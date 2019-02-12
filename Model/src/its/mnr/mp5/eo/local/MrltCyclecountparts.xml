@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltCyclecountparts"
+  Version="12.1.3.10.8"
+  DBObjectType="table"
+  DBObjectName="MRLT_CYCLECOUNTPARTS"
+  AliasName="MrltCyclecountparts"
+  BindingStyle="OracleName"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <Attribute
+    Name="StlTrans"
+    IsUnique="true"
+    Precision="8"
+    ColumnName="STL_TRANS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNTPARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlPart"
+    IsUnique="true"
+    IsNotNull="true"
+    Precision="18"
+    ColumnName="STL_PART"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNTPARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="18"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlBin"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="STL_BIN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNTPARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlLot"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="STL_LOT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNTPARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlStore"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="STL_STORE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNTPARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlExpqty"
+    Precision="15"
+    Scale="4"
+    ColumnName="STL_EXPQTY"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MRLT_CYCLECOUNTPARTS"/>
+  <Attribute
+    Name="StlType"
+    IsUnique="true"
+    Precision="5"
+    ColumnName="STL_TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNTPARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlPartOrg"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="STL_PART_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNTPARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlPartclass"
+    Precision="8"
+    ColumnName="STL_PARTCLASS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNTPARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlListid"
+    ColumnName="STL_LISTID"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="MRLT_CYCLECOUNTPARTS"/>
+  <Attribute
+    Name="Ccpid"
+    Precision="10"
+    Scale="0"
+    ColumnName="CCPID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MRLT_CYCLECOUNTPARTS"
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="StlPhyqty"
+    Precision="15"
+    Scale="0"
+    ColumnName="STL_PHYQTY"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MRLT_CYCLECOUNTPARTS">
+    <validation:CompareValidationBean
+      Name="StlPhyqty_Rule_0"
+      ResId="VALUE_MUST_BE_GREATER_THAN_OR_"
+      OnAttribute="StlPhyqty"
+      OperandType="LITERAL"
+      Inverse="false"
+      CompareType="GREATERTHANEQUALTO"
+      CompareValue="0"/>
+  </Attribute>
+  <Attribute
+    Name="StlTimestamp"
+    ColumnName="STL_TIMESTAMP"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="MRLT_CYCLECOUNTPARTS"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="Selected"
+    ColumnName="SELECTED"
+    SQLType="BIT"
+    Type="java.lang.Boolean"
+    ColumnType="NUMBER"
+    IsPersistent="false"
+    IsQueriable="false">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="check_box"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <AccessorAttribute
+    Name="MrltCyclecountheader"
+    Association="its.mnr.mp5.eo.assoc.CCHeaderCCPartsAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.CCHeaderCCPartsAssoc.MrltCyclecountheader"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.CCHeaderCCPartsAssoc.MrltCyclecountparts"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="AltKey"
+    AltKey="true">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_CYCLECOUNTPARTS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltCyclecountparts.StlListid"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltCyclecountparts.StlPart"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltCyclecountparts.StlType"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltCyclecountpartsUk1">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_CYCLECOUNTPARTS_UK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltCyclecountparts.StlType"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltCyclecountparts.StlPart"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltCyclecountparts.StlTrans"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltcyclecountpartsPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLTCYCLECOUNTPARTS_PRIMARY_KE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltCyclecountparts.Ccpid"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_MrltCyclecountparts">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_CYCLECOUNTHEADER_PK1"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_MRLT_CYCLECOUNTPARTS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltCyclecountparts.StlListid"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

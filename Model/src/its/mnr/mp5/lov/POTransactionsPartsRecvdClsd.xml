@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="POTransactionsPartsRecvdClsd"
+  Version="11.1.2.60.81"
+  OrderBy="TRL_ORDLINE"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.lov.POTransactionsPartsRecvdClsdImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchMode="FETCH_ALL"
+  FetchSize="5"
+  RangeSize="6">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.lov.POTransactionsPartsRecvdClsd_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="bOrder"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT TRA_TYPE,
+         TRA_ORDER,
+         TRA_STATUS,
+         TRA_ORG,
+         TRA_ORDER_ORG,
+         TRL_ORDLINE,
+         TRL_PART,
+         TRL_PART_ORG,
+         TRL_LOT,
+         TRL_BIN,
+         TRL_STORE,
+         TRL_PRICE,
+         ORL_ORDQTY,
+         TOTAL_RECV,
+         ITS_RETNQTY
+    FROM (  SELECT R2.TRA_TYPE,
+                   R2.TRA_ORDER,
+                   R2.TRA_STATUS,
+                   R2.TRA_ORG,
+                   R2.TRA_ORDER_ORG,
+                   R1.TRL_ORDLINE,
+                   R1.TRL_PART,
+                   R1.TRL_PART_ORG,
+                   R1.TRL_LOT,
+                   R1.TRL_BIN,
+                   R1.TRL_STORE,
+                   R1.TRL_PRICE,
+                   ORL_ORDQTY,
+                   SUM (R1.TRL_QTY)
+                      OVER (PARTITION BY TRL_PART ORDER BY TRL_PART)
+                      AS TOTAL_RECV,
+                   NVL (ITS_RETNQTY, 0) AS ITS_RETNQTY
+              FROM MP5PRD.R5TRANSLINES R1, MP5PRD.R5TRANSACTIONS R2, R5ORDERLINES
+             WHERE     R1.TRL_TRANS(+) = R2.TRA_CODE
+                   AND TRA_ORDER = ORL_ORDER
+                   AND TRA_ORDER_ORG = ORL_ORDER_ORG
+                   AND TRL_ORDLINE = ORL_ORDLINE
+                   AND TRA_ORDER = :bOrder
+                   AND TRA_STATUS IN ('RC','A')
+                   AND TRA_TYPE = 'RECV'
+          ORDER BY TRL_ORDLINE)
+WHERE   ITS_RETNQTY < TOTAL_RECV      
+GROUP BY TRA_TYPE,
+         TRA_ORDER,
+         TRA_STATUS,
+         TRA_ORG,
+         TRA_ORDER_ORG,
+         TRL_ORDLINE,
+         TRL_PART,
+         TRL_PART_ORG,
+         TRL_LOT,
+         TRL_BIN,
+         TRL_STORE,
+         TRL_PRICE,
+         ORL_ORDQTY,
+         TOTAL_RECV,
+         ITS_RETNQTY]]></SQLQuery>
+  <ViewAttribute
+    Name="TraType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TRA_TYPE"
+    Expression="TRA_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TraOrder"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="8"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TRA_ORDER"
+    Expression="TRA_ORDER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TraStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TRA_STATUS"
+    Expression="TRA_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TraOrg"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="8"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TRA_ORG"
+    Expression="TRA_ORG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TraOrderOrg"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="8"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TRA_ORDER_ORG"
+    Expression="TRA_ORDER_ORG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TrlOrdline"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="TRL_ORDLINE"
+    Expression="TRL_ORDLINE"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TrlPart"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="18"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TRL_PART"
+    Expression="TRL_PART"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="18"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TrlPartOrg"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="8"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TRL_PART_ORG"
+    Expression="TRL_PART_ORG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TrlLot"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="12"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TRL_LOT"
+    Expression="TRL_LOT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TrlBin"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="12"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TRL_BIN"
+    Expression="TRL_BIN"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TrlStore"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TRL_STORE"
+    Expression="TRL_STORE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TrlPrice"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="TRL_PRICE"
+    Expression="TRL_PRICE"
+    SQLType="DOUBLE"/>
+  <ViewAttribute
+    Name="OrlOrdqty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="ORL_ORDQTY"
+    Expression="ORL_ORDQTY"
+    SQLType="DOUBLE"/>
+  <ViewAttribute
+    Name="TotalRecv"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_RECV"
+    Expression="TOTAL_RECV"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="ItsRetnqty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="ITS_RETNQTY"
+    Expression="ITS_RETNQTY"
+    SQLType="DOUBLE"/>
+  <ViewCriteria
+    Name="POTransactionsPartsRecvdClsdCriteria"
+    ViewObjectName="its.mnr.mp5.lov.POTransactionsPartsRecvdClsd"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="POTransactionsPartsRecvdClsdCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="TraOrder"
+        ViewAttribute="TraOrder"
+        Operator="="
+        Conjunction="AND"
+        Value=":bOrder"
+        IsBindVarValue="true"
+        Required="Optional"
+        GenerateIsNullClauseForBindVars="false"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5fok3ActAssoc"
+  Version="11.1.2.60.81">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="R5orders"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.eo.local.R5orders">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="R5orders"/>
+      <Attr Name="_foreignKey" Value="its.mnr.mp5.eo.local.R5orders.R5prikOrd"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5orders.OrdCode"/>
+      <Item Value="its.mnr.mp5.eo.local.R5orders.OrdOrg"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="R5activities"
+    Cardinality="-1"
+    Owner="its.mnr.mp5.eo.local.R5activities">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="R5activities"/>
+      <Attr Name="_foreignKey" Value="its.mnr.mp5.eo.local.R5activities.R5fok3Act"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5activities.ActOrder"/>
+      <Item Value="its.mnr.mp5.eo.local.R5activities.ActOrderOrg"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="assetMaint">
+    <template-reference>
+      <document>/WEB-INF/error-handler-flow.xml</document>
+      <id>error-handler-flow</id>
+    </template-reference>
+    <default-activity>callFromWO</default-activity>
+    <transaction>
+      <new-transaction/>
+    </transaction>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <task-flow-reentry>
+      <reentry-not-allowed/>
+    </task-flow-reentry>
+    <input-parameter-definition id="__25">
+      <name>psfcalledfromwo</name>
+      <value>#{pageFlowScope.pfsCalledFromWO}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__26">
+      <name>psfAssetCd</name>
+      <value>#{pageFlowScope.psfAssetCd}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__27">
+      <name>psfAssetOrg</name>
+      <value>#{pageFlowScope.psfAssetOrg}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__3">
+      <managed-bean-name>assetMaintBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.assetMaintBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <!--
+    <managed-bean id="__28">
+      <managed-bean-name>meterReadingBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.meterReadingBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>-->
+    <task-flow-return id="exit">
+      <outcome>
+        <name>exit</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <view id="AssetMaint">
+      <page>/Content/Asset/AssetMaint.jspx</page>
+    </view>
+    <view id="spares">
+      <page>/Content/Asset/AddSpares.jspx</page>
+    </view>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="Asset-Docs">
+      <task-flow-reference>
+        <document>/WEB-INF/Taskflows/Asset/Asset-Docs.xml</document>
+        <id>Asset-Docs</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <task-flow-call id="Asset-MeterReading">
+      <task-flow-reference>
+        <document>/WEB-INF/Taskflows/Asset/Asset-MeterReading.xml</document>
+        <id>Asset-MeterReading</id>
+      </task-flow-reference>
+      <input-parameter id="__14">
+        <name>psfAssetCd</name>
+        <value>#{pageFlowScope.psfAssetCd}</value>
+      </input-parameter>
+      <input-parameter id="__15">
+        <name>psfAssetOrg</name>
+        <value>#{pageFlowScope.psfAssetOrg}</value>
+      </input-parameter>
+      <input-parameter id="__16">
+        <name>psfAssetUom</name>
+        <value>#{pageFlowScope.psfAssetUom}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <router id="callFromWO">
+      <case id="__24">
+        <expression>#{empty pageFlowScope.pfsCalledFromWO ? false : pageFlowScope.pfsCalledFromWO}</expression>
+        <outcome>yes</outcome>
+      </case>
+      <default-outcome>no</default-outcome>
+    </router>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome>
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>Exit</from-outcome>
+        <to-activity-id>exit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>AssetMaint</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>AddSpare</from-outcome>
+        <to-activity-id>CreateInsert</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__4">
+        <from-outcome>goDocs</from-outcome>
+        <to-activity-id>Asset-Docs</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__5">
+        <from-outcome>goMeterReading</from-outcome>
+        <to-activity-id>Asset-MeterReading</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__8">
+      <from-activity-id>CreateInsert</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>CreateInsert</from-outcome>
+        <to-activity-id>spares</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>spares</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>returnSpares</from-outcome>
+        <to-activity-id>AssetMaint</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__18">
+      <from-activity-id>Asset-MeterReading</from-activity-id>
+      <control-flow-case id="__19">
+        <from-outcome>exit</from-outcome>
+        <to-activity-id>Execute</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__17">
+      <from-activity-id>ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__20">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>AssetMaint</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__21">
+      <from-activity-id>callFromWO</from-activity-id>
+      <control-flow-case id="__22">
+        <from-outcome>yes</from-outcome>
+        <to-activity-id>ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__23">
+        <from-outcome>no</from-outcome>
+        <to-activity-id>AssetMaint</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__12">
+      <from-activity-id>Execute</from-activity-id>
+      <control-flow-case id="__13">
+        <from-outcome>Execute</from-outcome>
+        <to-activity-id>AssetMaint</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

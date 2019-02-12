@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AssetReadingLink2"
+  Version="11.1.2.60.81">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.link.AssetReadingLink2_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="MrltAssetView"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.vo.asset.MrltAssetView">
+    <DesignTime>
+      <Attr Name="_accessor" Value="true"/>
+      <Attr Name="_finderName" Value="MrltAssetView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.asset.MrltAssetView.Assetcd"/>
+      <Item Value="its.mnr.mp5.vo.asset.MrltAssetView.Org"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="AssetReading"
+    Cardinality="-1"
+    Owner="its.mnr.mp5.vo.asset.AssetReading">
+    <DesignTime>
+      <Attr Name="_finderName" Value="AssetReading"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.asset.AssetReading.Readingitem"/>
+      <Item Value="its.mnr.mp5.vo.asset.AssetReading.Org"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

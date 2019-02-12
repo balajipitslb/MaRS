@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltInvoicertroitemFk1Link"
+  Version="11.1.2.60.81"
+  EntityAssociation="its.mnr.mp5.eo.assoc.MrltInvoicertroitemFk1Assoc">
+  <ViewLinkDefEnd
+    Name="MrltInvoiceheaderView"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.vo.invoice.MrltInvoiceheaderView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="MrltInvoiceheaderView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.invoice.MrltInvoiceheaderView.Invoiceheaderid"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="RetroItemDetail"
+    Cardinality="-1"
+    Owner="its.mnr.mp5.vo.invoice.MrltInvoicertroitemView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="RetroItemDetail"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.invoice.MrltInvoicertroitemView.Invoiceheaderid"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

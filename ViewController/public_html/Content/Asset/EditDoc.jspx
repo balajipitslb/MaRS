@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Edit Document" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1" usesUpload="true">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelFormLayout id="pfl1" inlineStyle="margin:100px;">
+                        <af:inputText value="#{bindings.Docid.inputValue}" label="#{bindings.Docid.hints.label}"
+                                      required="#{bindings.Docid.hints.mandatory}"
+                                      columns="#{bindings.Docid.hints.displayWidth}"
+                                      maximumLength="#{bindings.Docid.hints.precision}"
+                                      shortDesc="#{bindings.Docid.hints.tooltip}" id="it1">
+                            <f:validator binding="#{bindings.Docid.validator}"/>
+                            <af:convertNumber groupingUsed="false" pattern="#{bindings.Docid.format}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.Docdesc.inputValue}" label="#{bindings.Docdesc.hints.label}"
+                                      required="#{bindings.Docdesc.hints.mandatory}"
+                                      columns="#{bindings.Docdesc.hints.displayWidth}"
+                                      maximumLength="#{bindings.Docdesc.hints.precision}"
+                                      shortDesc="#{bindings.Docdesc.hints.tooltip}" id="it2"
+                                      binding="#{docManagerBean.txtFileDesc}" autoSubmit="true" rows="5">
+                            <f:validator binding="#{bindings.Docdesc.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.Filesize.inputValue}" label="#{bindings.Filesize.hints.label}"
+                                      required="#{bindings.Filesize.hints.mandatory}"
+                                      columns="#{bindings.Filesize.hints.displayWidth}"
+                                      maximumLength="#{bindings.Filesize.hints.precision}"
+                                      shortDesc="#{bindings.Filesize.hints.tooltip}" id="it3" rendered="false">
+                            <f:validator binding="#{bindings.Filesize.validator}"/>
+                            <af:convertNumber groupingUsed="false" pattern="#{bindings.Filesize.format}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.Org.inputValue}" label="#{bindings.Org.hints.label}"
+                                      required="#{bindings.Org.hints.mandatory}"
+                                      columns="#{bindings.Org.hints.displayWidth}"
+                                      maximumLength="#{bindings.Org.hints.precision}"
+                                      shortDesc="#{bindings.Org.hints.tooltip}" id="it5">
+                            <f:validator binding="#{bindings.Org.validator}"/>
+                        </af:inputText>
+                        <af:selectOneChoice value="#{bindings.Doctype.inputValue}" label="#{bindings.Doctype.label}"
+                                            required="#{bindings.Doctype.hints.mandatory}"
+                                            shortDesc="#{bindings.Doctype.hints.tooltip}" id="soc1" autoSubmit="true"
+                                            binding="#{docManagerBean.txtDocType}">
+                            <f:selectItems value="#{bindings.Doctype.items}" id="si1"/>
+                        </af:selectOneChoice>
+                        <f:facet name="footer">
+                            <af:panelGroupLayout id="g1" halign="right">
+                                <af:spacer width="30" height="10" id="s1"/>
+                                <af:button actionListener="#{bindings.Delete.execute}" text=" Delete"
+                                           disabled="#{!bindings.Delete.enabled}" id="cb1" action="Return"
+                                           icon="#{resource['images:delete.png']}" inlineStyle="margin: 5px;"/>
+                                <af:button text="Apply" id="cb3" action="#{docManagerBean.commitEditDocs}"
+                                           icon="#{resource['images:commit.png']}" inlineStyle="margin: 5px;"
+                                           disabled="#{!bindings.Commit.enabled}"/>
+                                <af:button text="Cancel &amp; Exit" id="cb2" action="#{docManagerBean.doRollback}"
+                                           icon="#{resource['images:undo.png']}" inlineStyle="margin: 5px;"/>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <af:panelLabelAndMessage label="#{bindings.Docfile.hints.label}" id="plam1" rendered="false">
+                            <af:outputText value="#{bindings.Docfile.inputValue}" id="ot4"/>
+                            <af:button text="Download" id="cb4" binding="#{docManagerBean.downloadBtn}"
+                                       visible="#{bindings.Docfile.inputValue ne null}">
+                                <af:fileDownloadActionListener contentType="#{bindings.Filetype.inputValue}"
+                                                               filename="#{bindings.Docname.inputValue}"
+                                                               method="#{docManagerBean.downloadFile}"/>
+                            </af:button>
+                        </af:panelLabelAndMessage>
+                        <af:inputFile label="Upload File" id="if1" autoSubmit="true"
+                                      valueChangeListener="#{docManagerBean.uploadFileLsnr}"
+                                      binding="#{docManagerBean.uploadedFile}"/>
+                    </af:panelFormLayout>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

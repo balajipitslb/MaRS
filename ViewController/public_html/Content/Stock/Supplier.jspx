@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Suppliers" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelHeader text=" " id="ph2">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t1"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                <af:menuBar id="mb1" rendered="false">
+                                    <af:menu text="Actions" id="m2"/>
+                                </af:menuBar>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:button actionListener="#{bindings.Commit.execute}" text="Apply"
+                                           disabled="#{!bindings.Commit.enabled}" id="ctb4"
+                                           icon="#{resource['images:commit.png']}"/>
+                                <af:button actionListener="#{bindings.Rollback.execute}" text="Cancel"
+                                           disabled="#{!bindings.Rollback.enabled}" immediate="true" id="ctb5"
+                                           icon="#{resource['images:undo.png']}">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button id="ctb3" icon="#{resource['images:terminate.png']}"
+                                           actionListener="#{ModuleNavBean.goExit}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:panelGroupLayout id="pgl1" inlineStyle="margin: 15px 0px 0px 0px;">
+                            <af:panelHeader text=" " id="ph1">
+                                <af:query id="qryId1" headerText="Search" disclosed="true"
+                                          value="#{bindings.CompaniesCriteriaQuery.queryDescriptor}"
+                                          model="#{bindings.CompaniesCriteriaQuery.queryModel}"
+                                          queryListener="#{bindings.CompaniesCriteriaQuery.processQuery}"
+                                          queryOperationListener="#{bindings.CompaniesCriteriaQuery.processQueryOperation}"
+                                          resultComponentId="::pc1:resId1" saveQueryMode="readOnly"
+                                          modeChangeVisible="false"/>
+                            </af:panelHeader>
+                            <af:panelCollection id="pc1" styleClass="AFStretchWidth"
+                                                inlineStyle="margin:5px 0px 0px 5px; height:200px;"
+                                                featuresOff="viewMenu detach">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t3">
+                                        <af:button id="ctb2" icon="#{resource['images:add.png']}"
+                                                   disabled="#{!securityContext.userGrantedResource['resourceName=StockAddCompany;resourceType=UIControl;action=enabled']}"
+                                                   action="Add"/>
+                                        <af:button text="Edit" id="ctb1" icon="#{resource['images:edit.png']}"
+                                                   action="Edit"
+                                                   disabled="#{!securityContext.userGrantedResource['resourceName=StockModifyCompany;resourceType=UIControl;action=enabled']}"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.Companies.collectionModel}" var="row"
+                                          rows="#{bindings.Companies.rangeSize}"
+                                          emptyText="#{bindings.Companies.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.Companies.rangeSize}" rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.Companies.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.Companies.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="resId1" columnStretching="column:resId1c4">
+                                    <af:column sortProperty="#{bindings.Companies.hints.ComCode.name}" sortable="false"
+                                               headerText="#{bindings.Companies.hints.ComCode.label}" id="resId1c2"
+                                               align="center" width="80">
+                                        <af:outputText value="#{row.ComCode}" id="ot2"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Companies.hints.ComDesc.name}" sortable="false"
+                                               headerText="#{bindings.Companies.hints.ComDesc.label}" id="resId1c4"
+                                               align="left">
+                                        <af:outputText value="#{row.ComDesc}" id="ot4"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Companies.hints.ComPhone.name}" sortable="false"
+                                               headerText="#{bindings.Companies.hints.ComPhone.label}" id="resId1c8"
+                                               align="center">
+                                        <af:outputText value="#{row.ComPhone}" id="ot8"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Companies.hints.ComFax.name}" sortable="false"
+                                               headerText="#{bindings.Companies.hints.ComFax.label}" id="c6">
+                                        <af:outputText value="#{row.ComFax}" id="ot13"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Companies.hints.ComMinord.name}"
+                                               sortable="false" headerText="#{bindings.Companies.hints.ComMinord.label}"
+                                               id="resId1c6" align="center" width="75">
+                                        <af:outputText value="#{row.ComMinord}" id="ot6"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Companies.hints.ComNotused.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.Companies.hints.ComNotused.label}" id="resId1c7"
+                                               align="center" width="50">
+                                        <af:outputText value="#{row.ComNotused}" id="ot7"/>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                            <af:panelCollection id="pc2" styleClass="AFStretchWidth"
+                                                inlineStyle="margin:5px 0px 0px 5px; height: 175px;"
+                                                featuresOff="viewMenu detach">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t4">
+                                        <af:outputLabel value="Address" id="ol1"
+                                                        inlineStyle="font-size:small; font-weight:bolder;"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.Address.collectionModel}" var="row"
+                                          rows="#{bindings.Address.rangeSize}"
+                                          emptyText="#{bindings.Address.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.Address.rangeSize}" rowBandingInterval="0" id="t2"
+                                          partialTriggers=":::pc1:resId1" columnStretching="column:c2">
+                                    <f:facet name="detailStamp">
+                                        <af:panelGroupLayout id="g1" layout="vertical" inlineStyle="margin: 5px 15px;">
+                                            <af:link id="ot18" text=" #{row.AdrEmail}"
+                                                     destination="mailto: #{row.AdrEmail}"
+                                                     inlineStyle="font-size:small; text-decoration:underline;"/>
+                                            <af:outputText value="#{row.AdrText}" id="ot11"
+                                                           inlineStyle="font-size:small;"/>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                    <af:column sortProperty="#{bindings.Address.hints.AdrRtype.name}" sortable="false"
+                                               headerText="#{bindings.Address.hints.AdrRtype.label}" id="c1"
+                                               align="center" width="50">
+                                        <af:outputText value="#{row.AdrRtype}" id="ot1"
+                                                       shortDesc="#{row.AdrRtype eq 'M' ? 'Mail' : 'Invoice'}"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Address.hints.AdrAddress1.name}"
+                                               sortable="false" headerText="#{bindings.Address.hints.AdrAddress1.label}"
+                                               id="c2" width="150">
+                                        <af:outputText value="#{row.AdrAddress1}" id="ot3"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Address.hints.AdrAddress2.name}"
+                                               sortable="false" headerText="#{bindings.Address.hints.AdrAddress2.label}"
+                                               id="c3" width="50">
+                                        <af:outputText value="#{row.AdrAddress2}" id="ot5"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Address.hints.AdrAddress3.name}"
+                                               sortable="false" headerText="#{bindings.Address.hints.AdrAddress3.label}"
+                                               id="c4" width="50">
+                                        <af:outputText value="#{row.AdrAddress3}" id="ot9"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Address.hints.AdrCity.name}" sortable="false"
+                                               headerText="#{bindings.Address.hints.AdrCity.label}" id="c5"
+                                               align="center">
+                                        <af:outputText value="#{row.AdrCity}" id="ot10"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Address.hints.AdrState.name}" sortable="false"
+                                               headerText="#{bindings.Address.hints.AdrState.label}" id="c12"
+                                               align="center" width="50">
+                                        <af:outputText value="#{row.AdrState}" id="ot17"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Address.hints.AdrZip.name}" sortable="false"
+                                               headerText="#{bindings.Address.hints.AdrZip.label}" id="c14"
+                                               align="center" width="50">
+                                        <af:outputText value="#{row.AdrZip}" id="ot19"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Address.hints.AdrCountry.name}" sortable="false"
+                                               headerText="#{bindings.Address.hints.AdrCountry.label}" id="c7"
+                                               align="center" width="50">
+                                        <af:outputText value="#{row.AdrCountry}" id="ot12"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Address.hints.AdrPhone.name}" sortable="false"
+                                               headerText="#{bindings.Address.hints.AdrPhone.label}" id="c10"
+                                               align="center">
+                                        <af:outputText value="#{row.AdrPhone}" id="ot15"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Address.hints.AdrPhoneextn.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.Address.hints.AdrPhoneextn.label}" id="c11"
+                                               align="center" width="50">
+                                        <af:outputText value="#{row.AdrPhoneextn}" id="ot16"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Address.hints.AdrFax.name}" sortable="false"
+                                               headerText="#{bindings.Address.hints.AdrFax.label}" id="c9"
+                                               align="center">
+                                        <af:outputText value="#{row.AdrFax}" id="ot14"/>
+                                    </af:column>
+                                </af:table>
+                                <f:facet name="viewMenu"/>
+                            </af:panelCollection>
+                        </af:panelGroupLayout>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

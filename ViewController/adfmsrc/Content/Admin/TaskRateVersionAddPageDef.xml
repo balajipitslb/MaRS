@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="TaskRateVersionAddPageDef"
+                Package="Content.Admin">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BillingRatesDataControlNested.AccountRateView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="AccountRateViewIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="AccountRateViewIterator" id="Accountrateid">
+      <AttrNames>
+        <Item Value="Accountrateid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="Acctnum">
+      <AttrNames>
+        <Item Value="Acctnum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="AcctNumDesc">
+      <AttrNames>
+        <Item Value="AcctNumDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="Ver">
+      <AttrNames>
+        <Item Value="Ver"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="AcctBillType">
+      <AttrNames>
+        <Item Value="AcctBillType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="Effectivedt">
+      <AttrNames>
+        <Item Value="Effectivedt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="Base">
+      <AttrNames>
+        <Item Value="Base"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="M1">
+      <AttrNames>
+        <Item Value="M1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="M1o">
+      <AttrNames>
+        <Item Value="M1o"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="M2">
+      <AttrNames>
+        <Item Value="M2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="M2o">
+      <AttrNames>
+        <Item Value="M2o"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="M3">
+      <AttrNames>
+        <Item Value="M3"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="M3o">
+      <AttrNames>
+        <Item Value="M3o"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="R1">
+      <AttrNames>
+        <Item Value="R1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="R1o">
+      <AttrNames>
+        <Item Value="R1o"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="R2">
+      <AttrNames>
+        <Item Value="R2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="R2o">
+      <AttrNames>
+        <Item Value="R2o"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="R3">
+      <AttrNames>
+        <Item Value="R3"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="R3o">
+      <AttrNames>
+        <Item Value="R3o"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="AccountRateViewIterator" id="prevVerAccountChk" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="prevVerAccountChk"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="AccountRateViewIterator" id="otherAccountChk" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="otherAccountChk"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <list IterBinding="AccountRateViewIterator" StaticList="false" Uses="LOV_AcctNumLov" id="AcctNumLov"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

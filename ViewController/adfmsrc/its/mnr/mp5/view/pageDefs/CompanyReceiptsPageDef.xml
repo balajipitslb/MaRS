@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="CompanyReceiptsPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <searchRegion Criteria="POTransactionsCompRcptsCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="POTransactionsCompRcptsIterator" id="POTransactionsCompRcptsCriteriaQuery"
+                  InitialQueryOverridden="true"/>
+    <iterator Binds="PORecvDataControlNested.POTranslinesCompRcpts" DataControl="MNRDataControlDataControl" id="POTranslinesCompRcptsIterator"
+              RangeSize="25" ChangeEventPolicy="ppr" Refresh="default"/>
+    <iterator id="POTransactionsCompRcptsIterator" Binds="PORecvDataControlNested.POTransactionsCompRcpts"
+              DataControl="MNRDataControlDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="POTransactionsCompRcptsIterator" id="TraCode">
+      <AttrNames>
+        <Item Value="TraCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POTransactionsCompRcptsIterator" id="TraDesc">
+      <AttrNames>
+        <Item Value="TraDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POTransactionsCompRcptsIterator" id="TraDate">
+      <AttrNames>
+        <Item Value="TraDate"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="MNRDataControlDataControl"/>
+    <listOfValues StaticList="false" IterBinding="POTransactionsCompRcptsIterator" Uses="LOV_TraFromcode"
+                  id="TraFromcode"/>
+    <listOfValues StaticList="false" IterBinding="POTransactionsCompRcptsIterator" Uses="LOV_TraStatus" id="TraStatus"/>
+    <attributeValues IterBinding="POTransactionsCompRcptsIterator" id="tSupplierDesc">
+      <AttrNames>
+        <Item Value="tSupplierDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
+    <tree IterBinding="POTransactionsCompRcptsIterator" id="POTransactionsCompRcpts">
+      <nodeDefinition DefName="its.mnr.mp5.vo.po.POTransactionsCompRcpts" Name="POTransactionsCompRcpts0">
+        <AttrNames>
+          <Item Value="TraCode"/>
+          <Item Value="TraStatus"/>
+          <Item Value="TraDate"/>
+          <Item Value="TraAcd"/>
+          <Item Value="TraFromcode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="POTransactionsCompRcptsIterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="POTranslinesCompRcptsIterator" id="CreateInsert1" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <attributeValues IterBinding="POTransactionsCompRcptsIterator" id="tEntityState">
+      <AttrNames>
+        <Item Value="tEntityState"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="POTranslinesCompRcptsIterator" id="addPartToStock" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="addPartToStock" IsViewObjectMethod="false"
+                  DataControl="MNRDataControlDataControl"
+                  InstanceName="bindings.POTranslinesCompRcptsIterator.currentRow" IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.addPartToStock_addPartToStock_addPartToStock_result">
+      <NamedData NDName="pPart" NDType="java.lang.String"/>
+      <NamedData NDName="pPartOrg" NDType="java.lang.String"/>
+      <NamedData NDName="pStore" NDType="java.lang.String"/>
+      <NamedData NDName="pQty" NDType="java.lang.Double"/>
+    </methodAction>
+    <methodAction IterBinding="POTranslinesCompRcptsIterator" id="isPartInCat" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="isPartInCat" IsViewObjectMethod="false"
+                  DataControl="MNRDataControlDataControl"
+                  InstanceName="bindings.POTranslinesCompRcptsIterator.currentRow" IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.isPartInCat_isPartInCat_isPartInCat_result">
+      <NamedData NDName="pPart" NDType="java.lang.String"/>
+      <NamedData NDName="pPartOrg" NDType="java.lang.String"/>
+    </methodAction>
+    <listOfValues StaticList="false" IterBinding="POTranslinesCompRcptsIterator" Uses="LOV_TrlPart" id="TrlPart"/>
+    <attributeValues IterBinding="POTranslinesCompRcptsIterator" id="TrlQty">
+      <AttrNames>
+        <Item Value="TrlQty"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="POTranslinesCompRcptsIterator" Uses="LOV_TrlLot" id="TrlLot"/>
+    <listOfValues StaticList="false" IterBinding="POTranslinesCompRcptsIterator" Uses="LOV_TrlBin" id="TrlBin1"/>
+    <attributeValues IterBinding="POTranslinesCompRcptsIterator" id="TrlLine">
+      <AttrNames>
+        <Item Value="TrlLine"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POTranslinesCompRcptsIterator" id="TrlPrice">
+      <AttrNames>
+        <Item Value="TrlPrice"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POTranslinesCompRcptsIterator" id="tBasePrice">
+      <AttrNames>
+        <Item Value="tBasePrice"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="POTranslinesCompRcptsIterator" id="First" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="POTranslinesCompRcptsIterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="POTranslinesCompRcptsIterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="POTranslinesCompRcptsIterator" id="Last" RequiresUpdateModel="true" Action="last"/>
+    <attributeValues IterBinding="POTranslinesCompRcptsIterator" id="tPartDesc">
+      <AttrNames>
+        <Item Value="tPartDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POTranslinesCompRcptsIterator" id="tPartUom">
+      <AttrNames>
+        <Item Value="tPartUom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POTranslinesCompRcptsIterator" id="tAvail">
+      <AttrNames>
+        <Item Value="tAvail"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POTranslinesCompRcptsIterator" id="TrlTrans">
+      <AttrNames>
+        <Item Value="TrlTrans"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="POTranslinesCompRcptsIterator" id="POTranslinesCompRcpts">
+      <nodeDefinition DefName="its.mnr.mp5.vo.po.POTranslinesCompRcpts" Name="POTranslinesCompRcpts0">
+        <AttrNames>
+          <Item Value="TrlPart"/>
+          <Item Value="tPartDesc"/>
+          <Item Value="tPartUom"/>
+          <Item Value="tAvail"/>
+          <Item Value="TrlQty"/>
+          <Item Value="TrlBin"/>
+          <Item Value="TrlLot"/>
+          <Item Value="TrlPrice"/>
+          <Item Value="tBasePrice"/>
+          <Item Value="TrlDate"/>
+          <Item Value="TrlAcd"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="POTranslinesCompRcptsIterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <methodAction IterBinding="POTranslinesCompRcptsIterator" id="getDefaultBinLot"
+                  InstanceName="bindings.POTranslinesCompRcptsIterator.currentRow"
+                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getDefaultBinLot" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.getDefaultBinLot_getDefaultBinLot_getDefaultBinLot_result"/>
+    <action IterBinding="POTransactionsCompRcptsIterator" id="Delete1" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+  </bindings>
+</pageDefinition>

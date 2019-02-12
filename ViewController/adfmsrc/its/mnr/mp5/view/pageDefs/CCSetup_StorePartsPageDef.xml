@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="CCSetup_StorePartsPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CCDataControlNested.MrltCyclecountpartsMainStore" DataControl="MNRDataControlDataControl"
+              RangeSize="10000" id="MrltCyclecountpartsMainStoreIterator" />
+    <searchRegion Binds="MrltCyclecountpartsMainStoreIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MrltCyclecountpartsMainStoreQuery"/>
+    <iterator id="MrltCyclecountpartstoresViewIterator" Binds="CCDataControlNested.MrltCyclecountpartstoresView"
+              DataControl="MNRDataControlDataControl" RangeSize="25" />
+    <iterator id="MrltCyclecountpartsViewIterator" Binds="CCDataControlNested.MrltCyclecountpartsView"
+              DataControl="MNRDataControlDataControl" RangeSize="25"/>
+    <iterator Binds="CCDataControlNested.CycleCountParts" DataControl="MNRDataControlDataControl" RangeSize="10"
+              id="CycleCountPartsIterator"/>
+    <searchRegion Criteria="MrltCyclecountpartsMainStoreShuttle"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="MrltCyclecountpartsMainStoreIterator" id="MrltCyclecountpartsMainStoreShuttleQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MrltCyclecountpartsMainStoreIterator" id="MrltCyclecountpartsMainStore">
+      <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltCyclecountpartsMainStore"
+                      Name="MrltCyclecountpartsMainStore0">
+        <AttrNames>
+          <Item Value="StlPart"/>
+          <Item Value="StlBin"/>
+          <Item Value="StlLot"/>
+          <Item Value="StlPartclass"/>
+          <Item Value="Include" Binds="Include"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MrltCyclecountpartsMainStoreIterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" InstanceName="MNRDataControlDataControl"
+            DataControl="MNRDataControlDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
+    <tree IterBinding="MrltCyclecountpartstoresViewIterator" id="MrltCyclecountpartstoresView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltCyclecountpartstoresView"
+                      Name="MrltCyclecountpartstoresView0">
+        <AttrNames>
+          <Item Value="Listid"/>
+          <Item Value="Srcd"/>
+          <Item Value="Used" Binds="Used"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="MrltCyclecountpartstoresViewIterator" id="Used" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Used"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <list IterBinding="MrltCyclecountpartsMainStoreIterator" ListOperMode="multiSelect"
+          ListIter="MrltCyclecountpartsMainStoreIterator" id="MrltCyclecountpartsMainStore1"
+          SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="StlPart"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="StlPart"/>
+        <Item Value="StlBin"/>
+      </ListDisplayAttrNames>
+    </list>
+    <methodAction IterBinding="CycleCountPartsIterator" id="writeCCListXML"
+                  InstanceName="bindings.CycleCountPartsIterator.currentRow" DataControl="MNRDataControlDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="writeCCListXML"
+                  IsViewObjectMethod="false" IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.writeCCListXML_writeCCListXML_writeCCListXML_result">
+      <NamedData NDName="pList" NDType="java.lang.String"/>
+      <NamedData NDName="pType" NDType="java.lang.String"/>
+      <NamedData NDName="recEmail" NDType="java.lang.String"/>
+    </methodAction>
+    <button IterBinding="MrltCyclecountpartsMainStoreIterator" id="Include" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Include"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="homePageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="KPIDataControlNested.WOStatusCount" DataControl="MNRDataControlDataControl" RangeSize="-1"
+              id="WOStatusCountIterator"/>
+    <iterator Binds="KPIDataControlNested.WOStatusByAcct" DataControl="MNRDataControlDataControl" RangeSize="-1"
+              id="WOStatusByAcctIterator"/>
+    <iterator Binds="KPIDataControlNested.InvoiceTypeCount" DataControl="MNRDataControlDataControl" RangeSize="-1"
+              id="InvoiceTypeCountIterator"/>
+    <iterator Binds="KPIDataControlNested.InvoiceTypeStatusCount" DataControl="MNRDataControlDataControl"
+              RangeSize="-1" id="InvoiceTypeStatusCountIterator"/>
+    <iterator Binds="KPIDataControlNested.WOCreatedCount" DataControl="MNRDataControlDataControl" RangeSize="-1"
+              id="WOCreatedCountIterator"/>
+    <iterator Binds="KPIDataControlNested.WOCreatedByAcct" DataControl="MNRDataControlDataControl" RangeSize="-1"
+              id="WOCreatedByAcctIterator"/>
+    <iterator Binds="KPIDataControlNested.WOTurnTime" DataControl="MNRDataControlDataControl" RangeSize="-1"
+              id="WOTurnTimeIterator"/>
+  </executables>
+  <bindings>
+    <graph IterBinding="WOStatusByAcctIterator" id="WOStatusByAcct" xmlns="http://xmlns.oracle.com/adfm/dvt" type="PIE">
+      <graphDataMap convert="false" leafOnly="true">
+        <series>
+          <item value="Account"/>
+        </series>
+        <groups>
+          <data>
+            <item value="Count1"/>
+          </data>
+        </groups>
+      </graphDataMap>
+    </graph>
+    <attributeValues IterBinding="WOStatusCountIterator" id="UcoDesc">
+      <AttrNames>
+        <Item Value="UcoDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <graph IterBinding="WOStatusCountIterator" id="WOStatusCount" xmlns="http://xmlns.oracle.com/adfm/dvt"
+           type="BAR_VERT_CLUST">
+      <graphDataMap convert="false" leafOnly="true">
+        <series>
+          <item value="UcoCode"/>
+        </series>
+        <groups>
+          <data>
+            <item value="Count1"/>
+          </data>
+        </groups>
+      </graphDataMap>
+    </graph>
+    <graph IterBinding="InvoiceTypeCountIterator" id="InvoiceTypeCount" xmlns="http://xmlns.oracle.com/adfm/dvt"
+           type="BAR_VERT_CLUST">
+      <graphDataMap convert="false" leafOnly="true">
+        <series>
+          <item value="Type"/>
+        </series>
+        <groups>
+          <data>
+            <item value="Count1"/>
+          </data>
+        </groups>
+      </graphDataMap>
+    </graph>
+    <graph IterBinding="InvoiceTypeStatusCountIterator" id="InvoiceTypeStatusCount"
+           xmlns="http://xmlns.oracle.com/adfm/dvt" type="BAR_VERT_CLUST">
+      <graphDataMap convert="false" leafOnly="true">
+        <series>
+          <item value="Status"/>
+        </series>
+        <groups>
+          <data>
+            <item value="Count1"/>
+          </data>
+        </groups>
+      </graphDataMap>
+    </graph>
+    <attributeValues IterBinding="InvoiceTypeCountIterator" id="Type">
+      <AttrNames>
+        <Item Value="Type"/>
+      </AttrNames>
+    </attributeValues>
+    <graph IterBinding="WOCreatedCountIterator" id="WOCreatedCount" xmlns="http://xmlns.oracle.com/adfm/dvt"
+           type="LINE_VERT_ABS">
+      <graphDataMap convert="false" leafOnly="true">
+        <series>
+          <data>
+            <item value="Count1"/>
+          </data>
+          <item value="Workorder"/>
+        </series>
+        <groups>
+          <item value="Created"/>
+        </groups>
+      </graphDataMap>
+    </graph>
+    <graph IterBinding="WOCreatedByAcctIterator" id="WOCreatedByAcct" xmlns="http://xmlns.oracle.com/adfm/dvt"
+           type="LINE_VERT_ABS">
+      <graphDataMap convert="false" leafOnly="true">
+        <series>
+          <data>
+            <item value="Count1"/>
+          </data>
+          <item value="Account"/>
+        </series>
+        <groups>
+          <item value="Created"/>
+        </groups>
+      </graphDataMap>
+    </graph>
+    <graph IterBinding="WOTurnTimeIterator" id="WOTurnTime" xmlns="http://xmlns.oracle.com/adfm/dvt"
+           type="COMBINATION_VERT_ABS">
+      <graphDataMap convert="false" leafOnly="true">
+        <series>
+          <data>
+            <item value="Tocompleted"/>
+            <item value="Toinvassembly"/>
+            <item value="Completedtoassembly"/>
+          </data>
+        </series>
+        <groups>
+          <item value="Account"/>
+        </groups>
+      </graphDataMap>
+    </graph>
+  </bindings>
+</pageDefinition>

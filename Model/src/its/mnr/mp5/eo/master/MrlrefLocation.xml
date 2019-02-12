@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrlrefLocation"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="MRLREF_LOCATION"
+  AliasName="MrlrefLocation"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <Attribute
+    Name="Locationid"
+    Precision="20"
+    ColumnName="LOCATIONID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_LOCATION"
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    IsUpdateable="false">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefLocation.Locationid"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrlrefLocation.Locationid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Componentid"
+    IsUnique="true"
+    Precision="20"
+    ColumnName="COMPONENTID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_LOCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefLocation.Componentid"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrlrefLocation.Componentid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Locdescription"
+    Precision="50"
+    ColumnName="LOCDESCRIPTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_LOCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefLocation.Locdescription"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrlrefLocation.Locdescription_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Loccode"
+    IsUnique="true"
+    Precision="4"
+    ColumnName="LOCCODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_LOCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefLocation.Loccode"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrlrefLocation.Loccode_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Locactive"
+    Precision="1"
+    ColumnName="LOCACTIVE"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="MRLREF_LOCATION"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefLocation.Locactive"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrlrefLocation.Locactive_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Loccdx"
+    Precision="1"
+    ColumnName="LOCCDX"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="MRLREF_LOCATION"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefLocation.Loccdx"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrlrefLocation.Loccdx_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <AccessorAttribute
+    Name="MrlrefComponent"
+    Association="its.mnr.mp5.eo.assoc.MrlrefLocationFk1Assoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MrlrefLocationFk1Assoc.MrlrefComponent"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MrlrefLocationFk1Assoc.MrlrefLocation"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrlrefLocationPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLREF_LOCATION_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrlrefLocation.Locationid"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrlrefLocationUk1">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLREF_LOCATION_UK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrlrefLocation.Componentid"/>
+      <Item Value="its.mnr.mp5.eo.master.MrlrefLocation.Loccode"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0099427">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0099427"/>
+      <Attr Name="_checkCondition" Value="COMPONENTID IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="SysC0099428">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0099428"/>
+      <Attr Name="_checkCondition" Value="LOCDESCRIPTION IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="SysC0099429">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0099429"/>
+      <Attr Name="_checkCondition" Value="LOCCODE IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="SysC0099430">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0099430"/>
+      <Attr Name="_checkCondition" Value="LOCACTIVE IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="SysC0099431">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0099431"/>
+      <Attr Name="_checkCondition" Value="LOCCDX IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="MrlrefLocationFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLREF_COMPONENT_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLREF_LOCATION_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrlrefLocation.Componentid"/>
+    </AttrArray>
+  </Key>
+  <validation:ExistsValidationBean
+    Name="MrlrefLocation_Rule_0"
+    ResId="its.mnr.mp5.eo.master.MrlrefLocation_Rule_0"
+    OperandType="EO"
+    AssocName="its.mnr.mp5.eo.assoc.MrlrefLocationFk1Assoc">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="Componentid"/>
+    </validation:OnAttributes>
+  </validation:ExistsValidationBean>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

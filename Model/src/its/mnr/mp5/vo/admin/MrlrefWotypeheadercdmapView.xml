@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrlrefWotypeheadercdmapView"
+  Version="11.1.2.60.81"
+  SelectList="MrlrefWotypeheadercdmap.ID, 
+       MrlrefWotypeheadercdmap.WOTYPE, 
+       MrlrefWotypeheadercdmap.HEADERCD"
+  FromList="MRLREF_WOTYPEHEADERCDMAP MrlrefWotypeheadercdmap"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All">
+  <EntityUsage
+    Name="MrlrefWotypeheadercdmap"
+    Entity="its.mnr.mp5.eo.master.MrlrefWotypeheadercdmap"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="MrlrefWotypeheadercdmap"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="Wotype"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Wotype"
+    EntityUsage="MrlrefWotypeheadercdmap"
+    AliasName="WOTYPE"/>
+  <ViewAttribute
+    Name="Headercd"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Headercd"
+    EntityUsage="MrlrefWotypeheadercdmap"
+    AliasName="HEADERCD"/>
+</ViewObject>

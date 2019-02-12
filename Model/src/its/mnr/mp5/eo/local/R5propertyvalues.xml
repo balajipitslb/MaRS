@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5propertyvalues"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="R5PROPERTYVALUES"
+  AliasName="R5propertyvalues"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <Attribute
+    Name="PrvProperty"
+    IsUnique="true"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="PRV_PROPERTY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PROPERTYVALUES"
+    IsUpdateable="while_insert">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5propertyvalues.PrvProperty_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="PrvRentity"
+    IsUnique="true"
+    Precision="4"
+    ColumnName="PRV_RENTITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PROPERTYVALUES"
+    DefaultValue="EVNT"
+    IsUpdateable="while_insert">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="PrvClass"
+    IsUnique="true"
+    Precision="4"
+    ColumnName="PRV_CLASS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PROPERTYVALUES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+    <TransientExpression><![CDATA[(PrvCode != null? (WOEvents.EvtClass  != null? WOEvents.EvtClass:'*'):null)]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="PrvCode"/>
+    </Dependencies>
+  </Attribute>
+  <Attribute
+    Name="PrvCode"
+    Precision="40"
+    ColumnName="PRV_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PROPERTYVALUES"
+    IsUpdateable="while_insert">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="PrvSeqno"
+    IsUnique="true"
+    Precision="4"
+    Scale="0"
+    ColumnName="PRV_SEQNO"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5PROPERTYVALUES"
+    DefaultValue="1"/>
+  <Attribute
+    Name="PrvValue"
+    Precision="40"
+    ColumnName="PRV_VALUE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PROPERTYVALUES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+    <validation:RegExpValidationBean
+      Name="PrvValue_Rule_0"
+      ResId="IT2_DIGIT_YEAR3_DIGIT_CLAIM_NU"
+      OnAttribute="PrvValue"
+      Pattern="[IT]{2}-[0-9]{2}-[0-9]{3}"
+      Inverse="false">
+      <validation:OnCondition><![CDATA[PrvProperty=='CLAIM']]></validation:OnCondition>
+    </validation:RegExpValidationBean>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5propertyvalues.PrvValue_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="PrvNvalue"
+    ColumnName="PRV_NVALUE"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5PROPERTYVALUES"/>
+  <Attribute
+    Name="PrvDvalue"
+    ColumnName="PRV_DVALUE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5PROPERTYVALUES"/>
+  <Attribute
+    Name="PrvClassOrg"
+    IsUnique="true"
+    Precision="8"
+    ColumnName="PRV_CLASS_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PROPERTYVALUES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+    <TransientExpression><![CDATA[(PrvCode != null? (WOEvents.EvtClassOrg  != null? WOEvents.EvtClassOrg:'*'):null)]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="PrvCode"/>
+    </Dependencies>
+  </Attribute>
+  <Attribute
+    Name="Rowid"
+    IsUpdateable="false"
+    ColumnName="ROWID"
+    SQLType="ROWID"
+    Type="oracle.jbo.domain.RowID"
+    ColumnType="ROWID"
+    TableName="R5PROPERTYVALUES"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="PrvWOType"
+    Precision="80"
+    ColumnName="PRV_WOTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false"
+    IsUpdateable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[WOEvents.EvtWOType]]></TransientExpression>
+  </Attribute>
+  <ViewLinkAccessor
+    Name="WOEvents"
+    ViewLink="its.mnr.mp5.vo.link.WOEventsCustomFieldsLink"
+    ViewLinkEnd="its.mnr.mp5.vo.link.WOEventsCustomFieldsLink.WOEvents"
+    ViewLinkOtherEnd="its.mnr.mp5.vo.link.WOEventsCustomFieldsLink.CustomFields"
+    Type="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+    IsUpdateable="false"/>
+  <Key
+    Name="AltKey"
+    AltKey="true">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5PROPERTYVALUES"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5propertyvalues.PrvCode"/>
+      <Item Value="its.mnr.mp5.eo.local.R5propertyvalues.PrvProperty"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5nn01Prv">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN01_PRV"/>
+      <Attr Name="_checkCondition" Value="PRV_PROPERTY IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5uniqPrv">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5UNIQ_PRV"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5propertyvalues.PrvProperty"/>
+      <Item Value="its.mnr.mp5.eo.local.R5propertyvalues.PrvRentity"/>
+      <Item Value="its.mnr.mp5.eo.local.R5propertyvalues.PrvClass"/>
+      <Item Value="its.mnr.mp5.eo.local.R5propertyvalues.PrvClassOrg"/>
+      <Item Value="its.mnr.mp5.eo.local.R5propertyvalues.PrvCode"/>
+      <Item Value="its.mnr.mp5.eo.local.R5propertyvalues.PrvSeqno"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Prv">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_PRO"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_PRV"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5propertyvalues.PrvProperty"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok2Prv">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_ENT"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK2_PRV"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5propertyvalues.PrvRentity"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_R5propertyvalues">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_EVT"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_R5PROPERTYVALUES"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5propertyvalues.PrvCode"/>
+    </AttrArray>
+  </Key>
+  <validation:UniqueKeyValidationBean
+    Name="R5propertyvalues_Rule_0"
+    ResId="CUSTOM_FIELD_IS_A_DUPLICATE"
+    KeyName="AltKey">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="PrvCode"/>
+      <validation:Item
+        Value="PrvProperty"/>
+    </validation:OnAttributes>
+  </validation:UniqueKeyValidationBean>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

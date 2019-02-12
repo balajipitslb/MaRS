@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltTaskdamage"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="MRLT_TASKDAMAGE"
+  AliasName="MrltTaskdamage"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.eo.master.MrltTaskdamageImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="TaskRepair"
+    ViewObjectName="its.mnr.mp5.vo.workorder.TaskRepair"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="OneRepairDefaultOnly"
+    ViewObjectName="its.mnr.mp5.lov.OneRepairDefaultOnly">
+    <ParameterMap>
+      <PIMap Variable="TaskDamageIdBind">
+        <TransientExpression><![CDATA[Taskdamageid]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <Attribute
+    Name="Taskdamageid"
+    Precision="20"
+    ColumnName="TASKDAMAGEID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_TASKDAMAGE"
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    IsUpdateable="false"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrltTaskdamage.Taskdamageid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Taskid"
+    IsUnique="true"
+    Precision="20"
+    ColumnName="TASKID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_TASKDAMAGE"
+    RetrievedOnInsert="true"
+    IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrltTaskdamage.Taskid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Taskdamdescription"
+    Precision="25"
+    ColumnName="TASKDAMDESCRIPTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_TASKDAMAGE"
+    IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrltTaskdamage.Taskdamdescription_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Taskdamcode"
+    IsUnique="true"
+    Precision="2"
+    ColumnName="TASKDAMCODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_TASKDAMAGE"
+    IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrltTaskdamage.Taskdamcode_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Taskdamdflt"
+    Precision="1"
+    ColumnName="TASKDAMDFLT"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="MRLT_TASKDAMAGE"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    DefaultValue="N"
+    IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrltTaskdamage.Taskdamdflt_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="TaskDamCodeId"
+    Precision="80"
+    ColumnName="TASK_DAM_CODE_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[(Taskdamageid!=null?MrlrefDamage.Damageid:null)]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="Taskdamcode"/>
+    </Dependencies>
+  </Attribute>
+  <AccessorAttribute
+    Name="MrltTask"
+    Association="its.mnr.mp5.eo.assoc.MrltTaskdamageFk1Assoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MrltTaskdamageFk1Assoc.MrltTask"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MrltTaskdamageFk1Assoc.MrltTaskdamage"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="MrltTaskrepair"
+    Association="its.mnr.mp5.eo.assoc.MrltTaskrepairFk1Assoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MrltTaskrepairFk1Assoc.MrltTaskrepair"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MrltTaskrepairFk1Assoc.MrltTaskdamage"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="MrlrefDamage"
+    Association="its.mnr.mp5.eo.assoc.DamCodeIdForTaskDamage"
+    AssociationEnd="its.mnr.mp5.eo.assoc.DamCodeIdForTaskDamage.MrlrefDamage"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.DamCodeIdForTaskDamage.MrltTaskdamage"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrltTaskdamagePk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLT_TASKDAMAGE_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltTaskdamage.Taskdamageid"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltTaskdamageUk1">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_TASKDAMAGE_UK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltTaskdamage.Taskid"/>
+      <Item Value="its.mnr.mp5.eo.master.MrltTaskdamage.Taskdamcode"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltTaskdamageFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_TASK_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_TASKDAMAGE_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltTaskdamage.Taskid"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

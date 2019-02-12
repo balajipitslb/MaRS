@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title=" Document Manager" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1" usesUpload="true">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelGroupLayout layout="vertical" id="pgl1">
+                        <af:panelHeader text=" " id="ph1">
+                            <f:facet name="menuBar">
+                                <af:toolbar id="t1"
+                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                    <af:button actionListener="#{bindings.Commit.execute}" text="Apply"
+                                               disabled="#{!bindings.Commit.enabled}" id="ctb7"
+                                               icon="#{resource['images:commit.png']}"/>
+                                    <af:button actionListener="#{bindings.Rollback.execute}" text="Cancel"
+                                               disabled="#{!bindings.Rollback.enabled}" immediate="true" id="ctb6"
+                                               icon="#{resource['images:undo.png']}">
+                                        <af:resetActionListener/>
+                                    </af:button>
+                                    <af:spacer width="20" height="10" id="s1"/>
+                                    <af:button id="ctb3" actionListener="#{ModuleNavBean.goExit}"
+                                               icon="#{resource['images:terminate.png']}"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:query id="qryId1" headerText="Search" disclosed="true"
+                                      value="#{bindings.SearchDocsQuery.queryDescriptor}"
+                                      model="#{bindings.SearchDocsQuery.queryModel}"
+                                      queryListener="#{bindings.SearchDocsQuery.processQuery}"
+                                      queryOperationListener="#{bindings.SearchDocsQuery.processQueryOperation}"
+                                      resultComponentId="::pc1:resId1" modeChangeVisible="false"
+                                      saveQueryMode="hidden" fieldWidth="200" labelWidth="50"/>
+                        </af:panelHeader>
+                        <af:panelAccordion id="pb1" inlineStyle="margin:5px 0px 0px 5px;" dimensionsFrom="auto"
+                                           discloseMany="true">
+                            <af:showDetailItem id="sdi1" disclosed="true">
+                                <af:panelCollection id="pc1" defaultToolbarItemDisplay="icon"
+                                                    featuresOff="viewMenu detach" styleClass="AFStretchWidth"
+                                                    inlineStyle="margin:5px 0px 0px 5px; height:250px;">
+                                    <f:facet name="menus"/>
+                                    <f:facet name="toolbar">
+                                        <af:toolbar id="t2">
+                                            <af:button disabled="#{!bindings.CreateInsert.enabled || !securityContext.userGrantedResource['resourceName=AssetEditDoc;resourceType=UIControl;action=enabled']}"
+                                                       id="ctb4" icon="#{resource['images:add.png']}" action="Add"/>
+                                            <af:button actionListener="#{bindings.Delete.execute}"
+                                                       disabled="#{!bindings.Delete.enabled  || !securityContext.userGrantedResource['resourceName=AssetEditDoc;resourceType=UIControl;action=enabled']}"
+                                                       id="ctb2" icon="#{resource['images:delete.png']}"/>
+                                        </af:toolbar>
+                                    </f:facet>
+                                    <f:facet name="statusbar"/>
+                                    <af:table value="#{bindings.MrltDocumentsView.collectionModel}" var="row"
+                                              rows="#{bindings.MrltDocumentsView.rangeSize}"
+                                              emptyText="#{bindings.MrltDocumentsView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              fetchSize="#{bindings.MrltDocumentsView.rangeSize}" rowBandingInterval="1"
+                                              id="resId1"
+                                              selectedRowKeys="#{bindings.MrltDocumentsView.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.MrltDocumentsView.collectionModel.makeCurrent}"
+                                              rowSelection="single" inlineStyle="height:250px;"
+                                              columnStretching="column:resId1c2" partialTriggers="::ctb4 ::ctb2">
+                                        <af:column sortProperty="#{bindings.MrltDocumentsView.hints.Docid.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.MrltDocumentsView.hints.Docid.label}"
+                                                   id="resId1c1" width="70" displayIndex="-1" align="center">
+                                            <af:outputText value="#{row.Docid}" id="ot1">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.MrltDocumentsView.hints.Docid.format}"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.MrltDocumentsView.hints.Docdesc.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.MrltDocumentsView.hints.Docdesc.label}"
+                                                   id="resId1c2" width="30">
+                                            <af:outputText value="#{row.Docdesc}" id="ot2"/>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.MrltDocumentsView.hints.Filetype.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.MrltDocumentsView.hints.Filetype.label}"
+                                                   id="c1" width="60" displayIndex="-1" align="center">
+                                            <af:outputText value="#{row.Filetype}" id="ot3"/>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.MrltDocumentsView.hints.Docname.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.MrltDocumentsView.hints.Docname.label}"
+                                                   id="c3" width="70" align="center">
+                                            <af:outputText value="#{row.Docname}" id="ot7"/>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.MrltDocumentsView.hints.Doctype.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.MrltDocumentsView.hints.Doctype.label}"
+                                                   id="resId1c4" width="50" align="center">
+                                            <af:selectOneChoice value="#{row.bindings.Doctype.inputValue}"
+                                                                label="#{row.bindings.Doctype.label}"
+                                                                required="#{bindings.MrltDocumentsView.hints.Doctype.mandatory}"
+                                                                shortDesc="#{bindings.MrltDocumentsView.hints.Doctype.tooltip}"
+                                                                readOnly="true" id="soc2">
+                                                <f:selectItems value="#{row.bindings.Doctype.items}" id="si2"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
+                                        <af:column id="c4" width="30" align="center" headerText=""
+                                                   rendered="#{securityContext.userGrantedResource['resourceName=AssetEditDoc;resourceType=UIControl;action=enabled']}">
+                                            <af:link id="cl1" action="Edit" icon="#{resource['images:edit.png']}"/>
+                                        </af:column>
+                                        <af:column id="c2" width="30" align="center" headerText=""
+                                                   rendered="#{securityContext.userGrantedResource['resourceName=AssetEditDoc;resourceType=UIControl;action=enabled']}">
+                                            <af:link text=" " id="cl2" icon="#{resource['images:import.png']}">
+                                                <af:fileDownloadActionListener contentType="#{bindings.Filetype.inputValue}"
+                                                                               filename="#{bindings.Docname.inputValue}"
+                                                                               method="#{docManagerBean.downloadFile}"/>
+                                            </af:link>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelCollection>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="View File" id="sdi2" disclosed="true">
+                                <af:panelGroupLayout id="pgl2" halign="center">
+                                    <af:inlineFrame id="if2" source="/docservlet?id=#{bindings.Docid.inputValue}"
+                                                    inlineStyle="height:475px;width:700px;background-color:White; margin:5px 0px 0px 5px; border-color:Menu; border-style:solid;"
+                                                    sizing="preferred" partialTriggers="pc1:resId1"
+                                                    shortDesc="Preview Document"/>
+                                </af:panelGroupLayout>
+                            </af:showDetailItem>
+                        </af:panelAccordion>
+                    </af:panelGroupLayout>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

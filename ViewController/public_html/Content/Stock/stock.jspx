@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="MaRS" id="d1">
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/MP5BaseTemplate.jspx" id="pt1">
+                <f:facet name="GlobalTop">
+                    <af:navigationPane id="np1">
+                        <af:commandNavigationItem text="Home" id="cni1" accessKey="H"
+                                                  actionListener="#{ModuleNavBean.goHomeModule}"/>
+                        <af:commandNavigationItem text="Work Order" id="cni2" accessKey="W"
+                                                  actionListener="#{ModuleNavBean.goWOModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=WorkOrder;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Invoice" id="cni3" accessKey="I"
+                                                  actionListener="#{ModuleNavBean.goInvoiceModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Invoice;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="PO &amp; Receivings" id="cni4" accessKey="P"
+                                                  actionListener="#{ModuleNavBean.goPORecvModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=PORecv;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Stock (This)" id="cni5" accessKey="S"
+                                                  actionListener="#{ModuleNavBean.goStockModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Stock;resourceType=GlobalNav;action=view']}"
+                                                  selected="true"/>
+                        <af:commandNavigationItem text="Asset" id="cni8" accessKey="S"
+                                                  actionListener="#{ModuleNavBean.goAssetModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Asset;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Report" id="cni6" accessKey="R"
+                                                  actionListener="#{ModuleNavBean.goReportModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Report;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Admin" id="cni7" accessKey="M"
+                                                  actionListener="#{ModuleNavBean.goAdminModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Admin;resourceType=GlobalNav;action=view']}"/>
+                    </af:navigationPane>
+                </f:facet>
+                <f:facet name="Main">
+                    <af:panelDashboard id="pd1" columns="1" rowHeight="75px" inlineStyle="margin:20px; padding:10px;">
+                        <af:panelBox text="PanelBox1" id="pb1" showHeader="never">
+                            <f:facet name="toolbar"/>
+                            <af:panelGroupLayout id="pgl1" layout="horizontal" valign="middle"
+                                                 inlineStyle="margin:10px 10px 10px 30px;">
+                                <af:image id="i1" source="#{resource['images:rsz_tools.png']}"
+                                          shortDesc="Parts Maintenance Image"/>
+                                <af:spacer width="10" height="10" id="s1"/>
+                                <af:link text="Parts Maintenance" id="cl1" inlineStyle="font-size:medium;"
+                                         action="launchPartsMaint" useWindow="true" windowEmbedStyle="inlineDocument"
+                                         windowModalityType="modeless" windowHeight="600" windowWidth="800"
+                                         accessKey="m"/>
+                            </af:panelGroupLayout>
+                        </af:panelBox>
+                        <af:panelBox text="PanelBox2" id="pb2" showHeader="never"
+                                     rendered="#{securityContext.userGrantedResource['resourceName=CycleCount;resourceType=UIControl;action=enabled']}">
+                            <f:facet name="toolbar"/>
+                            <af:panelGroupLayout id="pgl2" layout="horizontal" valign="middle"
+                                                 inlineStyle="margin:10px 10px 10px 30px;">
+                                <af:image source="#{resource['images:barcode.png']}" id="i2"
+                                shortDesc="Cycle Count Image"/>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:link text="Cycle Count" id="cl2" inlineStyle="font-size:medium;"
+                                         action="launchCyclecnt" useWindow="true" windowEmbedStyle="inlineDocument"
+                                         windowModalityType="modeless" windowHeight="600" windowWidth="755"
+                                         accessKey="m"/>
+                            </af:panelGroupLayout>
+                        </af:panelBox>
+                        <af:panelBox text="PanelBox3" id="pb3" showHeader="never"
+                                     rendered="#{securityContext.userGrantedResource['resourceName=StockModifyCompany;resourceType=UIControl;action=enabled']}">
+                            <f:facet name="toolbar"/>
+                            <af:panelGroupLayout id="pgl3" layout="horizontal" valign="middle"
+                                                 inlineStyle="margin:10px 10px 10px 30px;">
+                                <af:image id="i3" source="#{resource['images:warehouse.png']}"
+                                shortDesc="Suppliers Image"/>
+                                <af:spacer width="10" height="10" id="s3"/>
+                                <af:link text="Suppliers" id="cl3" inlineStyle="font-size:medium;"
+                                         action="launchSuppliers" useWindow="true" windowEmbedStyle="inlineDocument"
+                                         windowModalityType="modeless" windowHeight="600" windowWidth="755"
+                                         accessKey="m"/>
+                            </af:panelGroupLayout>
+                        </af:panelBox>
+                    </af:panelDashboard>
+                </f:facet>
+                <f:facet name="LHS"/>
+                <f:attribute name="LHSSplitterCollapsed" value="true"/>
+                <f:attribute name="LHSSplitterDisabled" value="true"/>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

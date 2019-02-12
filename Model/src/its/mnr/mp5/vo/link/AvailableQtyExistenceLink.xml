@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AvailableQtyExistenceLink"
+  Version="11.1.2.64.36">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.link.AvailableQtyExistenceLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="Matlparts"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.vo.workorder.Matlparts">
+    <DesignTime>
+      <Attr Name="_accessor" Value="true"/>
+      <Attr Name="_finderName" Value="Matlparts"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.workorder.Matlparts.MlpPart"/>
+      <Item Value="its.mnr.mp5.vo.workorder.Matlparts.ItsLot"/>
+      <Item Value="its.mnr.mp5.vo.workorder.Matlparts.ItsBin"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="AvailableQtyExistence"
+    Cardinality="-1"
+    Owner="its.mnr.mp5.lov.AvailableQtyExistence">
+    <DesignTime>
+      <Attr Name="_finderName" Value="AvailableQtyExistence"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.lov.AvailableQtyExistence.BisPart"/>
+      <Item Value="its.mnr.mp5.lov.AvailableQtyExistence.BisLot"/>
+      <Item Value="its.mnr.mp5.lov.AvailableQtyExistence.BisBin"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

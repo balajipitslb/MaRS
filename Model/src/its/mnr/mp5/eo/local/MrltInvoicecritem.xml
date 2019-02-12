@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltInvoicecritem"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="MRLT_INVOICECRITEM"
+  AliasName="MrltInvoicecritem"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="Invoicecritemid"
+    IsNotNull="true"
+    Precision="38"
+    Scale="0"
+    ColumnName="INVOICECRITEMID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MRLT_INVOICECRITEM"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="Invoiceheaderid"
+    IsNotNull="true"
+    Precision="38"
+    Scale="0"
+    ColumnName="INVOICEHEADERID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MRLT_INVOICECRITEM"/>
+  <Attribute
+    Name="Wo"
+    IsNotNull="true"
+    Precision="10"
+    ColumnName="WO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_INVOICECRITEM">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltInvoicecritem.Wo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Labor"
+    IsNotNull="true"
+    Precision="10"
+    Scale="3"
+    ColumnName="LABOR"
+    SQLType="NUMERIC"
+    Type="java.lang.Double"
+    ColumnType="NUMBER"
+    TableName="MRLT_INVOICECRITEM">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.eo.local.MrltInvoicecritem.Labor_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Part"
+    IsNotNull="true"
+    ColumnName="PART"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MRLT_INVOICECRITEM">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.eo.local.MrltInvoicecritem.Part_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Tax"
+    IsNotNull="true"
+    ColumnName="TAX"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MRLT_INVOICECRITEM">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.eo.local.MrltInvoicecritem.Tax_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Taxper"
+    ColumnName="TAXPER"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MRLT_INVOICECRITEM">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltInvoicecritem.Taxper_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Laborcr"
+    ColumnName="LABORCR"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MRLT_INVOICECRITEM">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltInvoicecritem.Laborcr_LABEL"/>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.eo.local.MrltInvoicecritem.Laborcr_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Partcr"
+    ColumnName="PARTCR"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MRLT_INVOICECRITEM">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltInvoicecritem.Partcr_LABEL"/>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.eo.local.MrltInvoicecritem.Partcr_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Taxcr"
+    ColumnName="TAXCR"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MRLT_INVOICECRITEM">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltInvoicecritem.Taxcr_LABEL"/>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.eo.local.MrltInvoicecritem.Taxcr_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Totalcr"
+    IsNotNull="true"
+    ColumnName="TOTALCR"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MRLT_INVOICECRITEM">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltInvoicecritem.Totalcr_LABEL"/>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.eo.local.MrltInvoicecritem.Totalcr_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Hdrcode"
+    Precision="4"
+    ColumnName="HDRCODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_INVOICECRITEM">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="MrltInvoiceheader"
+    Association="its.mnr.mp5.eo.assoc.MrltInvoicecritemFk1Assoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MrltInvoicecritemFk1Assoc.MrltInvoiceheader"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MrltInvoicecritemFk1Assoc.MrltInvoicecritem"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrltInvoicecritemPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLT_INVOICECRITEM_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltInvoicecritem.Invoicecritemid"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltInvoicecritemFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_INVOICEHEADER_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_INVOICECRITEM_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltInvoicecritem.Invoiceheaderid"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="PartMaintenancePageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PartsDataControlNested.PartsMaintView" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="PartsMaintViewIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="PartsDataControlNested.Suppliers" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="SuppliersIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="PartsDataControlNested.PartComment" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="PartCommentIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="PartsDataControlNested.PartStock" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="PartStockIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="PartsDataControlNested.PartsBinstockView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="PartsBinstockViewIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="PartsDataControlNested.CompaniesPref" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="CompaniesPrefIterator" ChangeEventPolicy="ppr"/>
+    <searchRegion Criteria="PartSearchAll" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="PartsMaintViewIterator" id="PartSearchAllQuery" Refresh="default"/>
+    <iterator Binds="PartsDataControlNested.PartsSupplierOrderlines" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="PartsSupplierOrderlinesIterator" ChangeEventPolicy="ppr"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="PartsMaintViewIterator" id="PartsMaintView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.parts.PartsMaintView" Name="PartsMaintView0">
+        <AttrNames>
+          <Item Value="ParCode"/>
+          <Item Value="ParDesc"/>
+          <Item Value="ParClass"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="ParCode">
+      <AttrNames>
+        <Item Value="ParCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="ParDesc">
+      <AttrNames>
+        <Item Value="ParDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="PartsMaintViewIterator" StaticList="false" Uses="LOV_ParClass" id="ParClass"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="PartsMaintViewIterator" StaticList="false" Uses="LOV_ParUom" id="ParUom" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+    <button IterBinding="PartsMaintViewIterator" id="ParNotused" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ParNotused"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="+"/>
+        <Item Value="-"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="ItsGl">
+      <AttrNames>
+        <Item Value="ItsGl"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="PartsMaintViewIterator" id="ItsCyclecnt" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ItsCyclecnt"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <list IterBinding="PartsMaintViewIterator" StaticList="false" Uses="LOV_ParTax" id="ParTax" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="ParBaseprice">
+      <AttrNames>
+        <Item Value="ParBaseprice"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="ParLastprice">
+      <AttrNames>
+        <Item Value="ParLastprice"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="PartsMaintViewIterator" Uses="LOV_tPrefSup" id="tPrefSup"/>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="ParPrefsup">
+      <AttrNames>
+        <Item Value="ParPrefsup"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SuppliersIterator" id="CatMultiply">
+      <AttrNames>
+        <Item Value="CatMultiply"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="PartsMaintViewIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <methodAction IterBinding="PartsMaintViewIterator" id="writePartCSV" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="writePartCSV" IsViewObjectMethod="false"
+                  DataControl="MNRDataControlDataControl" InstanceName="bindings.PartsMaintViewIterator.currentRow"
+                  IsLocalObjectReference="true"/>
+    <attributeValues IterBinding="PartCommentIterator" id="AddText">
+      <AttrNames>
+        <Item Value="AddText"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartCommentIterator" id="AddCreated">
+      <AttrNames>
+        <Item Value="AddCreated"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartCommentIterator" id="AddUser">
+      <AttrNames>
+        <Item Value="AddUser"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartCommentIterator" id="AddUpdated">
+      <AttrNames>
+        <Item Value="AddUpdated"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartCommentIterator" id="AddUpduser">
+      <AttrNames>
+        <Item Value="AddUpduser"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="PartCommentIterator" id="First" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="PartCommentIterator" id="Last" RequiresUpdateModel="true" Action="last"/>
+    <action IterBinding="PartCommentIterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="PartCommentIterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="PartCommentIterator" id="Create" RequiresUpdateModel="true" Action="createRow"/>
+    <action IterBinding="PartCommentIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="PartCommentIterator" id="AddLine">
+      <AttrNames>
+        <Item Value="AddLine"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartCommentIterator" id="AddCode">
+      <AttrNames>
+        <Item Value="AddCode"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="PartStockIterator" id="PartStock">
+      <nodeDefinition DefName="its.mnr.mp5.vo.parts.PartStock" Name="PartStock0">
+        <AttrNames>
+          <Item Value="StoStore"/>
+          <Item Value="StoQty"/>
+          <Item Value="StoPrefsup"/>
+          <Item Value="StoMinlev"/>
+          <Item Value="StoOrdqty"/>
+          <Item Value="StoLeadtime"/>
+          <Item Value="ItsRorder" Binds="ItsRorder"/>
+          <Item Value="StoOrdlev"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="PartStockIterator" id="ItsRorder" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ItsRorder"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="PartsBinstockViewIterator" id="PartsBinstockView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.parts.PartsBinstockView" Name="PartsBinstockView0">
+        <AttrNames>
+          <Item Value="BisBin"/>
+          <Item Value="BisLot"/>
+          <Item Value="BisQty"/>
+          <Item Value="tIsBinEmpty"/>
+          <Item Value="tNewBin"/>
+          <Item Value="tNewLot"/>
+          <Item Value="tNewQty"/>
+          <Item Value="tTransferLine" Binds="tTransferLine"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="tTotalStoQty">
+      <AttrNames>
+        <Item Value="tTotalStoQty"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="PartsBinstockViewIterator" id="BinTransfer"
+                  InstanceName="bindings.PartsBinstockViewIterator.currentRow" DataControl="MNRDataControlDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="BinTransfer" IsViewObjectMethod="false"
+                  IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.BinTransfer_BinTransfer_BinTransfer_result">
+      <NamedData NDName="pOBin" NDType="java.lang.String"/>
+      <NamedData NDName="pOLot" NDType="java.lang.String"/>
+      <NamedData NDName="pNBin" NDType="java.lang.String"/>
+      <NamedData NDName="pNLot" NDType="java.lang.String"/>
+      <NamedData NDName="pNQty" NDType="oracle.jbo.domain.Number"/>
+      <NamedData NDName="pPart" NDType="java.lang.String"/>
+      <NamedData NDName="pPartOrg" NDType="java.lang.String"/>
+      <NamedData NDName="pStore" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="PartsBinstockViewIterator" id="BisQty">
+      <AttrNames>
+        <Item Value="BisQty"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="PartsBinstockViewIterator" id="Delete1" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <button IterBinding="PartStockIterator" id="vTransfer1" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="vTransfer"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="SuppliersIterator" id="Suppliers">
+      <nodeDefinition DefName="its.mnr.mp5.vo.parts.Suppliers" Name="Suppliers0">
+        <AttrNames>
+          <Item Value="CatPart"/>
+          <Item Value="CatSupplier"/>
+          <Item Value="CatPurprice"/>
+          <Item Value="CatCurr"/>
+          <Item Value="CatExch"/>
+          <Item Value="CatPuruom"/>
+          <Item Value="CatMultiply"/>
+          <Item Value="CatTax"/>
+          <Item Value="tSupplierName"/>
+          <Item Value="tSupplierIsPref" Binds="tSupplierIsPref"/>
+          <Item Value="CatGross"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="SuppliersIterator" id="tSupplierIsPref" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="tSupplierIsPref"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="SuppliersIterator" id="CatExch">
+      <AttrNames>
+        <Item Value="CatExch"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SuppliersIterator" id="CatGross">
+      <AttrNames>
+        <Item Value="CatGross"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="PartsBinstockViewIterator" Uses="LOV_tNewBin" id="tNewBin"/>
+    <listOfValues StaticList="false" IterBinding="PartsBinstockViewIterator" Uses="LOV_tNewLot" id="tNewLot"/>
+    <button IterBinding="PartsBinstockViewIterator" id="tTransferLine" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="tTransferLine"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="CompaniesPrefIterator" id="ComDesc">
+      <AttrNames>
+        <Item Value="ComDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="tPostedParNotused">
+      <AttrNames>
+        <Item Value="tPostedParNotused"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="SuppliersIterator" id="Delete2" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="PartsSupplierOrderlinesIterator" id="PartsSupplierOrderlines">
+      <nodeDefinition DefName="its.mnr.mp5.vo.parts.MrltPorderlinesvwView" Name="PartsSupplierOrderlines0">
+        <AttrNames>
+          <Item Value="Ponum"/>
+          <Item Value="Postatus"/>
+          <Item Value="Podate"/>
+          <Item Value="Poline"/>
+          <Item Value="Linestatus"/>
+          <Item Value="Lineordqty"/>
+          <Item Value="Lineuom"/>
+          <Item Value="Unitprice"/>
+          <Item Value="Recvqty"/>
+          <Item Value="Recvvalue"/>
+          <Item Value="Extracharges"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

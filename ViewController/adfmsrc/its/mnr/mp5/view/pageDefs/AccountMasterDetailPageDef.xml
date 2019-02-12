@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="AccountMasterDetailPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator Binds="MasterDataControlNested.MrltAccountmasterView1" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrltAccountmasterView1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="MrltAccountmasterView1Iterator" id="Acctnum">
+      <AttrNames>
+        <Item Value="Acctnum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltAccountmasterView1Iterator" id="Accountnm">
+      <AttrNames>
+        <Item Value="Accountnm"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="MrltAccountmasterView1Iterator" id="Billtype" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Billtype"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="B"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="MrltAccountmasterView1Iterator" id="Amstractive" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Amstractive"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="MrltAccountmasterView1Iterator" id="Estimate" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Estimate"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="MrltAccountmasterView1Iterator" id="Invrej" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Invrej"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="MrltAccountmasterView1Iterator" id="Locode">
+      <AttrNames>
+        <Item Value="Locode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltAccountmasterView1Iterator" id="Over">
+      <AttrNames>
+        <Item Value="Over"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="MNRDataControlDataControl"/>
+    <attributeValues IterBinding="MrltAccountmasterView1Iterator" id="Accountnmlong">
+      <AttrNames>
+        <Item Value="Accountnmlong"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltAccountmasterView1Iterator" id="Overuom">
+      <AttrNames>
+        <Item Value="Overuom"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="MrltAccountmasterView1Iterator" id="Parttax" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Parttax"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="MrltAccountmasterView1Iterator" id="Estcmpltn" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Estcmpltn"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+  </bindings>
+</pageDefinition>

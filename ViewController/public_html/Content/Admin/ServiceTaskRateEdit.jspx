@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle1" value="#{adfBundle['viewcontroller.Content.Admin.ServiceTaskRateEditBundle']}"/>
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.ServiceTaskRateEditBundle']}"/>
+    <af:document title="#{viewcontrollerBundle1.SERVICETASKRATE} (#{pageFlowScope.TaskAction})" id="d1"
+                 uncommittedDataWarning="on">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelHeader text=" " id="ph1"
+                                    inlineStyle="background-color:White; border-color:Silver; border-style:solid; border-width:2px;">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:group id="g1">
+                                <af:toolbar id="t1"
+                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px;">
+                                    <af:button actionListener="#{bindings.Commit.execute}"
+                                               text="#{viewcontrollerBundle.APPLY}"
+                                               disabled="#{!bindings.Commit.enabled}" id="ctb2"
+                                               icon="#{resource['images:add.png']}"
+                                               shortDesc="#{viewcontrollerBundle.SAVERECORD}">
+                                        <af:setPropertyListener to="#{pageFlowScope.TaskAction}" from="#{'Applied'}"
+                                                                type="action"/>
+                                    </af:button>
+                                    <af:spacer width="10" height="10" id="s6"/>
+                                    <af:commandToolbarButton id="ctb1" icon="#{resource['images:terminate.png']}"
+                                                             action="Cancel"
+                                                             shortDesc="#{viewcontrollerBundle.CLOSEANDRETURNTOPREVIOUSSCREEN}"
+                                                             immediate="true" text="#{viewcontrollerBundle1.EXIT}">
+                                        <af:setPropertyListener to="#{pageFlowScope.psfCurrentTaskRow}"
+                                                                from="#{bindings.AccountRateTaskViewIterator.currentRowKeyString}"
+                                                                type="action"/>
+                                        <af:checkUncommittedDataBehavior/>
+                                    </af:commandToolbarButton>
+                                </af:toolbar>
+                            </af:group>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+                        <af:panelFormLayout id="pfl1"
+                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px; padding:5px;"
+                                            maxColumns="3" fieldWidth="200" rows="4" labelWidth="100">
+                            <af:panelLabelAndMessage label="#{bindings.AccountRateTaskAcctNum.hints.label}:" id="plam4">
+                                <af:inputText value="#{bindings.AccountRateTaskAcctNum.inputValue}"
+                                              required="#{bindings.AccountRateTaskAcctNum.hints.mandatory}" columns="20"
+                                              maximumLength="#{bindings.AccountRateTaskAcctNum.hints.precision}"
+                                              shortDesc="#{bindings.AccountRateTaskAcctNum.hints.tooltip}" id="it4"
+                                              disabled="false" readOnly="true">
+                                    <f:validator binding="#{bindings.AccountRateTaskAcctNum.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.AccountRateTaskBillType.hints.label}:"
+                                                     id="plam6">
+                                <af:inputText value="#{bindings.AccountRateTaskBillType.inputValue  == 'B'? 'Billable' : 'NonBillable'}"
+                                              required="#{bindings.AccountRateTaskBillType.hints.mandatory}"
+                                              columns="100"
+                                              maximumLength="#{bindings.AccountRateTaskBillType.hints.precision}"
+                                              shortDesc="#{bindings.AccountRateTaskBillType.hints.tooltip}" id="it6"
+                                              rows="1" disabled="true">
+                                    <f:validator binding="#{bindings.AccountRateTaskBillType.validator}"/>
+                                </af:inputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{viewcontrollerBundle1.SERVICEGROUP}:" id="plam5">
+                                <af:selectOneChoice value="#{bindings.Servicegroupid1.inputValue}"
+                                                    required="#{bindings.Servicegroupid1.hints.mandatory}"
+                                                    shortDesc="#{bindings.Servicegroupid1.hints.tooltip}" id="soc1"
+                                                    readOnly="true" contentStyle="width:150px;">
+                                    <f:selectItems value="#{bindings.Servicegroupid1.items}" id="si2"/>
+                                </af:selectOneChoice>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Taskid1.hints.label}:" id="plam1">
+                                <af:selectOneChoice value="#{bindings.Taskid1.inputValue}"
+                                                    required="#{bindings.Taskid1.hints.mandatory}"
+                                                    shortDesc="#{bindings.Taskid1.hints.tooltip}" id="soc2"
+                                                    autoSubmit="true">
+                                    <f:selectItems value="#{bindings.Taskid1.items}" id="si3"/>
+                                </af:selectOneChoice>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.AccountRateTaskBase.hints.label}:" id="plam3">
+                                <af:inputText value="#{bindings.AccountRateTaskBase.inputValue}"
+                                              required="#{bindings.AccountRateTaskBase.hints.mandatory}" columns="20"
+                                              maximumLength="#{bindings.AccountRateTaskBase.hints.precision}"
+                                              shortDesc="#{bindings.AccountRateTaskBase.hints.tooltip}" id="it5"
+                                              disabled="false" readOnly="true">
+                                    <af:convertNumber type="currency"/>
+                                </af:inputText>
+                                <f:facet name="end">
+                                    <af:panelLabelAndMessage label="#{bindings.AccountRateTaskPer.hints.label}:"
+                                                             id="plam2">
+                                        <af:inputText value="#{bindings.AccountRateTaskPer.inputValue}"
+                                                      required="#{bindings.AccountRateTaskPer.hints.mandatory}"
+                                                      columns="20"
+                                                      maximumLength="#{bindings.AccountRateTaskPer.hints.precision}"
+                                                      shortDesc="#{bindings.AccountRateTaskPer.hints.tooltip}" id="it8"
+                                                      disabled="false" readOnly="true" partialTriggers="soc2">
+                                            <f:validator binding="#{bindings.AccountRateTaskPer.validator}"/>
+                                        </af:inputText>
+                                    </af:panelLabelAndMessage>
+                                </f:facet>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Ratetype.hints.label}:" id="plam7">
+                                <af:selectOneRadio value="#{bindings.Ratetype.inputValue}"
+                                                   required="#{bindings.Ratetype.hints.mandatory}"
+                                                   shortDesc="#{bindings.Ratetype.hints.tooltip}" id="sor1"
+                                                   autoSubmit="true" layout="horizontal">
+                                    <f:selectItems value="#{bindings.Ratetype.items}" id="si1"/>
+                                </af:selectOneRadio>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Equipcharge.label}:" id="plam8">
+                                <af:selectBooleanCheckbox value="#{bindings.Equipcharge.inputValue}"
+                                                          shortDesc="#{bindings.Equipcharge.hints.tooltip}" id="sbc1"
+                                                          disabled="#{bindings.Ratetype.inputValue == 'HOUR'}"
+                                                          partialTriggers="plam7" autoSubmit="true"/>
+                            </af:panelLabelAndMessage>
+                        </af:panelFormLayout>
+                        <af:spacer width="10" height="20" id="s3"/>
+                        <af:outputLabel value="#{viewcontrollerBundle1.HOUR_RATES}" id="ol1"/>
+                        <af:panelFormLayout id="pfl2"
+                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px; padding:5px;"
+                                            maxColumns="6" rows="1" fieldWidth="100" labelWidth="75"
+                                            labelAlignment="top">
+                            <af:inputText value="#{bindings.AccountRateTaskM1.inputValue}"
+                                          label="#{bindings.AccountRateTaskM1.hints.label}"
+                                          required="#{bindings.AccountRateTaskM1.hints.mandatory}" columns="15"
+                                          maximumLength="#{bindings.AccountRateTaskM1.hints.precision}"
+                                          shortDesc="#{bindings.AccountRateTaskM1.hints.tooltip}" id="it9"
+                                          disabled="true" contentStyle="text-align:right;">
+                                <f:validator binding="#{bindings.AccountRateTaskM1.validator}"/>
+                                <af:convertNumber type="currency"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.AccountRateTaskM1o.inputValue}"
+                                          label="#{bindings.AccountRateTaskM1o.hints.label}"
+                                          required="#{bindings.AccountRateTaskM1o.hints.mandatory}" columns="15"
+                                          maximumLength="#{bindings.AccountRateTaskM1o.hints.precision}"
+                                          shortDesc="#{bindings.AccountRateTaskM1o.hints.tooltip}" id="it10"
+                                          disabled="true" contentStyle="text-align:right;">
+                                <f:validator binding="#{bindings.AccountRateTaskM1o.validator}"/>
+                                <af:convertNumber type="currency"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.AccountRateTaskM2.inputValue}"
+                                          label="#{bindings.AccountRateTaskM2.hints.label}"
+                                          required="#{bindings.AccountRateTaskM2.hints.mandatory}" columns="15"
+                                          maximumLength="#{bindings.AccountRateTaskM2.hints.precision}"
+                                          shortDesc="#{bindings.AccountRateTaskM2.hints.tooltip}" id="it11"
+                                          disabled="true" contentStyle="text-align:right;">
+                                <f:validator binding="#{bindings.AccountRateTaskM2.validator}"/>
+                                <af:convertNumber type="currency"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.AccountRateTaskM2o.inputValue}"
+                                          label="#{bindings.AccountRateTaskM2o.hints.label}"
+                                          required="#{bindings.AccountRateTaskM2o.hints.mandatory}" columns="15"
+                                          maximumLength="#{bindings.AccountRateTaskM2o.hints.precision}"
+                                          shortDesc="#{bindings.AccountRateTaskM2o.hints.tooltip}" id="it12"
+                                          disabled="true" contentStyle="text-align:right;">
+                                <f:validator binding="#{bindings.AccountRateTaskM2o.validator}"/>
+                                <af:convertNumber type="currency"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.AccountRateTaskM3.inputValue}"
+                                          label="#{bindings.AccountRateTaskM3.hints.label}"
+                                          required="#{bindings.AccountRateTaskM3.hints.mandatory}" columns="15"
+                                          maximumLength="#{bindings.AccountRateTaskM3.hints.precision}"
+                                          shortDesc="#{bindings.AccountRateTaskM3.hints.tooltip}" id="it13"
+                                          disabled="true" contentStyle="text-align:right;">
+                                <f:validator binding="#{bindings.AccountRateTaskM3.validator}"/>
+                                <af:convertNumber type="currency"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.AccountRateTaskM3o.inputValue}"
+                                          label="#{bindings.AccountRateTaskM3o.hints.label}"
+                                          required="#{bindings.AccountRateTaskM3o.hints.mandatory}" columns="15"
+                                          maximumLength="#{bindings.AccountRateTaskM3o.hints.precision}"
+                                          shortDesc="#{bindings.AccountRateTaskM3o.hints.tooltip}" id="it14"
+                                          disabled="true" contentStyle="text-align:right;">
+                                <f:validator binding="#{bindings.AccountRateTaskM3o.validator}"/>
+                                <af:convertNumber type="currency"/>
+                            </af:inputText>
+                        </af:panelFormLayout>
+                        <af:spacer width="10" height="20" id="s4"/>
+                        <af:outputLabel value="#{viewcontrollerBundle1.FLAT_RATES}" id="ol2"
+                                        visible="#{bindings.Ratetype.inputValue == 'FLAT'}"/>
+                        <af:panelFormLayout id="pfl4"
+                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px; padding:5px;"
+                                            maxColumns="6" rows="1" fieldWidth="100" labelWidth="75"
+                                            labelAlignment="top" partialTriggers="plam7"
+                                            visible="#{bindings.Ratetype.inputValue == 'FLAT'}">
+                            <af:inputText value="#{bindings.R1.inputValue}" label="#{bindings.R1.hints.label}"
+                                          required="#{bindings.Ratetype.inputValue == 'FLAT'}"
+                                          columns="15" maximumLength="#{bindings.R1.hints.precision}"
+                                          shortDesc="#{bindings.R1.hints.tooltip}" id="it2" rows="1" autoSubmit="true"
+                                          partialTriggers="plam7"
+                                          disabled="#{bindings.Ratetype.inputValue == 'HOUR'}">
+                                <f:validator binding="#{bindings.R1.validator}"/>
+                                <af:clientListener method="clearMessagesForComponent" type="focus"/>
+                                <af:convertNumber type="currency"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.R1o.inputValue}" label="#{bindings.R1o.hints.label}"
+                                          required="#{bindings.Ratetype.inputValue == 'FLAT'}" columns="15"
+                                          maximumLength="#{bindings.R1o.hints.precision}"
+                                          shortDesc="#{bindings.R1o.hints.tooltip}" id="it15" rows="1"
+                                          disabled="#{bindings.Ratetype.inputValue == 'HOUR'}"
+                                          autoSubmit="true" partialTriggers="plam7">
+                                <f:validator binding="#{bindings.R1o.validator}"/>
+                                <af:convertNumber type="currency"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.R2.inputValue}" label="#{bindings.R2.hints.label}"
+                                          required="#{bindings.Ratetype.inputValue == 'FLAT'}" columns="15"
+                                          maximumLength="#{bindings.R2.hints.precision}"
+                                          shortDesc="#{bindings.R2.hints.tooltip}" id="it16" rows="1"
+                                          disabled="#{bindings.Ratetype.inputValue == 'HOUR'}"
+                                          autoSubmit="true" partialTriggers="plam7">
+                                <f:validator binding="#{bindings.R2.validator}"/>
+                                <af:convertNumber type="currency"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.R2o.inputValue}" label="#{bindings.R2o.hints.label}"
+                                          required="#{bindings.Ratetype.inputValue == 'FLAT'}" columns="15"
+                                          maximumLength="#{bindings.R2o.hints.precision}"
+                                          shortDesc="#{bindings.R2o.hints.tooltip}" id="it17" rows="1"
+                                          disabled="#{bindings.Ratetype.inputValue == 'HOUR'}"
+                                          autoSubmit="true" partialTriggers="plam7">
+                                <f:validator binding="#{bindings.R2o.validator}"/>
+                                <af:convertNumber type="currency"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.R3.inputValue}" label="#{bindings.R3.hints.label}"
+                                          required="#{bindings.Ratetype.inputValue == 'FLAT'}" columns="15"
+                                          maximumLength="#{bindings.R3.hints.precision}"
+                                          shortDesc="#{bindings.R3.hints.tooltip}" id="it18" rows="1"
+                                          disabled="#{bindings.Ratetype.inputValue == 'HOUR'}"
+                                          autoSubmit="true" partialTriggers="plam7">
+                                <f:validator binding="#{bindings.R3.validator}"/>
+                                <af:convertNumber type="currency"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.R3o.inputValue}" label="#{bindings.R3o.hints.label}"
+                                          required="#{bindings.Ratetype.inputValue == 'FLAT'}" columns="15"
+                                          maximumLength="#{bindings.R3o.hints.precision}"
+                                          shortDesc="#{bindings.R3o.hints.tooltip}" id="it19" rows="1"
+                                          disabled="#{bindings.Ratetype.inputValue == 'HOUR'}"
+                                          autoSubmit="true" partialTriggers="plam7">
+                                <f:validator binding="#{bindings.R3o.validator}"/>
+                                <af:convertNumber type="currency"/>
+                            </af:inputText>
+                        </af:panelFormLayout>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+    <af:resource type="javascript">
+      function clearMessagesForComponent(evt) {
+          AdfPage.PAGE.clearAllMessages();
+          evt.cancel();
+      }
+    </af:resource>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:AccountBillingMasterBean-->
+</f:view>

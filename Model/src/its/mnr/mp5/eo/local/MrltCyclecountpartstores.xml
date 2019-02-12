@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltCyclecountpartstores"
+  Version="11.1.2.64.36"
+  DBObjectType="table"
+  DBObjectName="MRLT_CYCLECOUNTPARTSTORES"
+  AliasName="MrltCyclecountpartstores"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="Listid"
+    ColumnName="LISTID"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="MRLT_CYCLECOUNTPARTSTORES"
+    IsUpdateable="while_insert"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="Srcd"
+    Precision="5"
+    ColumnName="SRCD"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNTPARTSTORES"
+    IsUpdateable="while_insert"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Used"
+    ColumnName="USED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNTPARTSTORES"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    DefaultValue="N"
+    Precision="255">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Ccpsid"
+    Precision="10"
+    Scale="0"
+    ColumnName="CCPSID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MRLT_CYCLECOUNTPARTSTORES"
+    PrimaryKey="true"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    IsUpdateable="while_insert"/>
+  <Key
+    Name="MrltcyclecountpartstoresPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLTCYCLECOUNTPARTSTORES_PRIMA"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltCyclecountpartstores.Ccpsid"/>
+    </AttrArray>
+  </Key>
+</Entity>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltLabels"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="MP5PRD.MRLT_LABELS"
+  AliasName="MrltLabels"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="Labelid"
+    IsNotNull="true"
+    ColumnName="LABELID"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="MP5PRD.MRLT_LABELS"
+    PrimaryKey="true"
+    IsUpdateable="false"
+    RetrievedOnInsert="true"/>
+  <Attribute
+    Name="Labelitem"
+    Precision="45"
+    ColumnName="LABELITEM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_LABELS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Labelorg"
+    Precision="8"
+    ColumnName="LABELORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_LABELS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Labelvalue"
+    Precision="30"
+    ColumnName="LABELVALUE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_LABELS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Labeltype"
+    Precision="10"
+    ColumnName="LABELTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_LABELS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="MrltSpares"
+    Association="its.mnr.mp5.eo.assoc.SpareLabelAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.SpareLabelAssoc.MrltSpares"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.SpareLabelAssoc.MrltLabels"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="MrltReading"
+    Association="its.mnr.mp5.eo.assoc.ReadingLabelAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.ReadingLabelAssoc.MrltReading"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.ReadingLabelAssoc.MrltLabels"
+    Type="its.mnr.mp5.eo.local.MrltReadingImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrltLabelsPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLT_LABELS_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltLabels.Labelid"/>
+    </AttrArray>
+  </Key>
+</Entity>

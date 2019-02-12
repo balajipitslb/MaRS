@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="TaskSetupPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator Binds="MasterDataControlNested.MrltTaskView1" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="MrltTaskView1Iterator"/>
+    <searchRegion Criteria="Billable" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="MrltTaskView1Iterator" id="BillableQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MrltTaskView1Iterator" id="MrltTaskView1">
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrltTaskView" Name="MrltTaskView10">
+        <AttrNames>
+          <Item Value="Taskid"/>
+          <Item Value="Servicegroupid"/>
+          <Item Value="Task"/>
+          <Item Value="Taskcompcode"/>
+          <Item Value="Per"/>
+          <Item Value="Billtype"/>
+          <Item Value="Taskactive"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MrltTaskView1Iterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="MrltTaskView1Iterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="MNRDataControlDataControl"/>
+  </bindings>
+</pageDefinition>

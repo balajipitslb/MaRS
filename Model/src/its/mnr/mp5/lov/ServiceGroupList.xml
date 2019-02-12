@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ServiceGroupList"
+  Version="11.1.2.60.81"
+  SelectList="MrlrefServicegrp.SEQ, 
+       MrlrefServicegrp.SERVICEGROUPID, 
+       MrlrefServicegrp.SGRPDESCRIPTION, 
+       MrlrefServicegrp.WOTYPE"
+  FromList="MRLREF_SERVICEGRP MrlrefServicegrp"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchSize="25"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.lov.ServiceGroupList_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="MrlrefServicegrp"
+    Entity="its.mnr.mp5.eo.master.MrlrefServicegrp"
+    ReadOnly="true"
+    DeleteParticipant="false"/>
+  <ViewAttribute
+    Name="Seq"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Seq"
+    EntityUsage="MrlrefServicegrp"
+    AliasName="SEQ"/>
+  <ViewAttribute
+    Name="Servicegroupid"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Servicegroupid"
+    EntityUsage="MrlrefServicegrp"
+    AliasName="SERVICEGROUPID"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="Sgrpdescription"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Sgrpdescription"
+    EntityUsage="MrlrefServicegrp"
+    AliasName="SGRPDESCRIPTION"/>
+  <ViewAttribute
+    Name="Wotype"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Wotype"
+    EntityUsage="MrlrefServicegrp"
+    AliasName="WOTYPE"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

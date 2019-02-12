@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<af:pageTemplateDef xmlns:af="http://xmlns.oracle.com/adf/faces/rich" var="attrs" definition="private"
+                    xmlns:afc="http://xmlns.oracle.com/adf/faces/rich/component" xmlns:f="http://java.sun.com/jsf/core">
+    <af:xmlContent>
+        <afc:component>
+            <afc:display-name>AdminDashboardTemplate</afc:display-name>
+            <afc:facet>
+                <afc:facet-name>main</afc:facet-name>
+            </afc:facet>
+            <afc:attribute>
+                <afc:attribute-name>Heading</afc:attribute-name>
+                <afc:attribute-class>java.lang.String</afc:attribute-class>
+            </afc:attribute>
+        </afc:component>
+    </af:xmlContent>
+    <af:panelStretchLayout id="pt_psl1">
+        <f:facet name="center">
+            <af:decorativeBox id="pt_db1" theme="medium">
+                <f:facet name="center">
+                    <af:facetRef facetName="main"/>
+                </f:facet>
+                <f:facet name="top"/>
+            </af:decorativeBox>
+            <!-- id="af_one_column_stretched"   -->
+        </f:facet>
+    </af:panelStretchLayout>
+    <af:resource type="javascript">
+                  function enforcePreventUserInput(evt) {
+                      var popup = AdfPage.PAGE.findComponentByAbsoluteId('pt1:pSplash');
+                      if (popup != null) {
+                          AdfPage.PAGE.addBusyStateListener(popup, handleBusyState);
+                          evt.preventUserInput();
+                      }
+                  }
+                  //JavaScript call back handler
+                  function handleBusyState(evt) {
+                      var popup = AdfPage.PAGE.findComponentByAbsoluteId('pt1:pSplash');
+                      if (popup != null) {
+                          if (evt.isBusy()) {
+                              popup.show();
+                          }
+                          else if (popup.isPopupVisible()) {
+                              popup.hide();
+                              AdfPage.PAGE.removeBusyStateListener(popup, handleBusyState);
+                          }
+                      }
+                  }
+                </af:resource>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="pSplash" contentDelivery="immediate">
+        <af:dialog id="pt_d2" type="none" closeIconVisible="false" title="Loading . . ."
+                   titleIconSource="#{resource['images:throbber.gif']}">
+            <f:facet name="buttonBar"/>
+        </af:dialog>
+    </af:popup>
+</af:pageTemplateDef>

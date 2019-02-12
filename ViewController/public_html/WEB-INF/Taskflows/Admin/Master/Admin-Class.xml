@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Admin-Class">
+    <template-reference>
+      <document>/WEB-INF/error-handler-flow.xml</document>
+      <id>error-handler-flow</id>
+    </template-reference>
+    <default-activity>Class</default-activity>
+    <view id="Class">
+      <page>/Content/Admin/Class.jspx</page>
+    </view>
+    <task-flow-return id="exit">
+      <outcome>
+        <name>exit</name>
+      </outcome>
+    </task-flow-return>
+    <view id="AddEdit">
+      <page>/Content/Admin/AddEdit.jspx</page>
+    </view>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__3">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>Exit</from-outcome>
+        <to-activity-id>exit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>Class</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>Add</from-outcome>
+        <to-activity-id>CreateInsert</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__9">
+        <from-outcome>Edit</from-outcome>
+        <to-activity-id>AddEdit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>CreateInsert</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome>CreateInsert</from-outcome>
+        <to-activity-id>AddEdit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>AddEdit</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>return</from-outcome>
+        <to-activity-id>Class</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

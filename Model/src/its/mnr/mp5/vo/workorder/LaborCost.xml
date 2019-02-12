@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="LaborCost"
+  Version="11.1.2.60.81"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.vo.workorder.LaborCostImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.workorder.LaborCost_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="ARTaskIdBind"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="ShiftCdBind"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="ARateIdBind"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="TaskIdBind"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT ACCOUNTRATETASKID,
+       A.ACCOUNTRATEID,
+       A.TASKID,
+       B.ACCTNUM,
+       RATETYPE,
+       EQUIPCHARGE,
+       SHIFTCD,
+       CASE
+          WHEN RATETYPE = 'HOUR'
+          THEN
+             CASE SHIFTCD
+                WHEN 'S1' THEN ROUND(M1 * BASE, 2)
+                WHEN 'S1O' THEN ROUND(M1O * BASE, 2)
+                WHEN 'S2' THEN ROUND(M2 * BASE, 2)
+                WHEN 'S2O' THEN ROUND(M2O * BASE, 2)
+                WHEN 'S3' THEN ROUND(M3 * BASE, 2)
+                WHEN 'S3O' THEN ROUND(M3O * BASE, 2)
+             END
+          WHEN RATETYPE = 'FLAT'
+          THEN
+             CASE SHIFTCD
+                WHEN 'S1' THEN ROUND(R1, 2)
+                WHEN 'S1O' THEN ROUND(R1O, 2)
+                WHEN 'S2' THEN ROUND(R2, 2)
+                WHEN 'S2O' THEN ROUND(R2O, 2)
+                WHEN 'S3' THEN ROUND(R3, 2)
+                WHEN 'S3O' THEN ROUND(R3O, 2)
+             END
+       END
+          LABOR
+  FROM MRLT_ACCOUNTRATETASK A, MRLT_ACCOUNTRATE B, MRLREF_SHIFT
+ WHERE A.ACCOUNTRATEID = B.ACCOUNTRATEID]]></SQLQuery>
+  <ViewAttribute
+    Name="Accountratetaskid"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACCOUNTRATETASKID"
+    Expression="ACCOUNTRATETASKID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Accountrateid"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACCOUNTRATEID"
+    Expression="ACCOUNTRATEID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Taskid"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TASKID"
+    Expression="TASKID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Acctnum"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACCTNUM"
+    Expression="ACCTNUM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Ratetype"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RATETYPE"
+    Expression="RATETYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Equipcharge"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="EQUIPCHARGE"
+    Expression="EQUIPCHARGE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Shiftcd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="3"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIFTCD"
+    Expression="SHIFTCD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ActualLaborCost"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="LABOR"
+    Expression="LABOR"
+    SQLType="DOUBLE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.vo.workorder.LaborCost.ActualLaborCost_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="LaborCostByARTaskIdShiftCD"
+    ViewObjectName="its.mnr.mp5.vo.workorder.LaborCost"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="LaborCostCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Accountratetaskid"
+        ViewAttribute="Accountratetaskid"
+        Operator="="
+        Conjunction="AND"
+        Value=":ARTaskIdBind"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Shiftcd"
+        ViewAttribute="Shiftcd"
+        Operator="="
+        Conjunction="AND"
+        Value=":ShiftCdBind"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="LaborCostByARateIdTaskIdShiftCd"
+    ViewObjectName="its.mnr.mp5.vo.workorder.LaborCost"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="LaborCostCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="LaborCostCriteria_LaborCostCriteria_row_0_Accountrateid"
+        ViewAttribute="Accountrateid"
+        Operator="="
+        Conjunction="AND"
+        Value=":ARateIdBind"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Taskid"
+        ViewAttribute="Taskid"
+        Operator="="
+        Conjunction="AND"
+        Value=":TaskIdBind"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Shiftcd"
+        ViewAttribute="Shiftcd"
+        Operator="="
+        Conjunction="AND"
+        Value=":ShiftCdBind"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Accountratetaskid"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

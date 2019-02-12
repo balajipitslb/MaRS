@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="InvoiceItemWOEventsLink"
+  Version="11.1.2.60.81"
+  EntityAssociation="its.mnr.mp5.eo.assoc.InvoiceItemR5EventsAssoc">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.link.InvoiceItemWOEventsLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="MrltInvoiceitemView"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.vo.invoice.MrltInvoiceitemView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="MrltInvoiceitemView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.invoice.MrltInvoiceitemView.Wo"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="WorkOrder"
+    Cardinality="1"
+    Owner="its.mnr.mp5.vo.workorder.WOEvents">
+    <DesignTime>
+      <Attr Name="_finderName" Value="WorkOrder"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.workorder.WOEvents.EvtCode"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

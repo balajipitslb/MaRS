@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.AccountMasterBundle']}"/>
+    <af:document title="#{viewcontrollerBundle.PAGEHEADING}" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                        <af:panelGroupLayout layout="vertical" id="pgl1">
+                            <af:panelHeader text=" " id="ph1"
+                                            inlineStyle="background-color:White;border-color:Silver; border-style:solid; border-width:thin; margin:5px;">
+                                <af:quickQuery label="#{viewcontrollerBundle.SEARCH_ACCOUNTS}" searchDesc="Search" id="qryId1"
+                                               value="#{bindings.ImplicitViewCriteriaQuery.quickQueryDescriptor}"
+                                               model="#{bindings.ImplicitViewCriteriaQuery.queryModel}"
+                                               queryListener="#{bindings.ImplicitViewCriteriaQuery.processQuery}">
+                                    <f:facet name="end">
+                                    <af:link text="Advanced" rendered="false" id="cl1"/>
+                                </f:facet>
+                                </af:quickQuery>
+                            <af:spacer width="10" height="10" id="s1"/>
+                        </af:panelHeader>
+                        <af:spacer width="10" height="10" id="s2"/>
+                        <af:panelCollection id="pc1" inlineStyle="background-color:White; width:inherit; height:460px;"
+                                                defaultToolbarItemDisplay="icon">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                <af:toolbar id="t2">
+                                    <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                               disabled="#{!bindings.CreateInsert.enabled}" id="ctb1"
+                                               icon="#{resource['images:add.png']}"
+                                               shortDesc="#{viewcontrollerBundle.ADD_RECORD}" action="goDetail"/>
+                                    <af:spacer width="10" height="10" id="s3"/>
+                                    <af:button actionListener="#{bindings.Delete.execute}"
+                                               disabled="#{!bindings.Delete.enabled}" id="ctb2"
+                                               icon="#{resource['images:delete.png']}"
+                                               shortDesc="#{viewcontrollerBundle.DELETE_RECORD}"/>
+                                    <af:spacer width="10" height="10" id="s4"/>
+                                    <af:button text="#{viewcontrollerBundle.EDIT_RECORD}" id="ctb3"
+                                               icon="#{resource['images:edit.png']}" action="goDetail"/>
+                                </af:toolbar>
+                            </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.MrltAccountmasterView1.collectionModel}" var="row"
+                                          rows="#{bindings.MrltAccountmasterView1.rangeSize}"
+                                          emptyText="#{bindings.MrltAccountmasterView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.MrltAccountmasterView1.rangeSize}"
+                                          rowBandingInterval="1"
+                                          selectedRowKeys="#{bindings.MrltAccountmasterView1.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.MrltAccountmasterView1.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t1" editingMode="clickToEdit"
+                                          partialTriggers="::ctb1 ::ctb2">
+                                    <af:column sortProperty="#{bindings.MrltAccountmasterView1.hints.Acctnum.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltAccountmasterView1.hints.Acctnum.label}"
+                                               id="c1" width="40">
+                                        <af:outputText value="#{row.Acctnum}" id="ot1"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltAccountmasterView1.hints.Accountnm.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltAccountmasterView1.hints.Accountnm.label}"
+                                               id="c2" width="75">
+                                        <af:outputText value="#{row.Accountnm}" id="ot2"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.MrltAccountmasterView1.hints.Accountnmlong.label}"
+                                               id="c3" width="150">
+                                        <af:outputText value="#{row.Accountnmlong}" id="ot3"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltAccountmasterView1.hints.Locode.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltAccountmasterView1.hints.Locode.label}"
+                                               id="c4" width="50" align="center">
+                                        <af:outputText value="#{row.Locode}" id="ot4"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltAccountmasterView1.hints.Billtype.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltAccountmasterView1.hints.Billtype.label}"
+                                               id="c5" width="40" align="center">
+                                        <af:outputText value="#{row.Billtype}" id="ot5"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltAccountmasterView1.hints.Amstractive.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltAccountmasterView1.hints.Amstractive.label}"
+                                               id="c6" width="40" align="center">
+                                        <af:outputText value="#{row.Amstractive}" id="ot6"/>
+                                    </af:column>
+                                <af:column headerText="#{bindings.MrltAccountmasterView1.hints.Parttax.label}" id="c11"
+                                           width="45" align="center">
+                                    <af:outputText value="#{row.Parttax}" id="ot11"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.MrltAccountmasterView1.hints.Estimate.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltAccountmasterView1.hints.Estimate.label}"
+                                               id="c7" width="50" align="center">
+                                        <af:outputText value="#{row.Estimate}" id="ot7"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltAccountmasterView1.hints.Over.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltAccountmasterView1.hints.Over.label}" id="c8"
+                                               width="40" align="center">
+                                        <af:outputText value="#{row.Over}" id="ot8"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltAccountmasterView1.hints.Overuom.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltAccountmasterView1.hints.Overuom.label}"
+                                               id="c9" width="40" align="center">
+                                        <af:outputText value="#{row.Overuom}" id="ot9"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltAccountmasterView1.hints.Invrej.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltAccountmasterView1.hints.Invrej.label}"
+                                               id="c10" width="45" align="center">
+                                        <af:outputText value="#{row.Invrej}" id="ot10"/>
+                                    </af:column>
+                                <af:column headerText="#{bindings.MrltAccountmasterView1.hints.Estcmpltn.label}"
+                                           id="c12" width="55">
+                                    <af:outputText value="#{row.Estcmpltn}" id="ot12"/>
+                                </af:column>
+                            </af:table>
+                            <f:facet name="secondaryToolbar">
+                                <af:toolbar id="t3">
+                                    <af:spacer width="10" height="10" id="s5"/>
+                                    <af:button actionListener="#{bindings.Commit.execute}"
+                                               text="#{viewcontrollerBundle.APPLY}"
+                                               disabled="#{!bindings.Commit.enabled}" id="ctb4"
+                                               icon="#{resource['images:commit.png']}"
+                                               shortDesc="#{viewcontrollerBundle.SAVE_RECORD}"/>
+                                    <af:button actionListener="#{bindings.Rollback.execute}"
+                                               text="#{viewcontrollerBundle.CANCEL}"
+                                               disabled="#{!bindings.Rollback.enabled}" immediate="true" id="ctb5"
+                                               icon="#{resource['images:undo.png']}"
+                                               shortDesc="#{viewcontrollerBundle.CANCEL_RECORD}">
+                                        <af:resetActionListener/>
+                                    </af:button>
+                                    <af:button id="ctb6" icon="#{resource['images:terminate.png']}"
+                                               shortDesc="#{viewcontrollerBundle.CLOSE_AND_RETURN_TO_PREVIOUS_S}"
+                                               actionListener="#{ModuleNavBean.goExit}"/>
+                                </af:toolbar>
+                            </f:facet>
+                        </af:panelCollection>
+                        </af:panelGroupLayout>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

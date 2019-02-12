@@ -1,0 +1,208 @@
+/**ADFFaces_Skin_File / DO NOT REMOVE**/
+@namespace af "http://xmlns.oracle.com/adf/faces/rich";
+
+@namespace dvt "http://xmlns.oracle.com/dss/adf/faces";
+
+af|menu::bar-item-text {
+    font-size: medium;
+}
+/*
+af|commandMenuItem::menu-item-text {
+    font-size: medium;
+}
+
+af|commandMenuItem::menu-item-accelerator {
+    font-size: medium;
+    padding-right: 5px;
+}
+*/
+
+.assetImg{
+    width: 200.0px;
+    height: 200.0px; 
+}
+  
+af|panelBox::content {
+    padding: 10px 30px;
+}
+/* new */
+af|selectBooleanCheckbox::selected-icon {
+    border-color: Silver;
+    outline-style: solid;
+    outline-color: Silver;
+    outline-width: 1px;
+   /* margin: 5px;
+    padding: 2px;*/
+    margin: 2px;
+    padding: 1px;
+    background-color: White;
+}
+
+af|selectBooleanCheckbox::unselected-icon {
+    outline-color: Silver;
+    outline-style: solid;
+    outline-width: 1px;
+    margin: 2px;
+    padding: 1px;
+    background-color: White;
+}
+
+af|inputText:disabled::content {
+    background-color: Silver;
+    color: #000000;
+    padding: 1px 2px 1px 3px;
+    border: 1px solid #a6a6a7;
+    width: auto;
+    font-size: 11px;
+    margin: 1px;
+}
+
+af|inputText::content:focus {
+    background-color: #FBED87;
+}
+
+af|inputDate::content:focus {
+    background-color: #FBED87;
+}
+
+af|inputListOfValues::content:focus {
+    background-color: #FBED87;
+}
+
+af|column::column-header-table {
+    background-color: #FBED87;
+    background-image: none;
+}
+
+af|inputText:read-only::content {
+    color: #000000;
+   /* border: 1px solid #a6a6a7;*/
+    width: auto;
+    font-size: 11px;
+    padding-right: 15%;
+    padding-bottom: 1px;
+    padding-left: 1px;
+    padding-top: 1px;
+}
+
+af|selectOneChoice:read-only::content {
+/*
+    outline-width: 1px;
+    outline-style: solid;
+    outline-color: Silver; */
+    margin: 1px;
+    padding-right: 15%;
+    padding-bottom: 1px;
+    padding-left: 1px;
+    padding-top: 1px;
+}
+af|inputComboboxListOfValues::search
+{
+  display: none; 
+}
+
+af|inputComboboxListOfValues
+{
+  -tr-dropdown-row-height: 20; 
+}
+
+af|panelLabelAndMessage::label
+{
+  vertical-align:middle;
+}
+af|panelLabelAndMessage::end-facet
+{
+  vertical-align:middle;
+  padding-top: 3px; 
+}
+af|panelLabelAndMessage::content-cell
+{
+  vertical-align:middle;
+  margin: 0px 0px 0px 0px; 
+  padding: 0px 0px 0px 0px; 
+  padding-bottom: 2px; 
+}
+af|panelCollection::statusbar{
+  display: none;
+}
+af|trainButtonBar::back-button
+{
+  background-image: url("../../shuttle_left.png"); 
+  width: 10px; 
+  height: 18px;
+  margin-left: 5px; 
+  margin-right: 5px; 
+}
+af|trainButtonBar::back-button:active:disabled
+{
+  background-image: url("../../shuttle_left.png"); 
+  width: 10px; 
+  height: 18px;
+  margin-left: 5px; 
+  margin-right: 5px; 
+}
+af|trainButtonBar::back-button:disabled
+{
+  background-image: url("../../shuttle_left.png");
+  width: 10px; 
+  height: 18px;
+  margin-left: 5px; 
+  margin-right: 5px; 
+}
+af|trainButtonBar::back-button:hover
+{
+  background-image: url("../../shuttle_left.png");
+  width: 10px; 
+  height: 18px;
+  margin-left: 5px; 
+  margin-right: 5px; 
+   
+}
+af|trainButtonBar::back-button:hover:disabled
+{
+  background-image: url("../../shuttle_left.png");
+  width: 10px; 
+  height: 18px;
+  margin-left: 5px; 
+  margin-right: 5px; 
+}
+af|trainButtonBar::next-button
+{
+  background-image: url("../../shuttle_right.png"); 
+  width: 10px; 
+  height: 18px;
+  margin-left: 5px; 
+  margin-right: 5px; 
+}
+af|trainButtonBar::next-button:active:disabled
+{
+  background-image: url("../../shuttle_right.png"); 
+  width: 10px; 
+  height: 18px;
+  margin-left: 5px; 
+  margin-right: 5px; 
+}
+af|trainButtonBar::next-button:disabled
+{
+  background-image: url("../../shuttle_right.png"); 
+  width: 10px; 
+  height: 18px;
+  margin-left: 5px; 
+  margin-right: 5px; 
+}
+af|trainButtonBar::next-button:hover
+{
+  background-image: url("../../shuttle_right.png"); 
+  width: 10px; 
+  height: 18px;
+  margin-left: 5px; 
+  margin-right: 5px; 
+}
+af|trainButtonBar::next-button:hover:disabled
+{
+  background-image: url("../../shuttle_right.png");
+  width: 10px; 
+  height: 18px;
+  margin-left: 5px; 
+  margin-right: 5px; 
+}

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5bins"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="R5BINS"
+  AliasName="R5bins"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="BinStore"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="BIN_STORE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5BINS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BinCode"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="BIN_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5BINS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BinDesc"
+    IsNotNull="true"
+    Precision="45"
+    ColumnName="BIN_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5BINS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BinCreated"
+    ColumnName="BIN_CREATED"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5BINS"/>
+  <Attribute
+    Name="BinCreatedby"
+    Precision="12"
+    ColumnName="BIN_CREATEDBY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5BINS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BinUpdated"
+    ColumnName="BIN_UPDATED"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5BINS"/>
+  <Attribute
+    Name="BinUpdatedby"
+    Precision="12"
+    ColumnName="BIN_UPDATEDBY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5BINS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ItsActive"
+    Precision="1"
+    ColumnName="ITS_ACTIVE"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="R5BINS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    DefaultValue="Y">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5binstock"
+    Association="its.mnr.mp5.eo.assoc.R5fok2BisAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok2BisAssoc.R5binstock"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok2BisAssoc.R5bins"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5objects"
+    Association="its.mnr.mp5.eo.assoc.R5fokdObjAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fokdObjAssoc.R5objects"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fokdObjAssoc.R5bins"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5translines"
+    Association="its.mnr.mp5.eo.assoc.R5fok2TrlAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok2TrlAssoc.R5translines"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok2TrlAssoc.R5bins"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="R5nn01Bin">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN01_BIN"/>
+      <Attr Name="_checkCondition" Value="BIN_DESC IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5prikBin"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_BIN"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5bins.BinStore"/>
+      <Item Value="its.mnr.mp5.eo.local.R5bins.BinCode"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Bin">
+    <DesignTime>
+      <Attr Name="_isCascadeDelete" Value="true"/>
+      <Attr Name="_referencedKey" Value="R5PRIK_STR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_BIN"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5bins.BinStore"/>
+    </AttrArray>
+  </Key>
+</Entity>

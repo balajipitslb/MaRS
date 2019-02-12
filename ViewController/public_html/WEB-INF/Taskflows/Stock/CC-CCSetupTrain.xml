@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="CC-CCSetupTrain">
+    <template-reference>
+      <document>/WEB-INF/error-handler-flow.xml</document>
+      <id>error-handler-flow</id>
+    </template-reference>
+    <default-activity>CreateInsert</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <task-flow-reentry>
+      <reentry-not-allowed/>
+    </task-flow-reentry>
+    <input-parameter-definition id="__9">
+      <name>psfListId</name>
+      <value>#{pageFlowScope.psfListId}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__14">
+      <name>psfStoreroom</name>
+      <value>#{pageFlowScope.psfStoreroom}</value>
+      <class>java.lang.Boolean</class>
+    </input-parameter-definition>
+    <managed-bean id="__7">
+      <managed-bean-name>ModuleNavBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.ModuleNavBean</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__8">
+      <managed-bean-name>CycleCountBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.CycleCountBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__10">
+      <managed-bean-name>TrainControllerBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.TrainControllerBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="Setup">
+      <page>/Content/CycleCnt/CCSetup-Setup.jspx</page>
+      <train-stop>
+        <display-name>Setup</display-name>
+        <sequential>false</sequential>
+      </train-stop>
+    </view>
+    <task-flow-call id="CC-CCSetupRangeTrain">
+      <task-flow-reference>
+        <document>/WEB-INF/Taskflows/Stock/CC-CCSetupRangeTrain.xml</document>
+        <id>CC-CCSetupRangeTrain</id>
+      </task-flow-reference>
+      <train-stop>
+        <display-name>Set Range</display-name>
+        <sequential>true</sequential>
+      </train-stop>
+      <input-parameter id="__11">
+        <name>psfrangetype</name>
+        <value>#{pageFlowScope.psfRangeType}</value>
+      </input-parameter>
+      <input-parameter id="__15">
+        <name>psfListId</name>
+        <value>#{pageFlowScope.psfListId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <view id="Stores">
+      <page>/Content/CycleCnt/CCSetup-Stores.jspx</page>
+      <train-stop>
+        <display-name>Create Stores</display-name>
+        <sequential>true</sequential>
+      </train-stop>
+    </view>
+    <task-flow-return id="exit">
+      <outcome>
+        <name>exit</name>
+      </outcome>
+    </task-flow-return>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <train/>
+    <control-flow-rule id="__3">
+      <from-activity-id>CC-CCSetupRangeTrain</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>childFlowReturn1</from-outcome>
+        <to-activity-id>Stores</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__17">
+        <from-outcome>startReturn</from-outcome>
+        <to-activity-id>Setup</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__21">
+        <from-outcome>closeSetup</from-outcome>
+        <to-activity-id>exit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>Exit</from-outcome>
+        <to-activity-id>exit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__1">
+      <from-activity-id>CreateInsert</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>CreateInsert</from-outcome>
+        <to-activity-id>Setup</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

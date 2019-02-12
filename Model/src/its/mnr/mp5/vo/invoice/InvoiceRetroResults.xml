@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="InvoiceRetroResults"
+  Version="11.1.2.60.81"
+  OrderBy="INVNUM,WO,ACT_ACT"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="its.mnr.mp5.vo.invoice.InvoiceRetroResultsRowImpl"
+  ComponentClass="its.mnr.mp5.vo.invoice.InvoiceRetroResultsImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  RowInterface="its.mnr.mp5.vo.invoice.common.InvoiceRetroResultsRow"
+  ClientRowProxyName="its.mnr.mp5.vo.invoice.client.InvoiceRetroResultsRowClient"
+  FetchMode="FETCH_ALL"
+  FetchSize="5000"
+  QueryHint="ALL_ROWS">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="MrltInvoiceheaderView"
+    ViewObjectName="its.mnr.mp5.vo.invoice.MrltInvoiceheaderView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="MrltInvoicertroitemView"
+    ViewObjectName="its.mnr.mp5.vo.invoice.MrltInvoicertroitemView"
+    RowLevelBinds="true"/>
+  <SQLQuery><![CDATA[SELECT H.INVNUM,H.INVDT,H.ACCTNUM,I.WO,I.HDRCODE,I.INVVER ACTIVEVER,I.STARTDT,I.COMPLETEDT,
+         /*A.ACCOUNTRATEID,*/A.VER CONTRACTVER,/*A.BASE,A.M1,A.M1O,A.M2,A.M2O,A.M3,A.M3O,*/ 
+         ACT_ACT ACT, ACT_RATETYPE OLDRATETYPE,ACT_TIMETYPE SHIFT,ACT_BILLABLE_LBR_HRS HRS, ROUND(ACT_BILLABLE_LBR_COST, 2) OLDRATE, 
+         ITS_COMPCODE, ITS_LOCCODE, ITS_LOCDESC,ITS_DAMCODE, ITS_DAMDESC, ITS_REPCODE, ITS_REPDESC, ITS_TASKDESC,ITS_ACCOUNTRATETASKID OLDARTASKID,
+         ART.ACCOUNTRATETASKID  NEWARTASKID, ART.RATETYPE NEWRATETYPE,ART.EQUIPCHARGE,/*ART.R1,ART.R1O,ART.R2,ART.R2O,ART.R3,ART.R3O,*/
+         CASE ART.RATETYPE
+         WHEN 'HOUR' THEN CASE ACT_TIMETYPE
+                                    WHEN 'S1' THEN ROUND(ROUND((A.BASE *A.M1), 2)*ACT_BILLABLE_LBR_HRS, 2)
+                                    WHEN 'S1O' THEN ROUND(ROUND((A.BASE *A.M1O), 2)*ACT_BILLABLE_LBR_HRS, 2)
+                                    WHEN 'S2' THEN ROUND(ROUND((A.BASE *A.M2), 2)*ACT_BILLABLE_LBR_HRS, 2)
+                                    WHEN 'S2O' THEN ROUND(ROUND((A.BASE *A.M2O), 2)*ACT_BILLABLE_LBR_HRS, 2)
+                                    WHEN 'S3' THEN ROUND(ROUND((A.BASE *A.M3), 2)*ACT_BILLABLE_LBR_HRS, 2)
+                                    WHEN 'S3O' THEN ROUND(ROUND((A.BASE *A.M3O), 2)*ACT_BILLABLE_LBR_HRS, 2)
+                                    END
+         WHEN 'FLAT' THEN  CASE EQUIPCHARGE
+                                    WHEN 'Y' THEN 
+                                        CASE ACT_TIMETYPE
+                                        WHEN 'S1' THEN  ROUND(ART.R1 *ACT_BILLABLE_LBR_HRS, 2)
+                                        WHEN 'S1O' THEN ROUND(ART.R1O *ACT_BILLABLE_LBR_HRS, 2)
+                                        WHEN 'S2' THEN ROUND(ART.R2 *ACT_BILLABLE_LBR_HRS, 2)
+                                        WHEN 'S2O' THEN ROUND(ART.R2O *ACT_BILLABLE_LBR_HRS, 2)
+                                        WHEN 'S3' THEN ROUND(ART.R3 *ACT_BILLABLE_LBR_HRS, 2)
+                                        WHEN 'S3O' THEN ROUND(ART.R3O *ACT_BILLABLE_LBR_HRS, 2)
+                                        END       
+                                    WHEN 'N' THEN 
+                                        CASE ACT_TIMETYPE
+                                        WHEN 'S1' THEN ROUND(ART.R1, 2) 
+                                        WHEN 'S1O' THEN ROUND(ART.R1O, 2)
+                                        WHEN 'S2' THEN ROUND(ART.R2, 2)
+                                        WHEN 'S2O' THEN ROUND(ART.R2O, 2)
+                                        WHEN 'S3' THEN ROUND(ART.R3, 2)
+                                        WHEN 'S3O' THEN ROUND(ART.R3O, 2)
+                                        END    
+                                    END                       
+         END NEWRATE,
+         (SELECT RTRORATETYPE FROM MRLT_INVOICERTROITEMVW R WHERE R.WO =I.WO AND R.ACT=ACT.ACT_ACT) RTRORATETYPE,
+         (SELECT RTROVER FROM MRLT_INVOICERTROITEMVW R WHERE R.WO =I.WO  AND R.ACT=ACT.ACT_ACT) RTROVER,
+         (SELECT NEWACCOUNTRATETASKID FROM MRLT_INVOICERTROITEMVW R WHERE R.WO =I.WO  AND R.ACT=ACT.ACT_ACT)  RTRONEWARTASKID,
+         (SELECT ROUND(RTRORATE, 2) FROM MRLT_INVOICERTROITEMVW R WHERE R.WO =I.WO  AND R.ACT=ACT.ACT_ACT) RTRORATE
+FROM MRLT_INVOICEHEADER H,MRLT_INVOICEITEM I,MRLT_ACCOUNTRATE A , R5ACTIVITIES ACT,MRLT_ACCOUNTRATETASK ART]]></SQLQuery>
+  <ViewAttribute
+    Name="Invnum"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="INVNUM"
+    Expression="INVNUM"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Invnum_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Invdt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="INVDT"
+    Expression="INVDT"
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Invdt_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Acctnum"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACCTNUM"
+    Expression="ACCTNUM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Acctnum_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Wo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="WO"
+    Expression="WO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Wo_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Hdrcode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HDRCODE"
+    Expression="HDRCODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Activever"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="3"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACTIVEVER"
+    Expression="ACTIVEVER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Activever_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Startdt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="STARTDT"
+    Expression="STARTDT"
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Startdt_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Completedt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="COMPLETEDT"
+    Expression="COMPLETEDT"
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Completedt_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Contractver"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="3"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONTRACTVER"
+    Expression="CONTRACTVER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Contractver_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Act"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="3"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ACT"
+    Expression="ACT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Oldratetype"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OLDRATETYPE"
+    Expression="OLDRATETYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Oldratetype_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Shift"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIFT"
+    Expression="SHIFT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Hrs"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="HRS"
+    Expression="HRS"
+    SQLType="DOUBLE"/>
+  <ViewAttribute
+    Name="Oldrate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="OLDRATE"
+    Expression="OLDRATE"
+    SQLType="DOUBLE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Oldrate_LABEL"/>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Oldrate_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItsCompcode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITS_COMPCODE"
+    Expression="ITS_COMPCODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItsLoccode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITS_LOCCODE"
+    Expression="ITS_LOCCODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItsLocdesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITS_LOCDESC"
+    Expression="ITS_LOCDESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.ItsLocdesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItsDamcode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITS_DAMCODE"
+    Expression="ITS_DAMCODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItsDamdesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITS_DAMDESC"
+    Expression="ITS_DAMDESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.ItsDamdesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItsRepcode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITS_REPCODE"
+    Expression="ITS_REPCODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItsRepdesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITS_REPDESC"
+    Expression="ITS_REPDESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.ItsRepdesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItsTaskdesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITS_TASKDESC"
+    Expression="ITS_TASKDESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.ItsTaskdesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Oldartaskid"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OLDARTASKID"
+    Expression="OLDARTASKID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Newartaskid"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NEWARTASKID"
+    Expression="NEWARTASKID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Newratetype"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NEWRATETYPE"
+    Expression="NEWRATETYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Newratetype_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Equipcharge"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="EQUIPCHARGE"
+    Expression="EQUIPCHARGE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Equipcharge_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Newrate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="NEWRATE"
+    Expression="NEWRATE"
+    SQLType="DOUBLE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Newrate_LABEL"/>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Newrate_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Rtroratetype"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RTRORATETYPE"
+    Expression="RTRORATETYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Rtroratetype_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Rtrover"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="3"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RTROVER"
+    Expression="RTROVER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Rtrover_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Rtronewartaskid"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RTRONEWARTASKID"
+    Expression="RTRONEWARTASKID"
+    SQLType="VARCHAR"
+    Precision="255"/>
+  <ViewAttribute
+    Name="Rtrorate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="RTRORATE"
+    Expression="RTRORATE"
+    SQLType="DOUBLE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Rtrorate_LABEL"/>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.Rtrorate_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreditDebit"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="VIEW_ATTR"
+    SQLType="DOUBLE">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[Newrate - (Rtrorate != null ? Rtrorate : Oldrate)]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.CreditDebit_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreditDebitSum"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="VIEW_ATTR"
+    SQLType="DOUBLE">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[adf.object.findRowSetForRow("").sum("CreditDebit != null? CreditDebit:0")]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.CreditDebitSum_LABEL"/>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.vo.invoice.InvoiceRetroResults.CreditDebitSum_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Invnum"/>
+    <Item Value="Wo"/>
+    <Item Value="Act"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+  <ClientRowInterface>
+    <Method
+      Name="createInvoiceHeader"
+      MethodName="createInvoiceHeader">
+      <Return
+        Type="oracle.jbo.domain.Number"/>
+    </Method>
+    <Method
+      Name="getInvoiceNum"
+      MethodName="getInvoiceNum">
+      <Return
+        Type="oracle.jbo.domain.Number"/>
+      <Parameter
+        Name="pHeaderId"
+        Type="oracle.jbo.domain.Number"/>
+    </Method>
+    <Method
+      Name="createInvoiceRtroItem"
+      MethodName="createInvoiceRtroItem">
+      <Return
+        Type="java.lang.Boolean"/>
+      <Parameter
+        Name="pHeaderId"
+        Type="oracle.jbo.domain.Number"/>
+      <Parameter
+        Name="pInvoice"
+        Type="oracle.jbo.domain.Number"/>
+      <Parameter
+        Name="pWO"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pAct"
+        Type="oracle.jbo.domain.Number"/>
+      <Parameter
+        Name="pOldVer"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pNewVer"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pOldARTaskId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pNewARTaskId"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pOldRate"
+        Type="java.lang.Double"/>
+      <Parameter
+        Name="pNewRate"
+        Type="java.lang.Double"/>
+      <Parameter
+        Name="pShift"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pHrs"
+        Type="java.lang.Double"/>
+      <Parameter
+        Name="pOldRateType"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pNewRateType"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pEquip"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pTask"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pCompCd"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pDamCd"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pDamDesc"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pLocCd"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pLocDesc"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pRepCd"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pRepDesc"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pHdrCode"
+        Type="java.lang.String"/>
+    </Method>
+  </ClientRowInterface>
+</ViewObject>

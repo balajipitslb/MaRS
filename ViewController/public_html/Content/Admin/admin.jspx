@@ -1,0 +1,455 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.Content.Admin.adminBundle']}"/>
+    <af:document title="#{viewcontrollerBundle.MARS}" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/MP5BaseTemplate.jspx" id="pt1">
+                <f:facet name="GlobalTop">
+                    <af:navigationPane id="np2">
+                        <af:commandNavigationItem text="Home" id="cni8" accessKey="H"
+                                                  actionListener="#{ModuleNavBean.goHomeModule}"/>
+                        <af:commandNavigationItem text="Work Order" id="cni9" accessKey="W"
+                                                  actionListener="#{ModuleNavBean.goWOModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=WorkOrder;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Invoice" id="cni10" accessKey="I"
+                                                  actionListener="#{ModuleNavBean.goInvoiceModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Invoice;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="PO &amp; Receivings" id="cni11" accessKey="P"
+                                                  actionListener="#{ModuleNavBean.goPORecvModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=PORecv;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Stock" id="cni12" accessKey="S"
+                                                  actionListener="#{ModuleNavBean.goStockModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Stock;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Asset" id="cni1" accessKey="S"
+                                                  actionListener="#{ModuleNavBean.goAssetModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Asset;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Report" id="cni13" accessKey="R"
+                                                  actionListener="#{ModuleNavBean.goReportModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Report;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Admin (This)" id="cni14" selected="true"
+                                                  accessKey="M" actionListener="#{ModuleNavBean.goAdminModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Admin;resourceType=GlobalNav;action=view']}"/>
+                    </af:navigationPane>
+                </f:facet>
+                <f:facet name="Main">
+                    <af:panelDashboard id="pd1" rowHeight="175px" columns="2"
+                                           inlineStyle="margin:20px; padding:10px;">
+                        <af:panelBox text="Manage Master" id="pb1" icon="#{resource['images:manageMaster.png']}"
+                                         showDisclosure="false"
+                                         rendered="#{securityContext.userGrantedResource['resourceName=AdminMasterPanel;resourceType=UIControl;action=enabled']}">
+                                <f:facet name="toolbar"/>
+                                <af:panelList id="pl2" rows="5">
+                                <af:link text="Work Order Type Master" id="cl1" action="launchWorkOrderMaster"
+                                         useWindow="true" windowWidth="400" inlineStyle="font-size:small;"
+                                         rendered="#{securityContext.userGrantedResource['resourceName=AdminMasterPanel-WorkOrderTypeMaster;resourceType=UIControl;action=enabled']}"/>
+                                <af:link text="Service Group Master" id="cl2" action="launchServiceGroupMaster"
+                                         useWindow="true" windowEmbedStyle="inlineDocument" windowHeight="400"
+                                         windowWidth="500" inlineStyle="font-size:small;"
+                                         rendered="#{securityContext.userGrantedResource['resourceName=AdminMasterPanel-ServiceGroupMaster;resourceType=UIControl;action=enabled']}"/>
+                                <af:link text="Component-Location Master" id="cl3"
+                                         action="launchComponentLocationMaster" useWindow="true"
+                                         windowEmbedStyle="inlineDocument" windowModalityType="modeless"
+                                         windowHeight="500" windowWidth="650"
+                                         inlineStyle="height:600px; width:750px; font-size:small;"
+                                         rendered="#{securityContext.userGrantedResource['resourceName=AdminMasterPanel-ComponentLocationMaster;resourceType=UIControl;action=enabled']}"/>
+                                <af:link text="Damage-Repair Master" id="cl4" action="launchDamageRepairMaster"
+                                         useWindow="true" windowEmbedStyle="inlineDocument" windowHeight="450"
+                                         windowWidth="430" inlineStyle="font-size:small;"
+                                         rendered="#{securityContext.userGrantedResource['resourceName=AdminMasterPanel-DamageRepairMaster;resourceType=UIControl;action=enabled']}"/>
+                                <af:link text="Per Unit of Measure" id="cl5" useWindow="true"
+                                         windowEmbedStyle="inlineDocument" windowModalityType="modeless"
+                                         windowHeight="300" windowWidth="400" action="launchPerMaster"
+                                         inlineStyle="font-size:small;"
+                                         rendered="#{securityContext.userGrantedResource['resourceName=AdminMasterPanel-PerUnitMaster;resourceType=UIControl;action=enabled']}"/>
+                                <af:link text="Account Master" id="cl6" action="launchAccountMaster" useWindow="true"
+                                         windowEmbedStyle="inlineDocument" windowModalityType="modeless"
+                                         windowHeight="550" windowWidth="700" inlineStyle="font-size:small;"
+                                         rendered="#{securityContext.userGrantedResource['resourceName=AdminMasterPanel-AccountMaster;resourceType=UIControl;action=enabled']}"/>
+                                <af:link text="Profile Master" id="cl7" action="launchProfileMaster" useWindow="true"
+                                         windowEmbedStyle="inlineDocument" windowModalityType="modeless"
+                                         windowHeight="375" windowWidth="500" inlineStyle="font-size:small;"
+                                         rendered="#{securityContext.userGrantedResource['resourceName=AdminMasterPanel-ProfileMaster;resourceType=UIControl;action=enabled']}"/>
+                                <af:link text="Service Task" id="cl8" action="launchServiceTask" useWindow="true"
+                                         windowWidth="750" windowHeight="550" inlineStyle="font-size:small;"
+                                         rendered="#{securityContext.userGrantedResource['resourceName=AdminMasterPanel-ServiceTaskMaster;resourceType=UIControl;action=enabled']}"/>
+                                <af:link text="Class Master" id="cl12" action="launchClass" useWindow="true"
+                                         windowWidth="450" windowHeight="500" inlineStyle="font-size:small;"
+                                         rendered="#{securityContext.userGrantedResource['resourceName=AdminMasterPanel-ServiceTaskMaster;resourceType=UIControl;action=enabled']}"/>
+                            </af:panelList>
+                            </af:panelBox>
+                            <af:panelBox text="Manage Billing Rates" id="pb2"
+                                         icon="#{resource['images:manageBillingRates.png']}" showDisclosure="false"
+                                         rendered="#{securityContext.userGrantedResource['resourceName=AdminBillingRatesPanel;resourceType=UIControl;action=enabled']}">
+                                <f:facet name="toolbar"/>
+                                <af:panelList id="pl1" rows="5">
+                                <af:link text="Account Billing Master" id="cl9" action="launchAccountBillingMaster"
+                                         useWindow="true" windowEmbedStyle="inlineDocument"
+                                         windowModalityType="modeless" windowHeight="620" windowWidth="850"
+                                         inlineStyle="font-size:small;"/>
+                            </af:panelList>
+                            </af:panelBox>
+                            <af:panelBox text="Tools" id="pb3" visible="true"
+                                         rendered="#{securityContext.userGrantedResource['resourceName=AdminToolsPanel;resourceType=UIControl;action=enabled']}">
+                                <f:facet name="toolbar"/>
+                            <af:panelList id="pl3">
+                                <af:link text="Update Work Order Dates" id="cl10" inlineStyle="font-size:small;"
+                                         rendered="#{securityContext.userName eq 'R5'}">
+                                    <af:showPopupBehavior popupId="::pUpdWODate" triggerType="click"/>
+                                </af:link>
+                                <af:link text="Create Test File" id="cl11" inlineStyle="font-size:small;"
+                                         rendered="#{securityContext.userName eq 'R5'}">
+                                    <af:showPopupBehavior popupId="::pWriteTest" triggerType="click"/>
+                                </af:link>
+                                <af:link text="Update PO Budget Code" id="cl14" inlineStyle="font-size:small;">
+                                    <af:showPopupBehavior popupId="::pUpdPOBCd" triggerType="click"/>
+                                </af:link>
+                                <af:link text="Create Invoice XML Files" id="cl17"
+                                         rendered="#{(securityContext.userGrantedResource['resourceName=AdminToolsPanel-InvoiceXMLTool;resourceType=UIControl;action=enabled'])}">
+                                    <af:showPopupBehavior triggerType="click" popupId="::invFilesPP"/>
+                                </af:link>
+                            </af:panelList>
+                        </af:panelBox>
+                            <af:panelBox text="Flags" id="pb4" visible="true" showDisclosure="false"
+                            rendered="#{(securityContext.userGrantedResource['resourceName=AdminFlagsPanel-FlagManager;resourceType=UIControl;action=enabled'])}">
+                                <f:facet name="toolbar"/>
+                            <af:panelList id="pl4">
+                                <af:link text="Flag Manager" id="cl13" inlineStyle="font-size:small;">
+                                    <af:showPopupBehavior popupId="::pFlagAssoc" triggerType="click"/>
+                                </af:link>
+                            </af:panelList>
+                        </af:panelBox>
+                        <af:panelBox text="Scheduled Jobs" id="pb5" visible="true" showDisclosure="false"
+                        rendered="#{(securityContext.userGrantedResource['resourceName=AdminFlagsPanel-FlagManager;resourceType=UIControl;action=enabled'])}">
+                            <f:facet name="toolbar"/>
+                            <af:panelList id="pl5">
+                                <af:link text="Job Details" id="cl15" inlineStyle="font-size:small;">
+                                    <af:showPopupBehavior popupId="::pUpjobDetails" triggerType="click"/>
+                                </af:link>
+                                <af:link text="Running Jobs" id="cl16" inlineStyle="font-size:small;">
+                                    <af:showPopupBehavior popupId="::pUpjobRunning" triggerType="click"/>
+                                </af:link>
+                            </af:panelList>
+                        </af:panelBox>
+                    </af:panelDashboard>
+                </f:facet>
+                <f:facet name="LHS"/>
+                <f:attribute name="LHSSplitterDisabled" value="true"/>
+                <f:attribute name="LHSSplitterCollapsed" value="true"/>
+            </af:pageTemplate>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="pUpdWODate">
+                <af:dialog id="d2" type="ok" closeIconVisible="false" title="#{bindings.return.hints.label}">
+                    <f:facet name="buttonBar"/>
+                    <af:panelFormLayout id="pfl1">
+                        <af:inputText value="#{bindings.sEvtcode.inputValue}" label="Work Order"
+                                      required="#{bindings.sEvtcode.hints.mandatory}"
+                                      columns="#{bindings.sEvtcode.hints.displayWidth}"
+                                      maximumLength="#{bindings.sEvtcode.hints.precision}"
+                                      shortDesc="#{bindings.sEvtcode.hints.tooltip}" id="it1">
+                            <f:validator binding="#{bindings.sEvtcode.validator}"/>
+                        </af:inputText>
+                        <af:inputDate value="#{bindings.newDate.inputValue}" label="New Date"
+                                      required="#{bindings.newDate.hints.mandatory}"
+                                      columns="#{bindings.newDate.hints.displayWidth}"
+                                      shortDesc="#{bindings.newDate.hints.tooltip}" id="id1">
+                            <f:validator binding="#{bindings.newDate.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.newDate.format}"/>
+                        </af:inputDate>
+                        <af:button actionListener="#{bindings.updateWODates.execute}" text="Update"
+                                   disabled="#{!bindings.updateWODates.enabled}" id="cb1"/>
+                        <af:outputLabel id="ol1"/>
+                    </af:panelFormLayout>
+                </af:dialog>
+            </af:popup>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="pWriteTest">
+                <af:dialog id="d3" type="ok" closeIconVisible="false" title="#{bindings.return.hints.label}">
+                    <f:facet name="buttonBar"/>
+                    <af:panelFormLayout id="pfl2">
+                        <af:inputText label="Path" id="it2" binding="#{AdminBean.txtPath}"/>
+                        <af:inputText label="Filename.ext" id="it3" binding="#{AdminBean.txtFilename}"/>
+                        <af:inputText label="Text" id="it4" rows="5" binding="#{AdminBean.txtText}"/>
+                        <af:button text="Create" disabled="#{!bindings.updateWODates.enabled}" id="cb2"
+                                   action="#{AdminBean.Create_action}"/>
+                        <af:outputLabel id="ol2"/>
+                    </af:panelFormLayout>
+                </af:dialog>
+            </af:popup>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="pFlagAssoc"
+                      binding="#{AdminBean.flagAssignedPP}">
+                <af:dialog id="d4" type="none" closeIconVisible="false" title="Flag Manager">
+                    <af:panelHeader id="ph1" inlineStyle="color:Window;" text="">
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t2"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                <af:button id="ctb1" icon="#{resource['images:add.png']}"
+                                           actionListener="#{bindings.CreateInsert.execute}"
+                                           disabled="#{!bindings.CreateInsert.enabled}"/>
+                                <!--actionListener="#{bindings.Delete.execute}"-->
+                                <af:button id="ctb2" icon="#{resource['images:delete.png']}"
+                                           actionListener="#{AdminBean.delFlag}" immediate="true"
+                                           binding="#{AdminBean.delFlagBttn}" partialTriggers="t1"/>
+                                <af:button text="Apply" id="ctb3" accessKey="a"
+                                           actionListener="#{bindings.Commit.execute}"
+                                           icon="#{resource['images:commit.png']}"/>
+                                <af:button text="Cancel" id="ctb4" accessKey="C"
+                                           actionListener="#{bindings.Rollback.execute}" immediate="true"
+                                           icon="#{resource['images:undo.png']}">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button id="ctb23" actionListener="#{AdminBean.Close_action}" immediate="false"
+                                           icon="#{resource['images:terminate.png']}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="legend">
+                        <!--selectedRowKeys="#{bindings.ActiveMrltFlag.collectionModel.selectedRow}"-->
+                            <af:group id="g1">
+                                <af:table value="#{bindings.MrltFlag_VO2.collectionModel}" var="row"
+                                          rows="#{bindings.MrltFlag_VO2.rangeSize}"
+                                          emptyText="#{bindings.MrltFlag_VO2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.MrltFlag_VO2.rangeSize}" rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.MrltFlag_VO2.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.MrltFlag_VO2.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t1" inlineStyle="margin:10px; color:Black;"
+                                          partialTriggers="::ctb1 ::ctb2 ::ctb3 ::ctb4 ::ctb7 ::ctb8"
+                                          editingMode="clickToEdit" columnStretching="column:c3">
+                                    <af:column sortProperty="#{bindings.MrltFlag_VO2.hints.Fname.name}"
+                                               sortable="false" headerText="Name" id="c1">
+                                        <af:inputText value="#{row.bindings.Fname.inputValue}"
+                                                      label="#{bindings.MrltFlag_VO2.hints.Fname.label}"
+                                                      required="#{bindings.MrltFlag_VO2.hints.Fname.mandatory}"
+                                                      columns="#{bindings.MrltFlag_VO2.hints.Fname.displayWidth}"
+                                                      maximumLength="#{bindings.MrltFlag_VO2.hints.Fname.precision}"
+                                                      shortDesc="#{bindings.MrltFlag_VO2.hints.Fname.tooltip}"
+                                                      id="it5">
+                                            <f:validator binding="#{row.bindings.Fname.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltFlag_VO2.hints.Ftype.name}"
+                                               sortable="false" headerText="Flag Type" id="c2">
+                                        <af:selectOneChoice value="#{row.bindings.Ftype.inputValue}"
+                                                            label="#{row.bindings.Ftype.label}"
+                                                            required="#{bindings.MrltFlag_VO2.hints.Ftype.mandatory}"
+                                                            shortDesc="#{bindings.MrltFlag_VO2.hints.Ftype.tooltip}"
+                                                            id="soc2">
+                                            <f:selectItems value="#{row.bindings.Ftype.items}" id="si2"/>
+                                        </af:selectOneChoice>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltFlag_VO2.hints.Factive.name}"
+                                               sortable="false" headerText="Active" id="c3" width="80">
+                                        <af:selectOneChoice value="#{row.bindings.Factive.inputValue}"
+                                                            label="#{row.bindings.Factive.label}"
+                                                            required="#{bindings.MrltFlag_VO2.hints.Factive.mandatory}"
+                                                            shortDesc="#{bindings.MrltFlag_VO2.hints.Factive.tooltip}"
+                                                            id="soc1">
+                                            <f:selectItems value="#{row.bindings.Factive.items}" id="si1"/>
+                                        </af:selectOneChoice>
+                                    </af:column>
+                                </af:table>
+                            </af:group>
+                        </f:facet>
+                    </af:panelHeader>
+                </af:dialog>
+            </af:popup>
+            <!--
+            <af:popup childCreation="deferred" autoCancel="disabled" id="p1" binding="#{AdminBean.flagAssignedPP}">
+                <af:dialog id="d5" type="ok" title="Cannot delete flag">
+                    <f:facet name="buttonBar"/>
+                    <af:outputText value="Cannot delete flag as it is associated with a Work Order." id="ot1"/>
+                </af:dialog>
+            </af:popup>-->
+            <af:popup childCreation="deferred" autoCancel="disabled" id="pUpdPOBCd" binding="#{AdminBean.ppUpdPOBCd}">
+                <af:dialog id="d5" type="none" closeIconVisible="false" title="Update PO Budget Code">
+                    <f:facet name="buttonBar"/>
+                    <af:panelHeader text=" " id="ph2">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t3"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                <!--actionListener="#{bindings.Delete.execute}"-->
+                                <af:button text="Apply" id="ctb7" accessKey="a"
+                                           actionListener="#{bindings.Commit.execute}"
+                                           icon="#{resource['images:commit.png']}"
+                                           disabled="#{!bindings.Commit.enabled}"/>
+                                <af:button text="Cancel" id="ctb8" accessKey="C"
+                                           actionListener="#{bindings.Rollback.execute}" immediate="true"
+                                           icon="#{resource['images:undo.png']}"
+                                           disabled="#{!bindings.Rollback.enabled}">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button id="ctb9" actionListener="#{AdminBean.Close_actionUpdBCd}" immediate="false"
+                                           icon="#{resource['images:terminate.png']}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="info"/>
+                        <af:panelGroupLayout layout="vertical" id="pgl1">
+                            <af:panelHeader text=" " id="ph3" inlineStyle="width:250px;">
+                                <af:query id="qryId1" headerText="Search" disclosed="true"
+                                          value="#{bindings.POrdersOrdCdQuery.queryDescriptor}"
+                                          model="#{bindings.POrdersOrdCdQuery.queryModel}"
+                                          queryListener="#{bindings.POrdersOrdCdQuery.processQuery}"
+                                          queryOperationListener="#{bindings.POrdersOrdCdQuery.processQueryOperation}"
+                                          displayMode="compact" saveQueryMode="hidden" modeChangeVisible="false"
+                                          inlineStyle="background-color:White;"/>
+                                <af:panelFormLayout id="pfl3"
+                                                    inlineStyle="margin:20px; border-color:Silver; border-style:solid; border-width:thin; padding:5px;">
+                                    <af:inputText value="#{bindings.OrdCode.inputValue}"
+                                                  label="#{bindings.OrdCode.hints.label}"
+                                                  required="#{bindings.OrdCode.hints.mandatory}"
+                                                  columns="#{bindings.OrdCode.hints.displayWidth}"
+                                                  maximumLength="#{bindings.OrdCode.hints.precision}"
+                                                  shortDesc="#{bindings.OrdCode.hints.tooltip}" id="it6">
+                                        <f:validator binding="#{bindings.OrdCode.validator}"/>
+                                    </af:inputText>
+                                    <af:inputText value="#{bindings.OrdDesc.inputValue}"
+                                                  label="#{bindings.OrdDesc.hints.label}"
+                                                  required="#{bindings.OrdDesc.hints.mandatory}"
+                                                  columns="#{bindings.OrdDesc.hints.displayWidth}"
+                                                  maximumLength="#{bindings.OrdDesc.hints.precision}"
+                                                  shortDesc="#{bindings.OrdDesc.hints.tooltip}" id="it7">
+                                        <f:validator binding="#{bindings.OrdDesc.validator}"/>
+                                    </af:inputText>
+                                    <af:inputText value="#{bindings.ItsCustfld1.inputValue}"
+                                                  label="#{bindings.ItsCustfld1.hints.label}"
+                                                  required="#{bindings.ItsCustfld1.hints.mandatory}"
+                                                  columns="#{bindings.ItsCustfld1.hints.displayWidth}"
+                                                  maximumLength="#{bindings.ItsCustfld1.hints.precision}"
+                                                  shortDesc="#{bindings.ItsCustfld1.hints.tooltip}" id="it8"
+                                                  autoSubmit="true" contentStyle="text-transform:uppercase; ">
+                                        <f:validator binding="#{bindings.ItsCustfld1.validator}"/>
+                                    </af:inputText>
+                                </af:panelFormLayout>
+                            </af:panelHeader>
+                        </af:panelGroupLayout>
+                    </af:panelHeader>
+                </af:dialog>
+            </af:popup>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="pUpjobDetails"
+                      binding="#{AdminBean.PUpjobDetails}">
+                <af:dialog id="d6" type="none" closeIconVisible="false" title="Job Details">
+      
+                    <af:panelHeader text=" " id="ph4">
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t4" inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                <af:button id="ctb5" actionListener="#{AdminBean.Close_actionPUpjobDetails}"
+                                           immediate="false" icon="#{resource['images:terminate.png']}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="info">
+                                    <af:table value="#{bindings.joblogView11.collectionModel}" var="row"
+                                              rows="#{bindings.joblogView11.rangeSize}"
+                                              emptyText="#{bindings.joblogView11.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              fetchSize="#{bindings.joblogView11.rangeSize}" rowBandingInterval="0"
+                                              id="t5" width="900" columnStretching="last"
+                                              filterModel="#{bindings.joblogView11Query.queryDescriptor}"
+                                              queryListener="#{bindings.joblogView11Query.processQuery}"
+                                              filterVisible="true" varStatus="vs">
+                                <af:column sortProperty="#{bindings.joblogView11.hints.LogID.name}" sortable="true"
+                                           headerText="Log ID" id="c4" width="45" filterable="true">
+                                    <af:outputText value="#{row.LogID}"
+                                                   shortDesc="#{bindings.joblogView11.hints.LogID.tooltip}" id="ot1"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.joblogView11.hints.JobName.name}" sortable="true"
+                                           headerText="Job Name" id="c5" width="175" filterable="true">
+                                    <af:outputText value="#{row.JobName}"
+                                                   shortDesc="#{bindings.joblogView11.hints.JobName.tooltip}" id="ot2"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.joblogView11.hints.Status.name}" sortable="true"
+                                           headerText="Status" id="c6" width="70" filterable="true">
+                                    <af:outputText value="#{row.Status}"
+                                                   shortDesc="#{bindings.joblogView11.hints.Status.tooltip}" id="ot3"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.joblogView11.hints.ActualStartDate.name}"
+                                           sortable="true" headerText="Actual Start Date" id="c7" width="170"
+                                           filterable="true">
+                                    <af:outputText value="#{row.ActualStartDate}"
+                                                   shortDesc="#{bindings.joblogView11.hints.ActualStartDate.tooltip}"
+                                                   id="ot4">
+                                        <af:convertDateTime pattern="#{bindings.joblogView11.hints.ActualStartDate.format}"/>
+                                    </af:outputText>
+                                    <f:facet name="filter">
+                                        <af:inputDate value="#{vs.filterCriteria.ActualStartDate}" id="id2">
+                                            <af:convertDateTime pattern="#{bindings.joblogView11.hints.ActualStartDate.format}"/>
+                                        </af:inputDate>
+                                    </f:facet>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.joblogView11.hints.RunDuration.name}"
+                                           sortable="true" headerText="Run Duration" id="c8" width="140"
+                                           filterable="true">
+                                    <af:outputText value="#{row.RunDuration}"
+                                                   shortDesc="#{bindings.joblogView11.hints.RunDuration.tooltip}"
+                                                   id="ot5"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.joblogView11.hints.AdditionalInfo.name}"
+                                           sortable="true" headerText="Additional Info" id="c9" filterable="true"
+                                           noWrap="true">
+                                    <af:outputText value="#{row.AdditionalInfo}"
+                                                   shortDesc="#{bindings.joblogView11.hints.AdditionalInfo.tooltip}"
+                                                   id="ot6" inlineStyle="white-space: pre-wrap;display:inline-block;"
+     noWrap="true"/>
+                                </af:column>
+                            </af:table>
+                        </f:facet>
+                    </af:panelHeader>
+                </af:dialog>
+            </af:popup>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="pUpjobRunning"
+                      binding="#{AdminBean.pupjobRunning}">
+                <af:dialog id="d7" title="Running Jobs" type="none" closeIconVisible="false" inlineStyle="width:515px;">
+                    <af:panelHeader text="" id="ph5" inlineStyle="padding-right:10px;">
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t6" inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px;background-color:White;">
+                                <af:button id="ctb6" immediate="false" icon="#{resource['images:terminate.png']}"
+                                           actionListener="#{AdminBean.Close_actionPUpjobRunning}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="info">
+                            <af:table value="#{bindings.jobRunningView1.collectionModel}" var="row"
+                                      rows="#{bindings.jobRunningView1.rangeSize}"
+                                      emptyText="#{bindings.jobRunningView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.jobRunningView1.rangeSize}" rowBandingInterval="0"
+                                      filterModel="#{bindings.jobRunningView1Query.queryDescriptor}"
+                                      queryListener="#{bindings.jobRunningView1Query.processQuery}" filterVisible="true"
+                                      varStatus="vs" id="t7" width="480">
+                                <af:column sortProperty="#{bindings.jobRunningView1.hints.LogId.name}" filterable="true"
+                                           sortable="true" headerText="Log ID" id="c10" width="55">
+                                    <af:outputText value="#{row.LogId}"
+                                                   shortDesc="#{bindings.jobRunningView1.hints.LogId.tooltip}"
+                                                   id="ot7"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.jobRunningView1.hints.SessionId.name}"
+                                           filterable="true" sortable="true" headerText="Session ID" id="c11" width="70">
+                                    <af:outputText value="#{row.SessionId}"
+                                                   shortDesc="#{bindings.jobRunningView1.hints.SessionId.tooltip}"
+                                                   id="ot8"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.jobRunningView1.hints.JobName.name}"
+                                           filterable="true" width="200" sortable="true" headerText="Job Name" id="c12">
+                                    <af:outputText value="#{row.JobName}"
+                                                   shortDesc="#{bindings.jobRunningView1.hints.JobName.tooltip}"
+                                                   id="ot9"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.jobRunningView1.hints.ElapsedTime.name}"
+                                           filterable="true" sortable="true" width="135" headerText="Elapsed Time" id="c13">
+                                    <af:outputText value="#{row.ElapsedTime}"
+                                                   shortDesc="#{bindings.jobRunningView1.hints.ElapsedTime.tooltip}"
+                                                   id="ot10"/>
+                                </af:column>
+                            </af:table>
+                        </f:facet>
+                    </af:panelHeader>
+                </af:dialog>
+            </af:popup>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="invFilesPP">
+                <af:dialog id="d8" title="Create Invoice XML Files" dialogListener="#{AdminBean.invoice_action}">
+                    <f:facet name="buttonBar"/>
+                    <af:inputText label="Invoice #" id="it9" binding="#{AdminBean.poNum}" autoSubmit="true"/>
+                
+                </af:dialog>
+            </af:popup>            
+        </af:form>
+    </af:document>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:AdminBean-->
+</f:view>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltAssetdocuments"
+  Version="11.1.2.60.81"
+  DBObjectType="TABLE"
+  DBObjectName="MP5PRD.MRLT_ASSETDOCUMENTS"
+  AliasName="MrltAssetdocuments"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <Attribute
+    Name="Assetdocitem"
+    IsNotNull="true"
+    Precision="45"
+    ColumnName="ASSETDOCITEM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_ASSETDOCUMENTS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Org"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_ASSETDOCUMENTS"
+    PrimaryKey="true"
+    DefaultValue="1">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Docid"
+    Precision="12"
+    Scale="0"
+    ColumnName="DOCID"
+    SQLType="NUMERIC"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    TableName="MP5PRD.MRLT_ASSETDOCUMENTS"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="tDocDesc"
+    Precision="80"
+    ColumnName="T_DOC_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[Docid != null? MrltDocuments.Docdesc : null]]></TransientExpression>
+  </Attribute>
+  <Attribute
+    Name="tDocType"
+    Precision="80"
+    ColumnName="T_DOC_TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[Docid != null? MrltDocuments.Doctype : null]]></TransientExpression>
+  </Attribute>
+  <AccessorAttribute
+    Name="MrltAsset"
+    Association="its.mnr.mp5.eo.assoc.MrltAssetdocumentsFk1Assoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MrltAssetdocumentsFk1Assoc.MrltAsset"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MrltAssetdocumentsFk1Assoc.MrltAssetdocuments"
+    Type="its.mnr.mp5.eo.local.MrltAssetImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="MrltDocuments"
+    Association="its.mnr.mp5.eo.assoc.MrltAssetdocumentsFk2Assoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MrltAssetdocumentsFk2Assoc.MrltDocuments"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MrltAssetdocumentsFk2Assoc.MrltAssetdocuments1"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrltAssetdocumentsPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLT_ASSETDOCUMENTS_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltAssetdocuments.Assetdocitem"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltAssetdocuments.Org"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltAssetdocuments.Docid"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltAssetdocumentsFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_ASSET_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_ASSETDOCUMENTS_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltAssetdocuments.Assetdocitem"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltAssetdocuments.Org"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltAssetdocumentsFk2">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_DOCUMENTS_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_ASSETDOCUMENTS_FK2"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltAssetdocuments.Docid"/>
+    </AttrArray>
+  </Key>
+  <validation:UniqueKeyValidationBean
+    Name="MrltAssetdocuments_Rule_0"
+    ResId="its.mnr.mp5.eo.local.MrltAssetdocuments_Rule_0"
+    KeyName="MrltAssetdocumentsPk">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="Assetdocitem"/>
+      <validation:Item
+        Value="Org"/>
+      <validation:Item
+        Value="Docid"/>
+    </validation:OnAttributes>
+  </validation:UniqueKeyValidationBean>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

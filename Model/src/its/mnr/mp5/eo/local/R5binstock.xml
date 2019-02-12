@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5binstock"
+  Version="11.1.2.64.36"
+  DBObjectType="table"
+  DBObjectName="R5BINSTOCK"
+  AliasName="R5binstock"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.eo.local.R5binstockImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="PartsIssuedExistence"
+    ViewObjectName="its.mnr.mp5.lov.PartsIssuedExistence"
+    RowLevelBinds="true"/>
+  <Attribute
+    Name="BisPart"
+    IsNotNull="true"
+    Precision="18"
+    ColumnName="BIS_PART"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5BINSTOCK"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="18"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BisStore"
+    Precision="4"
+    ColumnName="BIS_STORE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5BINSTOCK"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BisBin"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="BIS_BIN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5BINSTOCK"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BisLot"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="BIS_LOT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5BINSTOCK"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BisQty"
+    IsNotNull="true"
+    ColumnName="BIS_QTY"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="R5BINSTOCK"/>
+  <Attribute
+    Name="BisPartOrg"
+    Precision="8"
+    ColumnName="BIS_PART_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5BINSTOCK"
+    PrimaryKey="true"
+    DefaultValue="1">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BisCreated"
+    ColumnName="BIS_CREATED"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5BINSTOCK"/>
+  <Attribute
+    Name="BisCreatedby"
+    Precision="12"
+    ColumnName="BIS_CREATEDBY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5BINSTOCK">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BisUpdated"
+    ColumnName="BIS_UPDATED"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5BINSTOCK"/>
+  <Attribute
+    Name="BisUpdatedby"
+    Precision="12"
+    ColumnName="BIS_UPDATEDBY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5BINSTOCK">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="tNewBin"
+    Precision="80"
+    ColumnName="T_NEW_BIN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false"/>
+  <Attribute
+    Name="tNewLot"
+    Precision="80"
+    ColumnName="T_NEW_LOT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false"/>
+  <Attribute
+    Name="tNewQty"
+    ColumnName="T_NEW_QTY"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    IsPersistent="false"
+    IsQueriable="false"/>
+  <AccessorAttribute
+    Name="R5bins"
+    Association="its.mnr.mp5.eo.assoc.R5fok2BisAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok2BisAssoc.R5bins"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok2BisAssoc.R5binstock"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5matlparts"
+    Association="its.mnr.mp5.eo.assoc.MlpPartsBinStockAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MlpPartsBinStockAssoc.R5matlparts"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MlpPartsBinStockAssoc.R5binstock"
+    Type="its.mnr.mp5.eo.local.R5matlpartsImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5parts"
+    Association="its.mnr.mp5.eo.assoc.PartsBinStockAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.PartsBinStockAssoc.R5parts"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.PartsBinStockAssoc.R5binstock"
+    Type="its.mnr.mp5.eo.local.R5partsImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5stock"
+    Association="its.mnr.mp5.eo.assoc.R5fok1BisAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1BisAssoc.R5stock"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1BisAssoc.R5binstock"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5lots"
+    Association="its.mnr.mp5.eo.assoc.R5fok3BisAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok3BisAssoc.R5lots"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok3BisAssoc.R5binstock"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="R5chk1Bis">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK1_BIS"/>
+      <Attr Name="_checkCondition" Value="BIS_QTY >= 0 AND BIS_QTY &lt;= 99999999999.9999"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn01Bis">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN01_BIS"/>
+      <Attr Name="_checkCondition" Value="BIS_QTY IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5prikBis"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_BIS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5binstock.BisStore"/>
+      <Item Value="its.mnr.mp5.eo.local.R5binstock.BisPart"/>
+      <Item Value="its.mnr.mp5.eo.local.R5binstock.BisPartOrg"/>
+      <Item Value="its.mnr.mp5.eo.local.R5binstock.BisBin"/>
+      <Item Value="its.mnr.mp5.eo.local.R5binstock.BisLot"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Bis">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_STO"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_BIS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5binstock.BisPart"/>
+      <Item Value="its.mnr.mp5.eo.local.R5binstock.BisPartOrg"/>
+      <Item Value="its.mnr.mp5.eo.local.R5binstock.BisStore"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok2Bis">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_BIN"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK2_BIS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5binstock.BisStore"/>
+      <Item Value="its.mnr.mp5.eo.local.R5binstock.BisBin"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok3Bis">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_LOT"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK3_BIS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5binstock.BisLot"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_R5binstock">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_PAR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_R5BINSTOCK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5binstock.BisPart"/>
+      <Item Value="its.mnr.mp5.eo.local.R5binstock.BisPartOrg"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

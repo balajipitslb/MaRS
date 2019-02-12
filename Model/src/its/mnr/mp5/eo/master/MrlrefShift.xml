@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrlrefShift"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="MRLREF_SHIFT"
+  AliasName="MrlrefShift"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="Shiftcd"
+    IsNotNull="true"
+    Precision="3"
+    ColumnName="SHIFTCD"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_SHIFT"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefShift.Shiftcd"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+  </Attribute>
+  <Attribute
+    Name="Shortdesc"
+    IsNotNull="true"
+    Precision="5"
+    ColumnName="SHORTDESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_SHIFT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefShift.Shortdesc"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+  </Attribute>
+  <Attribute
+    Name="Description"
+    IsNotNull="true"
+    Precision="10"
+    ColumnName="DESCRIPTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_SHIFT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefShift.Description"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+  </Attribute>
+  <Attribute
+    Name="Mid"
+    Precision="3"
+    ColumnName="MID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_SHIFT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Rid"
+    Precision="3"
+    ColumnName="RID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_SHIFT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+  </Attribute>
+  <Key
+    Name="MrlrefShiftPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLREF_SHIFT_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrlrefShift.Shiftcd"/>
+    </AttrArray>
+  </Key>
+</Entity>

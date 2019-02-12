@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5LanguagesView"
+  Version="11.1.2.60.81"
+  SelectList="R5Languages.LAN_CODE, 
+       R5Languages.LAN_DESC"
+  FromList="MP5PRD.R5LANGUAGES R5Languages"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchSize="15"
+  RangeSize="16">
+  <EntityUsage
+    Name="R5Languages"
+    Entity="its.mnr.mp5.eo.master.R5Languages"/>
+  <ViewAttribute
+    Name="LanCode"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LanCode"
+    EntityUsage="R5Languages"
+    AliasName="LAN_CODE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.admin.R5LanguagesView.LanCode_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LanDesc"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LanDesc"
+    EntityUsage="R5Languages"
+    AliasName="LAN_DESC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.admin.R5LanguagesView.LanDesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

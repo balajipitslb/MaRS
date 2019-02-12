@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Admin-PerMaster">
+    <template-reference>
+      <document>/WEB-INF/error-handler-flow.xml</document>
+      <id>error-handler-flow</id>
+    </template-reference>
+    <default-activity>PerMaster</default-activity>
+    <managed-bean id="__6">
+      <managed-bean-name>ModuleNavBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.ModuleNavBean</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="PerMaster">
+      <page>/Content/Admin/PerMaster.jspx</page>
+    </view>
+    <task-flow-return id="Exit">
+      <outcome>
+        <name>Exit</name>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__1">
+      <from-activity-id>PerMaster</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>Exit</from-outcome>
+        <to-activity-id>Exit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

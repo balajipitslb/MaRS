@@ -1,0 +1,348 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+   <Reference name="MP5TMSWS" className="oracle.adf.model.connection.webservice.impl.WebServiceConnectionImpl" xmlns="">
+      <Factory className="oracle.adf.model.connection.webservice.api.WebServiceConnectionFactory"/>
+      <RefAddresses>
+         <XmlRefAddr addrType="WebServiceConnection">
+            <Contents>
+               <wsconnection description="http://marstmsws/MaRSWebSvc/MaRSWebSvc.asmx?WSDL"
+                             service="{http://ITSLB.com/}MP5_x0020_Service">
+                  <model name="{http://ITSLB.com/}wsdl" xmlns="http://oracle.com/ws/model">
+                     <types xmlns="http://oracle.com/oracle/webservices/mdds">
+                        <types-in-elements/>
+                     </types>
+                     <service name="{http://ITSLB.com/}MP5_x0020_Service">
+                        <port name="MP5_x0020_ServiceSoap12" binding="{http://ITSLB.com/}MP5_x0020_ServiceSoap12"
+                              portType="{http://ITSLB.com/}MP5_x0020_ServiceSoap">
+                           <soap addressUrl="http://marstmsws/MaRSWebSvc/MaRSWebSvc.asmx"
+                                 xmlns="http://schemas.xmlsoap.org/wsdl/soap/"/>
+                           <operation name="Update_BIT">
+                              <soap soapAction="http://ITSLB.com/Update_BIT"
+                                    xmlns="http://schemas.xmlsoap.org/wsdl/soap/"/>
+                              <output name="" message="{http://ITSLB.com/}Update_BITSoapOut">
+                                 <message style="2" use="1" soapVersion="2" encodingStyle="" docLitWrapped="true"
+                                          namespace="http://ITSLB.com/" localPart="Update_BITResponse"
+                                          xmlns="http://oracle.com/oracle/webservices/mdds">
+                                    <part name="parameters" required="true" xmlns="">
+                                       <type>
+                                          <complexType elementQualified="true">
+                                             <sequence minOccurs="1" maxOccurs="1">
+                                                <part name="Update_BITResult" required="true"
+                                                      namespace="http://ITSLB.com/" elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="boolean"/>
+                                                </part>
+                                             </sequence>
+                                          </complexType>
+                                       </type>
+                                    </part>
+                                 </message>
+                              </output>
+                              <input name="" message="{http://ITSLB.com/}Update_BITSoapIn">
+                                 <message style="2" use="1" soapVersion="2" encodingStyle="" docLitWrapped="true"
+                                          namespace="http://ITSLB.com/" localPart="Update_BIT"
+                                          xmlns="http://oracle.com/oracle/webservices/mdds">
+                                    <part name="parameters" required="true" xmlns="">
+                                       <type>
+                                          <complexType elementQualified="true">
+                                             <sequence minOccurs="1" maxOccurs="1">
+                                                <part name="ChassisNo" required="false" namespace="http://ITSLB.com/"
+                                                      elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                                <part name="Bit" required="false" namespace="http://ITSLB.com/"
+                                                      elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                                <part name="Fhwa" required="false" namespace="http://ITSLB.com/"
+                                                      elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                             </sequence>
+                                          </complexType>
+                                       </type>
+                                    </part>
+                                 </message>
+                              </input>
+                           </operation>
+                           <operation name="Get_EquipInfo">
+                              <soap soapAction="http://ITSLB.com/Get_EquipInfo"
+                                    xmlns="http://schemas.xmlsoap.org/wsdl/soap/"/>
+                              <output name="" message="{http://ITSLB.com/}Get_EquipInfoSoapOut">
+                                 <message style="2" use="1" soapVersion="2" encodingStyle="" docLitWrapped="true"
+                                          namespace="http://ITSLB.com/" localPart="Get_EquipInfoResponse"
+                                          xmlns="http://oracle.com/oracle/webservices/mdds">
+                                    <part name="parameters" required="true" xmlns="">
+                                       <type>
+                                          <complexType elementQualified="true">
+                                             <sequence minOccurs="1" maxOccurs="1">
+                                                <part name="Get_EquipInfoResult" required="false"
+                                                      namespace="http://ITSLB.com/" elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                             </sequence>
+                                          </complexType>
+                                       </type>
+                                    </part>
+                                 </message>
+                              </output>
+                              <input name="" message="{http://ITSLB.com/}Get_EquipInfoSoapIn">
+                                 <message style="2" use="1" soapVersion="2" encodingStyle="" docLitWrapped="true"
+                                          namespace="http://ITSLB.com/" localPart="Get_EquipInfo"
+                                          xmlns="http://oracle.com/oracle/webservices/mdds">
+                                    <part name="parameters" required="true" xmlns="">
+                                       <type>
+                                          <complexType elementQualified="true">
+                                             <sequence minOccurs="1" maxOccurs="1">
+                                                <part name="EquipNo" required="false" namespace="http://ITSLB.com/"
+                                                      elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                                <part name="EndDt" required="false" namespace="http://ITSLB.com/"
+                                                      elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                             </sequence>
+                                          </complexType>
+                                       </type>
+                                    </part>
+                                 </message>
+                              </input>
+                           </operation>
+                           <operation name="Get_USerInfo">
+                              <soap soapAction="http://ITSLB.com/Get_USerInfo"
+                                    xmlns="http://schemas.xmlsoap.org/wsdl/soap/"/>
+                              <output name="" message="{http://ITSLB.com/}Get_USerInfoSoapOut">
+                                 <message style="2" use="1" soapVersion="2" encodingStyle="" docLitWrapped="true"
+                                          namespace="http://ITSLB.com/" localPart="Get_USerInfoResponse"
+                                          xmlns="http://oracle.com/oracle/webservices/mdds">
+                                    <part name="parameters" required="true" xmlns="">
+                                       <type>
+                                          <complexType elementQualified="true">
+                                             <sequence minOccurs="1" maxOccurs="1">
+                                                <part name="Get_USerInfoResult" required="false"
+                                                      namespace="http://ITSLB.com/" elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                             </sequence>
+                                          </complexType>
+                                       </type>
+                                    </part>
+                                 </message>
+                              </output>
+                              <input name="" message="{http://ITSLB.com/}Get_USerInfoSoapIn">
+                                 <message style="2" use="1" soapVersion="2" encodingStyle="" docLitWrapped="true"
+                                          namespace="http://ITSLB.com/" localPart="Get_USerInfo"
+                                          xmlns="http://oracle.com/oracle/webservices/mdds">
+                                    <part name="parameters" required="true" xmlns="">
+                                       <type>
+                                          <complexType elementQualified="true">
+                                             <sequence minOccurs="1" maxOccurs="1">
+                                                <part name="UsrNm" required="false" namespace="http://ITSLB.com/"
+                                                      elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                                <part name="Pswd" required="false" namespace="http://ITSLB.com/"
+                                                      elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                             </sequence>
+                                          </complexType>
+                                       </type>
+                                    </part>
+                                 </message>
+                              </input>
+                           </operation>
+                        </port>
+                        <port name="MP5_x0020_ServiceSoap" binding="{http://ITSLB.com/}MP5_x0020_ServiceSoap"
+                              portType="{http://ITSLB.com/}MP5_x0020_ServiceSoap">
+                           <soap addressUrl="http://marstmsws/MaRSWebSvc/MaRSWebSvc.asmx"
+                                 xmlns="http://schemas.xmlsoap.org/wsdl/soap/"/>
+                           <operation name="Update_BIT">
+                              <soap soapAction="http://ITSLB.com/Update_BIT"
+                                    xmlns="http://schemas.xmlsoap.org/wsdl/soap/"/>
+                              <output name="" message="{http://ITSLB.com/}Update_BITSoapOut">
+                                 <message style="2" use="1" soapVersion="1" encodingStyle="" docLitWrapped="true"
+                                          namespace="http://ITSLB.com/" localPart="Update_BITResponse"
+                                          xmlns="http://oracle.com/oracle/webservices/mdds">
+                                    <part name="parameters" required="true" xmlns="">
+                                       <type>
+                                          <complexType elementQualified="true">
+                                             <sequence minOccurs="1" maxOccurs="1">
+                                                <part name="Update_BITResult" required="true"
+                                                      namespace="http://ITSLB.com/" elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="boolean"/>
+                                                </part>
+                                             </sequence>
+                                          </complexType>
+                                       </type>
+                                    </part>
+                                 </message>
+                              </output>
+                              <input name="" message="{http://ITSLB.com/}Update_BITSoapIn">
+                                 <message style="2" use="1" soapVersion="1" encodingStyle="" docLitWrapped="true"
+                                          namespace="http://ITSLB.com/" localPart="Update_BIT"
+                                          xmlns="http://oracle.com/oracle/webservices/mdds">
+                                    <part name="parameters" required="true" xmlns="">
+                                       <type>
+                                          <complexType elementQualified="true">
+                                             <sequence minOccurs="1" maxOccurs="1">
+                                                <part name="ChassisNo" required="false" namespace="http://ITSLB.com/"
+                                                      elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                                <part name="Bit" required="false" namespace="http://ITSLB.com/"
+                                                      elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                                <part name="Fhwa" required="false" namespace="http://ITSLB.com/"
+                                                      elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                             </sequence>
+                                          </complexType>
+                                       </type>
+                                    </part>
+                                 </message>
+                              </input>
+                           </operation>
+                           <operation name="Get_EquipInfo">
+                              <soap soapAction="http://ITSLB.com/Get_EquipInfo"
+                                    xmlns="http://schemas.xmlsoap.org/wsdl/soap/"/>
+                              <output name="" message="{http://ITSLB.com/}Get_EquipInfoSoapOut">
+                                 <message style="2" use="1" soapVersion="1" encodingStyle="" docLitWrapped="true"
+                                          namespace="http://ITSLB.com/" localPart="Get_EquipInfoResponse"
+                                          xmlns="http://oracle.com/oracle/webservices/mdds">
+                                    <part name="parameters" required="true" xmlns="">
+                                       <type>
+                                          <complexType elementQualified="true">
+                                             <sequence minOccurs="1" maxOccurs="1">
+                                                <part name="Get_EquipInfoResult" required="false"
+                                                      namespace="http://ITSLB.com/" elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                             </sequence>
+                                          </complexType>
+                                       </type>
+                                    </part>
+                                 </message>
+                              </output>
+                              <input name="" message="{http://ITSLB.com/}Get_EquipInfoSoapIn">
+                                 <message style="2" use="1" soapVersion="1" encodingStyle="" docLitWrapped="true"
+                                          namespace="http://ITSLB.com/" localPart="Get_EquipInfo"
+                                          xmlns="http://oracle.com/oracle/webservices/mdds">
+                                    <part name="parameters" required="true" xmlns="">
+                                       <type>
+                                          <complexType elementQualified="true">
+                                             <sequence minOccurs="1" maxOccurs="1">
+                                                <part name="EquipNo" required="false" namespace="http://ITSLB.com/"
+                                                      elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                                <part name="EndDt" required="false" namespace="http://ITSLB.com/"
+                                                      elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                             </sequence>
+                                          </complexType>
+                                       </type>
+                                    </part>
+                                 </message>
+                              </input>
+                           </operation>
+                           <operation name="Get_USerInfo">
+                              <soap soapAction="http://ITSLB.com/Get_USerInfo"
+                                    xmlns="http://schemas.xmlsoap.org/wsdl/soap/"/>
+                              <output name="" message="{http://ITSLB.com/}Get_USerInfoSoapOut">
+                                 <message style="2" use="1" soapVersion="1" encodingStyle="" docLitWrapped="true"
+                                          namespace="http://ITSLB.com/" localPart="Get_USerInfoResponse"
+                                          xmlns="http://oracle.com/oracle/webservices/mdds">
+                                    <part name="parameters" required="true" xmlns="">
+                                       <type>
+                                          <complexType elementQualified="true">
+                                             <sequence minOccurs="1" maxOccurs="1">
+                                                <part name="Get_USerInfoResult" required="false"
+                                                      namespace="http://ITSLB.com/" elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                             </sequence>
+                                          </complexType>
+                                       </type>
+                                    </part>
+                                 </message>
+                              </output>
+                              <input name="" message="{http://ITSLB.com/}Get_USerInfoSoapIn">
+                                 <message style="2" use="1" soapVersion="1" encodingStyle="" docLitWrapped="true"
+                                          namespace="http://ITSLB.com/" localPart="Get_USerInfo"
+                                          xmlns="http://oracle.com/oracle/webservices/mdds">
+                                    <part name="parameters" required="true" xmlns="">
+                                       <type>
+                                          <complexType elementQualified="true">
+                                             <sequence minOccurs="1" maxOccurs="1">
+                                                <part name="UsrNm" required="false" namespace="http://ITSLB.com/"
+                                                      elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                                <part name="Pswd" required="false" namespace="http://ITSLB.com/"
+                                                      elementQualified="true">
+                                                   <type namespace="http://www.w3.org/2001/XMLSchema"
+                                                         localPart="string"/>
+                                                </part>
+                                             </sequence>
+                                          </complexType>
+                                       </type>
+                                    </part>
+                                 </message>
+                              </input>
+                           </operation>
+                        </port>
+                     </service>
+                  </model>
+               </wsconnection>
+            </Contents>
+         </XmlRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="MP5" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="MP5" xmlns="">
+      <Factory className="oracle.jdevimpl.db.adapter.DatabaseProviderFactory1212"/>
+      <RefAddresses>
+         <StringRefAddr addrType="sid">
+            <Contents>MaRSDB</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>oraJDBC</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>mp5prd</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="port">
+            <Contents>1521</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>ITSMP5ORADB21.itslb.com</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="oraDriverType">
+            <Contents>thin</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+</References>

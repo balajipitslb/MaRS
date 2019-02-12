@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="CC-CCSetupStoreTrain">
+    <template-reference>
+      <document>/WEB-INF/error-handler-flow.xml</document>
+      <id>error-handler-flow</id>
+    </template-reference>
+    <default-activity>StoreParts</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__5">
+      <name>psfStoreroom</name>
+      <value>#{pageFlowScope.psfStoreroom}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>CycleCountBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.CycleCountBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__2">
+      <managed-bean-name>ModuleNavBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.ModuleNavBean</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="StoreParts">
+      <page>/Content/CycleCnt/CCSetup-StoreParts.jspx</page>
+      <train-stop/>
+    </view>
+    <task-flow-return id="childFlowReturn2">
+      <outcome>
+        <name>childFlowReturn2</name>
+      </outcome>
+    </task-flow-return>
+    <view id="StorePartsTemp">
+      <page>/CC-CCSetupStorePartsTemp.jspx</page>
+      <train-stop>
+        <ignore>true</ignore>
+      </train-stop>
+    </view>
+    <train/>
+    <control-flow-rule id="__3">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>done</from-outcome>
+        <to-activity-id>childFlowReturn2</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

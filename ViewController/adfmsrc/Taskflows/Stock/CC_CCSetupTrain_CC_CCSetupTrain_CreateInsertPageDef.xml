@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81"
+                id="CC_CCSetupTrain_CC_CCSetupTrain_CreateInsertPageDef" Package="Taskflows.Stock"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="CCDataControlNested.MrltCyclecountheaderView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrltCyclecountheaderViewIterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="MrltCyclecountheaderViewIterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

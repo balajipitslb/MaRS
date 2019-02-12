@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Asset-MeterReading">
+    <default-activity>ExecuteWithParams</default-activity>
+    <transaction>
+      <requires-transaction/>
+    </transaction>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__5">
+      <name>psfAssetCd</name>
+      <value>#{pageFlowScope.psfAssetCd}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__6">
+      <name>psfAssetOrg</name>
+      <value>#{pageFlowScope.psfAssetOrg}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__8">
+      <name>psfAssetUom</name>
+      <value>#{pageFlowScope.psfAssetUom}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__7">
+      <managed-bean-name>meterReadingBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.meterReadingBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <task-flow-return id="exit">
+      <outcome>
+        <name>exit</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <view id="AssetMeterReading">
+      <page>/Content/Asset/AssetMeterReading.jspx</page>
+    </view>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>Exit</from-outcome>
+        <to-activity-id>exit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__9">
+      <from-activity-id>ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__10">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>AssetMeterReading</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

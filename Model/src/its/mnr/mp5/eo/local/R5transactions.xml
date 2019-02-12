@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5transactions"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="R5TRANSACTIONS"
+  AliasName="R5transactions"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.eo.local.R5transactionsImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="POTransactionExistence"
+    ViewObjectName="its.mnr.mp5.lov.POTransactionExistence"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="POTransactionExistenceLine"
+      FullName="its.mnr.mp5.lov.POTransactionExistence.POTransactionExistenceLine"/>
+  </ViewAccessor>
+  <Attribute
+    Name="TraDesc"
+    Precision="45"
+    ColumnName="TRA_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraClass"
+    Precision="4"
+    ColumnName="TRA_CLASS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraType"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="TRA_TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraRtype"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="TRA_RTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraAdvice"
+    Precision="24"
+    ColumnName="TRA_ADVICE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraAuth"
+    Precision="12"
+    ColumnName="TRA_AUTH"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraDate"
+    IsNotNull="true"
+    ColumnName="TRA_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"/>
+  <Attribute
+    Name="TraOrder"
+    Precision="8"
+    ColumnName="TRA_ORDER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraPridest"
+    Precision="4"
+    ColumnName="TRA_PRIDEST"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraPriorig"
+    Precision="4"
+    ColumnName="TRA_PRIORIG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraReq"
+    Precision="8"
+    ColumnName="TRA_REQ"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraStatus"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="TRA_STATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+    <validation:MethodValidationBean
+      Name="TraStatus_Rule_0"
+      MethodName="validateTraStatusTraLineRecvdExists"
+      ResId="CAN_NOT_CANCEL_TRANSACTION_WHE">
+      <validation:OnCondition><![CDATA[newValue == 'C' || newValue == 'A']]></validation:OnCondition>
+    </validation:MethodValidationBean>
+    <validation:ExpressionValidationBean
+      Name="TraStatus_Rule_1"
+      OperandType="EXPR"
+      Inverse="false">
+      <validation:OnCondition><![CDATA[TraType == 'RECV' || TraType == 'RETN']]></validation:OnCondition>
+      <validation:MsgIds>
+        <validation:Item
+          Value="INVALID_STATUS_CHANGE"/>
+      </validation:MsgIds>
+      <validation:TransientExpression><![CDATA[if (newValue == 'U' && oldValue == 'A'){
+adf.error.raise("INVALID_STATUS_CHANGE")
+return false
+}
+return true]]></validation:TransientExpression>
+    </validation:ExpressionValidationBean>
+  </Attribute>
+  <Attribute
+    Name="TraRstatus"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="TRA_RSTATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraFromentity"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="TRA_FROMENTITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraFromrentity"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="TRA_FROMRENTITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraFromtype"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="TRA_FROMTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraFromrtype"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="TRA_FROMRTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraFromcode"
+    Precision="24"
+    ColumnName="TRA_FROMCODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraToentity"
+    Precision="4"
+    ColumnName="TRA_TOENTITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraTorentity"
+    Precision="4"
+    ColumnName="TRA_TORENTITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraTotype"
+    Precision="4"
+    ColumnName="TRA_TOTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraTortype"
+    Precision="4"
+    ColumnName="TRA_TORTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraTocode"
+    Precision="24"
+    ColumnName="TRA_TOCODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraPrinted"
+    Precision="1"
+    ColumnName="TRA_PRINTED"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraSourcesystem"
+    Precision="45"
+    ColumnName="TRA_SOURCESYSTEM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraSourcecode"
+    Precision="45"
+    ColumnName="TRA_SOURCECODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraInterface"
+    ColumnName="TRA_INTERFACE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"/>
+  <Attribute
+    Name="TraAcd"
+    ColumnName="TRA_ACD"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="R5TRANSACTIONS"
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    IsUpdateable="while_insert"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="TraOrg"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="TRA_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraClassOrg"
+    Precision="8"
+    ColumnName="TRA_CLASS_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraTocodeOrg"
+    Precision="8"
+    ColumnName="TRA_TOCODE_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraFromcodeOrg"
+    Precision="8"
+    ColumnName="TRA_FROMCODE_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraOrderOrg"
+    Precision="8"
+    ColumnName="TRA_ORDER_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraDckcode"
+    Precision="8"
+    ColumnName="TRA_DCKCODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraDckline"
+    Precision="5"
+    Scale="0"
+    ColumnName="TRA_DCKLINE"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"/>
+  <Attribute
+    Name="TraBarcode"
+    Precision="1"
+    ColumnName="TRA_BARCODE"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TraCodeTransient"
+    ColumnName="TRA_CODE_TRANSIENT"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    IsPersistent="false"
+    IsQueriable="false">
+    <TransientExpression><![CDATA[(TraCode != null ? TraCode : null)]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="TraCode"/>
+    </Dependencies>
+  </Attribute>
+  <Attribute
+    Name="TraCode"
+    ColumnName="TRA_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSACTIONS"
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"
+    Precision="255">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ItsNopo"
+    Precision="1"
+    ColumnName="ITS_NOPO"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="R5TRANSACTIONS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5translines"
+    Association="its.mnr.mp5.eo.assoc.R5fok8TrlAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok8TrlAssoc.R5translines"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok8TrlAssoc.R5transactions"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5orders"
+    Association="its.mnr.mp5.eo.assoc.R5fok1TraAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1TraAssoc.R5orders"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1TraAssoc.R5transactions"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <ViewLinkAccessor
+    Name="Translines"
+    ViewLink="its.mnr.mp5.vo.link.TransactionsTranslineLink"
+    ViewLinkEnd="its.mnr.mp5.vo.link.TransactionsTranslineLink.Translines"
+    ViewLinkOtherEnd="its.mnr.mp5.vo.link.TransactionsTranslineLink.Transactions"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="R5chk1Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK1_TRA"/>
+      <Attr Name="_checkCondition"
+        Value="(TRA_FROMENTITY = TRA_TOENTITY AND TRA_FROMTYPE = TRA_TOTYPE) AND TRA_FROMCODE = TRA_TOCODE"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk2Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK2_TRA"/>
+      <Attr Name="_checkCondition"
+        Value="(TRA_CLASS IS NULL AND TRA_CLASS_ORG IS NULL) OR (TRA_CLASS IS NOT NULL AND TRA_CLASS_ORG IS NOT NULL)"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn01Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN01_TRA"/>
+      <Attr Name="_checkCondition" Value="TRA_DESC IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn02Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN02_TRA"/>
+      <Attr Name="_checkCondition" Value="TRA_STATUS IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn03Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN03_TRA"/>
+      <Attr Name="_checkCondition" Value="TRA_TYPE IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn04Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN04_TRA"/>
+      <Attr Name="_checkCondition" Value="TRA_DATE IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn05Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN05_TRA"/>
+      <Attr Name="_checkCondition" Value="TRA_FROMENTITY IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn06Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN06_TRA"/>
+      <Attr Name="_checkCondition" Value="TRA_FROMTYPE IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn07Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN07_TRA"/>
+      <Attr Name="_checkCondition" Value="TRA_FROMCODE IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn12Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN12_TRA"/>
+      <Attr Name="_checkCondition" Value="TRA_RSTATUS IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn13Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN13_TRA"/>
+      <Attr Name="_checkCondition" Value="TRA_RTYPE IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn14Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN14_TRA"/>
+      <Attr Name="_checkCondition" Value="TRA_FROMRENTITY IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn15Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN15_TRA"/>
+      <Attr Name="_checkCondition" Value="TRA_FROMRTYPE IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn16Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN16_TRA"/>
+      <Attr Name="_checkCondition" Value="TRA_ORG IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn17Tra">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN17_TRA"/>
+      <Attr Name="_checkCondition" Value="TRA_BARCODE = 'B'"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5prikTra"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_TRA"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5transactions.TraAcd"/>
+      <Item Value="its.mnr.mp5.eo.local.R5transactions.TraCode"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Tra">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_ORD"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_TRA"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5transactions.TraOrder"/>
+      <Item Value="its.mnr.mp5.eo.local.R5transactions.TraOrderOrg"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok2Tra">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_USR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK2_TRA"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5transactions.TraAuth"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok4Tra">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_REQ"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK4_TRA"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5transactions.TraReq"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok5Tra">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_ORG"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK5_TRA"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5transactions.TraOrg"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok6Tra">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_DKL"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK6_TRA"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5transactions.TraDckcode"/>
+      <Item Value="its.mnr.mp5.eo.local.R5transactions.TraDckline"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok7Tra">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_DCK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK7_TRA"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5transactions.TraDckcode"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

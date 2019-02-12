@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="POTestPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PORecvDataControlNested.POrdersView" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="POrdersViewIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="PORecvDataControlNested.POrderlinesView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="POrderlinesViewIterator" ChangeEventPolicy="ppr"/>
+  </executables>
+  <bindings>
+    <action IterBinding="POrdersViewIterator" id="First" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="POrdersViewIterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="POrdersViewIterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="POrdersViewIterator" id="Last" RequiresUpdateModel="true" Action="last"/>
+    <attributeValues IterBinding="POrdersViewIterator" id="OrdApprov">
+      <AttrNames>
+        <Item Value="OrdApprov"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrdersViewIterator" id="OrdAuth">
+      <AttrNames>
+        <Item Value="OrdAuth"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrdersViewIterator" id="OrdBuyer">
+      <AttrNames>
+        <Item Value="OrdBuyer"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrdersViewIterator" id="OrdCode">
+      <AttrNames>
+        <Item Value="OrdCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrdersViewIterator" id="tPriceExtended">
+      <AttrNames>
+        <Item Value="tPriceExtended"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="POrderlinesViewIterator" id="First1" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="POrderlinesViewIterator" id="Previous1" RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="POrderlinesViewIterator" id="Next1" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="POrderlinesViewIterator" id="Last1" RequiresUpdateModel="true" Action="last"/>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlOrder">
+      <AttrNames>
+        <Item Value="OrlOrder"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlOrdline">
+      <AttrNames>
+        <Item Value="OrlOrdline"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlSupplier">
+      <AttrNames>
+        <Item Value="OrlSupplier"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlPart">
+      <AttrNames>
+        <Item Value="OrlPart"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlDue">
+      <AttrNames>
+        <Item Value="OrlDue"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlPrice">
+      <AttrNames>
+        <Item Value="OrlPrice"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlCurr">
+      <AttrNames>
+        <Item Value="OrlCurr"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlExch">
+      <AttrNames>
+        <Item Value="OrlExch"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlOrdqty">
+      <AttrNames>
+        <Item Value="OrlOrdqty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlRecvqty">
+      <AttrNames>
+        <Item Value="OrlRecvqty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlRecvvalue">
+      <AttrNames>
+        <Item Value="OrlRecvvalue"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlDiscperc">
+      <AttrNames>
+        <Item Value="OrlDiscperc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlStore">
+      <AttrNames>
+        <Item Value="OrlStore"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="POrderlinesViewIterator" StaticList="false" Uses="LOV_OrlPuruom" id="OrlPuruom"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlRtype">
+      <AttrNames>
+        <Item Value="OrlRtype"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlType">
+      <AttrNames>
+        <Item Value="OrlType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlActive">
+      <AttrNames>
+        <Item Value="OrlActive"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlMultiply">
+      <AttrNames>
+        <Item Value="OrlMultiply"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlTax">
+      <AttrNames>
+        <Item Value="OrlTax"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlRstatus">
+      <AttrNames>
+        <Item Value="OrlRstatus"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="POrderlinesViewIterator" StaticList="false" Uses="LOV_OrlStatus" id="OrlStatus"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlAcd">
+      <AttrNames>
+        <Item Value="OrlAcd"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlDeladdress">
+      <AttrNames>
+        <Item Value="OrlDeladdress"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlSupplierOrg">
+      <AttrNames>
+        <Item Value="OrlSupplierOrg"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlOrderOrg">
+      <AttrNames>
+        <Item Value="OrlOrderOrg"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlPartOrg">
+      <AttrNames>
+        <Item Value="OrlPartOrg"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlInspect">
+      <AttrNames>
+        <Item Value="OrlInspect"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlExchfix">
+      <AttrNames>
+        <Item Value="OrlExchfix"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlTottaxamount">
+      <AttrNames>
+        <Item Value="OrlTottaxamount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlTotextra">
+      <AttrNames>
+        <Item Value="OrlTotextra"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="POrderlinesViewIterator" StaticList="false" Uses="LOV_OrlTask" id="OrlTask"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlTaskqty">
+      <AttrNames>
+        <Item Value="OrlTaskqty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="ItsGl">
+      <AttrNames>
+        <Item Value="ItsGl"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="ItsOrltype">
+      <AttrNames>
+        <Item Value="ItsOrltype"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="ItsRetnqty">
+      <AttrNames>
+        <Item Value="ItsRetnqty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="ItsRecvqty">
+      <AttrNames>
+        <Item Value="ItsRecvqty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="Recvqty">
+      <AttrNames>
+        <Item Value="Recvqty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="Retnqty">
+      <AttrNames>
+        <Item Value="Retnqty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="tPartDesc">
+      <AttrNames>
+        <Item Value="tPartDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="tOrlPriceExtended">
+      <AttrNames>
+        <Item Value="tOrlPriceExtended"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="tTaskDesc">
+      <AttrNames>
+        <Item Value="tTaskDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="tIsOrdTypePart">
+      <AttrNames>
+        <Item Value="tIsOrdTypePart"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="tEntityState">
+      <AttrNames>
+        <Item Value="tEntityState"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="tPostedOrlStatus">
+      <AttrNames>
+        <Item Value="tPostedOrlStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="POrderlinesViewIterator" id="ItsNote">
+      <AttrNames>
+        <Item Value="ItsNote"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

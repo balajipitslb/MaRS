@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81"
+                id="Asset_Maint_assetMaint_ExecuteWithParamsPageDef" Package="Taskflows.Asset" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="AssetDataControlNested.MrltAssetView" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="MrltAssetViewIterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="MrltAssetViewIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="BindAssetCd" NDType="java.lang.String" NDValue="#{pageFlowScope.psfAssetCd}"/>
+      <NamedData NDName="BindAssetOrg" NDType="java.lang.String" NDValue="#{pageFlowScope.psfAssetOrg}"/>
+    </action>
+  </bindings>
+</pageDefinition>

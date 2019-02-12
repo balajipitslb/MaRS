@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltFifoitemFk1Link"
+  Version="11.1.2.60.81"
+  EntityAssociation="its.mnr.mp5.eo.assoc.MrltFifoitemFk1Assoc">
+  <ViewLinkDefEnd
+    Name="MrltFifoheaderView"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.vo.cyclecount.MrltFifoheaderView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="MrltFifoheaderView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.cyclecount.MrltFifoheaderView.Fhid"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="MrltFifoitemView"
+    Cardinality="-1"
+    Owner="its.mnr.mp5.vo.cyclecount.MrltFifoitemView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="MrltFifoitemView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.cyclecount.MrltFifoitemView.Fhid"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

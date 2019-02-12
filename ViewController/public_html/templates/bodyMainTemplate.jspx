@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<af:pageTemplateDef xmlns:af="http://xmlns.oracle.com/adf/faces/rich" var="attrs" definition="private"
+                    xmlns:afc="http://xmlns.oracle.com/adf/faces/rich/component" xmlns:f="http://java.sun.com/jsf/core">
+    <af:xmlContent>
+        <afc:component>
+            <afc:display-name>bodyMainTemplate</afc:display-name>
+            <afc:facet>
+                <afc:facet-name>main</afc:facet-name>
+            </afc:facet>
+            <afc:facet>
+                <afc:facet-name>toolBar</afc:facet-name>
+            </afc:facet>
+            <afc:facet>
+                <afc:facet-name>
+                    menuBar
+                </afc:facet-name>
+            </afc:facet>
+            <afc:facet>
+                <afc:facet-name>
+                    context
+                </afc:facet-name>
+            </afc:facet>
+            <afc:attribute>
+                <afc:attribute-name>title</afc:attribute-name>
+                <afc:attribute-class>java.lang.String</afc:attribute-class>
+            </afc:attribute>
+        </afc:component>
+    </af:xmlContent>
+    <af:panelStretchLayout id="pt_psl1" inlineStyle="height:768px; width:874px;">
+        <f:facet name="center">
+            <!-- id="af_one_column_stretched"   -->
+            <af:decorativeBox theme="light" id="pt_db1">
+                <f:facet name="center">
+                        <af:panelHeader text="#{attrs.title}" id="pt_ph1" inlineStyle="margin:10px;">
+                            <f:facet name="context">
+                                <af:facetRef facetName="context"/>
+                            </f:facet>
+                            <f:facet name="menuBar">
+                                <af:facetRef facetName="menuBar"/>
+                            </f:facet>
+                            <f:facet name="toolbar">
+                                <af:facetRef facetName="toolBar"/>
+                            </f:facet>
+                            <f:facet name="legend"/>
+                            <f:facet name="info"/>
+                            <af:facetRef facetName="main"/>
+                        </af:panelHeader>
+                </f:facet>
+            </af:decorativeBox>
+        </f:facet>
+    </af:panelStretchLayout>
+</af:pageTemplateDef>

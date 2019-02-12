@@ -1,0 +1,58 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <WildcardControlFlowRule
+      id="WildcardControlFlowRule2">
+      <property
+         name="activityId">*</property>
+      <property
+         name="y">179.29883</property>
+      <property
+         name="x">233.0</property>
+   </WildcardControlFlowRule>
+   <TaskFlowReturn
+      id="TaskFlowReturn3">
+      <property
+         name="activityId">exit</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>exit&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  exit&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">183.94824</property>
+      <property
+         name="x">428.0</property>
+   </TaskFlowReturn>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="WildcardControlFlowRule2"
+      to="TaskFlowReturn3">
+      <property
+         name="fromOutcome">Exit</property>
+      <property
+         name="sdm:polyPoints">R50,269.0,179.44824,387.0,183.59766,L50</property>
+   </ControlFlowCase>
+   <View
+      id="View5">
+      <property
+         name="activityId">POHist</property>
+      <property
+         name="page">/Content/PORecv/POHist.jspx</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>POHist&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">315.29883</property>
+      <property
+         name="x">200.0</property>
+   </View>
+</SDM>

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document id="d2" title="Create List">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+    <af:pageTemplate viewId="/templates/CCSetupTrainTemplate.jspx" id="pt1">
+        <f:facet name="body">
+            <af:panelHeader text="Stores" id="ph1">
+                <f:facet name="context"/>
+                <f:facet name="menuBar">
+                                <af:toolbar id="t1">
+                                <af:button id="ctb1" icon="#{resource['images:terminate.png']}"
+                                           action="#{CycleCountBean.onExitStore}"/>
+                            </af:toolbar>
+                        </f:facet>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                        <af:panelLabelAndMessage label="#{bindings.Listid.hints.label}" id="plam1">
+                            <af:outputText value="#{bindings.Listid.inputValue}" id="ot7"/>
+                        </af:panelLabelAndMessage>
+                        <af:selectBooleanCheckbox label="Create Additional Storerooms?" id="sbc1"
+                                                  binding="#{CycleCountBean.storeCreateMoreStoreBtn}"
+                                                  valueChangeListener="#{CycleCountBean.crMoreStoresChkLsnr}"
+                                                  autoSubmit="true">
+                            <af:setPropertyListener from="#{true}" to="#{pageFlowScope.psfStoreroom}"
+                                                    type="valueChange"/>
+                        </af:selectBooleanCheckbox>
+                        <af:spacer width="10" height="20" id="s1"/>
+                        <af:spacer width="10" height="10" id="s3"/>
+                        <af:selectManyShuttle value="#{bindings.MrlrefCyclecountstoreView.inputValue}"
+                                              label="#{bindings.MrlrefCyclecountstoreView.label}" id="sms1" size="3"
+                                              partialTriggers="ctb8 sbc1" binding="#{CycleCountBean.storeShuttle}"
+                                              visible="false" autoSubmit="true">
+                            <f:selectItems value="#{bindings.MrlrefCyclecountstoreView.items}" id="si2"/>
+                        </af:selectManyShuttle>
+                        <af:spacer width="10" height="10" id="s2"/>
+                        <af:toolbar id="t5">
+                            <af:spacer width="350" height="40" id="s11"/>
+                            <af:button text="Process" id="ctb7" actionListener="#{CycleCountBean.processSelection}"
+                                       binding="#{CycleCountBean.storeProcessBtn}" visible="false"
+                                       icon="#{resource['images:quick_query.png']}"/>
+                            <af:button text="Clear" id="ctb8" actionListener="#{CycleCountBean.clearSelection}"
+                                       binding="#{CycleCountBean.storeClearBtn}" visible="false"
+                                       icon="#{resource['images:refresh.png']}"/>
+                        </af:toolbar>
+                    </af:panelHeader>
+                </f:facet>
+    </af:pageTemplate>
+        </af:form>
+        <!--
+        <af:clientListener method="triggerOnLoad" type="load"/>
+        <af:serverListener type="onloadEvent" method="#{CycleCountBean.setListId}"/>
+        <af:resource type="javascript">
+          function triggerOnLoad(event) {
+              AdfCustomEvent.queue(event.getSource(), "onloadEvent", {},false);
+              return true;
+          }
+           </af:resource>
+           -->
+    </af:document>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:CycleCountBean-->
+</f:view>

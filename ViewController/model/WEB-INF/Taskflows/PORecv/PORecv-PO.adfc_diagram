@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <WildcardControlFlowRule
+      id="WildcardControlFlowRule4">
+      <property
+         name="activityId">*</property>
+      <property
+         name="y">123.29883</property>
+      <property
+         name="x">316.0</property>
+   </WildcardControlFlowRule>
+   <TaskFlowReturn
+      id="TaskFlowReturn5">
+      <property
+         name="activityId">exit</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>exit&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  exit&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">124.59766</property>
+      <property
+         name="x">491.0</property>
+   </TaskFlowReturn>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="WildcardControlFlowRule4"
+      to="TaskFlowReturn5">
+      <property
+         name="fromOutcome">Exit</property>
+      <property
+         name="sdm:polyPoints">R50,352.0,123.44824,450.0,124.24707,L50</property>
+   </ControlFlowCase>
+   <View
+      id="View7">
+      <property
+         name="activityId">POMaintenance</property>
+      <property
+         name="page">/Content/PORecv/POMaintenance.jspx</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>POMaintenance&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">227.29883</property>
+      <property
+         name="x">328.0</property>
+   </View>
+   <View
+      id="View8">
+      <property
+         name="activityId">POTest</property>
+      <property
+         name="page">/POTest.jspx</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>POTest&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">223.29883</property>
+      <property
+         name="x">461.0</property>
+   </View>
+</SDM>

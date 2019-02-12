@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltSpares"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="MRLT_SPARES"
+  AliasName="MrltSpares"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="Org"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_SPARES"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Item"
+    IsNotNull="true"
+    Precision="40"
+    ColumnName="ITEM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_SPARES"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Partnum"
+    Precision="18"
+    ColumnName="PARTNUM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_SPARES"
+    PrimaryKey="true"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="18"/>
+      <Attr Name="_diagramName" Value="Part"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltSpares.Partnum_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Partorg"
+    Precision="8"
+    ColumnName="PARTORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_SPARES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+      <Attr Name="_diagramName" Value="Part Org"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltSpares.Partorg_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Sparelabel"
+    ColumnName="SPARELABEL"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    TableName="MRLT_SPARES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="tAssetClass"
+    Precision="80"
+    ColumnName="T_ASSET_CLASS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[MrltAsset != null? MrltAsset.Assetclass : null]]></TransientExpression>
+  </Attribute>
+  <Attribute
+    Name="tLabelDesc"
+    Precision="255"
+    ColumnName="T_LABEL_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[Item != null && Sparelabel != null? MrltLabels.Labelvalue : null]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="Item"/>
+      <Item
+        Value="Sparelabel"/>
+    </Dependencies>
+  </Attribute>
+  <AccessorAttribute
+    Name="MrltAsset"
+    Association="its.mnr.mp5.eo.assoc.AssetSparesAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.AssetSparesAssoc.MrltAsset"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.AssetSparesAssoc.MrltSpares"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5parts"
+    Association="its.mnr.mp5.eo.assoc.SparesPartsAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.SparesPartsAssoc.R5parts"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.SparesPartsAssoc.MrltSpares"
+    Type="its.mnr.mp5.eo.local.R5partsImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="MrltLabels"
+    Association="its.mnr.mp5.eo.assoc.SpareLabelAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.SpareLabelAssoc.MrltLabels"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.SpareLabelAssoc.MrltSpares"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrltSparesPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLT_SPARES_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltSpares.Org"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltSpares.Item"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltSpares.Partnum"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltSparesFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_PAR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_SPARES_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltSpares.Partnum"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltSpares.Partorg"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_MrltSpares">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_ASSET_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_MRLT_SPARES"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltSpares.Item"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltSpares.Org"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

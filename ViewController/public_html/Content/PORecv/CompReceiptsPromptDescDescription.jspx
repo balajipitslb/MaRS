@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Company Receipts" id="d1" binding="#{POCompanyReceipts.pvTransDesc}">
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelGroupLayout id="pgl1">
+                        <af:popup childCreation="deferred" id="p1" binding="#{POCompanyReceipts.popTransDescPrompt}">
+                            <af:dialog id="d2" type="okCancel" closeIconVisible="false"
+                                       title="Company Receipts Transaction Description"
+                                       dialogListener="#{POCompanyReceipts.transDescDiagLsnr}">
+                                <f:facet name="buttonBar"/>
+                                <af:inputText label="Transaction Description" id="it1" value="COMPANY RECEIPTS"
+                                              binding="#{POCompanyReceipts.itTransDesc}"/>
+                                <af:serverListener type="DialogCancelHandlerEvent"
+                                                   method="#{POCompanyReceipts.onDialogCancel}"/>
+                                <af:clientListener method="onDialogCancel" type="dialog"/>
+                            </af:dialog>
+                        </af:popup>
+                    </af:panelGroupLayout>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+        <af:showPopupBehavior popupId="pt1:p1" triggerType="load"/>
+        <af:resource type="javascript">
+          function onDialogCancel(evt) {
+              var outcome = evt.getOutcome();
+              if (outcome == AdfDialogEvent.OUTCOME_CANCEL) {
+                  //call server 
+                  var eventSource = evt.getSource();
+                  var immediate = true;
+                  AdfCustomEvent.queue(eventSource, "DialogCancelHandlerEvent", 
+                  {
+                  },
+                  immediate);
+                  evt.cancel();
+              }
+          }
+        </af:resource>
+    </af:document>
+</f:view>

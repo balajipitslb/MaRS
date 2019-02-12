@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CCPartStoresCCPartsLink"
+  Version="11.1.2.60.81">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.link.CCPartStoresCCPartsLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="MrltCyclecountpartstoresView"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.vo.cyclecount.MrltCyclecountpartstoresView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="MrltCyclecountpartstoresView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.cyclecount.MrltCyclecountpartstoresView.Listid"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="MrltCyclecountpartsView"
+    Cardinality="-1"
+    Owner="its.mnr.mp5.vo.cyclecount.MrltCyclecountpartsView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="MrltCyclecountpartsView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.cyclecount.MrltCyclecountpartsView.StlListid"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="AccountMasterPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator Binds="MasterDataControlNested.MrltAccountmasterView1" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrltAccountmasterView1Iterator"/>
+    <searchRegion Criteria="__ImplicitViewCriteria__" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="MrltAccountmasterView1Iterator" id="ImplicitViewCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MrltAccountmasterView1Iterator" id="MrltAccountmasterView1">
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrltAccountmasterView" Name="MrltAccountmasterView10">
+        <AttrNames>
+          <Item Value="Acctnum"/>
+          <Item Value="Accountnm"/>
+          <Item Value="Accountnmlong"/>
+          <Item Value="Locode"/>
+          <Item Value="Billtype"/>
+          <Item Value="Amstractive"/>
+          <Item Value="Estimate"/>
+          <Item Value="Over"/>
+          <Item Value="Overuom"/>
+          <Item Value="Invrej"/>
+          <Item Value="Parttax"/>
+          <Item Value="Estcmpltn"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MrltAccountmasterView1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="MrltAccountmasterView1Iterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="MNRDataControlDataControl"/>
+  </bindings>
+</pageDefinition>

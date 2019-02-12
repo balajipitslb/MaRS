@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.PerMasterBundle']}"/>
+    <af:document title="#{viewcontrollerBundle.PAGEHEADING}" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelCollection id="pc1" inlineStyle="background-color:White;" defaultToolbarItemDisplay="icon">
+                        <f:facet name="menus"/>
+                        <f:facet name="toolbar">
+                            <af:toolbar id="t2">
+                                <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                           disabled="#{!bindings.CreateInsert.enabled}" id="ctb1"
+                                           icon="#{resource['images:add.png']}"
+                                           shortDesc="#{viewcontrollerBundle.ADD_RECORD}"/>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:button actionListener="#{bindings.Delete.execute}"
+                                           disabled="#{!bindings.Delete.enabled}" id="ctb2"
+                                           icon="#{resource['images:delete.png']}"
+                                           shortDesc="#{viewcontrollerBundle.DELETE_RECORD}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar"/>
+                        <af:table value="#{bindings.MrlrefPerView1.collectionModel}" var="row"
+                                  rows="#{bindings.MrlrefPerView1.rangeSize}"
+                                  emptyText="#{bindings.MrlrefPerView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.MrlrefPerView1.rangeSize}" rowBandingInterval="1"
+                                  selectedRowKeys="#{bindings.MrlrefPerView1.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.MrlrefPerView1.collectionModel.makeCurrent}"
+                                  rowSelection="single" id="t1" partialTriggers="::ctb1 ::ctb2"
+                                  editingMode="clickToEdit">
+                            <af:column sortProperty="#{bindings.MrlrefPerView1.hints.Peruom.name}" sortable="false"
+                                       headerText="#{bindings.MrlrefPerView1.hints.Peruom.label}" id="c1" width="75">
+                                <af:inputText value="#{row.bindings.Peruom.inputValue}"
+                                              label="#{bindings.MrlrefPerView1.hints.Peruom.label}"
+                                              required="#{bindings.MrlrefPerView1.hints.Peruom.mandatory}"
+                                              columns="#{bindings.MrlrefPerView1.hints.Peruom.displayWidth}"
+                                              maximumLength="#{bindings.MrlrefPerView1.hints.Peruom.precision}"
+                                              shortDesc="#{bindings.MrlrefPerView1.hints.Peruom.tooltip}" id="it1">
+                                    <f:validator binding="#{row.bindings.Peruom.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrlrefPerView1.hints.Description.name}" sortable="false"
+                                       headerText="#{bindings.MrlrefPerView1.hints.Description.label}" id="c2"
+                                       width="200">
+                                <af:inputText value="#{row.bindings.Description.inputValue}"
+                                              label="#{bindings.MrlrefPerView1.hints.Description.label}"
+                                              required="#{bindings.MrlrefPerView1.hints.Description.mandatory}"
+                                              columns="#{bindings.MrlrefPerView1.hints.Description.displayWidth}"
+                                              maximumLength="#{bindings.MrlrefPerView1.hints.Description.precision}"
+                                              shortDesc="#{bindings.MrlrefPerView1.hints.Description.tooltip}" id="it2">
+                                    <f:validator binding="#{row.bindings.Description.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                        </af:table>
+                        <f:facet name="secondaryToolbar">
+                            <af:toolbar id="t3">
+                                <af:spacer width="10" height="10" id="s1"/>
+                                <af:button actionListener="#{bindings.Commit.execute}"
+                                           text="#{viewcontrollerBundle.APPLY}" disabled="#{!bindings.Commit.enabled}"
+                                           id="ctb3" icon="#{resource['images:commit.png']}"
+                                           shortDesc="#{viewcontrollerBundle.SAVE_RECORD}"/>
+                                <af:button actionListener="#{bindings.Rollback.execute}"
+                                           text="#{viewcontrollerBundle.CANCEL}"
+                                           disabled="#{!bindings.Rollback.enabled}" immediate="true" id="ctb4"
+                                           icon="#{resource['images:undo.png']}"
+                                           shortDesc="#{viewcontrollerBundle.CANCEL_RECORD}">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button id="ctb5" icon="#{resource['images:terminate.png']}"
+                                           shortDesc="#{viewcontrollerBundle.CANCEL_AND_RETURN_TO_PREVIOUS_}"
+                                           actionListener="#{ModuleNavBean.goExit}"/>
+                            </af:toolbar>
+                        </f:facet>
+                    </af:panelCollection>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

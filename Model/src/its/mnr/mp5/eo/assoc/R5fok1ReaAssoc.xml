@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5fok1ReaAssoc"
+  Version="11.1.2.60.81">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="R5objects"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.eo.local.R5objects">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="R5objects"/>
+      <Attr Name="_foreignKey" Value="its.mnr.mp5.eo.local.R5objects.R5prikObj"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjCode"/>
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjOrg"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="R5readings"
+    Cardinality="-1"
+    Owner="its.mnr.mp5.eo.local.R5readings">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="R5readings"/>
+      <Attr Name="_foreignKey" Value="its.mnr.mp5.eo.local.R5readings.R5fok1Rea"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5readings.ReaObject"/>
+      <Item Value="its.mnr.mp5.eo.local.R5readings.ReaObjectOrg"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

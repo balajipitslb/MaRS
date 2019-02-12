@@ -1,0 +1,926 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="POrderlinesView"
+  Version="12.1.3.10.8"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="its.mnr.mp5.vo.po.POrderlinesViewRowImpl"
+  ComponentClass="its.mnr.mp5.vo.po.POrderlinesViewImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All"
+  FetchSize="15"
+  RangeSize="16"
+  RowInterface="its.mnr.mp5.vo.po.common.POrderlinesViewRow">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|Prog|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="POrderLinesPartsView"
+    ViewObjectName="its.mnr.mp5.lov.PartsView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="R5uoms"
+    ViewObjectName="its.mnr.mp5.lov.R5uoms"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="R5uomsActiveCriteria"
+      FullName="its.mnr.mp5.lov.R5uoms.R5uomsActiveCriteria"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="POPartsView"
+    ViewObjectName="its.mnr.mp5.vo.po.POParts"
+    RowLevelBinds="true"
+    MaxFetchSize="5000">
+    <ViewCriteriaUsage
+      Name="PartsActive"
+      FullName="its.mnr.mp5.vo.po.POParts.PartsActive"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="POLineStatus"
+    ViewObjectName="its.mnr.mp5.lov.POLineStatus"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="POLineStatusCriteria"
+      FullName="its.mnr.mp5.lov.POLineStatus.POLineStatusCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="CURRENTSTATUS">
+        <TransientExpression><![CDATA[OrlStatus]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="USERGROUP">
+        <TransientExpression><![CDATA[adf.userSession.userData.UserGroup]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="POServices"
+    ViewObjectName="its.mnr.mp5.vo.po.POServices"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="SupplierExistence"
+    ViewObjectName="its.mnr.mp5.lov.SupplierExistence"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Suppliers"
+    ViewObjectName="its.mnr.mp5.vo.parts.Suppliers"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_OrlPuruom"
+    ListVOName="R5uoms"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OrlPuruom"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UomCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="UomCode"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_OrlStatus"
+    ListVOName="POLineStatus"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OrlStatus"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="OrlRstatus"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AutStatnew"/>
+      <Item Value="UcoRcode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AutStatnew"/>
+      <Item Value="UcoDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_OrlTask"
+    ListVOName="POServices"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OrlTask"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="tTaskDesc"/>
+      <Item Value="ItsGl"/>
+      <Item Value="ItsTaskprice"/>
+      <Item Value="ItsTaskuom"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Posid"/>
+      <Item Value="Description"/>
+      <Item Value="Posgl"/>
+      <Item Value="Price"/>
+      <Item Value="Uom"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Posid"/>
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_OrlPart"
+    ListVOName="POPartsView"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OrlPart"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="OrlPartOrg"/>
+      <Item Value="tPartDesc"/>
+      <Item Value="ItsGl"/>
+      <Item Value="OrlPuruom"/>
+      <Item Value="OrlPrice"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ParCode"/>
+      <Item Value="ParOrg"/>
+      <Item Value="ParDesc"/>
+      <Item Value="ItsGl"/>
+      <Item Value="ParUom"/>
+      <Item Value="ParBaseprice"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ParCode"/>
+      <Item Value="ParDesc"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="PartsActive"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ItsTaskuom"
+    ListVOName="R5uoms"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ItsTaskuom"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UomCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="UomCode"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT R5orderlines.ORL_ORDER, 
+       R5orderlines.ORL_ORDLINE, 
+       R5orderlines.ORL_SUPPLIER, 
+       R5orderlines.ORL_PART, 
+       R5orderlines.ORL_DUE, 
+       R5orderlines.ORL_PRICE, 
+       R5orderlines.ORL_CURR, 
+       R5orderlines.ORL_EXCH, 
+       R5orderlines.ORL_ORDQTY, 
+       R5orderlines.ORL_RECVQTY, 
+       R5orderlines.ORL_RECVVALUE, 
+       R5orderlines.ORL_DISCPERC, 
+       R5orderlines.ORL_STORE, 
+       R5orderlines.ORL_PURUOM, 
+       R5orderlines.ORL_RTYPE, 
+       R5orderlines.ORL_TYPE, 
+       R5orderlines.ORL_ACTIVE, 
+       R5orderlines.ORL_MULTIPLY, 
+       R5orderlines.ORL_TAX, 
+       R5orderlines.ORL_RSTATUS, 
+       R5orderlines.ORL_STATUS, 
+       R5orderlines.ORL_ACD, 
+       R5orderlines.ORL_DELADDRESS, 
+       R5orderlines.ORL_SUPPLIER_ORG, 
+       R5orderlines.ORL_ORDER_ORG, 
+       R5orderlines.ORL_PART_ORG, 
+       R5orderlines.ORL_INSPECT, 
+       R5orderlines.ORL_EXCHFIX, 
+       R5orderlines.ORL_TOTTAXAMOUNT, 
+       R5orderlines.ORL_TOTEXTRA, 
+       R5orderlines.ORL_TASK, 
+       R5orderlines.ORL_TASKQTY, 
+       R5orderlines.ITS_GL, 
+       R5orderlines.ITS_ORDTYPE, 
+       R5orderlines.ITS_RETNQTY, 
+       R5orderlines.ITS_RECVQTY, 
+       R5orderlines.ITS_NOTE, 
+       NVL(RECV.RECVQTY,0) RECVQTY,
+       NVL(RETN.RETNQTY,0) RETNQTY,
+       R5orderlines.ITS_TASKPRICE, 
+       R5orderlines.ITS_TASKUOM
+FROM MP5PRD.R5ORDERLINES R5ORDERLINES,
+            (SELECT SUM(NVL(TRL_QTY,0))"RECVQTY", TRL_PART, TRL_PART_ORG, TRL_ORDLINE,TRL_ORDER 
+            FROM R5TRANSLINES, R5TRANSACTIONS
+            WHERE   TRA_ORDER=TRL_ORDER
+            AND TRL_PART=TRL_PART
+            AND TRL_LINE=TRL_LINE
+            AND TRA_CODE=TRL_TRANS
+            AND  TRL_TYPE='RECV'
+           -- AND TRA_STATUS <> 'C'
+            AND TRA_STATUS = 'A'
+            --TRA_ORDER= '1027294'
+            --AND TRL_PART = '345678'
+            GROUP BY TRL_PART, TRL_PART_ORG, TRL_ORDLINE,TRL_ORDER) "RECV",
+            (SELECT SUM(NVL(TRL_QTY,0))"RETNQTY", TRL_PART, TRL_PART_ORG, TRL_ORDLINE,TRL_ORDER 
+            FROM R5TRANSLINES, R5TRANSACTIONS
+            WHERE   TRA_ORDER=TRL_ORDER
+            AND TRL_PART=TRL_PART
+            AND TRL_LINE=TRL_LINE
+            AND TRA_CODE=TRL_TRANS
+            AND  TRL_TYPE='RETN'
+           -- AND TRA_STATUS <> 'C'
+            AND TRA_STATUS = 'A'
+            --TRA_ORDER= '1027294'
+            --AND TRL_PART = '345678'
+            GROUP BY TRL_PART, TRL_PART_ORG, TRL_ORDLINE,TRL_ORDER) "RETN"
+WHERE ORL_ORDER = RECV.TRL_ORDER (+)
+AND ORL_PART = RECV.TRL_PART (+)
+AND ORL_ORDLINE = RECV.TRL_ORDLINE(+)
+AND ORL_ORDER = RETN.TRL_ORDER (+)
+AND ORL_PART = RETN.TRL_PART (+)
+AND ORL_ORDLINE = RETN.TRL_ORDLINE(+)]]></SQLQuery>
+  <EntityUsage
+    Name="R5orderlines"
+    Entity="its.mnr.mp5.eo.local.R5orderlines"/>
+  <ViewAttribute
+    Name="OrlOrder"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrlOrder"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_ORDER"
+    IsUpdateable="false">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.OrlOrder_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlOrdline"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrlOrdline"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_ORDLINE"
+    IsUpdateable="false">
+    <TransientExpression><![CDATA[(object.getRowSet().max("OrlOrdline") == null ? 1 : object.getRowSet().max("OrlOrdline")+ 1)]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.OrlOrdline_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlSupplier"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrlSupplier"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_SUPPLIER">
+    <TransientExpression><![CDATA[POrdersView.OrdSupplier == null ? null : POrdersView.OrdSupplier]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlPart"
+    PrecisionRule="true"
+    EntityAttrName="OrlPart"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_PART"
+    LOVName="LOV_OrlPart">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.OrlPart_LABEL"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlDue"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrlDue"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_DUE">
+    <TransientExpression><![CDATA[POrdersView.OrdDue == null ? null : POrdersView.OrdDue]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlPrice"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrlPrice"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_PRICE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.OrlPrice_LABEL"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlCurr"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrlCurr"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_CURR"
+    DefaultValue="USD"/>
+  <ViewAttribute
+    Name="OrlExch"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrlExch"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_EXCH">
+    <TransientExpression><![CDATA[POrdersView.OrdExch == null ? null : POrdersView.OrdExch]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlOrdqty"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrlOrdqty"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_ORDQTY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.OrlOrdqty_LABEL"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlRecvqty"
+    PrecisionRule="true"
+    EntityAttrName="OrlRecvqty"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_RECVQTY"/>
+  <ViewAttribute
+    Name="OrlRecvvalue"
+    PrecisionRule="true"
+    EntityAttrName="OrlRecvvalue"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_RECVVALUE"/>
+  <ViewAttribute
+    Name="OrlDiscperc"
+    PrecisionRule="true"
+    EntityAttrName="OrlDiscperc"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_DISCPERC"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="OrlStore"
+    PrecisionRule="true"
+    EntityAttrName="OrlStore"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_STORE"
+    DefaultValue="01"/>
+  <ViewAttribute
+    Name="OrlPuruom"
+    PrecisionRule="true"
+    EntityAttrName="OrlPuruom"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_PURUOM"
+    LOVName="LOV_OrlPuruom">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.OrlPuruom_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlRtype"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrlRtype"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_RTYPE"
+    IsQueriable="false">
+    <TransientExpression><![CDATA[(ItsOrltype == 'PART' ? 'PS' :  'ST' )]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="ItsOrltype"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlType"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrlType"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_TYPE"
+    IsQueriable="false">
+    <TransientExpression><![CDATA[(ItsOrltype == 'PART' ? 'PS' :  'ST' )]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <Dependencies>
+      <Item
+        Value="ItsOrltype"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlActive"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrlActive"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_ACTIVE"
+    DefaultValue="-"/>
+  <ViewAttribute
+    Name="OrlMultiply"
+    PrecisionRule="true"
+    EntityAttrName="OrlMultiply"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_MULTIPLY"
+    DefaultValue="1">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.OrlMultiply_LABEL"/>
+        <DISPLAYWIDTH
+          Value="3"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlTax"
+    PrecisionRule="true"
+    EntityAttrName="OrlTax"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_TAX"/>
+  <ViewAttribute
+    Name="OrlRstatus"
+    PrecisionRule="true"
+    EntityAttrName="OrlRstatus"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_RSTATUS"
+    DefaultValue="U"/>
+  <ViewAttribute
+    Name="OrlStatus"
+    PrecisionRule="true"
+    EntityAttrName="OrlStatus"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_STATUS"
+    LOVName="LOV_OrlStatus"
+    DefaultValue="U">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.OrlStatus_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlAcd"
+    PrecisionRule="true"
+    EntityAttrName="OrlAcd"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_ACD"/>
+  <ViewAttribute
+    Name="OrlDeladdress"
+    PrecisionRule="true"
+    EntityAttrName="OrlDeladdress"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_DELADDRESS"/>
+  <ViewAttribute
+    Name="OrlSupplierOrg"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrlSupplierOrg"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_SUPPLIER_ORG">
+    <TransientExpression><![CDATA[POrdersView.OrdSupplierOrg == null ? null : POrdersView.OrdSupplierOrg]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlOrderOrg"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OrlOrderOrg"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_ORDER_ORG"/>
+  <ViewAttribute
+    Name="OrlPartOrg"
+    PrecisionRule="true"
+    EntityAttrName="OrlPartOrg"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_PART_ORG"/>
+  <ViewAttribute
+    Name="OrlInspect"
+    PrecisionRule="true"
+    EntityAttrName="OrlInspect"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_INSPECT"
+    DefaultValue="-"/>
+  <ViewAttribute
+    Name="OrlExchfix"
+    PrecisionRule="true"
+    EntityAttrName="OrlExchfix"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_EXCHFIX"
+    DefaultValue="-"/>
+  <ViewAttribute
+    Name="OrlTottaxamount"
+    PrecisionRule="true"
+    EntityAttrName="OrlTottaxamount"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_TOTTAXAMOUNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.OrlTottaxamount_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlTotextra"
+    PrecisionRule="true"
+    EntityAttrName="OrlTotextra"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_TOTEXTRA">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.OrlTotextra_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlTask"
+    PrecisionRule="true"
+    EntityAttrName="OrlTask"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_TASK"
+    LOVName="LOV_OrlTask">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.OrlTask_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrlTaskqty"
+    PrecisionRule="true"
+    EntityAttrName="OrlTaskqty"
+    EntityUsage="R5orderlines"
+    AliasName="ORL_TASKQTY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.OrlTaskqty_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItsGl"
+    PrecisionRule="true"
+    EntityAttrName="ItsGl"
+    EntityUsage="R5orderlines"
+    AliasName="ITS_GL"
+    IsQueriable="false"/>
+  <ViewAttribute
+    Name="ItsOrltype"
+    IsQueriable="false"
+    PrecisionRule="true"
+    EntityAttrName="ItsOrltype"
+    EntityUsage="R5orderlines"
+    AliasName="ITS_ORDTYPE"
+    DefaultValue="PART">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.ItsOrltype_LABEL"/>
+        <AUTOSUBMIT
+          Value="true"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItsRetnqty"
+    PrecisionRule="true"
+    EntityAttrName="ItsRetnqty"
+    EntityUsage="R5orderlines"
+    AliasName="ITS_RETNQTY"/>
+  <ViewAttribute
+    Name="ItsRecvqty"
+    PrecisionRule="true"
+    EntityAttrName="ItsRecvqty"
+    EntityUsage="R5orderlines"
+    AliasName="ITS_RECVQTY"/>
+  <ViewAttribute
+    Name="ItsNote"
+    IsQueriable="false"
+    PrecisionRule="true"
+    EntityAttrName="ItsNote"
+    EntityUsage="R5orderlines"
+    AliasName="ITS_NOTE"/>
+  <ViewAttribute
+    Name="Recvqty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="RECVQTY"
+    Expression="RECVQTY"
+    SQLType="DOUBLE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.Recvqty_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Retnqty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="RETNQTY"
+    Expression="RETNQTY"
+    SQLType="DOUBLE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.Retnqty_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItsTaskprice"
+    PrecisionRule="true"
+    EntityAttrName="ItsTaskprice"
+    EntityUsage="R5orderlines"
+    AliasName="ITS_TASKPRICE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.ItsTaskprice_LABEL"/>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.ItsTaskprice_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItsTaskuom"
+    PrecisionRule="true"
+    EntityAttrName="ItsTaskuom"
+    EntityUsage="R5orderlines"
+    AliasName="ITS_TASKUOM"
+    LOVName="LOV_ItsTaskuom">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.ItsTaskuom_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tPartDesc"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    IsQueriable="false">
+    <TransientExpression><![CDATA[POParts == null? null : POParts.ParDesc]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <Dependencies>
+      <Item
+        Value="OrlPart"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.tPartDesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tTaskDesc"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    IsQueriable="false">
+    <TransientExpression><![CDATA[POServicesLink == null? null : POServicesLink.Description]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <Dependencies>
+      <Item
+        Value="OrlTask"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.tTaskDesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tIsOrdTypePart"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    Precision="255">
+    <TransientExpression><![CDATA[ItsOrltype == 'PART' ? true : false]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <Dependencies>
+      <Item
+        Value="ItsOrltype"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <AUTOSUBMIT
+          Value="true"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tEntityState"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[entities[0].entityState]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tPostedOrlStatus"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    EntityAttrName="tPostedOrlStatus"
+    EntityUsage="R5orderlines"
+    AliasName="T_POSTED_ORL_STATUS"/>
+  <ViewAttribute
+    Name="tOrlOutstanding"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[OrlOrdqty == null || Recvqty == null? null: OrlOrdqty - Recvqty]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tOnHandQty"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="VIEW_ATTR"
+    SQLType="DOUBLE">
+    <TransientExpression><![CDATA[POParts == null? null : POParts.tTotalStoQty]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tSumExtCharges"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="VIEW_ATTR"
+    SQLType="DOUBLE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.tSumExtCharges_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tOrlPriceExtended"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    EntityAttrName="tOrlPriceExtended"
+    EntityUsage="R5orderlines"
+    AliasName="T_ORL_PRICE_EXTENDED">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POrderlinesView.tOrlPriceExtended_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tItsTaskPriceExtended"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    EntityAttrName="tItsTaskPriceExtended"
+    EntityUsage="R5orderlines"
+    AliasName="T_ITS_TASK_PRICE_EXTENDED"/>
+  <ViewLinkAccessor
+    Name="POrderlinesComment"
+    ViewLink="its.mnr.mp5.vo.link.POrderlinesPOrderlinesCommentLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="POParts"
+    ViewLink="its.mnr.mp5.vo.link.POrderlinesPOPartsLink"
+    Type="oracle.jbo.Row"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="POrdersView"
+    ViewLink="its.mnr.mp5.vo.link.R5fok1OrlLink"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="POServicesLink"
+    ViewLink="its.mnr.mp5.vo.link.POrderlinePOServiceLink"
+    Type="oracle.jbo.Row"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="POExchargesView"
+    ViewLink="its.mnr.mp5.vo.link.POOrderlinesExchargesLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ClientRowInterface
+    Name="__rowClientInterface">
+    <Method
+      Name="addPartToSupplier"
+      MethodName="addPartToSupplier">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+    </Method>
+    <Method
+      Name="isPartInCat"
+      MethodName="isPartInCat">
+      <Return
+        Name="_return_type_"
+        Type="boolean"/>
+    </Method>
+  </ClientRowInterface>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

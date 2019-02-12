@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document id="d4" title="Create List">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+    <af:pageTemplate viewId="/templates/CCSetupTrainTemplate.jspx" id="pt1">
+        <f:facet name="body">
+            <af:panelHeader text="Review" id="ph1">
+                <f:facet name="context"/>
+                <f:facet name="menuBar">
+                                <af:toolbar id="t1">
+                                <af:button id="ctb4" action="restart" icon="#{resource['images:shuttle_leftall.png']}"/>
+                                <af:button id="ctb2"
+                                           action="#{controllerContext.currentViewPort.taskFlowContext.trainModel.getPrevious}"
+                                           immediate="true" icon="#{resource['images:shuttle_left.png']}"
+                                           disabled="#{pageFlowScope.TrainControllerBean.previousDisabled}"/>
+                                <af:button id="ctb3"
+                                           action="#{controllerContext.currentViewPort.taskFlowContext.trainModel.getNext}"
+                                           immediate="true" icon="#{resource['images:shuttle_right.png']}"
+                                           disabled="#{pageFlowScope.TrainControllerBean.nextDisabled}" rendered="false"/>
+                                <af:button id="ctb1" icon="#{resource['images:terminate.png']}" action="Exit"/>
+                            </af:toolbar>
+                        </f:facet>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                        <af:panelFormLayout id="pfl1" maxColumns="1" labelWidth="50" fieldWidth="150"
+                                            inlineStyle=" margin: 5px;">
+                            <af:panelLabelAndMessage label="#{bindings.Listid.hints.label}" id="plam1">
+                                <af:outputText value="#{bindings.Listid.inputValue}" id="ot1">
+                                    <af:convertNumber groupingUsed="false" pattern="#{bindings.Listid.format}"/>
+                                </af:outputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Ccdesc.hints.label}" id="plam2">
+                                <af:outputText value="#{bindings.Ccdesc.inputValue}" id="ot2"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Created.hints.label}" id="plam3">
+                                <af:outputText value="#{bindings.Created.inputValue}" id="ot3">
+                                    <af:convertDateTime pattern="#{bindings.Created.format}"/>
+                                </af:outputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Sttknum.hints.label}" id="plam15">
+                                <af:outputText value="#{bindings.Sttknum.inputValue}" id="ot15"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Partclass.hints.label}" id="plam6"
+                                                     rendered="#{!empty bindings.Partclass.inputValue}">
+                                <af:outputText value="#{bindings.Partclass.inputValue}" id="ot6"/>
+                            </af:panelLabelAndMessage>
+                        </af:panelFormLayout>
+                        <af:panelFormLayout id="pfl3" maxColumns="2" rows="1" labelWidth="50" fieldWidth="150"
+                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin;margin: 5px;">
+                            <af:panelLabelAndMessage label="#{bindings.Binstart.hints.label}" id="plam4"
+                                                     rendered="#{!empty bindings.Binstart.inputValue}">
+                                <af:outputText value="#{bindings.Binstart.inputValue}" id="ot4"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Partstart.hints.label}" id="plam7"
+                                                     rendered="#{!empty bindings.Partstart.inputValue}">
+                                <af:outputText value="#{bindings.Partstart.inputValue}" id="ot7"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Binend.hints.label}" id="plam5"
+                                                     rendered="#{!empty bindings.Binend.inputValue}">
+                                <af:outputText value="#{bindings.Binend.inputValue}" id="ot5"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Partend.hints.label}" id="plam8"
+                                                     rendered="#{!empty bindings.Partend.inputValue}">
+                                <af:outputText value="#{bindings.Partend.inputValue}" id="ot8"/>
+                            </af:panelLabelAndMessage>
+                        </af:panelFormLayout>
+                        <af:panelFormLayout id="pfl2" maxColumns="3" rows="2" labelWidth="50" fieldWidth="150"
+                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin;margin: 5px;">
+                            <af:panelLabelAndMessage label="#{bindings.P1.hints.label}" id="plam9"
+                                                     rendered="#{!empty bindings.P1.inputValue}">
+                                <af:outputText value="#{bindings.P1.inputValue}" id="ot9"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.P2.hints.label}" id="plam10"
+                                                     rendered="#{!empty bindings.P2.inputValue}">
+                                <af:outputText value="#{bindings.P2.inputValue}" id="ot10"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.P3.hints.label}" id="plam11"
+                                                     rendered="#{!empty bindings.P3.inputValue}">
+                                <af:outputText value="#{bindings.P3.inputValue}" id="ot11"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.P4.hints.label}" id="plam12"
+                                                     rendered="#{!empty bindings.P4.inputValue}">
+                                <af:outputText value="#{bindings.P4.inputValue}" id="ot12"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.P5.hints.label}" id="plam13"
+                                                     rendered="#{!empty bindings.P5.inputValue}">
+                                <af:outputText value="#{bindings.P5.inputValue}" id="ot13"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.P6.hints.label}" id="plam14"
+                                                     rendered="#{!empty bindings.P6.inputValue}">
+                                <af:outputText value="#{bindings.P6.inputValue}" id="ot14"/>
+                            </af:panelLabelAndMessage>
+                        </af:panelFormLayout>
+                        <af:table value="#{bindings.MrltCyclecountpartsView.collectionModel}" var="row"
+                                  rows="#{bindings.MrltCyclecountpartsView.rangeSize}"
+                                  emptyText="#{bindings.MrltCyclecountpartsView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.MrltCyclecountpartsView.rangeSize}" rowBandingInterval="0"
+                                  filterModel="#{bindings.MrltCyclecountpartsViewQuery.queryDescriptor}"
+                                  queryListener="#{bindings.MrltCyclecountpartsViewQuery.processQuery}"
+                                  filterVisible="true" varStatus="vs" id="t2"
+                                  inlineStyle=" margin: 5px;height:200px; width:475px;">
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlListid.name}"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlListid.label}" id="c1"
+                                       align="center" width="78" displayIndex="-1">
+                                <af:outputText value="#{row.StlListid}" id="ot16">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.MrltCyclecountpartsView.hints.StlListid.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlType.name}"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlType.label}" id="c2"
+                                       align="center" width="75" displayIndex="-1">
+                                <af:outputText value="#{row.StlType}" id="ot17"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlPart.name}"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlPart.label}" id="c3"
+                                       align="center" width="75" displayIndex="-1">
+                                <af:outputText value="#{row.StlPart}" id="ot18"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlBin.name}"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlBin.label}" id="c4"
+                                       align="center" width="75" displayIndex="-1">
+                                <af:outputText value="#{row.StlBin}" id="ot19"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlLot.name}"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlLot.label}" id="c5"
+                                       align="center" width="75" displayIndex="-1">
+                                <af:outputText value="#{row.StlLot}" id="ot20"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlExpqty.name}"
+                                       filterable="true" sortable="true"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlExpqty.label}" id="c6"
+                                       align="center" width="75" displayIndex="-1">
+                                <af:outputText value="#{row.StlExpqty}" id="ot21">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.MrltCyclecountpartsView.hints.StlExpqty.format}"/>
+                                </af:outputText>
+                            </af:column>
+                        </af:table>
+                    </af:panelHeader>
+        </f:facet>
+    </af:pageTemplate>
+    </af:form>
+    </af:document>
+</f:view>

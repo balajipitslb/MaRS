@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltCustattribvalues"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="MRLT_CUSTATTRIBVALUES"
+  AliasName="MrltCustattribvalues"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="Org"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CUSTATTRIBVALUES"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Custattribitem"
+    IsNotNull="true"
+    Precision="40"
+    ColumnName="CUSTATTRIBITEM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CUSTATTRIBVALUES"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Custattribcd"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="CUSTATTRIBCD"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CUSTATTRIBVALUES"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Custattribvalue"
+    Precision="40"
+    ColumnName="CUSTATTRIBVALUE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CUSTATTRIBVALUES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrltCustattribvalues.Custattribvalue_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="tCustAttribDesc"
+    Precision="80"
+    ColumnName="T_CUST_ATTRIB_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[(Custattribitem != null && Custattribcd != null? adf.object.MrlrefCustattribs.Attribdesc: null)]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="Custattribcd"/>
+    </Dependencies>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrltCustattribvalues.tCustAttribDesc_LABEL"/>
+        <DISPLAYWIDTH
+          Value="25"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <AccessorAttribute
+    Name="MrlrefCustattribs"
+    Association="its.mnr.mp5.eo.assoc.CustAttribsCustAttrivsValuesAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.CustAttribsCustAttrivsValuesAssoc.MrlrefCustattribs"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.CustAttribsCustAttrivsValuesAssoc.MrltCustattribvalues"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="MrltAsset"
+    Association="its.mnr.mp5.eo.assoc.AssetCustAttribValuesAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.AssetCustAttribValuesAssoc.MrltAsset"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.AssetCustAttribValuesAssoc.MrltCustattribvalues"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrlrefCustattribvaluesPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLREF_CUSTATTRIBVALUES_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltCustattribvalues.Org"/>
+      <Item Value="its.mnr.mp5.eo.master.MrltCustattribvalues.Custattribitem"/>
+      <Item Value="its.mnr.mp5.eo.master.MrltCustattribvalues.Custattribcd"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrlrefCustattribvaluesFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_ASSET_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLREF_CUSTATTRIBVALUES_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltCustattribvalues.Custattribitem"/>
+      <Item Value="its.mnr.mp5.eo.master.MrltCustattribvalues.Org"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrlrefCustattribvaluesFk2">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLEF_CUSTATTRIBS_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLREF_CUSTATTRIBVALUES_FK2"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltCustattribvalues.Custattribcd"/>
+      <Item Value="its.mnr.mp5.eo.master.MrltCustattribvalues.Org"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_MrltCustattribvalues">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_ASSET_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_MRLT_CUSTATTRIBVALUES"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltCustattribvalues.Custattribitem"/>
+      <Item Value="its.mnr.mp5.eo.master.MrltCustattribvalues.Org"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

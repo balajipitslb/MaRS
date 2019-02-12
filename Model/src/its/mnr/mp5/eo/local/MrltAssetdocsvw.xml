@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltAssetdocsvw"
+  Version="11.1.2.60.81"
+  DBObjectType="VIEW"
+  DBObjectName="MP5PRD.MRLT_ASSETDOCSVW"
+  AliasName="MrltAssetdocsvw"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="Assetdocitem"
+    Precision="45"
+    ColumnName="ASSETDOCITEM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_ASSETDOCSVW"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Org"
+    Precision="8"
+    ColumnName="ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_ASSETDOCSVW"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Docid"
+    Precision="12"
+    Scale="0"
+    ColumnName="DOCID"
+    SQLType="NUMERIC"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    TableName="MP5PRD.MRLT_ASSETDOCSVW"
+    PrimaryKey="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltAssetdocsvw.Docid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Docdesc"
+    Precision="80"
+    ColumnName="DOCDESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_ASSETDOCSVW">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltAssetdocsvw.Docdesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Filesize"
+    ColumnName="FILESIZE"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="MP5PRD.MRLT_ASSETDOCSVW"/>
+  <Attribute
+    Name="Docfile"
+    IsQueriable="false"
+    ColumnName="DOCFILE"
+    SQLType="BLOB"
+    Type="oracle.jbo.domain.BlobDomain"
+    ColumnType="BLOB"
+    TableName="MP5PRD.MRLT_ASSETDOCSVW"/>
+  <Attribute
+    Name="Doctype"
+    Precision="10"
+    ColumnName="DOCTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_ASSETDOCSVW">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Filetype"
+    Precision="50"
+    ColumnName="FILETYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_ASSETDOCSVW">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Docname"
+    Precision="50"
+    ColumnName="DOCNAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_ASSETDOCSVW">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="MrltAsset"
+    Association="its.mnr.mp5.eo.assoc.AssetsAssetsDocViewAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.AssetsAssetsDocViewAssoc.MrltAsset"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.AssetsAssetsDocViewAssoc.MrltAssetdocsvw"
+    Type="its.mnr.mp5.eo.local.MrltAssetImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrltassetdocsvwPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLTASSETDOCSVW_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltAssetdocsvw.Assetdocitem"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltAssetdocsvw.Org"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltAssetdocsvw.Docid"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

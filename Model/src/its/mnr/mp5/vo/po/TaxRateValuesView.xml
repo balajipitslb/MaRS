@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TaxRateValuesView"
+  Version="11.1.2.64.36"
+  SelectList="R5taxratevalues.TXV_END, 
+       R5taxratevalues.TXV_PERCENT, 
+       R5taxratevalues.TXV_RATE, 
+       R5taxratevalues.TXV_START"
+  FromList="R5TAXRATEVALUES R5taxratevalues"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.po.TaxRateValuesView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="R5taxratevalues"
+    Entity="its.mnr.mp5.eo.local.R5taxratevalues"
+    DeleteParticipant="false"/>
+  <ViewAttribute
+    Name="TxvEnd"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="TxvEnd"
+    EntityUsage="R5taxratevalues"
+    AliasName="TXV_END"/>
+  <ViewAttribute
+    Name="TxvPercent"
+    PrecisionRule="true"
+    EntityAttrName="TxvPercent"
+    EntityUsage="R5taxratevalues"
+    AliasName="TXV_PERCENT"/>
+  <ViewAttribute
+    Name="TxvRate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="TxvRate"
+    EntityUsage="R5taxratevalues"
+    AliasName="TXV_RATE"/>
+  <ViewAttribute
+    Name="TxvStart"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="TxvStart"
+    EntityUsage="R5taxratevalues"
+    AliasName="TXV_START"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltFlag_EO"
+  Version="11.1.2.64.36"
+  DBObjectType="table"
+  DBObjectName="MRLT_FLAG"
+  AliasName="MrltFlag_EO"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="Fid"
+    ColumnName="FID"
+    SQLType="INTEGER"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
+    TableName="MRLT_FLAG"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    RetrievedOnInsert="true"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="MRLT_FLAG_SEQ"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Ftype"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="FTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_FLAG"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"
+    IsUpdateable="while_insert">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Fname"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="FNAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_FLAG"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"
+    IsUpdateable="while_insert">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Factive"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="FACTIVE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_FLAG"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Forg"
+    Precision="8"
+    ColumnName="FORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_FLAG"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="MrltFlagassociation_EO"
+    Association="its.mnr.mp5.eo.assoc.MrltFlagassociationFk1Assoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MrltFlagassociationFk1Assoc.MrltFlagassociation_EO"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MrltFlagassociationFk1Assoc.MrltFlag_EO"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="MrltFlagPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLT_FLAG_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltFlag_EO.Fid"/>
+    </AttrArray>
+  </Key>
+</Entity>

@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5companies"
+  Version="11.1.2.60.81"
+  DBObjectType="TABLE"
+  DBObjectName="MP5PRD.R5COMPANIES"
+  AliasName="R5companies"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <Attribute
+    Name="ComCode"
+    IsNotNull="true"
+    Precision="17"
+    ColumnName="COM_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5COMPANIES"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="17"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5companies.ComCode_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="ComDesc"
+    IsNotNull="true"
+    Precision="45"
+    ColumnName="COM_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5COMPANIES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5companies.ComDesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="ComCurr"
+    IsNotNull="true"
+    Precision="3"
+    ColumnName="COM_CURR"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5COMPANIES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ComLang"
+    IsNotNull="true"
+    Precision="2"
+    ColumnName="COM_LANG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5COMPANIES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ComMinord"
+    ColumnName="COM_MINORD"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    TableName="MP5PRD.R5COMPANIES">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="12"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="ComPhone"
+    Precision="45"
+    ColumnName="COM_PHONE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5COMPANIES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ComBuyer"
+    Precision="12"
+    ColumnName="COM_BUYER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5COMPANIES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ComParent"
+    Precision="17"
+    ColumnName="COM_PARENT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5COMPANIES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="17"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ComPurchasesite"
+    Precision="1"
+    ColumnName="COM_PURCHASESITE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5COMPANIES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ComNotused"
+    Precision="1"
+    ColumnName="COM_NOTUSED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5COMPANIES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ComPeople"
+    Precision="1"
+    ColumnName="COM_PEOPLE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5COMPANIES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ComOrg"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="COM_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5COMPANIES"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ComFax"
+    Precision="45"
+    ColumnName="COM_FAX"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5COMPANIES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5translines"
+    Association="its.mnr.mp5.eo.assoc.R5fokbTrlAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fokbTrlAssoc.R5translines"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fokbTrlAssoc.R5companies"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5users"
+    Association="its.mnr.mp5.eo.assoc.R5fok4ComAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok4ComAssoc.R5users"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok4ComAssoc.R5companies"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5parts"
+    Association="its.mnr.mp5.eo.assoc.PartsCompanyAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.PartsCompanyAssoc.R5parts"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.PartsCompanyAssoc.R5companies"
+    Type="its.mnr.mp5.eo.local.R5partsImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5catalogue"
+    Association="its.mnr.mp5.eo.assoc.R5fok2CatAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok2CatAssoc.R5catalogue"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok2CatAssoc.R5companies"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5stock"
+    Association="its.mnr.mp5.eo.assoc.R5fok5StoAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok5StoAssoc.R5stock"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok5StoAssoc.R5companies"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5orders"
+    Association="its.mnr.mp5.eo.assoc.R5fok1OrdAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1OrdAssoc.R5orders"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1OrdAssoc.R5companies"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5orderlines"
+    Association="its.mnr.mp5.eo.assoc.R5fok4OrlAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok4OrlAssoc.R5orderlines"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok4OrlAssoc.R5companies"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5address"
+    Association="its.mnr.mp5.eo.assoc.CompanyAddressAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.CompanyAddressAssoc.R5address"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.CompanyAddressAssoc.R5companies"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="R5prikCom"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_COM"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5companies.ComCode"/>
+      <Item Value="its.mnr.mp5.eo.local.R5companies.ComOrg"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="uk_R5companies">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_DBObjectName" Value="UK_R5COMPANIES"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5companies.ComCode"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Com">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_CUR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_COM"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5companies.ComCurr"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok2Com">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_LAN"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK2_COM"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5companies.ComLang"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok4Com">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_USR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK4_COM"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5companies.ComBuyer"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok5Com">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_COM"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK5_COM"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5companies.ComParent"/>
+    </AttrArray>
+  </Key>
+  <validation:UniqueKeyValidationBean
+    Name="R5companies_Rule_0"
+    ResId="its.mnr.mp5.eo.local.R5companies_Rule_0"
+    KeyName="R5prikCom">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="ComCode"/>
+      <validation:Item
+        Value="ComOrg"/>
+    </validation:OnAttributes>
+    <validation:ResExpressions>
+      <validation:Expression
+        Name="id"><![CDATA[newValue]]></validation:Expression>
+    </validation:ResExpressions>
+  </validation:UniqueKeyValidationBean>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="EditDocPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="AssetDataControlNested.MrltDocumentsView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrltDocumentsViewIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="MrltDocumentsViewIterator" id="Docid">
+      <AttrNames>
+        <Item Value="Docid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltDocumentsViewIterator" id="Docdesc">
+      <AttrNames>
+        <Item Value="Docdesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltDocumentsViewIterator" id="Filesize">
+      <AttrNames>
+        <Item Value="Filesize"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltDocumentsViewIterator" id="Docfile">
+      <AttrNames>
+        <Item Value="Docfile"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltDocumentsViewIterator" id="Org">
+      <AttrNames>
+        <Item Value="Org"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MrltDocumentsViewIterator" StaticList="false" Uses="LOV_Doctype" id="Doctype"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="MrltDocumentsViewIterator" id="Filetype">
+      <AttrNames>
+        <Item Value="Filetype"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltDocumentsViewIterator" id="Docname">
+      <AttrNames>
+        <Item Value="Docname"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="MrltDocumentsViewIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="MrltDocumentsViewIterator" id="setCurrentRowWithKeyValue"
+            InstanceName="MNRDataControlDataControl.AssetDataControlNested.MrltDocumentsView"
+            DataControl="MNRDataControlDataControl" RequiresUpdateModel="false" Action="setCurrentRowWithKeyValue">
+      <NamedData NDName="rowKey" NDValue="#{bindings.Docid}" NDType="java.lang.String"/>
+    </action>
+    <action id="Rollback" InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <action id="Commit" InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

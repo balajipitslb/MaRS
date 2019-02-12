@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FirstEquipDate"
+  Version="11.1.2.60.81"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.lov.FirstEquipDate_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="BEQUIP"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="BEQUIPORG"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT WO.EQUIP,
+       WO.ORG,
+       FIRSTWODATE,
+       FIRSTREADDATE
+  FROM (  SELECT EVT_DESC "EQUIP", EVT_CREATED "FIRSTWODATE", EVT_ORG "ORG"
+            FROM R5EVENTS
+           WHERE EVT_DESC = :BEQUIP AND EVT_ORG = :BEQUIPORG AND ROWNUM = 1
+        ORDER BY EVT_DATE) WO,
+       (  SELECT READINGITEM "EQUIP", READINGDATE "FIRSTREADDATE", ORG
+            FROM MRLT_READING
+           WHERE READINGITEM = :BEQUIP AND ORG = :BEQUIPORG AND ROWNUM = 1
+        ORDER BY READINGDATE) R
+ WHERE WO.EQUIP = R.EQUIP(+) AND WO.ORG = R.ORG(+)]]></SQLQuery>
+  <ViewAttribute
+    Name="Equip"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EQUIP"
+    Expression="EQUIP"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Org"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="8"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORG"
+    Expression="ORG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Firstwodate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    AliasName="FIRSTWODATE"
+    Expression="FIRSTWODATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="Firstreaddate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    AliasName="FIRSTREADDATE"
+    Expression="FIRSTREADDATE"
+    SQLType="DATE"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

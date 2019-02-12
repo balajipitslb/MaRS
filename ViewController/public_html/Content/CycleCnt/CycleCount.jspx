@@ -1,0 +1,730 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Cycle Count" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelHeader text=" " id="ph1" binding="#{CycleCountBean.mainHdr}">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t2"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                <af:menuBar id="mb1">
+
+                                    <af:menu text="Actions" id="m2"
+                                             rendered="#{securityContext.userGrantedResource['resourceName=CycleCountCreateList;resourceType=UIControl;action=enabled']}"
+                                             >
+                                        <af:commandMenuItem text="Create List" id="CCSetup" action="launchCCSetup"
+                                                            useWindow="true" windowHeight="400" windowWidth="500"
+                                                            disabled="#{not empty(bindings.Jobid.attributeValue) or !securityContext.userGrantedResource['resourceName=CycleCountCreateList;resourceType=UIControl;action=enabled']}"
+                                                            />
+                                                            <!--actionListener="#{CycleCountBean.checkIfJobRunning}"-->
+                                        <af:commandMenuItem text="Storeroom Parts" id="CCStoreSetup" action="launchTst"
+                                                            useWindow="true" windowHeight="460" windowWidth="500"
+                                                            disabled="#{bindings.Ccstatus.attributeValue ne 'READY' or not empty(bindings.Jobid.attributeValue) or !securityContext.userGrantedResource['resourceName=CycleCountCreateList;resourceType=UIControl;action=enabled']}"
+                                                            partialTriggers="t1"
+                                                            actionListener="#{CycleCountBean.checkIfJobRunning}"
+                                                            />
+                                                            <!--actionListener="#{CycleCountBean.getPartsHeader}"-->
+                                        <af:menu text="FIFO" id="m3"
+                                                 disabled="#{bindings.Commit.enabled or !securityContext.userGrantedResource['resourceName=FifoCreate;resourceType=UIControl;action=enabled']}">
+                                            <af:commandMenuItem text="Exceptions" id="launchFIFO" useWindow="true"
+                                                                 windowHeight="400"
+                                                                windowWidth="550" actionListener="#{CycleCountBean.launchFIFOAction}">
+                                                                <!--action="launchFIFO"-->
+                                                <af:setActionListener to="#{pageFlowScope.psfFIFO}" from="#{'EXC'}"/>
+                                            </af:commandMenuItem>
+                                            <af:commandMenuItem text="As-Counted" id="createAsCounted"
+                                                                windowHeight="350" windowWidth="400" useWindow="true"
+                                                                disabled="#{bindings.Ccstatus.attributeValue ne 'FROZEN' and  bindings.Ccstatus.attributeValue ne 'COMPLETED'}"
+                                                                partialTriggers="t1"
+                                                                actionListener="#{CycleCountBean.launchFIFOAction}">
+                                                <!--<af:setActionListener to="#{pageFlowScope.psfFIFO}" from="#{'AC'}"/>-->
+                                            </af:commandMenuItem>                                            
+                                            <!--
+                                            <af:commandMenuItem text="As-Counted" id="createAsCounted"
+                                                                windowHeight="350" windowWidth="400" useWindow="true"
+                                                                action="#{CycleCountBean.launchFIFOAction}"
+                                                                disabled="#{bindings.Ccstatus.attributeValue ne 'FROZEN' and  bindings.Ccstatus.attributeValue ne 'COMPLETED'}"
+                                                                partialTriggers="t1"
+                                                                actionListener="#{CycleCountBean.checkIfJobRunning}">
+                                                <af:setActionListener to="#{pageFlowScope.psfFIFO}" from="#{'AC'}"/>
+                                            </af:commandMenuItem>-->
+                                            <af:commandMenuItem text="Adjusted" id="createAdjusted"
+                                                                actionListener="#{CycleCountBean.launchFIFOAction}"
+                                                                windowHeight="350" windowWidth="400" useWindow="true"
+                                                                disabled="#{bindings.Ccstatus.attributeValue ne 'FROZEN' and  bindings.Ccstatus.attributeValue ne 'COMPLETED'}"
+                                                                partialTriggers="t1">
+                                               <!-- <af:setActionListener to="#{pageFlowScope.psfFIFO}" from="#{'ADJ'}"/>-->
+                                            </af:commandMenuItem>
+                                            <af:commandMenuItem text="Delete FIFO" id="delFifo"
+                                                                disabled="#{empty bindings.Fhid.inputValue or (bindings.Ccstatus.attributeValue ne 'FROZEN' and  bindings.Ccstatus.attributeValue ne 'COMPLETED')}"
+                                                                partialTriggers="t1" actionListener="#{CycleCountBean.checkIfJobRunning}">
+                                                <!--<af:showPopupBehavior popupId="::p2" triggerType="action"/>-->
+                                            </af:commandMenuItem>
+                                        </af:menu>
+                                    </af:menu>
+                                </af:menuBar>
+                                <af:button text="Apply" disabled="#{!bindings.Commit.enabled}" id="ctb2"
+                                           icon="#{resource['images:commit.png']}" partialTriggers="CCSetup"
+                                           action="#{CycleCountBean.commit_action}"/>
+                                <af:button text="Cancel" disabled="#{!bindings.Rollback.enabled}" immediate="true"
+                                           id="ctb3" icon="#{resource['images:undo.png']}"
+                                           action="#{CycleCountBean.rollback_action}" partialTriggers="CCSetup">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button id="ctb1" icon="#{resource['images:terminate.png']}"
+                                           actionListener="#{ModuleNavBean.goExit}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:panelTabbed id="pt2">
+                            <af:showDetailItem text="List" id="sdi1" disclosureListener="#{CycleCountBean.tabListener}">
+                                <af:table value="#{bindings.MrltCyclecountheaderView.collectionModel}" var="row"
+                                          rows="#{bindings.MrltCyclecountheaderView.rangeSize}"
+                                          emptyText="#{bindings.MrltCyclecountheaderView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.MrltCyclecountheaderView.rangeSize}"
+                                          rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.MrltCyclecountheaderView.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.MrltCyclecountheaderView.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t1" styleClass="AFStretchWidth"
+                                          inlineStyle="border-color:Silver; border-style:solid; border-width:thin; background-color:White; margin:0px 0px 5px;height:525px;"
+                                          partialTriggers="::ctb2 ::CCSetup"
+                                          binding="#{CycleCountBean.ccListTable}">
+                                    <af:column sortProperty="#{bindings.MrltCyclecountheaderView.hints.Listid.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.MrltCyclecountheaderView.hints.Listid.label}"
+                                               id="c1" align="center" width="55">
+                                        <af:outputText value="#{row.Listid}" id="ot1">
+                                            <f:facet name="context">
+                                                <af:contextInfo id="ci1">
+                                                    <af:showPopupBehavior align="beforeStart" triggerType="contextInfo"
+                                                                          popupId=":::p1"/>
+                                                </af:contextInfo>
+                                            </f:facet>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.MrltCyclecountheaderView.hints.Listid.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltCyclecountheaderView.hints.Ccdesc.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.MrltCyclecountheaderView.hints.Ccdesc.label}"
+                                               id="c2" align="left" width="205" displayIndex="-1">
+                                        <af:outputText value="#{row.Ccdesc}" id="ot2"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltCyclecountheaderView.hints.Ccstatus.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.MrltCyclecountheaderView.hints.Ccstatus.label}"
+                                               id="c3" width="104" align="center">
+                                        <af:inputComboboxListOfValues id="iclov1"
+                                                                      popupTitle="Search and Select: #{bindings.MrltCyclecountheaderView.hints.Ccstatus.label}"
+                                                                      value="#{row.bindings.Ccstatus.inputValue}"
+                                                                      model="#{row.bindings.Ccstatus.listOfValuesModel}"
+                                                                      required="#{bindings.MrltCyclecountheaderView.hints.Ccstatus.mandatory}"
+                                                                      columns="#{bindings.MrltCyclecountheaderView.hints.Ccstatus.displayWidth}"
+                                                                      shortDesc="#{bindings.MrltCyclecountheaderView.hints.Ccstatus.tooltip}"
+                                                                      autoSubmit="true"
+                                                                      editMode="select"
+                                                                      readOnly="#{row.bindings.Ccstatus.attributeValue eq 'CANCELLED' or row.bindings.Ccstatus.attributeValue eq 'CLOSED'}"
+                                                                      valueChangeListener="#{CycleCountBean.openCompletePopup}">
+                                            <f:validator binding="#{row.bindings.Ccstatus.validator}"/>
+                                        </af:inputComboboxListOfValues>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltCyclecountheaderView.hints.Created.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.MrltCyclecountheaderView.hints.Created.label}"
+                                               id="c4" align="center" width="111">
+                                        <af:outputText value="#{row.Created}" id="ot4">
+                                            <af:convertDateTime pattern="#{bindings.MrltCyclecountheaderView.hints.Created.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltCyclecountheaderView.hints.Frozen.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.MrltCyclecountheaderView.hints.Frozen.label}"
+                                               id="c5" align="center" width="110">
+                                        <af:inputDate value="#{row.bindings.Frozen.inputValue}"
+                                                      label="#{bindings.MrltCyclecountheaderView.hints.Frozen.label}"
+                                                      required="#{bindings.MrltCyclecountheaderView.hints.Frozen.mandatory}"
+                                                      columns="#{bindings.MrltCyclecountheaderView.hints.Frozen.displayWidth}"
+                                                      shortDesc="#{bindings.MrltCyclecountheaderView.hints.Frozen.tooltip}"
+                                                      id="id2" readOnly="true" partialTriggers="iclov1">
+                                            <f:validator binding="#{row.bindings.Frozen.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.MrltCyclecountheaderView.hints.Frozen.format}"/>
+                                        </af:inputDate>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltCyclecountheaderView.hints.Completed.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.MrltCyclecountheaderView.hints.Completed.label}"
+                                               id="c6" align="center" width="110">
+                                        <af:inputDate value="#{row.bindings.Completed.inputValue}"
+                                                      label="#{bindings.MrltCyclecountheaderView.hints.Completed.label}"
+                                                      required="#{bindings.MrltCyclecountheaderView.hints.Completed.mandatory}"
+                                                      columns="#{bindings.MrltCyclecountheaderView.hints.Completed.displayWidth}"
+                                                      shortDesc="#{bindings.MrltCyclecountheaderView.hints.Completed.tooltip}"
+                                                      id="id1" readOnly="true" partialTriggers="iclov1">
+                                            <f:validator binding="#{row.bindings.Completed.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.MrltCyclecountheaderView.hints.Completed.format}"/>
+                                        </af:inputDate>
+                                    </af:column>
+                                </af:table>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="Count" id="sdi2"
+                                               disclosureListener="#{CycleCountBean.tabListener}"
+                                               binding="#{CycleCountBean.countTab}">
+                                <af:panelGroupLayout id="pgl1" layout="vertical" inlineStyle="height:800px;">
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <af:outputLabel value=" List Id: #{bindings.Listid.inputValue} -  #{bindings.Ccdesc.inputValue}" id="ol1"
+                                                    inlineStyle="font-weight:bold; margin:10px;"/>
+                                  <!--
+                                    <af:query id="qryId1"
+                                              headerText="Search"
+                                              value="#{bindings.MrltCyclecountpartsViewCriteriaQuery.queryDescriptor}"
+                                              model="#{bindings.MrltCyclecountpartsViewCriteriaQuery.queryModel}"
+                                              queryListener="#{bindings.MrltCyclecountpartsViewCriteriaQuery.processQuery}"
+                                              queryOperationListener="#{bindings.MrltCyclecountpartsViewCriteriaQuery.processQueryOperation}"
+                                              maxColumns="4" rows="1" saveQueryMode="hidden" modeChangeVisible="false"
+                                              resultComponentId="::pc1:t3" inlineStyle="margin:10px 0px 10px 0px;"
+                                              displayMode="simple"/>
+                                              -->
+                                              <!--
+                                    <af:query id="qryId1"
+                                              headerText="Search"
+                                              value="#{bindings.MrltCyclecountpartsViewCriteriaQuery.queryDescriptor}"
+                                              model="#{bindings.MrltCyclecountpartsViewCriteriaQuery.queryModel}"
+                                              queryListener="#{CycleCountBean.partQueryProcess}"
+                                              queryOperationListener="#{bindings.MrltCyclecountpartsViewCriteriaQuery.processQueryOperation}"
+                                              maxColumns="4" rows="1" saveQueryMode="hidden" modeChangeVisible="false"
+                                              resultComponentId="::pc1:t3" inlineStyle="margin:10px 0px 10px 0px;"
+                                              displayMode="simple"/>  -->
+                                    <af:panelGroupLayout layout="vertical" id="pgl3">
+                                            <af:query id="qryId1" headerText="Search" disclosed="true"
+                                                      value="#{bindings.MrltCyclecountpartsViewCriteria1Query.queryDescriptor}"
+                                                      model="#{bindings.MrltCyclecountpartsViewCriteria1Query.queryModel}"
+                                                      queryListener="#{bindings.MrltCyclecountpartsViewCriteria1Query.processQuery}"
+                                                      queryOperationListener="#{bindings.MrltCyclecountpartsViewCriteria1Query.processQueryOperation}"
+                                              maxColumns="4" rows="1" saveQueryMode="hidden" modeChangeVisible="false"
+                                              resultComponentId="::pc1:t3" inlineStyle="margin:10px 0px 10px 0px;"
+                                              displayMode="simple"/>    
+                                    </af:panelGroupLayout>
+                                    <af:panelCollection id="pc1"
+                                                        inlineStyle="background-color:White; height:450px;"
+                                                        defaultToolbarItemDisplay="icon" featuresOff="viewMenu"
+                                                        styleClass="AFStretchWidth">
+                                        <af:table value="#{bindings.MrltCyclecountpartsView.collectionModel}" var="row"
+                                                  rows="#{bindings.MrltCyclecountpartsView.rangeSize}"
+                                                  emptyText="#{bindings.MrltCyclecountpartsView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.MrltCyclecountpartsView.rangeSize}"
+                                                  rowBandingInterval="1" id="t3" varStatus="vs" rowSelection="single"
+                                                  columnBandingInterval="0" columnResizing="disabled"
+                                                  disableColumnReordering="true" editingMode="editAll"
+                                                  contextMenuSelect="false"
+                                                  selectionListener="#{bindings.MrltCyclecountpartsView.collectionModel.makeCurrent}"
+                                                  selectedRowKeys="#{bindings.MrltCyclecountpartsView.collectionModel.selectedRow}"
+                                                  partialTriggers=":::t1:iclov1" binding="#{CycleCountBean.ccInputTbl}">
+                                            <af:column id="c14" headerText="#" align="center" width="50">
+                                                <af:outputText value="#{vs.index+1}" id="ot7"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlType.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlType.label}"
+                                                       id="c7" align="center" width="65" displayIndex="-1">
+                                                <af:outputText value="#{row.StlType}" id="ot25"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlPart.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlPart.label}"
+                                                       id="c8" align="center" width="60">
+                                                <af:inputText value="#{row.bindings.StlPart.inputValue}" simple="true"
+                                                              required="#{bindings.MrltCyclecountpartsView.hints.StlPart.mandatory}"
+                                                              columns="#{bindings.MrltCyclecountpartsView.hints.StlPart.displayWidth}"
+                                                              maximumLength="#{bindings.MrltCyclecountpartsView.hints.StlPart.precision}"
+                                                              shortDesc="#{bindings.MrltCyclecountpartsView.hints.StlPart.tooltip}"
+                                                              id="it1" readOnly="true">
+                                                    <f:validator binding="#{row.bindings.StlPart.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlExpqty.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlExpqty.label}"
+                                                       id="c11" align="center" width="60">
+                                                <af:outputText value="#{row.StlExpqty}" id="ot3">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.MrltCyclecountpartsView.hints.StlExpqty.format}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.MrltCyclecountpartsView.hints.StlPhyqty.label}"
+                                                       id="c12" align="center" width="60"
+                                                       sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlPhyqty.name}"
+                                                       sortable="true">
+                                                <af:inputText value="#{row.bindings.StlPhyqty.inputValue}"
+                                                              label="#{bindings.MrltCyclecountpartsView.hints.StlPhyqty.label}"
+                                                              required="#{bindings.MrltCyclecountpartsView.hints.StlPhyqty.mandatory}"
+                                                              columns="#{bindings.MrltCyclecountpartsView.hints.StlPhyqty.displayWidth}"
+                                                              maximumLength="#{bindings.MrltCyclecountpartsView.hints.StlPhyqty.precision}"
+                                                              shortDesc="#{bindings.MrltCyclecountpartsView.hints.StlPhyqty.tooltip}"
+                                                              id="it2" autoSubmit="true"
+                                                              binding="#{CycleCountBean.ccPhyqtyTxt}" autoTab="true"
+                                                              contentStyle='#{!empty  row.bindings.StlPhyqty.inputValue and (row.bindings.StlExpqty.inputValue != row.bindings.StlPhyqty.inputValue)?"color: Red":""};'
+                                                              partialTriggers=":::t1"
+                                                              readOnly="#{bindings.Ccstatus.attributeValue ne 'FROZEN' or !securityContext.userGrantedResource['resourceName=CycleCountEditPhyQty;resourceType=UIControl;action=enabled']  or row.tShowCycleCount eq 'N'}">
+                                                    <af:clientListener type="valueChange" method="updTimestamp"/>
+                                                    <af:resource type="javascript">
+                                                      function updTimestamp(event) {
+                                                          AdfCustomEvent.queue(event.getSource(), "callUpdTimestamp", 
+                                                          {
+                                                          },
+false);
+                                                          return true;
+                                                      }
+                                                    </af:resource>
+                                                    <af:serverListener type="callUpdTimestamp"
+                                                                       method="#{CycleCountBean.updTimestamp}"/>
+                                                    <f:validator binding="#{row.bindings.StlPhyqty.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.MrltCyclecountpartsView.hints.StlPhyqty.format}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.MrltCyclecountpartsView.hints.tShowCycleCount.label}"
+                                                       id="c16" width="50" align="center" rendered="false">
+                                                <af:outputText value="#{row.tShowCycleCount}" id="ot59"/>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.MrltCyclecountpartsView.hints.StlTimestamp.label}"
+                                                       id="c13" align="center" width="100"
+                                                       sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlTimestamp.name}"
+                                                       sortable="true" displayIndex="-1">
+                                                <af:inputText value="#{row.StlTimestamp}" id="ot24" label="Label 1"
+                                                              binding="#{CycleCountBean.ccTimestampTxt}"
+                                                              readOnly="true">
+                                                    <af:convertDateTime pattern="#{bindings.MrltCyclecountpartsView.hints.StlTimestamp.format}"
+                                                                        type="both"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.MrltCyclecountpartsView.hints.tPartDesc.label}"
+                                                       id="c15" width="191" displayIndex="-1"
+                                                       sortProperty="#{bindings.MrltCyclecountpartsView.hints.tPartDesc.name}"
+                                                       sortable="true">
+                                                <af:outputText value="#{row.tPartDesc}" id="ot8"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlBin.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlBin.label}"
+                                                       id="c9" align="center" width="40">
+                                                <af:outputText value="#{row.StlBin}" id="ot5"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlLot.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlLot.label}"
+                                                       id="c10" align="center" width="40">
+                                                <af:outputText value="#{row.StlLot}" id="ot6"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelGroupLayout>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="FIFO" id="sdi3">
+                                <af:panelFormLayout id="pfl1" maxColumns="2" rows="1" labelWidth="120">
+                                    <af:panelLabelAndMessage label="#{bindings.Listid1.hints.label}" id="plam17">
+                                        <af:outputText value="#{bindings.Listid1.inputValue}" id="ot27">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Listid1.format}"/>
+                                        </af:outputText>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{bindings.tCCDesc.hints.label}" id="plam16">
+                                        <af:outputText value="#{bindings.tCCDesc.inputValue}" id="ot31"/>
+                                    </af:panelLabelAndMessage>
+                                    <f:facet name="footer">
+                                        <af:group id="g1">
+                                            <af:panelLabelAndMessage label="#{bindings.Accreated.hints.label}"
+                                                                     id="plam18">
+                                                <af:outputText value="#{bindings.Accreated.inputValue}" id="ot28">
+                                                    <af:convertDateTime pattern="#{bindings.Accreated.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="#{bindings.Adjcreated.hints.label}"
+                                                                     id="plam19">
+                                                <af:outputText value="#{bindings.Adjcreated.inputValue}" id="ot29">
+                                                    <af:convertDateTime pattern="#{bindings.Adjcreated.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="#{bindings.Adjtodate.hints.label}"
+                                                                     id="plam20">
+                                                <af:outputText value="#{bindings.Adjtodate.inputValue}" id="ot30">
+                                                    <af:convertDateTime pattern="#{bindings.Adjtodate.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:selectOneChoice value="#{bindings.Fpxhid.inputValue}"
+                                                                label="#{bindings.Fpxhid.label}"
+                                                                required="#{bindings.Fpxhid.hints.mandatory}"
+                                                                shortDesc="#{bindings.Fpxhid.hints.tooltip}"
+                                                                readOnly="true" id="soc1">
+                                                <f:selectItems value="#{bindings.Fpxhid.items}" id="si1"/>
+                                            </af:selectOneChoice>
+                                        </af:group>
+                                    </f:facet>
+                                </af:panelFormLayout>
+                                <af:panelFormLayout id="pfl5" maxColumns="2" rows="2" fieldWidth="100" labelWidth="150"/>
+                                <af:panelTabbed id="pt3" dimensionsFrom="disclosedChild"
+                                                inlineStyle=" margin: 5px;">
+                                    <af:showDetailItem text="As Counted" id="sdi4"
+                                                       inlineStyle="border-color:Silver; border-style:solid; border-width:thin; background-color:White; margin:0px 0px 5px;"
+                                                       styleClass="AFStretchWidth">
+                                        <af:table value="#{bindings.MrltFifoitemView.collectionModel}" var="row"
+                                                  rows="#{bindings.MrltFifoitemView.rangeSize}"
+                                                  emptyText="#{bindings.MrltFifoitemView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.MrltFifoitemView.rangeSize}"
+                                                  rowBandingInterval="0" id="t4" styleClass="AFStretchWidth"
+                                                  inlineStyle="border-color:Silver; border-style:solid; border-width:thin; background-color:White; margin:0px 0px 5px;height:400px;"
+                                                  filterModel="#{bindings.MrltFifoitemViewQuery.queryDescriptor}"
+                                                  queryListener="#{bindings.MrltFifoitemViewQuery.processQuery}"
+                                                  filterVisible="true" varStatus="vs">
+                                            <af:column sortProperty="#{bindings.MrltFifoitemView.hints.Partnum.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoitemView.hints.Partnum.label}"
+                                                       id="c18" width="75" align="center" filterable="true">
+                                                <af:outputText value="#{row.Partnum}" id="ot35"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoitemView.hints.Partorg.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoitemView.hints.Partorg.label}"
+                                                       id="c27" width="25" align="center" filterable="false">
+                                                <af:outputText value="#{row.Partorg}" id="ot44"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoitemView.hints.Partdesc.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoitemView.hints.Partdesc.label}"
+                                                       id="c20" width="181" align="left" filterable="true">
+                                                <af:outputText value="#{row.Partdesc}" id="ot37"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoitemView.hints.Partuom.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoitemView.hints.Partuom.label}"
+                                                       id="c21" width="50" align="center" filterable="false">
+                                                <af:outputText value="#{row.Partuom}" id="ot38"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoitemView.hints.Supplierid.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoitemView.hints.Supplierid.label}"
+                                                       id="c19" width="50" align="center" filterable="true">
+                                                <af:outputText value="#{row.Supplierid}" id="ot36"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoitemView.hints.Expqty.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoitemView.hints.Expqty.label}"
+                                                       id="c22" width="50" align="center" filterable="false">
+                                                <af:outputText value="#{row.Expqty}" id="ot39">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.MrltFifoitemView.hints.Expqty.format}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoitemView.hints.Phyqty.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoitemView.hints.Phyqty.label}"
+                                                       id="c23" width="50" align="center" filterable="false">
+                                                <af:outputText value="#{row.Phyqty}" id="ot40">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.MrltFifoitemView.hints.Phyqty.format}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoitemView.hints.Lastprice.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoitemView.hints.Lastprice.label}"
+                                                       id="c26" width="50" align="center" filterable="false">
+                                                <af:outputText value="#{row.Lastprice}" id="ot43"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoitemView.hints.Stdcost.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoitemView.hints.Stdcost.label}"
+                                                       id="c24" width="50" align="center" filterable="false">
+                                                <af:outputText value="#{row.Stdcost}" id="ot41"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoitemView.hints.Extprice.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoitemView.hints.Extprice.label}"
+                                                       id="c28" width="50" align="center">
+                                                <af:outputText value="#{row.Extprice}"
+                                                               shortDesc="#{bindings.MrltFifoitemView.hints.Extprice.tooltip}"
+                                                               id="ot61"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoitemView.hints.Avgfifo.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoitemView.hints.Avgfifo.label}"
+                                                       id="c17" width="50" align="center">
+                                                <af:outputText value="#{row.Avgfifo}"
+                                                               shortDesc="#{bindings.MrltFifoitemView.hints.Avgfifo.tooltip}"
+                                                               id="ot60"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoitemView.hints.Extfifocost.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoitemView.hints.Extfifocost.label}"
+                                                       id="c25" width="75" align="center" filterable="true">
+                                                <af:outputText value="#{row.Extfifocost}" id="ot42"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:showDetailItem>
+                                    <af:showDetailItem text="Adjusted" id="sdi5"
+                                                       inlineStyle="border-color:Silver; border-style:solid; border-width:thin; background-color:White; margin:0px 0px 5px;"
+                                                       styleClass="AFStretchWidth">
+                                        <af:table value="#{bindings.MrltFifoadjitemView.collectionModel}" var="row"
+                                                  rows="#{bindings.MrltFifoadjitemView.rangeSize}"
+                                                  emptyText="#{bindings.MrltFifoadjitemView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.MrltFifoadjitemView.rangeSize}"
+                                                  rowBandingInterval="0" id="t5" styleClass="AFStretchWidth"
+                                                  inlineStyle="border-color:Silver; border-style:solid; border-width:thin; background-color:White; margin:0px 0px 5px;height:400px;"
+                                                  filterModel="#{bindings.MrltFifoadjitemViewQuery.queryDescriptor}"
+                                                  queryListener="#{bindings.MrltFifoadjitemViewQuery.processQuery}"
+                                                  filterVisible="true" varStatus="vs">
+                                            <af:column sortProperty="#{bindings.MrltFifoadjitemView.hints.Partnum.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoadjitemView.hints.Partnum.label}"
+                                                       id="c32" width="80" align="center" filterable="true">
+                                                <af:outputText value="#{row.Partnum}" id="ot47"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoadjitemView.hints.Partorg.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoadjitemView.hints.Partorg.label}"
+                                                       id="c40" width="30" align="center" filterable="false">
+                                                <af:outputText value="#{row.Partorg}" id="ot55"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoadjitemView.hints.Partdesc.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoadjitemView.hints.Partdesc.label}"
+                                                       id="c34" width="186" align="left" filterable="true">
+                                                <af:outputText value="#{row.Partdesc}" id="ot49"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoadjitemView.hints.Partuom.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoadjitemView.hints.Partuom.label}"
+                                                       id="c35" width="55" align="center" filterable="false">
+                                                <af:outputText value="#{row.Partuom}" id="ot50"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoadjitemView.hints.Supplierid.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoadjitemView.hints.Supplierid.label}"
+                                                       id="c33" width="55" align="center" filterable="true">
+                                                <af:outputText value="#{row.Supplierid}" id="ot48"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoadjitemView.hints.Adjtype.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoadjitemView.hints.Adjtype.label}"
+                                                       id="c30" width="55" align="center" filterable="true">
+                                                <af:outputText value="#{row.Adjtype}" id="ot45"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoadjitemView.hints.Qty.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoadjitemView.hints.Qty.label}"
+                                                       id="c36" width="55" align="center" filterable="false">
+                                                <af:outputText value="#{row.Qty}" id="ot51">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.MrltFifoadjitemView.hints.Qty.format}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoadjitemView.hints.Lastprice.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoadjitemView.hints.Lastprice.label}"
+                                                       id="c39" width="55" align="center" filterable="false">
+                                                <af:outputText value="#{row.Lastprice}" id="ot54"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoadjitemView.hints.Stdcost.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoadjitemView.hints.Stdcost.label}"
+                                                       id="c37" width="55" align="center" filterable="false">
+                                                <af:outputText value="#{row.Stdcost}" id="ot52"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoadjitemView.hints.Extprice.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoadjitemView.hints.Extprice.label}"
+                                                       id="c29" width="55" align="center">
+                                                <af:outputText value="#{row.Extprice}"
+                                                               shortDesc="#{bindings.MrltFifoadjitemView.hints.Extprice.tooltip}"
+                                                               id="ot62"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoadjitemView.hints.Avgfifo.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoadjitemView.hints.Avgfifo.label}"
+                                                       id="c31" width="55" align="center">
+                                                <af:outputText value="#{row.Avgfifo}"
+                                                               shortDesc="#{bindings.MrltFifoadjitemView.hints.Avgfifo.tooltip}"
+                                                               id="ot63"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrltFifoadjitemView.hints.Extfifocost.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.MrltFifoadjitemView.hints.Extfifocost.label}"
+                                                       id="c38" width="80" align="center" filterable="false">
+                                                <af:outputText value="#{row.Extfifocost}" id="ot53"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:showDetailItem>
+                                </af:panelTabbed>
+                            </af:showDetailItem>
+                        </af:panelTabbed>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="p1" contentDelivery="immediate">
+                <af:dialog id="d2" type="cancel" title="Cycle Count Detail"
+                           closeIconVisible="false" stretchChildren="none">
+                    <f:facet name="buttonBar"/>
+                    <af:panelGroupLayout id="pgl2" layout="vertical">
+                        <af:panelFormLayout id="pfl2" maxColumns="1" labelWidth="75" fieldWidth="125"
+                                            inlineStyle=" margin: 5px;">
+                            <af:panelLabelAndMessage label="#{bindings.Listid.hints.label}" id="plam1">
+                                <af:outputText value="#{bindings.Listid.attributeValue}" id="ot9">
+                                    <af:convertNumber groupingUsed="false" pattern="#{bindings.Listid.format}"/>
+                                </af:outputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Ccdesc.hints.label}" id="plam2">
+                                <af:outputText value="#{bindings.Ccdesc.attributeValue}" id="ot10"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Created.hints.label}" id="plam3">
+                                <af:outputText value="#{bindings.Created.attributeValue}" id="ot11">
+                                    <af:convertDateTime pattern="#{bindings.Created.format}"/>
+                                </af:outputText>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Sttknum.hints.label}" id="plam15">
+                                <af:outputText value="#{bindings.Sttknum.attributeValue}" id="ot15"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Partclass.hints.label}" id="plam6">
+                                <af:outputText value="#{bindings.Partclass.attributeValue}" id="ot12"/>
+                            </af:panelLabelAndMessage>
+                        </af:panelFormLayout>
+                        <af:panelFormLayout id="pfl3" maxColumns="2" rows="1" labelWidth="75" fieldWidth="125"
+                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin;margin: 5px;">
+                            <af:panelLabelAndMessage label="#{bindings.Binstart.hints.label}" id="plam4">
+                                <af:outputText value="#{bindings.Binstart.attributeValue}" id="ot13"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Partstart.hints.label}" id="plam7">
+                                <af:outputText value="#{bindings.Partstart.attributeValue}" id="ot14"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Binend.hints.label}" id="plam5">
+                                <af:outputText value="#{bindings.Binend.attributeValue}" id="ot23"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.Partend.hints.label}" id="plam8">
+                                <af:outputText value="#{bindings.Partend.attributeValue}" id="ot16"/>
+                            </af:panelLabelAndMessage>
+                        </af:panelFormLayout>
+                        <af:panelFormLayout id="pfl4" maxColumns="3" rows="2" labelWidth="75" fieldWidth="125"
+                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin;margin: 5px;">
+                            <af:panelLabelAndMessage label="#{bindings.P1.hints.label}" id="plam9">
+                                <af:outputText value="#{bindings.P1.attributeValue}" id="ot17"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.P2.hints.label}" id="plam10">
+                                <af:outputText value="#{bindings.P2.attributeValue}" id="ot18"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.P3.hints.label}" id="plam11">
+                                <af:outputText value="#{bindings.P3.attributeValue}" id="ot19"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.P4.hints.label}" id="plam12">
+                                <af:outputText value="#{bindings.P4.attributeValue}" id="ot20"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.P5.hints.label}" id="plam13">
+                                <af:outputText value="#{bindings.P5.attributeValue}" id="ot21"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelLabelAndMessage label="#{bindings.P6.hints.label}" id="plam14">
+                                <af:outputText value="#{bindings.P6.attributeValue}" id="ot22"/>
+                            </af:panelLabelAndMessage>
+                        </af:panelFormLayout>
+                    </af:panelGroupLayout>
+                </af:dialog>
+            </af:popup>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="p2" contentDelivery="immediate"
+                      binding="#{CycleCountBean.popFifoDel}">
+                <af:dialog id="d3" title="FIFO Delete" closeIconVisible="false"
+                           dialogListener="#{CycleCountBean.FifoDelLsnr}">
+                    <f:facet name="buttonBar"/>
+                    <af:panelFormLayout id="pfl6"
+                                        inlineStyle=" padding:10px ;border-color:Silver; border-style:solid; border-width:thin; margin:  5px 5px 20px 5px; background-color:White;">
+                        <af:panelLabelAndMessage label="#{bindings.Fhid.hints.label}" id="plam27">
+                            <af:outputText value="#{bindings.Fhid.inputValue}" id="ot58">
+                                <af:convertNumber groupingUsed="false" pattern="#{bindings.Fhid.format}"/>
+                            </af:outputText>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{bindings.Listid1.hints.label}" id="plam21">
+                            <af:outputText value="#{bindings.Listid1.inputValue}" id="ot32">
+                                <af:convertNumber groupingUsed="false" pattern="#{bindings.Listid1.format}"/>
+                            </af:outputText>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{bindings.Accreated.hints.label}" id="plam22">
+                            <af:outputText value="#{bindings.Accreated.inputValue}" id="ot33">
+                                <af:convertDateTime pattern="#{bindings.Accreated.format}"/>
+                            </af:outputText>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{bindings.Adjcreated.hints.label}" id="plam23">
+                            <af:outputText value="#{bindings.Adjcreated.inputValue}" id="ot34">
+                                <af:convertDateTime pattern="#{bindings.Adjcreated.format}"/>
+                            </af:outputText>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{bindings.Adjtodate.hints.label}" id="plam24">
+                            <af:outputText value="#{bindings.Adjtodate.inputValue}" id="ot46">
+                                <af:convertDateTime pattern="#{bindings.Adjtodate.format}"/>
+                            </af:outputText>
+                        </af:panelLabelAndMessage>
+                        <af:selectOneChoice value="#{bindings.Fpxhid.inputValue}" label="#{bindings.Fpxhid.label}"
+                                            required="#{bindings.Fpxhid.hints.mandatory}"
+                                            shortDesc="#{bindings.Fpxhid.hints.tooltip}" readOnly="true" id="soc2">
+                            <f:selectItems value="#{bindings.Fpxhid.items}" id="si2"/>
+                        </af:selectOneChoice>
+                        <af:panelLabelAndMessage label="#{bindings.tCCDesc.hints.label}" id="plam25">
+                            <af:outputText value="#{bindings.tCCDesc.inputValue}" id="ot56"/>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{bindings.tCCStatus.hints.label}" id="plam26">
+                            <af:outputText value="#{bindings.tCCStatus.inputValue}" id="ot57"/>
+                        </af:panelLabelAndMessage>
+                    </af:panelFormLayout>
+                    <af:outputText id="ot26" value="Deleting FIFO will remove As Counted and Adjusted Reports."/>
+                </af:dialog>
+            </af:popup>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="p3" binding="#{CycleCountBean.ppEmailSub}">
+                <af:dialog id="d4" title="Email Subscription" closeIconVisible="false"
+                           dialogListener="#{CycleCountBean.emailSubscriptionLstnr}" type="ok">
+                           <!--
+                    <af:selectBooleanCheckbox text="Would you like to be notified when the job is complete?" id="sbc1"
+                                                  valueChangeListener="#{CycleCountBean.emailSubCheckbox}"
+                                                  binding="#{CycleCountBean.emailSubChk}" autoSubmit="true"   simple="true"/>
+                    <af:panelFormLayout id="pfl7" partialTriggers="sbc1">
+                        <af:inputText label="Email 1" id="email1" binding="#{CycleCountBean.email1}" autoSubmit="true"
+                            rendered="#{CycleCountBean.emailSubChk.value}"
+                                      validator="#{CycleCountBean.emailValidator}"/>
+                        <af:inputText label="Email 2" id="email2" binding="#{CycleCountBean.email2}" autoSubmit="true"
+                            rendered="#{CycleCountBean.emailSubChk.value}"
+                                      valueChangeListener="#{CycleCountBean.emailValChngLstnr}"/>
+                                      -->                           
+                    <af:panelFormLayout id="pfl7"  partialTriggers="sbc1">
+                        <af:inputText label="Email 1" id="email1" binding="#{CycleCountBean.email1}" autoSubmit="true"
+                                      validator="#{CycleCountBean.emailValidator}" showRequired="true"/>
+                       
+                    <af:selectBooleanCheckbox text="Would you like to another email address?" id="sbc1"
+                                                  valueChangeListener="#{CycleCountBean.emailSubCheckbox}"
+                                                  binding="#{CycleCountBean.emailSubChk}" autoSubmit="true"   simple="true"
+                                              contentStyle="margin-left:-45px;" immediate="true"/>
+
+                        <af:inputText label="Email 2" id="email2" binding="#{CycleCountBean.email2}" autoSubmit="true"
+                            rendered="#{CycleCountBean.emailSubChk.value}"
+                            required="#{CycleCountBean.emailSubChk.value}"
+                                      valueChangeListener="#{CycleCountBean.emailValChngLstnr}" showRequired="true"/>
+                                      </af:panelFormLayout>
+                </af:dialog>
+            </af:popup>
+                <af:popup childCreation="deferred" autoCancel="disabled" id="p4"
+                          binding="#{CycleCountBean.ppJobRunning}">
+                    <af:dialog id="d5" closeIconVisible="false" title="Job is running">
+                        <af:outputText value="#{bindings.Jobid.inputValue} Job is running for the List #{bindings.Listid.inputValue}" shortDesc="#{bindings.Jobid.hints.tooltip}"
+                                       id="ot64"/>
+                    </af:dialog>
+                </af:popup>            
+        </af:form>
+        <!--
+        <af:clientListener type="load" method="triggerOnLoad"/>
+        <af:serverListener type="onloadEvent" method="#{CycleCountBean.setOnLoadEvents}"/>
+        <af:resource type="javascript">
+          function triggerOnLoad(event) {
+              AdfCustomEvent.queue(event.getSource(), "onloadEvent", {},false);
+              return true;
+          }
+        </af:resource>
+        -->
+    </af:document>
+</f:view>

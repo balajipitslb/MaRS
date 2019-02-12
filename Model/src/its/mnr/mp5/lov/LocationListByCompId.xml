@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="LocationListByCompId"
+  Version="11.1.2.60.81"
+  SelectList="MrlrefLocation.LOCATIONID, 
+       MrlrefLocation.COMPONENTID, 
+       MrlrefLocation.LOCCODE, 
+       MrlrefLocation.LOCDESCRIPTION, 
+       MrlrefLocation.LOCACTIVE, 
+       MrlrefLocation.LOCCDX"
+  FromList="MRLREF_LOCATION MrlrefLocation"
+  Where="((MrlrefLocation.COMPONENTID = :BINDLocListByCompId) OR (:BINDLocListByCompId IS NULL))"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.lov.LocationListByCompId_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="BINDLocListByCompId"
+    Kind="where"
+    Type="java.lang.String"/>
+  <EntityUsage
+    Name="MrlrefLocation"
+    Entity="its.mnr.mp5.eo.master.MrlrefLocation"
+    ReadOnly="true"
+    DeleteParticipant="false"/>
+  <ViewAttribute
+    Name="Locationid"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Locationid"
+    EntityUsage="MrlrefLocation"
+    AliasName="LOCATIONID"/>
+  <ViewAttribute
+    Name="Componentid"
+    IsUnique="true"
+    PrecisionRule="true"
+    EntityAttrName="Componentid"
+    EntityUsage="MrlrefLocation"
+    AliasName="COMPONENTID"/>
+  <ViewAttribute
+    Name="Loccode"
+    IsUnique="true"
+    PrecisionRule="true"
+    EntityAttrName="Loccode"
+    EntityUsage="MrlrefLocation"
+    AliasName="LOCCODE"/>
+  <ViewAttribute
+    Name="Locdescription"
+    PrecisionRule="true"
+    EntityAttrName="Locdescription"
+    EntityUsage="MrlrefLocation"
+    AliasName="LOCDESCRIPTION"/>
+  <ViewAttribute
+    Name="Locactive"
+    PrecisionRule="true"
+    EntityAttrName="Locactive"
+    EntityUsage="MrlrefLocation"
+    AliasName="LOCACTIVE"/>
+  <ViewAttribute
+    Name="Loccdx"
+    PrecisionRule="true"
+    EntityAttrName="Loccdx"
+    EntityUsage="MrlrefLocation"
+    AliasName="LOCCDX"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

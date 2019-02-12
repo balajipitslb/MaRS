@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81"
+                id="Asset_Maint_assetMaint_CreateInsertPageDef" Package="Taskflows.Asset" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="AssetDataControlNested.MrltSparesView" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="MrltSparesViewIterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="MrltSparesViewIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,400 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="FIFO Part Exceptions" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelHeader text=" " id="ph1">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t4">
+                                <af:menuBar id="mb1">
+                                    <af:menu text="Actions" id="m2">
+                                        <af:commandMenuItem actionListener="#{bindings.Create.execute}" text="Create"
+                                                            disabled="#{!bindings.Create.enabled}" id="cmi2"
+                                                            rendered="false"/>
+                                        <af:commandMenuItem actionListener="#{bindings.CreateInsert.execute}"
+                                                            text="Create" disabled="#{!bindings.CreateInsert.enabled}"
+                                                            id="cmi1"/>
+                                    </af:menu>
+                                </af:menuBar>
+                                <af:button text="Apply" disabled="#{!bindings.Commit.enabled}" id="ctb3"
+                                           icon="#{resource['images:commit.png']}"
+                                           actionListener="#{bindings.Commit.execute}" partialTriggers="cmi2 cmi1"/>
+                                <af:button text="Cancel" disabled="#{!bindings.Rollback.enabled}" id="ctb4"
+                                           icon="#{resource['images:undo.png']}"
+                                           actionListener="#{bindings.Rollback.execute}" immediate="true"
+                                           partialTriggers="cmi1 cmi2">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button id="ctb1" icon="#{resource['images:terminate.png']}"
+                                           action="#{FifoBean.onExitExcptn}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+<af:panelSplitter id="ps1" orientation="vertical" splitterPosition="100"
+                  styleClass="AFStretchWidth">
+                                <f:facet name="first">
+                                    <af:panelSplitter id="ps2" splitterPosition="168" disabled="true">
+                                        <f:facet name="first">
+                                            <af:panelCollection id="pc3" styleClass="AFStretchWidth"
+                                                                inlineStyle="background-color:White;"
+                                                                featuresOff="viewMenu freeze detach"
+                                                                partialTriggers="::cmi1">
+                                                <f:facet name="toolbar">
+                                                    <af:toolbar id="t7">
+                                                        <af:outputLabel value="List" id="ol1"
+                                                                        inlineStyle="font-weight:bold;"/>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                                <f:facet name="statusbar"/>
+                                                <af:table value="#{bindings.MrltFifopartxheaderView.collectionModel}"
+                                                          var="row" rows="#{bindings.MrltFifopartxheaderView.rangeSize}"
+                                                          emptyText="#{bindings.MrltFifopartxheaderView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                          fetchSize="#{bindings.MrltFifopartxheaderView.rangeSize}"
+                                                          rowBandingInterval="1"
+                                                          selectedRowKeys="#{bindings.MrltFifopartxheaderView.collectionModel.selectedRow}"
+                                                          selectionListener="#{bindings.MrltFifopartxheaderView.collectionModel.makeCurrent}"
+                                                          rowSelection="single" id="t1"
+                                                          partialTriggers=":::cmi2 :::cmi1">
+                                                    <af:column sortProperty="#{bindings.MrltFifopartxheaderView.hints.Fpxhid.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.MrltFifopartxheaderView.hints.Fpxhid.label}"
+                                                               id="c4" align="center" width="54">
+                                                        <af:outputText value="#{row.Fpxhid}" id="ot3"
+                                                                       partialTriggers=":::cmi1 :::cmi2">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.MrltFifopartxheaderView.hints.Fpxhid.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.MrltFifopartxheaderView.hints.Created.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.MrltFifopartxheaderView.hints.Created.label}"
+                                                               id="c6" align="center" width="83" displayIndex="-1">
+                                                        <af:outputText value="#{row.Created}" id="ot4"
+                                                                       partialTriggers=":::cmi1 :::cmi2">
+                                                            <af:convertDateTime pattern="#{bindings.MrltFifopartxheaderView.hints.Created.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                </af:table>
+                                            </af:panelCollection>
+                                        </f:facet>
+                                        <f:facet name="second">
+                                            <af:panelCollection id="pc2" defaultToolbarItemDisplay="icon"
+                                                                featuresOff="viewMenu freeze detach"
+                                                                styleClass="AFStretchWidth"
+                                                                inlineStyle="background-color:White;">
+                                                <af:table value="#{bindings.MrltFifoheaderView1.collectionModel}"
+                                                          var="row" rows="#{bindings.MrltFifoheaderView1.rangeSize}"
+                                                          emptyText="#{bindings.MrltFifoheaderView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                          fetchSize="#{bindings.MrltFifoheaderView1.rangeSize}"
+                                                          rowBandingInterval="1" id="t2"
+                                                          partialTriggers=":::cmi2 :::cmi1">
+                                                    <af:column sortProperty="#{bindings.MrltFifoheaderView1.hints.Listid.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.MrltFifoheaderView1.hints.Listid.label}"
+                                                               id="c2" width="49" align="center">
+                                                        <af:outputText value="#{row.Listid}" id="ot2">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.MrltFifoheaderView1.hints.Listid.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.MrltFifoheaderView1.hints.tCCDesc.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.MrltFifoheaderView1.hints.tCCDesc.label}"
+                                                               id="c1" width="222" displayIndex="-1">
+                                                        <af:outputText value="#{row.tCCDesc}" id="ot1"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.MrltFifoheaderView1.hints.tCCStatus.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.MrltFifoheaderView1.hints.tCCStatus.label}"
+                                                               id="c9" align="center" width="80">
+                                                        <af:outputText value="#{row.tCCStatus}" id="ot5"/>
+                                                    </af:column>
+                                                </af:table>
+                                                <f:facet name="viewMenu"/>
+                                                <f:facet name="toolbar">
+                                                    <af:toolbar id="t6">
+                                                        <af:outputLabel value="Used By" id="ol3"
+                                                                        inlineStyle="font-weight:bold;"/>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                            </af:panelCollection>
+                                        </f:facet>
+                                    </af:panelSplitter>
+                                </f:facet>
+                                <f:facet name="second">
+                                    <af:panelCollection id="pc1" featuresOff="viewMenu detach"
+                                                        defaultToolbarItemDisplay="icon" styleClass="AFStretchWidth"
+                                                        inlineStyle="background-color:White;">
+                                        <f:facet name="toolbar">
+                                            <af:toolbar id="t5">
+                                                <af:spacer width="40" height="10" id="s2"/>
+                                                <!--actionListener="#{bindings.CreateInsert1.execute}"-->
+                                                <af:button actionListener="#{FifoBean.addFifoExceptionPart}"
+                                                           disabled="#{!bindings.CreateInsert1.enabled or bindings.MrltFifoheaderView1Iterator.estimatedRowCount gt 0}"
+                                                           id="ctb2" icon="#{resource['images:add.png']}"
+                                                           partialTriggers="::pc3:t1"/>
+                                                <!--
+                                            <af:button actionListener="#{bindings.CreateInsert2.execute}"
+                                                       disabled="#{!bindings.CreateInsert2.enabled or bindings.MrltFifoheaderView1Iterator.estimatedRowCount gt 0}"
+                                                       id="ctb2" 
+                                                       icon="#{resource['images:add.png']}"
+                                                       partialTriggers="::pc3:t1"/>
+                                                       -->
+                                                <af:spacer width="10" height="10" id="s1"/>
+                                                <af:button actionListener="#{bindings.Delete.execute}"
+                                                           disabled="#{!bindings.Delete.enabled  or bindings.MrltFifoheaderView1Iterator.estimatedRowCount gt 0}"
+                                                           id="ctb5" icon="#{resource['images:delete.png']}"
+                                                           partialTriggers="::pc3:t1"/>
+                                                <!--
+                                            <af:button actionListener="#{bindings.Delete1.execute}"
+                                                       disabled="#{!bindings.Delete1.enabled  or bindings.MrltFifoheaderView1Iterator.estimatedRowCount gt 0}"
+                                                       id="ctb5" icon="#{resource['images:delete.png']}"
+                                                       partialTriggers="::pc3:t1"/>
+                                                       -->
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.MrltFifopartxView1.collectionModel}" var="row"
+                                                  rows="#{bindings.MrltFifopartxView1.rangeSize}"
+                                                  emptyText="#{bindings.MrltFifopartxView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.MrltFifopartxView1.rangeSize}"
+                                                  rowBandingInterval="0" id="t3" varStatus="vs"
+                                                  partialTriggers=":::cmi1 ::ctb2 ::ctb5 :::cmi2"
+                                                  selectedRowKeys="#{bindings.MrltFifopartxView1.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.MrltFifopartxView1.collectionModel.makeCurrent}"
+                                                  rowSelection="single">
+                                            <af:column sortable="false"
+                                                       headerText="#{bindings.MrltFifopartxView1.hints.Fpxhid.label}"
+                                                       id="c5" width="50" align="center">
+                                                <af:outputText value="#{row.Fpxhid}"
+                                                               shortDesc="#{bindings.MrltFifopartxView1.hints.Fpxhid.tooltip}"
+                                                               id="ot10">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.MrltFifopartxView1.hints.Fpxhid.format}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortable="false"
+                                                       headerText="#{bindings.MrltFifopartxView1.hints.Partnum.label}"
+                                                       id="c3" width="60" align="center">
+                                                <af:outputText value="#{row.Partnum}"
+                                                               shortDesc="#{bindings.MrltFifopartxView1.hints.Partnum.tooltip}"
+                                                               id="ot14"/>
+                                            </af:column>
+                                            <af:column sortable="false"
+                                                       headerText="#{bindings.MrltFifopartxView1.hints.tPartDesc.label}"
+                                                       id="c12" width="180">
+                                                <af:outputText value="#{row.tPartDesc}"
+                                                               shortDesc="#{bindings.MrltFifopartxView1.hints.tPartDesc.tooltip}"
+                                                               id="ot8"/>
+                                            </af:column>
+                                            <af:column sortable="false"
+                                                       headerText="#{bindings.MrltFifopartxView1.hints.Xtype.label}"
+                                                       id="c7" width="50" align="center">
+                                                <af:outputText value="#{row.Xtype}"
+                                                               shortDesc="#{bindings.MrltFifopartxView1.hints.Xtype.tooltip}"
+                                                               id="ot13"/>
+                                            </af:column>
+                                            <af:column sortable="false"
+                                                       headerText="#{bindings.MrltFifopartxView1.hints.Pvalue.label}"
+                                                       id="c8" width="50" align="center">
+                                                <af:outputText value="#{row.Pvalue}"
+                                                               shortDesc="#{bindings.MrltFifopartxView1.hints.Pvalue.tooltip}"
+                                                               id="ot11">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.MrltFifopartxView1.hints.Pvalue.format}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortable="false"
+                                                       headerText="#{bindings.MrltFifopartxView1.hints.Reptype.label}"
+                                                       id="c10" width="65" align="center">
+                                                <af:outputText value="#{row.Reptype}"
+                                                               shortDesc="#{bindings.MrltFifopartxView1.hints.Reptype.tooltip}"
+                                                               id="ot12"/>
+                                            </af:column>
+                                            <af:column sortable="false"
+                                                       headerText="#{bindings.MrltFifopartxView1.hints.Created.label}"
+                                                       id="c11" width="50" align="center">
+                                                <af:outputText value="#{row.Created}"
+                                                               shortDesc="#{bindings.MrltFifopartxView1.hints.Created.tooltip}"
+                                                               id="ot9">
+                                                    <af:convertDateTime pattern="#{bindings.MrltFifopartxView1.hints.Created.format}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                        </af:table>
+                                        <!--
+                                    <af:table value="#{bindings.MrltFifoPartx_partView1.collectionModel}" var="row"
+                                              rows="#{bindings.MrltFifoPartx_partView1.rangeSize}"
+                                              emptyText="#{bindings.MrltFifoPartx_partView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              rowBandingInterval="0"
+                                              selectedRowKeys="#{bindings.MrltFifoPartx_partView1.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.MrltFifoPartx_partView1.collectionModel.makeCurrent}"
+                                              rowSelection="single"
+                                              partialTriggers=":::cmi1 ::ctb2 ::ctb5 :::cmi2"
+                                              fetchSize="#{bindings.MrltFifoPartx_partView1.rangeSize}" id="t8">
+                                        <af:column headerText="#{bindings.MrltFifoPartx_partView1.hints.Fpxhid.label}"
+                                                   id="c13">
+                                            <af:outputText value="#{row.Fpxhid}"
+                                                           shortDesc="#{bindings.MrltFifoPartx_partView1.hints.Fpxhid.tooltip}"
+                                                           id="ot7">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.MrltFifoPartx_partView1.hints.Fpxhid.format}"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.MrltFifoPartx_partView1.hints.Partnum.label}"
+                                                   id="c14">
+                                            <af:inputListOfValues id="partnumId"
+                                                                  popupTitle="Search and Select: #{bindings.MrltFifoPartx_partView1.hints.Partnum.label}"
+                                                                  value="#{row.bindings.Partnum.inputValue}"                                                                  
+                                                                  autoSubmit="true" autoTab="true"
+                                                                  model="#{row.bindings.Partnum.listOfValuesModel}"
+                                                                  label="#{bindings.Partnum.hints.label}"
+                                                                  shortDesc="#{bindings.MrltFifoPartx_partView1.hints.Partnum.tooltip}"
+                                                                  required="#{bindings.MrltFifoPartx_partView1.hints.Partnum.mandatory}"
+                                                                  columns="#{bindings.MrltFifoPartx_partView1.hints.Partnum.displayWidth}">
+                                                <f:validator binding="#{row.bindings.Partnum.validator}"/>
+                                            </af:inputListOfValues>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.MrltFifoPartx_partView1.hints.ParDesc.label}"
+                                                   id="c15">
+                                            <af:outputText value="#{row.ParDesc}"
+                                                           shortDesc="#{bindings.MrltFifoPartx_partView1.hints.ParDesc.tooltip}"
+                                                           id="ot6"/>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.MrltFifoPartx_partView1.hints.Xtype.label}"
+                                                   id="c16">
+                                            <af:selectOneChoice value="#{row.bindings.Xtype.inputValue}"
+                                                                label="#{row.bindings.Xtype.label}"
+                                                                required="#{bindings.MrltFifoPartx_partView1.hints.Xtype.mandatory}"
+                                                                shortDesc="#{bindings.MrltFifoPartx_partView1.hints.Xtype.tooltip}"
+                                                                id="soc3"
+                                                                readOnly="#{ bindings.MrltFifoheaderView1Iterator.estimatedRowCount gt 0}"
+                                                                partialTriggers=":::pc3:t1" autoSubmit="true">
+                                                <f:selectItems value="#{row.bindings.Xtype.items}" id="si3"/>
+                                                <f:validator binding="#{row.bindings.Xtype.validator}"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.MrltFifoPartx_partView1.hints.Pvalue.label}"
+                                                   id="c17">
+                                            <af:inputText value="#{row.bindings.Pvalue.inputValue}"
+                                                          label="#{bindings.MrltFifoPartx_partView1.hints.Pvalue.label}"
+                                                          required="#{bindings.MrltFifoPartx_partView1.hints.Pvalue.mandatory}"
+                                                          columns="#{bindings.MrltFifoPartx_partView1.hints.Pvalue.displayWidth}"
+                                                          maximumLength="#{bindings.MrltFifoPartx_partView1.hints.Pvalue.precision}"
+                                                          shortDesc="#{bindings.MrltFifoPartx_partView1.hints.Pvalue.tooltip}"
+                                                          id="it7" partialTriggers=":::pc3:t1" autoSubmit="true"
+                                                          autoTab="true">
+                                                <f:validator binding="#{row.bindings.Pvalue.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.MrltFifoPartx_partView1.hints.Pvalue.format}"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.MrltFifoPartx_partView1.hints.Reptype.label}"
+                                                   id="c18">
+                                            <af:selectOneChoice value="#{row.bindings.Reptype.inputValue}"
+                                                                label="#{row.bindings.Reptype.label}"
+                                                                required="#{bindings.MrltFifoPartx_partView1.hints.Reptype.mandatory}"
+                                                                shortDesc="#{bindings.MrltFifoPartx_partView1.hints.Reptype.tooltip}"
+                                                                id="soc4" partialTriggers=":::pc3:t1" autoSubmit="true">
+                                                <f:selectItems value="#{row.bindings.Reptype.items}" id="si4"/>
+                                                <f:validator binding="#{row.bindings.Reptype.validator}"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.MrltFifoPartx_partView1.hints.Created.label}"
+                                                   id="c19">
+                                            <af:outputFormatted value="#{row.Created}" id="of1">
+                                                <af:convertDateTime pattern="#{bindings.MrltFifoPartx_partView1.hints.Created.format}"/>
+                                            </af:outputFormatted>
+                                        </af:column>
+                                    </af:table>
+                                    -->
+                                    </af:panelCollection>
+                                </f:facet>
+                            </af:panelSplitter>
+                        <f:facet name="info"/>
+                        <f:facet name="legend"/>
+                    </af:panelHeader>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                  binding="#{FifoBean.fifoExceptionPartPP}">
+                            <af:dialog id="d2" title="Add FIFO Exception Part" closeIconVisible="false" type="none"
+                                       >
+                                <af:panelHeader text="" id="ph2"
+                                inlineStyle="width:450px; height:210px;margin-bottom:10px; background-color:transparent;">
+                                    <f:facet name="context"/>
+                                    <f:facet name="menuBar">
+                                        <af:toolbar id="t8"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                            <af:button icon="#{resource['images:commit.png']}" text="Apply"
+                                                       disabled="#{!bindings.Commit.enabled}"
+                                                       actionListener="#{bindings.Commit.execute}" id="b1"/>
+                                            <af:spacer width="10" height="10" id="s3"/>
+                                            <af:button actionListener="#{bindings.Rollback.execute}"
+                                                       icon="#{resource['images:undo.png']}"
+                                                       disabled="#{!bindings.Rollback.enabled}" text="Cancel" id="b2"/>
+                                            <af:spacer width="10" height="10" id="s4"/>
+                                            <af:button actionListener="#{FifoBean.closeFifoExceptionPartPP}"
+                                                       icon="#{resource['images:terminate.png']}" id="b3"/>
+                                        </af:toolbar>
+                                    </f:facet>
+                                    <f:facet name="legend">
+                                        <af:panelFormLayout id="pfl1">
+                                            <af:inputListOfValues id="partnum1Id"
+                                                                  popupTitle="Search and Select: #{bindings.Partnum1.hints.label}"
+                                                                  value="#{bindings.Partnum1.inputValue}"
+                                                                  label="#{bindings.Partnum1.hints.label}"
+                                                                  model="#{bindings.Partnum1.listOfValuesModel}"
+                                                                  required="#{bindings.Partnum1.hints.mandatory}"
+                                                                  columns="#{bindings.Partnum1.hints.displayWidth}"
+                                                                  shortDesc="#{bindings.Partnum1.hints.tooltip}"
+                                                                  autoSubmit="true">
+                                                <f:validator binding="#{bindings.Partnum1.validator}"/>
+                                            </af:inputListOfValues>
+                                            <af:outputText value="#{bindings.tParDesc.inputValue}"
+                                                           shortDesc="#{bindings.tParDesc.hints.tooltip}" id="ot6"
+                                                           partialTriggers="partnum1Id"/>
+                                            <af:selectOneChoice value="#{bindings.Xtype.inputValue}"
+                                                                label="#{bindings.Xtype.label}"
+                                                                required="#{bindings.Xtype.hints.mandatory}"
+                                                                shortDesc="#{bindings.Xtype.hints.tooltip}" id="soc3"
+                                                                autoSubmit="true">
+                                                <f:selectItems value="#{bindings.Xtype.items}" id="si3"/>
+                                                <f:validator binding="#{bindings.Xtype.validator}"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText value="#{bindings.Pvalue.inputValue}"
+                                                          label="#{bindings.Pvalue.hints.label}"
+                                                          required="#{bindings.Pvalue.hints.mandatory}"
+                                                          columns="#{bindings.Pvalue.hints.displayWidth}"
+                                                          maximumLength="#{bindings.Pvalue.hints.precision}"
+                                                          shortDesc="#{bindings.Pvalue.hints.tooltip}" id="it1"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.Pvalue.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.Pvalue.format}"/>
+                                            </af:inputText>
+                                            <af:selectOneChoice value="#{bindings.Reptype.inputValue}"
+                                                                label="#{bindings.Reptype.label}"
+                                                                required="#{bindings.Reptype.hints.mandatory}"
+                                                                shortDesc="#{bindings.Reptype.hints.tooltip}" id="soc4"
+                                                                autoSubmit="true">
+                                                <f:selectItems value="#{bindings.Reptype.items}" id="si4"/>
+                                                <f:validator binding="#{bindings.Reptype.validator}"/>
+                                            </af:selectOneChoice>
+                                            <af:panelLabelAndMessage label="Created" id="plam1" for="ot7">
+                                                <af:outputText value="#{bindings.Created.inputValue}"
+                                                               shortDesc="#{bindings.Created.hints.tooltip}" id="ot7">
+                                                    <af:convertDateTime pattern="#{bindings.Created.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                        </af:panelFormLayout>
+                                    </f:facet>
+                                </af:panelHeader>
+                            </af:dialog>
+                        </af:popup>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

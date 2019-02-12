@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltFifoheader"
+  Version="11.1.2.64.36"
+  DBObjectType="table"
+  DBObjectName="MRLT_FIFOHEADER"
+  AliasName="MrltFifoheader"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.eo.local.MrltFifoheaderImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="Fhid"
+    ColumnName="FHID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    TableName="MRLT_FIFOHEADER"
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"
+    IsUpdateable="while_insert"/>
+  <Attribute
+    Name="Listid"
+    ColumnName="LISTID"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="MRLT_FIFOHEADER"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"
+    IsUpdateable="while_insert"/>
+  <Attribute
+    Name="Accreated"
+    ColumnName="ACCREATED"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="MRLT_FIFOHEADER"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.eo.local.MrltFifoheader.Accreated_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="its.mnr.mp5.eo.local.MrltFifoheader.Accreated_FMT_FORMAT"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Adjcreated"
+    ColumnName="ADJCREATED"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="MRLT_FIFOHEADER"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.eo.local.MrltFifoheader.Adjcreated_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="its.mnr.mp5.eo.local.MrltFifoheader.Adjcreated_FMT_FORMAT"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Adjtodate"
+    ColumnName="ADJTODATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="MRLT_FIFOHEADER"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <validation:CompareValidationBean
+      Name="Adjtodate_Rule_0"
+      ResId="ADJUSTED_DATE_MUST_BE_GREATER_"
+      OnAttribute="Adjtodate"
+      OperandType="EXPR"
+      Inverse="false"
+      CompareType="GREATERTHANEQUALTO">
+      <validation:ResExpressions>
+        <validation:Expression
+          Name="Accdate"><![CDATA[Accreated]]></validation:Expression>
+      </validation:ResExpressions>
+      <validation:TransientExpression><![CDATA[Accreated]]></validation:TransientExpression>
+    </validation:CompareValidationBean>
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.eo.local.MrltFifoheader.Adjtodate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="its.mnr.mp5.eo.local.MrltFifoheader.Adjtodate_FMT_FORMAT"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Fpxhid"
+    ColumnName="FPXHID"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="MRLT_FIFOHEADER"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"/>
+  <AccessorAttribute
+    Name="MrltFifoadjitem"
+    Association="its.mnr.mp5.eo.assoc.MrltFifoadjitemFk1Assoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MrltFifoadjitemFk1Assoc.MrltFifoadjitem"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MrltFifoadjitemFk1Assoc.MrltFifoheader"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="MrltFifoitem"
+    Association="its.mnr.mp5.eo.assoc.MrltFifoitemFk1Assoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MrltFifoitemFk1Assoc.MrltFifoitem"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MrltFifoitemFk1Assoc.MrltFifoheader"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="MrltCyclecountheader"
+    Association="its.mnr.mp5.eo.assoc.CCHeaderFifoHeaderAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.CCHeaderFifoHeaderAssoc.MrltCyclecountheader"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.CCHeaderFifoHeaderAssoc.MrltFifoheader"
+    Type="its.mnr.mp5.eo.local.MrltCyclecountheaderImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrltFifoheaderPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLT_FIFOHEADER_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltFifoheader.Fhid"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltFifoheaderFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_CYCLECOUNTHEADER_PK1"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_FIFOHEADER_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltFifoheader.Listid"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltFifoheaderFk2">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_FIFOPARTX_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_FIFOHEADER_FK2"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="fk_MrltFifoheader">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_CYCLECOUNTHEADER_PK1"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_MRLT_FIFOHEADER"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltFifoheader.Listid"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

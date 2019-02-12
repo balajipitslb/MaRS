@@ -1,0 +1,345 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle1" value="#{adfBundle['viewcontroller.Content.Invoice.InvoiceCreditBundle']}"/>
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.InvoiceCreditBundle']}"/>
+    <af:document title="Invoice Credit" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelHeader text=" " id="ph1" partialTriggers="it7">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t3"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px; background-color:White;">
+                                <af:menuBar id="mb1">
+                                    <af:menu text="Actions" id="m2">
+                                        <af:commandMenuItem text="#{viewcontrollerBundle.NEW_INVOICE}" id="cmi1"
+                                                            action="#{invoiceCreditBean.createNewInvoice}"
+                                                            binding="#{invoiceCreditBean.createNewMenu}"
+                                                            disabled="true"/>
+                                    </af:menu>
+                                </af:menuBar>
+                                <af:button text="#{viewcontrollerBundle.APPLY}"
+                                           disabled="#{!bindings.Commit.enabled or bindings.RefInvoice.inputValue  eq null  or bindings.CurCrTotal.inputValue eq null or bindings.CurCrTotal.inputValue eq 0}"
+                                           id="ctb3" icon="#{resource['images:commit.png']}"
+                                           shortDesc="#{viewcontrollerBundle.SAVERECORD}"
+                                           action="#{invoiceCreditBean.apply_action}" partialSubmit="false"
+                                           binding="#{invoiceCreditBean.applyBtn}" partialTriggers="refInvoiceId it7"/>
+                                <af:button text="#{viewcontrollerBundle.CANCEL}"
+                                           disabled="#{!bindings.Rollback.enabled}" immediate="true" id="ctb4"
+                                           icon="#{resource['images:commit.png']}"
+                                           action="#{invoiceCreditBean.cancel_action}">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button id="ctb5" icon="#{resource['images:terminate.png']}"
+                                           actionListener="#{ModuleNavBean.goExit}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:panelStretchLayout id="psl1" startWidth="0px" endWidth="0px" topHeight="125px"
+                                               bottomHeight="40px">
+                            <f:facet name="bottom">
+                                <af:panelFormLayout id="pfl4" maxColumns="3" rows="1" labelWidth="125" fieldWidth="120">
+                                    <af:inputText value="#{bindings.Invtotal.inputValue}"
+                                                  label="#{bindings.Invtotal.hints.label}"
+                                                  required="#{bindings.Invtotal.hints.mandatory}"
+                                                  columns="#{bindings.Invtotal.hints.displayWidth}"
+                                                  maximumLength="#{bindings.Invtotal.hints.precision}"
+                                                  shortDesc="#{bindings.Invtotal.hints.tooltip}" id="it5">
+                                        <f:validator binding="#{bindings.Invtotal.validator}"/>
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.Invtotal.format}"
+                                                          type="currency"/>
+                                    </af:inputText>
+                                    <af:inputText value="#{bindings.Invtotalcr.inputValue}"
+                                                  label="#{bindings.Invtotalcr.hints.label}"
+                                                  required="#{bindings.Invtotalcr.hints.mandatory}"
+                                                  columns="#{bindings.Invtotalcr.hints.displayWidth}"
+                                                  maximumLength="#{bindings.Invtotalcr.hints.precision}"
+                                                  shortDesc="#{bindings.Invtotalcr.hints.tooltip}" id="it6">
+                                        <f:validator binding="#{bindings.Invtotalcr.validator}"/>
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.Invtotalcr.format}"
+                                                          type="currency"/>
+                                    </af:inputText>
+                                    <af:inputText value="#{bindings.CurCrTotal.inputValue}"
+                                                  label="#{bindings.CurCrTotal.hints.label}"
+                                                  required="#{bindings.CurCrTotal.hints.mandatory}"
+                                                  columns="#{bindings.CurCrTotal.hints.displayWidth}"
+                                                  maximumLength="#{bindings.CurCrTotal.hints.precision}"
+                                                  shortDesc="#{bindings.CurCrTotal.hints.tooltip}" id="it7"
+                                                  autoSubmit="true">
+                                        <f:validator binding="#{bindings.CurCrTotal.validator}"/>
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.CurCrTotal.format}"
+                                                          type="currency"/>
+                                    </af:inputText>
+                                </af:panelFormLayout>
+                            </f:facet>
+                            <f:facet name="center">
+                                <af:panelCollection id="pc1" inlineStyle="background-color:White; margin:5px;"
+                                                    defaultToolbarItemDisplay="icon">
+                                    <f:facet name="menus"/>
+                                    <f:facet name="toolbar"/>
+                                    <f:facet name="statusbar"/>
+                                    <af:table value="#{bindings.InvoiceCreditResults.collectionModel}" var="row"
+                                              rows="#{bindings.InvoiceCreditResults.rangeSize}"
+                                              emptyText="#{bindings.InvoiceCreditResults.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              fetchSize="#{bindings.InvoiceCreditResults.rangeSize}"
+                                              rowBandingInterval="1" id="t2" columnStretching="last"
+                                              binding="#{invoiceCreditBean.resultsTable}" autoHeightRows="-1">
+                                        <af:column sortProperty="#{bindings.InvoiceCreditResults.hints.Wo.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.InvoiceCreditResults.hints.Wo.label}" id="c1"
+                                                   width="50">
+                                            <af:outputText value="#{row.Wo}" id="ot1"/>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.InvoiceCreditResults.hints.Labor.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.InvoiceCreditResults.hints.Labor.label}"
+                                                   id="c2" width="75" align="right">
+                                            <af:outputText value="#{row.Labor}" id="ot2"
+                                                           shortDesc=" ##{row.Wo} Total Labor Credits: #{row.Wolaborcr}">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.InvoiceCreditResults.hints.Labor.format}"
+                                                                  type="currency" minFractionDigits="3"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.InvoiceCreditResults.hints.Part.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.InvoiceCreditResults.hints.Part.label}"
+                                                   id="c3" width="75" align="right">
+                                            <af:outputText value="#{row.Part}" id="ot3"
+                                                           shortDesc=" ##{row.Wo} Total Part Credits: #{row.Wopartcr}">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.InvoiceCreditResults.hints.Part.format}"
+                                                                  type="currency" minFractionDigits="3"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.InvoiceCreditResults.hints.Tax.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.InvoiceCreditResults.hints.Tax.label}"
+                                                   id="c4" width="75" align="right">
+                                            <af:outputText value="#{row.Tax}" id="ot4"
+                                                           shortDesc=" ##{row.Wo} Total Tax Credits: #{row.Wotaxcr}">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.InvoiceCreditResults.hints.Tax.format}"
+                                                                  type="currency" minFractionDigits="3"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.InvoiceCreditResults.hints.Total.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.InvoiceCreditResults.hints.Total.label}"
+                                                   id="c5" width="75" align="right">
+                                            <af:outputText value="#{row.Total}" id="ot5">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.InvoiceCreditResults.hints.Total.format}"
+                                                                  type="currency" minFractionDigits="3"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column id="c7" headerText="Credit" align="center">
+                                            <af:column sortProperty="#{bindings.InvoiceCreditResults.hints.Wototalcr.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvoiceCreditResults.hints.Wototalcr.label}"
+                                                       id="c12" width="75" align="right">
+                                                <af:outputText value="#{row.Wototalcr}" id="ot12">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.InvoiceCreditResults.hints.Wototalcr.format}"
+                                                                      type="currency" minFractionDigits="3"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvoiceCreditResults.hints.LaborCr.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvoiceCreditResults.hints.LaborCr.label}"
+                                                       id="c13" width="60" align="right" displayIndex="-1">
+                                                <af:inputText value="#{row.bindings.LaborCr.inputValue}" id="ot13"
+                                                              shortDesc="Available: #{row.AvailableLaborCr}"
+                                                              autoSubmit="true" partialTriggers=":::sbc2"
+                                                              binding="#{invoiceCreditBean.laborCr}"
+                                                              disabled="#{row.AvailableLaborCr eq '$0.00'}"
+                                                              label="#{bindings.InvoiceCreditResults.hints.LaborCr.label}">
+                                                    <af:convertNumber type="currency"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvoiceCreditResults.hints.PartCr.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvoiceCreditResults.hints.PartCr.label}"
+                                                       id="c14" width="60" align="right" displayIndex="-1">
+                                                <af:inputText value="#{row.bindings.PartCr.inputValue}" id="ot14"
+                                                              shortDesc="Available: #{row.AvailablePartCr}"
+                                                              autoSubmit="true" partialTriggers=":::sbc2"
+                                                              binding="#{invoiceCreditBean.partCr}"
+                                                              disabled="#{row.AvailablePartCr eq '$0.00'}"
+                                                              label="#{bindings.InvoiceCreditResults.hints.PartCr.label}">
+                                                    <af:convertNumber type="currency"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column headerText="#{bindings.InvoiceCreditResults.hints.TaxCr.label}"
+                                                       id="c6" align="right" width="60" displayIndex="-1">
+                                                <af:inputText value="#{row.bindings.TaxCr.inputValue}"
+                                                              label="#{bindings.InvoiceCreditResults.hints.TaxCr.label}"
+                                                              required="#{bindings.InvoiceCreditResults.hints.TaxCr.mandatory}"
+                                                              columns="#{bindings.InvoiceCreditResults.hints.TaxCr.displayWidth}"
+                                                              maximumLength="#{bindings.InvoiceCreditResults.hints.TaxCr.precision}"
+                                                              shortDesc="Available: #{row.AvailableTaxCr}"
+                                                              id="it8" disabled="#{row.AvailableTaxCr eq '$0.00'}"
+                                                              autoSubmit="true" partialTriggers=":::sbc2"
+                                                              binding="#{invoiceCreditBean.taxCr}">
+                                                    <f:validator binding="#{row.bindings.TaxCr.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.InvoiceCreditResults.hints.TaxCr.format}"
+                                                                      type="currency"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.InvoiceCreditResults.hints.CurrentCr.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.InvoiceCreditResults.hints.CurrentCr.label}"
+                                                       id="c15" width="75" align="right">
+                                                <af:outputText value="#{row.CurrentCr}" id="ot15"
+                                                               partialTriggers="ot13 ot14 it8"/>
+                                            </af:column>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelCollection>
+                            </f:facet>
+                            <f:facet name="start"/>
+                            <f:facet name="end"/>
+                            <f:facet name="top">
+                                <af:panelGroupLayout layout="vertical" id="pgl1"
+                                                     inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:10px 5px 5px; background-color:White; padding:10px 5px 5px;"
+                                                     halign="left" valign="top">
+                                    <af:panelFormLayout id="pfl1" maxColumns="3" rows="2" labelWidth="75">
+                                    <!--readOnly="#{bindings.CurCrTotal.inputValue le  0}"
+                                    partialTriggers="it7"-->
+                                    <!--
+                                        <af:inputListOfValues id="refInvoiceId"
+                                                              popupTitle="Search and Select Invoice to Credit"
+                                                              value="#{bindings.RefInvoice.inputValue}"
+                                                              label="#{bindings.RefInvoice.hints.label}"
+                                                              model="#{bindings.RefInvoice.listOfValuesModel}"
+                                                              required="#{bindings.RefInvoice.hints.mandatory}"
+                                                              columns="#{bindings.RefInvoice.hints.displayWidth}"
+                                                              shortDesc="#{bindings.RefInvoice.hints.tooltip}"
+                                                              autoSubmit="true"
+                                                              contentStyle="background-color: #d5ccb2;"
+                                                              readOnly="#{bindings.CurCrTotal.inputValue le  0}"
+                                                              editMode="select">
+                                            <f:validator binding="#{bindings.RefInvoice.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.RefInvoice.format}"/>
+                                        </af:inputListOfValues>
+                                        valueChangeListener="#{invoiceCreditBean.refInvValChangeLstnr}"-->
+                                        <af:inputListOfValues id="refInvoiceId"
+                                                              popupTitle="Search and Select Invoice to Credit"
+                                                              value="#{bindings.RefInvoice.inputValue}"
+                                                              label="#{bindings.RefInvoice.hints.label}"
+                                                              model="#{bindings.RefInvoice.listOfValuesModel}"
+                                                              required="#{bindings.RefInvoice.hints.mandatory}"
+                                                              columns="#{bindings.RefInvoice.hints.displayWidth}"
+                                                              shortDesc="#{bindings.RefInvoice.hints.tooltip}"
+                                                              autoSubmit="true"
+                                                              contentStyle="background-color: #d5ccb2;"
+                                                              readOnly="#{bindings.CurCrTotal.inputValue le  0}"
+                                                              editMode="select"                                                              
+                                                              binding="#{invoiceCreditBean.refInvoiceId}"
+                                                              >
+                                            <f:validator binding="#{bindings.RefInvoice.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.RefInvoice.format}"/>
+                                        </af:inputListOfValues>
+                                        <af:inputText label="(CR) Invoice" id="it1"
+                                                      binding="#{invoiceCreditBean.invoiceNumber}" disabled="true"/>
+                                        <af:toolbar id="t1">
+                                            <af:button text="Search"
+                                                       disabled="#{!bindings.executeInvoiceCreditSearch.enabled or bindings.RefInvoice.inputValue  eq null or  bindings.CurCrTotal.inputValue le 0}"
+                                                       id="cb1" icon="#{resource['images:find.png']}"
+                                                       action="#{invoiceCreditBean.search_action}"
+                                                       binding="#{invoiceCreditBean.searchBtn}"
+                                                       partialTriggers="refInvoiceId it7"/>
+                                            <af:separator id="s3"/>
+                                            <af:button text="Reset"
+                                                       disabled='#{!bindings.initInvoiceCredit.enabled  or bindings.RefInvoice.inputValue == ""}'
+                                                       id="cb2" icon="#{resource['images:refresh.png']}"
+                                                       action="#{invoiceCreditBean.reset_action}"
+                                                       binding="#{invoiceCreditBean.resetBtn}" immediate="true"
+                                                       partialTriggers="refInvoiceId"/>
+                                        </af:toolbar>
+                                        <af:inputText value="#{bindings.Acctnum.inputValue}"
+                                                      label="#{bindings.Acctnum.hints.label}"
+                                                      required="#{bindings.Acctnum.hints.mandatory}"
+                                                      columns="#{bindings.Acctnum.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Acctnum.hints.precision}"
+                                                      shortDesc="#{bindings.Acctnum.hints.tooltip}" id="it2">
+                                            <f:validator binding="#{bindings.Acctnum.validator}"/>
+                                        </af:inputText>
+                                        <af:spacer width="10" height="19" id="s1"/>
+                                        <af:panelLabelAndMessage id="plam2">
+                                            <af:selectBooleanCheckbox value="#{bindings.Internal.inputValue}"
+                                                                      shortDesc="#{bindings.Internal.hints.tooltip}"
+                                                                      id="sbc1"
+                                                                      readOnly='#{bindings.RefInvoice.inputValue == "" and bindings.InvoiceCreditResultsIterator.estimatedRowCount ==0}'
+                                                                      partialTriggers="refInvoiceId"
+                                                                      binding="#{invoiceCreditBean.internalOnlyChk}"
+                                                                      autoSubmit="true"/>
+                                            <f:facet name="end">
+                                                <af:outputLabel value="#{bindings.Internal.label}" id="ol2"/>
+                                            </f:facet>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelFormLayout>
+                                    <af:spacer width="10" height="10" id="s2"/>
+                                    <af:panelFormLayout id="pfl2" maxColumns="3" rows="1" fieldWidth="160"
+                                                        labelWidth="75"
+                                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin;"
+                                                        labelAlignment="start">
+                                        <f:facet name="footer"/>
+                                        <af:panelLabelAndMessage id="plam1">
+                                            <af:selectBooleanCheckbox id="sbc2"
+                                                                      autoSubmit="true"
+                                                                      valueChangeListener="#{invoiceCreditBean.applyInvoiceCreditListener}"
+                                                                      binding="#{invoiceCreditBean.applyInvoiceCreditChk}"
+                                                                      readOnly='#{bindings.RefInvoice.inputValue == "" and bindings.InvoiceCreditResultsIterator.estimatedRowCount ==0}'
+                                                                      simple="true"/>
+                                            <f:facet name="end">
+                                                <af:outputLabel value="Apply Invoice Credit" id="ol1"/>
+                                            </f:facet>
+                                        </af:panelLabelAndMessage>
+                                        <af:inputText value="#{bindings.InvoiceCr.inputValue}"
+                                                      label="#{bindings.InvoiceCr.hints.label}"
+                                                      required="#{bindings.InvoiceCr.hints.mandatory}"
+                                                      columns="#{bindings.InvoiceCr.hints.displayWidth}"
+                                                      maximumLength="#{bindings.InvoiceCr.hints.precision}"
+                                                      shortDesc="Available: #{bindings.AvailableInvoiceCr.attributeValue}" id="it3"
+                                                      autoSubmit="true" partialTriggers="sbc2"
+                                                      binding="#{invoiceCreditBean.creditAmt}">
+                                            <f:validator binding="#{bindings.InvoiceCr.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.InvoiceCr.format}" type="currency"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.Invcr.inputValue}"
+                                                      label="#{bindings.Invcr.hints.label}"
+                                                      required="#{bindings.Invcr.hints.mandatory}"
+                                                      columns="#{bindings.Invcr.hints.displayWidth}"
+                                                      maximumLength="#{bindings.Invcr.hints.precision}"
+                                                      shortDesc="#{bindings.Invcr.hints.tooltip}" id="it4">
+                                            <f:validator binding="#{bindings.Invcr.validator}"/>
+                                            <af:convertNumber groupingUsed="false" pattern="#{bindings.Invcr.format}"
+                                                              type="currency"/>
+                                        </af:inputText>
+                                    </af:panelFormLayout>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                        </af:panelStretchLayout>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="p1" binding="#{invoiceCreditBean.popInvConf}">
+                <af:dialog id="d2" type="ok" closeIconVisible="false">
+                    <f:facet name="buttonBar"/>
+                    <af:outputLabel value="Invoice Created" id="ol3"/>
+                </af:dialog>
+            </af:popup>
+        </af:form>
+    </af:document>
+</f:view>

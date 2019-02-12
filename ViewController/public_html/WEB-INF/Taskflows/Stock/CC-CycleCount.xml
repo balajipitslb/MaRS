@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Inv-CycleCount">
+    <template-reference>
+      <document>/WEB-INF/error-handler-flow.xml</document>
+      <id>error-handler-flow</id>
+    </template-reference>
+    <default-activity>CycleCount</default-activity>
+    <transaction>
+      <requires-transaction/>
+    </transaction>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__11">
+      <name>psfFIFO</name>
+      <value>#{pageFlowScope.psfFIFO}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__3">
+      <managed-bean-name>ModuleNavBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.ModuleNavBean</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__6">
+      <managed-bean-name>CycleCountBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.CycleCountBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <task-flow-return id="exit">
+      <outcome>
+        <name>exit</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <view id="CycleCount">
+      <page>/Content/CycleCnt/CycleCount.jspx</page>
+    </view>
+    <task-flow-call id="CC-CCSetupTrain">
+      <task-flow-reference>
+        <document>/WEB-INF/Taskflows/Stock/CC-CCSetupTrain.xml</document>
+        <id>CC-CCSetupTrain</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>psfListId</name>
+        <value></value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>psfStoreroom</name>
+        <value></value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <task-flow-call id="CC-FIFO">
+      <task-flow-reference>
+        <document>/WEB-INF/Taskflows/Stock/CC-FIFO.xml</document>
+        <id>CC-FIFO</id>
+      </task-flow-reference>
+      <input-parameter id="__10">
+        <name>psfFIFO</name>
+        <value>#{pageFlowScope.psfFIFO}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <task-flow-call id="StoreroomPartsShuttle">
+      <task-flow-reference>
+        <document>/WEB-INF/StoreroomPartsShuttle.xml</document>
+        <id>StoreroomPartsShuttle</id>
+      </task-flow-reference>
+      <input-parameter id="__15">
+        <name>listID</name>
+        <value>#{pageFlowScope.listID}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>Exit</from-outcome>
+        <to-activity-id>exit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>CycleCount</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>launchCCSetup</from-outcome>
+        <to-activity-id>CC-CCSetupTrain</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__9">
+        <from-outcome>launchFIFO</from-outcome>
+        <to-activity-id>CC-FIFO</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__12">
+        <from-outcome>launchTst</from-outcome>
+        <to-activity-id>StoreroomPartsShuttle</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>StoreroomPartsShuttle</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>returnCC</from-outcome>
+        <to-activity-id>CycleCount</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <critical/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Create List" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/CCSetupTrainTemplate.jspx" id="pt1">
+                <f:facet name="body">
+                    <af:panelHeader text="Part Class" id="ph1">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t1">
+                                <af:button text="Cancel" disabled="#{!bindings.Rollback.enabled}" immediate="true"
+                                           id="ctb1" icon="#{resource['images:undo.png']}"
+                                           binding="#{CycleCountBean.setupRangeCancelBtn}" visible="false"
+                                           action="#{CycleCountBean.ccSetupRangeCanc_action}">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button text="Back to Setup" id="ctb2" action="gotoStart"
+                                           icon="#{resource['images:shuttle_leftall.png']}"
+                                           binding="#{CycleCountBean.setupRangeReturnBtn}" visible="false"/>
+                                <af:button id="ctb3" icon="#{resource['images:shuttle_right.png']}"
+                                           action="gotoEmailNotification"
+                                           actionListener="#{CycleCountBean.RangeNext_action}" partialTriggers="it1"
+                                           disabled="#{empty bindings.Partclass.inputValue}"
+                                           binding="#{CycleCountBean.setupRangeForwardBtn}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:panelFormLayout id="pfl1">
+                            <af:inputText value="#{bindings.Partclass.inputValue}"
+                                          label="#{bindings.Partclass.hints.label}"
+                                          required="#{bindings.Partclass.hints.mandatory}"
+                                          columns="#{bindings.Partclass.hints.displayWidth}"
+                                          maximumLength="#{bindings.Partclass.hints.precision}"
+                                          shortDesc="#{bindings.Partclass.hints.tooltip}" id="it1" autoSubmit="true"
+                                          autoTab="true" contentStyle="text-transform:uppercase; ">
+                                <f:validator binding="#{bindings.Partclass.validator}"/>
+                            </af:inputText>
+                        </af:panelFormLayout>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:CycleCountBean-->
+</f:view>

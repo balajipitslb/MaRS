@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5translines"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="R5TRANSLINES"
+  AliasName="R5translines"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.eo.local.R5translinesImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="POLineRecvOnHand"
+    ViewObjectName="its.mnr.mp5.lov.POLineRecvOnHand"
+    RowLevelBinds="true"/>
+  <Attribute
+    Name="TrlTrans"
+    IsNotNull="true"
+    ColumnName="TRL_TRANS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES"
+    PrimaryKey="true"
+    Precision="255">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+    <TransientExpression><![CDATA[R5Transactions.TraCode != null ? R5Transactions.TraCode : null]]></TransientExpression>
+  </Attribute>
+  <Attribute
+    Name="TrlType"
+    Precision="4"
+    ColumnName="TRL_TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlRtype"
+    Precision="4"
+    ColumnName="TRL_RTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlLine"
+    IsNotNull="true"
+    Precision="5"
+    Scale="0"
+    ColumnName="TRL_LINE"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5TRANSLINES"
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="TrlDate"
+    ColumnName="TRL_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5TRANSLINES"/>
+  <Attribute
+    Name="TrlCostcode"
+    Precision="17"
+    ColumnName="TRL_COSTCODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="17"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlProject"
+    Precision="12"
+    ColumnName="TRL_PROJECT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlProjbud"
+    Precision="4"
+    ColumnName="TRL_PROJBUD"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlEvent"
+    Precision="8"
+    ColumnName="TRL_EVENT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlAct"
+    Precision="3"
+    Scale="0"
+    ColumnName="TRL_ACT"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5TRANSLINES"/>
+  <Attribute
+    Name="TrlPart"
+    IsNotNull="true"
+    Precision="18"
+    ColumnName="TRL_PART"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="18"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlOrdline"
+    Precision="4"
+    Scale="0"
+    ColumnName="TRL_ORDLINE"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5TRANSLINES"/>
+  <Attribute
+    Name="TrlReqline"
+    Precision="4"
+    Scale="0"
+    ColumnName="TRL_REQLINE"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5TRANSLINES"/>
+  <Attribute
+    Name="TrlObtype"
+    Precision="4"
+    ColumnName="TRL_OBTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlObrtype"
+    Precision="4"
+    ColumnName="TRL_OBRTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlObject"
+    Precision="24"
+    ColumnName="TRL_OBJECT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlLot"
+    Precision="12"
+    ColumnName="TRL_LOT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlBin"
+    Precision="12"
+    ColumnName="TRL_BIN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlStore"
+    Precision="4"
+    ColumnName="TRL_STORE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlPrice"
+    ColumnName="TRL_PRICE"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="R5TRANSLINES"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"/>
+  <Attribute
+    Name="TrlQty"
+    ColumnName="TRL_QTY"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="R5TRANSLINES"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="TrlStockprice"
+    Precision="15"
+    Scale="2"
+    ColumnName="TRL_STOCKPRICE"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="R5TRANSLINES"/>
+  <Attribute
+    Name="TrlOrder"
+    Precision="8"
+    ColumnName="TRL_ORDER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlReq"
+    Precision="8"
+    ColumnName="TRL_REQ"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlMultiply"
+    Precision="10"
+    Scale="4"
+    ColumnName="TRL_MULTIPLY"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="R5TRANSLINES"/>
+  <Attribute
+    Name="TrlIo"
+    ColumnName="TRL_IO"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5TRANSLINES"/>
+  <Attribute
+    Name="TrlAcd"
+    ColumnName="TRL_ACD"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="R5TRANSLINES"
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="TrlGltransferflag"
+    Precision="1"
+    ColumnName="TRL_GLTRANSFERFLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlGltransfer"
+    ColumnName="TRL_GLTRANSFER"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5TRANSLINES"/>
+  <Attribute
+    Name="TrlInterface"
+    ColumnName="TRL_INTERFACE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5TRANSLINES"/>
+  <Attribute
+    Name="TrlSourcesystem"
+    Precision="45"
+    ColumnName="TRL_SOURCESYSTEM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlSourcecode"
+    Precision="45"
+    ColumnName="TRL_SOURCECODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlConsignment"
+    Precision="1"
+    ColumnName="TRL_CONSIGNMENT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlConsignsupplier"
+    Precision="17"
+    ColumnName="TRL_CONSIGNSUPPLIER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="17"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlRejectreason"
+    Precision="4"
+    ColumnName="TRL_REJECTREASON"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlTransorgid"
+    ColumnName="TRL_TRANSORGID"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5TRANSLINES"/>
+  <Attribute
+    Name="TrlTranscode"
+    Precision="4"
+    ColumnName="TRL_TRANSCODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlTransgroup"
+    ColumnName="TRL_TRANSGROUP"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5TRANSLINES"/>
+  <Attribute
+    Name="TrlWarranty"
+    Precision="1"
+    ColumnName="TRL_WARRANTY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlObjectOrg"
+    Precision="8"
+    ColumnName="TRL_OBJECT_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlConsignsupplierOrg"
+    Precision="8"
+    ColumnName="TRL_CONSIGNSUPPLIER_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlOrderOrg"
+    Precision="8"
+    ColumnName="TRL_ORDER_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlPartOrg"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="TRL_PART_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlPicklist"
+    Precision="8"
+    ColumnName="TRL_PICKLIST"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlDckcode"
+    Precision="8"
+    ColumnName="TRL_DCKCODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlDckline"
+    Precision="5"
+    Scale="0"
+    ColumnName="TRL_DCKLINE"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5TRANSLINES"/>
+  <Attribute
+    Name="TrlAllocate"
+    Precision="1"
+    ColumnName="TRL_ALLOCATE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlEvtalias"
+    Precision="25"
+    ColumnName="TRL_EVTALIAS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlBarcode"
+    Precision="1"
+    ColumnName="TRL_BARCODE"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="R5TRANSLINES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TrlMlpline"
+    Precision="4"
+    Scale="0"
+    ColumnName="TRL_MLPLINE"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5TRANSLINES"/>
+  <Attribute
+    Name="tOrderQty"
+    ColumnName="T_ORDER_QTY"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    IsPersistent="false"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[R5orderlines == null? 0 : R5orderlines.OrlOrdqty]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5translines.tOrderQty_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5parts"
+    Association="its.mnr.mp5.eo.assoc.R5fok1TrlAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1TrlAssoc.R5parts"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1TrlAssoc.R5translines"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5bins"
+    Association="its.mnr.mp5.eo.assoc.R5fok2TrlAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok2TrlAssoc.R5bins"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok2TrlAssoc.R5translines"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5activities"
+    Association="its.mnr.mp5.eo.assoc.R5fok5TrlAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok5TrlAssoc.R5activities"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok5TrlAssoc.R5translines"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5transactions"
+    Association="its.mnr.mp5.eo.assoc.R5fok8TrlAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok8TrlAssoc.R5transactions"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok8TrlAssoc.R5translines"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5companies"
+    Association="its.mnr.mp5.eo.assoc.R5fokbTrlAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fokbTrlAssoc.R5companies"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fokbTrlAssoc.R5translines"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5orderlines"
+    Association="its.mnr.mp5.eo.assoc.R5fok9TrlAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok9TrlAssoc.R5orderlines"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok9TrlAssoc.R5translines"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <ViewLinkAccessor
+    Name="Transactions"
+    ViewLink="its.mnr.mp5.vo.link.TransactionsTranslineLink"
+    ViewLinkEnd="its.mnr.mp5.vo.link.TransactionsTranslineLink.Transactions"
+    ViewLinkOtherEnd="its.mnr.mp5.vo.link.TransactionsTranslineLink.Translines"
+    Type="its.mnr.mp5.vo.workorder.TransactionsRowImpl"
+    IsUpdateable="false"/>
+  <Key
+    Name="R5chk1Trl">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK1_TRL"/>
+      <Attr Name="_checkCondition" Value="TRL_WARRANTY IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk2Trl">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK2_TRL"/>
+      <Attr Name="_checkCondition" Value="TRL_QTY >= 99999999999.9999 AND TRL_QTY &lt;= 99999999999.9999"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk3Trl">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK3_TRL"/>
+      <Attr Name="_checkCondition" Value="TRL_IO IN (1, 0, 1)"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk4Trl">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK4_TRL"/>
+      <Attr Name="_checkCondition" Value="TRL_CONSIGNMENT IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk5Trl">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK5_TRL"/>
+      <Attr Name="_checkCondition" Value="TRL_BARCODE = 'B'"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn01Trl">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN01_TRL"/>
+      <Attr Name="_checkCondition" Value="TRL_PART IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn02Trl">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN02_TRL"/>
+      <Attr Name="_checkCondition" Value="TRL_QTY IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn04Trl">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN04_TRL"/>
+      <Attr Name="_checkCondition" Value="TRL_PRICE IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn05Trl">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN05_TRL"/>
+      <Attr Name="_checkCondition" Value="TRL_PART_ORG IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5prikTrl"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_TRL"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlTrans"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlLine"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlAcd"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Trl">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_PAR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_TRL"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlPart"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlPartOrg"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok2Trl">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_BIN"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK2_TRL"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlStore"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlBin"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok4Trl">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_PCL"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK4_TRL"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlProject"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlProjbud"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok5Trl">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_ACT"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK5_TRL"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlEvent"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlAct"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok7Trl">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_CST"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK7_TRL"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlCostcode"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok8Trl">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_TRA"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK8_TRL"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlTrans"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok9Trl">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_ORL"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK9_TRL"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlOrder"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlOrderOrg"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlOrdline"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fokaTrl">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_RQL"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOKA_TRL"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlReq"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlReqline"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fokbTrl">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_COM"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOKB_TRL"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlConsignsupplier"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlConsignsupplierOrg"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fokcTrl">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_RJR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOKC_TRL"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlRejectreason"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fokdTrl">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_PIC"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOKD_TRL"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlPicklist"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fokeTrl">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_DKL"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOKE_TRL"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlDckcode"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlDckline"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_R5translines">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_STO"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_R5TRANSLINES"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlPart"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlPartOrg"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlStore"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_R5translines1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_STO"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_R5TRANSLINES1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlPart"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlPartOrg"/>
+      <Item Value="its.mnr.mp5.eo.local.R5translines.TrlStore"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

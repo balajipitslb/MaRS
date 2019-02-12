@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="WOEventsAccountMasterLink"
+  Version="11.1.2.60.81"
+  EntityAssociation="its.mnr.mp5.eo.assoc.R5EventsAccountMasterAssoc">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.link.WOEventsAccountMasterLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="WOEvents"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.vo.workorder.WOEvents">
+    <DesignTime>
+      <Attr Name="_finderName" Value="WOEvents"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.workorder.WOEvents.EvtCostcode"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="MrltAccountmasterView1"
+    Cardinality="1"
+    Owner="its.mnr.mp5.vo.admin.MrltAccountmasterView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="MrltAccountmasterView1"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.admin.MrltAccountmasterView.Acctnum"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

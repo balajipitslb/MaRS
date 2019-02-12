@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AvailableQtyExistence"
+  Version="11.1.2.64.36"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.lov.AvailableQtyExistence_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT R5binstock.BIS_BIN, 
+       R5binstock.BIS_PART, 
+       R5binstock.BIS_STORE, 
+       R5binstock.BIS_LOT, 
+       R5binstock.BIS_PART_ORG,
+       R5binstock.BIS_QTY,
+       mlp.mlp_qty,
+       mlp.mlp_matlist,
+       mlp.mlp_line,
+       mlp.mlp_matlrev,
+    CASE 
+        WHEN R5binstock.BIS_QTY - mlp.mlp_qty >= 0 THEN 'Y'
+        ELSE 'N'
+    END AvailQty
+FROM R5BINSTOCK R5binstock,
+R5MATLPARTS mlp
+where 
+    R5binstock.BIS_PART = mlp.mlp_part]]></SQLQuery>
+  <EntityUsage
+    Name="R5binstock"
+    Entity="its.mnr.mp5.eo.local.R5binstock"
+    ReadOnly="true"
+    DeleteParticipant="false"/>
+  <EntityUsage
+    Name="R5matlparts"
+    Entity="its.mnr.mp5.eo.local.R5matlparts"
+    Association="its.mnr.mp5.eo.assoc.MlpPartsBinStockAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MlpPartsBinStockAssoc.R5matlparts"
+    SourceUsage="its.mnr.mp5.lov.AvailableQtyExistence.R5binstock"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="INNER JOIN">
+    <DesignTime>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="its.mnr.mp5.eo.local.R5binstock.BisPart"/>
+        <Item Value="its.mnr.mp5.eo.local.R5binstock.BisPartOrg"/>
+      </AttrArray>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="its.mnr.mp5.eo.local.R5matlparts.MlpPart"/>
+        <Item Value="its.mnr.mp5.eo.local.R5matlparts.MlpPartOrg"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
+  <ViewAttribute
+    Name="BisBin"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="BisBin"
+    EntityUsage="R5binstock"
+    AliasName="BIS_BIN"/>
+  <ViewAttribute
+    Name="BisPart"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="BisPart"
+    EntityUsage="R5binstock"
+    AliasName="BIS_PART"/>
+  <ViewAttribute
+    Name="BisStore"
+    PrecisionRule="true"
+    EntityAttrName="BisStore"
+    EntityUsage="R5binstock"
+    AliasName="BIS_STORE"/>
+  <ViewAttribute
+    Name="BisLot"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="BisLot"
+    EntityUsage="R5binstock"
+    AliasName="BIS_LOT"/>
+  <ViewAttribute
+    Name="BisPartOrg"
+    PrecisionRule="true"
+    EntityAttrName="BisPartOrg"
+    EntityUsage="R5binstock"
+    AliasName="BIS_PART_ORG"/>
+  <ViewAttribute
+    Name="BisQty"
+    PrecisionRule="true"
+    AliasName="BIS_QTY"
+    IsNotNull="true"
+    EntityAttrName="BisQty"
+    EntityUsage="R5binstock"/>
+  <ViewAttribute
+    Name="MlpQty"
+    PrecisionRule="true"
+    AliasName="MLP_QTY"
+    IsNotNull="true"
+    EntityAttrName="MlpQty"
+    EntityUsage="R5matlparts"/>
+  <ViewAttribute
+    Name="MlpMatlist"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="MlpMatlist"
+    EntityUsage="R5matlparts"
+    AliasName="MLP_MATLIST"/>
+  <ViewAttribute
+    Name="MlpLine"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="MlpLine"
+    EntityUsage="R5matlparts"
+    AliasName="MLP_LINE"/>
+  <ViewAttribute
+    Name="MlpMatlrev"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="MlpMatlrev"
+    EntityUsage="R5matlparts"
+    AliasName="MLP_MATLREV"/>
+  <ViewAttribute
+    Name="Availqty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="AVAILQTY"
+    Expression="AVAILQTY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="BisBin"/>
+    <Item Value="BisPart"/>
+    <Item Value="BisStore"/>
+    <Item Value="BisLot"/>
+    <Item Value="BisPartOrg"/>
+  </AttrArray>
+  <ViewLinkAccessor
+    Name="Matlparts"
+    ViewLink="its.mnr.mp5.vo.link.AvailableQtyExistenceLink"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

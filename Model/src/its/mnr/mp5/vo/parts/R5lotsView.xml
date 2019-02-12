@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5lotsView"
+  Version="11.1.2.60.81"
+  SelectList="R5lots.LOT_CODE, 
+       R5lots.LOT_DESC, 
+       R5lots.LOT_ORG"
+  FromList="MP5PRD.R5LOTS R5lots"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchSize="25"
+  RangeSize="26">
+  <EntityUsage
+    Name="R5lots"
+    Entity="its.mnr.mp5.eo.local.R5lots"/>
+  <ViewAttribute
+    Name="LotCode"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LotCode"
+    EntityUsage="R5lots"
+    AliasName="LOT_CODE"/>
+  <ViewAttribute
+    Name="LotDesc"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LotDesc"
+    EntityUsage="R5lots"
+    AliasName="LOT_DESC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.parts.R5lotsView.LotDesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LotOrg"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LotOrg"
+    EntityUsage="R5lots"
+    AliasName="LOT_ORG"
+    IsQueriable="false"/>
+  <ViewLinkAccessor
+    Name="PartsBinstockView"
+    ViewLink="its.mnr.mp5.vo.link.R5fok3BisLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

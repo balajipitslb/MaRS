@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Suppliers">
+    <template-reference>
+      <document>/WEB-INF/error-handler-flow.xml</document>
+      <id>error-handler-flow</id>
+    </template-reference>
+    <default-activity>Supplier</default-activity>
+    <managed-bean id="__10">
+      <managed-bean-name>SupplierBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.SupplierBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <task-flow-return id="exit">
+      <outcome>
+        <name>exit</name>
+      </outcome>
+    </task-flow-return>
+    <view id="Supplier">
+      <page>/Content/Stock/Supplier.jspx</page>
+    </view>
+    <view id="EditSupplier">
+      <page>/Content/Stock/EditSupplier.jspx</page>
+    </view>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>Exit</from-outcome>
+        <to-activity-id>exit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>Supplier</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>Add</from-outcome>
+        <to-activity-id>CreateInsert</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__7">
+        <from-outcome>Edit</from-outcome>
+        <to-activity-id>EditSupplier</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>CreateInsert</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>CreateInsert</from-outcome>
+        <to-activity-id>EditSupplier</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__8">
+      <from-activity-id>EditSupplier</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>Return</from-outcome>
+        <to-activity-id>Supplier</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

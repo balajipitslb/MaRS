@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5users"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="R5USERS"
+  AliasName="R5users"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="UsrCode"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="USR_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrDesc"
+    IsNotNull="true"
+    Precision="45"
+    ColumnName="USR_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrClass"
+    Precision="4"
+    ColumnName="USR_CLASS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrMrc"
+    Precision="4"
+    ColumnName="USR_MRC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrSysman"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="USR_SYSMAN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrPassword"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="USR_PASSWORD"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrLastfunc"
+    Precision="6"
+    ColumnName="USR_LASTFUNC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrFirstfunc"
+    Precision="6"
+    ColumnName="USR_FIRSTFUNC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrGroup"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="USR_GROUP"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrLang"
+    IsNotNull="true"
+    Precision="2"
+    ColumnName="USR_LANG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrPrinter"
+    Precision="12"
+    ColumnName="USR_PRINTER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrExppass"
+    IsNotNull="true"
+    ColumnName="USR_EXPPASS"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5USERS"/>
+  <Attribute
+    Name="UsrExpuser"
+    IsNotNull="true"
+    ColumnName="USR_EXPUSER"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5USERS"/>
+  <Attribute
+    Name="UsrFacility"
+    Precision="10"
+    ColumnName="USR_FACILITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrReqappvlimit"
+    Precision="15"
+    Scale="2"
+    ColumnName="USR_REQAPPVLIMIT"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="R5USERS"/>
+  <Attribute
+    Name="UsrReqauthappvlimit"
+    Precision="15"
+    Scale="2"
+    ColumnName="USR_REQAUTHAPPVLIMIT"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="R5USERS"/>
+  <Attribute
+    Name="UsrBuyer"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="USR_BUYER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrPordappvlimit"
+    Precision="15"
+    Scale="2"
+    ColumnName="USR_PORDAPPVLIMIT"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="R5USERS"/>
+  <Attribute
+    Name="UsrPordauthappvlimit"
+    Precision="15"
+    Scale="2"
+    ColumnName="USR_PORDAUTHAPPVLIMIT"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="R5USERS"/>
+  <Attribute
+    Name="UsrRouter"
+    Precision="1"
+    ColumnName="USR_ROUTER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrDatelocked"
+    ColumnName="USR_DATELOCKED"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5USERS"/>
+  <Attribute
+    Name="UsrViolations"
+    ColumnName="USR_VIOLATIONS"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5USERS"/>
+  <Attribute
+    Name="UsrClassOrg"
+    Precision="8"
+    ColumnName="USR_CLASS_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrApprover"
+    Precision="1"
+    ColumnName="USR_APPROVER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrPicappvlimit"
+    Precision="15"
+    Scale="2"
+    ColumnName="USR_PICAPPVLIMIT"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="R5USERS"/>
+  <Attribute
+    Name="UsrEmailaddress"
+    Precision="255"
+    ColumnName="USR_EMAILADDRESS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="255"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrNotificationpref"
+    Precision="4"
+    ColumnName="USR_NOTIFICATIONPREF"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UsrBrowser"
+    Precision="255"
+    ColumnName="USR_BROWSER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5USERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="255"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5companies"
+    Association="its.mnr.mp5.eo.assoc.R5fok4ComAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok4ComAssoc.R5companies"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok4ComAssoc.R5users"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5addetails"
+    Association="its.mnr.mp5.eo.assoc.R5fok4AddAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok4AddAssoc.R5addetails"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok4AddAssoc.R5users"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5addetails1"
+    Association="its.mnr.mp5.eo.assoc.R5fok3AddAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok3AddAssoc.R5addetails1"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok3AddAssoc.R5users1"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5orders"
+    Association="its.mnr.mp5.eo.assoc.R5fok5OrdAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok5OrdAssoc.R5orders"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok5OrdAssoc.R5users"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5orders1"
+    Association="its.mnr.mp5.eo.assoc.R5fok7OrdAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok7OrdAssoc.R5orders1"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok7OrdAssoc.R5users1"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="R5chk1Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK1_USR"/>
+      <Attr Name="_checkCondition" Value="USR_EXPUSER >= USR_EXPPASS"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk2Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK2_USR"/>
+      <Attr Name="_checkCondition" Value="USR_SYSMAN IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk3Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK3_USR"/>
+      <Attr Name="_checkCondition" Value="USR_BUYER IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk4Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK4_USR"/>
+      <Attr Name="_checkCondition" Value="USR_ROUTER IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk5Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK5_USR"/>
+      <Attr Name="_checkCondition" Value="USR_APPROVER IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk6Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK6_USR"/>
+      <Attr Name="_checkCondition" Value="USR_PICAPPVLIMIT >= 0"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk7Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK7_USR"/>
+      <Attr Name="_checkCondition"
+        Value="(USR_CLASS IS NULL AND USR_CLASS_ORG IS NULL) OR (USR_CLASS IS NOT NULL AND USR_CLASS_ORG IS NOT NULL)"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn01Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN01_USR"/>
+      <Attr Name="_checkCondition" Value="USR_PASSWORD IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn02Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN02_USR"/>
+      <Attr Name="_checkCondition" Value="USR_DESC IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn03Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN03_USR"/>
+      <Attr Name="_checkCondition" Value="USR_EXPPASS IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn04Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN04_USR"/>
+      <Attr Name="_checkCondition" Value="USR_EXPUSER IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn05Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN05_USR"/>
+      <Attr Name="_checkCondition" Value="USR_LANG IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn06Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN06_USR"/>
+      <Attr Name="_checkCondition" Value="USR_GROUP IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn07Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN07_USR"/>
+      <Attr Name="_checkCondition" Value="USR_SYSMAN IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn08Usr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN08_USR"/>
+      <Attr Name="_checkCondition" Value="USR_BUYER IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5prikUsr"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_USR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5users.UsrCode"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Usr">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_MRC"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_USR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5users.UsrMrc"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok2Usr">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_DEV"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK2_USR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5users.UsrPrinter"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok3Usr">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_UGR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK3_USR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5users.UsrGroup"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok4Usr">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_LIN"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK4_USR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5users.UsrLang"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok5Usr">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_FUN"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK5_USR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5users.UsrLastfunc"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok6Usr">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_FAC"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK6_USR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5users.UsrFacility"/>
+    </AttrArray>
+  </Key>
+</Entity>

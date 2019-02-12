@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5groups"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="R5GROUPS"
+  AliasName="R5groups"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="UgrCode"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="UGR_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5GROUPS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UgrDesc"
+    IsNotNull="true"
+    Precision="45"
+    ColumnName="UGR_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5GROUPS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UgrClass"
+    Precision="4"
+    ColumnName="UGR_CLASS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5GROUPS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UgrMrc"
+    Precision="4"
+    ColumnName="UGR_MRC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5GROUPS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UgrPrinter"
+    Precision="12"
+    ColumnName="UGR_PRINTER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5GROUPS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UgrCorrbook"
+    Precision="1"
+    ColumnName="UGR_CORRBOOK"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5GROUPS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UgrClassOrg"
+    Precision="8"
+    ColumnName="UGR_CLASS_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5GROUPS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5objects"
+    Association="its.mnr.mp5.eo.assoc.R5fok5ObjAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok5ObjAssoc.R5objects"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok5ObjAssoc.R5groups"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="R5chk1Ugr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK1_UGR"/>
+      <Attr Name="_checkCondition" Value="UGR_CORRBOOK IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk2Ugr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK2_UGR"/>
+      <Attr Name="_checkCondition"
+        Value="(UGR_CLASS IS NULL AND UGR_CLASS_ORG IS NULL) OR (UGR_CLASS IS NOT NULL AND UGR_CLASS_ORG IS NOT NULL)"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn01Ugr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN01_UGR"/>
+      <Attr Name="_checkCondition" Value="UGR_DESC IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5prikUgr"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_UGR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5groups.UgrCode"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Ugr">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_MRC"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_UGR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5groups.UgrMrc"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok2Ugr">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_DEV"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK2_UGR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5groups.UgrPrinter"/>
+    </AttrArray>
+  </Key>
+</Entity>

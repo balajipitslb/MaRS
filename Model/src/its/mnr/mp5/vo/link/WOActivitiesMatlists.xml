@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="WOActivitiesMatlists"
+  Version="11.1.2.60.81">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.link.WOActivitiesMatlists_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="WOActivities"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.vo.workorder.WOActivities">
+    <DesignTime>
+      <Attr Name="_finderName" Value="WOActivities"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.workorder.WOActivities.ActEvent"/>
+      <Item Value="its.mnr.mp5.vo.workorder.WOActivities.ActAct"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="Matlists"
+    Cardinality="-1"
+    Owner="its.mnr.mp5.vo.workorder.Matlists">
+    <DesignTime>
+      <Attr Name="_finderName" Value="Matlists"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.workorder.Matlists.MtlEvent"/>
+      <Item Value="its.mnr.mp5.vo.workorder.Matlists.MtlAct"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

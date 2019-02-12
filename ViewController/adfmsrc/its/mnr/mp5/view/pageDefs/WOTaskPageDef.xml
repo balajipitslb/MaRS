@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="WOTaskPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="WODataControlNested.WOEvents" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="WOEventsIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="WODataControlNested.WOActivities" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="WOActivitiesIterator" ChangeEventPolicy="ppr"/>
+    <iterator id="WOServiceGroupIterator" Binds="WODataControlNested.WOServiceGroup"
+              DataControl="MNRDataControlDataControl" RangeSize="25" Refresh="default"/>
+    <iterator Binds="WODataControlNested.Matlists" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="MatlistsIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="WODataControlNested.Matlparts" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="MatlpartsIterator" Refresh="default" ChangeEventPolicy="ppr"/>
+    <iterator id="PartsViewIterator" Binds="WODataControlNested.PartsView" DataControl="MNRDataControlDataControl"
+              RangeSize="50"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="WOEventsIterator" id="EvtCode">
+      <AttrNames>
+        <Item Value="EvtCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WOEventsIterator" id="EvtWOType">
+      <AttrNames>
+        <Item Value="EvtWOType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WOEventsIterator" id="EvtDesc">
+      <AttrNames>
+        <Item Value="EvtDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WOEventsIterator" id="EvtCostcode">
+      <AttrNames>
+        <Item Value="EvtCostcode"/>
+      </AttrNames>
+    </attributeValues>
+    <navigationlist IterBinding="WOActivitiesIterator" ListOperMode="navigation" ListIter="WOActivitiesIterator"
+                    id="WOActivities" DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="ActAct"/>
+      </AttrNames>
+    </navigationlist>
+    <attributeValues IterBinding="WOActivitiesIterator" id="ActUom">
+      <AttrNames>
+        <Item Value="ActUom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WOActivitiesIterator" id="ActRatetype">
+      <AttrNames>
+        <Item Value="ActRatetype"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="WOActivitiesIterator" Uses="LOV_ItsTaskdesc" id="ItsTaskdesc"/>
+    <list IterBinding="WOActivitiesIterator" StaticList="false" Uses="LOV_ItsLoccode" id="ItsLoccode"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="WOActivitiesIterator" StaticList="false" Uses="LOV_ItsDamcode" id="ItsDamcode"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="WOActivitiesIterator" id="ItsTaskdamid">
+      <AttrNames>
+        <Item Value="ItsTaskdamid"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="WOActivitiesIterator" StaticList="false" Uses="LOV_ItsRepcode" id="ItsRepcode"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="WOActivitiesIterator" id="ActBillableLbrHrs">
+      <AttrNames>
+        <Item Value="ActBillableLbrHrs"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WOActivitiesIterator" id="ActMechanicid">
+      <AttrNames>
+        <Item Value="ActMechanicid"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="WOActivitiesIterator" StaticList="false" Uses="LOV_ActTimetype" id="ActTimetype"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="WOActivitiesIterator" id="ItsComment">
+      <AttrNames>
+        <Item Value="ItsComment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WOActivitiesIterator" id="ActMatlist">
+      <AttrNames>
+        <Item Value="ActMatlist"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MatlistsIterator" id="MtlCode">
+      <AttrNames>
+        <Item Value="MtlCode"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="MatlpartsIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="MatlpartsIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="MatlistsIterator" id="CreateWithParams"
+            InstanceName="MNRDataControlDataControl.WODataControlNested.Matlists"
+            DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="createWithParams"/>
+    <methodAction IterBinding="WOActivitiesIterator" id="getDefLocCode"
+                  InstanceName="bindings.WOActivitiesIterator.currentRow" DataControl="MNRDataControlDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="getDefLocCode" IsViewObjectMethod="false"
+                  IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.getDefLocCode_getDefLocCode_getDefLocCode_result">
+      <NamedData NDName="taskid" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="WOActivitiesIterator" id="getDefDamCode"
+                  InstanceName="bindings.WOActivitiesIterator.currentRow" DataControl="MNRDataControlDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="getDefDamCode" IsViewObjectMethod="false"
+                  IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.getDefDamCode_getDefDamCode_getDefDamCode_result">
+      <NamedData NDName="taskid" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="WOActivitiesIterator" id="getDefRepCode"
+                  InstanceName="bindings.WOActivitiesIterator.currentRow" DataControl="MNRDataControlDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="getDefRepCode" IsViewObjectMethod="false"
+                  IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.getDefRepCode_getDefRepCode_getDefRepCode_result">
+      <NamedData NDName="taskdamid" NDType="java.lang.String"/>
+      <NamedData NDName="idtype" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="WOActivitiesIterator" id="ItsTaskid">
+      <AttrNames>
+        <Item Value="ItsTaskid"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="WOActivitiesIterator" id="CreateInsert1" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <methodAction IterBinding="WOActivitiesIterator" id="isSingleDefaultLoc"
+                  InstanceName="bindings.WOActivitiesIterator.currentRow" DataControl="MNRDataControlDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="isSingleDefaultLoc"
+                  IsViewObjectMethod="false" IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.isSingleDefaultLoc_isSingleDefaultLoc_isSingleDefaultLoc_result"/>
+    <methodAction IterBinding="WOActivitiesIterator" id="isSingleDefaultDam"
+                  InstanceName="bindings.WOActivitiesIterator.currentRow" DataControl="MNRDataControlDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="isSingleDefaultDam"
+                  IsViewObjectMethod="false" IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.isSingleDefaultDam_isSingleDefaultDam_isSingleDefaultDam_result"/>
+    <methodAction IterBinding="WOActivitiesIterator" id="isSingleDefaultRep"
+                  InstanceName="bindings.WOActivitiesIterator.currentRow" DataControl="MNRDataControlDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="isSingleDefaultRep"
+                  IsViewObjectMethod="false" IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.isSingleDefaultRep_isSingleDefaultRep_isSingleDefaultRep_result"/>
+    <listOfValues StaticList="false" IterBinding="MatlpartsIterator" Uses="LOV_MlpPart" id="MlpPart"/>
+    <attributeValues IterBinding="MatlpartsIterator" id="PartDesc">
+      <AttrNames>
+        <Item Value="PartDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MatlpartsIterator" id="MlpQty">
+      <AttrNames>
+        <Item Value="MlpQty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MatlpartsIterator" id="PartUOM">
+      <AttrNames>
+        <Item Value="PartUOM"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MatlpartsIterator" id="ItsBin">
+      <AttrNames>
+        <Item Value="ItsBin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MatlpartsIterator" id="ItsLot">
+      <AttrNames>
+        <Item Value="ItsLot"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MatlpartsIterator" id="Available">
+      <AttrNames>
+        <Item Value="Available"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="MatlpartsIterator" id="First" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="MatlpartsIterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="MatlpartsIterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="MatlpartsIterator" id="Last" RequiresUpdateModel="true" Action="last"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="MNRDataControlDataControl"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Parts-PartMaint">
+    <template-reference>
+      <document>/WEB-INF/error-handler-flow.xml</document>
+      <id>error-handler-flow</id>
+    </template-reference>
+    <default-activity>PartMaintenance</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>ModuleNavBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.ModuleNavBean</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__4">
+      <managed-bean-name>PartsMaintenanceBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.PartsMaintenanceBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <task-flow-return id="exit">
+      <outcome>
+        <name>exit</name>
+      </outcome>
+    </task-flow-return>
+    <view id="PartMaintenance">
+      <page>/Content/Stock/PartMaintenance.jspx</page>
+    </view>
+    <task-flow-call id="POCompanReceipts">
+      <task-flow-reference>
+        <document>/WEB-INF/Taskflows/PORecv/POCompanReceipts.xml</document>
+        <id>POCompanReceipts</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>pfsPart</name>
+        <value>#{pageFlowScope.pfsPartNo}</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>psfSupplier</name>
+        <value>#{pageFlowScope.pfsSupplierNo}</value>
+      </input-parameter>
+      <input-parameter id="__9">
+        <name>psfcalledfromstock</name>
+        <value>#{pageFlowScope.pfsCalledFromStock}</value>
+      </input-parameter>
+      <input-parameter id="__10">
+        <name>psfbaseprice</name>
+        <value>#{pageFlowScope.pfsBasePrice}</value>
+      </input-parameter>
+      <input-parameter id="__11">
+        <name>psfdescription</name>
+        <value>#{pageFlowScope.pfsDescription}</value>
+      </input-parameter>
+    </task-flow-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>Exit</from-outcome>
+        <to-activity-id>exit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>PartMaintenance</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>launchCmpRcpts</from-outcome>
+        <to-activity-id>POCompanReceipts</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__12">
+      <from-activity-id>POCompanReceipts</from-activity-id>
+      <control-flow-case id="__13">
+        <from-outcome>exit</from-outcome>
+        <to-activity-id>PartMaintenance</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <critical/>
+  </task-flow-definition>
+</adfc-config>

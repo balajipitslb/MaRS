@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Setup Email Notification" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/CCSetupTrainTemplate.jspx" id="pt1">
+                <f:facet name="body">
+                    <af:panelHeader text="Subscribe to Email Notifications" id="ph1">
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t1">
+                                <af:button text="Cancel" id="ctb1" immediate="true"
+                                           icon="#{resource['images:undo.png']}"
+                                           action="#{CycleCountBean.ccSetupRangeCanc_action}" visible="false"
+                                           binding="#{CycleCountBean.setupRangeCancelBtn}">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button text="Back to Setup" action="gotoStart"
+                                           icon="#{resource['images:shuttle_leftall.png']}"
+                                           binding="#{CycleCountBean.setupRangeReturnBtn}" visible="false" id="b1"/>
+                                <af:button id="ctb2" icon="#{resource['images:shuttle_right.png']}"
+                                           action="#{CycleCountBean.emailStr}"/>
+                                <!--action="#{CycleCountBean.createCCListAndSetEmailJobs}"
+                                                         disabled="#{empty CycleCountBean.email1.value and empty CycleCountBean.email2.value and empty CycleCountBean.email3.value and empty CycleCountBean.email4.value and empty CycleCountBean.email5.value and empty CycleCountBean.email6.value}"
+                                                         partialTriggers="it1 it2 it3 it4 it5 it6"-->
+                            </af:toolbar>
+                        </f:facet>
+                        <!--
+                        <af:selectBooleanCheckbox text="Would you like to be notified when the job is complete?" id="sbc1"
+                                                  valueChangeListener="#{CycleCountBean.emailSubCheckbox}"
+                                                  binding="#{CycleCountBean.emailSubChk}" autoSubmit="true"   simple="true"
+                                                  />
+                        <af:spacer width="10" height="10" id="s1"/>
+                        <af:panelFormLayout id="pfl1" maxColumns="2" rows="3" partialTriggers="sbc1 it1 it2">
+                            <af:inputText label="Email 1" id="it1" binding="#{CycleCountBean.email1}" autoSubmit="true"
+                            rendered="#{CycleCountBean.emailSubChk.value}" validator="#{CycleCountBean.emailValidator}"/>
+                            -->
+                        <!--<af:validateRegExp pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$"
+                                                   messageDetailNoMatch="Please enter a valid email address"/>
+                            </af:inputText>-->
+                        <!--
+                            <af:inputText label="Email 2" id="it2" binding="#{CycleCountBean.email2}" autoSubmit="true"
+                            rendered="#{CycleCountBean.emailSubChk.value}"
+                                          valueChangeListener="#{CycleCountBean.emailValChngLstnr}"/>
+                                          -->
+                        <!--  <af:validateRegExp pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$"
+                                                   messageDetailNoMatch="Please enter a valid email address"/>
+                            </af:inputText>-->
+                        <!--
+                        </af:panelFormLayout>
+                        -->
+                        <af:panelFormLayout id="pfl1" maxColumns="2" rows="3" partialTriggers="sbc1">
+                            <af:inputText label="Email 1" id="it1" binding="#{CycleCountBean.email1}" autoSubmit="true"
+                                          validator="#{CycleCountBean.emailValidator}" showRequired="true"/>
+                            <af:selectBooleanCheckbox text="Would you like to another email address?"
+                                                      id="sbc1" valueChangeListener="#{CycleCountBean.emailSubCheckbox}"
+                                                      binding="#{CycleCountBean.emailSubChk}" autoSubmit="true"
+                                                      simple="true" contentStyle="margin-left:-45px;" immediate="true"/>
+                            <af:inputText label="Email 2" id="it2" binding="#{CycleCountBean.email2}" autoSubmit="true"
+                                          rendered="#{CycleCountBean.emailSubChk.value}"
+                                          required="#{CycleCountBean.emailSubChk.value}"
+                                          valueChangeListener="#{CycleCountBean.emailValChngLstnr}"
+                                          showRequired="true"/>
+                        </af:panelFormLayout>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                      binding="#{CycleCountBean.popCCListConfirm}">
+                <af:dialog id="d2" type="ok" dialogListener="#{CycleCountBean.diagLsnrCCListConfirm}"
+                           title="Cycle Count List Confirmation" closeIconVisible="false">
+                    <f:facet name="buttonBar"/>
+                    <!--
+                        <af:inputText id="ot1" readOnly="true" binding="#{CycleCountBean.ccListConfTxt}" autoSubmit="true"
+                                      value="List # #{bindings.Listid.inputValue} is being created. You will receive an email to the subscribed email address(es) when the requested operation is completed.">
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.Listid.format}"/>
+                    </af:inputText>-->
+                    <af:outputText id="ot1"
+                                   value="List # #{bindings.Listid.inputValue} is being created. You will receive an email to the subscribed email address(es) when the requested operation is completed.">
+                        <!--binding="#{CycleCountBean.ccListConfTxt}" <af:convertNumber groupingUsed="false" pattern="#{bindings.Listid.format}"/>-->
+                    </af:outputText>
+                </af:dialog>
+            </af:popup>
+        </af:form>
+    </af:document>
+</f:view>

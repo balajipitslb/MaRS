@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltAssetdocumentsView"
+  Version="11.1.2.60.81"
+  SelectList="MrltAssetdocuments.ASSETDOCITEM, 
+       MrltAssetdocuments.ORG, 
+       MrltAssetdocuments.DOCID"
+  FromList="MP5PRD.MRLT_ASSETDOCUMENTS MrltAssetdocuments"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <ViewAccessor
+    Name="AssetDocsLookup"
+    ViewObjectName="its.mnr.mp5.lov.AssetDocsLookup">
+    <ViewCriteriaUsage
+      Name="AssetDocsLookupCriteria"
+      FullName="its.mnr.mp5.lov.AssetDocsLookup.AssetDocsLookupCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="BASSET">
+        <TransientExpression><![CDATA[Assetdocitem]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="BASSETORG">
+        <TransientExpression><![CDATA[Org]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_Docid"
+    ListVOName="AssetDocsLookup"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Docid"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="tDocDesc"/>
+      <Item Value="tDocType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Docid"/>
+      <Item Value="Docdesc"/>
+      <Item Value="Doctype"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Docid"/>
+      <Item Value="Docdesc"/>
+      <Item Value="Doctype"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="AssetDocsLookupCriteria"/>
+  </ListBinding>
+  <EntityUsage
+    Name="MrltAssetdocuments"
+    Entity="its.mnr.mp5.eo.local.MrltAssetdocuments"/>
+  <ViewAttribute
+    Name="Assetdocitem"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Assetdocitem"
+    EntityUsage="MrltAssetdocuments"
+    AliasName="ASSETDOCITEM">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.asset.MrltAssetdocumentsView.Assetdocitem_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Org"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Org"
+    EntityUsage="MrltAssetdocuments"
+    AliasName="ORG">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.asset.MrltAssetdocumentsView.Org_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Docid"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Docid"
+    EntityUsage="MrltAssetdocuments"
+    AliasName="DOCID"
+    LOVName="LOV_Docid">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.asset.MrltAssetdocumentsView.Docid_LABEL"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tDocDesc"
+    PrecisionRule="true"
+    EntityAttrName="tDocDesc"
+    EntityUsage="MrltAssetdocuments"
+    AliasName="T_DOC_DESC"
+    IsPersistent="false"
+    IsQueriable="false">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.asset.MrltAssetdocumentsView.tDocDesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tDocType"
+    PrecisionRule="true"
+    EntityAttrName="tDocType"
+    EntityUsage="MrltAssetdocuments"
+    AliasName="T_DOC_TYPE"
+    IsPersistent="false"
+    IsQueriable="false">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.asset.MrltAssetdocumentsView.tDocType_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewLinkAccessor
+    Name="MrltAssetView"
+    ViewLink="its.mnr.mp5.vo.link.MrltAssetdocumentsFk1Link"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="MrltDocumentsView"
+    ViewLink="its.mnr.mp5.vo.link.MrltAssetdocumentsFk2Link"
+    Type="oracle.jbo.Row"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

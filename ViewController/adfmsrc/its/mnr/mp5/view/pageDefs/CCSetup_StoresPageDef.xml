@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="CCSetup_StoresPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CCDataControlNested.MrltCyclecountheaderView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrltCyclecountheaderViewIterator"/>
+    <iterator Binds="CCDataControlNested.MrlrefCyclecountstoreView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrlrefCyclecountstoreViewIterator" />
+    <iterator id="MrltCyclecountpartstoresViewIterator" Binds="CCDataControlNested.MrltCyclecountpartstoresView"
+              DataControl="MNRDataControlDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <methodAction id="initCycleCountParts" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="initCycleCountParts" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.CCDataControlNested"/>
+    <methodAction id="executeCycleCountParts" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="executeCycleCountParts" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.CCDataControlNested"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.executeCycleCountParts_MNRDataControlDataControl_dataProvider_CCDataControlNested_executeCycleCountParts_result">
+      <NamedData NDName="sListid" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Listid">
+      <AttrNames>
+        <Item Value="Listid"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MrlrefCyclecountstoreViewIterator" ListOperMode="multiSelect"
+          ListIter="MrlrefCyclecountstoreViewIterator" id="MrlrefCyclecountstoreView" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Srcd"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Srcd"/>
+        <Item Value="Srname"/>
+      </ListDisplayAttrNames>
+    </list>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" InstanceName="MNRDataControlDataControl"
+            DataControl="MNRDataControlDataControl"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="KPIDataControl"
+  Version="11.1.2.60.81"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedApplicationModuleImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedApplicationModuleDefImpl"
+  ClearCacheOnRollback="true">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.model.KPIDataControl_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewUsage
+    Name="WOStatusCount"
+    ViewObjectName="its.mnr.mp5.kpi.WOStatusCount"/>
+  <ViewUsage
+    Name="WOStatusByAcct"
+    ViewObjectName="its.mnr.mp5.kpi.WOStatusByAcct"/>
+  <ViewUsage
+    Name="InvoiceTypeCount"
+    ViewObjectName="its.mnr.mp5.kpi.InvoiceTypeCount"/>
+  <ViewUsage
+    Name="InvoiceTypeStatusCount"
+    ViewObjectName="its.mnr.mp5.kpi.InvoiceTypeStatusCount"/>
+  <ViewUsage
+    Name="WOCreatedByAcct"
+    ViewObjectName="its.mnr.mp5.kpi.WOCreatedByAcct"/>
+  <ViewUsage
+    Name="WOCreatedCount"
+    ViewObjectName="its.mnr.mp5.kpi.WOCreatedCount"/>
+  <ViewUsage
+    Name="WOTurnTime"
+    ViewObjectName="its.mnr.mp5.kpi.WOTurnTime"/>
+  <ViewLinkUsage
+    Name="WOStatusAccountLink1"
+    ViewLinkObjectName="its.mnr.mp5.kpi.link.WOStatusAccountLink"
+    SrcViewUsageName="its.mnr.mp5.model.KPIDataControl.WOStatusCount"
+    DstViewUsageName="its.mnr.mp5.model.KPIDataControl.WOStatusByAcct"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="InvoiceTypeStatusLink1"
+    ViewLinkObjectName="its.mnr.mp5.kpi.link.InvoiceTypeStatusLink"
+    SrcViewUsageName="its.mnr.mp5.model.KPIDataControl.InvoiceTypeCount"
+    DstViewUsageName="its.mnr.mp5.model.KPIDataControl.InvoiceTypeStatusCount"
+    Reversed="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</AppModule>

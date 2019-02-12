@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="WOCreatedByAcct"
+  Version="11.1.2.60.81"
+  OrderBy='"Created"'
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.kpi.WOCreatedByAcct_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT EVT_COSTCODE "Account" ,TRUNC(EVT_CREATED) "Created" ,COUNT(*) "Count" FROM MP5PRD.R5EVENTS
+  WHERE ITS_ISADF='Y' 
+  AND TRUNC(EVT_CREATED) >= SYSDATE -5
+  AND EVT_STATUS IN ('OPEN','CRV','EST','UNA','RFI','RBF','APP','INV','C')
+  GROUP BY EVT_COSTCODE,TRUNC(EVT_CREATED)]]></SQLQuery>
+  <ViewAttribute
+    Name="Account"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="17"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"Account"'
+    Expression='"Account"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="17"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Created"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName='"Created"'
+    Expression='"Created"'
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="Count1"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName='"Count"'
+    Expression='"Count"'
+    SQLType="INTEGER">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.kpi.WOCreatedByAcct.Count1_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

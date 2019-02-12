@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5uoms"
+  Version="11.1.2.60.81"
+  DBObjectType="TABLE"
+  DBObjectName="MP5PRD.R5UOMS"
+  AliasName="R5uoms"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="UomCode"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="UOM_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5UOMS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UomDesc"
+    IsNotNull="true"
+    Precision="45"
+    ColumnName="UOM_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5UOMS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UomNotused"
+    Precision="1"
+    ColumnName="UOM_NOTUSED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5UOMS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5readings"
+    Association="its.mnr.mp5.eo.assoc.R5fok3ReaAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok3ReaAssoc.R5readings"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok3ReaAssoc.R5uoms"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5parts"
+    Association="its.mnr.mp5.eo.assoc.R5fok1ParAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1ParAssoc.R5parts"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1ParAssoc.R5uoms"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5matlparts"
+    Association="its.mnr.mp5.eo.assoc.R5fok3MlpAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok3MlpAssoc.R5matlparts"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok3MlpAssoc.R5uoms"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5events"
+    Association="its.mnr.mp5.eo.assoc.R5fokhEvtAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fokhEvtAssoc.R5events"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fokhEvtAssoc.R5uoms"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5activities"
+    Association="its.mnr.mp5.eo.assoc.R5fokaActAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fokaActAssoc.R5activities"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fokaActAssoc.R5uoms"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5objects"
+    Association="its.mnr.mp5.eo.assoc.R5fok9ObjAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok9ObjAssoc.R5objects"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok9ObjAssoc.R5uoms"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5catalogue"
+    Association="its.mnr.mp5.eo.assoc.R5fok4CatAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok4CatAssoc.R5catalogue"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok4CatAssoc.R5uoms"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5orderlines"
+    Association="its.mnr.mp5.eo.assoc.R5fok8OrlAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok8OrlAssoc.R5orderlines"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok8OrlAssoc.R5uoms"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="R5prikUom"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_UOM"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5uoms.UomCode"/>
+    </AttrArray>
+  </Key>
+</Entity>

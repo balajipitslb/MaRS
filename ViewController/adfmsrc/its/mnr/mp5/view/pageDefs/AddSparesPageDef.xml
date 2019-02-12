@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="AddSparesPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="AssetDataControlNested.MrltSparesView" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="MrltSparesViewIterator"/>
+    <accessorIterator MasterBinding="MrltSparesViewIterator" Binds="PartsMaintView" RangeSize="25"
+                      DataControl="MNRDataControlDataControl" BeanClass="its.mnr.mp5.vo.parts.PartsMaintViewImpl"
+                      id="PartsMaintViewIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="MrltSparesViewIterator" id="Org">
+      <AttrNames>
+        <Item Value="Org"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltSparesViewIterator" id="Item">
+      <AttrNames>
+        <Item Value="Item"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltSparesViewIterator" id="Partorg">
+      <AttrNames>
+        <Item Value="Partorg"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="ParCode">
+      <AttrNames>
+        <Item Value="ParCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="ParClass">
+      <AttrNames>
+        <Item Value="ParClass"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="ParDesc">
+      <AttrNames>
+        <Item Value="ParDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="ParLastprice">
+      <AttrNames>
+        <Item Value="ParLastprice"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="ParNotused">
+      <AttrNames>
+        <Item Value="ParNotused"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="ParUom">
+      <AttrNames>
+        <Item Value="ParUom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PartsMaintViewIterator" id="tTotalStoQty">
+      <AttrNames>
+        <Item Value="tTotalStoQty"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="MrltSparesViewIterator" Uses="LOV_Partnum" id="Partnum"/>
+    <action IterBinding="MrltSparesViewIterator" id="Delete"
+            InstanceName="MNRDataControlDataControl.AssetDataControlNested.MrltSparesView"
+            DataControl="MNRDataControlDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Rollback" InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <action id="Commit" InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <list IterBinding="MrltSparesViewIterator" StaticList="false" Uses="LOV_Sparelabel" id="Sparelabel"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

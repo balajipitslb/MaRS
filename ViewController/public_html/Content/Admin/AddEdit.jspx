@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Class Master" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelHeader text=" Edit Class" id="ph1">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar"/>
+                        <f:facet name="toolbar">
+                            <af:toolbar id="t3"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                <af:spacer width="10" height="10" id="s1"/>
+                                <af:button text="Apply" id="ctb6" icon="#{resource['images:commit.png']}"
+                                           actionListener="#{bindings.Commit.execute}"
+                                           disabled="#{!bindings.Commit.enabled}"/>
+                                <af:button actionListener="#{bindings.Rollback.execute}" text="Cancel"
+                                           disabled="#{!bindings.Rollback.enabled}" immediate="true" id="ctb7"
+                                           icon="#{resource['images:undo.png']}">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button id="ctb5" icon="#{resource['images:terminate.png']}"
+                                           shortDesc="#{viewcontrollerBundle.CANCEL_AND_RETURN_TO_PREVIOUS_}"
+                                           action="return"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:panelFormLayout id="pfl1">
+                            <af:inputText value="#{bindings.Classcd.inputValue}" label="#{bindings.Classcd.hints.label}"
+                                          required="#{bindings.Classcd.hints.mandatory}"
+                                          columns="#{bindings.Classcd.hints.displayWidth}"
+                                          maximumLength="#{bindings.Classcd.hints.precision}"
+                                          shortDesc="#{bindings.Classcd.hints.tooltip}" id="it1" autoSubmit="true">
+                                <f:validator binding="#{bindings.Classcd.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.Org.inputValue}" label="#{bindings.Org.hints.label}"
+                                          required="#{bindings.Org.hints.mandatory}"
+                                          columns="#{bindings.Org.hints.displayWidth}"
+                                          maximumLength="#{bindings.Org.hints.precision}"
+                                          shortDesc="#{bindings.Org.hints.tooltip}" id="it2" readOnly="true">
+                                <f:validator binding="#{bindings.Org.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.Classdesc.inputValue}"
+                                          label="#{bindings.Classdesc.hints.label}"
+                                          required="#{bindings.Classdesc.hints.mandatory}"
+                                          columns="#{bindings.Classdesc.hints.displayWidth}"
+                                          maximumLength="#{bindings.Classdesc.hints.precision}"
+                                          shortDesc="#{bindings.Classdesc.hints.tooltip}" id="it3" autoSubmit="true">
+                                <f:validator binding="#{bindings.Classdesc.validator}"/>
+                            </af:inputText>
+                            <af:selectOneChoice value="#{bindings.Classtype.inputValue}"
+                                                label="#{bindings.Classtype.label}"
+                                                required="#{bindings.Classtype.hints.mandatory}"
+                                                shortDesc="#{bindings.Classtype.hints.tooltip}" id="soc1"
+                                                autoSubmit="true">
+                                <f:selectItems value="#{bindings.Classtype.items}" id="si1"/>
+                            </af:selectOneChoice>
+                        </af:panelFormLayout>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

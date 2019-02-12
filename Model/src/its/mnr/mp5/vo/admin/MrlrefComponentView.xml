@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrlrefComponentView"
+  Version="11.1.2.60.81"
+  SelectList="MrlrefComponent.COMPONENTID, 
+       MrlrefComponent.SERVICEGROUPID, 
+       MrlrefComponent.COMPWOTYPE, 
+       MrlrefComponent.COMPDESCRIPTION, 
+       MrlrefComponent.COMPCODE, 
+       MrlrefComponent.COMPACTIVE, 
+       MrlrefComponent.COMPCDX"
+  FromList="MRLREF_COMPONENT MrlrefComponent"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchSize="25"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All"
+  OrderBy="TO_NUMBER(MrlrefComponent.COMPONENTID)">
+  <ViewAccessor
+    Name="ServiceGroupList1"
+    ViewObjectName="its.mnr.mp5.lov.ServiceGroupList"
+    RowLevelBinds="true"
+    OrderBy="TO_NUMBER(MrlrefServicegrp.SERVICEGROUPID)"/>
+  <ViewAccessor
+    Name="WorkOrderList1"
+    ViewObjectName="its.mnr.mp5.lov.WorkOrderList"
+    RowLevelBinds="true"
+    FetchSize="10"/>
+  <ViewAccessor
+    Name="ServiceGroupListADFQuery"
+    ViewObjectName="its.mnr.mp5.lov.ServiceGroupList"
+    RowLevelBinds="true"
+    OrderBy="TO_NUMBER(MrlrefServicegrp.SERVICEGROUPID)"/>
+  <ListBinding
+    Name="LOV_Servicegroupid"
+    ListVOName="ServiceGroupList1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Servicegroupid"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Compwotype"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Servicegroupid"/>
+      <Item Value="Wotype"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Servicegroupid"/>
+      <Item Value="Sgrpdescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Compwotype"
+    ListVOName="WorkOrderList1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Compwotype"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Wotype"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ServicegroupidADFQuery"
+    ListVOName="ServiceGroupListADFQuery"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Servicegroupid"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Servicegroupid"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Servicegroupid"/>
+      <Item Value="Sgrpdescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="MrlrefComponent"
+    Entity="its.mnr.mp5.eo.master.MrlrefComponent"/>
+  <ViewAttribute
+    Name="Componentid"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Componentid"
+    EntityUsage="MrlrefComponent"
+    AliasName="COMPONENTID"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="Servicegroupid"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Servicegroupid"
+    EntityUsage="MrlrefComponent"
+    AliasName="SERVICEGROUPID"
+    LOVName="LOV_Servicegroupid"
+    LOVFinder="ServiceGroupIdSwitcher">
+    <Properties>
+      <SchemaBasedProperties>
+        <AUTOSUBMIT
+          Value="true"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Compwotype"
+    IsUnique="true"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Compwotype"
+    EntityUsage="MrlrefComponent"
+    AliasName="COMPWOTYPE"
+    LOVName="LOV_Compwotype">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Compdescription"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Compdescription"
+    EntityUsage="MrlrefComponent"
+    AliasName="COMPDESCRIPTION"/>
+  <ViewAttribute
+    Name="Compcode"
+    IsUnique="true"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Compcode"
+    EntityUsage="MrlrefComponent"
+    AliasName="COMPCODE"/>
+  <ViewAttribute
+    Name="Compactive"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Compactive"
+    EntityUsage="MrlrefComponent"
+    AliasName="COMPACTIVE"
+    DefaultValue="N"/>
+  <ViewAttribute
+    Name="Compcdx"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Compcdx"
+    EntityUsage="MrlrefComponent"
+    AliasName="COMPCDX"
+    DefaultValue="N"/>
+  <ViewAttribute
+    Name="ServiceGroupIdSwitcher"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="$none$"
+    SQLType="VARCHAR">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[(adf.isCriteriaRow) ? "LOV_Servicegroupid" : "LOV_ServicegroupidADFQuery"]]></TransientExpression>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="AllComponents"
+    ViewObjectName="its.mnr.mp5.vo.admin.MrlrefComponentView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="Never"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="false"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="MrlrefComponentViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Servicegroupid"
+        ViewAttribute="Servicegroupid"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Compwotype"
+        ViewAttribute="Compwotype"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="MrlrefComponentViewCriteria_MrlrefComponentViewCriteria_row_0_Compdescription"
+        ViewAttribute="Compdescription"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="MrlrefComponentViewCriteria_MrlrefComponentViewCriteria_row_0_Compcode"
+        ViewAttribute="Compcode"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="MrlrefComponentViewCriteria_MrlrefComponentViewCriteria_row_0_Compactive"
+        ViewAttribute="Compactive"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="MrlrefComponentViewCriteria_MrlrefComponentViewCriteria_row_0_Compcdx"
+        ViewAttribute="Compcdx"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="MrlrefLocationView"
+    ViewLink="its.mnr.mp5.vo.link.MrlrefLocationFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

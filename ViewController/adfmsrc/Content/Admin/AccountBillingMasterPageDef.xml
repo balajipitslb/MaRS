@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="AccountBillingMasterPageDef"
+                Package="Content.Admin">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BillingRatesDataControlNested.AccountRateView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="AccountRateViewIterator"/>
+    <iterator Binds="MasterDataControlNested.MrlrefWorkordermasterView1" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrlrefWorkordermasterView1Iterator" Refresh="ifNeeded"/>
+    <iterator Binds="BillingRatesDataControlNested.AccountMasterView" DataControl="MNRDataControlDataControl"
+              RangeSize="50" id="AccountMasterViewIterator" />
+    <iterator Binds="BillingRatesDataControlNested.AccountRateTaskView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="AccountRateTaskViewIterator" />
+    <iterator Binds="BillingRatesDataControlNested.AccountRateVersionDetail"
+              DataControl="MNRDataControlDataControl" RangeSize="25" id="AccountRateVersionDetailIterator"
+              Refresh="deferred"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="AccountRateViewIterator" id="Ver">
+      <AttrNames>
+        <Item Value="Ver"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="MrlrefWorkordermasterView1Iterator" id="MrlrefWorkordermasterView1">
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrlrefWorkordermasterView" Name="MrlrefWorkordermasterView10">
+        <AttrNames>
+          <Item Value="Wotype"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="MrlrefServicegrpView"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrlrefServicegrpView" Name="MrlrefWorkordermasterView11"
+                      TargetIterator="${bindings.AccountRateView}">
+        <AttrNames>
+          <Item Value="Servicegroupid"/>
+          <Item Value="Sgrpdescription"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <navigationlist IterBinding="AccountMasterViewIterator" ListOperMode="navigation"
+                    ListIter="AccountMasterViewIterator" id="AccountMasterView" DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="Acctnum"/>
+        <Item Value="Accountnm"/>
+      </AttrNames>
+    </navigationlist>
+    <tree IterBinding="AccountRateTaskViewIterator" id="AccountRateTaskView1">
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrltAccountratetaskView" Name="AccountRateTaskView10">
+        <AttrNames>
+          <Item Value="Accountratetaskid"/>
+          <Item Value="Accountrateid"/>
+          <Item Value="Taskid"/>
+          <Item Value="Servicegroupid"/>
+          <Item Value="AccountRateTaskDesc"/>
+          <Item Value="AccountRateTaskPer"/>
+          <Item Value="Ratetype"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="AccountRateViewIterator" id="AcctBillType1" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="AcctBillType"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="B"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <action IterBinding="AccountRateViewIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="AccountRateViewIterator" id="Acctnum">
+      <AttrNames>
+        <Item Value="Acctnum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="AcctNumDesc">
+      <AttrNames>
+        <Item Value="AcctNumDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateViewIterator" id="AcctBillType">
+      <AttrNames>
+        <Item Value="AcctBillType"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
+    <action IterBinding="AccountRateTaskViewIterator" id="Delete1" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <tree IterBinding="AccountRateVersionDetailIterator" id="AccountRateVersionDetail">
+      <nodeDefinition DefName="its.mnr.mp5.vo.workorder.AccountRateVersionDetail" Name="AccountRateVersionDetail0">
+        <AttrNames>
+          <Item Value="Ver"/>
+          <Item Value="Effectivedt"/>
+          <Item Value="Accountrateid"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="Accountrateid">
+      <AttrNames>
+        <Item Value="Accountrateid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="AcctBillType2">
+      <AttrNames>
+        <Item Value="AcctBillType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="Acctnum1">
+      <AttrNames>
+        <Item Value="Acctnum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="AcctNumDesc1">
+      <AttrNames>
+        <Item Value="AcctNumDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="Ver1">
+      <AttrNames>
+        <Item Value="Ver"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="Effectivedt">
+      <AttrNames>
+        <Item Value="Effectivedt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="Base">
+      <AttrNames>
+        <Item Value="Base"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M1">
+      <AttrNames>
+        <Item Value="M1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M1o">
+      <AttrNames>
+        <Item Value="M1o"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M2">
+      <AttrNames>
+        <Item Value="M2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M2o">
+      <AttrNames>
+        <Item Value="M2o"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M3">
+      <AttrNames>
+        <Item Value="M3"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M3o">
+      <AttrNames>
+        <Item Value="M3o"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="MNRDataControlDataControl"/>
+    <attributeValues IterBinding="AccountRateViewIterator" id="Effectivedt1">
+      <AttrNames>
+        <Item Value="Effectivedt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountMasterViewIterator" id="Billtype">
+      <AttrNames>
+        <Item Value="Billtype"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

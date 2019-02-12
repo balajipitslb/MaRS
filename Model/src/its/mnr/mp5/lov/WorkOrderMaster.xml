@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="WorkOrderMaster"
+  Version="11.1.2.60.81"
+  SelectList="MrlrefWorkordermaster.EVENTJOBTYPE, 
+       MrlrefWorkordermaster.SEQ, 
+       MrlrefWorkordermaster.WORKORDER, 
+       MrlrefWorkordermaster.WOTYPE"
+  FromList="MRLREF_WORKORDERMASTER MrlrefWorkordermaster"
+  OrderBy="TO_NUMBER(SEQ)"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.lov.WorkOrderMaster_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="MrlrefWorkordermaster"
+    Entity="its.mnr.mp5.eo.master.MrlrefWorkordermaster"
+    DeleteParticipant="false"
+    ReadOnly="true"/>
+  <ViewAttribute
+    Name="Eventjobtype"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="Eventjobtype"
+    EntityUsage="MrlrefWorkordermaster"
+    AliasName="EVENTJOBTYPE"/>
+  <ViewAttribute
+    Name="Seq"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Seq"
+    EntityUsage="MrlrefWorkordermaster"
+    AliasName="SEQ"/>
+  <ViewAttribute
+    Name="Workorder"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Workorder"
+    EntityUsage="MrlrefWorkordermaster"
+    AliasName="WORKORDER"/>
+  <ViewAttribute
+    Name="Wotype"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Wotype"
+    EntityUsage="MrlrefWorkordermaster"
+    AliasName="WOTYPE"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document id="d3" title="Create List">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+    <af:pageTemplate viewId="/templates/CCSetupTrainTemplate.jspx" id="pt1">
+        <f:facet name="body">
+            <af:panelHeader text="Bin Range" id="ph1">
+                <f:facet name="context"/>
+                <f:facet name="menuBar">
+                            <af:toolbar id="t1">
+                                <af:button text="Cancel" immediate="true" id="ctb1"
+                                           icon="#{resource['images:undo.png']}"
+                                           binding="#{CycleCountBean.setupRangeCancelBtn}" visible="false"
+                                           action="#{CycleCountBean.ccSetupRangeCanc_action}">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button text="Back to Setup" id="ctb2" action="gotoStart"
+                                           icon="#{resource['images:shuttle_leftall.png']}"
+                                           binding="#{CycleCountBean.setupRangeReturnBtn}" visible="false"/>
+                                <af:button id="ctb3" icon="#{resource['images:shuttle_right.png']}"
+                                           disabled="#{ empty bindings.Binstart.inputValue or empty bindings.Binstart.inputValue}"
+                                           partialTriggers="it1 it2" action="gotoEmailNotification"
+                                           actionListener="#{CycleCountBean.RangeNext_action}"
+                                           binding="#{CycleCountBean.setupRangeForwardBtn}">
+                                    <af:setActionListener from="#{bindings.Listid.inputValue}"
+                                                          to="#{pageFlowScope.psfListId}"/>
+                                </af:button>
+                            </af:toolbar>
+                        </f:facet>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                        <af:panelFormLayout id="pfl1" maxColumns="2" rows="1">
+                            <af:inputText value="#{bindings.Binstart.inputValue}"
+                                          label="Bin Range"
+                                          required="#{bindings.Binstart.hints.mandatory}"
+                                          columns="#{bindings.Binstart.hints.displayWidth}"
+                                          maximumLength="#{bindings.Binstart.hints.precision}"
+                                          shortDesc="#{bindings.Binstart.hints.tooltip}" id="it1" autoSubmit="true"
+                                          autoTab="true" contentStyle="text-transform:uppercase; ">
+                                <f:validator binding="#{bindings.Binstart.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.Binend.inputValue}" label="To"
+                                          required="#{bindings.Binend.hints.mandatory}"
+                                          columns="#{bindings.Binend.hints.displayWidth}"
+                                          maximumLength="#{bindings.Binend.hints.precision}"
+                                          shortDesc="#{bindings.Binend.hints.tooltip}" id="it2" autoSubmit="true"
+                                          autoTab="true" contentStyle="text-transform:uppercase; ">
+                                <f:validator binding="#{bindings.Binend.validator}"/>
+                            </af:inputText>
+                        </af:panelFormLayout>
+                    </af:panelHeader>
+        </f:facet>
+    </af:pageTemplate>
+            <!--<af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                      binding="#{CycleCountBean.popCCListConfirm}">
+                <af:dialog id="d2" type="ok" dialogListener="#{CycleCountBean.diagLsnrCCListConfirm}"
+                           title="Cycle Count List Confirmation" closeIconVisible="false">
+                    <f:facet name="buttonBar"/>
+                    <af:inputText id="ot1" readOnly="true" binding="#{CycleCountBean.ccListConfTxt}" autoSubmit="true"
+                                  value="List # #{bindings.Listid.inputValue} created successfully"/>
+                </af:dialog>
+            </af:popup>-->
+        </af:form>
+    </af:document>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:CycleCountBean-->
+</f:view>

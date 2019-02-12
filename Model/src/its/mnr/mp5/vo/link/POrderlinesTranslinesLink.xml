@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="POrderlinesTranslinesLink"
+  Version="11.1.2.60.81"
+  EntityAssociation="its.mnr.mp5.eo.assoc.R5fok9TrlAssoc">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.link.POrderlinesTranslinesLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="POrderlinesView"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.vo.po.POrderlinesView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="POrderlinesView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_accessor" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.po.POrderlinesView.OrlOrder"/>
+      <Item Value="its.mnr.mp5.vo.po.POrderlinesView.OrlOrderOrg"/>
+      <Item Value="its.mnr.mp5.vo.po.POrderlinesView.OrlOrdline"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="POTranslinesView"
+    Cardinality="-1"
+    Owner="its.mnr.mp5.vo.po.POTranslinesView">
+    <DesignTime>
+      <Attr Name="_accessor" Value="false"/>
+      <Attr Name="_finderName" Value="POTranslinesView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.po.POTranslinesView.TrlOrder"/>
+      <Item Value="its.mnr.mp5.vo.po.POTranslinesView.TrlOrderOrg"/>
+      <Item Value="its.mnr.mp5.vo.po.POTranslinesView.TrlOrdline"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

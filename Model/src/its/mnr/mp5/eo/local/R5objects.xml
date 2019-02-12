@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5objects"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="R5OBJECTS"
+  AliasName="R5objects"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="ObjObtype"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="OBJ_OBTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjObrtype"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="OBJ_OBRTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjCode"
+    IsNotNull="true"
+    Precision="24"
+    ColumnName="OBJ_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjDesc"
+    IsNotNull="true"
+    Precision="45"
+    ColumnName="OBJ_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjClass"
+    Precision="4"
+    ColumnName="OBJ_CLASS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjCategory"
+    Precision="24"
+    ColumnName="OBJ_CATEGORY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjCostcode"
+    Precision="17"
+    ColumnName="OBJ_COSTCODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="17"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjLtype"
+    Precision="4"
+    ColumnName="OBJ_LTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjLocation"
+    Precision="24"
+    ColumnName="OBJ_LOCATION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjTag"
+    Precision="24"
+    ColumnName="OBJ_TAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjPtype"
+    Precision="4"
+    ColumnName="OBJ_PTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjPosition"
+    Precision="24"
+    ColumnName="OBJ_POSITION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjParent"
+    Precision="24"
+    ColumnName="OBJ_PARENT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjDepend"
+    Precision="1"
+    ColumnName="OBJ_DEPEND"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjManufact"
+    Precision="45"
+    ColumnName="OBJ_MANUFACT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjMrc"
+    Precision="4"
+    ColumnName="OBJ_MRC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjPart"
+    Precision="18"
+    ColumnName="OBJ_PART"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="18"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjSerialno"
+    Precision="24"
+    ColumnName="OBJ_SERIALNO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjStore"
+    Precision="4"
+    ColumnName="OBJ_STORE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjStatus"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="OBJ_STATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjRstatus"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="OBJ_RSTATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjCommiss"
+    ColumnName="OBJ_COMMISS"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5OBJECTS"/>
+  <Attribute
+    Name="ObjWithdraw"
+    ColumnName="OBJ_WITHDRAW"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5OBJECTS"/>
+  <Attribute
+    Name="ObjRecord"
+    IsNotNull="true"
+    ColumnName="OBJ_RECORD"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5OBJECTS"/>
+  <Attribute
+    Name="ObjGroup"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="OBJ_GROUP"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjUser"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="OBJ_USER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjOrder"
+    Precision="8"
+    ColumnName="OBJ_ORDER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjOrderline"
+    Precision="4"
+    Scale="0"
+    ColumnName="OBJ_ORDERLINE"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5OBJECTS"/>
+  <Attribute
+    Name="ObjProduction"
+    Precision="1"
+    ColumnName="OBJ_PRODUCTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjPrimaryuom"
+    Precision="8"
+    ColumnName="OBJ_PRIMARYUOM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjAcd"
+    ColumnName="OBJ_ACD"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5OBJECTS"/>
+  <Attribute
+    Name="ObjNotused"
+    Precision="1"
+    ColumnName="OBJ_NOTUSED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjSafety"
+    Precision="1"
+    ColumnName="OBJ_SAFETY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjCriticality"
+    Precision="4"
+    ColumnName="OBJ_CRITICALITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjProfile"
+    Precision="24"
+    ColumnName="OBJ_PROFILE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjManufactmodel"
+    Precision="30"
+    ColumnName="OBJ_MANUFACTMODEL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjManufactrevnum"
+    Precision="10"
+    ColumnName="OBJ_MANUFACTREVNUM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjValue"
+    ColumnName="OBJ_VALUE"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5OBJECTS"/>
+  <Attribute
+    Name="ObjSourcesystem"
+    Precision="45"
+    ColumnName="OBJ_SOURCESYSTEM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjSourcecode"
+    Precision="45"
+    ColumnName="OBJ_SOURCECODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjVariable1"
+    Precision="30"
+    ColumnName="OBJ_VARIABLE1"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjVariable2"
+    Precision="30"
+    ColumnName="OBJ_VARIABLE2"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjVariable3"
+    Precision="30"
+    ColumnName="OBJ_VARIABLE3"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjVariable4"
+    Precision="30"
+    ColumnName="OBJ_VARIABLE4"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjVariable5"
+    Precision="30"
+    ColumnName="OBJ_VARIABLE5"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjVariable6"
+    Precision="30"
+    ColumnName="OBJ_VARIABLE6"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjState"
+    Precision="4"
+    ColumnName="OBJ_STATE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjRstate"
+    Precision="4"
+    ColumnName="OBJ_RSTATE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjCn"
+    Precision="24"
+    ColumnName="OBJ_CN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjOrg"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="OBJ_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjClassOrg"
+    Precision="8"
+    ColumnName="OBJ_CLASS_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjLocationOrg"
+    Precision="8"
+    ColumnName="OBJ_LOCATION_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjPositionOrg"
+    Precision="8"
+    ColumnName="OBJ_POSITION_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjParentOrg"
+    Precision="8"
+    ColumnName="OBJ_PARENT_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjOrderOrg"
+    Precision="8"
+    ColumnName="OBJ_ORDER_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjPartOrg"
+    Precision="8"
+    ColumnName="OBJ_PART_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjBin"
+    Precision="12"
+    ColumnName="OBJ_BIN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjLot"
+    Precision="12"
+    ColumnName="OBJ_LOT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ObjUpdated"
+    ColumnName="OBJ_UPDATED"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5OBJECTS"/>
+  <Attribute
+    Name="ObjUpdatedby"
+    Precision="12"
+    ColumnName="OBJ_UPDATEDBY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5OBJECTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5events"
+    Association="its.mnr.mp5.eo.assoc.R5fok5EvtAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok5EvtAssoc.R5events"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok5EvtAssoc.R5objects"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5events1"
+    Association="its.mnr.mp5.eo.assoc.R5fok2EvtAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok2EvtAssoc.R5events1"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok2EvtAssoc.R5objects1"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5matlparts"
+    Association="its.mnr.mp5.eo.assoc.R5fok4MlpAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok4MlpAssoc.R5matlparts"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok4MlpAssoc.R5objects"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5groups"
+    Association="its.mnr.mp5.eo.assoc.R5fok5ObjAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok5ObjAssoc.R5groups"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok5ObjAssoc.R5objects"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5bins"
+    Association="its.mnr.mp5.eo.assoc.R5fokdObjAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fokdObjAssoc.R5bins"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fokdObjAssoc.R5objects"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5parts"
+    Association="its.mnr.mp5.eo.assoc.R5fok2ObjAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok2ObjAssoc.R5parts"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok2ObjAssoc.R5objects"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5readings"
+    Association="its.mnr.mp5.eo.assoc.R5fok1ReaAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1ReaAssoc.R5readings"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1ReaAssoc.R5objects"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5uoms"
+    Association="its.mnr.mp5.eo.assoc.R5fok9ObjAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok9ObjAssoc.R5uoms"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok9ObjAssoc.R5objects"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5lots"
+    Association="its.mnr.mp5.eo.assoc.R5fokeObjAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fokeObjAssoc.R5lots"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fokeObjAssoc.R5objects"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="R5chk1Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK1_OBJ"/>
+      <Attr Name="_checkCondition" Value="OBJ_WITHDRAW >= OBJ_COMMISS"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk2Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK2_OBJ"/>
+      <Attr Name="_checkCondition" Value="OBJ_DEPEND IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk5Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK5_OBJ"/>
+      <Attr Name="_checkCondition" Value="OBJ_PRODUCTION IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk6Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK6_OBJ"/>
+      <Attr Name="_checkCondition" Value="OBJ_NOTUSED IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk7Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK7_OBJ"/>
+      <Attr Name="_checkCondition" Value="OBJ_SAFETY IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk8Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK8_OBJ"/>
+      <Attr Name="_checkCondition"
+        Value="(OBJ_CLASS IS NULL AND OBJ_CLASS_ORG IS NULL) OR (OBJ_CLASS IS NOT NULL AND OBJ_CLASS_ORG IS NOT NULL)"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk9Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK9_OBJ"/>
+      <Attr Name="_checkCondition"
+        Value="(OBJ_LOCATION IS NULL AND OBJ_LOCATION_ORG IS NULL) OR (OBJ_LOCATION IS NOT NULL AND OBJ_LOCATION_ORG IS NOT NULL)"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chkaObj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHKA_OBJ"/>
+      <Attr Name="_checkCondition"
+        Value="(OBJ_POSITION IS NULL AND OBJ_POSITION_ORG IS NULL) OR (OBJ_POSITION IS NOT NULL AND OBJ_POSITION_ORG IS NOT NULL)"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chkbObj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHKB_OBJ"/>
+      <Attr Name="_checkCondition"
+        Value="(OBJ_PARENT IS NULL AND OBJ_PARENT_ORG IS NULL) OR (OBJ_PARENT IS NOT NULL AND OBJ_PARENT_ORG IS NOT NULL)"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chkcObj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHKC_OBJ"/>
+      <Attr Name="_checkCondition"
+        Value="(OBJ_ORDER IS NULL AND OBJ_ORDER_ORG IS NULL) OR (OBJ_ORDER IS NOT NULL AND OBJ_ORDER_ORG IS NOT NULL)"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chkdObj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHKD_OBJ"/>
+      <Attr Name="_checkCondition"
+        Value="(OBJ_PART IS NULL AND OBJ_PART_ORG IS NULL) OR (OBJ_PART IS NOT NULL AND OBJ_PART_ORG IS NOT NULL)"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn01Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN01_OBJ"/>
+      <Attr Name="_checkCondition" Value="OBJ_DESC IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn02Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN02_OBJ"/>
+      <Attr Name="_checkCondition" Value="OBJ_STATUS IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn03Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN03_OBJ"/>
+      <Attr Name="_checkCondition" Value="OBJ_RECORD IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn04Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN04_OBJ"/>
+      <Attr Name="_checkCondition" Value="OBJ_GROUP IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn05Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN05_OBJ"/>
+      <Attr Name="_checkCondition" Value="OBJ_USER IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn06Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN06_OBJ"/>
+      <Attr Name="_checkCondition" Value="OBJ_OBRTYPE IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn07Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN07_OBJ"/>
+      <Attr Name="_checkCondition" Value="OBJ_RSTATUS IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn09Obj">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN09_OBJ"/>
+      <Attr Name="_checkCondition" Value="OBJ_OBTYPE IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5prikObj"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_OBJ"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjCode"/>
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjOrg"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Obj">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_MRC"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_OBJ"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjMrc"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok2Obj">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_PAR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK2_OBJ"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjPart"/>
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjPartOrg"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok4Obj">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_USR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK4_OBJ"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjUser"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok5Obj">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_UGR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK5_OBJ"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjGroup"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok8Obj">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_STR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK8_OBJ"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjStore"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok9Obj">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_UOM"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK9_OBJ"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjPrimaryuom"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fokbObj">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_CST"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOKB_OBJ"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjCostcode"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fokcObj">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_CNH"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOKC_OBJ"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjCn"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fokdObj">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_BIN"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOKD_OBJ"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjStore"/>
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjBin"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fokeObj">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_LOT"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOKE_OBJ"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5objects.ObjLot"/>
+    </AttrArray>
+  </Key>
+</Entity>

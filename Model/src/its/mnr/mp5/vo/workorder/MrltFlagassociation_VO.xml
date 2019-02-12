@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltFlagassociation_VO"
+  Version="11.1.2.64.36"
+  SelectList="MrltFlagassociation_EO.FAACTIVE, 
+       MrltFlagassociation_EO.FAID, 
+       MrltFlagassociation_EO.FAITEM, 
+       MrltFlagassociation_EO.FAUPDBY, 
+       MrltFlagassociation_EO.FAUPDDT, 
+       MrltFlagassociation_EO.FID"
+  FromList="MRLT_FLAGASSOCIATION MrltFlagassociation_EO"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.vo.workorder.MrltFlagassociation_VORowImpl"
+  ComponentClass="its.mnr.mp5.vo.workorder.MrltFlagassociation_VOImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|Prog|VarAccess"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.workorder.MrltFlagassociation_VO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="MrltFlag_VO1"
+    ViewObjectName="its.mnr.mp5.vo.workorder.MrltFlag_VO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="WODataControl_ActiveMrltFlag1"
+    ViewObjectName="its.mnr.mp5.vo.workorder.MrltFlag_VO"
+    AMUsageName="WODataControl"
+    ViewInstanceName="ActiveMrltFlag"
+    RowLevelBinds="true"/>
+  <EntityUsage
+    Name="MrltFlagassociation_EO"
+    Entity="its.mnr.mp5.eo.master.MrltFlagassociation_EO"/>
+  <ViewAttribute
+    Name="Faactive"
+    PrecisionRule="true"
+    EntityAttrName="Faactive"
+    EntityUsage="MrltFlagassociation_EO"
+    AliasName="FAACTIVE"/>
+  <ViewAttribute
+    Name="Faid"
+    IsUpdateable="while_insert"
+    PrecisionRule="true"
+    EntityAttrName="Faid"
+    EntityUsage="MrltFlagassociation_EO"
+    AliasName="FAID"/>
+  <ViewAttribute
+    Name="Faitem"
+    IsUpdateable="while_insert"
+    IsUnique="true"
+    PrecisionRule="true"
+    EntityAttrName="Faitem"
+    EntityUsage="MrltFlagassociation_EO"
+    AliasName="FAITEM"/>
+  <ViewAttribute
+    Name="Faupdby"
+    PrecisionRule="true"
+    EntityAttrName="Faupdby"
+    EntityUsage="MrltFlagassociation_EO"
+    AliasName="FAUPDBY"/>
+  <ViewAttribute
+    Name="Faupddt"
+    PrecisionRule="true"
+    EntityAttrName="Faupddt"
+    EntityUsage="MrltFlagassociation_EO"
+    AliasName="FAUPDDT"/>
+  <ViewAttribute
+    Name="Fid"
+    IsUpdateable="while_insert"
+    IsUnique="true"
+    PrecisionRule="true"
+    EntityAttrName="Fid"
+    EntityUsage="MrltFlagassociation_EO"
+    AliasName="FID"/>
+  <ViewLinkAccessor
+    Name="MrltFlag_VO"
+    ViewLink="its.mnr.mp5.vo.link.MrltFlagassociationFk1Link"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

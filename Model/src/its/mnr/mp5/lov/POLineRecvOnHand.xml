@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="POLineRecvOnHand"
+  Version="11.1.2.60.81"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.lov.POLineRecvOnHand_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="BORDER"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="BPART"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="BLINE"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT DISTINCT 'x', (NVL(B.RECV,0) - NVL(A.RETN,0)) RECV, BIS_QTY ONHAND
+FROM R5TRANSACTIONS C,
+     (SELECT SUM(NVL(TRL_QTY,0)) "RETN", TRL_PART, TRL_PART_ORG, TRL_LINE,TRL_ORDER
+     FROM R5TRANSLINES
+     WHERE  TRL_TYPE IN ('RETN') GROUP BY TRL_PART, TRL_PART_ORG, TRL_LINE,TRL_ORDER) A,
+     (SELECT SUM(NVL(TRL_QTY,0))"RECV", TRL_PART, TRL_PART_ORG, TRL_LINE,TRL_ORDER
+     FROM R5TRANSLINES
+     WHERE  TRL_TYPE='RECV' GROUP BY TRL_PART, TRL_PART_ORG, TRL_LINE,TRL_ORDER) B,
+     R5BINSTOCK
+WHERE TRA_ORDER= :BORDER
+AND TRA_ORDER=A.TRL_ORDER
+AND A.TRL_ORDER = B.TRL_ORDER
+AND A.TRL_PART=B.TRL_PART
+AND A.TRL_LINE=B.TRL_LINE
+AND A.TRL_PART = BIS_PART
+AND A.TRL_PART_ORG = BIS_PART_ORG
+ AND A.TRL_PART = :BPART
+ AND A.TRL_LINE = :BLINE]]></SQLQuery>
+  <ViewAttribute
+    Name="X"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="&quot;'X'&quot;"
+    Expression="&quot;'X'&quot;"
+    SQLType="CHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Recv"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="RECV"
+    Expression="RECV"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Onhand"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="ONHAND"
+    Expression="ONHAND"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltFlagassociationFk1Link"
+  Version="11.1.2.64.36"
+  EntityAssociation="its.mnr.mp5.eo.assoc.MrltFlagassociationFk1Assoc">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.link.MrltFlagassociationFk1Link_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="MrltFlag_VO"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.vo.workorder.MrltFlag_VO">
+    <DesignTime>
+      <Attr Name="_accessor" Value="true"/>
+      <Attr Name="_finderName" Value="MrltFlag_VO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.workorder.MrltFlag_VO.Fid"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="MrltFlagassociation_VO"
+    Cardinality="-1"
+    Owner="its.mnr.mp5.vo.workorder.MrltFlagassociation_VO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="MrltFlagassociation_VO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.workorder.MrltFlagassociation_VO.Fid"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

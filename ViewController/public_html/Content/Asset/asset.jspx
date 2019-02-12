@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title=" " id="d1">
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/MP5BaseTemplate.jspx" id="pt1">
+                <f:facet name="GlobalTop">
+                    <af:navigationPane id="np1">
+                        <af:commandNavigationItem text="Home" id="cni1" accessKey="H"
+                                                  actionListener="#{ModuleNavBean.goHomeModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Invoice;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Work Order" id="cni2" selected="false" accessKey="W"
+                                                  actionListener="#{ModuleNavBean.goWOModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=WorkOrder;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Invoice" id="cni3" accessKey="I"
+                                                  actionListener="#{ModuleNavBean.goInvoiceModule}"/>
+                        <af:commandNavigationItem text="PO &amp; Receivings" id="cni4" accessKey="P"
+                                                  actionListener="#{ModuleNavBean.goPORecvModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=PORecv;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Stock" id="cni5" accessKey="S"
+                                                  actionListener="#{ModuleNavBean.goStockModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Stock;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Asset (This) " id="cni8" accessKey="S"
+                                                  actionListener="#{ModuleNavBean.goAssetModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Asset;resourceType=GlobalNav;action=view']}"
+                                                  selected="true"/>
+                        <af:commandNavigationItem text="Report" id="cni6" accessKey="R"
+                                                  actionListener="#{ModuleNavBean.goReportModule}"/>
+                        <af:commandNavigationItem text="Admin" id="cni7" accessKey="M"
+                                                  actionListener="#{ModuleNavBean.goAdminModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Admin;resourceType=GlobalNav;action=view']}"/>
+                    </af:navigationPane>
+                </f:facet>
+                <f:facet name="Main">
+                    <af:panelGroupLayout id="g1" layout="vertical" inlineStyle="margin:50px;">
+                        <af:link text="Asset Maintenance" id="cil2" action="goAssetMaint" useWindow="true"
+                                 windowEmbedStyle="inlineDocument" windowModalityType="modeless" windowHeight="700"
+                                 windowWidth="850" inlineStyle="font-size:medium;"
+                                 icon="#{resource['images:truck.png']}"/>
+                        <af:spacer width="10" height="30" id="s1"/>
+                        <af:link text="Documents" id="cil1" action="goDocs" useWindow="true"
+                                 windowEmbedStyle="inlineDocument" windowModalityType="modeless" windowHeight="700"
+                                 windowWidth="730" inlineStyle="font-size:medium; "
+                                 icon="#{resource['images:document_gear.png']}"/>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="LHS"/>
+                <f:attribute name="LHSSplitterCollapsed" value="true"/>
+                <f:attribute name="LHSSplitterDisabled" value="true"/>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

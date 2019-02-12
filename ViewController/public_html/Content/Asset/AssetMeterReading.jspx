@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title=" Meter Reading" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                        <af:panelHeader text="Asset #{pageFlowScope.psfAssetCd}" id="ph1" inlineStyle="margin:10px;">
+                            <f:facet name="context"/>
+                            <f:facet name="menuBar">
+                            <af:toolbar id="t2"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; background-color:White;">
+                                <af:button id="actb1" icon="#{resource['images:add.png']}"
+                                           action="#{meterReadingBean.crInsReading}"
+                                           disabled="#{!securityContext.userGrantedResource['resourceName=AssetAddReading;resourceType=UIControl;action=enabled'] }"
+                                           />
+                                           <!--disabled="#{!securityContext.userGrantedResource['resourceName=AssetAddReading;resourceType=UIControl;action=enabled'] }"-->
+                                <!--
+                                <af:button id="actb1" actionListener="#{meterReadingBean.crInsReading}"
+                                           icon="#{resource['images:add.png']}"
+                                           disabled="#{!securityContext.userGrantedResource['resourceName=AssetAddReading;resourceType=UIControl;action=enabled'] }"/>
+                                           -->
+                                <af:spacer width="20" height="10" id="s2"/>
+                                <af:button text="Apply" disabled="#{!bindings.Commit.enabled}" id="ctb2"
+                                           icon="#{resource['images:commit.png']}"
+                                           action="#{meterReadingBean.saveReading}"/>
+                                <af:button actionListener="#{bindings.Rollback.execute}" text="Cancel" immediate="true"
+                                           id="ctb1" icon="#{resource['images:undo.png']}">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button id="ctb4" action="Exit" icon="#{resource['images:terminate.png']}"/>
+                            </af:toolbar>
+                        </f:facet>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="legend"/>
+                            <f:facet name="info"/>
+                        <af:panelGroupLayout id="pgl1" inlineStyle="background-color:White; margin:10px 5px 5px 5px ;">
+                            <af:panelCollection id="pc1" styleClass="AFStretchWidth" featuresOff="viewMenu detach"
+                                                inlineStyle="margin:5px 0px;">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar"/>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.AssetReading.collectionModel}" var="row"
+                                          rows="#{bindings.AssetReading.rangeSize}"
+                                          emptyText="#{bindings.AssetReading.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.AssetReading.rangeSize}" rowBandingInterval="0" id="t1"
+                                          selectedRowKeys="#{bindings.AssetReading.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.AssetReading.collectionModel.makeCurrent}"
+                                          rowSelection="single">
+                                    <af:column sortProperty="#{bindings.AssetReading.hints.Createdt.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.AssetReading.hints.Createdt.label}" id="c1"
+                                               align="center" width="130">
+                                        <af:outputText value="#{row.Createdt}" id="ot9">
+                                            <af:convertDateTime pattern="#{bindings.AssetReading.hints.Createdt.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.AssetReading.hints.tLabelDesc.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.AssetReading.hints.tLabelDesc.label}" id="c2"
+                                               align="center" width="105">
+                                        <af:outputText value="#{row.tLabelDesc}" id="ot8"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.AssetReading.hints.Readingdate.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.AssetReading.hints.Readingdate.label}" id="c4"
+                                               align="center" width="104">
+                                        <af:outputText value="#{row.Readingdate}" id="ot4">
+                                            <af:convertDateTime pattern="#{bindings.AssetReading.hints.Readingdate.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.AssetReading.hints.Readingvalue.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.AssetReading.hints.Readingvalue.label}" id="c5"
+                                               align="center" width="106">
+                                        <af:outputText value="#{row.Readingvalue}" id="ot5">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.AssetReading.hints.Readingvalue.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.AssetReading.hints.Readingdiff.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.AssetReading.hints.Readingdiff.label}" id="c6"
+                                               align="center" width="105">
+                                        <af:outputText value="#{row.Readingdiff}" id="ot6">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.AssetReading.hints.Readingdiff.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.AssetReading.hints.Uom.name}" sortable="false"
+                                               headerText="#{bindings.AssetReading.hints.Uom.label}" id="c7"
+                                               align="center" width="35">
+                                        <af:outputText value="#{row.Uom}" id="ot7"/>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                            <af:panelFormLayout id="pfl1" inlineStyle="margin:40px;">
+                                <af:panelLabelAndMessage label="#{bindings.Createdt.hints.label}" id="plam2">
+                                    <af:outputText value="#{bindings.Createdt.inputValue}" id="ot10">
+                                        <af:convertDateTime pattern="#{bindings.Createdt.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:inputText value="#{bindings.Readingitem.inputValue}"
+                                              label="#{bindings.Readingitem.hints.label}"
+                                              required="#{bindings.Readingitem.hints.mandatory}"
+                                              columns="#{bindings.Readingitem.hints.displayWidth}"
+                                              maximumLength="#{bindings.Readingitem.hints.precision}"
+                                              shortDesc="#{bindings.Readingitem.hints.tooltip}" id="it2"
+                                              autoSubmit="true" binding="#{meterReadingBean.txtAssetCd}"
+                                              readOnly="true">
+                                    <f:validator binding="#{bindings.Readingitem.validator}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.Org.inputValue}" label="#{bindings.Org.hints.label}"
+                                              required="#{bindings.Org.hints.mandatory}"
+                                              columns="#{bindings.Org.hints.displayWidth}"
+                                              maximumLength="#{bindings.Org.hints.precision}"
+                                              shortDesc="#{bindings.Org.hints.tooltip}" id="it1" autoSubmit="true"
+                                              binding="#{meterReadingBean.txtAssetOrg}" readOnly="true">
+                                    <f:validator binding="#{bindings.Org.validator}"/>
+                                </af:inputText>
+                                <af:panelLabelAndMessage label="#{bindings.tAssetStatus.hints.label}" id="plam1">
+                                    <af:outputText value="#{bindings.tAssetStatus.inputValue}" id="ot3"/>
+                                </af:panelLabelAndMessage>
+                                <af:selectOneChoice value="#{bindings.Readinglabel.inputValue}"
+                                                    label="#{bindings.Readinglabel.label}"
+                                                    required="#{bindings.Readinglabel.hints.mandatory}"
+                                                    shortDesc="#{bindings.Readinglabel.hints.tooltip}" id="soc1"
+                                                    autoSubmit="true" binding="#{meterReadingBean.socMeterType}"
+                                                    valueChangeListener="#{meterReadingBean.meterTypeLsnr}">
+                                    <f:selectItems value="#{bindings.Readinglabel.items}" id="si1"/>
+                                    <f:validator binding="#{bindings.Readinglabel.validator}"/>
+                                </af:selectOneChoice>
+                                <af:inputDate value="#{bindings.Readingdate.inputValue}"
+                                              label="#{bindings.Readingdate.hints.label}"
+                                              required="#{bindings.Readingdate.hints.mandatory}"
+                                              columns="#{bindings.Readingdate.hints.displayWidth}"
+                                              shortDesc="#{bindings.Readingdate.hints.tooltip}" id="id1"
+                                              autoSubmit="true" binding="#{meterReadingBean.txtDate}"
+                                              partialTriggers="soc1">
+                                    <f:validator binding="#{bindings.Readingdate.validator}"/>
+                                    <af:convertDateTime pattern="#{bindings.Readingdate.format}"/>
+                                </af:inputDate>
+                                <af:inputText value="#{bindings.Readingvalue.inputValue}"
+                                              label="#{bindings.Readingvalue.hints.label}"
+                                              required="#{bindings.Readingvalue.hints.mandatory}"
+                                              columns="#{bindings.Readingvalue.hints.displayWidth}"
+                                              maximumLength="#{bindings.Readingvalue.hints.precision}"
+                                              shortDesc="#{bindings.Readingvalue.hints.tooltip}" id="it3"
+                                              autoSubmit="true" binding="#{meterReadingBean.txtNewReading}"
+                                              readOnly="#{empty bindings.Readinglabel.inputValue}"
+                                              partialTriggers="soc1">
+                                    <f:validator binding="#{bindings.Readingvalue.validator}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.Readingdiff.inputValue eq null  &amp;&amp; bindings.Readingvalue.inputValue ne null? bindings.Readingvalue.inputValue - bindings.tLastReadingValue.inputValue : bindings.Readingdiff.inputValue}"
+                                              label="#{bindings.Readingdiff.hints.label}"
+                                              required="#{bindings.Readingdiff.hints.mandatory}"
+                                              columns="#{bindings.Readingdiff.hints.displayWidth}"
+                                              maximumLength="#{bindings.Readingdiff.hints.precision}"
+                                              shortDesc="#{bindings.Readingdiff.hints.tooltip}" id="it4"
+                                              autoSubmit="true" binding="#{meterReadingBean.txtDifference}"
+                                              readOnly="true" partialTriggers="it3">
+                                    <f:validator binding="#{bindings.Readingdiff.validator}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.Uom.inputValue}" label="#{bindings.Uom.hints.label}"
+                                              required="#{bindings.Uom.hints.mandatory}"
+                                              columns="#{bindings.Uom.hints.displayWidth}"
+                                              maximumLength="#{bindings.Uom.hints.precision}"
+                                              shortDesc="#{bindings.Uom.hints.tooltip}" id="it5" autoSubmit="true"
+                                              binding="#{meterReadingBean.txtUom}" readOnly="true">
+                                    <f:validator binding="#{bindings.Uom.validator}"/>
+                                </af:inputText>
+                                <af:separator id="s1"/>
+                                <af:inputText value="#{bindings.tLastReadingValue.inputValue}" id="ot1"
+                                              label="#{bindings.tLastReadingValue.hints.label}"
+                                              binding="#{meterReadingBean.txtLastReading}" readOnly="true">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.tLastReadingValue.format}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.tLastReadingDate.inputValue}" id="ot2"
+                                              label="#{bindings.tLastReadingDate.hints.label}"
+                                              binding="#{meterReadingBean.txtLastReadingDate}" readOnly="true">
+                                    <af:convertDateTime pattern="#{bindings.tLastReadingDate.format}"/>
+                                </af:inputText>
+                            </af:panelFormLayout>
+                        </af:panelGroupLayout>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:meterReadingBean-->
+</f:view>

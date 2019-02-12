@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <view id="login">
+    <page>/login.jspx</page>
+  </view>
+  <view id="home">
+    <page>/home.jspx</page>
+  </view>
+  <view id="workorder">
+    <page>/Content/WorkOrder/workorder.jspx</page>
+  </view>
+  <view id="admin">
+    <page>/Content/Admin/admin.jspx</page>
+  </view>
+  <task-flow-call id="Admin-WorkOrderMaster">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Admin/Master/Admin-WorkOrderMaster.xml</document>
+      <id>Admin-WorkOrderMaster</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Admin-ServiceGroupMaster">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Admin/Master/Admin-ServiceGroupMaster.xml</document>
+      <id>Admin-ServiceGroupMaster</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Admin-ComponentLocation">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Admin/Master/Admin-ComponentLocation.xml</document>
+      <id>Admin-ComponentLocation</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Admin-DamageRepairMaster">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Admin/Master/Admin-DamageRepairMaster.xml</document>
+      <id>Admin-DamageRepairMaster</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Admin-PerMaster">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Admin/Master/Admin-PerMaster.xml</document>
+      <id>Admin-PerMaster</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Admin-AccountMaster">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Admin/Master/Admin-AccountMaster.xml</document>
+      <id>Admin-AccountMaster</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Admin-Profile">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Admin/Master/Admin-Profile.xml</document>
+      <id>Admin-Profile</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Admin-ServiceTask">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Admin/Master/Admin-ServiceTask.xml</document>
+      <id>Admin-ServiceTask</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Admin-AccountBillingMaster">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Admin/BillingRate/Admin-AccountBillingMaster.xml</document>
+      <id>Admin-AccountBillingMaster</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <view id="invoice">
+    <page>/Content/Invoice/invoice.jspx</page>
+  </view>
+  <task-flow-call id="Invoice-Assembly">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Invoice/Invoice-Assembly.xml</document>
+      <id>Invoice-Assembly</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Invoice-Inquiry">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Invoice/Invoice-Inquiry.xml</document>
+      <id>Invoice-Inquiry</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Invoice-Credit">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Invoice/Invoice-Credit.xml</document>
+      <id>Invoice-Credit</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Invoice-Retro">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Invoice/Invoice-Retro.xml</document>
+      <id>Invoice-Retro</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <view id="report">
+    <page>/Content/Report/report.jspx</page>
+  </view>
+  <view id="stock">
+    <page>/Content/Stock/stock.jspx</page>
+  </view>
+  <task-flow-call id="Parts-PartMaint">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Stock/Parts-PartMaint.xml</document>
+      <id>Parts-PartMaint</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="PORecv-PO">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/PORecv/PORecv-PO.xml</document>
+      <id>PORecv-PO</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <view id="PORecv">
+    <page>/Content/PORecv/PORecv.jspx</page>
+  </view>
+  <task-flow-call id="POCompanReceipts">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/PORecv/POCompanReceipts.xml</document>
+      <id>POCompanReceipts</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Inv-CycleCount">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Stock/CC-CycleCount.xml</document>
+      <id>Inv-CycleCount</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <view id="asset">
+    <page>/Content/Asset/asset.jspx</page>
+  </view>
+  <task-flow-call id="assetMaint">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Asset/Asset-Maint.xml</document>
+      <id>assetMaint</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Asset-Docs">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Asset/Asset-Docs.xml</document>
+      <id>Asset-Docs</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Admin-Class">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Admin/Master/Admin-Class.xml</document>
+      <id>Admin-Class</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="Suppliers">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Stock/Suppliers.xml</document>
+      <id>Suppliers</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <task-flow-call id="POHistory">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/PORecv/POHistory.xml</document>
+      <id>POHistory</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
+  <control-flow-rule id="__1">
+    <from-activity-id>*</from-activity-id>
+    <control-flow-case id="__2">
+      <from-outcome>goHome</from-outcome>
+      <to-activity-id>home</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__3">
+      <from-outcome>goAdmin</from-outcome>
+      <to-activity-id>admin</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__5">
+      <from-outcome>goWorkOrder</from-outcome>
+      <to-activity-id>workorder</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__19">
+      <from-outcome>goInvoice</from-outcome>
+      <to-activity-id>invoice</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__26">
+      <from-outcome>goReport</from-outcome>
+      <to-activity-id>report</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__22">
+      <from-outcome>goStock</from-outcome>
+      <to-activity-id>stock</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__29">
+      <from-outcome>goPORecv</from-outcome>
+      <to-activity-id>PORecv</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__35">
+      <from-outcome>goAsset</from-outcome>
+      <to-activity-id>asset</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__6">
+    <from-activity-id>admin</from-activity-id>
+    <control-flow-case id="__7">
+      <from-outcome>launchWorkOrderMaster</from-outcome>
+      <to-activity-id>Admin-WorkOrderMaster</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__8">
+      <from-outcome>launchServiceGroupMaster</from-outcome>
+      <to-activity-id>Admin-ServiceGroupMaster</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__9">
+      <from-outcome>launchComponentLocationMaster</from-outcome>
+      <to-activity-id>Admin-ComponentLocation</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__10">
+      <from-outcome>launchDamageRepairMaster</from-outcome>
+      <to-activity-id>Admin-DamageRepairMaster</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__11">
+      <from-outcome>launchPerMaster</from-outcome>
+      <to-activity-id>Admin-PerMaster</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__12">
+      <from-outcome>launchAccountMaster</from-outcome>
+      <to-activity-id>Admin-AccountMaster</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__13">
+      <from-outcome>launchProfileMaster</from-outcome>
+      <to-activity-id>Admin-Profile</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__14">
+      <from-outcome>launchServiceTask</from-outcome>
+      <to-activity-id>Admin-ServiceTask</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__15">
+      <from-outcome>launchAccountBillingMaster</from-outcome>
+      <to-activity-id>Admin-AccountBillingMaster</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__39">
+      <from-outcome>launchClass</from-outcome>
+      <to-activity-id>Admin-Class</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__20">
+    <from-activity-id>invoice</from-activity-id>
+    <control-flow-case id="__21">
+      <from-outcome>launchInvoiceAssembly</from-outcome>
+      <to-activity-id>Invoice-Assembly</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__23">
+      <from-outcome>launchInvoiceInquiry</from-outcome>
+      <to-activity-id>Invoice-Inquiry</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__24">
+      <from-outcome>launchInvoiceCredit</from-outcome>
+      <to-activity-id>Invoice-Credit</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__25">
+      <from-outcome>launchInvoiceRetro</from-outcome>
+      <to-activity-id>Invoice-Retro</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__27">
+    <from-activity-id>stock</from-activity-id>
+    <control-flow-case id="__28">
+      <from-outcome>launchPartsMaint</from-outcome>
+      <to-activity-id>Parts-PartMaint</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__33">
+      <from-outcome>launchCyclecnt</from-outcome>
+      <to-activity-id>Inv-CycleCount</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__40">
+      <from-outcome>launchSuppliers</from-outcome>
+      <to-activity-id>Suppliers</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__30">
+    <from-activity-id>PORecv</from-activity-id>
+    <control-flow-case id="__31">
+      <from-outcome>launchPORecv</from-outcome>
+      <to-activity-id>PORecv-PO</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__32">
+      <from-outcome>launchCompRcpts</from-outcome>
+      <to-activity-id>POCompanReceipts</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__41">
+      <from-outcome>launchPOHist</from-outcome>
+      <to-activity-id>POHistory</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__36">
+    <from-activity-id>asset</from-activity-id>
+    <control-flow-case id="__37">
+      <from-outcome>goAssetMaint</from-outcome>
+      <to-activity-id>assetMaint</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__38">
+      <from-outcome>goDocs</from-outcome>
+      <to-activity-id>Asset-Docs</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <managed-bean id="__4">
+    <managed-bean-name>LoginBean</managed-bean-name>
+    <managed-bean-class>its.mnr.mp5.view.LoginBean</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__17">
+    <managed-bean-name>Region</managed-bean-name>
+    <managed-bean-class>its.mnr.mp5.view.Region</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="_18">
+  <managed-bean-name>
+    oracle$adfinternal$view$rich$dailogInlineDocument
+  </managed-bean-name>
+  <managed-bean-class>java.util.TreeMap</managed-bean-class>
+  <managed-bean-scope>application</managed-bean-scope>
+    <map-entries>
+      <key-class>java.lang.String</key-class>
+      <value-class>java.lang.String</value-class>
+      <map-entry>
+        <key>MODE</key>
+        <value>withoutCancel</value>
+      </map-entry>
+    </map-entries>
+  </managed-bean>
+  <managed-bean id="__16">
+    <managed-bean-name>WorkOrderQueryBean</managed-bean-name>
+    <managed-bean-class>its.mnr.mp5.view.WorkOrderQueryBean</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__18">
+    <managed-bean-name>ModuleNavBean</managed-bean-name>
+    <managed-bean-class>its.mnr.mp5.view.ModuleNavBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__34">
+    <managed-bean-name>AdminBean</managed-bean-name>
+    <managed-bean-class>its.mnr.mp5.view.AdminBean</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

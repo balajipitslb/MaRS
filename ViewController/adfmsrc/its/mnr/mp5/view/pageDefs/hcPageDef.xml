@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="hcPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BillingRatesDataControlNested.AccountRateTaskView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="AccountRateTaskViewIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="Accountratetaskid">
+      <AttrNames>
+        <Item Value="Accountratetaskid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="Accountrateid">
+      <AttrNames>
+        <Item Value="Accountrateid"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountRateTaskViewIterator" StaticList="false" Uses="LOV_Taskid" id="Taskid"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="Multiple">
+      <AttrNames>
+        <Item Value="Accountratetaskid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="Ratetype">
+      <AttrNames>
+        <Item Value="Ratetype"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="R1">
+      <AttrNames>
+        <Item Value="R1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="R1o">
+      <AttrNames>
+        <Item Value="R1o"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="R2">
+      <AttrNames>
+        <Item Value="R2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="R2o">
+      <AttrNames>
+        <Item Value="R2o"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="R3">
+      <AttrNames>
+        <Item Value="R3"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="R3o">
+      <AttrNames>
+        <Item Value="R3o"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountRateTaskViewIterator" StaticList="false" Uses="LOV_Servicegroupid" id="Servicegroupid"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="AccountRateTaskAcctNum">
+      <AttrNames>
+        <Item Value="AccountRateTaskAcctNum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="AccountRateTaskBase">
+      <AttrNames>
+        <Item Value="AccountRateTaskBase"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="AccountRateTaskBillType">
+      <AttrNames>
+        <Item Value="AccountRateTaskBillType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="AccountRateTaskDesc">
+      <AttrNames>
+        <Item Value="AccountRateTaskDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="AccountRateTaskPer">
+      <AttrNames>
+        <Item Value="AccountRateTaskPer"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="AccountRateTaskM1">
+      <AttrNames>
+        <Item Value="AccountRateTaskM1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="AccountRateTaskM1o">
+      <AttrNames>
+        <Item Value="AccountRateTaskM1o"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="AccountRateTaskM2">
+      <AttrNames>
+        <Item Value="AccountRateTaskM2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="AccountRateTaskM2o">
+      <AttrNames>
+        <Item Value="AccountRateTaskM2o"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="AccountRateTaskM3">
+      <AttrNames>
+        <Item Value="AccountRateTaskM3"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AccountRateTaskViewIterator" id="AccountRateTaskM3o">
+      <AttrNames>
+        <Item Value="AccountRateTaskM3o"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

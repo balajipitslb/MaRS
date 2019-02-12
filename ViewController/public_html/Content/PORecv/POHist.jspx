@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="PO History Lookup" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                        <af:panelGroupLayout id="pgl2">
+                        <af:panelSplitter id="ps1" dimensionsFrom="children" splitterPosition="300">
+                            <f:facet name="first">
+                                <af:panelGroupLayout id="pgl1">
+                                    <af:query id="qryId1" headerText="Search" disclosed="true"
+                                              value="#{bindings.SuppliersCriteriaQuery.queryDescriptor}"
+                                              model="#{bindings.SuppliersCriteriaQuery.queryModel}"
+                                              queryListener="#{bindings.SuppliersCriteriaQuery.processQuery}"
+                                              queryOperationListener="#{bindings.SuppliersCriteriaQuery.processQueryOperation}"
+                                              resultComponentId="::pc1:resId1" displayMode="compact"
+                                              saveQueryMode="hidden" modeChangeVisible="false"/>
+                                    <af:panelCollection id="pc1" styleClass="AFStretchWidth"
+                                                        inlineStyle="margin: 10px; height: 515px;"
+                                                        featuresOff="viewMenu detach">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar"/>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.SuppliersSearch.collectionModel}" var="row"
+                                                  rows="#{bindings.SuppliersSearch.rangeSize}"
+                                                  emptyText="#{bindings.SuppliersSearch.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.SuppliersSearch.rangeSize}"
+                                                  rowBandingInterval="1"
+                                                  selectedRowKeys="#{bindings.SuppliersSearch.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.SuppliersSearch.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="resId1">
+                                            <af:column sortProperty="#{bindings.SuppliersSearch.hints.CatPart.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.SuppliersSearch.hints.CatPart.label}"
+                                                       id="resId1c1" width="50" align="center">
+                                                <af:outputText value="#{row.CatPart}" id="ot1"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.SuppliersSearch.hints.tPartDesc.name}"
+                                                       sortable="false" id="c1" width="100">
+                                                <af:outputText value="#{row.tPartDesc}" id="ot3"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.SuppliersSearch.hints.CatSupplier.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.SuppliersSearch.hints.CatSupplier.label}"
+                                                       id="resId1c2" width="50" align="center">
+                                                <af:outputText value="#{row.CatSupplier}" id="ot2"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.SuppliersSearch.hints.Companies.ComDesc.name}"
+                                                       sortable="false" id="resId1c6" width="100">
+                                                <af:outputText value="#{row.Companies.bindings.ComDesc.inputValue}"
+                                                               id="ot6"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                            <f:facet name="second">
+                                <af:panelGroupLayout id="pgl3">
+                                    <af:panelHeader text=" Supplier  #{bindings.CatSupplier.inputValue} " id="ph2">
+                                        <f:facet name="toolbar">
+                                                <af:toolbar id="t1"
+                                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                                <af:button id="ctb1" action="Exit"
+                                                           icon="#{resource['images:terminate.png']}"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <af:outputText value="#{bindings.tPartDesc.inputValue}" id="ot29"
+                                                       rendered="false"/>
+                                        <af:outputText value="#{bindings.CatPart.inputValue}" id="ot28"
+                                                       rendered="false"/>
+                                        <af:outputText value="#{bindings.CatSupplier.inputValue}" id="ot27"
+                                                       rendered="false"/>
+                                        <af:panelFormLayout id="pgl4"
+                                                            inlineStyle="border-color:Silver; border-style:solid; border-width:1px;  margin:5px 0px; padding:5px; text-align:left;background-color:White;"
+                                                            maxColumns="1" rows="2">
+                                            <af:panelLabelAndMessage label="Supplier" id="plam1" rendered="false">
+                                                <af:outputText value=" #{bindings.CatSupplier.inputValue} " id="ot20"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="Part POs" id="plam2">
+                                                <af:outputText value="#{bindings.CatPart.inputValue}     #{bindings.tPartDesc.inputValue}" id="ot30"/>
+                                            </af:panelLabelAndMessage>
+                                        </af:panelFormLayout>
+                                        <af:panelCollection id="pc2" styleClass="AFStretchWidth"
+                                                            inlineStyle="height: 250px;"
+                                                            featuresOff="viewMenu detach"
+                                                            defaultToolbarItemDisplay="icon">
+                                            <f:facet name="menus"/>
+                                            <f:facet name="toolbar"/>
+                                            <f:facet name="statusbar"/>
+                                            <af:table value="#{bindings.Orderlines.collectionModel}" var="row"
+                                                      rows="#{bindings.Orderlines.rangeSize}"
+                                                      emptyText="#{bindings.Orderlines.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.Orderlines.rangeSize}"
+                                                      rowBandingInterval="1"
+                                                      selectedRowKeys="#{bindings.Orderlines.collectionModel.selectedRow}"
+                                                      selectionListener="#{bindings.Orderlines.collectionModel.makeCurrent}"
+                                                      rowSelection="single" id="t2" columnStretching="column:c2">
+                                                <af:column sortProperty="#{bindings.Orderlines.hints.Ponum.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.Orderlines.hints.Ponum.label} - #{bindings.Orderlines.hints.Poline.label}" id="c2"
+                                                           align="center" width="70">
+                                                    <af:outputText value="#{row.Ponum}" id="ot4" rendered="false"/>
+                                                    <af:link text="#{row.Ponum} - #{row.Poline}" id="gl1"
+                                                             destination="http://itsgp31/MaRSReportServer?%2fMaRSIntegrated%2fMaRSPO&amp;rs:Command=Render&amp;rc:Toolbar=false&amp;PONo=#{row.Ponum}"
+                                                             targetFrame="_blank"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.Orderlines.hints.Postatus.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.Orderlines.hints.Postatus.label}"
+                                                           id="c4" align="center" width="50">
+                                                    <af:outputText value="#{row.Postatus}" id="ot7"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.Orderlines.hints.Podate.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.Orderlines.hints.Podate.label}"
+                                                           id="c5" align="center" width="70">
+                                                    <af:outputText value="#{row.Podate}" id="ot8"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.Orderlines.hints.Poline.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.Orderlines.hints.Poline.label}"
+                                                           id="c6" align="center" width="50" rendered="false">
+                                                    <af:outputText value="#{row.Poline}" id="ot9">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.Orderlines.hints.Poline.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.Orderlines.hints.Linestatus.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.Orderlines.hints.Linestatus.label}"
+                                                           id="c14" align="center" width="60">
+                                                    <af:outputText value="#{row.Linestatus}" id="ot17"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.Orderlines.hints.Lineordqty.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.Orderlines.hints.Lineordqty.label}"
+                                                           id="c8" align="center" width="50">
+                                                    <af:outputText value="#{row.Lineordqty}" id="ot11">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.Orderlines.hints.Lineordqty.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.Orderlines.hints.Lineuom.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.Orderlines.hints.Lineuom.label}"
+                                                           id="c9" align="center" width="50">
+                                                    <af:outputText value="#{row.Lineuom}" id="ot12"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.Orderlines.hints.Unitprice.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.Orderlines.hints.Unitprice.label}"
+                                                           id="c10" align="center" width="50">
+                                                    <af:outputText value="#{row.Unitprice}" id="ot13">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.Orderlines.hints.Unitprice.format}"
+                                                                          type="currency"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.Orderlines.hints.Recvqty.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.Orderlines.hints.Recvqty.label}"
+                                                           id="c11" align="center" width="50">
+                                                    <af:outputText value="#{row.Recvqty}" id="ot14">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.Orderlines.hints.Recvqty.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.Orderlines.hints.Recvvalue.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.Orderlines.hints.Recvvalue.label}"
+                                                           id="c12" align="center" width="60">
+                                                    <af:outputText value="#{row.Recvvalue}" id="ot15">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.Orderlines.hints.Recvvalue.format}"
+                                                                          type="currency"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.Orderlines.hints.Extracharges.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.Orderlines.hints.Extracharges.label}"
+                                                           id="c13" align="center" width="100" displayIndex="-1">
+                                                    <af:outputText value="#{row.Extracharges}" id="ot16">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.Orderlines.hints.Extracharges.format}"
+                                                                          type="currency"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                            </af:table>
+                                        </af:panelCollection>
+                                        <af:panelFormLayout id="pfl1"
+                                                            inlineStyle="border-color:Silver; border-style:solid; border-width:1px;  margin:20px 0px 5px 0px; padding:5px; text-align:left;background-color:White;"
+                                                            maxColumns="1" rows="2">
+                                            <af:panelLabelAndMessage label="Service POs" id="plam4"/>
+                                        </af:panelFormLayout>
+                                        <af:panelCollection id="pc3" styleClass="AFStretchWidth"
+                                                            inlineStyle="height: 260px;"
+                                                            defaultToolbarItemDisplay="icon"
+                                                            featuresOff="viewMenu detach">
+                                            <f:facet name="menus"/>
+                                            <f:facet name="toolbar"/>
+                                            <f:facet name="statusbar"/>
+                                            <af:table value="#{bindings.POOrderlineServices.collectionModel}" var="row"
+                                                      rows="#{bindings.POOrderlineServices.rangeSize}"
+                                                      emptyText="#{bindings.POOrderlineServices.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.POOrderlineServices.rangeSize}"
+                                                      rowBandingInterval="1"
+                                                      selectedRowKeys="#{bindings.POOrderlineServices.collectionModel.selectedRow}"
+                                                      selectionListener="#{bindings.POOrderlineServices.collectionModel.makeCurrent}"
+                                                      rowSelection="single" id="t3" columnStretching="column:c3">
+                                                <af:column sortProperty="#{bindings.POOrderlineServices.hints.OrlOrder.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.POOrderlineServices.hints.OrlOrder.label} - #{bindings.POOrderlineServices.hints.OrlOrdline.label}"
+                                                           id="c3" align="center" width="70">
+                                                    <af:outputText value="#{row.OrlOrder}" id="ot5" rendered="false"/>
+                                                    <af:link text="#{row.OrlOrder} - #{row.OrlOrdline}" id="gl2"
+                                                             targetFrame="_blank"
+                                                             destination="http://itsgp31/MaRSReportServer?%2fMaRSIntegrated%2fMaRSPO&amp;rs:Command=Render&amp;rc:Toolbar=false&amp;PONo=#{row.OrlOrder}"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.POOrderlineServices.hints.OrlOrdline.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.POOrderlineServices.hints.OrlOrdline.label}"
+                                                           id="c7" align="center" width="50" rendered="false">
+                                                    <af:outputText value="#{row.OrlOrdline}" id="ot10">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.POOrderlineServices.hints.OrlOrdline.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.POOrderlineServices.hints.OrlStatus.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.POOrderlineServices.hints.OrlStatus.label}"
+                                                           id="c15" align="center" width="60">
+                                                    <af:outputText value="#{row.OrlStatus}" id="ot18"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.POOrderlineServices.hints.OrlDue.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.POOrderlineServices.hints.OrlDue.label}"
+                                                           id="c16" align="center" width="70">
+                                                    <af:outputText value="#{row.OrlDue}" id="ot19">
+                                                        <af:convertDateTime pattern="#{bindings.POOrderlineServices.hints.OrlDue.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.POOrderlineServices.hints.OrlTask.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.POOrderlineServices.hints.OrlTask.label}"
+                                                           id="c18" align="center">
+                                                    <af:outputText value="#{row.OrlTask}" id="ot21"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.POOrderlineServices.hints.OrlTaskqty.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.POOrderlineServices.hints.OrlTaskqty.label}"
+                                                           id="c19" align="center" width="50">
+                                                    <af:outputText value="#{row.OrlTaskqty}" id="ot22">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.POOrderlineServices.hints.OrlTaskqty.format}"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.POOrderlineServices.hints.ItsTaskprice.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.POOrderlineServices.hints.ItsTaskprice.label}"
+                                                           id="c20" align="center" width="50">
+                                                    <af:outputText value="#{row.ItsTaskprice}" id="ot23">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.POOrderlineServices.hints.ItsTaskprice.format}"
+                                                                          type="currency"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.POOrderlineServices.hints.ItsTaskuom.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.POOrderlineServices.hints.ItsTaskuom.label}"
+                                                           id="c21" align="center" width="50">
+                                                    <af:outputText value="#{row.ItsTaskuom}" id="ot24"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.POOrderlineServices.hints.OrlTotextra.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.POOrderlineServices.hints.OrlTotextra.label}"
+                                                           id="c22" align="center" width="100">
+                                                    <af:outputText value="#{row.OrlTotextra}" id="ot25">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.POOrderlineServices.hints.OrlTotextra.format}"
+                                                                          type="currency"/>
+                                                    </af:outputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.POOrderlineServices.hints.ItsOrltype.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.POOrderlineServices.hints.ItsOrltype.label}"
+                                                           id="c23" align="center" width="50">
+                                                    <af:outputText value="#{row.ItsOrltype}" id="ot26"/>
+                                                </af:column>
+                                            </af:table>
+                                        </af:panelCollection>
+                                    </af:panelHeader>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                        </af:panelSplitter>
+                    </af:panelGroupLayout>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

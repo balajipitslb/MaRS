@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltTaskrepairFk1Link"
+  Version="11.1.2.60.81"
+  EntityAssociation="its.mnr.mp5.eo.assoc.MrltTaskrepairFk1Assoc">
+  <ViewLinkDefEnd
+    Name="MrltTaskdamageView"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.vo.admin.MrltTaskdamageView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="MrltTaskdamageView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.admin.MrltTaskdamageView.Taskdamageid"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="MrltTaskrepairView"
+    Cardinality="-1"
+    Owner="its.mnr.mp5.vo.admin.MrltTaskrepairView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="MrltTaskrepairView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.admin.MrltTaskrepairView.Taskdamageid"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

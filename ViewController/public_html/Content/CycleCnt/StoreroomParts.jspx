@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <af:document title="Storeroom Parts" id="d1" inlineStyle="width:507px;height:467px;">
+    <af:messages id="m1"/>
+    <af:form id="f1">
+      <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+        <f:facet name="main">
+          <af:group id="g1">
+            <af:panelFormLayout id="pfl1" partialTriggers="t1:sbc1" binding="#{CycleCountBean.assignBinsToSRForm}">
+            <!--
+              <af:outputText value="#{bindings.Listid1.inputValue}" shortDesc="#{bindings.Listid1.hints.tooltip}"
+                             id="ot1">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.Listid1.format}"/>
+              </af:outputText>-->
+              <af:panelHeader id="pgl1" text=" " >
+                <af:table value="#{bindings.MrltCyclecountpartstoresView.collectionModel}" var="row"
+                          rows="#{bindings.MrltCyclecountpartstoresView.rangeSize}"
+                          emptyText="#{bindings.MrltCyclecountpartstoresView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          fetchSize="#{bindings.MrltCyclecountpartstoresView.rangeSize}" rowBandingInterval="0" id="t1"
+                          inlineStyle="height:180px; width:450px;margin:0px 0px 10px;"
+                          binding="#{CycleCountBean.modifyStoresStoreTable}">
+                  <af:column sortProperty="#{bindings.MrltCyclecountpartstoresView.hints.Listid.name}" sortable="false"
+                             headerText="#{bindings.MrltCyclecountpartstoresView.hints.Listid.label}" id="c1"
+                             align="center" width="100">
+                    <af:inputText value="#{row.bindings.Listid.inputValue}"
+                                  label="#{bindings.MrltCyclecountpartstoresView.hints.Listid.label}"
+                                  required="#{bindings.MrltCyclecountpartstoresView.hints.Listid.mandatory}"
+                                  columns="#{bindings.MrltCyclecountpartstoresView.hints.Listid.displayWidth}"
+                                  maximumLength="#{bindings.MrltCyclecountpartstoresView.hints.Listid.precision}"
+                                  shortDesc="#{bindings.MrltCyclecountpartstoresView.hints.Listid.tooltip}" id="it1">
+                      <f:validator binding="#{row.bindings.Listid.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.MrltCyclecountpartstoresView.hints.Listid.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.MrltCyclecountpartstoresView.hints.Srcd.name}" sortable="false"
+                             headerText="#{bindings.MrltCyclecountpartstoresView.hints.Srcd.label}" id="c2"
+                             align="center" width="264">
+                    <af:inputText value="#{row.bindings.Srcd.inputValue}"
+                                  label="#{bindings.MrltCyclecountpartstoresView.hints.Srcd.label}"
+                                  required="#{bindings.MrltCyclecountpartstoresView.hints.Srcd.mandatory}"
+                                  columns="#{bindings.MrltCyclecountpartstoresView.hints.Srcd.displayWidth}"
+                                  maximumLength="#{bindings.MrltCyclecountpartstoresView.hints.Srcd.precision}"
+                                  shortDesc="#{bindings.MrltCyclecountpartstoresView.hints.Srcd.tooltip}" id="it2">
+                      <f:validator binding="#{row.bindings.Srcd.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.MrltCyclecountpartstoresView.hints.tSelected.name}"
+                             sortable="false"
+                             headerText="#{bindings.MrltCyclecountpartstoresView.hints.tSelected.label}" id="c3"
+                             align="center" width="71">
+                    <af:selectBooleanCheckbox value="#{row.bindings.tSelected.inputValue}"
+                                              label="#{row.bindings.tSelected.label}"
+                                              shortDesc="#{bindings.MrltCyclecountpartstoresView.hints.tSelected.tooltip}"
+                                              id="sbc1" autoSubmit="true"
+                                              valueChangeListener="#{CycleCountBean.selectStoreroomLsnr}"
+                                              binding="#{CycleCountBean.tselectedChbox}"/>
+                    <!--valueChangeListener="#{CycleCountBean.selectStoreroomLsnr}"-->
+                  </af:column>
+                </af:table>
+                <!--
+                <af:selectManyShuttle value="#{bindings.CycleCountPartsMain1.inputValue}"
+                                      label="#{bindings.CycleCountPartsMain1.label}" id="sms1"
+                                      binding="#{CycleCountBean.ccpartsResults1}"
+                                      partialTriggers="t1:sbc1 ctb5 ctb6">
+                  <f:selectItems value="#{bindings.CycleCountPartsMain1.items}" id="si1"/>
+                </af:selectManyShuttle>-->
+                <af:selectManyShuttle value="#{bindings.CycleCountPartsMain_distBinView1.inputValue}"
+                binding="#{CycleCountBean.ccpartsResults1}" 
+                                      label="Bin" id="sms2"
+                                      valueChangeListener="#{CycleCountBean.binShuttleValue}" autoSubmit="true"
+                                      inlineStyle="width:300px;">
+                  <f:selectItems value="#{bindings.CycleCountPartsMain_distBinView1.items}" id="si2"/>
+                </af:selectManyShuttle>
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:panelGroupLayout id="pgl2" layout="horizontal">
+                  <af:spacer width="250" height="40"  id="s2"/>
+                  <af:button text="Process" id="ctb1" action="#{CycleCountBean.selectedStoreroomProcess}"
+                             icon="#{resource['images:quick_query.png']}"
+                             binding="#{CycleCountBean.processStorePartsBtn}" disabled="true"/>
+                  <af:button text="Clear" id="ctb6" actionListener="#{CycleCountBean.unmarkAction}"
+                             binding="#{CycleCountBean.unchkSelBtn}"
+                             disabled="#{bindings.tUsedCnt.inputValue == '0'  or bindings.tUsedCnt.inputValue == null}"
+                             partialTriggers="t1:sbc1" icon="#{resource['images:refresh.png']}"/>
+                </af:panelGroupLayout>
+                <!--
+                <af:commandToolbarButton text="Select" id="ctb5" actionListener="#{CycleCountBean.mark}"
+                                         binding="#{CycleCountBean.chkSelBtn}"
+                                         disabled="#{bindings.tUsedCnt.inputValue == '0'  or bindings.tUsedCnt.inputValue == null}"
+                                         partialTriggers="t1:sbc1" icon="#{resource['images:check.png']}"/>
+                <af:commandToolbarButton text="Unselect" id="ctb6" actionListener="#{CycleCountBean.unmark}"
+                                         binding="#{CycleCountBean.unchkSelBtn}"
+                                         disabled="#{bindings.tUsedCnt.inputValue == '0'  or bindings.tUsedCnt.inputValue == null}"
+                                         partialTriggers="t1:sbc1" icon="#{resource['images:noaccess.png']}"/>
+                 -->
+                 <!--
+                                <af:panelSplitter id="ps1" dimensionsFrom="auto" splitterPosition="321"
+                                                  positionedFromEnd="true">
+                                    <f:facet name="first">
+                                    
+                                        <af:panelHeader id="pgl2" text="Available Parts">
+                                            <af:table value="#{bindings.CycleCountPartsMain.collectionModel}" var="row"
+                                                      rows="#{bindings.CycleCountPartsMain.rangeSize}"
+                                                      emptyText="#{bindings.CycleCountPartsMain.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.CycleCountPartsMain.rangeSize}"
+                                                      rowBandingInterval="1" id="resId1"
+                                                      binding="#{CycleCountBean.ccpartsResults}"
+                                                      partialTriggers="::t1"
+                                                      rowSelection="multiple"
+                                                      selectionListener="#{bindings.CycleCountPartsMain.collectionModel.makeCurrent}"
+                                                      filterVisible="true" varStatus="vs"
+                                                      inlineStyle="margin: 0px 5px 0px 0px;height:430px;"
+                                                      styleClass="AFStretchWidth" contentDelivery="immediate"
+                                                      filterModel="#{bindings.CycleCountPartsMainQuery.queryDescriptor}"
+                                                      queryListener="#{bindings.CycleCountPartsMainQuery.processQuery}">
+                                                <f:facet name="contextMenu"/>
+                                                <af:column sortProperty="#{bindings.CycleCountPartsMain.hints.StlPart.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.CycleCountPartsMain.hints.StlPart.label}"
+                                                           id="c5" align="center" width="65" filterable="true">
+                                                    <af:inputText value="#{row.bindings.StlPart.inputValue}"
+                                                                  label="#{bindings.CycleCountPartsMain.hints.StlPart.label}"
+                                                                  required="#{bindings.CycleCountPartsMain.hints.StlPart.mandatory}"
+                                                                  columns="#{bindings.CycleCountPartsMain.hints.StlPart.displayWidth}"
+                                                                  maximumLength="#{bindings.CycleCountPartsMain.hints.StlPart.precision}"
+                                                                  shortDesc="#{bindings.CycleCountPartsMain.hints.StlPart.tooltip}"
+                                                                  id="it5" readOnly="true">
+                                                        <f:validator binding="#{row.bindings.StlPart.validator}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.CycleCountPartsMain.hints.StlBin.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.CycleCountPartsMain.hints.StlBin.label}"
+                                                           id="c7" align="center" width="65" filterable="true">
+                                                    <af:inputText value="#{row.bindings.StlBin.inputValue}"
+                                                                  label="#{bindings.CycleCountPartsMain.hints.StlBin.label}"
+                                                                  required="#{bindings.CycleCountPartsMain.hints.StlBin.mandatory}"
+                                                                  columns="#{bindings.CycleCountPartsMain.hints.StlBin.displayWidth}"
+                                                                  maximumLength="#{bindings.CycleCountPartsMain.hints.StlBin.precision}"
+                                                                  shortDesc="#{bindings.CycleCountPartsMain.hints.StlBin.tooltip}"
+                                                                  id="it4" readOnly="true">
+                                                        <f:validator binding="#{row.bindings.StlBin.validator}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.CycleCountPartsMain.hints.StlLot.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.CycleCountPartsMain.hints.StlLot.label}"
+                                                           id="c8" align="center" width="65" filterable="true">
+                                                    <af:inputText value="#{row.bindings.StlLot.inputValue}"
+                                                                  label="#{bindings.CycleCountPartsMain.hints.StlLot.label}"
+                                                                  required="#{bindings.CycleCountPartsMain.hints.StlLot.mandatory}"
+                                                                  columns="#{bindings.CycleCountPartsMain.hints.StlLot.displayWidth}"
+                                                                  maximumLength="#{bindings.CycleCountPartsMain.hints.StlLot.precision}"
+                                                                  shortDesc="#{bindings.CycleCountPartsMain.hints.StlLot.tooltip}"
+                                                                  id="it7" readOnly="true">
+                                                        <f:validator binding="#{row.bindings.StlLot.validator}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.CycleCountPartsMain.hints.StlPartclass.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.CycleCountPartsMain.hints.StlPartclass.label}"
+                                                           id="c4" align="center" width="65" filterable="true">
+                                                    <af:inputText value="#{row.bindings.StlPartclass.inputValue}"
+                                                                  label="#{bindings.CycleCountPartsMain.hints.StlPartclass.label}"
+                                                                  required="#{bindings.CycleCountPartsMain.hints.StlPartclass.mandatory}"
+                                                                  columns="#{bindings.CycleCountPartsMain.hints.StlPartclass.displayWidth}"
+                                                                  maximumLength="#{bindings.CycleCountPartsMain.hints.StlPartclass.precision}"
+                                                                  shortDesc="#{bindings.CycleCountPartsMain.hints.StlPartclass.tooltip}"
+                                                                  id="it6" readOnly="true">
+                                                        <f:validator binding="#{row.bindings.StlPartclass.validator}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.CycleCountPartsMain.hints.Selected.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.CycleCountPartsMain.hints.Selected.label}"
+                                                           id="c6" width="65" align="center">
+                                                    <af:selectBooleanCheckbox value="#{row.bindings.Selected.inputValue}"
+                                                                              label="#{bindings.CycleCountPartsMain.hints.Selected.label}"
+                                                                              required="#{bindings.CycleCountPartsMain.hints.Selected.mandatory}"
+                                                                              shortDesc="#{bindings.CycleCountPartsMain.hints.Selected.tooltip}"
+                                                                              id="it8" autoSubmit="true"
+                                                                              readOnly="#{bindings.tUsedCnt.inputValue == '0'  or bindings.tUsedCnt.inputValue == null}"
+                                                                              binding="#{CycleCountBean.includeChk}"/>
+                                                </af:column>
+                                            </af:table>
+                                            <f:facet name="context">
+                                                <af:group id="g2">
+                                                    <af:inputText value="#{bindings.tUsedCnt.inputValue}" id="ot5"
+                                                                  partialTriggers="t1:sbc1" label="Label 1"
+                                                                  binding="#{CycleCountBean.tusedCntTxt}"
+                                                                  visible="false" rendered="false">
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.tUsedCnt.format}"/>
+                                                    </af:inputText>
+                                                    <af:inputText label="== 0?" id="it9"
+                                                                  value="#{bindings.tUsedCnt.inputValue == '0'  or bindings.tUsedCnt.inputValue == null? true : false}"
+                                                                  partialTriggers="ot5" visible="false"/>
+                                                </af:group>
+                                            </f:facet>
+                                            <f:facet name="menuBar"/>
+                                            <f:facet name="toolbar">
+                                                <af:toolbar id="t2">
+                                                    <af:commandToolbarButton text="Check" id="ctb5"
+                                                                             actionListener="#{CycleCountBean.mark}"
+                                                                             binding="#{CycleCountBean.chkSelBtn}"
+                                                                             disabled="#{bindings.tUsedCnt.inputValue == '0'  or bindings.tUsedCnt.inputValue == null}"
+                                                                             partialTriggers="t1:sbc1"
+                                                                             icon="#{resource['images:check.png']}"/>
+                                                    <af:commandToolbarButton text="Uncheck" id="ctb6"
+                                                                             actionListener="#{CycleCountBean.unmark}"
+                                                                             binding="#{CycleCountBean.unchkSelBtn}"
+                                                                             disabled="#{bindings.tUsedCnt.inputValue == '0'  or bindings.tUsedCnt.inputValue == null}"
+                                                                             partialTriggers="t1:sbc1"
+                                                                             icon="#{resource['images:noaccess.png']}"/>
+                                                </af:toolbar>
+                                            </f:facet>
+                                        </af:panelHeader>
+                                   
+
+                                    </f:facet>
+                                    <f:facet name="second">
+                                        <af:panelHeader id="pgl3"
+                                                        text="Selected"
+                                                        partialTriggers="t3">
+                                            <af:table value="#{bindings.CycleCountPartsMainSelected.collectionModel}"
+                                                      var="row" rows="#{bindings.CycleCountPartsMainSelected.rangeSize}"
+                                                      emptyText="#{bindings.CycleCountPartsMainSelected.viewable ? 'Please select Available Parts and click Refresh.' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.CycleCountPartsMainSelected.rangeSize}"
+                                                      rowBandingInterval="1" id="t3" partialTriggers="::ctb7"
+                                                      styleClass="AFStretchWidth"
+                                                      inlineStyle="margin: 0px 5px 0px 0px;height:431px;"
+                                                      binding="#{CycleCountBean.ccpartsSelectedResults}"
+                                                      contentDelivery="immediate">
+                                                <af:column sortProperty="#{bindings.CycleCountPartsMainSelected.hints.StlPart.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.CycleCountPartsMainSelected.hints.StlPart.label}"
+                                                           id="c9" width="70" align="center">
+                                                    <af:outputText value="#{row.StlPart}" id="ot1"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.CycleCountPartsMainSelected.hints.StlBin.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.CycleCountPartsMainSelected.hints.StlBin.label}"
+                                                           id="c10" width="71" align="center">
+                                                    <af:outputText value="#{row.StlBin}" id="ot2"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.CycleCountPartsMainSelected.hints.StlLot.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.CycleCountPartsMainSelected.hints.StlLot.label}"
+                                                           id="c11" width="69" align="center">
+                                                    <af:outputText value="#{row.StlLot}" id="ot3"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.CycleCountPartsMainSelected.hints.StlPartclass.name}"
+                                                           sortable="true"
+                                                           headerText="#{bindings.CycleCountPartsMainSelected.hints.StlPartclass.label}"
+                                                           id="c12" width="70" align="center">
+                                                    <af:outputText value="#{row.StlPartclass}" id="ot4"/>
+                                                </af:column>
+                                            </af:table>
+                                            <f:facet name="context">
+                                                <af:outputLabel value=" ( #{bindings.CycleCountPartsMainSelectedIterator.estimatedRowCount} Parts)" id="ol1"
+                                                                binding="#{CycleCountBean.selectedCntTxt}"/>
+                                            </f:facet>
+                                            <f:facet name="menuBar"/>
+                                            <f:facet name="toolbar">
+                                                <af:toolbar id="t4">
+                                                    <af:commandToolbarButton
+                                                                             text="Refresh"
+                                                                             disabled="#{!bindings.Execute1.enabled}"
+                                                                             id="ctb7"
+                                                                             icon="#{resource['images:refresh.png']}"
+                                                                             action="#{CycleCountBean.refreshSelectedBtn}"/>
+                                                </af:toolbar>
+                                            </f:facet>
+                                        </af:panelHeader>
+                                    </f:facet>
+                                </af:panelSplitter>
+                                -->
+                <f:facet name="menuBar">
+                  <af:toolbar id="t5" 
+                              inlineStyle="border-color:Silver; border-style:solid; border-width:thin; background-color:transparent; margin:2px;">
+                    <!--partialTriggers="t3 ot5"-->
+                    <!--
+                    <af:commandToolbarButton text="Process" id="ctb1" action="#{CycleCountBean.selectedStoreroomProcess}"
+                                             icon="#{resource['images:commit.png']}"
+                                             binding="#{CycleCountBean.processStorePartsBtn}" disabled="true"/>-->
+                                             <!--disabled="#{ (bindings.tUsedCnt.inputValue eq '0'  or bindings.tUsedCnt.inputValue == null) and not empty (pageFlowScope.str)}" action="#{CycleCountBean.processStoreRoomParts}"-->
+                    <af:button text="Print Chk Cnt" id="ctb3" action="#{CycleCountBean.printChkSel}" rendered="false"/>
+                    <af:button id="ctb2" icon="#{resource['images:terminate.png']}" action="#{CycleCountBean.onExit}"
+                               inlineStyle="background-color:White;"/>
+                  </af:toolbar>
+                </f:facet>
+              </af:panelHeader>
+            </af:panelFormLayout>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="p2"
+                      binding="#{CycleCountBean.popCCListConfirm}">
+              <af:dialog id="d2" type="ok" dialogListener="#{CycleCountBean.diagLsnrCCListConfirm}"
+                         title="Storeroom Parts Confirmation" closeIconVisible="false"
+                         binding="#{CycleCountBean.popCCListConfirm}">
+                <f:facet name="buttonBar"/>
+                <af:inputText id="it3" readOnly="true" binding="#{CycleCountBean.ccListConfTxt}" autoSubmit="true"
+                              value="Storeroom parts created successfully"/>
+              </af:dialog>
+            </af:popup>
+          </af:group>
+        </f:facet>
+    </af:pageTemplate>
+    </af:form>
+  </af:document>
+</f:view>

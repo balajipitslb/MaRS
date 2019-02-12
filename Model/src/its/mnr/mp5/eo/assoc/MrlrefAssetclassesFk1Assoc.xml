@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrlrefAssetclassesFk1Assoc"
+  Version="11.1.2.60.81">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="R5classes"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.eo.local.R5classes">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="R5classes"/>
+      <Attr Name="_foreignKey" Value="its.mnr.mp5.eo.local.R5classes.R5prikCls"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5classes.ClsEntity"/>
+      <Item Value="its.mnr.mp5.eo.local.R5classes.ClsCode"/>
+      <Item Value="its.mnr.mp5.eo.local.R5classes.ClsOrg"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="MrlrefAssetclasses"
+    Cardinality="1"
+    Owner="its.mnr.mp5.eo.master.MrlrefAssetclasses">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="MrlrefAssetclasses"/>
+      <Attr Name="_foreignKey" Value="its.mnr.mp5.eo.master.MrlrefAssetclasses.MrlrefAssetclassesFk1"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrlrefAssetclasses.Clsentity"/>
+      <Item Value="its.mnr.mp5.eo.master.MrlrefAssetclasses.Clscode"/>
+      <Item Value="its.mnr.mp5.eo.master.MrlrefAssetclasses.Clsorg"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="AssetMeterTypeSelPageDef"
+                Package="Content.Asset">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="MasterDataControlNested.MrltLabelsViewMaster" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrltLabelsViewMasterIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MrltLabelsViewMasterIterator" id="MrltLabelsViewMaster">
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrltLabelsView" Name="MrltLabelsViewMaster0">
+        <AttrNames>
+          <Item Value="Labelitem"/>
+          <Item Value="Labelorg"/>
+          <Item Value="Labelvalue"/>
+          <Item Value="Labeltype"/>
+          <Item Value="Labelid"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+<!---->
+<AppModule
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BillingRatesDataControl"
+  Version="11.1.2.60.81"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedApplicationModuleImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedApplicationModuleDefImpl"
+  ClearCacheOnRollback="true">
+  <ViewUsage
+    Name="AccountMasterView"
+    ViewObjectName="its.mnr.mp5.vo.admin.MrltAccountmasterView"/>
+  <ViewUsage
+    Name="AccountRateView"
+    ViewObjectName="its.mnr.mp5.vo.admin.MrltAccountrateView"/>
+  <ViewUsage
+    Name="AccountRateTaskView"
+    ViewObjectName="its.mnr.mp5.vo.admin.MrltAccountratetaskView"
+    FetchSize="20">
+    <ViewCriteriaUsage
+      Name="RateTasksBySGroupId"
+      FullName="its.mnr.mp5.vo.admin.MrltAccountratetaskView.RateTasksBySGroupId"/>
+  </ViewUsage>
+  <ViewUsage
+    Name="AccountRateVersionDetail"
+    ViewObjectName="its.mnr.mp5.vo.workorder.AccountRateVersionDetail">
+    <ViewCriteriaUsage
+      Name="AccountRateVersionDetailCriteria"
+      FullName="its.mnr.mp5.vo.workorder.AccountRateVersionDetail.AccountRateVersionDetailCriteria"/>
+  </ViewUsage>
+  <ViewLinkUsage
+    Name="AccountMasterAccountRateLink1"
+    ViewLinkObjectName="its.mnr.mp5.vo.link.AccountMasterAccountRateLink"
+    SrcViewUsageName="its.mnr.mp5.model.BillingRatesDataControl.AccountMasterView"
+    DstViewUsageName="its.mnr.mp5.model.BillingRatesDataControl.AccountRateView"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="MrltAccountratetaskFk1Link1"
+    ViewLinkObjectName="its.mnr.mp5.vo.link.MrltAccountratetaskFk1Link"
+    SrcViewUsageName="its.mnr.mp5.model.BillingRatesDataControl.AccountRateView"
+    DstViewUsageName="its.mnr.mp5.model.BillingRatesDataControl.AccountRateTaskView"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="AccountMasterAccountRateVersionDetailLink1"
+    ViewLinkObjectName="its.mnr.mp5.vo.link.AccountMasterAccountRateVersionDetailLink"
+    SrcViewUsageName="its.mnr.mp5.model.BillingRatesDataControl.AccountMasterView"
+    DstViewUsageName="its.mnr.mp5.model.BillingRatesDataControl.AccountRateVersionDetail"
+    Reversed="false"/>
+</AppModule>

@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="AddSpares.jspx" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:panelStretchLayout id="psl1">
+                <f:facet name="center">
+                    <af:panelFormLayout id="pfl1">
+                        <af:inputText value="#{bindings.Org.inputValue}" label="#{bindings.Org.hints.label}"
+                                      required="#{bindings.Org.hints.mandatory}"
+                                      columns="#{bindings.Org.hints.displayWidth}"
+                                      maximumLength="#{bindings.Org.hints.precision}"
+                                      shortDesc="#{bindings.Org.hints.tooltip}" id="it1" rendered="false"
+                                      readOnly="true">
+                            <f:validator binding="#{bindings.Org.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.Item.inputValue}" label="#{bindings.Item.hints.label}"
+                                      required="#{bindings.Item.hints.mandatory}"
+                                      columns="#{bindings.Item.hints.displayWidth}"
+                                      maximumLength="#{bindings.Item.hints.precision}"
+                                      shortDesc="#{bindings.Item.hints.tooltip}" id="it2">
+                            <f:validator binding="#{bindings.Item.validator}"/>
+                        </af:inputText>
+                        <af:inputListOfValues id="partnumId"
+                                              popupTitle="Search and Select: #{bindings.Partnum.hints.label}"
+                                              value="#{bindings.Partnum.inputValue}"
+                                              label="#{bindings.Partnum.hints.label}"
+                                              model="#{bindings.Partnum.listOfValuesModel}"
+                                              required="#{bindings.Partnum.hints.mandatory}"
+                                              columns="#{bindings.Partnum.hints.displayWidth}"
+                                              shortDesc="#{bindings.Partnum.hints.tooltip}" autoSubmit="true">
+                            <f:validator binding="#{bindings.Partnum.validator}"/>
+                        </af:inputListOfValues>
+                        <af:selectOneChoice value="#{bindings.Sparelabel.inputValue}"
+                                            label="#{bindings.Sparelabel.label}"
+                                            required="#{bindings.Sparelabel.hints.mandatory}"
+                                            shortDesc="#{bindings.Sparelabel.hints.tooltip}" id="soc1">
+                            <f:selectItems value="#{bindings.Sparelabel.items}" id="si1"/>
+                        </af:selectOneChoice>
+                        <af:inputText value="#{bindings.Partorg.inputValue}" label="#{bindings.Partorg.hints.label}"
+                                      required="#{bindings.Partorg.hints.mandatory}"
+                                      columns="#{bindings.Partorg.hints.displayWidth}"
+                                      maximumLength="#{bindings.Partorg.hints.precision}"
+                                      shortDesc="#{bindings.Partorg.hints.tooltip}" id="it3" readOnly="true">
+                            <f:validator binding="#{bindings.Partorg.validator}"/>
+                        </af:inputText>
+                        <af:panelLabelAndMessage label="#{bindings.ParCode.hints.label}" id="plam1" rendered="false">
+                            <af:outputText value="#{bindings.ParCode.inputValue}" id="ot1"/>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{bindings.ParClass.hints.label}" id="plam2" rendered="false">
+                            <af:outputText value="#{bindings.ParClass.inputValue}" id="ot2"/>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{bindings.ParDesc.hints.label}" id="plam3" rendered="false">
+                            <af:outputText value="#{bindings.ParDesc.inputValue}" id="ot3"/>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{bindings.ParLastprice.hints.label}" id="plam4"
+                                                 rendered="false">
+                            <af:outputText value="#{bindings.ParLastprice.inputValue}" id="ot4">
+                                <af:convertNumber groupingUsed="false" pattern="#{bindings.ParLastprice.format}"/>
+                            </af:outputText>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{bindings.ParNotused.hints.label}" id="plam5" rendered="false">
+                            <af:outputText value="#{bindings.ParNotused.inputValue}" id="ot5"/>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{bindings.ParUom.hints.label}" id="plam6" rendered="false">
+                            <af:outputText value="#{bindings.ParUom.inputValue}" id="ot6"/>
+                        </af:panelLabelAndMessage>
+                        <af:panelLabelAndMessage label="#{bindings.tTotalStoQty.hints.label}" id="plam7"
+                                                 rendered="false">
+                            <af:outputText value="#{bindings.tTotalStoQty.inputValue}" id="ot7">
+                                <af:convertNumber groupingUsed="false" pattern="#{bindings.tTotalStoQty.format}"/>
+                            </af:outputText>
+                        </af:panelLabelAndMessage>
+                        <f:facet name="footer">
+                            <af:panelGroupLayout id="g1" halign="right">
+                                <af:spacer width="30" height="10" id="s1"/>
+                                <af:button actionListener="#{bindings.Delete.execute}" text=" "
+                                           disabled="#{!bindings.Delete.enabled}" id="cb1" action="returnSpares"
+                                           icon="#{resource['images:delete.png']}" inlineStyle="margin: 5px;"/>
+                                <af:button text="Apply" id="cb3" icon="#{resource['images:commit.png']}"
+                                           inlineStyle="margin: 5px;" disabled="#{!bindings.Commit.enabled}"
+                                           action="#{assetMaintBean.doCommit}"/>
+                                           <!--action="#{assetMaintBean.doSpareCommitReturn}"-->
+                                <af:button text="Cancel" id="cb2" icon="#{resource['images:undo.png']}"
+                                           inlineStyle="margin: 5px;" action="#{assetMaintBean.doRollback}"/>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                    </af:panelFormLayout>
+                    <!-- id="af_one_column_stretched"   -->
+                </f:facet>
+            </af:panelStretchLayout>
+        </af:form>
+    </af:document>
+</f:view>

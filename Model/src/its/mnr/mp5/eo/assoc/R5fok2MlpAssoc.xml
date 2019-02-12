@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5fok2MlpAssoc"
+  Version="11.1.2.60.81">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="R5parts"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.eo.local.R5parts">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="R5parts"/>
+      <Attr Name="_foreignKey" Value="its.mnr.mp5.eo.local.R5parts.R5prikPar"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5parts.ParCode"/>
+      <Item Value="its.mnr.mp5.eo.local.R5parts.ParOrg"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="R5matlparts"
+    Cardinality="-1"
+    Owner="its.mnr.mp5.eo.local.R5matlparts">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="R5matlparts"/>
+      <Attr Name="_foreignKey" Value="its.mnr.mp5.eo.local.R5matlparts.R5fok2Mlp"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5matlparts.MlpPart"/>
+      <Item Value="its.mnr.mp5.eo.local.R5matlparts.MlpPartOrg"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

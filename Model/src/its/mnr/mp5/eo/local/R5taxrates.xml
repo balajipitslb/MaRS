@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5taxrates"
+  Version="11.1.2.64.36"
+  DBObjectType="table"
+  DBObjectName="R5TAXRATES"
+  AliasName="R5taxrates"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="TxrCode"
+    IsNotNull="true"
+    Precision="6"
+    ColumnName="TXR_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TAXRATES"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TxrDesc"
+    IsNotNull="true"
+    Precision="45"
+    ColumnName="TXR_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TAXRATES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TxrRatetype"
+    Precision="2"
+    ColumnName="TXR_RATETYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TAXRATES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TxrInvcalc"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="TXR_INVCALC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TAXRATES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5taxratevalues"
+    Association="its.mnr.mp5.eo.assoc.R5fok1TxvAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1TxvAssoc.R5taxratevalues"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1TxvAssoc.R5taxrates"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5parts"
+    Association="its.mnr.mp5.eo.assoc.PartsTaxRateAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.PartsTaxRateAssoc.R5parts"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.PartsTaxRateAssoc.R5taxrates"
+    Type="its.mnr.mp5.eo.local.R5partsImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="R5chk1Txr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK1_TXR"/>
+      <Attr Name="_checkCondition" Value="TXR_INVCALC IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn01Txr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN01_TXR"/>
+      <Attr Name="_checkCondition" Value="TXR_DESC IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn2Txr">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN2_TXR"/>
+      <Attr Name="_checkCondition" Value="TXR_INVCALC IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5prikTxr"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_TXR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5taxrates.TxrCode"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Txr">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_TXT"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_TXR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5taxrates.TxrRatetype"/>
+    </AttrArray>
+  </Key>
+</Entity>

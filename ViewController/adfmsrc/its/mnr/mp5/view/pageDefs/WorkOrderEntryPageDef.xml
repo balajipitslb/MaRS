@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="WorkOrderEntryPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="R5eventsView" RangeSize="25" DataControl="WODataControlDataControl" id="R5eventsViewIterator"
+              ChangeEventPolicy="ppr"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="R5eventsViewIterator" id="EvtCode">
+      <AttrNames>
+        <Item Value="EvtCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="R5eventsViewIterator" id="EvtDesc">
+      <AttrNames>
+        <Item Value="EvtDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="R5eventsViewIterator" id="EvtType">
+      <AttrNames>
+        <Item Value="EvtType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="R5eventsViewIterator" id="EvtRtype">
+      <AttrNames>
+        <Item Value="EvtRtype"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="R5eventsViewIterator" id="EvtDate">
+      <AttrNames>
+        <Item Value="EvtDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="R5eventsViewIterator" id="EvtStatus">
+      <AttrNames>
+        <Item Value="EvtStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="R5eventsViewIterator" id="First" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="R5eventsViewIterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="R5eventsViewIterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="R5eventsViewIterator" id="Last" RequiresUpdateModel="true" Action="last"/>
+  </bindings>
+</pageDefinition>

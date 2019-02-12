@@ -1,0 +1,433 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Supplier" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                        <af:panelHeader text=" " id="ph1">
+                            <f:facet name="context"/>
+                            <f:facet name="menuBar">
+                            <af:toolbar id="t1"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                <af:menuBar id="mb1">
+                                    <af:menu text="Actions" id="m2"/>
+                                </af:menuBar>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:button actionListener="#{bindings.Commit.execute}" text="Apply"
+                                           disabled="#{!bindings.Commit.enabled}" id="ctb4"
+                                           icon="#{resource['images:commit.png']}"/>
+                                <af:button text="Cancel" disabled="#{!bindings.Rollback.enabled}" immediate="true"
+                                           id="ctb5" icon="#{resource['images:undo.png']}"
+                                           action="#{SupplierBean.doRollback}">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button id="ctb3" icon="#{resource['images:terminate.png']}" action="Return"/>
+                            </af:toolbar>
+                        </f:facet>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="legend"/>
+                            <f:facet name="info"/>
+                            <af:panelFormLayout id="pfl1" inlineStyle="margin: 20px 0px 0px 0px;" maxColumns="2"
+                                                rows="7" fieldWidth="200" labelWidth="100">
+                                <af:inputText value="#{bindings.ComCode.inputValue}"
+                                              label="#{bindings.ComCode.hints.label}"
+                                              required="#{bindings.ComCode.hints.mandatory}"
+                                              columns="#{bindings.ComCode.hints.displayWidth}"
+                                              maximumLength="#{bindings.ComCode.hints.precision}"
+                                              shortDesc="#{bindings.ComCode.hints.tooltip}" id="it1" autoSubmit="true">
+                                    <f:validator binding="#{bindings.ComCode.validator}"/>
+                                </af:inputText>
+                            <af:inputText value="#{bindings.ComOrg.inputValue}" label="#{bindings.ComOrg.hints.label}"
+                                          required="#{bindings.ComOrg.hints.mandatory}"
+                                          columns="#{bindings.ComOrg.hints.displayWidth}"
+                                          maximumLength="#{bindings.ComOrg.hints.precision}"
+                                          shortDesc="#{bindings.ComOrg.hints.tooltip}" id="it8" readOnly="true">
+                                <f:validator binding="#{bindings.ComOrg.validator}"/>
+                            </af:inputText>
+                                <af:inputText value="#{bindings.ComDesc.inputValue}"
+                                              label="#{bindings.ComDesc.hints.label}"
+                                              required="#{bindings.ComDesc.hints.mandatory}"
+                                              columns="#{bindings.ComDesc.hints.displayWidth}"
+                                              maximumLength="#{bindings.ComDesc.hints.precision}"
+                                              shortDesc="#{bindings.ComDesc.hints.tooltip}" id="it4" autoSubmit="true">
+                                    <f:validator binding="#{bindings.ComDesc.validator}"/>
+                                </af:inputText>
+                            <af:inputListOfValues id="comBuyerId"
+                                                  popupTitle="Search and Select: #{bindings.ComBuyer.hints.label}"
+                                                  value="#{bindings.ComBuyer.inputValue}"
+                                                  label="#{bindings.ComBuyer.hints.label}"
+                                                  model="#{bindings.ComBuyer.listOfValuesModel}"
+                                                  required="#{bindings.ComBuyer.hints.mandatory}"
+                                                  columns="#{bindings.ComBuyer.hints.displayWidth}"
+                                                  shortDesc="#{bindings.ComBuyer.hints.tooltip}" autoSubmit="true">
+                                <f:validator binding="#{bindings.ComBuyer.validator}"/>
+                            </af:inputListOfValues>
+                            <af:inputText value="#{bindings.ComPhone.inputValue}"
+                                          label="#{bindings.ComPhone.hints.label}"
+                                          required="#{bindings.ComPhone.hints.mandatory}"
+                                          columns="#{bindings.ComPhone.hints.displayWidth}"
+                                          maximumLength="#{bindings.ComPhone.hints.precision}"
+                                          shortDesc="#{bindings.ComPhone.hints.tooltip}" id="it11" autoSubmit="true">
+                                <f:validator binding="#{bindings.ComPhone.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.ComFax.inputValue}" label="#{bindings.ComFax.hints.label}"
+                                          required="#{bindings.ComFax.hints.mandatory}"
+                                          columns="#{bindings.ComFax.hints.displayWidth}"
+                                          maximumLength="#{bindings.ComFax.hints.precision}"
+                                          shortDesc="#{bindings.ComFax.hints.tooltip}" id="it7" autoSubmit="true">
+                                <f:validator binding="#{bindings.ComFax.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.ComMinord.inputValue}"
+                                          label="#{bindings.ComMinord.hints.label}"
+                                          required="#{bindings.ComMinord.hints.mandatory}"
+                                          columns="#{bindings.ComMinord.hints.displayWidth}"
+                                          maximumLength="#{bindings.ComMinord.hints.precision}"
+                                          shortDesc="#{bindings.ComMinord.hints.tooltip}" id="it6" autoSubmit="true">
+                                <f:validator binding="#{bindings.ComMinord.validator}"/>
+                            </af:inputText>
+                            <af:inputListOfValues id="comCurrId"
+                                                  popupTitle="Search and Select: #{bindings.ComCurr.hints.label}"
+                                                  value="#{bindings.ComCurr.inputValue}"
+                                                  label="#{bindings.ComCurr.hints.label}"
+                                                  model="#{bindings.ComCurr.listOfValuesModel}"
+                                                  required="#{bindings.ComCurr.hints.mandatory}"
+                                                  columns="#{bindings.ComCurr.hints.displayWidth}"
+                                                  shortDesc="#{bindings.ComCurr.hints.tooltip}">
+                                <f:validator binding="#{bindings.ComCurr.validator}"/>
+                            </af:inputListOfValues>
+                            <af:inputListOfValues id="comLangId"
+                                                  popupTitle="Search and Select: #{bindings.ComLang.hints.label}"
+                                                  value="#{bindings.ComLang.inputValue}"
+                                                  label="#{bindings.ComLang.hints.label}"
+                                                  model="#{bindings.ComLang.listOfValuesModel}"
+                                                  required="#{bindings.ComLang.hints.mandatory}"
+                                                  columns="#{bindings.ComLang.hints.displayWidth}"
+                                                  shortDesc="#{bindings.ComLang.hints.tooltip}">
+                                <f:validator binding="#{bindings.ComLang.validator}"/>
+                            </af:inputListOfValues>
+                            <af:selectBooleanCheckbox value="#{bindings.ComNotused.inputValue}"
+                                                      label="#{bindings.ComNotused.label}"
+                                                      shortDesc="#{bindings.ComNotused.hints.tooltip}" id="sbc1"
+                                                      autoSubmit="true"/>
+                        </af:panelFormLayout>
+                        <af:panelGroupLayout id="pgl1">
+                            <af:panelTabbed id="pt2" dimensionsFrom="auto" inlineStyle="margin: 20px 0px 0px 0px;">
+                                <af:showDetailItem text="Mail" id="sdi1">
+                                    <af:panelHeader text=" " id="ph2">
+                                        <f:facet name="menuBar">
+                                            <af:toolbar id="t2">
+                                                <af:button disabled="#{!bindings.CreateInsertAddressMail.enabled}"
+                                                           id="ctb1" icon="#{resource['images:add.png']}"
+                                                           rendered="#{empty bindings.AdrCode1.inputValue}"
+                                                           action="#{SupplierBean.crAddressMail}"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="toolbar"/>
+                                        <af:panelFormLayout id="pfl3" maxColumns="2" rows="10" fieldWidth="100"
+                                                            labelWidth="20"
+                                                            visible="#{! empty bindings.AdrCode1.inputValue}">
+                                            <af:inputText value="#{bindings.AdrCode1.inputValue}"
+                                                          label="#{bindings.AdrCode1.hints.label}"
+                                                          required="#{bindings.AdrCode1.hints.mandatory}"
+                                                          columns="#{bindings.AdrCode1.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrCode1.hints.precision}"
+                                                          shortDesc="#{bindings.AdrCode1.hints.tooltip}" id="it9"
+                                                          readOnly="true" visible="#{securityContext.userName == 'R5'}"
+                                                          binding="#{SupplierBean.txtAddressMailCd}">
+                                                <f:validator binding="#{bindings.AdrCode1.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrRentity1.inputValue}"
+                                                          label="#{bindings.AdrRentity1.hints.label}"
+                                                          required="#{bindings.AdrRentity1.hints.mandatory}"
+                                                          columns="#{bindings.AdrRentity1.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrRentity1.hints.precision}"
+                                                          shortDesc="#{bindings.AdrRentity1.hints.tooltip}" id="it24"
+                                                          readOnly="true" visible="#{securityContext.userName == 'R5'}">
+                                                <f:validator binding="#{bindings.AdrRentity1.validator}"/>
+                                            </af:inputText>
+                                            <af:selectOneChoice value="#{bindings.AdrRtype1.inputValue}"
+                                                                label="#{bindings.AdrRtype1.label}"
+                                                                required="#{bindings.AdrRtype1.hints.mandatory}"
+                                                                shortDesc="#{bindings.AdrRtype1.hints.tooltip}"
+                                                                id="soc1" readOnly="true">
+                                                <f:selectItems value="#{bindings.AdrRtype1.items}" id="si2"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText value="#{bindings.AdrAddress11.inputValue}"
+                                                          label="#{bindings.AdrAddress11.hints.label}"
+                                                          required="#{bindings.AdrAddress11.hints.mandatory}"
+                                                          columns="#{bindings.AdrAddress11.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrAddress11.hints.precision}"
+                                                          shortDesc="#{bindings.AdrAddress11.hints.tooltip}" id="it25"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrAddress11.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrAddress21.inputValue}"
+                                                          label="#{bindings.AdrAddress21.hints.label}"
+                                                          required="#{bindings.AdrAddress21.hints.mandatory}"
+                                                          columns="#{bindings.AdrAddress21.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrAddress21.hints.precision}"
+                                                          shortDesc="#{bindings.AdrAddress21.hints.tooltip}" id="it26"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrAddress21.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrAddress31.inputValue}"
+                                                          label="#{bindings.AdrAddress31.hints.label}"
+                                                          required="#{bindings.AdrAddress31.hints.mandatory}"
+                                                          columns="#{bindings.AdrAddress31.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrAddress31.hints.precision}"
+                                                          shortDesc="#{bindings.AdrAddress31.hints.tooltip}" id="it27"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrAddress31.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrCity1.inputValue}"
+                                                          label="#{bindings.AdrCity1.hints.label}"
+                                                          required="#{bindings.AdrCity1.hints.mandatory}"
+                                                          columns="#{bindings.AdrCity1.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrCity1.hints.precision}"
+                                                          shortDesc="#{bindings.AdrCity1.hints.tooltip}" id="it28"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrCity1.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrState1.inputValue}"
+                                                          label="#{bindings.AdrState1.hints.label}"
+                                                          required="#{bindings.AdrState1.hints.mandatory}"
+                                                          columns="#{bindings.AdrState1.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrState1.hints.precision}"
+                                                          shortDesc="#{bindings.AdrState1.hints.tooltip}" id="it30"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrState1.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrZip1.inputValue}"
+                                                          label="#{bindings.AdrZip1.hints.label}"
+                                                          required="#{bindings.AdrZip1.hints.mandatory}"
+                                                          columns="#{bindings.AdrZip1.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrZip1.hints.precision}"
+                                                          shortDesc="#{bindings.AdrZip1.hints.tooltip}" id="it31"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrZip1.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrCountry1.inputValue}"
+                                                          label="#{bindings.AdrCountry1.hints.label}"
+                                                          required="#{bindings.AdrCountry1.hints.mandatory}"
+                                                          columns="#{bindings.AdrCountry1.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrCountry1.hints.precision}"
+                                                          shortDesc="#{bindings.AdrCountry1.hints.tooltip}" id="it29"
+                                                          autoSubmit="true"
+                                                          binding="#{SupplierBean.txtAddressMailCountry}">
+                                                <f:validator binding="#{bindings.AdrCountry1.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrEmail1.inputValue}"
+                                                          label="#{bindings.AdrEmail1.hints.label}"
+                                                          required="#{bindings.AdrEmail1.hints.mandatory}"
+                                                          columns="#{bindings.AdrEmail1.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrEmail1.hints.precision}"
+                                                          shortDesc="#{bindings.AdrEmail1.hints.tooltip}" id="it32"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrEmail1.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrFax1.inputValue}"
+                                                          label="#{bindings.AdrFax1.hints.label}"
+                                                          required="#{bindings.AdrFax1.hints.mandatory}"
+                                                          columns="#{bindings.AdrFax1.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrFax1.hints.precision}"
+                                                          shortDesc="#{bindings.AdrFax1.hints.tooltip}" id="it33"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrFax1.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrPhone1.inputValue}"
+                                                          label="#{bindings.AdrPhone1.hints.label}"
+                                                          required="#{bindings.AdrPhone1.hints.mandatory}"
+                                                          columns="#{bindings.AdrPhone1.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrPhone1.hints.precision}"
+                                                          shortDesc="#{bindings.AdrPhone1.hints.tooltip}" id="it34"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrPhone1.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrPhoneextn1.inputValue}"
+                                                          label="#{bindings.AdrPhoneextn1.hints.label}"
+                                                          required="#{bindings.AdrPhoneextn1.hints.mandatory}"
+                                                          columns="#{bindings.AdrPhoneextn1.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrPhoneextn1.hints.precision}"
+                                                          shortDesc="#{bindings.AdrPhoneextn1.hints.tooltip}" id="it35"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrPhoneextn1.validator}"/>
+                                            </af:inputText>
+                                            <f:facet name="footer">
+                                                <af:inputText value="#{bindings.AdrText1.inputValue}"
+                                                              label="#{bindings.AdrText1.hints.label}"
+                                                              required="#{bindings.AdrText1.hints.mandatory}"
+                                                              columns="#{bindings.AdrText1.hints.displayWidth}"
+                                                              maximumLength="#{bindings.AdrText1.hints.precision}"
+                                                              shortDesc="#{bindings.AdrText1.hints.tooltip}" id="it36"
+                                                              readOnly="true">
+                                                    <f:validator binding="#{bindings.AdrText1.validator}"/>
+                                                </af:inputText>
+                                            </f:facet>
+                                        </af:panelFormLayout>
+                                    </af:panelHeader>
+                                    <f:facet name="toolbar"/>
+                                </af:showDetailItem>
+                                <af:showDetailItem text="Invoice" id="sdi2">
+                                    <af:panelHeader text=" " id="ph3">
+                                        <f:facet name="menuBar">
+                                            <af:toolbar id="t3">
+                                                <af:button disabled="#{!bindings.CreateInsertAddressInvoice.enabled}"
+                                                           id="ctb2" icon="#{resource['images:add.png']}"
+                                                           rendered="#{empty bindings.AdrCode.inputValue}"
+                                                           action="#{SupplierBean.crAddressInvoice}"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="toolbar"/>
+                                        <af:panelFormLayout id="pfl2" maxColumns="2" rows="10" fieldWidth="100"
+                                                            labelWidth="20"
+                                                            visible="#{! empty bindings.AdrCode.inputValue}">
+                                            <af:inputText value="#{bindings.AdrCode.inputValue}"
+                                                          label="#{bindings.AdrCode.hints.label}"
+                                                          required="#{bindings.AdrCode.hints.mandatory}"
+                                                          columns="#{bindings.AdrCode.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrCode.hints.precision}"
+                                                          shortDesc="#{bindings.AdrCode.hints.tooltip}" id="it14"
+                                                          readOnly="true" binding="#{SupplierBean.txtAddressInvoiceCd}"
+                                                          visible="#{securityContext.userName == 'R5'}">
+                                                <f:validator binding="#{bindings.AdrCode.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrRentity.inputValue}"
+                                                          label="#{bindings.AdrRentity.hints.label}"
+                                                          required="#{bindings.AdrRentity.hints.mandatory}"
+                                                          columns="#{bindings.AdrRentity.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrRentity.hints.precision}"
+                                                          shortDesc="#{bindings.AdrRentity.hints.tooltip}" id="it20"
+                                                          readOnly="true" visible="#{securityContext.userName == 'R5'}">
+                                                <f:validator binding="#{bindings.AdrRentity.validator}"/>
+                                            </af:inputText>
+                                            <af:selectOneChoice value="#{bindings.AdrRtype.inputValue}"
+                                                                label="#{bindings.AdrRtype.label}"
+                                                                required="#{bindings.AdrRtype.hints.mandatory}"
+                                                                shortDesc="#{bindings.AdrRtype.hints.tooltip}"
+                                                                id="soc2" autoSubmit="true" readOnly="true">
+                                                <f:selectItems value="#{bindings.AdrRtype.items}" id="si1"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText value="#{bindings.AdrAddress1.inputValue}"
+                                                          label="#{bindings.AdrAddress1.hints.label}"
+                                                          required="#{bindings.AdrAddress1.hints.mandatory}"
+                                                          columns="#{bindings.AdrAddress1.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrAddress1.hints.precision}"
+                                                          shortDesc="#{bindings.AdrAddress1.hints.tooltip}" id="it2"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrAddress1.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrAddress2.inputValue}"
+                                                          label="#{bindings.AdrAddress2.hints.label}"
+                                                          required="#{bindings.AdrAddress2.hints.mandatory}"
+                                                          columns="#{bindings.AdrAddress2.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrAddress2.hints.precision}"
+                                                          shortDesc="#{bindings.AdrAddress2.hints.tooltip}" id="it10"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrAddress2.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrAddress3.inputValue}"
+                                                          label="#{bindings.AdrAddress3.hints.label}"
+                                                          required="#{bindings.AdrAddress3.hints.mandatory}"
+                                                          columns="#{bindings.AdrAddress3.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrAddress3.hints.precision}"
+                                                          shortDesc="#{bindings.AdrAddress3.hints.tooltip}" id="it12"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrAddress3.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrCity.inputValue}"
+                                                          label="#{bindings.AdrCity.hints.label}"
+                                                          required="#{bindings.AdrCity.hints.mandatory}"
+                                                          columns="#{bindings.AdrCity.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrCity.hints.precision}"
+                                                          shortDesc="#{bindings.AdrCity.hints.tooltip}" id="it13"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrCity.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrState.inputValue}"
+                                                          label="#{bindings.AdrState.hints.label}"
+                                                          required="#{bindings.AdrState.hints.mandatory}"
+                                                          columns="#{bindings.AdrState.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrState.hints.precision}"
+                                                          shortDesc="#{bindings.AdrState.hints.tooltip}" id="it21"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrState.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrZip.inputValue}"
+                                                          label="#{bindings.AdrZip.hints.label}"
+                                                          required="#{bindings.AdrZip.hints.mandatory}"
+                                                          columns="#{bindings.AdrZip.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrZip.hints.precision}"
+                                                          shortDesc="#{bindings.AdrZip.hints.tooltip}" id="it23"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrZip.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrCountry.inputValue}"
+                                                          label="#{bindings.AdrCountry.hints.label}"
+                                                          required="#{bindings.AdrCountry.hints.mandatory}"
+                                                          columns="#{bindings.AdrCountry.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrCountry.hints.precision}"
+                                                          shortDesc="#{bindings.AdrCountry.hints.tooltip}" id="it15"
+                                                          autoSubmit="true"
+                                                          binding="#{SupplierBean.txtAddressInvoiceCountry}">
+                                                <f:validator binding="#{bindings.AdrCountry.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrEmail.inputValue}"
+                                                          label="#{bindings.AdrEmail.hints.label}"
+                                                          required="#{bindings.AdrEmail.hints.mandatory}"
+                                                          columns="#{bindings.AdrEmail.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrEmail.hints.precision}"
+                                                          shortDesc="#{bindings.AdrEmail.hints.tooltip}" id="it16"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrEmail.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrFax.inputValue}"
+                                                          label="#{bindings.AdrFax.hints.label}"
+                                                          required="#{bindings.AdrFax.hints.mandatory}"
+                                                          columns="#{bindings.AdrFax.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrFax.hints.precision}"
+                                                          shortDesc="#{bindings.AdrFax.hints.tooltip}" id="it17"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrFax.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrPhone.inputValue}"
+                                                          label="#{bindings.AdrPhone.hints.label}"
+                                                          required="#{bindings.AdrPhone.hints.mandatory}"
+                                                          columns="#{bindings.AdrPhone.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrPhone.hints.precision}"
+                                                          shortDesc="#{bindings.AdrPhone.hints.tooltip}" id="it18"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrPhone.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.AdrPhoneextn.inputValue}"
+                                                          label="#{bindings.AdrPhoneextn.hints.label}"
+                                                          required="#{bindings.AdrPhoneextn.hints.mandatory}"
+                                                          columns="#{bindings.AdrPhoneextn.hints.displayWidth}"
+                                                          maximumLength="#{bindings.AdrPhoneextn.hints.precision}"
+                                                          shortDesc="#{bindings.AdrPhoneextn.hints.tooltip}" id="it19"
+                                                          autoSubmit="true">
+                                                <f:validator binding="#{bindings.AdrPhoneextn.validator}"/>
+                                            </af:inputText>
+                                            <f:facet name="footer">
+                                                <af:inputText value="#{bindings.AdrText.inputValue}"
+                                                              label="#{bindings.AdrText.hints.label}"
+                                                              required="#{bindings.AdrText.hints.mandatory}"
+                                                              columns="#{bindings.AdrText.hints.displayWidth}"
+                                                              maximumLength="#{bindings.AdrText.hints.precision}"
+                                                              shortDesc="#{bindings.AdrText.hints.tooltip}" id="it22"
+                                                              readOnly="true">
+                                                    <f:validator binding="#{bindings.AdrText.validator}"/>
+                                                </af:inputText>
+                                            </f:facet>
+                                        </af:panelFormLayout>
+                                    </af:panelHeader>
+                                </af:showDetailItem>
+                            </af:panelTabbed>
+                        </af:panelGroupLayout>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

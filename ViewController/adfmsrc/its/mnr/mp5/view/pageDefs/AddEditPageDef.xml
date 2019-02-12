@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="AddEditPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="MasterDataControlNested.MrlrefClassView1" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrlrefClassView1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="MrlrefClassView1Iterator" id="Classcd">
+      <AttrNames>
+        <Item Value="Classcd"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrlrefClassView1Iterator" id="Org">
+      <AttrNames>
+        <Item Value="Org"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrlrefClassView1Iterator" id="Classdesc">
+      <AttrNames>
+        <Item Value="Classdesc"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MrlrefClassView1Iterator" StaticList="false" Uses="LOV_Classtype" id="Classtype"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <action id="Commit" InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+  </bindings>
+</pageDefinition>

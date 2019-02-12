@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltReading"
+  Version="12.1.3.10.8"
+  DBObjectType="table"
+  DBObjectName="MRLT_READING"
+  AliasName="MrltReading"
+  BindingStyle="OracleName"
+  RowClass="its.mnr.mp5.eo.local.MrltReadingImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="Org"
+    Precision="8"
+    ColumnName="ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_READING"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Readingitem"
+    Precision="24"
+    ColumnName="READINGITEM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_READING"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Readingvalue"
+    ColumnName="READINGVALUE"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="MRLT_READING"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    Precision="9"
+    Scale="0"/>
+  <Attribute
+    Name="Uom"
+    Precision="8"
+    ColumnName="UOM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_READING"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Readingdate"
+    ColumnName="READINGDATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="MRLT_READING"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <validation:CompareValidationBean
+      Name="Readingdate_Rule_0"
+      ResId="its.mnr.mp5.eo.local.MrltReading.Readingdate_Rule_0"
+      OnAttribute="Readingdate"
+      OperandType="EXPR"
+      Inverse="false"
+      CompareType="LESSTHANEQUALTO">
+      <validation:TransientExpression><![CDATA[adf.currentDate]]></validation:TransientExpression>
+    </validation:CompareValidationBean>
+  </Attribute>
+  <Attribute
+    Name="Readingdiff"
+    ColumnName="READINGDIFF"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="MRLT_READING"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    Precision="9"
+    Scale="0"/>
+  <Attribute
+    Name="Rowid"
+    IsUpdateable="false"
+    ColumnName="ROWID"
+    SQLType="ROWID"
+    Type="oracle.jbo.domain.RowID"
+    ColumnType="ROWID"
+    TableName="MRLT_READING"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="tLastReadingValue"
+    ColumnName="T_LAST_READING_VALUE"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    IsPersistent="false"
+    IsQueriable="false"/>
+  <Attribute
+    Name="tLastReadingDate"
+    ColumnName="T_LAST_READING_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    IsPersistent="false"
+    IsQueriable="false"/>
+  <Attribute
+    Name="Readinglabel"
+    ColumnName="READINGLABEL"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    TableName="MRLT_READING"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="tAssetClass"
+    Precision="80"
+    ColumnName="T_ASSET_CLASS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <TransientExpression><![CDATA[Readingitem != null? MrltAsset.Assetclass : null]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <Dependencies>
+      <Item
+        Value="Readingitem"/>
+    </Dependencies>
+  </Attribute>
+  <Attribute
+    Name="tAssetStatus"
+    Precision="80"
+    ColumnName="T_ASSET_STATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <TransientExpression><![CDATA[Readingitem != null? MrltAsset.Assetstatus : null]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <Dependencies>
+      <Item
+        Value="Readingitem"/>
+    </Dependencies>
+  </Attribute>
+  <Attribute
+    Name="tLabelDesc"
+    Precision="80"
+    ColumnName="T_LABEL_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <TransientExpression><![CDATA[Readingitem != null && Readinglabel != null? MrltLabels.Labelvalue : null]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <Dependencies>
+      <Item
+        Value="Readingitem"/>
+      <Item
+        Value="Readinglabel"/>
+    </Dependencies>
+  </Attribute>
+  <Attribute
+    Name="Createdt"
+    ColumnName="CREATEDT"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="MRLT_READING"
+    IsUpdateable="false">
+    <TransientExpression><![CDATA[adf.currentDateTime]]></TransientExpression>
+  </Attribute>
+  <AccessorAttribute
+    Name="MrltAsset"
+    Association="its.mnr.mp5.eo.assoc.AssetReadingAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.AssetReadingAssoc.MrltAsset"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.AssetReadingAssoc.MrltReading"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="MrltLabels"
+    Association="its.mnr.mp5.eo.assoc.ReadingLabelAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.ReadingLabelAssoc.MrltLabels"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.ReadingLabelAssoc.MrltReading"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrltReadingFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_ASSET_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_READING_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltReading.Readingitem"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltReading.Org"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_MrltReading">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_ASSET_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_MRLT_READING"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltReading.Readingitem"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltReading.Org"/>
+    </AttrArray>
+  </Key>
+  <validation:CompareValidationBean
+    Name="MrltReading_Rule_0"
+    ResId="its.mnr.mp5.eo.local.MrltReading_Rule_0"
+    OnAttribute="Readingvalue"
+    OperandType="ATTR"
+    Inverse="false"
+    CompareType="GREATERTHAN"
+    CompareValue="tLastReadingValue">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="Readingvalue"/>
+      <validation:Item
+        Value="tLastReadingValue"/>
+    </validation:OnAttributes>
+  </validation:CompareValidationBean>
+  <validation:CompareValidationBean
+    Name="MrltReading_Rule_1"
+    ResId="its.mnr.mp5.eo.local.MrltReading_Rule_1"
+    OnAttribute="Readingdate"
+    OperandType="ATTR"
+    Inverse="false"
+    CompareType="GREATERTHAN"
+    CompareValue="tLastReadingDate">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="Readingdate"/>
+      <validation:Item
+        Value="tLastReadingDate"/>
+    </validation:OnAttributes>
+  </validation:CompareValidationBean>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

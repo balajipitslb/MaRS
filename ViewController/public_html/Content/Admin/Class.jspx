@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Class Master" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelGroupLayout layout="vertical" id="pgl1">
+                        <af:panelHeader text=" " id="ph1">
+                            <af:query id="qryId1" headerText="Search" disclosed="true"
+                                      value="#{bindings.ClassByTypeQuery.queryDescriptor}"
+                                      model="#{bindings.ClassByTypeQuery.queryModel}"
+                                      queryListener="#{bindings.ClassByTypeQuery.processQuery}"
+                                      queryOperationListener="#{bindings.ClassByTypeQuery.processQueryOperation}"
+                                      resultComponentId="::pc1:resId1" saveQueryMode="hidden"
+                                      modeChangeVisible="false" displayMode="compact"/>
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t3"
+                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <af:button actionListener="#{bindings.Commit.execute}" text="Apply"
+                                               disabled="#{!bindings.Commit.enabled}" id="ctb6"
+                                               icon="#{resource['images:commit.png']}" rendered="false"/>
+                                    <af:button actionListener="#{bindings.Rollback.execute}" text="Cancel"
+                                               disabled="#{!bindings.Rollback.enabled}" immediate="true" id="ctb7"
+                                               icon="#{resource['images:undo.png']}" rendered="false">
+                                        <af:resetActionListener/>
+                                    </af:button>
+                                    <af:button id="ctb5" icon="#{resource['images:terminate.png']}"
+                                               shortDesc="#{viewcontrollerBundle.CANCEL_AND_RETURN_TO_PREVIOUS_}"
+                                               actionListener="#{ModuleNavBean.goExit}"/>
+                                </af:toolbar>
+                            </f:facet>
+                        </af:panelHeader>
+                        <af:panelCollection id="pc1" styleClass="AFStretchWidth" inlineStyle="margin:5px 0px 0px 5px; "
+                                            featuresOff="viewMenu detach">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t2">
+                                    <af:button id="ctb1" icon="#{resource['images:add.png']}" action="Add"/>
+                                    <af:button id="ctb2" icon="#{resource['images:edit.png']}" action="Edit"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <f:facet name="statusbar"/>
+                            <af:table value="#{bindings.MrlrefClassView1.collectionModel}" var="row"
+                                      rows="#{bindings.MrlrefClassView1.rangeSize}"
+                                      emptyText="#{bindings.MrlrefClassView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.MrlrefClassView1.rangeSize}" rowBandingInterval="1"
+                                      id="resId1" columnStretching="column:resId1c3"
+                                      selectedRowKeys="#{bindings.MrlrefClassView1.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.MrlrefClassView1.collectionModel.makeCurrent}"
+                                      rowSelection="single">
+                                <af:column sortProperty="#{bindings.MrlrefClassView1.hints.Classcd.name}"
+                                           sortable="false"
+                                           headerText="#{bindings.MrlrefClassView1.hints.Classcd.label}" id="resId1c1"
+                                           align="left">
+                                    <af:outputText value="#{row.Classcd}" id="ot1"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.MrlrefClassView1.hints.Classdesc.name}"
+                                           sortable="false"
+                                           headerText="#{bindings.MrlrefClassView1.hints.Classdesc.label}" id="resId1c3"
+                                           align="left">
+                                    <af:outputText value="#{row.Classdesc}" id="ot3"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.MrlrefClassView1.hints.Classtype.name}"
+                                           sortable="false"
+                                           headerText="#{bindings.MrlrefClassView1.hints.Classtype.label}" id="resId1c4"
+                                           align="center">
+                                    <af:selectOneChoice value="#{row.bindings.Classtype.inputValue}"
+                                                        label="#{row.bindings.Classtype.label}"
+                                                        required="#{bindings.MrlrefClassView1.hints.Classtype.mandatory}"
+                                                        shortDesc="#{bindings.MrlrefClassView1.hints.Classtype.tooltip}"
+                                                        readOnly="true" id="soc1">
+                                        <f:selectItems value="#{row.bindings.Classtype.items}" id="si1"/>
+                                    </af:selectOneChoice>
+                                </af:column>
+                            </af:table>
+                        </af:panelCollection>
+                    </af:panelGroupLayout>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="CycleCountPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="CCDataControlNested.MrltCyclecountheaderView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrltCyclecountheaderViewIterator" Refresh="deferred">
+      <sortCriteria>
+        <sort attribute="Listid" ascending="false"/>
+      </sortCriteria>
+    </iterator>
+    <iterator Binds="CCDataControlNested.MrltCyclecountpartsView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrltCyclecountpartsViewIterator" CacheResults="false"/>
+    <searchRegion Criteria="MrltCyclecountpartsViewCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="MrltCyclecountpartsViewIterator" id="MrltCyclecountpartsViewCriteriaQuery"/>
+    <iterator Binds="CCDataControlNested.MrltFifoheaderView" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="MrltFifoheaderViewIterator"/>
+    <iterator Binds="CCDataControlNested.MrltFifoitemView" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="MrltFifoitemViewIterator"/>
+    <iterator Binds="CCDataControlNested.MrltFifoadjitemView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrltFifoadjitemViewIterator"/>
+    <searchRegion Binds="MrltFifoitemViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="MrltFifoitemViewQuery"/>
+    <searchRegion Binds="MrltFifoadjitemViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="MrltFifoadjitemViewQuery"/>
+    <iterator Binds="MasterDataControlNested.jobRunningView1" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="jobRunningView1Iterator"/>
+    <searchRegion Criteria="MrltCyclecountpartsViewCriteria1"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="MrltCyclecountpartsViewIterator" id="MrltCyclecountpartsViewCriteria1Query"/>
+  </executables>
+  <bindings>
+    
+    <tree IterBinding="MrltCyclecountheaderViewIterator" id="MrltCyclecountheaderView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltCyclecountheaderView" Name="MrltCyclecountheaderView0">
+        <AttrNames>
+          <Item Value="Listid"/>
+          <Item Value="Ccdesc"/>
+          <Item Value="Ccstatus"/>
+          <Item Value="Created"/>
+          <Item Value="Frozen"/>
+          <Item Value="Completed"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" InstanceName="MNRDataControlDataControl"
+            DataControl="MNRDataControlDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
+            <tree IterBinding="MrltCyclecountpartsViewIterator" id="MrltCyclecountpartsView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltCyclecountpartsView" Name="MrltCyclecountpartsView0">
+        <AttrNames>
+          <Item Value="StlType"/>
+          <Item Value="StlPart"/>
+          <Item Value="StlExpqty"/>
+          <Item Value="StlPhyqty"/>
+          <Item Value="StlTimestamp"/>
+          <Item Value="tPartDesc"/>
+          <Item Value="StlBin"/>
+          <Item Value="StlLot"/>
+          <Item Value="tShowCycleCount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Listid">
+      <AttrNames>
+        <Item Value="Listid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Ccdesc">
+      <AttrNames>
+        <Item Value="Ccdesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Ccstatus">
+      <AttrNames>
+        <Item Value="Ccstatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Sttknum">
+      <AttrNames>
+        <Item Value="Sttknum"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Partclass">
+      <AttrNames>
+        <Item Value="Partclass"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Created">
+      <AttrNames>
+        <Item Value="Created"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Binstart">
+      <AttrNames>
+        <Item Value="Binstart"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Binend">
+      <AttrNames>
+        <Item Value="Binend"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Partstart">
+      <AttrNames>
+        <Item Value="Partstart"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Partend">
+      <AttrNames>
+        <Item Value="Partend"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P1">
+      <AttrNames>
+        <Item Value="P1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P2">
+      <AttrNames>
+        <Item Value="P2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P3">
+      <AttrNames>
+        <Item Value="P3"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P4">
+      <AttrNames>
+        <Item Value="P4"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P5">
+      <AttrNames>
+        <Item Value="P5"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P6">
+      <AttrNames>
+        <Item Value="P6"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Listid1">
+      <AttrNames>
+        <Item Value="Listid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Accreated">
+      <AttrNames>
+        <Item Value="Accreated"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Adjcreated">
+      <AttrNames>
+        <Item Value="Adjcreated"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Adjtodate">
+      <AttrNames>
+        <Item Value="Adjtodate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MrltFifoheaderViewIterator" StaticList="false" Uses="LOV_Fpxhid" id="Fpxhid"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <tree IterBinding="MrltFifoitemViewIterator" id="MrltFifoitemView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltFifoitemView" Name="MrltFifoitemView0">
+        <AttrNames>
+          <Item Value="Partnum"/>
+          <Item Value="Partorg"/>
+          <Item Value="Partdesc"/>
+          <Item Value="Partuom"/>
+          <Item Value="Supplierid"/>
+          <Item Value="Expqty"/>
+          <Item Value="Phyqty"/>
+          <Item Value="Lastprice"/>
+          <Item Value="Stdcost"/>
+          <Item Value="Extprice"/>
+          <Item Value="Avgfifo"/>
+          <Item Value="Extfifocost"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="MrltFifoadjitemViewIterator" id="MrltFifoadjitemView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltFifoadjitemView" Name="MrltFifoadjitemView0">
+        <AttrNames>
+          <Item Value="Partnum"/>
+          <Item Value="Partorg"/>
+          <Item Value="Partdesc"/>
+          <Item Value="Partuom"/>
+          <Item Value="Supplierid"/>
+          <Item Value="Adjtype"/>
+          <Item Value="Qty"/>
+          <Item Value="Lastprice"/>
+          <Item Value="Stdcost"/>
+          <Item Value="Extprice"/>
+          <Item Value="Avgfifo"/>
+          <Item Value="Extfifocost"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="tCCDesc">
+      <AttrNames>
+        <Item Value="tCCDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="tCCStatus">
+      <AttrNames>
+        <Item Value="tCCStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Fhid">
+      <AttrNames>
+        <Item Value="Fhid"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="MrltFifoheaderViewIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <methodAction IterBinding="MrltCyclecountheaderViewIterator" id="getMP5Profile"
+                  InstanceName="bindings.MrltCyclecountheaderViewIterator.currentRow"
+                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getMP5Profile" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.getMP5Profile_getMP5Profile_getMP5Profile_result">
+      <NamedData NDName="sprofile" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Bin">
+      <AttrNames>
+        <Item Value="Bin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Jobid">
+      <AttrNames>
+        <Item Value="Jobid"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="MrltCyclecountheaderViewIterator" id="ExecuteCCHeader"
+            InstanceName="MNRDataControlDataControl.CCDataControlNested.MrltCyclecountheaderView"
+            DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action IterBinding="jobRunningView1Iterator" id="ExecuteJobRunning"
+            InstanceName="MNRDataControlDataControl.MasterDataControlNested.jobRunningView1"
+            DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

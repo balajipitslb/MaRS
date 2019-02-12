@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle1" value="#{adfBundle['viewcontroller.Content.Invoice.invoiceBundle']}"/>
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.invoiceBundle']}"/>
+    <af:document id="d1" title="#{viewcontrollerBundle1.MARS}">
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/MP5BaseTemplate.jspx" id="pt1">
+                <f:facet name="GlobalTop">
+                    <af:navigationPane id="np1">
+                        <af:commandNavigationItem text="Home" id="cni1" accessKey="H"
+                                                  actionListener="#{ModuleNavBean.goHomeModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Invoice;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Work Order" id="cni2" selected="false" accessKey="W"
+                                                  actionListener="#{ModuleNavBean.goWOModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=WorkOrder;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Invoice (This)" id="cni3" accessKey="I"
+                                                  actionListener="#{ModuleNavBean.goInvoiceModule}" selected="true"/>
+                        <af:commandNavigationItem text="PO &amp; Receivings" id="cni4" accessKey="P"
+                                                  actionListener="#{ModuleNavBean.goPORecvModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=PORecv;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Stock" id="cni5" accessKey="S"
+                                                  actionListener="#{ModuleNavBean.goStockModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Stock;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Asset" id="cni8" accessKey="S"
+                                                  actionListener="#{ModuleNavBean.goAssetModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Asset;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Report" id="cni6" accessKey="R"
+                                                  actionListener="#{ModuleNavBean.goReportModule}"/>
+                        <af:commandNavigationItem text="Admin" id="cni7" accessKey="M"
+                                                  actionListener="#{ModuleNavBean.goAdminModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Admin;resourceType=GlobalNav;action=view']}"/>
+                    </af:navigationPane>
+                </f:facet>
+                <f:facet name="Main">
+                        <af:panelDashboard id="pd1" columns="1" rowHeight="75px"
+                                           inlineStyle="margin:20px; padding:10px;">
+                            <af:panelBox text="PanelBox1" id="pb1" showDisclosure="false" showHeader="never"
+                                         rendered="#{securityContext.userGrantedResource['resourceName=InvoiceAssembly;resourceType=UIControl;action=enabled']}">
+                                <f:facet name="toolbar"/>
+                            <af:panelGroupLayout id="pgl1" layout="horizontal" valign="middle"
+                                                 inlineStyle="margin:10px 10px 10px 30px;">
+                                <af:image source="#{resource['images:invoiceAssembly.png']}" id="i1"/>
+                                <af:spacer width="10" height="10" id="s1"/>
+                                <af:link text="Assemble Invoices from Work Orders" id="cl1"
+                                         inlineStyle="font-size:medium;" action="launchInvoiceAssembly" useWindow="true"
+                                         windowEmbedStyle="inlineDocument" windowModalityType="modeless"
+                                         windowHeight="600" windowWidth="755" accessKey="a"/>
+                            </af:panelGroupLayout>
+                        </af:panelBox>
+                        <af:panelBox text="PanelBox2" id="pb2" showHeader="never"
+                                     rendered="#{securityContext.userGrantedResource['resourceName=InvoiceCredit;resourceType=UIControl;action=enabled']}">
+                            <f:facet name="toolbar"/>
+                            <af:panelGroupLayout id="pgl2" layout="horizontal" valign="middle"
+                                                 inlineStyle="margin:10px 10px 10px 30px;">
+                                <af:image source="#{resource['images:invoiceCredit.png']}" id="i2"/>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:link text="Issue Credit Invoices" id="cl2" inlineStyle="font-size:medium;"
+                                         action="launchInvoiceCredit" useWindow="true" windowEmbedStyle="inlineDocument"
+                                         windowModalityType="modeless" windowHeight="600" windowWidth="755"/>
+                            </af:panelGroupLayout>
+                        </af:panelBox>
+                        <af:panelBox text="PanelBox3" id="pb3" showHeader="never"
+                                     rendered="#{securityContext.userGrantedResource['resourceName=InvoiceRetro;resourceType=UIControl;action=enabled']}">
+                            <f:facet name="toolbar"/>
+                            <af:panelGroupLayout id="pgl3" layout="horizontal" valign="middle"
+                                                 inlineStyle="margin:10px 10px 10px 30px;">
+                                <af:image source="#{resource['images:invoiceRetro.png']}" id="i3"/>
+                                <af:spacer width="10" height="10" id="s3"/>
+                                <af:link text="Issue Retroactive Invoices" id="cl3" inlineStyle="font-size:medium;"
+                                         action="launchInvoiceRetro" useWindow="true" windowEmbedStyle="inlineDocument"
+                                         windowModalityType="modeless" windowHeight="600" windowWidth="875"/>
+                            </af:panelGroupLayout>
+                        </af:panelBox>
+                        <af:panelBox text="PanelBox4" id="pb4" showHeader="never"
+                                     rendered="#{securityContext.userGrantedResource['resourceName=InvoiceInquiry;resourceType=UIControl;action=enabled']}">
+                            <f:facet name="toolbar"/>
+                            <af:panelGroupLayout id="pgl4" layout="horizontal" valign="middle"
+                                                 inlineStyle="margin:10px 10px 10px 30px;">
+                                <af:image source="#{resource['images:invoiceInquiry.png']}" id="i4"/>
+                                <af:spacer width="10" height="10" id="s4"/>
+                                <af:link text="Search, Issue, and Cancel Invoices" id="cl4"
+                                         inlineStyle="font-size:medium;" action="launchInvoiceInquiry" useWindow="true"
+                                         windowEmbedStyle="inlineDocument" windowModalityType="modeless"
+                                         windowHeight="575" windowWidth="755"/>
+                            </af:panelGroupLayout>
+                        </af:panelBox>
+                    </af:panelDashboard>
+                </f:facet>
+                <f:facet name="LHS"/>
+                <f:attribute name="LHSSplitterCollapsed" value="true"/>
+                <f:attribute name="LHSSplitterDisabled" value="true"/>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

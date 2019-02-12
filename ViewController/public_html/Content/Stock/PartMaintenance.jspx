@@ -1,0 +1,969 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Part Maintenance" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelHeader text=" " id="ph1" binding="#{PartsMaintenanceBean.panelHeader}">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t1"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                <af:menuBar id="mb1">
+                                    <af:menu text="Actions" id="m2">
+                                        <af:commandMenuItem actionListener="#{bindings.CreateInsert.execute}"
+                                                            text="New Part"
+                                                            disabled="#{!bindings.CreateInsert.enabled or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}" id="cmi4"/>
+                                        <af:commandMenuItem text="#{bindings.Commit.enabled ? 'Print Label (Apply changes)' : 'Print Label' } " id="cmi2"
+                                                            actionListener="#{bindings.writePartCSV.execute}"
+                                                            disabled="#{!bindings.writePartCSV.enabled or bindings.Commit.enabled or bindings.ParCode.inputValue eq null or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}"/>
+                                        <af:commandMenuItem text="Company Receipts" id="cmi3"
+                                                            disabled="#{bindings.Commit.enabled or bindings.ParCode.inputValue eq null or empty bindings.tPrefSup.inputValue or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}"
+                                                            action="launchCmpRcpts" useWindow="true"
+                                                            windowEmbedStyle="inlineDocument" windowHeight="500"
+                                                            windowWidth="700" partialTriggers="tPrefSupId"
+                                                            shortDesc="#{empty bindings.ParCode.inputValue or empty bindings.tPrefSup.inputValue or empty bindings.ParBaseprice.inputValue ? 'Part, Supplier and Base Price required' : '' } ">
+                                            <af:setActionListener from="#{bindings.ParCode.inputValue}"
+                                                                  to="#{pageFlowScope.pfsPartNo}"/>
+                                            <af:setActionListener from="#{bindings.tPrefSup.inputValue}"
+                                                                  to="#{pageFlowScope.pfsSupplierNo}"/>
+                                            <af:setActionListener to="#{pageFlowScope.pfsCalledFromStock}"
+                                                                  from="#{true}"/>
+                                            <af:setActionListener from="#{bindings.ParBaseprice.inputValue}"
+                                                                  to="#{pageFlowScope.pfsBasePrice}"/>
+                                        </af:commandMenuItem>
+                                    </af:menu>
+                                </af:menuBar>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:button actionListener="#{bindings.Commit.execute}" text="Apply"
+                                           disabled='#{!bindings.Commit.enabled or bindings.ParCode.inputValue eq null or bindings.ParDesc.inputValue eq null or bindings.ParClass.inputValue eq "" or bindings.ParTax.inputValue eq "" or bindings.ParUom.inputValue eq ""}'
+                                           id="ctb1" icon="#{resource['images:commit.png']}"
+                                           action="#{PartsMaintenanceBean.commitAction}" partialTriggers="ctb9 ctb8"/>
+                                <af:button text="Cancel" disabled="#{!bindings.Rollback.enabled }" immediate="true"
+                                           id="ctb2" icon="#{resource['images:undo.png']}"
+                                           action="#{PartsMaintenanceBean.onRollback}" partialTriggers="ctb8 ctb9 pfl6">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button id="ctb3" icon="#{resource['images:terminate.png']}"
+                                           actionListener="#{ModuleNavBean.goExit}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:panelSplitter id="ps1" splitterPosition="325">
+                            <f:facet name="first">
+                                <af:panelGroupLayout layout="vertical" id="pgl1" inlineStyle="margin-top:10px;">
+                                    <af:panelHeader text="Part Search" id="ph2">
+                                        <af:query id="qryId1" headerText="Search" disclosed="true"
+                                                  value="#{bindings.PartSearchAllQuery.queryDescriptor}"
+                                                  model="#{bindings.PartSearchAllQuery.queryModel}"
+                                                  queryListener="#{PartsMaintenanceBean.processQuery}"
+                                                  queryOperationListener="#{bindings.PartSearchAllQuery.processQueryOperation}"
+                                                  type="flow" saveQueryMode="readOnly" resultComponentId="::resId1"
+                                                  displayMode="compact" modeChangeVisible="false"/>
+                                        <af:spacer width="10" height="10" id="s1"/>
+                                        <af:table value="#{bindings.PartsMaintView.collectionModel}" var="row"
+                                                  rows="#{bindings.PartsMaintView.rangeSize}"
+                                                  emptyText="#{bindings.PartsMaintView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.PartsMaintView.rangeSize}"
+                                                  rowBandingInterval="1"
+                                                  selectedRowKeys="#{bindings.PartsMaintView.collectionModel.selectedRow}"
+                                                  selectionListener="#{PartsMaintenanceBean.resultsPartTableSelectionListener}"
+                                                  rowSelection="single" id="resId1" columnStretching="column:resId1c2"
+                                                  inlineStyle=" height:325px;border-color:Silver; border-style:solid; border-width:thin; background-color:White; margin:2px 2px 2px 0px;"
+                                                  binding="#{PartsMaintenanceBean.resultsSearchTable}"
+                                                  partialTriggers="::cmi4 ::cmi2" styleClass="AFStretchWidth">
+                                            <af:column sortProperty="#{bindings.PartsMaintView.hints.ParCode.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.PartsMaintView.hints.ParCode.label}"
+                                                       id="resId1c1" width="50">
+                                                <af:outputText value="#{row.ParCode}" id="ot1"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.PartsMaintView.hints.ParDesc.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.PartsMaintView.hints.ParDesc.label}"
+                                                       id="resId1c2">
+                                                <af:outputText value="#{row.ParDesc}" id="ot2"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.PartsMaintView.hints.ParClass.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.PartsMaintView.hints.ParClass.label}"
+                                                       id="resId1c3" width="30">
+                                                <af:outputText value="#{row.ParClass}" id="ot3"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelHeader>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                            <f:facet name="second">
+                                <af:panelTabbed id="pt2" inlineStyle="margin-top:10px;"
+                                                binding="#{PartsMaintenanceBean.panelTabbed}">
+                                    <af:showDetailItem text="Record" id="sdi1" inlineStyle="background-color:White;"
+                                                       disabled="#{bindings.Commit.enabled or bindings.ParCode.inputValue eq null  }"
+                                                       binding="#{PartsMaintenanceBean.tabRecord}"
+                                                       disclosureListener="#{PartsMaintenanceBean.tabListener}">
+                                        <af:panelFormLayout id="pfl3" maxColumns="1" rows="6"
+                                                            labelWidth="60">
+                                            <af:inputText value="#{bindings.ParCode.inputValue}"
+                                                          columns="#{bindings.ParCode.hints.displayWidth}"
+                                                          maximumLength="#{bindings.ParCode.hints.precision}"
+                                                          shortDesc="#{bindings.ParCode.hints.tooltip}" id="it1"
+                                                          label="#{bindings.ParCode.hints.label}" rows="1"
+                                                          contentStyle="text-transform:uppercase;" autoSubmit="true">
+                                                <f:validator binding="#{bindings.ParCode.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.ParDesc.inputValue}"
+                                                          columns="#{bindings.ParDesc.hints.displayWidth}"
+                                                          maximumLength="#{bindings.ParDesc.hints.precision}"
+                                                          shortDesc="#{bindings.ParDesc.hints.tooltip}" id="it2"
+                                                          autoSubmit="true"
+                                                          readOnly="#{bindings.tPostedParNotused.attributeValue ne null and bindings.tPostedParNotused.attributeValue eq '+'  or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}"
+                                                          label="#{bindings.ParDesc.hints.label}"
+                                                          contentStyle="text-transform:uppercase; " autoTab="true">
+                                                <f:validator binding="#{bindings.ParDesc.validator}"/>
+                                            </af:inputText>
+                                            <af:spacer width="10" height="20" id="s4"/>
+                                            <af:selectOneChoice value="#{bindings.ParClass.inputValue}"
+                                                                shortDesc="#{bindings.ParClass.hints.tooltip}" id="soc2"
+                                                                autoSubmit="true" label="#{bindings.ParClass.label}"
+                                                                partialTriggers="it1"
+                                                                readOnly="#{bindings.ParCode.inputValue eq null or (bindings.tPostedParNotused.attributeValue ne null and bindings.tPostedParNotused.attributeValue eq '+') or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}">
+                                                <f:selectItems value="#{bindings.ParClass.items}" id="si2"/>
+                                            </af:selectOneChoice>
+                                            <af:selectOneChoice value="#{bindings.ParTax.inputValue}"
+                                                                shortDesc="#{bindings.ParTax.hints.tooltip}" id="soc1"
+                                                                autoSubmit="true" label="#{bindings.ParTax.label}"
+                                                                partialTriggers="it1"
+                                                                readOnly="#{bindings.ParCode.inputValue eq null or (bindings.tPostedParNotused.attributeValue ne null and bindings.tPostedParNotused.attributeValue eq '+') or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}">
+                                                <f:selectItems value="#{bindings.ParTax.items}" id="si1"/>
+                                            </af:selectOneChoice>
+                                            <af:selectOneChoice value="#{bindings.ParUom.inputValue}"
+                                                                shortDesc="#{bindings.ParUom.hints.tooltip}" id="soc3"
+                                                                autoSubmit="true" label="#{bindings.ParUom.label}"
+                                                                partialTriggers="it1"
+                                                                readOnly="#{bindings.ParCode.inputValue eq null or (bindings.tPostedParNotused.attributeValue ne null and bindings.tPostedParNotused.attributeValue eq '+') or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}">
+                                                <f:selectItems value="#{bindings.ParUom.items}" id="si3"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText value="#{bindings.ItsGl.inputValue}"
+                                                          required="#{bindings.ItsGl.hints.mandatory}"
+                                                          columns="#{bindings.ItsGl.hints.displayWidth}"
+                                                          maximumLength="#{bindings.ItsGl.hints.precision}"
+                                                          shortDesc="#{bindings.ItsGl.hints.tooltip}" id="it3"
+                                                          autoSubmit="true" label="#{bindings.ItsGl.hints.label}"
+                                                          partialTriggers="it1"
+                                                          readOnly="#{bindings.ParCode.inputValue eq null or (bindings.tPostedParNotused.attributeValue ne null and bindings.tPostedParNotused.attributeValue eq '+') or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}"
+                                                          autoTab="true">
+                                                <f:validator binding="#{bindings.ItsGl.validator}"/>
+                                            </af:inputText>
+                                        </af:panelFormLayout>
+                                        <af:spacer width="10" height="10" id="s6"/>
+                                        <af:panelFormLayout id="pfl1" maxColumns="2" rows="1" labelAlignment="start"
+                                                            labelWidth="100" fieldWidth="20">
+                                            <af:selectBooleanCheckbox value="#{bindings.ParNotused.inputValue}"
+                                                                      label="#{bindings.ParNotused.label}"
+                                                                      shortDesc="#{bindings.ParNotused.hints.tooltip}"
+                                                                      id="sbc1" autoSubmit="true"
+                                                                      readOnly="#{bindings.ItsCyclecnt.inputValue eq true or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}"
+                                                                      partialTriggers="sbc2 it1 it2"
+                                                                      disabled="#{bindings.ParCode.inputValue eq null or bindings.ParDesc.inputValue eq null}"/>
+                                            <af:selectBooleanCheckbox value="#{bindings.ItsCyclecnt.inputValue}"
+                                                                      label="#{bindings.ItsCyclecnt.label}"
+                                                                      shortDesc="#{bindings.ItsCyclecnt.hints.tooltip}"
+                                                                      id="sbc2" autoSubmit="true" readOnly="true"/>
+                                        </af:panelFormLayout>
+                                        <af:spacer width="10" height="20" id="s3"/>
+                                        <af:panelFormLayout id="pgl2"
+                                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin; padding:5px 10px 5px 10px;"
+                                                            maxColumns="2" rows="1" fieldWidth="95" labelWidth="100"
+                                                            labelAlignment="start">
+                                            <af:inputText value="#{bindings.ParLastprice.inputValue}"
+                                                          label="#{bindings.ParLastprice.hints.label}"
+                                                          required="#{bindings.ParLastprice.hints.mandatory}"
+                                                          columns="#{bindings.ParLastprice.hints.displayWidth}"
+                                                          maximumLength="#{bindings.ParLastprice.hints.precision}"
+                                                          shortDesc="#{bindings.ParLastprice.hints.tooltip}" id="it5"
+                                                          autoTab="true">
+                                                <f:validator binding="#{bindings.ParLastprice.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.ParBaseprice.inputValue}"
+                                                          label="#{bindings.ParBaseprice.hints.label}"
+                                                          required="#{bindings.ParBaseprice.hints.mandatory}"
+                                                          columns="#{bindings.ParBaseprice.hints.displayWidth}"
+                                                          maximumLength="#{bindings.ParBaseprice.hints.precision}"
+                                                          shortDesc="#{bindings.ParBaseprice.hints.tooltip}" id="it4"
+                                                          autoSubmit="true"
+                                                          readOnly="#{bindings.ParCode.inputValue eq null or bindings.ParDesc.inputValue eq null or (bindings.tPostedParNotused.attributeValue ne null and bindings.tPostedParNotused.attributeValue eq '+') or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}"
+                                                          autoTab="true">
+                                                <f:validator binding="#{bindings.ParBaseprice.validator}"/>
+                                            </af:inputText>
+                                        </af:panelFormLayout>
+                                        <af:spacer width="10" height="30" id="s5"/>
+                                        <af:panelHeader text="Preferred Supplier" id="ph3">
+                                            <f:facet name="context"/>
+                                            <f:facet name="menuBar"/>
+                                            <f:facet name="toolbar"/>
+                                            <f:facet name="legend"/>
+                                            <f:facet name="info"/>
+                                            <af:panelFormLayout id="pfl2" labelAlignment="start" maxColumns="1"
+                                                                fieldWidth="250" labelWidth="75" rows="2"
+                                                                partialTriggers="resId1">
+                                                <af:inputListOfValues id="tPrefSupId"
+                                                                      popupTitle="Search and Select: #{bindings.tPrefSup.hints.label}"
+                                                                      value="#{bindings.tPrefSup.inputValue}"
+                                                                      model="#{bindings.tPrefSup.listOfValuesModel}"
+                                                                      required="#{bindings.tPrefSup.hints.mandatory}"
+                                                                      columns="#{bindings.tPrefSup.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.tPrefSup.hints.tooltip}"
+                                                                      label="#{bindings.tPrefSup.hints.label}"
+                                                                      autoSubmit="true"
+                                                                      partialTriggers="it1 it2"
+                                                                      readOnly="#{bindings.ParCode.inputValue eq null or bindings.ParDesc.inputValue eq null or (bindings.tPostedParNotused.attributeValue ne null and bindings.tPostedParNotused.attributeValue eq '+') or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}"
+                                                                      autoTab="true">
+                                                    <f:validator binding="#{bindings.tPrefSup.validator}"/>
+                                                </af:inputListOfValues>
+                                                <af:outputText value="#{bindings.ComDesc.inputValue}" id="ot7"/>
+                                                <af:inputText value="#{bindings.ParPrefsup.inputValue}"
+                                                              label="#{bindings.ParPrefsup.hints.label}"
+                                                              required="#{bindings.ParPrefsup.hints.mandatory}"
+                                                              columns="#{bindings.ParPrefsup.hints.displayWidth}"
+                                                              maximumLength="#{bindings.ParPrefsup.hints.precision}"
+                                                              shortDesc="#{bindings.ParPrefsup.hints.tooltip}" id="it7"
+                                                              visible="false">
+                                                    <f:validator binding="#{bindings.ParPrefsup.validator}"/>
+                                                </af:inputText>
+                                            </af:panelFormLayout>
+                                        </af:panelHeader>
+                                    </af:showDetailItem>
+                                    <af:showDetailItem text="Comment" id="sdi2" inlineStyle="background-color:White;"
+                                                       disabled="#{bindings.Commit.enabled or bindings.ParCode.inputValue eq null  }"
+                                                       binding="#{PartsMaintenanceBean.tabComment}"
+                                                       disclosureListener="#{PartsMaintenanceBean.tabListener}">
+                                        <af:panelFormLayout id="pfl4" maxColumns="2" rows="1" labelWidth="60"
+                                                            partialTriggers="resId1">
+                                            <af:inputText value="#{bindings.ParCode.inputValue}"
+                                                          label="#{bindings.ParCode.hints.label}"
+                                                          required="#{bindings.ParCode.hints.mandatory}"
+                                                          columns="#{bindings.ParCode.hints.displayWidth}"
+                                                          maximumLength="#{bindings.ParCode.hints.precision}"
+                                                          shortDesc="#{bindings.ParCode.hints.tooltip}" id="it10"
+                                                          readOnly="true">
+                                                <f:validator binding="#{bindings.ParCode.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.ParDesc.inputValue}"
+                                                          label="#{bindings.ParDesc.hints.label}"
+                                                          required="#{bindings.ParDesc.hints.mandatory}"
+                                                          columns="#{bindings.ParDesc.hints.displayWidth}"
+                                                          maximumLength="#{bindings.ParDesc.hints.precision}"
+                                                          shortDesc="#{bindings.ParDesc.hints.tooltip}" id="it11"
+                                                          readOnly="true">
+                                                <f:validator binding="#{bindings.ParDesc.validator}"/>
+                                            </af:inputText>
+                                        </af:panelFormLayout>
+                                        <af:spacer width="10" height="30" id="s10"/>
+                                        <af:panelHeader text="Comment" id="pb1" styleClass="margin:10px;">
+                                            <f:facet name="toolbar">
+                                                <af:toolbar id="t2">
+                                                    <af:button actionListener="#{bindings.Create.execute}"
+                                                               disabled="#{!bindings.Create.enabled or bindings.tPostedParNotused.attributeValue eq '+' or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}"
+                                                               id="ctb8" icon="#{resource['images:add.png']}"/>
+                                                    <af:spacer width="10" height="10" id="s11"/>
+                                                    <af:button disabled="#{!bindings.Delete.enabled or bindings.tPostedParNotused.attributeValue eq '+' or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}"
+                                                               id="ctb9" icon="#{resource['images:delete.png']}"
+                                                               actionListener="#{bindings.Delete.execute}"
+                                                               partialSubmit="true"/>
+                                                    <af:spacer width="50" height="10" id="s9"/>
+                                                </af:toolbar>
+                                            </f:facet>
+                                            <af:panelFormLayout id="pfl5" partialTriggers="resId1">
+                                                <af:panelLabelAndMessage label="#{bindings.AddCode.hints.label}"
+                                                                         id="plam1" visible="false">
+                                                    <af:outputText value="#{bindings.AddCode.inputValue}" id="ot4"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:inputText value="#{bindings.AddText.inputValue}"
+                                                              required="#{bindings.AddText.hints.mandatory}"
+                                                              columns="65"
+                                                              maximumLength="#{bindings.AddText.hints.precision}"
+                                                              shortDesc="#{bindings.AddText.hints.tooltip}" id="it14"
+                                                              rows="15" autoSubmit="true">
+                                                    <f:validator binding="#{bindings.AddText.validator}"/>
+                                                    <af:validateLength minimum="1"
+                                                                       maximum="750"/>
+                                                </af:inputText>
+                                            </af:panelFormLayout>
+                                            <af:panelFormLayout id="pfl6" maxColumns="2" rows="2"
+                                                                inlineStyle="margin:20px;"
+                                                                partialTriggers="ctb4 ctb7 ctb6 ctb5 resId1">
+                                                <f:facet name="footer">
+                                                    <af:toolbar id="t3">
+                                                        <af:spacer width="100" height="50" id="s8"/>
+                                                        <af:button disabled="#{!bindings.First.enabled}"
+                                                                   partialSubmit="true" id="ctb4"
+                                                                   icon="#{resource['images:shuttle_leftall.png']}"
+                                                                   actionListener="#{bindings.First.execute}"/>
+                                                        <af:button disabled="#{!bindings.Previous.enabled}"
+                                                                   partialSubmit="true" id="ctb7"
+                                                                   icon="#{resource['images:shuttle_left.png']}"
+                                                                   actionListener="#{bindings.Previous.execute}"/>
+                                                        <af:button disabled="#{!bindings.Next.enabled}"
+                                                                   partialSubmit="true" id="ctb6"
+                                                                   icon="#{resource['images:shuttle_right.png']}"
+                                                                   actionListener="#{bindings.Next.execute}"/>
+                                                        <af:button disabled="#{!bindings.Last.enabled}"
+                                                                   partialSubmit="true" id="ctb5"
+                                                                   icon="#{resource['images:shuttle_rightall.png']}"
+                                                                   actionListener="#{bindings.Last.execute}"/>
+                                                        <af:spacer width="10" height="10" id="s7"/>
+                                                        <af:outputLabel value="#{(bindings.PartCommentIterator.rangeStart &lt; 0 ?  0 : bindings.PartCommentIterator.rangeStart+1) +  ( bindings.PartCommentIterator.currentRowIndexInRange == -1 ?  0 : bindings.PartCommentIterator.currentRowIndexInRange)}/#{bindings.PartCommentIterator.estimatedRowCount} records"
+                                                                        id="ol1"/>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                                <af:inputDate value="#{bindings.AddCreated.inputValue}"
+                                                              label="#{bindings.AddCreated.hints.label}"
+                                                              required="#{bindings.AddCreated.hints.mandatory}"
+                                                              columns="#{bindings.AddCreated.hints.displayWidth}"
+                                                              shortDesc="#{bindings.AddCreated.hints.tooltip}" id="id1"
+                                                              readOnly="true">
+                                                    <f:validator binding="#{bindings.AddCreated.validator}"/>
+                                                    <af:convertDateTime pattern="#{bindings.AddCreated.format}"/>
+                                                </af:inputDate>
+                                                <af:inputText value="#{bindings.AddUser.inputValue}"
+                                                              label="#{bindings.AddUser.hints.label}"
+                                                              required="#{bindings.AddUser.hints.mandatory}"
+                                                              columns="#{bindings.AddUser.hints.displayWidth}"
+                                                              maximumLength="#{bindings.AddUser.hints.precision}"
+                                                              shortDesc="#{bindings.AddUser.hints.tooltip}" id="it15"
+                                                              readOnly="true">
+                                                    <f:validator binding="#{bindings.AddUser.validator}"/>
+                                                </af:inputText>
+                                                <af:inputDate value="#{bindings.AddUpdated.inputValue}"
+                                                              label="#{bindings.AddUpdated.hints.label}"
+                                                              required="#{bindings.AddUpdated.hints.mandatory}"
+                                                              columns="#{bindings.AddUpdated.hints.displayWidth}"
+                                                              shortDesc="#{bindings.AddUpdated.hints.tooltip}" id="id2"
+                                                              readOnly="true">
+                                                    <f:validator binding="#{bindings.AddUpdated.validator}"/>
+                                                    <af:convertDateTime pattern="#{bindings.AddUpdated.format}"/>
+                                                </af:inputDate>
+                                                <af:inputText value="#{bindings.AddUpduser.inputValue}"
+                                                              label="#{bindings.AddUpduser.hints.label}"
+                                                              required="#{bindings.AddUpduser.hints.mandatory}"
+                                                              columns="#{bindings.AddUpduser.hints.displayWidth}"
+                                                              maximumLength="#{bindings.AddUpduser.hints.precision}"
+                                                              shortDesc="#{bindings.AddUpduser.hints.tooltip}" id="it16"
+                                                              readOnly="true">
+                                                    <f:validator binding="#{bindings.AddUpduser.validator}"/>
+                                                </af:inputText>
+                                            </af:panelFormLayout>
+                                            <f:facet name="context">
+                                                <af:group id="g1">
+                                                    <af:spacer width="10" height="10" id="s12"/>
+                                                    <af:outputLabel value="#{bindings.AddLine.inputValue eq null ? '' :   'Line '} #{bindings.AddLine.inputValue eq null ? '' :   bindings.AddLine.inputValue}"
+                                                                    id="ol2"/>
+                                                </af:group>
+                                            </f:facet>
+                                            <f:facet name="menuBar"/>
+                                        </af:panelHeader>
+                                    </af:showDetailItem>
+                                    <af:showDetailItem text="Stock" id="sdi3" inlineStyle="background-color:White;"
+                                                       disabled="#{bindings.Commit.enabled or bindings.ParCode.inputValue eq null  }"
+                                                       binding="#{PartsMaintenanceBean.tabStock}"
+                                                       disclosureListener="#{PartsMaintenanceBean.tabListener}">
+                                        <af:panelGroupLayout id="pgl5" layout="scroll">
+                                            <af:panelFormLayout id="pfl7" maxColumns="2" rows="1" labelWidth="60"
+                                                                partialTriggers="resId1">
+                                                <af:inputText value="#{bindings.ParCode.inputValue}"
+                                                              label="#{bindings.ParCode.hints.label}"
+                                                              required="#{bindings.ParCode.hints.mandatory}"
+                                                              columns="#{bindings.ParCode.hints.displayWidth}"
+                                                              maximumLength="#{bindings.ParCode.hints.precision}"
+                                                              shortDesc="#{bindings.ParCode.hints.tooltip}" id="it12"
+                                                              readOnly="true">
+                                                    <f:validator binding="#{bindings.ParCode.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.ParDesc.inputValue}"
+                                                              label="#{bindings.ParDesc.hints.label}"
+                                                              required="#{bindings.ParDesc.hints.mandatory}"
+                                                              columns="#{bindings.ParDesc.hints.displayWidth}"
+                                                              maximumLength="#{bindings.ParDesc.hints.precision}"
+                                                              shortDesc="#{bindings.ParDesc.hints.tooltip}" id="it13"
+                                                              readOnly="true">
+                                                    <f:validator binding="#{bindings.ParDesc.validator}"/>
+                                                </af:inputText>
+                                            </af:panelFormLayout>
+                                            <af:spacer width="10" height="30" id="s13"/>
+                                            <af:table value="#{bindings.PartStock.collectionModel}" var="row"
+                                                      rows="#{bindings.PartStock.rangeSize}"
+                                                      emptyText="#{bindings.PartStock.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.PartStock.rangeSize}" rowBandingInterval="1"
+                                                      id="t4"
+                                                      inlineStyle=" height:75px;border-color:Silver; border-style:solid; border-width:thin; background-color:White; margin:15px;"
+                                                      columnStretching="column:c6" width="425px"
+                                                      columnBandingInterval="0" partialTriggers="::pc1:ctb10 ::resId1">
+                                                <af:column sortProperty="#{bindings.PartStock.hints.StoStore.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.PartStock.hints.StoStore.label}"
+                                                           id="c1" align="center" width="40">
+                                                    <af:inputText value="#{row.bindings.StoStore.inputValue}"
+                                                                  label="#{bindings.PartStock.hints.StoStore.label}"
+                                                                  required="#{bindings.PartStock.hints.StoStore.mandatory}"
+                                                                  columns="#{bindings.PartStock.hints.StoStore.displayWidth}"
+                                                                  maximumLength="#{bindings.PartStock.hints.StoStore.precision}"
+                                                                  shortDesc="#{bindings.PartStock.hints.StoStore.tooltip}"
+                                                                  id="it17" readOnly="true">
+                                                        <f:validator binding="#{row.bindings.StoStore.validator}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.PartStock.hints.StoQty.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.PartStock.hints.StoQty.label}" id="c2"
+                                                           align="center" width="50">
+                                                    <af:inputText value="#{row.bindings.StoQty.inputValue}"
+                                                                  label="#{bindings.PartStock.hints.StoQty.label}"
+                                                                  required="#{bindings.PartStock.hints.StoQty.mandatory}"
+                                                                  columns="#{bindings.PartStock.hints.StoQty.displayWidth}"
+                                                                  maximumLength="#{bindings.PartStock.hints.StoQty.precision}"
+                                                                  shortDesc="#{bindings.PartStock.hints.StoQty.tooltip}"
+                                                                  id="it18" readOnly="true">
+                                                        <f:validator binding="#{row.bindings.StoQty.validator}"/>
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.PartStock.hints.StoQty.format}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.PartStock.hints.StoPrefsup.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.PartStock.hints.StoPrefsup.label}"
+                                                           id="c3" align="center" width="65">
+                                                    <af:inputText value="#{row.bindings.StoPrefsup.inputValue}"
+                                                                  label="#{bindings.PartStock.hints.StoPrefsup.label}"
+                                                                  required="#{bindings.PartStock.hints.StoPrefsup.mandatory}"
+                                                                  columns="#{bindings.PartStock.hints.StoPrefsup.displayWidth}"
+                                                                  maximumLength="#{bindings.PartStock.hints.StoPrefsup.precision}"
+                                                                  shortDesc="#{bindings.PartStock.hints.StoPrefsup.tooltip}"
+                                                                  id="it19" readOnly="true">
+                                                        <f:validator binding="#{row.bindings.StoPrefsup.validator}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.PartStock.hints.StoMinlev.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.PartStock.hints.StoMinlev.label}"
+                                                           id="c4" align="center" width="55">
+                                                    <af:inputText value="#{row.bindings.StoMinlev.inputValue}"
+                                                                  label="#{bindings.PartStock.hints.StoMinlev.label}"
+                                                                  required="#{bindings.PartStock.hints.StoMinlev.mandatory}"
+                                                                  columns="#{bindings.PartStock.hints.StoMinlev.displayWidth}"
+                                                                  maximumLength="#{bindings.PartStock.hints.StoMinlev.precision}"
+                                                                  shortDesc="#{bindings.PartStock.hints.StoMinlev.tooltip}"
+                                                                  id="it20" autoSubmit="true"
+                                                                  readOnly="#{bindings.tPostedParNotused.attributeValue eq '+' or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}">
+                                                        <f:validator binding="#{row.bindings.StoMinlev.validator}"/>
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.PartStock.hints.StoMinlev.format}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.PartStock.hints.StoOrdqty.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.PartStock.hints.StoOrdqty.label}"
+                                                           id="c5" align="center" width="55">
+                                                    <af:inputText value="#{row.bindings.StoOrdlev.inputValue}"
+                                                                  label="#{bindings.PartStock.hints.StoOrdlev.label}"
+                                                                  required="#{bindings.PartStock.hints.StoOrdlev.mandatory}"
+                                                                  columns="#{bindings.PartStock.hints.StoOrdlev.displayWidth}"
+                                                                  maximumLength="#{bindings.PartStock.hints.StoOrdlev.precision}"
+                                                                  shortDesc="#{bindings.PartStock.hints.StoOrdlev.tooltip}"
+                                                                  id="it21" autoSubmit="true"
+                                                                  readOnly="#{bindings.tPostedParNotused.attributeValue eq '+' or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}">
+                                                        <f:validator binding="#{row.bindings.StoOrdlev.validator}"/>
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.PartStock.hints.StoOrdlev.format}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                                <af:column headerText="#{bindings.PartStock.hints.ItsRorder.label}"
+                                                           id="c7" width="55" align="center">
+                                                    <af:selectBooleanCheckbox value="#{row.bindings.ItsRorder.inputValue}"
+                                                                              label="#{row.bindings.ItsRorder.label}"
+                                                                              shortDesc="#{bindings.PartStock.hints.ItsRorder.tooltip}"
+                                                                              id="sbc3" autoSubmit="true"
+                                                                              readOnly="#{bindings.tPostedParNotused.attributeValue eq '+' or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}"/>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.PartStock.hints.StoLeadtime.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.PartStock.hints.StoLeadtime.label}"
+                                                           id="c6" align="center" width="55">
+                                                    <af:inputText value="#{row.bindings.StoLeadtime.inputValue}"
+                                                                  label="#{bindings.PartStock.hints.StoLeadtime.label}"
+                                                                  required="#{bindings.PartStock.hints.StoLeadtime.mandatory}"
+                                                                  columns="#{bindings.PartStock.hints.StoLeadtime.displayWidth}"
+                                                                  maximumLength="#{bindings.PartStock.hints.StoLeadtime.precision}"
+                                                                  shortDesc="#{bindings.PartStock.hints.StoLeadtime.tooltip}"
+                                                                  id="it22" autoSubmit="true"
+                                                                  readOnly="#{bindings.tPostedParNotused.attributeValue eq '+' or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}">
+                                                        <f:validator binding="#{row.bindings.StoLeadtime.validator}"/>
+                                                        <af:convertNumber groupingUsed="false"
+                                                                          pattern="#{bindings.PartStock.hints.StoLeadtime.format}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                            </af:table>
+                                            <af:panelHeader text="Part in Bins" id="ph4" styleClass="margin:10px;">
+                                                <f:facet name="context"/>
+                                                <f:facet name="menuBar"/>
+                                                <f:facet name="toolbar"/>
+                                                <f:facet name="legend">
+                                                    <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                                        <af:selectBooleanCheckbox id="sbc7" autoSubmit="true"
+                                                                                  binding="#{PartsMaintenanceBean.transferPartChk}"
+                                                                                  valueChangeListener="#{PartsMaintenanceBean.applyTransferPartListener}"
+                                                                                  readOnly="#{bindings.ItsCyclecnt.inputValue eq true or bindings.tPostedParNotused.attributeValue eq '+' or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}"/>
+                                                        <af:spacer width="5" height="10" id="s14"/>
+                                                        <af:outputLabel value="#{bindings.vTransfer1.label}" id="ol3"/>
+                                                        <af:outputText value="#{bindings.tTotalStoQty.inputValue}"
+                                                                       id="ot5" visible="false"
+                                                                       partialTriggers="resId1"/>
+                                                    </af:panelGroupLayout>
+                                                </f:facet>
+                                                <f:facet name="info"/>
+                                                <af:panelCollection id="pc1" featuresOff="viewMenu"
+                                                                    inlineStyle="width:425px; margin:10px 0px 0px; height:210px;"
+                                                                    defaultToolbarItemDisplay="icon">
+                                                    <f:facet name="toolbar">
+                                                        <af:toolbar id="t6">
+                                                            <af:spacer width="278" height="10" id="s15"/>
+                                                            <af:button actionListener="#{bindings.Delete1.execute}"
+                                                                       text="Delete Bin"
+                                                                       disabled="#{!bindings.Delete1.enabled or bindings.ItsCyclecnt.inputValue eq true or bindings.tPostedParNotused.attributeValue eq '+'  or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}"
+                                                                       id="ctb10"
+                                                                       icon="#{resource['images:delete.png']}"
+                                                                       binding="#{PartsMaintenanceBean.deleteBinstockButton}"/>
+                                                        </af:toolbar>
+                                                    </f:facet>
+                                                    <af:table value="#{bindings.PartsBinstockView.collectionModel}"
+                                                              var="row" rows="#{bindings.PartsBinstockView.rangeSize}"
+                                                              emptyText="#{bindings.PartsBinstockView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                              fetchSize="#{bindings.PartsBinstockView.rangeSize}"
+                                                              rowBandingInterval="1" id="t5"
+                                                              inlineStyle="height:175px; border-style:solid; border-width:thin; background-color:White; margin:0px 10px 10px;"
+                                                              width="400px"
+                                                              binding="#{PartsMaintenanceBean.resultsTable}"
+                                                              selectedRowKeys="#{bindings.PartsBinstockView.collectionModel.selectedRow}"
+                                                              rowSelection="single" partialTriggers=":::resId1 ::ctb10"
+                                                              selectionListener="#{bindings.PartsBinstockView.collectionModel.makeCurrent}">
+                                                        <af:column headerText="#{bindings.PartsBinstockView.hints.tTransferLine.label}"
+                                                                   id="c11" align="center" width="46"
+                                                                   binding="#{PartsMaintenanceBean.transferLineCol}"
+                                                                   visible="false">
+                                                            <af:selectBooleanCheckbox value="#{row.bindings.tTransferLine.inputValue}"
+                                                                                      label="#{row.bindings.tTransferLine.label}"
+                                                                                      shortDesc="#{bindings.PartsBinstockView.hints.tTransferLine.tooltip}"
+                                                                                      id="sbc6" autoSubmit="true"
+                                                                                      binding="#{PartsMaintenanceBean.transferLine}"/>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PartsBinstockView.hints.BisBin.name}"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.PartsBinstockView.hints.BisBin.label}"
+                                                                   id="c8" align="center" width="43" displayIndex="-1"
+                                                                   frozen="false">
+                                                            <af:inputText value="#{row.bindings.BisBin.inputValue}"
+                                                                          label="#{bindings.PartsBinstockView.hints.BisBin.label}"
+                                                                          required="#{bindings.PartsBinstockView.hints.BisBin.mandatory}"
+                                                                          columns="#{bindings.PartsBinstockView.hints.BisBin.displayWidth}"
+                                                                          maximumLength="#{bindings.PartsBinstockView.hints.BisBin.precision}"
+                                                                          shortDesc="#{bindings.PartsBinstockView.hints.BisBin.tooltip}"
+                                                                          id="it23" readOnly="true"
+                                                                          binding="#{PartsMaintenanceBean.curBin}">
+                                                                <f:validator binding="#{row.bindings.BisBin.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PartsBinstockView.hints.BisLot.name}"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.PartsBinstockView.hints.BisLot.label}"
+                                                                   id="c9" align="center" width="43" displayIndex="-1"
+                                                                   frozen="false">
+                                                            <af:inputText value="#{row.bindings.BisLot.inputValue}"
+                                                                          label="#{bindings.PartsBinstockView.hints.BisLot.label}"
+                                                                          required="#{bindings.PartsBinstockView.hints.BisLot.mandatory}"
+                                                                          columns="#{bindings.PartsBinstockView.hints.BisLot.displayWidth}"
+                                                                          maximumLength="#{bindings.PartsBinstockView.hints.BisLot.precision}"
+                                                                          shortDesc="#{bindings.PartsBinstockView.hints.BisLot.tooltip}"
+                                                                          id="it24" readOnly="true"
+                                                                          binding="#{PartsMaintenanceBean.curLot}">
+                                                                <f:validator binding="#{row.bindings.BisLot.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.PartsBinstockView.hints.BisQty.name}"
+                                                                   sortable="false" headerText="Qty" id="c10"
+                                                                   align="center" width="43" displayIndex="-1"
+                                                                   frozen="false">
+                                                            <af:inputText value="#{row.bindings.BisQty.inputValue}"
+                                                                          label="#{bindings.PartsBinstockView.hints.BisQty.label}"
+                                                                          required="#{bindings.PartsBinstockView.hints.BisQty.mandatory}"
+                                                                          columns="#{bindings.PartsBinstockView.hints.BisQty.displayWidth}"
+                                                                          maximumLength="#{bindings.PartsBinstockView.hints.BisQty.precision}"
+                                                                          shortDesc="#{bindings.PartsBinstockView.hints.BisQty.tooltip}"
+                                                                          id="it25" readOnly="true"
+                                                                          binding="#{PartsMaintenanceBean.curQty}">
+                                                                <f:validator binding="#{row.bindings.BisQty.validator}"/>
+                                                                <af:convertNumber groupingUsed="false"
+                                                                                  pattern="#{bindings.PartsBinstockView.hints.BisQty.format}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column headerText="#{bindings.PartsBinstockView.hints.tIsBinEmpty.label}"
+                                                                   id="c15" visible="false"
+                                                                   sortProperty="#{bindings.PartsBinstockView.hints.tIsBinEmpty.name}"
+                                                                   sortable="false">
+                                                            <af:inputText value="#{row.bindings.tIsBinEmpty.inputValue}"
+                                                                          label="#{bindings.PartsBinstockView.hints.tIsBinEmpty.label}"
+                                                                          required="#{bindings.PartsBinstockView.hints.tIsBinEmpty.mandatory}"
+                                                                          columns="#{bindings.PartsBinstockView.hints.tIsBinEmpty.displayWidth}"
+                                                                          maximumLength="#{bindings.PartsBinstockView.hints.tIsBinEmpty.precision}"
+                                                                          shortDesc="#{bindings.PartsBinstockView.hints.tIsBinEmpty.tooltip}"
+                                                                          id="it27">
+                                                                <f:validator binding="#{row.bindings.tIsBinEmpty.validator}"/>
+                                                            </af:inputText>
+                                                        </af:column>
+                                                        <af:column id="c14" align="center"
+                                                                   binding="#{PartsMaintenanceBean.newColumns}"
+                                                                   displayIndex="-1" frozen="false" visible="false"
+                                                                   headerText="New">
+                                                            <af:column sortProperty="#{bindings.PartsBinstockView.hints.tNewBin.name}"
+                                                                       sortable="false"
+                                                                       headerText="#{bindings.PartsBinstockView.hints.tNewBin.label}"
+                                                                       id="c23" width="70" align="center">
+                                                                <af:inputListOfValues id="tNewBinId"
+                                                                                      popupTitle="Search and Select: #{bindings.tNewBin.hints.label}"
+                                                                                      value="#{row.bindings.tNewBin.inputValue}"
+                                                                                      label="#{bindings.tNewBin.hints.label}"
+                                                                                      model="#{bindings.tNewBin.listOfValuesModel}"
+                                                                                      required="#{bindings.tNewBin.hints.mandatory}"
+                                                                                      columns="#{bindings.tNewBin.hints.displayWidth}"
+                                                                                      shortDesc="#{bindings.tNewBin.hints.tooltip}"
+                                                                                      autoSubmit="true"
+                                                                                      disabled="#{row.bindings.tIsBinEmpty.inputValue or !row.bindings.tTransferLine.inputValue}"
+                                                                                      autoTab="true">
+                                                                    <f:validator binding="#{bindings.tNewBin.validator}"/>
+                                                                </af:inputListOfValues>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.PartsBinstockView.hints.tNewLot.name}"
+                                                                       sortable="false"
+                                                                       headerText="#{bindings.PartsBinstockView.hints.tNewLot.label}"
+                                                                       id="c22" width="70" align="center">
+                                                                <af:inputListOfValues id="tNewLotId"
+                                                                                      popupTitle="Search and Select: #{bindings.tNewLot.hints.label}"
+                                                                                      value="#{row.bindings.tNewLot.inputValue}"
+                                                                                      label="#{bindings.tNewLot.hints.label}"
+                                                                                      model="#{bindings.tNewLot.listOfValuesModel}"
+                                                                                      required="#{bindings.tNewLot.hints.mandatory}"
+                                                                                      columns="#{bindings.tNewLot.hints.displayWidth}"
+                                                                                      shortDesc="#{bindings.tNewLot.hints.tooltip}"
+                                                                                      autoSubmit="true"
+                                                                                      disabled="#{row.bindings.tIsBinEmpty.inputValue or !row.bindings.tTransferLine.inputValue}"
+                                                                                      autoTab="true">
+                                                                    <f:validator binding="#{bindings.tNewLot.validator}"/>
+                                                                </af:inputListOfValues>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.PartsBinstockView.hints.tNewQty.name}"
+                                                                       sortable="false"
+                                                                       headerText="#{bindings.PartsBinstockView.hints.tNewQty.label}"
+                                                                       id="c24" width="50" align="center">
+                                                                <af:inputText value="#{row.bindings.tNewQty.inputValue}"
+                                                                              label="#{bindings.PartsBinstockView.hints.tNewQty.label}"
+                                                                              required="#{bindings.PartsBinstockView.hints.tNewQty.mandatory}"
+                                                                              columns="#{bindings.PartsBinstockView.hints.tNewQty.displayWidth}"
+                                                                              maximumLength="#{bindings.PartsBinstockView.hints.tNewQty.precision}"
+                                                                              shortDesc="#{bindings.PartsBinstockView.hints.tNewQty.tooltip}"
+                                                                              id="it26" autoSubmit="true"
+                                                                              partialTriggers="tNewBinId tNewLotId"
+                                                                              disabled="#{row.tNewBin == null or row.tNewLot == null or row.bindings.tIsBinEmpty.inputValue or !row.bindings.tTransferLine.inputValue}"
+                                                                              autoTab="true">
+                                                                    <f:validator binding="#{row.bindings.tNewQty.validator}"/>
+                                                                </af:inputText>
+                                                            </af:column>
+                                                        </af:column>
+                                                    </af:table>
+                                                </af:panelCollection>
+                                            </af:panelHeader>
+                                        </af:panelGroupLayout>
+                                    </af:showDetailItem>
+                                    <af:showDetailItem text="Supplier" id="sdi4"
+                                                       inlineStyle="background-color:White;"
+                                                       disabled="#{bindings.Commit.enabled or bindings.ParCode.inputValue eq null  }"
+                                                       binding="#{PartsMaintenanceBean.tabSupplier}"
+                                                       disclosureListener="#{PartsMaintenanceBean.tabListener}">
+                                        <af:panelFormLayout id="pfl8" maxColumns="2" rows="1" labelWidth="60"
+                                                            partialTriggers="resId1">
+                                            <af:inputText value="#{bindings.ParCode.inputValue}"
+                                                          label="#{bindings.ParCode.hints.label}"
+                                                          required="#{bindings.ParCode.hints.mandatory}"
+                                                          columns="#{bindings.ParCode.hints.displayWidth}"
+                                                          maximumLength="#{bindings.ParCode.hints.precision}"
+                                                          shortDesc="#{bindings.ParCode.hints.tooltip}" id="it28"
+                                                          readOnly="true">
+                                                <f:validator binding="#{bindings.ParCode.validator}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.ParDesc.inputValue}"
+                                                          label="#{bindings.ParDesc.hints.label}"
+                                                          required="#{bindings.ParDesc.hints.mandatory}"
+                                                          columns="#{bindings.ParDesc.hints.displayWidth}"
+                                                          maximumLength="#{bindings.ParDesc.hints.precision}"
+                                                          shortDesc="#{bindings.ParDesc.hints.tooltip}" id="it29"
+                                                          readOnly="true">
+                                                <f:validator binding="#{bindings.ParDesc.validator}"/>
+                                            </af:inputText>
+                                        </af:panelFormLayout>
+                                        <af:spacer width="10" height="20" id="s16"/>
+                                        <af:panelBorderLayout id="pbl1">
+                                            <f:facet name="bottom"/>
+                                            <f:facet name="top"/>
+                                            <af:panelCollection id="pc2" styleClass="AFStretchWidth"
+                                                                featuresOff="viewMenu detach"
+                                                                defaultToolbarItemDisplay="icon"
+                                                                inlineStyle="margin: 10px;height: 200px;">
+                                                <f:facet name="menus"/>
+                                                <f:facet name="toolbar">
+                                                    <af:toolbar id="t8" inlineStyle="margin:0px 0px 0px 50px;">
+                                                        <af:spacer width="335" height="10" id="s17"/>
+                                                        <af:button actionListener="#{bindings.Delete2.execute}"
+                                                                   disabled="#{!bindings.Delete2.enabled or bindings.tSupplierIsPref.attributeValue eq true}"
+                                                                   id="ctb11" icon="#{resource['images:delete.png']}"/>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                                <f:facet name="statusbar"/>
+                                                <af:table value="#{bindings.Suppliers.collectionModel}" var="row"
+                                                          rows="#{bindings.Suppliers.rangeSize}"
+                                                          emptyText="#{bindings.Suppliers.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                          fetchSize="#{bindings.Suppliers.rangeSize}"
+                                                          rowBandingInterval="0"
+                                                          selectedRowKeys="#{bindings.Suppliers.collectionModel.selectedRow}"
+                                                          selectionListener="#{bindings.Suppliers.collectionModel.makeCurrent}"
+                                                          rowSelection="single" id="t7"
+                                                          inlineStyle="border-color:Silver; border-style:solid; border-width:thin; background-color:White; "
+                                                          editingMode="clickToEdit" partialTriggers="::ctb11"
+                                                          columnStretching="column:c16">
+                                                    <f:facet name="detailStamp">
+                                                        <af:panelGroupLayout id="pgl4" layout="horizontal">
+                                                            <af:panelFormLayout id="pfl9" maxColumns="2" rows="1"
+                                                                                fieldWidth="150" labelWidth="75">
+                                                                <af:panelLabelAndMessage label="#{bindings.Suppliers.hints.CatExch.label}:"
+                                                                                         id="plam2">
+                                                                    <af:inputText value="#{row.bindings.CatExch.inputValue}"
+                                                                                  required="#{bindings.Suppliers.hints.CatExch.mandatory}"
+                                                                                  columns="#{bindings.Suppliers.hints.CatExch.displayWidth}"
+                                                                                  maximumLength="#{bindings.Suppliers.hints.CatExch.precision}"
+                                                                                  shortDesc="#{bindings.Suppliers.hints.CatExch.tooltip}"
+                                                                                  id="it30" autoSubmit="true"
+                                                                                  readOnly="#{!securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}">
+                                                                        <f:validator binding="#{row.bindings.CatExch.validator}"/>
+                                                                        <af:convertNumber groupingUsed="false"
+                                                                                          pattern="#{bindings.Suppliers.hints.CatExch.format}"/>
+                                                                    </af:inputText>
+                                                                </af:panelLabelAndMessage>
+                                                                <af:panelLabelAndMessage label="#{bindings.Suppliers.hints.CatMultiply.label}:"
+                                                                                         id="plam3">
+                                                                    <af:inputText value="#{row.bindings.CatMultiply.inputValue}"
+                                                                                  required="#{bindings.Suppliers.hints.CatMultiply.mandatory}"
+                                                                                  columns="#{bindings.Suppliers.hints.CatMultiply.displayWidth}"
+                                                                                  maximumLength="#{bindings.Suppliers.hints.CatMultiply.precision}"
+                                                                                  shortDesc="#{bindings.Suppliers.hints.CatMultiply.tooltip}"
+                                                                                  id="it34"
+                                                                                  readOnly="#{!securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}"
+                                                                                  autoSubmit="true">
+                                                                        <f:validator binding="#{row.bindings.CatMultiply.validator}"/>
+                                                                        <af:convertNumber groupingUsed="false"
+                                                                                          pattern="#{bindings.Suppliers.hints.CatMultiply.format}"/>
+                                                                    </af:inputText>
+                                                                </af:panelLabelAndMessage>
+                                                            </af:panelFormLayout>
+                                                        </af:panelGroupLayout>
+                                                    </f:facet>
+                                                    <af:column sortProperty="#{bindings.Suppliers.hints.CatSupplier.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.Suppliers.hints.CatSupplier.label}"
+                                                               id="c17" width="50" displayIndex="-1" align="center">
+                                                        <af:inputText value="#{row.bindings.CatSupplier.inputValue}"
+                                                                      label="#{bindings.Suppliers.hints.CatSupplier.label}"
+                                                                      required="#{bindings.Suppliers.hints.CatSupplier.mandatory}"
+                                                                      columns="#{bindings.Suppliers.hints.CatSupplier.displayWidth}"
+                                                                      maximumLength="#{bindings.Suppliers.hints.CatSupplier.precision}"
+                                                                      shortDesc="#{bindings.Suppliers.hints.CatSupplier.tooltip}"
+                                                                      id="it31" readOnly="true">
+                                                            <f:validator binding="#{row.bindings.CatSupplier.validator}"/>
+                                                        </af:inputText>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.Suppliers.hints.tSupplierName.label}"
+                                                               id="c16"
+                                                               sortProperty="#{bindings.Suppliers.hints.tSupplierName.name}"
+                                                               sortable="false" width="150" displayIndex="-1">
+                                                        <af:outputText value="#{row.tSupplierName}" id="ot6"/>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.Suppliers.hints.tSupplierIsPref.label}"
+                                                               id="c20" width="50" align="center">
+                                                        <af:selectBooleanCheckbox value="#{row.bindings.tSupplierIsPref.inputValue}"
+                                                                                  label="#{row.bindings.tSupplierIsPref.label}"
+                                                                                  shortDesc="#{bindings.Suppliers.hints.tSupplierIsPref.tooltip}"
+                                                                                  id="sbc5" readOnly="true"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.Suppliers.hints.CatGross.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.Suppliers.hints.CatGross.label}"
+                                                               id="c18" width="55" align="center">
+                                                        <af:inputText value="#{row.bindings.CatGross.inputValue}"
+                                                                      label="#{bindings.Suppliers.hints.CatGross.label}"
+                                                                      required="#{bindings.Suppliers.hints.CatGross.mandatory}"
+                                                                      columns="#{bindings.Suppliers.hints.CatGross.displayWidth}"
+                                                                      maximumLength="#{bindings.Suppliers.hints.CatGross.precision}"
+                                                                      shortDesc="#{bindings.Suppliers.hints.CatGross.tooltip}"
+                                                                      id="it32" autoSubmit="true"
+                                                                      readOnly="#{bindings.tPostedParNotused.attributeValue eq '+' or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}">
+                                                            <f:validator binding="#{row.bindings.CatGross.validator}"/>
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.Suppliers.hints.CatGross.format}"/>
+                                                        </af:inputText>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.Suppliers.hints.CatPuruom.label}"
+                                                               id="c19" align="center" width="50"
+                                                               sortProperty="#{bindings.Suppliers.hints.CatPuruom.name}"
+                                                               sortable="false">
+                                                        <af:selectOneChoice value="#{row.bindings.CatPuruom.inputValue}"
+                                                                            label="#{row.bindings.CatPuruom.label}"
+                                                                            required="#{bindings.Suppliers.hints.CatPuruom.mandatory}"
+                                                                            shortDesc="#{bindings.Suppliers.hints.CatPuruom.tooltip}"
+                                                                            id="soc4" autoSubmit="true"
+                                                                            readOnly="#{bindings.tPostedParNotused.attributeValue eq '+' or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}">
+                                                            <f:selectItems value="#{row.bindings.CatPuruom.items}"
+                                                                           id="si4"/>
+                                                        </af:selectOneChoice>
+                                                    </af:column>
+                                                    <af:column headerText="#{bindings.Suppliers.hints.CatTax.label}"
+                                                               id="c21" align="center" width="60"
+                                                               sortProperty="#{bindings.Suppliers.hints.CatTax.name}"
+                                                               sortable="false" displayIndex="-1">
+                                                        <af:selectOneChoice value="#{row.bindings.CatTax.inputValue}"
+                                                                            label="#{row.bindings.CatTax.label}"
+                                                                            required="#{bindings.Suppliers.hints.CatTax.mandatory}"
+                                                                            shortDesc="#{bindings.Suppliers.hints.CatTax.tooltip}"
+                                                                            id="soc5" autoSubmit="true"
+                                                                            readOnly="#{bindings.tPostedParNotused.attributeValue eq '+' or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}">
+                                                            <f:selectItems value="#{row.bindings.CatTax.items}"
+                                                                           id="si5"/>
+                                                        </af:selectOneChoice>
+                                                    </af:column>
+                                                </af:table>
+                                            </af:panelCollection>
+                                            <af:panelCollection id="pc3" featuresOff="viewMenu detach"
+                                                                defaultToolbarItemDisplay="icon"
+                                                                styleClass="AFStretchWidth"
+                                                                inlineStyle="margin: 10px; height: 250px;">
+                                                <f:facet name="menus"/>
+                                                <f:facet name="toolbar"/>
+                                                <f:facet name="statusbar"/>
+                                                <af:table value="#{bindings.PartsSupplierOrderlines.collectionModel}"
+                                                          var="row" rows="#{bindings.PartsSupplierOrderlines.rangeSize}"
+                                                          emptyText="#{bindings.PartsSupplierOrderlines.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                          fetchSize="#{bindings.PartsSupplierOrderlines.rangeSize}"
+                                                          rowBandingInterval="1"
+                                                          selectedRowKeys="#{bindings.PartsSupplierOrderlines.collectionModel.selectedRow}"
+                                                          selectionListener="#{bindings.PartsSupplierOrderlines.collectionModel.makeCurrent}"
+                                                          rowSelection="single" id="t9" columnStretching="column:c13">
+                                                    <af:column sortProperty="#{bindings.PartsSupplierOrderlines.hints.Ponum.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.PartsSupplierOrderlines.hints.Ponum.label}"
+                                                               id="c13" align="center" width="60">
+                                                        <af:outputText value="#{row.Ponum}" id="ot9" rendered="false"/>
+                                                        <af:link text="#{row.Ponum}" id="gl1"
+                                                                 destination="http://itsgp31/MaRSReportServer?%2fMaRSIntegrated%2fMaRSPO&amp;rs:Command=Render&amp;rc:Toolbar=false&amp;PONo=#{row.Ponum}"
+                                                                 targetFrame="_blank"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PartsSupplierOrderlines.hints.Postatus.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.PartsSupplierOrderlines.hints.Postatus.label}"
+                                                               id="c26" align="center" width="60">
+                                                        <af:outputText value="#{row.Postatus}" id="ot11"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PartsSupplierOrderlines.hints.Podate.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.PartsSupplierOrderlines.hints.Podate.label}"
+                                                               id="c27" align="center" width="70">
+                                                        <af:outputText value="#{row.Podate}" id="ot12"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PartsSupplierOrderlines.hints.Poline.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.PartsSupplierOrderlines.hints.Poline.label}"
+                                                               id="c28" align="center" width="30">
+                                                        <af:outputText value="#{row.Poline}" id="ot13">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.PartsSupplierOrderlines.hints.Poline.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PartsSupplierOrderlines.hints.Linestatus.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.PartsSupplierOrderlines.hints.Linestatus.label}"
+                                                               id="c36" align="center" width="60">
+                                                        <af:outputText value="#{row.Linestatus}" id="ot21"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PartsSupplierOrderlines.hints.Lineordqty.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.PartsSupplierOrderlines.hints.Lineordqty.label}"
+                                                               id="c30" align="center" width="60">
+                                                        <af:outputText value="#{row.Lineordqty}" id="ot15">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.PartsSupplierOrderlines.hints.Lineordqty.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PartsSupplierOrderlines.hints.Lineuom.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.PartsSupplierOrderlines.hints.Lineuom.label}"
+                                                               id="c31" align="center" width="30">
+                                                        <af:outputText value="#{row.Lineuom}" id="ot16"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PartsSupplierOrderlines.hints.Unitprice.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.PartsSupplierOrderlines.hints.Unitprice.label}"
+                                                               id="c32" align="center" width="60">
+                                                        <af:outputText value="#{row.Unitprice}" id="ot17">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.PartsSupplierOrderlines.hints.Unitprice.format}"
+                                                                              type="currency"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PartsSupplierOrderlines.hints.Recvqty.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.PartsSupplierOrderlines.hints.Recvqty.label}"
+                                                               id="c33" align="center" width="50">
+                                                        <af:outputText value="#{row.Recvqty}" id="ot18">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.PartsSupplierOrderlines.hints.Recvqty.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PartsSupplierOrderlines.hints.Recvvalue.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.PartsSupplierOrderlines.hints.Recvvalue.label}"
+                                                               id="c34" align="center" width="60">
+                                                        <af:outputText value="#{row.Recvvalue}" id="ot19">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.PartsSupplierOrderlines.hints.Recvvalue.format}"
+                                                                              type="currency"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.PartsSupplierOrderlines.hints.Extracharges.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.PartsSupplierOrderlines.hints.Extracharges.label}"
+                                                               id="c35" align="center" width="120">
+                                                        <af:outputText value="#{row.Extracharges}" id="ot20">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.PartsSupplierOrderlines.hints.Extracharges.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                </af:table>
+                                            </af:panelCollection>
+                                        </af:panelBorderLayout>
+                                    </af:showDetailItem>
+                                </af:panelTabbed>
+                            </f:facet>
+                        </af:panelSplitter>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

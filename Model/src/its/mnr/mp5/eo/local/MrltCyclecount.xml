@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltCyclecount"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="MRLT_CYCLECOUNT"
+  AliasName="MrltCyclecount"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="StlTrans"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="STL_TRANS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNT"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlPart"
+    IsNotNull="true"
+    Precision="18"
+    ColumnName="STL_PART"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNT"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="18"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlBin"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="STL_BIN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNT"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlLot"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="STL_LOT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlStore"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="STL_STORE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlExpqty"
+    ColumnName="STL_EXPQTY"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MRLT_CYCLECOUNT"/>
+  <Attribute
+    Name="StlPhyqty"
+    ColumnName="STL_PHYQTY"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MRLT_CYCLECOUNT"/>
+  <Attribute
+    Name="StlType"
+    IsNotNull="true"
+    Precision="5"
+    ColumnName="STL_TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNT"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlRtype"
+    Precision="4"
+    ColumnName="STL_RTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StlPartOrg"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="STL_PART_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_CYCLECOUNT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Key
+    Name="MrltCyclecountPk1"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLT_CYCLECOUNT_PK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltCyclecount.StlTrans"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltCyclecount.StlType"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltCyclecount.StlPart"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltCyclecount.StlBin"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="CchdrFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="CCHDR_UK1"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="CCHDR_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltCyclecount.StlTrans"/>
+    </AttrArray>
+  </Key>
+</Entity>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="ClassPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="MasterDataControlNested.MrlrefClassView1" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrlrefClassView1Iterator"/>
+    <searchRegion Criteria="ClassByType" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="MrlrefClassView1Iterator" id="ClassByTypeQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MrlrefClassView1Iterator" id="MrlrefClassView1">
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrlrefClassView" Name="MrlrefClassView10">
+        <AttrNames>
+          <Item Value="Classcd"/>
+          <Item Value="Classdesc"/>
+          <Item Value="Classtype"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="MNRDataControlDataControl"/>
+  </bindings>
+</pageDefinition>

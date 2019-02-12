@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltFlag_VO"
+  Version="11.1.2.64.36"
+  SelectList="MrltFlag_EO.FID, 
+       MrltFlag_EO.FTYPE, 
+       MrltFlag_EO.FNAME, 
+       MrltFlag_EO.FACTIVE, 
+       MrltFlag_EO.FORG"
+  FromList="MRLT_FLAG MrltFlag_EO"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <ViewAccessor
+    Name="YesNoBoolean1"
+    ViewObjectName="its.mnr.mp5.lov.YesNoBoolean"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ClassType1"
+    ViewObjectName="its.mnr.mp5.lov.ClassType"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="MrlrefClassView1"
+    ViewObjectName="its.mnr.mp5.vo.admin.MrlrefClassView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="ClassFlagVC"
+      FullName="its.mnr.mp5.vo.admin.MrlrefClassView.ClassFlagVC"/>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_Factive"
+    ListVOName="YesNoBoolean1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Factive"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Ftype"
+    ListVOName="MrlrefClassView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Ftype"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Classcd"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Classcd"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="MrltFlag_EO"
+    Entity="its.mnr.mp5.eo.master.MrltFlag_EO"/>
+  <ViewAttribute
+    Name="Fid"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Fid"
+    EntityUsage="MrltFlag_EO"
+    AliasName="FID"
+    IsUpdateable="while_insert"/>
+  <ViewAttribute
+    Name="Ftype"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Ftype"
+    EntityUsage="MrltFlag_EO"
+    AliasName="FTYPE"
+    IsUpdateable="while_insert"
+    LOVName="LOV_Ftype">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Fname"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Fname"
+    EntityUsage="MrltFlag_EO"
+    AliasName="FNAME"
+    IsUpdateable="while_insert"/>
+  <ViewAttribute
+    Name="Factive"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Factive"
+    EntityUsage="MrltFlag_EO"
+    AliasName="FACTIVE"
+    LOVName="LOV_Factive">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Forg"
+    PrecisionRule="true"
+    EntityAttrName="Forg"
+    EntityUsage="MrltFlag_EO"
+    AliasName="FORG"
+    DefaultValue="1"/>
+  <ViewCriteria
+    Name="MrltFlag_VOCriteria"
+    ViewObjectName="its.mnr.mp5.vo.workorder.MrltFlag_VO"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="MrltFlag_VOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Ftype"
+        ViewAttribute="Ftype"
+        Operator="="
+        Conjunction="AND"
+        Value="WO"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="MrltFlag_VOCriteria_MrltFlag_VOCriteria_row_0_Factive"
+        ViewAttribute="Factive"
+        Operator="="
+        Conjunction="AND"
+        Value="Y"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="MrltFlagassociation_VO"
+    ViewLink="its.mnr.mp5.vo.link.MrltFlagassociationFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

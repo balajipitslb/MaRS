@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.loginBundle']}"/>
+    <af:document title="#{viewcontrollerBundle.MARS}" id="d1" initialFocusId="it1">
+        <af:form id="f1">
+            <af:panelBox text="#{viewcontrollerBundle.LOGON}" id="pb1" background="medium"
+                         icon="#{resource['images:lock_unlocked.png']}" showDisclosure="false">
+                <f:facet name="toolbar"/>
+                <af:panelFormLayout id="pfl1"
+                                    inlineStyle="background-color:White; border-style:solid; border-width:thin; margin:15px; padding:10px;"
+                                    maxColumns="2" rows="4" fieldWidth="400">
+                    <f:facet name="footer"/>
+                    <af:inputText label="#{viewcontrollerBundle.USERNAME}" id="it1" value="#{LoginBean.username}"
+                                  required="true" clientComponent="true" autoTab="true"
+                                  shortDesc="Please enter your Windows Username">
+                        <af:clientListener method="toUpperCase" type="blur"/>
+                    </af:inputText>
+                    <af:inputText label="#{viewcontrollerBundle.PASSWORD}" id="it2" secret="true"
+                                  value="#{LoginBean.password}" required="true" autoTab="true"
+                                  shortDesc="Please enter your Windows Password">
+                        <af:clientListener method="doSubmit" type="valueChange"/>
+                    </af:inputText>
+                    <af:spacer width="10" height="10" id="s1"/>
+                    <af:panelGroupLayout id="pgl1" layout="horizontal">
+                        <af:spacer width="128" height="10" id="s2"/>
+                        <af:button text="#{viewcontrollerBundle.LOGINBUTTON}" id="submitBtn"
+                                   action="#{LoginBean.doLogin}"/>
+                    </af:panelGroupLayout>
+                    <af:image source="#{resource['images:its-logo.gif']}" id="i1"/>
+                    <af:resource type="javascript">
+                      function toUpperCase(event) {
+                          var inputComp = event.getCurrentTarget();
+                          inputComp.setValue(inputComp.getSubmittedValue().toUpperCase());
+                      }
+                    </af:resource>
+                </af:panelFormLayout>
+                <af:button text="R5" id="cb1" action="#{LoginBean.doLoginQuick}" rendered="false"/>
+            </af:panelBox>
+            <af:panelGroupLayout id="pgl2">
+                <af:spacer width="10" height="50" id="s3"/>
+                <af:outputFormatted value="Report Server" id="of1"
+                                    inlineStyle="font-size:small; font-weight:bolder; margin:50px;"/>
+                <af:panelList id="pl1" maxColumns="1" listStyle="list-style-type:square"
+                              inlineStyle=" margin:10px 50px 50px 50px;">
+                    <af:link text="Work Orders" id="gl1"
+                             destination="http://itsgp31/MaRSReport/Pages/Folder.aspx?ItemPath=%2fWork+Orders&amp;ViewMode=List"
+                             targetFrame="_parent" inlineStyle="font-weight:lighter; font-size:small;"/>
+                    <af:link text="Invoices" id="gl2"
+                             destination="http://itsgp31/MaRSReport/Pages/Folder.aspx?ItemPath=%2fInvoices&amp;ViewMode=List"
+                             targetFrame="_parent" inlineStyle="font-weight:lighter; font-size:small;"/>
+                    <af:link text="Purchase Orders" id="gl3"
+                             destination="http://itsgp31/MaRSReport/Pages/Folder.aspx?ItemPath=%2fPO+Receivings&amp;ViewMode=List"
+                             targetFrame="_parent" inlineStyle="font-weight:lighter; font-size:small;"/>
+                    <af:link text="Stock" id="gl4"
+                             destination="http://itsgp31/MaRSReport/Pages/Folder.aspx?ItemPath=%2fStock&amp;ViewMode=List"
+                             targetFrame="_parent" inlineStyle="font-weight:lighter; font-size:small;"/>
+                </af:panelList>
+            </af:panelGroupLayout>
+        </af:form>
+    </af:document>
+    <af:resource type="javascript">
+      function doSubmit(actionEvent) {
+          var component = AdfPage.PAGE.findComponentByAbsoluteId('submitBtn');
+
+          AdfActionEvent.queue(component, component.getPartialSubmit())
+      }
+    </af:resource>
+</f:view>

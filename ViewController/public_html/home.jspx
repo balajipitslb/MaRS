@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.homeBundle']}"/>
+    <af:document title="#{viewcontrollerBundle.MARS}" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/MP5BaseTemplate.jspx" id="pt1">
+                <f:facet name="GlobalTop">
+                    <af:navigationPane id="np1">
+                        <af:commandNavigationItem text="Home (This)" id="cni1" action="goHome" accessKey="H" selected="true"/>
+                        <af:commandNavigationItem text="Work Order" id="cni2" accessKey="W"
+                                                  actionListener="#{ModuleNavBean.goWOModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=WorkOrder;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Invoice #{securityContext.userInRole}" id="cni3" accessKey="I"
+                                                  actionListener="#{ModuleNavBean.goInvoiceModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Invoice;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="PO &amp; Receivings" id="cni4" accessKey="P"
+                                                  actionListener="#{ModuleNavBean.goPORecvModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=PORecv;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Stock" id="cni5" accessKey="S"
+                                                  actionListener="#{ModuleNavBean.goStockModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Stock;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Report" id="cni6" accessKey="R"
+                                                  actionListener="#{ModuleNavBean.goReportModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Report;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Admin" id="cni7"
+                                                  accessKey="D" actionListener="#{ModuleNavBean.goAdminModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Admin;resourceType=GlobalNav;action=view']}"/>
+                    </af:navigationPane>
+                </f:facet>
+                <f:facet name="Main">
+                        <af:panelTabbed id="pt2">
+                            <af:showDetailItem text="Status &amp; Count Metrics" id="sdi1" stretchChildren="first">
+                                <af:panelDashboard id="pd1" columns="4" rowHeight="300px" dimensionsFrom="auto">
+                                    <af:panelBox text="Work Order Statuses" id="pb1" showDisclosure="false">
+                                        <f:facet name="toolbar"/>
+                                    <dvt:barGraph id="graph1" value="#{bindings.WOStatusCount.graphModel}"
+                                                  subType="BAR_VERT_CLUST"
+                                                  clickListener="#{bindings.WOStatusCount.graphModel.processClick}"
+                                                  shortDesc="Work Order Status Graph"
+                                                  hideAndShowBehavior="withoutRescale"
+                                                  seriesRolloverBehavior="RB_HIGHLIGHT" dynamicResize="DYNAMIC_SIZE">
+                                        <dvt:background>
+                                            <dvt:specialEffects/>
+                                        </dvt:background>
+                                        <dvt:graphPlotArea/>
+                                        <dvt:seriesSet>
+                                            <dvt:series/>
+                                        </dvt:seriesSet>
+                                        <dvt:o1Axis/>
+                                        <dvt:y1Axis/>
+                                        <dvt:legendArea automaticPlacement="AP_NEVER"/>
+                                        <dvt:o1TickLabel id="o1TickLabel1" rendered="false"/>
+                                    </dvt:barGraph>
+                                </af:panelBox>
+                                    <af:panelBox id="pb2" showDisclosure="false">
+                                        <f:facet name="toolbar"/>
+                                    <dvt:pieGraph id="graph2" value="#{bindings.WOStatusByAcct.graphModel}"
+                                                  subType="PIE"
+                                                  shortDesc="Work Order Status by Account"
+                                                  hideAndShowBehavior="withoutRescale"
+                                                  seriesRolloverBehavior="RB_HIGHLIGHT" dynamicResize="DYNAMIC_SIZE"
+                                                  partialTriggers="::graph1">
+                                        <dvt:background>
+                                            <dvt:specialEffects/>
+                                        </dvt:background>
+                                        <dvt:graphPieFrame/>
+                                        <dvt:seriesSet>
+                                            <dvt:series pieSliceExplode="0"/>
+                                        </dvt:seriesSet>
+                                        <dvt:sliceLabel/>
+                                        <dvt:pieLabel rendered="false"/>
+                                        <dvt:graphSubtitle text="#{bindings.UcoDesc}"/>
+                                        <dvt:graphTitle text="Status">
+                                            <dvt:graphFont id="graphFont2" bold="true"/>
+                                        </dvt:graphTitle>
+                                    </dvt:pieGraph>
+                                </af:panelBox>
+                                    <af:panelBox id="pb3" showDisclosure="false" text="Invoice Types">
+                                        <f:facet name="toolbar"/>
+                                    <dvt:barGraph id="graph3" value="#{bindings.InvoiceTypeCount.graphModel}"
+                                                  subType="BAR_VERT_CLUST"
+                                                  clickListener="#{bindings.InvoiceTypeCount.graphModel.processClick}"
+                                                  shortDesc="Invoice Statuses Graph"
+                                                  hideAndShowBehavior="withoutRescale"
+                                                  seriesRolloverBehavior="RB_HIGHLIGHT" dynamicResize="DYNAMIC_SIZE">
+                                        <dvt:background>
+                                            <dvt:specialEffects/>
+                                        </dvt:background>
+                                        <dvt:graphPlotArea/>
+                                        <dvt:seriesSet>
+                                            <dvt:series/>
+                                        </dvt:seriesSet>
+                                        <dvt:o1Axis/>
+                                        <dvt:y1Axis/>
+                                        <dvt:legendArea automaticPlacement="AP_NEVER"/>
+                                        <dvt:o1TickLabel id="o1TickLabel2" rendered="false"/>
+                                    </dvt:barGraph>
+                                </af:panelBox>
+                                    <af:panelBox id="pb4"
+                                                 showDisclosure="false">
+                                        <f:facet name="toolbar"/>
+                                    <dvt:barGraph id="graph4" value="#{bindings.InvoiceTypeStatusCount.graphModel}"
+                                                  subType="BAR_VERT_CLUST"
+                                                  shortDesc="Invoice Status Type Graph"
+                                                  hideAndShowBehavior="withoutRescale"
+                                                  seriesRolloverBehavior="RB_HIGHLIGHT" dynamicResize="DYNAMIC_SIZE">
+                                        <dvt:background>
+                                            <dvt:specialEffects/>
+                                        </dvt:background>
+                                        <dvt:graphPlotArea/>
+                                        <dvt:seriesSet defaultColor="#ffb563">
+                                            <dvt:series/>
+                                        </dvt:seriesSet>
+                                        <dvt:o1Axis/>
+                                        <dvt:y1Axis/>
+                                        <dvt:graphSubtitle text="#{bindings.Type}"/>
+                                        <dvt:o1TickLabel id="o1TickLabel3"/>
+                                        <dvt:graphTitle text="Invoice">
+                                            <dvt:graphFont id="graphFont3" bold="true"/>
+                                        </dvt:graphTitle>
+                                    </dvt:barGraph>
+                                </af:panelBox>
+                                </af:panelDashboard>
+                            <af:panelDashboard id="pd4" columns="2" rowHeight="300px" dimensionsFrom="auto">
+                                <af:panelBox id="pb9" text="Work Orders Created (by Type)" showDisclosure="false">
+                                    <f:facet name="toolbar"/>
+                                    <dvt:lineGraph id="graph5" value="#{bindings.WOCreatedCount.graphModel}"
+                                                   subType="LINE_VERT_ABS" shortDesc="Work Orders Created (by Type)"
+                                                   hideAndShowBehavior="withoutRescale"
+                                                   seriesRolloverBehavior="RB_HIGHLIGHT" dynamicResize="DYNAMIC_SIZE">
+                                        <dvt:background>
+                                            <dvt:specialEffects/>
+                                        </dvt:background>
+                                        <dvt:graphPlotArea/>
+                                        <dvt:seriesSet defaultMarkerType="MT_CURVE_LINE" markerDisplayed="true">
+                                            <dvt:series/>
+                                        </dvt:seriesSet>
+                                        <dvt:o1Axis/>
+                                        <dvt:y1Axis/>
+                                        <dvt:legendArea automaticPlacement="AP_NEVER"/>
+                                        <dvt:o1TickLabel id="o1TickLabel4" automaticRotation="AR_NO_ROTATE"/>
+                                    </dvt:lineGraph>
+                                </af:panelBox>
+                                <af:panelBox text="Work Orders Created (by Account)" id="pb10" showDisclosure="false">
+                                    <f:facet name="toolbar"/>
+                                    <dvt:lineGraph id="graph6" value="#{bindings.WOCreatedByAcct.graphModel}"
+                                                   subType="LINE_VERT_ABS" shortDesc="Work Orders Created (by Account)"
+                                                   hideAndShowBehavior="withoutRescale"
+                                                   seriesRolloverBehavior="RB_HIGHLIGHT" dynamicResize="DYNAMIC_SIZE">
+                                        <dvt:background>
+                                            <dvt:specialEffects/>
+                                        </dvt:background>
+                                        <dvt:graphPlotArea/>
+                                        <dvt:seriesSet defaultMarkerType="MT_CURVE_LINE" markerDisplayed="true">
+                                            <dvt:series/>
+                                        </dvt:seriesSet>
+                                        <dvt:o1Axis/>
+                                        <dvt:y1Axis/>
+                                        <dvt:legendArea automaticPlacement="AP_NEVER"/>
+                                        <dvt:o1TickLabel id="o1TickLabel5" automaticRotation="AR_NO_ROTATE"
+                                                         tickLabelSkipCount="0"/>
+                                    </dvt:lineGraph>
+                                </af:panelBox>
+                            </af:panelDashboard>
+                        </af:showDetailItem>
+                            <af:showDetailItem text="Turn Time" id="sdi2" stretchChildren="first">
+                            <af:panelDashboard id="pd2" columns="1" rowHeight="300px" dimensionsFrom="children">
+                                <af:panelBox text="Work Orders" id="pb5" showDisclosure="false">
+                                    <f:facet name="toolbar"/>
+                                    <dvt:comboGraph id="graph7" value="#{bindings.WOTurnTime.graphModel}"
+                                                    subType="COMBINATION_VERT_ABS" shortDesc="WO Turn Time Graph"
+                                                    dynamicResize="DYNAMIC_SIZE" hideAndShowBehavior="withoutRescale"
+                                                    seriesRolloverBehavior="RB_HIGHLIGHT">
+                                        <dvt:background>
+                                            <dvt:specialEffects/>
+                                        </dvt:background>
+                                        <dvt:graphPlotArea/>
+                                        <dvt:seriesSet>
+                                            <dvt:series/>
+                                        </dvt:seriesSet>
+                                        <dvt:o1Axis/>
+                                        <dvt:y1Axis/>
+                                        <dvt:legendArea automaticPlacement="AP_NEVER"/>
+                                        <dvt:legendTitle text="Status Transitions">
+                                            <dvt:graphFont id="graphFont1" size="15" bold="true"/>
+                                        </dvt:legendTitle>
+                                        <dvt:graphSubtitle text="30 Days"/>
+                                        <dvt:graphTitle text="Turn Time"/>
+                                        <dvt:o1Title text="Account"/>
+                                        <dvt:y1Title text="Days"/>
+                                    </dvt:comboGraph>
+                                </af:panelBox>
+                            </af:panelDashboard>
+                            <af:panelDashboard id="pd3" rowHeight="300px" columns="3" dimensionsFrom="auto"
+                                               rendered="false">
+                                <af:panelBox text="PanelBox1" id="pb6" showDisclosure="false" visible="false">
+                                    <f:facet name="toolbar"/>
+                                </af:panelBox>
+                                <af:panelBox text="PanelBox2" id="pb7" visible="false">
+                                    <f:facet name="toolbar"/>
+                                </af:panelBox>
+                                <af:panelBox text="PanelBox3" id="pb8" visible="false">
+                                    <f:facet name="toolbar"/>
+                                </af:panelBox>
+                            </af:panelDashboard>
+                        </af:showDetailItem>
+                        </af:panelTabbed>
+                </f:facet>
+                <f:facet name="LHS"/>
+                <f:attribute name="LHSSplitterCollapsed" value="true"/>
+                <f:attribute name="LHSSplitterDisabled" value="true"/>
+                <f:attribute name="LHSSplitterPosition" value="0"/>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

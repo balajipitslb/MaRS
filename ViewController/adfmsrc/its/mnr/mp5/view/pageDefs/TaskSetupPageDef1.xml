@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="TaskSetupPageDef1"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator Binds="MasterDataControlNested.MrltTaskView1" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="MrltTaskView1Iterator"/>
+    <iterator Binds="MasterDataControlNested.MrltTasklocationView2" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrltTasklocationView2Iterator"/>
+    <iterator Binds="MasterDataControlNested.MrltTaskdamageView2" DataControl="MNRDataControlDataControl"
+              RangeSize="20" id="MrltTaskdamageView2Iterator"/>
+    <iterator Binds="MasterDataControlNested.MrltTaskrepairView3" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrltTaskrepairView3Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="MrltTaskView1Iterator" id="Taskid">
+      <AttrNames>
+        <Item Value="Taskid"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MrltTaskView1Iterator" StaticList="false" Uses="ServiceGroups" id="Servicegroupid"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="MrltTaskView1Iterator" id="Task">
+      <AttrNames>
+        <Item Value="Task"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MrltTaskView1Iterator" StaticList="false" Uses="ComponentCodes" id="Taskcompcode"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <button IterBinding="MrltTaskView1Iterator" id="Billtype" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Billtype"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="B"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="MrltTaskView1Iterator" id="Taskactive" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Taskactive"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="MNRDataControlDataControl"/>
+    <tree IterBinding="MrltTaskdamageView2Iterator" id="MrltTaskdamageView2">
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrltTaskdamageView" Name="MrltTaskdamageView20">
+        <AttrNames>
+          <Item Value="Taskdamcode"/>
+          <Item Value="Taskdamdescription"/>
+          <Item Value="Taskdamdflt" Binds="Taskdamdflt"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MrltTaskdamageView2Iterator" id="CreateInsert1" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="MrltTaskdamageView2Iterator" id="Delete1" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <button IterBinding="MrltTaskdamageView2Iterator" id="Taskdamdflt" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Taskdamdflt"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="MrltTaskrepairView3Iterator" id="MrltTaskrepairView3">
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrltTaskrepairView" Name="MrltTaskrepairView30">
+        <AttrNames>
+          <Item Value="Taskrepcode"/>
+          <Item Value="Taskrepdescription"/>
+          <Item Value="Taskrepdflt" Binds="Taskrepdflt"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MrltTaskrepairView3Iterator" id="CreateInsert2" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="MrltTaskrepairView3Iterator" id="Delete2" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <button IterBinding="MrltTaskrepairView3Iterator" id="Taskrepdflt" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Taskrepdflt"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="MrltTasklocationView2Iterator" id="MrltTasklocationView2">
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrltTasklocationView" Name="MrltTasklocationView20">
+        <AttrNames>
+          <Item Value="Taskloccode"/>
+          <Item Value="Tasklocdescription"/>
+          <Item Value="Tasklocdflt" Binds="Tasklocdflt"/>
+          <Item Value="TaskLocCompCodeId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="MrltTasklocationView2Iterator" id="Tasklocdflt" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Tasklocdflt"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <action IterBinding="MrltTasklocationView2Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="MrltTasklocationView2Iterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <list IterBinding="MrltTaskView1Iterator" StaticList="false" Uses="LOV_Per" id="Per1" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject"/>
+  </bindings>
+</pageDefinition>

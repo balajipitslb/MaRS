@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltTaskrepairView"
+  Version="11.1.2.60.81"
+  SelectList="MrltTaskrepair.TASKREPAIRID, 
+       MrltTaskrepair.TASKDAMAGEID, 
+       MrltTaskrepair.TASKREPDESCRIPTION, 
+       MrltTaskrepair.TASKREPCODE, 
+       MrltTaskrepair.TASKREPDFLT"
+  FromList="MRLT_TASKREPAIR MrltTaskrepair"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchSize="25"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All">
+  <ViewAccessor
+    Name="RepairListByDamId1"
+    ViewObjectName="its.mnr.mp5.lov.RepairListByDamId"
+    FetchSize="25">
+    <ParameterMap>
+      <PIMap Variable="BINDRepListByDamId">
+        <TransientExpression><![CDATA[TaskRepDamCodeId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_Taskrepcode"
+    ListVOName="RepairListByDamId1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Taskrepcode"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TaskRepDamCodeId"/>
+      <Item Value="Taskrepdescription"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Repcode"/>
+      <Item Value="Damageid"/>
+      <Item Value="Repdescription"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Repcode"/>
+      <Item Value="Repdescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="MrltTaskrepair"
+    Entity="its.mnr.mp5.eo.master.MrltTaskrepair"/>
+  <ViewAttribute
+    Name="Taskrepairid"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Taskrepairid"
+    EntityUsage="MrltTaskrepair"
+    AliasName="TASKREPAIRID"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="Taskdamageid"
+    IsUnique="true"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Taskdamageid"
+    EntityUsage="MrltTaskrepair"
+    AliasName="TASKDAMAGEID"/>
+  <ViewAttribute
+    Name="Taskrepdescription"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Taskrepdescription"
+    EntityUsage="MrltTaskrepair"
+    AliasName="TASKREPDESCRIPTION"/>
+  <ViewAttribute
+    Name="Taskrepcode"
+    IsUnique="true"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Taskrepcode"
+    EntityUsage="MrltTaskrepair"
+    AliasName="TASKREPCODE"
+    LOVName="LOV_Taskrepcode">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Taskrepdflt"
+    PrecisionRule="true"
+    EntityAttrName="Taskrepdflt"
+    EntityUsage="MrltTaskrepair"
+    AliasName="TASKREPDFLT"/>
+  <ViewAttribute
+    Name="TaskRepDamCodeId"
+    PrecisionRule="true"
+    EntityAttrName="TaskRepDamCodeId"
+    EntityUsage="MrltTaskrepair"
+    AliasName="TASK_REP_DAM_CODE_ID"
+    IsQueriable="false"
+    IsPersistent="false"/>
+</ViewObject>

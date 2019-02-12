@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5taxratevalues"
+  Version="11.1.2.64.36"
+  DBObjectType="table"
+  DBObjectName="R5TAXRATEVALUES"
+  AliasName="R5taxratevalues"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="TxvRate"
+    IsNotNull="true"
+    Precision="6"
+    ColumnName="TXV_RATE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5TAXRATEVALUES"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="6"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TxvStart"
+    IsNotNull="true"
+    ColumnName="TXV_START"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5TAXRATEVALUES"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="TxvEnd"
+    IsNotNull="true"
+    ColumnName="TXV_END"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5TAXRATEVALUES"/>
+  <Attribute
+    Name="TxvPercent"
+    ColumnName="TXV_PERCENT"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="R5TAXRATEVALUES"/>
+  <AccessorAttribute
+    Name="R5taxrates"
+    Association="its.mnr.mp5.eo.assoc.R5fok1TxvAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1TxvAssoc.R5taxrates"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1TxvAssoc.R5taxratevalues"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="R5chk1Txv">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK1_TXV"/>
+      <Attr Name="_checkCondition" Value="TXV_START &lt;= TXV_END"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn01Txv">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN01_TXV"/>
+      <Attr Name="_checkCondition" Value="TXV_END IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5prikTxv"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_TXV"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5taxratevalues.TxvRate"/>
+      <Item Value="its.mnr.mp5.eo.local.R5taxratevalues.TxvStart"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Txv">
+    <DesignTime>
+      <Attr Name="_isCascadeDelete" Value="true"/>
+      <Attr Name="_referencedKey" Value="R5PRIK_TXR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_TXV"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5taxratevalues.TxvRate"/>
+    </AttrArray>
+  </Key>
+</Entity>

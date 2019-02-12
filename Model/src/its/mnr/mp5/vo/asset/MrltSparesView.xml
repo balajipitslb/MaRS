@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltSparesView"
+  Version="12.1.3.10.8"
+  SelectList="MrltSpares.ORG, 
+       MrltSpares.ITEM, 
+       MrltSpares.PARTNUM, 
+       MrltSpares.PARTORG, 
+       MrltSpares.SPARELABEL"
+  FromList="MRLT_SPARES MrltSpares"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_diagramName" Value="Part"/>
+  </DesignTime>
+  <Variable
+    Name="Bind_AssetCd"
+    Kind="viewcriteria"
+    Type="java.lang.String">
+    <TransientExpression
+      Name="expression"><![CDATA[adf.object.applicationModule.findViewObject("MrltAssetView").currentRow.Assetcd]]></TransientExpression>
+  </Variable>
+  <ViewAccessor
+    Name="PartsMaintViewSpare"
+    ViewObjectName="its.mnr.mp5.vo.parts.PartsMaintView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="PartSearch"
+      FullName="its.mnr.mp5.vo.parts.PartsMaintView.PartSearch"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="MrltLabelsViewSpare"
+    ViewObjectName="its.mnr.mp5.vo.admin.MrltLabelsView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="MrltLabelsViewCriteriaByType"
+      FullName="its.mnr.mp5.vo.admin.MrltLabelsView.MrltLabelsViewCriteriaByType"/>
+    <ParameterMap>
+      <PIMap Variable="BLABELTYPE">
+        <TransientExpression><![CDATA['ASSETSPARE']]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="BLABELORG">
+        <TransientExpression><![CDATA[Org]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="BLABELITEM">
+        <TransientExpression><![CDATA[tAssetClass]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_Partnum"
+    ListVOName="PartsMaintViewSpare"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0"
+    ComboRowCountHint="10">
+    <AttrArray Name="AttrNames">
+      <Item Value="Partnum"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Partorg"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ParCode"/>
+      <Item Value="ParOrg"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ParCode"/>
+      <Item Value="ParDesc"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="PartSearch"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Sparelabel"
+    ListVOName="MrltLabelsViewSpare"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Sparelabel"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Labelid"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Labelvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="MrltSpares"
+    Entity="its.mnr.mp5.eo.local.MrltSpares"/>
+  <ViewAttribute
+    Name="Org"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Org"
+    EntityUsage="MrltSpares"
+    AliasName="ORG"/>
+  <ViewAttribute
+    Name="Item"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Item"
+    EntityUsage="MrltSpares"
+    AliasName="ITEM"/>
+  <ViewAttribute
+    Name="Partnum"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Partnum"
+    EntityUsage="MrltSpares"
+    AliasName="PARTNUM"
+    LOVName="LOV_Partnum">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="Part"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Partorg"
+    PrecisionRule="true"
+    EntityAttrName="Partorg"
+    EntityUsage="MrltSpares"
+    AliasName="PARTORG"/>
+  <ViewAttribute
+    Name="Sparelabel"
+    PrecisionRule="true"
+    EntityAttrName="Sparelabel"
+    EntityUsage="MrltSpares"
+    AliasName="SPARELABEL"
+    LOVName="LOV_Sparelabel">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.asset.MrltSparesView.Sparelabel_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tAssetClass"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    EntityAttrName="tAssetClass"
+    EntityUsage="MrltSpares"
+    AliasName="T_ASSET_CLASS"/>
+  <ViewAttribute
+    Name="tLabelDesc"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    EntityAttrName="tLabelDesc"
+    EntityUsage="MrltSpares"
+    AliasName="T_LABEL_DESC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.asset.MrltSparesView.tLabelDesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="MrltSparesViewByType"
+    ViewObjectName="its.mnr.mp5.vo.asset.MrltSparesView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="Never"/>
+        <Property
+          Name="displayName"
+          ResId="displayName"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="false"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="MrltSparesViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="MrltSparesViewByType_MrltSparesViewCriteria_row_0_Item"
+        ViewAttribute="Item"
+        Operator="="
+        Conjunction="AND"
+        Value=":Bind_AssetCd"
+        IsBindVarValue="true"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="renderedMode"
+              Value="Never"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="Sparelabel"
+        ViewAttribute="Sparelabel"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="PartsMaintView"
+    ViewLink="its.mnr.mp5.vo.link.SparesPartsLink"
+    Type="oracle.jbo.Row"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="MrltAssetView"
+    ViewLink="its.mnr.mp5.vo.link.AssetSparesLink"
+    Type="oracle.jbo.Row"
+    Reversed="true"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

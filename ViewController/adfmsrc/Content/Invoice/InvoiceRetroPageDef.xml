@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="InvoiceRetroPageDef"
+                Package="Content.Invoice">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="INVDataControl.InvoiceRetroCriteria" DataControl="MNRDataControlDataControl" RangeSize="200"
+              id="InvoiceRetroCriteriaIterator"/>
+    <iterator Binds="INVDataControl.InvoiceRetroResults" DataControl="MNRDataControlDataControl" RangeSize="5000"
+              id="InvoiceRetroResultsIterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="InvoiceRetroCriteriaIterator" StaticList="false" Uses="LOV_AccountNum" id="AccountNum"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="InvoiceRetroCriteriaIterator" id="StartDt">
+      <AttrNames>
+        <Item Value="StartDt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="InvoiceRetroCriteriaIterator" id="EndDt">
+      <AttrNames>
+        <Item Value="EndDt"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="executeInvoiceRetroSearch" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="executeInvoiceRetroSearch" IsViewObjectMethod="false"
+                  DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.executeInvoiceRetroSearch_MNRDataControlDataControl_dataProvider_INVDataControl_executeInvoiceRetroSearch_result"/>
+    <methodAction id="initInvoiceRetro" RequiresUpdateModel="true" Action="invokeMethod" MethodName="initInvoiceRetro"
+                  IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.initInvoiceRetro_MNRDataControlDataControl_dataProvider_INVDataControl_initInvoiceRetro_result"/>
+    <tree IterBinding="InvoiceRetroResultsIterator" id="InvoiceRetroResults">
+      <nodeDefinition DefName="its.mnr.mp5.vo.invoice.InvoiceRetroResults" Name="InvoiceRetroResults0">
+        <AttrNames>
+          <Item Value="Invnum"/>
+          <Item Value="Invdt"/>
+          <Item Value="Wo"/>
+          <Item Value="Act"/>
+          <Item Value="Startdt"/>
+          <Item Value="Activever"/>
+          <Item Value="Rtrover"/>
+          <Item Value="Contractver"/>
+          <Item Value="Oldratetype"/>
+          <Item Value="Rtroratetype"/>
+          <Item Value="Newratetype"/>
+          <Item Value="Oldrate"/>
+          <Item Value="Rtrorate"/>
+          <Item Value="Newrate"/>
+          <Item Value="CreditDebit"/>
+          <Item Value="Shift"/>
+          <Item Value="Hrs"/>
+          <Item Value="ItsCompcode"/>
+          <Item Value="ItsLoccode"/>
+          <Item Value="ItsLocdesc"/>
+          <Item Value="ItsDamcode"/>
+          <Item Value="ItsDamdesc"/>
+          <Item Value="ItsRepcode"/>
+          <Item Value="ItsRepdesc"/>
+          <Item Value="ItsTaskdesc"/>
+          <Item Value="Equipcharge"/>
+          <Item Value="CreditDebitSum"/>
+          <Item Value="Completedt"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="InvoiceRetroResultsIterator" id="CreditDebitSum">
+      <AttrNames>
+        <Item Value="CreditDebitSum"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"
+            InstanceName="MNRDataControlDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+    <methodAction IterBinding="InvoiceRetroResultsIterator" id="createInvoiceHeader"
+                  InstanceName="bindings.InvoiceRetroResultsIterator.currentRow" DataControl="MNRDataControlDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="createInvoiceHeader"
+                  IsViewObjectMethod="false" IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.createInvoiceHeader_createInvoiceHeader_createInvoiceHeader_result"/>
+    <methodAction IterBinding="InvoiceRetroResultsIterator" id="getInvoiceNum"
+                  InstanceName="bindings.InvoiceRetroResultsIterator.currentRow" DataControl="MNRDataControlDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="getInvoiceNum" IsViewObjectMethod="false"
+                  IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.getInvoiceNum_getInvoiceNum_getInvoiceNum_result">
+      <NamedData NDName="pHeaderId" NDType="oracle.jbo.domain.Number"/>
+    </methodAction>
+    <methodAction IterBinding="InvoiceRetroResultsIterator" id="createInvoiceRtroItem"
+                  InstanceName="bindings.InvoiceRetroResultsIterator.currentRow" DataControl="MNRDataControlDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="createInvoiceRtroItem"
+                  IsViewObjectMethod="false" IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.createInvoiceRtroItem_createInvoiceRtroItem_createInvoiceRtroItem_result">
+      <NamedData NDName="pHeaderId" NDType="oracle.jbo.domain.Number"/>
+      <NamedData NDName="pInvoice" NDType="oracle.jbo.domain.Number"/>
+      <NamedData NDName="pWO" NDType="java.lang.String"/>
+      <NamedData NDName="pAct" NDType="oracle.jbo.domain.Number"/>
+      <NamedData NDName="pOldVer" NDType="java.lang.String"/>
+      <NamedData NDName="pNewVer" NDType="java.lang.String"/>
+      <NamedData NDName="pOldARTaskId" NDType="java.lang.String"/>
+      <NamedData NDName="pNewARTaskId" NDType="java.lang.String"/>
+      <NamedData NDName="pOldRate" NDType="java.lang.Double"/>
+      <NamedData NDName="pNewRate" NDType="java.lang.Double"/>
+      <NamedData NDName="pShift" NDType="java.lang.String"/>
+      <NamedData NDName="pHrs" NDType="java.lang.Double"/>
+      <NamedData NDName="pOldRateType" NDType="java.lang.String"/>
+      <NamedData NDName="pNewRateType" NDType="java.lang.String"/>
+      <NamedData NDName="pEquip" NDType="java.lang.String"/>
+      <NamedData NDName="pTask" NDType="java.lang.String"/>
+      <NamedData NDName="pCompCd" NDType="java.lang.String"/>
+      <NamedData NDName="pDamCd" NDType="java.lang.String"/>
+      <NamedData NDName="pDamDesc" NDType="java.lang.String"/>
+      <NamedData NDName="pLocCd" NDType="java.lang.String"/>
+      <NamedData NDName="pLocDesc" NDType="java.lang.String"/>
+      <NamedData NDName="pRepCd" NDType="java.lang.String"/>
+      <NamedData NDName="pRepDesc" NDType="java.lang.String"/>
+      <NamedData NDName="pHdrCode" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

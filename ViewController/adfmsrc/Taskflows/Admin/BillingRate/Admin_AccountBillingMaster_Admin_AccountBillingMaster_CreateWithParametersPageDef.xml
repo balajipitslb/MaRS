@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81"
+                id="Admin_AccountBillingMaster_Admin_AccountBillingMaster_CreateWithParametersPageDef"
+                Package="Taskflows.Admin.BillingRate" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="BillingRatesDataControlNested.AccountRateTaskView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="AccountRateTaskViewIterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="AccountRateTaskViewIterator" id="CreateWithParams" RequiresUpdateModel="true"
+            Action="createWithParams">
+      <NamedData NDName="AcctRateTskSGIdBind" NDValue="#{pageFlowScope.psfSGrpId}" NDType="java.lang.String"/>
+      <NamedData NDType="java.lang.String" NDValue="#{pageFlowScope.psfSGrpId}" NDName="Servicegroupid"/>
+      <NamedData NDValue="#{pageFlowScope.psfBillType}" NDName="TaskBillTypeBind" NDType="java.lang.String"/>
+      <NamedData NDValue="#{pageFlowScope.psfBillType}" NDName="AccountRateTaskBillType" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

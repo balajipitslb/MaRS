@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5lots"
+  Version="11.1.2.60.81"
+  DBObjectType="TABLE"
+  DBObjectName="MP5PRD.R5LOTS"
+  AliasName="R5lots"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="LotCode"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="LOT_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5LOTS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5lots.LotCode_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="LotDesc"
+    IsNotNull="true"
+    Precision="45"
+    ColumnName="LOT_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5LOTS"
+    DefaultValue="-">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LotOrg"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="LOT_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5LOTS"
+    DefaultValue="1">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5binstock"
+    Association="its.mnr.mp5.eo.assoc.R5fok3BisAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok3BisAssoc.R5binstock"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok3BisAssoc.R5lots"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5objects"
+    Association="its.mnr.mp5.eo.assoc.R5fokeObjAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fokeObjAssoc.R5objects"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fokeObjAssoc.R5lots"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="R5prikLot"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_LOT"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5lots.LotCode"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Lot">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_ORG"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_LOT"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5lots.LotOrg"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

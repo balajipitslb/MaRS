@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Admin-AccountBillingMasterAddRateVersion">
+    <template-reference>
+      <document>/WEB-INF/error-handler-flow.xml</document>
+      <id>error-handler-flow</id>
+    </template-reference>
+    <default-activity>Create</default-activity>
+    <transaction>
+      <requires-transaction/>
+    </transaction>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <view id="TaskRateVersionAdd">
+      <page>/Content/Admin/TaskRateVersionAdd.jspx</page>
+    </view>
+    <method-call id="CreateNewAccountRateVersion">
+      <method>#{bindings.CreateNewAccountRateVersion.execute}</method>
+      <return-value>#{pageFlowScope.Return}</return-value>
+      <outcome>
+        <fixed-outcome>Executed</fixed-outcome>
+      </outcome>
+    </method-call>
+    <router id="SuccessFail">
+      <case id="__5">
+        <expression>#{pageFlowScope.Return != 'SUCCESS'}</expression>
+        <outcome>Fail</outcome>
+      </case>
+      <case id="__9">
+        <expression>#{pageFlowScope.Return == 'SUCCESS'}</expression>
+        <outcome>Success</outcome>
+      </case>
+      <default-outcome>Fail</default-outcome>
+    </router>
+    <view id="TaskRateVersionFailMsg">
+      <page>/Content/Admin/TaskRateVersionFailMsg.jspx</page>
+    </view>
+    <view id="TaskRateVersionSuccessMsg">
+      <page>/Content/Admin/TaskRateVersionSuccessMsg.jspx</page>
+    </view>
+    <task-flow-return id="Cancel">
+      <outcome>
+        <name>Cancel</name>
+        <rollback/>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="OkayExit">
+      <outcome>
+        <name>OkayExit</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <method-call id="Create">
+      <method>#{bindings.Create.execute}</method>
+      <outcome>
+        <fixed-outcome>Create</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>TaskRateVersionAdd</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>Apply</from-outcome>
+        <to-activity-id>CreateNewAccountRateVersion</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>CreateNewAccountRateVersion</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>Executed</from-outcome>
+        <to-activity-id>SuccessFail</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>SuccessFail</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>Fail</from-outcome>
+        <to-activity-id>TaskRateVersionFailMsg</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>Success</from-outcome>
+        <to-activity-id>TaskRateVersionSuccessMsg</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__32">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__33">
+        <from-outcome>OkayExit</from-outcome>
+        <to-activity-id>OkayExit</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__13">
+        <from-outcome>CancelExit</from-outcome>
+        <to-activity-id>Cancel</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id>Create</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome>Create</from-outcome>
+        <to-activity-id>TaskRateVersionAdd</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

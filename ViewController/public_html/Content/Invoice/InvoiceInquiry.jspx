@@ -1,0 +1,499 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.Content.Invoice.InvoiceInquiryBundle']}"/>
+    <af:document title="Invoice Inquiry" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelHeader text=" " id="ph1">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t1"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px; background-color:White;">
+                                <af:menuBar id="mb1">
+                                    <af:menu text="Actions" id="m2">
+                                        <af:commandMenuItem text="Issue Invoice(s)" id="cmi1"
+                                                            actionListener="#{invoiceInquiryBean.invoice_action}"
+                                                            partialSubmit="false" icon="#{resource['images:issue.png']}"
+                                                            disabled="#{!securityContext.userGrantedResource['resourceName=InvoiceInquiryIssueAction;resourceType=UIControl;action=enabled']}">
+                                            <f:attribute name="invAction" value="ISSUE"/>
+                                        </af:commandMenuItem>
+                                        <af:commandMenuItem text="Cancel Invoice(s)" id="cmi2"
+                                                            actionListener="#{invoiceInquiryBean.invoice_action}"
+                                                            partialSubmit="false"
+                                                            icon="#{resource['images:cancelinv.png']}"
+                                                            disabled="#{!securityContext.userGrantedResource['resourceName=InvoiceInquiryCancelAction;resourceType=UIControl;action=enabled']}">
+                                            <f:attribute name="invAction" value="CANCEL"/>
+                                        </af:commandMenuItem>
+                                    </af:menu>
+                                </af:menuBar>
+                                <af:button actionListener="#{bindings.Rollback.execute}"
+                                           text="#{viewcontrollerBundle.CANCEL}"
+                                           disabled="#{!bindings.Rollback.enabled}" immediate="true" id="ctb2"
+                                           icon="#{resource['images:commit.png']}" rendered="false">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:spacer width="10" height="10" id="s1"/>
+                                <af:button id="ctb1" icon="#{resource['images:terminate.png']}"
+                                           actionListener="#{ModuleNavBean.goExit}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:panelGroupLayout layout="vertical" id="pgl1">
+                            <af:query id="qryId1" headerText="Search Invoices"
+                                      value="#{bindings.InvoiceInquiryCriteriaQuery.queryDescriptor}"
+                                      model="#{bindings.InvoiceInquiryCriteriaQuery.queryModel}"
+                                      queryListener="#{bindings.InvoiceInquiryCriteriaQuery.processQuery}"
+                                      queryOperationListener="#{bindings.InvoiceInquiryCriteriaQuery.processQueryOperation}"
+                                      resultComponentId="::pc1:resId1" modeChangeVisible="false"
+                                      inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:10px 5px 5px; padding:10px 5px 5px;"
+                                      disclosed="true"/>
+                            <af:panelCollection id="pc1"
+                                                inlineStyle="background-color:White; margin:5px; width:inherit;"
+                                                defaultToolbarItemDisplay="icon">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t4">
+                                        <af:link text="Select" id="cl1" inlineStyle="color:Red; font-weight:bold;">
+                                            <af:showPopupBehavior popupId=":::pHelp" triggerType="mouseHover"/>
+                                        </af:link>
+                                        <af:outputLabel value="Invoice(s) and choose Action from the menu." id="ol1"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.MrltInvoiceheaderView.collectionModel}" var="row"
+                                          rows="#{bindings.MrltInvoiceheaderView.rangeSize}"
+                                          emptyText="#{bindings.MrltInvoiceheaderView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.MrltInvoiceheaderView.rangeSize}" rowBandingInterval="0"
+                                          selectionListener="#{bindings.MrltInvoiceheaderView.collectionModel.makeCurrent}"
+                                          rowSelection="multiple" id="resId1"
+                                          binding="#{invoiceInquiryBean.invoiceTable}" columnStretching="last">
+                                    <af:column sortProperty="#{bindings.MrltInvoiceheaderView.hints.Invnum.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltInvoiceheaderView.hints.Invnum.label}"
+                                               id="resId1c1" width="70" align="left" displayIndex="-1">
+                                        <af:outputText value="#{row.Invnum}" id="ot1">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.MrltInvoiceheaderView.hints.Invnum.format}"/>
+                                            <f:facet name="context">
+                                                <af:contextInfo id="ci1"
+                                                                contextInfoListener="#{invoiceInquiryBean.contextInfoListener}"/>
+                                            </f:facet>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltInvoiceheaderView.hints.Labor.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltInvoiceheaderView.hints.Labor.label}"
+                                               id="resId1c2" width="60" align="right">
+                                        <af:outputText value="#{row.Labor}" id="ot2">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.MrltInvoiceheaderView.hints.Labor.format}"
+                                                              type="currency" minFractionDigits="3"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltInvoiceheaderView.hints.Part.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltInvoiceheaderView.hints.Part.label}"
+                                               id="resId1c3" width="60" align="right">
+                                        <af:outputText value="#{row.Part}" id="ot3">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.MrltInvoiceheaderView.hints.Part.format}"
+                                                              type="currency" minFractionDigits="3"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltInvoiceheaderView.hints.Tax.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltInvoiceheaderView.hints.Tax.label}"
+                                               id="resId1c4" width="60" align="right">
+                                        <af:outputText value="#{row.Tax}" id="ot4">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.MrltInvoiceheaderView.hints.Tax.format}"
+                                                              type="currency" minFractionDigits="3"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltInvoiceheaderView.hints.Total.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltInvoiceheaderView.hints.Total.label}"
+                                               id="resId1c5" width="60" align="right">
+                                        <af:outputText value="#{row.Total}" id="ot5">
+                                            <af:convertNumber pattern="#{bindings.MrltInvoiceheaderView.hints.Total.format}"
+                                                              type="currency" minFractionDigits="3"
+                                                              groupingUsed="false"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltInvoiceheaderView.hints.Invdt.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltInvoiceheaderView.hints.Invdt.label}"
+                                               id="resId1c6" width="75" align="center">
+                                        <af:outputText value="#{row.Invdt}" id="ot6">
+                                            <af:convertDateTime pattern="#{bindings.MrltInvoiceheaderView.hints.Invdt.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltInvoiceheaderView.hints.Status.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltInvoiceheaderView.hints.Status.label}"
+                                               id="resId1c7" width="50" align="center"
+                                               inlineStyle="#{(row.Status == 'READY')?&quot;background-color: #d5ccb2&quot;:&quot;&quot;};">
+                                        <af:selectOneChoice value="#{row.bindings.Status.inputValue}"
+                                                            label="#{row.bindings.Status.label}"
+                                                            required="#{bindings.MrltInvoiceheaderView.hints.Status.mandatory}"
+                                                            shortDesc="#{bindings.MrltInvoiceheaderView.hints.Status.tooltip}"
+                                                            readOnly="true" id="soc1">
+                                            <f:selectItems value="#{row.bindings.Status.items}" id="si1"/>
+                                        </af:selectOneChoice>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltInvoiceheaderView.hints.Acctnum.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltInvoiceheaderView.hints.Acctnum.label}"
+                                               id="resId1c8" width="55" align="center">
+                                        <af:outputText value="#{row.Acctnum}" id="ot7"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltInvoiceheaderView.hints.Type.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltInvoiceheaderView.hints.Type.label}"
+                                               id="resId1c9" width="40" align="center">
+                                        <af:outputText value="#{row.Type}" id="ot8"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltInvoiceheaderView.hints.Int1.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltInvoiceheaderView.hints.Int1.label}"
+                                               id="resId1c10" width="70" align="center">
+                                        <af:selectOneChoice value="#{row.bindings.Int1.inputValue}"
+                                                            label="#{row.bindings.Int1.label}"
+                                                            required="#{bindings.MrltInvoiceheaderView.hints.Int1.mandatory}"
+                                                            shortDesc="#{bindings.MrltInvoiceheaderView.hints.Int1.tooltip}"
+                                                            readOnly="true" id="soc2">
+                                            <f:selectItems value="#{row.bindings.Int1.items}" id="si2"/>
+                                        </af:selectOneChoice>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.MrltInvoiceheaderView.hints.Ref.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.MrltInvoiceheaderView.hints.Ref.label}"
+                                               id="resId1c12" width="55">
+                                        <af:outputText value="#{row.Ref}" id="ot10">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.MrltInvoiceheaderView.hints.Ref.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                        </af:panelGroupLayout>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+            <af:popup childCreation="deferred" id="pDetailSTD" contentDelivery="immediate"
+                      binding="#{invoiceInquiryBean.pdtlStd}">
+                <af:dialog id="d2"
+                           title="#{bindings.Type == 'STD'? 'Standard' : 'Estimate'} Invoice Details for ##{bindings.Invnum}"
+                           contentHeight="250" contentWidth="700" type="ok" closeIconVisible="false">
+                    <f:facet name="buttonBar"/>
+                    <af:table value="#{bindings.MrltInvoiceitemView.collectionModel}" var="row"
+                              rows="#{bindings.MrltInvoiceitemView.rangeSize}"
+                              emptyText="#{bindings.MrltInvoiceitemView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.MrltInvoiceitemView.rangeSize}" rowBandingInterval="1" id="t2"
+                              columnStretching="last" inlineStyle="height:inherit; width:inherit;"
+                              rowSelection="single">
+                        <af:column sortProperty="#{bindings.MrltInvoiceitemView.hints.Wo.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoiceitemView.hints.Wo.label}" id="c1" width="55">
+                            <af:outputText value="#{row.Wo}" id="ot11"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoiceitemView.hints.Equip.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoiceitemView.hints.Equip.label}" id="c2" width="80">
+                            <af:outputText value="#{row.Equip}" id="ot12"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoiceitemView.hints.WorkOrder.EvtWOType.name}"
+                                   sortable="false" headerText="Type" id="c3" width="55" align="center">
+                            <af:outputText value="#{row.WorkOrder.bindings.EvtWOType.inputValue}" id="ot13"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoiceitemView.hints.Startdt.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoiceitemView.hints.Startdt.label}" id="c4" width="55">
+                            <af:outputText value="#{row.Startdt}" id="ot14"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoiceitemView.hints.Completedt.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoiceitemView.hints.Completedt.label}" id="c5"
+                                   width="55">
+                            <af:outputText value="#{row.Completedt}" id="ot15">
+                                <af:convertDateTime pattern="#{bindings.MrltInvoiceitemView.hints.Completedt.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoiceitemView.hints.TotalHrs.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoiceitemView.hints.TotalHrs.label}" id="c10" width="55"
+                                   align="right">
+                            <af:outputText value="#{row.TotalHrs}" id="ot20"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoiceitemView.hints.Labor.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoiceitemView.hints.Labor.label}" id="c6" width="55"
+                                   align="right">
+                            <af:outputText value="#{row.Labor}" id="ot16">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.MrltInvoiceitemView.hints.Labor.format}"
+                                                  type="currency" minFractionDigits="3" maxFractionDigits="3"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoiceitemView.hints.Part.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoiceitemView.hints.Part.label}" id="c7" width="55"
+                                   align="right">
+                            <af:outputText value="#{row.Part}" id="ot17">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.MrltInvoiceitemView.hints.Part.format}"
+                                                  type="currency" minFractionDigits="3" maxFractionDigits="3"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoiceitemView.hints.Tax.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoiceitemView.hints.Tax.label}" id="c8" width="56"
+                                   align="right">
+                            <af:outputText value="#{row.Tax}" id="ot18">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.MrltInvoiceitemView.hints.Tax.format}"
+                                                  type="currency" minFractionDigits="3" maxFractionDigits="3"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoiceitemView.hints.Total.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoiceitemView.hints.Total.label}" id="c9" width="54"
+                                   align="right">
+                            <af:outputText value="#{row.Total}" id="ot19">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.MrltInvoiceitemView.hints.Total.format}"
+                                                  type="currency" minFractionDigits="3" maxFractionDigits="3"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoiceitemView.hints.WorkOrder.ItsNote.name}"
+                                   sortable="false" headerText="Note" id="c11" width="56">
+                            <af:outputText value="#{row.WorkOrder.bindings.ItsNote.inputValue}" id="ot21"/>
+                        </af:column>
+                    </af:table>
+                </af:dialog>
+            </af:popup>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="pHelp">
+                <af:noteWindow id="nw1" inlineStyle="width:400px;" autoDismissalTimeout="15">
+                    <p>
+                        <u>Range Selection</u>: Hold 
+                        <strong>Shift</strong>
+                         key + click on first Invoice, then click on last Invoice. 
+                        <br/><u>Single Selection</u>:  Hold 
+                        <strong>Ctrl</strong>
+                         + click on Invoice.
+                    </p>
+                </af:noteWindow>
+            </af:popup>
+            <af:popup childCreation="deferred" autoCancel="enabled" id="pDetailCR" contentDelivery="immediate"
+                      binding="#{invoiceInquiryBean.pdtlCr}">
+                <af:dialog id="d3" type="ok" title="Credit Invoice Details for ##{bindings.Invnum.inputValue}"
+                           closeIconVisible="false" contentWidth="540" contentHeight="200">
+                    <f:facet name="buttonBar"/>
+                    <af:table value="#{bindings.MrltInvoicecritemView.collectionModel}" var="row"
+                              rows="#{bindings.MrltInvoicecritemView.rangeSize}"
+                              emptyText="#{bindings.MrltInvoicecritemView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.MrltInvoicecritemView.rangeSize}" rowBandingInterval="1" id="t3"
+                              inlineStyle="height:inherit; width:inherit;" columnStretching="last">
+                        <af:column sortProperty="#{bindings.MrltInvoicecritemView.hints.Wo.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoicecritemView.hints.Wo.label}" id="c12" width="50"
+                                   align="center">
+                            <af:outputText value="#{row.Wo}" id="ot9"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicecritemView.hints.Labor.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoicecritemView.hints.Labor.label}" id="c13" width="50"
+                                   align="right">
+                            <af:outputText value="#{row.Labor}" id="ot22">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.MrltInvoicecritemView.hints.Labor.format}"
+                                                  minFractionDigits="3" maxFractionDigits="3" type="currency"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicecritemView.hints.Part.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoicecritemView.hints.Part.label}" id="c14" width="50"
+                                   align="right">
+                            <af:outputText value="#{row.Part}" id="ot23">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.MrltInvoicecritemView.hints.Part.format}"
+                                                  minFractionDigits="3" maxFractionDigits="3" type="currency"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicecritemView.hints.Tax.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoicecritemView.hints.Tax.label}" id="c15" width="50"
+                                   align="right">
+                            <af:outputText value="#{row.Tax}" id="ot24">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.MrltInvoicecritemView.hints.Tax.format}"
+                                                  minFractionDigits="3" maxFractionDigits="3" type="currency"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicecritemView.hints.Taxper.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoicecritemView.hints.Taxper.label}" id="c16" width="40"
+                                   align="right">
+                            <af:outputText value="#{row.Taxper}" id="ot25">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.MrltInvoicecritemView.hints.Taxper.format}"
+                                                  minFractionDigits="3" maxFractionDigits="3"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicecritemView.hints.Laborcr.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoicecritemView.hints.Laborcr.label}" id="c17"
+                                   width="60" align="right">
+                            <af:outputText value="#{row.Laborcr}" id="ot26">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.MrltInvoicecritemView.hints.Laborcr.format}"
+                                                  minFractionDigits="3" maxFractionDigits="3" type="currency"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicecritemView.hints.Partcr.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoicecritemView.hints.Partcr.label}" id="c18" width="60"
+                                   align="right">
+                            <af:outputText value="#{row.Partcr}" id="ot27">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.MrltInvoicecritemView.hints.Partcr.format}"
+                                                  minFractionDigits="3" maxFractionDigits="3" type="currency"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column headerText="#{bindings.MrltInvoicecritemView.hints.Taxcr.label}" id="c39" width="60"
+                                   align="right">
+                            <af:outputText value="#{row.Taxcr}" id="ot31">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.MrltInvoicecritemView.hints.Taxcr.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicecritemView.hints.Totalcr.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoicecritemView.hints.Totalcr.label}" id="c19"
+                                   width="60" align="right">
+                            <af:outputText value="#{row.Totalcr}" id="ot28">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.MrltInvoicecritemView.hints.Totalcr.format}"
+                                                  minFractionDigits="3" maxFractionDigits="3" type="currency"/>
+                            </af:outputText>
+                        </af:column>
+                    </af:table>
+                </af:dialog>
+            </af:popup>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="pDetailRTRO" contentDelivery="immediate"
+                      binding="#{invoiceInquiryBean.pdtlRtro}">
+                <af:dialog id="d4" type="ok" title="Retroactive Invoice Details for ##{bindings.Invnum.inputValue}"
+                           closeIconVisible="false">
+                    <f:facet name="buttonBar"/>
+                    <af:table value="#{bindings.MrltInvoicertroitemView.collectionModel}" var="row"
+                              rows="#{bindings.MrltInvoicertroitemView.rangeSize}"
+                              emptyText="#{bindings.MrltInvoicertroitemView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              fetchSize="#{bindings.MrltInvoicertroitemView.rangeSize}" rowBandingInterval="1" id="t5"
+                              inlineStyle="height:300px; width:600px;" rowSelection="single">
+                        <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Invoice.name}"
+                                   sortable="false" headerText="#{bindings.MrltInvoicertroitemView.hints.Invoice.label}"
+                                   id="c20" width="55">
+                            <af:outputText value="#{row.Invoice}" id="ot29">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.MrltInvoicertroitemView.hints.Invoice.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Wo.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoicertroitemView.hints.Wo.label}" id="c21" width="55">
+                            <af:outputText value="#{row.Wo}##{row.Act}" id="ot30"/>
+                        </af:column>
+                        <af:column id="c22" headerText="Rate Version" align="center" width="110">
+                            <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Oldver.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltInvoicertroitemView.hints.Oldver.label}" id="c23"
+                                       width="50" align="center">
+                                <af:outputText value="#{row.Oldver}" id="ot32"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Newver.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltInvoicertroitemView.hints.Newver.label}" id="c24"
+                                       width="50" align="center">
+                                <af:outputText value="#{row.Newver}" id="ot33"/>
+                            </af:column>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Lbrhrs.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoicertroitemView.hints.Lbrhrs.label}" id="c25"
+                                   width="30" align="center">
+                            <af:outputText value="#{row.Lbrhrs}" id="ot34">
+                                <af:convertNumber groupingUsed="false"
+                                                  pattern="#{bindings.MrltInvoicertroitemView.hints.Lbrhrs.format}"/>
+                            </af:outputText>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Shift.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoicertroitemView.hints.Shift.label}" id="c26"
+                                   width="30" align="center">
+                            <af:outputText value="#{row.Shift}" id="ot35"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Equipcharge.name}"
+                                   sortable="false"
+                                   headerText="#{bindings.MrltInvoicertroitemView.hints.Equipcharge.label}" id="c27"
+                                   width="40" align="center">
+                            <af:outputText value="#{row.Equipcharge}" id="ot36"/>
+                        </af:column>
+                        <af:column id="c37" headerText="Rate Type" align="center" width="110">
+                            <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Oldratetype.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltInvoicertroitemView.hints.Oldratetype.label}" id="c28"
+                                       width="50" align="center">
+                                <af:outputText value="#{row.Oldratetype}" id="ot37"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Newratetype.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltInvoicertroitemView.hints.Newratetype.label}" id="c29"
+                                       width="50" align="center">
+                                <af:outputText value="#{row.Newratetype}" id="ot38"/>
+                            </af:column>
+                        </af:column>
+                        <af:column id="c38" headerText="Rates" align="center" width="165">
+                            <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Oldrate.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltInvoicertroitemView.hints.Oldrate.label}" id="c30"
+                                       width="50" align="right">
+                                <af:outputText value="#{row.Oldrate}" id="ot39">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.MrltInvoicertroitemView.hints.Oldrate.format}"
+                                                      type="currency" minFractionDigits="3" maxFractionDigits="3"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Newrate.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltInvoicertroitemView.hints.Newrate.label}" id="c31"
+                                       width="50" align="right">
+                                <af:outputText value="#{row.Newrate}" id="ot40">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.MrltInvoicertroitemView.hints.Newrate.format}"
+                                                      type="currency" minFractionDigits="3" maxFractionDigits="3"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.CreditDebit.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltInvoicertroitemView.hints.CreditDebit.label}" id="c36"
+                                       width="50" align="right">
+                                <af:outputText value="#{row.CreditDebit}" id="ot45">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.MrltInvoicertroitemView.hints.CreditDebit.format}"
+                                                      type="currency" minFractionDigits="3" maxFractionDigits="3"/>
+                                </af:outputText>
+                            </af:column>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Task.name}" sortable="false"
+                                   headerText="#{bindings.MrltInvoicertroitemView.hints.Task.label}" id="c32"
+                                   width="105">
+                            <af:outputText value="#{row.Task}" id="ot41"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Locdesc.name}"
+                                   sortable="false" headerText="#{bindings.MrltInvoicertroitemView.hints.Locdesc.label}"
+                                   id="c33" width="75">
+                            <af:outputText value="#{row.Locdesc}" id="ot42"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Damdesc.name}"
+                                   sortable="false" headerText="#{bindings.MrltInvoicertroitemView.hints.Damdesc.label}"
+                                   id="c34" width="75">
+                            <af:outputText value="#{row.Damdesc}" id="ot43"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.MrltInvoicertroitemView.hints.Reppdesc.name}"
+                                   sortable="false"
+                                   headerText="#{bindings.MrltInvoicertroitemView.hints.Reppdesc.label}" id="c35"
+                                   width="75">
+                            <af:outputText value="#{row.Reppdesc}" id="ot44"/>
+                        </af:column>
+                    </af:table>
+                </af:dialog>
+            </af:popup>
+        </af:form>
+    </af:document>
+</f:view>

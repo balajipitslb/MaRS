@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AssetCommentsView"
+  Version="11.1.2.60.81"
+  SelectList="MrltComments.COMMCREATED, 
+       MrltComments.COMMCREATEDBY, 
+       MrltComments.COMMITEM, 
+       MrltComments.COMMLINE, 
+       MrltComments.COMMTEXT, 
+       MrltComments.COMMTYPE, 
+       MrltComments.COMMUPD, 
+       MrltComments.COMMUPDBY, 
+       MrltComments.ORG"
+  FromList="MRLT_COMMENTS MrltComments"
+  Where="COMMTYPE='ASSET'"
+  OrderBy="MrltComments.ORG,MrltComments.COMMITEM"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.asset.AssetCommentsView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <EntityUsage
+    Name="MrltComments"
+    Entity="its.mnr.mp5.eo.local.MrltComments"/>
+  <ViewAttribute
+    Name="Commcreated"
+    PrecisionRule="true"
+    EntityAttrName="Commcreated"
+    EntityUsage="MrltComments"
+    AliasName="COMMCREATED"
+    IsUpdateable="false">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="Created"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Commcreatedby"
+    PrecisionRule="true"
+    EntityAttrName="Commcreatedby"
+    EntityUsage="MrltComments"
+    AliasName="COMMCREATEDBY"
+    IsUpdateable="false">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="Create By"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.asset.AssetCommentsView.Commcreatedby_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Commitem"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Commitem"
+    EntityUsage="MrltComments"
+    AliasName="COMMITEM"
+    IsUpdateable="false">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="Item"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Commline"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Commline"
+    EntityUsage="MrltComments"
+    AliasName="COMMLINE"
+    IsUpdateable="false">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="Line"/>
+    </DesignTime>
+    <TransientExpression><![CDATA[(object.getRowSet().max("Commline") == null ? 1 : object.getRowSet().max("Commline")+ 1)]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Commtext"
+    IsQueriable="false"
+    PrecisionRule="true"
+    EntityAttrName="Commtext"
+    EntityUsage="MrltComments"
+    AliasName="COMMTEXT">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="Comment"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="42"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Commtype"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Commtype"
+    EntityUsage="MrltComments"
+    AliasName="COMMTYPE"
+    DefaultValue="ASSET"
+    IsUpdateable="while_insert">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="Type"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Commupd"
+    PrecisionRule="true"
+    EntityAttrName="Commupd"
+    EntityUsage="MrltComments"
+    AliasName="COMMUPD"
+    IsUpdateable="false">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="Updated"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Commupdby"
+    PrecisionRule="true"
+    EntityAttrName="Commupdby"
+    EntityUsage="MrltComments"
+    AliasName="COMMUPDBY"
+    IsUpdateable="false">
+    <DesignTime>
+      <Attr Name="_diagramName" Value="Updated By"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.asset.AssetCommentsView.Commupdby_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Org"
+    PrecisionRule="true"
+    EntityAttrName="Org"
+    EntityUsage="MrltComments"
+    AliasName="ORG"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

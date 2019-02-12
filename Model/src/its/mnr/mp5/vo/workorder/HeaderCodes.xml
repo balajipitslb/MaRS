@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="HeaderCodes"
+  Version="11.1.2.60.81"
+  OrderBy="EVENTJOBTYPE,CLS_CODE"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchSize="25"
+  FetchMode="FETCH_AS_NEEDED"
+  RangeSize="25"
+  Passivate="All">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.workorder.HeaderCodes_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="JobTypeBind"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT MAP.WOTYPE,EVENTJOBTYPE,
+        R5classes.CLS_CODE, 
+       R5classes.CLS_DESC, 
+       R5classes.CLS_ORG
+FROM R5CLASSES R5classes, MRLREF_WOTYPEHEADERCDMAP MAP, MRLREF_WORKORDERMASTER MASTER
+WHERE CLS_CODE = HEADERCD 
+AND MAP.WOTYPE= MASTER.WOTYPE
+AND CLS_ENTITY = 'EVNT' 
+AND CLS_ORG = (SELECT VALUE FROM MRLREF_MP5PROFILE WHERE PROFILE = 'Organization')
+AND cls_code <> '*'
+ORDER BY WOTYPE,CLS_CODE]]></SQLQuery>
+  <ViewAttribute
+    Name="Wotype"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="WOTYPE"
+    Expression="WOTYPE"
+    SQLType="VARCHAR"
+    IsQueriable="false">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.HeaderCodes.Wotype_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Eventjobtype"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EVENTJOBTYPE"
+    Expression="EVENTJOBTYPE"
+    SQLType="VARCHAR"
+    IsQueriable="false">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.HeaderCodes.Eventjobtype_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ClsCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CLS_CODE"
+    Expression="CLS_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.HeaderCodes.ClsCode_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ClsDesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="45"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CLS_DESC"
+    Expression="CLS_DESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.HeaderCodes.ClsDesc_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ClsOrg"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="8"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CLS_ORG"
+    Expression="CLS_ORG"
+    SQLType="VARCHAR"
+    IsQueriable="false">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.HeaderCodes.ClsOrg_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="HeaderCodesByJobType"
+    ViewObjectName="its.mnr.mp5.vo.workorder.HeaderCodes"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="false"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="HeaderCodesByWOType_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Eventjobtype"
+        ViewAttribute="Eventjobtype"
+        Operator="="
+        Conjunction="AND"
+        Value=":JobTypeBind"
+        IsBindVarValue="true"
+        Required="Optional"
+        GenerateIsNullClauseForBindVars="false">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="renderedMode"
+              Value="Never"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="ClsCode"/>
+  </AttrArray>
+</ViewObject>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="ComponentLocationMasterPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator Binds="MasterDataControlNested.MrlrefComponentView1" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrlrefComponentView1Iterator"/>
+    <iterator Binds="MasterDataControlNested.MrlrefLocationView2" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrlrefLocationView2Iterator"/>
+    <searchRegion Criteria="AllComponents" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="MrlrefComponentView1Iterator" id="AllComponentsQuery1"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MrlrefComponentView1Iterator" id="MrlrefComponentView1">
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrlrefComponentView" Name="MrlrefComponentView10">
+        <AttrNames>
+          <Item Value="Componentid"/>
+          <Item Value="Servicegroupid"/>
+          <Item Value="Compwotype"/>
+          <Item Value="Compdescription"/>
+          <Item Value="Compcode"/>
+          <Item Value="Compactive" Binds="Compactive"/>
+          <Item Value="Compcdx" Binds="Compcdx"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="MrlrefComponentView1Iterator" id="Compactive" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Compactive"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="MrlrefComponentView1Iterator" id="Compcdx" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Compcdx"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <action IterBinding="MrlrefComponentView1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="MrlrefComponentView1Iterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <tree IterBinding="MrlrefLocationView2Iterator" id="MrlrefLocationView2">
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrlrefLocationView" Name="MrlrefLocationView20">
+        <AttrNames>
+          <Item Value="Loccode"/>
+          <Item Value="Locdescription"/>
+          <Item Value="Locactive" Binds="Locactive"/>
+          <Item Value="Loccdx" Binds="Loccdx"/>
+          <Item Value="Locationid"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="MrlrefLocationView2Iterator" id="Locactive" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Locactive"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="MrlrefLocationView2Iterator" id="Loccdx" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Loccdx"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <action IterBinding="MrlrefLocationView2Iterator" id="CreateInsert1" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="MrlrefLocationView2Iterator" id="Delete1" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="MNRDataControlDataControl"/>
+  </bindings>
+</pageDefinition>

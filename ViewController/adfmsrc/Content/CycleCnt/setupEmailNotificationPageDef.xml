@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="setupEmailNotificationPageDef"
+                Package="Content.CycleCnt">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="MasterDataControlNested.jobRunningView1" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="jobRunningView1Iterator"/>
+    <iterator Binds="CCDataControlNested.MrltCyclecountheaderView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrltCyclecountheaderViewIterator"/>
+    <iterator id="CycleCountPartsIterator" Binds="CCDataControlNested.CycleCountParts"
+              DataControl="MNRDataControlDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="jobRunningView1Iterator" id="ElapsedTime">
+      <AttrNames>
+        <Item Value="ElapsedTime"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Listid">
+      <AttrNames>
+        <Item Value="Listid"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="CycleCountPartsIterator" id="writeCCListXML" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="writeCCListXML" IsViewObjectMethod="false"
+                  DataControl="MNRDataControlDataControl" InstanceName="bindings.CycleCountPartsIterator.currentRow"
+                  IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.writeCCListXML_writeCCListXML_writeCCListXML_result">
+      <NamedData NDName="pList" NDType="java.lang.String"/>
+      <NamedData NDName="pType" NDType="java.lang.String"/>
+      <NamedData NDName="recEmail" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="initCycleCountParts" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="initCycleCountParts" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.CCDataControlNested"/>
+    <methodAction id="executeCycleCountParts" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="executeCycleCountParts" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.CCDataControlNested"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.executeCycleCountParts_MNRDataControlDataControl_dataProvider_Root_CCDataControlNested_executeCycleCountParts_result">
+      <NamedData NDName="sListid" NDType="java.lang.Integer"/>
+    </methodAction>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" InstanceName="MNRDataControlDataControl"
+            DataControl="MNRDataControlDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
+    <methodAction IterBinding="MrltCyclecountheaderViewIterator" id="getMP5Profile"
+                  InstanceName="bindings.MrltCyclecountheaderViewIterator.currentRow"
+                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getMP5Profile" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.getMP5Profile_getMP5Profile_getMP5Profile_result">
+      <NamedData NDName="sprofile" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="WorkOrder-WorkOrderEntry">
+    <template-reference>
+      <document>/WEB-INF/error-handler-flow.xml</document>
+      <id>error-handler-flow</id>
+    </template-reference>
+    <default-activity>WOEntry</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>WorkOrderBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.WorkOrderBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <view id="WOEntry">
+      <page>/Content/WorkOrder/WOEntry.jspx</page>
+    </view>
+    <task-flow-call id="Asset-MeterReading">
+      <task-flow-reference>
+        <document>/WEB-INF/Taskflows/Asset/Asset-MeterReading.xml</document>
+        <id>Asset-MeterReading</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>psfAssetCd</name>
+        <value>#{pageFlowScope.psfAssetCd}</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>psfAssetOrg</name>
+        <value>#{pageFlowScope.psfAssetOrg}</value>
+      </input-parameter>
+      <input-parameter id="__9">
+        <name>psfAssetUom</name>
+        <value>#{pageFlowScope.psfAssetUom}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <task-flow-call id="assetMaint">
+      <task-flow-reference>
+        <document>/WEB-INF/Taskflows/Asset/Asset-Maint.xml</document>
+        <id>assetMaint</id>
+      </task-flow-reference>
+      <input-parameter id="__11">
+        <name>psfcalledfromwo</name>
+        <value>#{pageFlowScope.pfsCalledFromWO}</value>
+      </input-parameter>
+      <input-parameter id="__12">
+        <name>psfAssetCd</name>
+        <value>#{pageFlowScope.psfAssetCd}</value>
+      </input-parameter>
+      <input-parameter id="__13">
+        <name>psfAssetOrg</name>
+        <value>#{pageFlowScope.psfAssetOrg}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>WOEntry</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>callAssetReading</from-outcome>
+        <to-activity-id>Asset-MeterReading</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__10">
+        <from-outcome>callAsset</from-outcome>
+        <to-activity-id>assetMaint</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,1497 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle1" value="#{adfBundle['viewcontroller.Content.WorkOrder.WOEntryBundle']}"/>
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.WOEntryBundle']}"/>
+    <af:pageTemplate viewId="/templates/bodyMainTemplate.jspx" id="pt1">
+        <f:facet name="main">
+            <af:panelSplitter id="g3" splitterPosition="460" dimensionsFrom="children" partialTriggers="ctb1 ctb2"
+                              collapsed="true" binding="#{WorkOrderBean.lhsSplitter}">
+                <f:facet name="first">
+                    <af:panelGroupLayout layout="vertical" id="pgl12">
+                        <af:panelHeader text=" " id="ph2">
+                            <af:query id="qryId1" headerText="Search"
+                                      value="#{bindings.WorkOrderListQuery.queryDescriptor}"
+                                      model="#{bindings.WorkOrderListQuery.queryModel}"
+                                      queryListener="#{WorkOrderBean.processQuery}"
+                                      queryOperationListener="#{bindings.WorkOrderListQuery.processQueryOperation}"
+                                      saveQueryMode="readOnly" modeChangeVisible="false" searchButtonAccessKey="s"
+                                      resetButtonAccessKey="r" disclosed="true"/>
+                            <af:spacer width="10" height="10" id="s10"/>
+                            <af:table value="#{bindings.WOEvents.collectionModel}" var="row"
+                                      rows="#{bindings.WOEvents.rangeSize}"
+                                      emptyText="#{bindings.WOEvents.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      fetchSize="#{bindings.WOEvents.rangeSize}" rowBandingInterval="1"
+                                      selectedRowKeys="#{bindings.WOEvents.collectionModel.selectedRow}"
+                                      selectionListener="#{WorkOrderBean.eventsTableSelectionListener}"
+                                      rowSelection="single" id="resId1" columnStretching="column:resId1c5"
+                                      inlineStyle="width:440px; height:325px; border-color:Silver; border-style:solid; border-width:thin; background-color:White; margin:2px;"
+                                      partialTriggers="::ctb1 ::ctb2 ::ctb9" binding="#{WorkOrderBean.resultsTable}">
+                                <af:column sortProperty="#{bindings.WOEvents.hints.EvtCode.name}" headerText="WO #"
+                                           id="resId1c1" align="center" width="45">
+                                    <af:outputText value="#{row.EvtCode}" id="ot25"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.WOEvents.hints.EvtDesc.name}"
+                                           headerText="#{bindings.WOEvents.hints.EvtDesc.label}" id="resId1c2"
+                                           width="80" displayIndex="-1">
+                                    <af:outputText value="#{row.EvtDesc}" id="ot26"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.WOEvents.hints.EvtCostcode.name}" headerText="Acct"
+                                           id="resId1c3" width="40" align="center" displayIndex="-1">
+                                    <af:outputText value="#{row.EvtCostcode}" id="ot37"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.WOEvents.hints.EvtWOType.name}" headerText="Type"
+                                           id="resId1c4" width="40" align="center">
+                                    <af:outputText value="#{row.EvtWOType}" id="ot27"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.WOEvents.hints.EvtClass.name}" headerText="Hdr Code"
+                                           id="resId1c5" width="60" displayIndex="-1">
+                                    <af:selectOneChoice value="#{row.bindings.EvtClass.inputValue}"
+                                                        label="#{row.bindings.EvtClass.label}"
+                                                        required="#{bindings.WOEvents.hints.EvtClass.mandatory}"
+                                                        shortDesc="#{bindings.WOEvents.hints.EvtClass.tooltip}"
+                                                        readOnly="true" id="soc10">
+                                        <f:selectItems value="#{row.bindings.EvtClass.items}" id="si11"/>
+                                    </af:selectOneChoice>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.WOEvents.hints.EvtStatus.name}"
+                                           headerText="#{bindings.WOEvents.hints.EvtStatus.label}" id="resId1c6"
+                                           width="55">
+                                    <af:selectOneChoice value="#{row.bindings.EvtStatus.inputValue}"
+                                                        label="#{row.bindings.EvtStatus.label}"
+                                                        required="#{bindings.WOEvents.hints.EvtStatus.mandatory}"
+                                                        shortDesc="#{bindings.WOEvents.hints.EvtStatus.tooltip}"
+                                                        readOnly="true" id="soc11">
+                                        <f:selectItems value="#{row.bindings.EvtStatus.items}" id="si12"/>
+                                    </af:selectOneChoice>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.WOEvents.hints.EvtStart.name}"
+                                           headerText="#{bindings.WOEvents.hints.EvtStart.label}" id="resId1c7"
+                                           width="60">
+                                    <af:outputText value="#{row.EvtStart}" id="ot28">
+                                        <af:convertDateTime pattern="#{bindings.WOEvents.hints.EvtStart.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                            </af:table>
+                        </af:panelHeader>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="second">
+                    <af:group id="g1">
+                        <af:panelGroupLayout id="pgl3" layout="scroll"
+                                             inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px;"
+                                             binding="#{WorkOrderBean.panelGroupLayoutDetail}" partialTriggers="qryId1">
+                            <af:panelFormLayout id="pfl1" maxColumns="2" rows="3" fieldWidth="300" labelWidth="150"
+                                                labelAlignment="start">
+                                <f:facet name="footer">
+                                    <af:panelGroupLayout id="g6" layout="horizontal" valign="top">
+                                        <af:spacer width="15" height="10" id="s6"/>
+                                        <af:showDetailHeader id="pgl4" text="Checks" disclosed="false"
+                                                             inlineStyle="width:375px;">
+                                            <af:panelFormLayout id="pfl7" maxColumns="1" labelAlignment="start" rows="2"
+                                                                inlineStyle="margin:5px;">
+                                                <af:panelLabelAndMessage id="plam26"
+                                                                         label="#{bindings.ItsReviewed.label}"
+                                                                         rendered="#{securityContext.userGrantedResource['resourceName=WOEntryReviewed;resourceType=UIControl;action=enabled']  or !bindings.EvtStatus.inputValue eq 'CRV'}">
+                                                    <af:selectBooleanCheckbox value="#{bindings.ItsReviewed.inputValue}"
+                                                                              shortDesc="#{bindings.ItsReviewed.hints.tooltip}"
+                                                                              id="sbc3" autoSubmit="true"
+                                                                              disabled="#{!securityContext.userGrantedResource['resourceName=WOEntryReviewed;resourceType=UIControl;action=enabled']}"/>
+                                                    <f:facet name="end">
+                                                        <af:group id="g5">
+                                                            <af:outputFormatted value="#{bindings.ItsReviewedby.inputValue}"
+                                                                                id="of1" styleUsage="pageStamp"/>
+                                                            <af:spacer width="10" height="1" id="s9"/>
+                                                            <af:outputFormatted value="#{bindings.ItsReviewdt.inputValue}"
+                                                                                id="of2" styleUsage="pageStamp"
+                                                                                converter="javax.faces.DateTime">
+                                                                <af:convertDateTime pattern="#{bindings.ItsReviewdt.format}"
+                                                                                    type="both"/>
+                                                            </af:outputFormatted>
+                                                        </af:group>
+                                                    </f:facet>
+                                                </af:panelLabelAndMessage>
+                                                <af:panelLabelAndMessage id="plam27"
+                                                                         label="#{bindings.ItsPerformed.label}">
+                                                    <af:selectBooleanCheckbox value="#{bindings.ItsPerformed.inputValue}"
+                                                                              shortDesc="#{bindings.ItsPerformed.hints.tooltip}"
+                                                                              id="sbc4" autoSubmit="true"
+                                                                              disabled="#{!securityContext.userGrantedResource['resourceName=WOEntryPerformed;resourceType=UIControl;action=enabled']}"/>
+                                                    <f:facet name="end">
+                                                        <af:group id="g7">
+                                                            <af:outputFormatted value="#{bindings.ItsPerformedby.inputValue}"
+                                                                                id="of9" styleUsage="pageStamp"/>
+                                                            <af:spacer width="10" height="1" id="s24"/>
+                                                            <af:outputFormatted value="#{bindings.ItsPerformdt.inputValue}"
+                                                                                id="of10" styleUsage="pageStamp">
+                                                                <af:convertDateTime pattern="#{bindings.ItsPerformdt.format}"
+                                                                                    type="both"/>
+                                                            </af:outputFormatted>
+                                                        </af:group>
+                                                    </f:facet>
+                                                </af:panelLabelAndMessage>
+                                            </af:panelFormLayout>
+                                            <af:showDetail id="sd1"
+                                                           disclosedText="#{bindings.ItsNote.attributeValue ne null ? 'Hide Internal Notes (Available)': 'Hide Internal Notes (None)'}"
+                                                           undisclosedText="#{bindings.ItsNote.attributeValue ne null ? 'Show Internal Notes (Available)': 'Show Internal Notes (None)'}"
+                                                           partialTriggers="ctb1 ctb2 ot1">
+                                                <af:inputText value="#{bindings.ItsNote.inputValue}"
+                                                              required="#{bindings.ItsNote.hints.mandatory}"
+                                                              columns="50"
+                                                              maximumLength="#{bindings.ItsNote.hints.precision}"
+                                                              shortDesc="#{bindings.ItsNote.hints.tooltip}" id="it2"
+                                                              rows="5" autoSubmit="true"
+                                                              disabled="#{bindings.EvtStatus.inputValue eq 'CBM' or !securityContext.userGrantedResource['resourceName=WOEntryInternalNotes;resourceType=UIControl;action=enabled']}"
+                                                              contentStyle=" background-color:#FBED87">
+                                                    <f:validator binding="#{bindings.ItsNote.validator}"/>
+                                                </af:inputText>
+                                            </af:showDetail>
+                                        </af:showDetailHeader>
+                                        <af:spacer width="10" height="10" id="s8"/>
+                                        <af:toolbar id="t16">
+                                            <af:button text="#{viewcontrollerBundle.FLAG}" id="cb1"
+                                                       actionListener="#{WorkOrderBean.ShowWOFlagAssociation_action}"
+                                                       icon="#{resource['images:flag.png']}" accessKey="f"/>
+                                        </af:toolbar>
+                                    </af:panelGroupLayout>
+                                </f:facet>
+                                <af:panelLabelAndMessage label="#{bindings.EvtCode.hints.label}" id="plam1">
+                                    <af:inputText value="#{bindings.EvtCode.inputValue}" id="ot1"/>
+                                    <f:facet name="end">
+                                        <af:group id="g8">
+                                            <af:toolbar id="t13">
+                                                <af:spacer width="30" height="10" id="s21"/>
+                                                <af:button disabled="#{!bindings.Previous.enabled}" partialSubmit="true"
+                                                           id="ctb1" icon="#{resource['images:shuttle_left.png']}"
+                                                           action="#{WorkOrderBean.previousBtnAction}"/>
+                                                <af:spacer width="20" height="10" id="s20"/>
+                                                <af:button disabled="#{!bindings.Next.enabled}" partialSubmit="true"
+                                                           id="ctb2" icon="#{resource['images:shuttle_right.png']}"
+                                                           action="#{WorkOrderBean.nextBtnAction}"/>
+                                            </af:toolbar>
+                                        </af:group>
+                                    </f:facet>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.EvtDesc.hints.label}" id="plam2">
+                                    <af:inputText value="#{bindings.EvtDesc.inputValue}"
+                                                  columns="#{bindings.EvtDesc.hints.displayWidth}"
+                                                  maximumLength="#{bindings.EvtDesc.hints.precision}"
+                                                  shortDesc="#{bindings.EvtDesc.hints.tooltip}" id="it1"
+                                                  autoSubmit="true" disabled="#{bindings.EvtStatus.inputValue eq 'CBM'}"
+                                                  required="#{bindings.EvtDesc.hints.mandatory}"
+                                                  contentStyle="text-transform:uppercase;"
+                                                  binding="#{WorkOrderBean.equipDesc}">
+                                        <f:validator binding="#{bindings.EvtDesc.validator}"/>
+                                    </af:inputText>
+                                    <f:facet name="end">
+                                        <af:toolbar id="t14">
+                                            <af:button text="#{viewcontrollerBundle.SEARCH}" id="ctb24"
+                                                       icon="#{resource['images:find.png']}"
+                                                       action="#{WorkOrderBean.cbWS_action}" partialTriggers="id1"
+                                                       disabled="#{!bindings.Get_EquipInfo.enabled or bindings.EvtDesc.inputValue eq null or bindings.EvtStart.inputValue eq '' or bindings.EvtStatus.attributeValue eq 'EST' or bindings.EvtStatus.attributeValue eq 'APP' or bindings.EvtStatus.attributeValue eq 'REJ' or bindings.EvtStatus.attributeValue eq 'UNA' or bindings.EvtStatus.attributeValue eq 'C' or bindings.EvtStatus.attributeValue eq 'CANC' or bindings.EvtStatus.attributeValue eq 'RFI' or bindings.EvtStatus.attributeValue eq 'INV' or bindings.EvtStatus.attributeValue eq 'EXC'  or bindings.EvtStatus.inputValue eq 'CBM' or !securityContext.userGrantedResource['resourceName=WOEntryEdit;resourceType=UIControl;action=enabled']}"
+                                                       accessKey="s"/>
+                                        </af:toolbar>
+                                    </f:facet>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.EvtStatus.label}" id="plam3">
+                                    <af:inputComboboxListOfValues id="evtStatus1Id"
+                                                                  popupTitle="Search and Select: #{bindings.EvtStatus1.hints.label}"
+                                                                  value="#{bindings.EvtStatus1.inputValue}"
+                                                                  model="#{bindings.EvtStatus1.listOfValuesModel}"
+                                                                  required="#{bindings.EvtStatus1.hints.mandatory}"
+                                                                  columns="#{bindings.EvtStatus1.hints.displayWidth}"
+                                                                  shortDesc="#{bindings.EvtStatus1.hints.tooltip}"
+                                                                  autoSubmit="true" editMode="select"
+                                                                  disabled="#{bindings.EvtStatus.inputValue ne bindings.PostedEvtStatus.attributeValue}">
+                                        <f:validator binding="#{bindings.EvtStatus1.validator}"/>
+                                    </af:inputComboboxListOfValues>
+                                    <af:panelLabelAndMessage label="#{bindings.PostedEvtStatus.hints.label}" id="plam12"
+                                                             visible="false">
+                                        <af:outputText value="#{bindings.PostedEvtStatus.inputValue}" id="ot17"/>
+                                    </af:panelLabelAndMessage>
+                                    <f:facet name="end">
+                                        <af:panelGroupLayout id="g2" layout="horizontal"
+                                                             inlineStyle="margin: 0px 0px 0px 100px;">
+                                            <af:outputLabel value="#{bindings.ItsIsasset.label}" id="ol4"
+                                                            rendered="#{bindings.ItsIsasset.attributeValue == 'N'}"/>
+                                            <af:link text="Asset" id="cl1" action="callAsset" useWindow="true"
+                                                     windowHeight="700" windowWidth="750"
+                                                     rendered="#{bindings.ItsIsasset.attributeValue == 'Y'}"
+                                                     inlineStyle="font-size:large;">
+                                                <af:setActionListener to="#{pageFlowScope.pfsCalledFromWO}"
+                                                                      from="#{true}"/>
+                                                <af:setActionListener from="#{bindings.EvtDesc.inputValue}"
+                                                                      to="#{pageFlowScope.psfAssetCd}"/>
+                                                <af:setActionListener to="#{pageFlowScope.psfAssetOrg}"
+                                                                      from="#{bindings.EvtOrg.inputValue}"/>
+                                            </af:link>
+                                            <af:selectBooleanCheckbox value="#{bindings.ItsIsasset.inputValue}"
+                                                                      shortDesc="#{bindings.ItsIsasset.hints.tooltip}"
+                                                                      id="sbc1" binding="#{WorkOrderBean.isAssetChkBox}"
+                                                                      disabled="true"/>
+                                            <af:selectBooleanCheckbox value="#{bindings.ItsIspm.inputValue}"
+                                                                      label="#{bindings.ItsIspm.label}"
+                                                                      shortDesc="#{bindings.ItsIspm.hints.tooltip}"
+                                                                      id="sbc2" disabled="true"/>
+                                        </af:panelGroupLayout>
+                                    </f:facet>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.EvtClass.hints.label}" id="plam36"
+                                                         labelStyle="vertical-align:middle">
+                                    <af:inputComboboxListOfValues id="evtClassId"
+                                                                  popupTitle="Search and Select: #{bindings.EvtClass.hints.label}"
+                                                                  value="#{bindings.EvtClass.inputValue}"
+                                                                  model="#{bindings.EvtClass.listOfValuesModel}"
+                                                                  required="#{bindings.EvtClass.hints.mandatory}"
+                                                                  columns="#{bindings.EvtClass.hints.displayWidth}"
+                                                                  shortDesc="#{bindings.EvtClass.hints.tooltip}"
+                                                                  disabled="#{bindings.EvtJobtype.inputValue eq ''  or bindings.EvtStatus1.inputValue eq 'CBM'}"
+                                                                  autoSubmit="true"
+                                                                  partialTriggers="evtJobtype1Id evtStatus1Id"
+                                                                  editMode="select" binding="#{WorkOrderBean.evtClass}">
+                                        <f:validator binding="#{bindings.EvtClass.validator}"/>
+                                    </af:inputComboboxListOfValues>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.EvtCostcode.hints.label}" id="plam37"
+                                                         labelStyle="vertical-align:middle">
+                                    <af:inputComboboxListOfValues id="evtCostcodeId"
+                                                                  popupTitle="Search and Select: #{bindings.EvtCostcode.hints.label}"
+                                                                  value="#{bindings.EvtCostcode.inputValue}"
+                                                                  model="#{bindings.EvtCostcode.listOfValuesModel}"
+                                                                  required="#{bindings.EvtCostcode.hints.mandatory}"
+                                                                  columns="#{bindings.EvtCostcode.hints.displayWidth}"
+                                                                  shortDesc="#{bindings.EvtCostcode.hints.tooltip}"
+                                                                  disabled="#{bindings.EvtDesc.inputValue eq null  or bindings.EvtStatus1.inputValue eq 'CBM'}"
+                                                                  partialTriggers="it1" autoSubmit="true"
+                                                                  editMode="select"
+                                                                  binding="#{WorkOrderBean.costCodeLOV}">
+                                        <f:validator binding="#{bindings.EvtCostcode.validator}"/>
+                                    </af:inputComboboxListOfValues>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.EvtJobtype1.hints.label}" id="plam19">
+                                    <af:inputComboboxListOfValues id="evtJobtype1Id"
+                                                                  popupTitle="Search and Select: #{bindings.EvtJobtype1.hints.label}"
+                                                                  value="#{bindings.EvtJobtype1.inputValue}"
+                                                                  model="#{bindings.EvtJobtype1.listOfValuesModel}"
+                                                                  required="#{bindings.EvtJobtype1.hints.mandatory}"
+                                                                  columns="#{bindings.EvtJobtype1.hints.displayWidth}"
+                                                                  shortDesc="#{bindings.EvtJobtype1.hints.tooltip}"
+                                                                  readOnly="#{bindings.WOActivitiesIterator.estimatedRowCount gt 0 ? true : false}"
+                                                                  partialTriggers="it1" autoSubmit="true"
+                                                                  disabled="#{bindings.EvtDesc.inputValue eq null  or bindings.EvtStatus1.inputValue eq 'CBM'}"
+                                                                  editMode="select"
+                                                                  binding="#{WorkOrderBean.jobTypeLOV}">
+                                        <f:validator binding="#{bindings.EvtJobtype1.validator}"/>
+                                    </af:inputComboboxListOfValues>
+                                    <f:facet name="end">
+                                        <af:outputText value="- #{bindings.EvtWOType.inputValue}" id="ot18"/>
+                                    </f:facet>
+                                </af:panelLabelAndMessage>
+                            </af:panelFormLayout>
+                            <af:panelCollection id="pc1"
+                                                inlineStyle="height:175px; width:850px; width:inherit; margin:5px 3px 5px 10px;"
+                                                featuresOff="viewMenu" defaultToolbarItemDisplay="icon">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t2">
+                                        <af:button id="ctb3" icon="#{resource['images:add.png']}"
+                                                   actionListener="#{WorkOrderBean.addAct_action}" useWindow="true"
+                                                   windowEmbedStyle="inlineDocument" windowHeight="550"
+                                                   windowWidth="600"
+                                                   disabled="#{!bindings.CreateInsert3.enabled or bindings.EvtCostcode2.inputValue eq '' or bindings.EvtJobtype.inputValue eq '' or bindings.EvtStatus1.attributeValue eq 'EST' or bindings.EvtStatus1.attributeValue eq 'APP' or bindings.EvtStatus1.attributeValue eq 'REJ' or bindings.EvtStatus1.attributeValue eq 'UNA' or bindings.EvtStatus1.attributeValue eq 'C' or bindings.EvtStatus1.attributeValue eq 'CANC' or bindings.EvtStatus1.attributeValue eq 'RFI' or bindings.EvtStatus1.attributeValue eq 'INV' or bindings.EvtStatus1.attributeValue eq 'EXC' or bindings.EvtStatus1.inputValue eq 'CBM' or !securityContext.userGrantedResource['resourceName=WOEntryEdit;resourceType=UIControl;action=enabled']}"
+                                                   partialTriggers="::evtCostcodeId ::evtJobtype1Id">
+                                            <af:clientListener method="enforcePreventUserInput" type="action"/>
+                                        </af:button>
+                                        <af:spacer width="10" height="10" id="s3"/>
+                                        <af:button id="ctb5" icon="#{resource['images:delete.png']}"
+                                                   actionListener="#{bindings.Delete2.execute}"
+                                                   disabled="#{!bindings.Delete2.enabled or (bindings.MatlpartsIterator.estimatedRowCount gt 0 ? true : false) or bindings.EvtStatus1.attributeValue eq 'EST' or bindings.EvtStatus1.attributeValue eq 'APP' or bindings.EvtStatus1.attributeValue eq 'REJ' or bindings.EvtStatus1.attributeValue eq 'UNA' or bindings.EvtStatus1.attributeValue eq 'C' or bindings.EvtStatus1.attributeValue eq 'CANC' or bindings.EvtStatus1.attributeValue eq 'RFI' or bindings.EvtStatus1.attributeValue eq 'INV' or bindings.EvtStatus1.attributeValue eq 'EXC'  or bindings.EvtStatus1.inputValue eq 'CBM' or !securityContext.userGrantedResource['resourceName=WOEntryEdit;resourceType=UIControl;action=enabled']}"/>
+                                        <af:spacer width="10" height="10" id="s4"/>
+                                        <af:button id="ctb4" icon="#{resource['images:edit.png']}"
+                                                   text="#{viewcontrollerBundle.EDIT_RECORD}" useWindow="true"
+                                                   windowModalityType="modeless" windowEmbedStyle="inlineDocument"
+                                                   windowHeight="550" windowWidth="600"
+                                                   disabled="#{bindings.EvtCostcode2.inputValue eq '' or bindings.EvtJobtype.inputValue eq '' or (bindings.WOActivitiesIterator.estimatedRowCount eq 0 ? true : false) or bindings.EvtStatus1.attributeValue eq 'EST' or bindings.EvtStatus1.attributeValue eq 'APP' or bindings.EvtStatus1.attributeValue eq 'REJ' or bindings.EvtStatus1.attributeValue eq 'UNA' or bindings.EvtStatus1.attributeValue eq 'C' or bindings.EvtStatus1.attributeValue eq 'CANC' or bindings.EvtStatus1.attributeValue eq 'RFI' or bindings.EvtStatus1.attributeValue eq 'INV' or bindings.EvtStatus1.attributeValue eq 'EXC'  or bindings.EvtStatus1.inputValue eq 'CBM' or !securityContext.userGrantedResource['resourceName=WOEntryEdit;resourceType=UIControl;action=enabled']}"
+                                                   partialTriggers="::evtCostcodeId ::evtJobtype1Id"
+                                                   actionListener="#{WorkOrderBean.editRecord_action}"
+                                                   binding="#{WorkOrderBean.editRecordBtn}"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.WOActivities.collectionModel}" var="row"
+                                          rows="#{bindings.WOActivities.rangeSize}"
+                                          emptyText="#{bindings.WOActivities.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.WOActivities.rangeSize}" rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.WOActivities.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.WOActivities.collectionModel.makeCurrent}"
+                                          rowSelection="single" id="t1" columnStretching="column:c3"
+                                          partialTriggers="::ctb3 ::ctb4 ::ctb5 :::ctb20 :::ctb21 :::ctb10 :::ctb15 :::ctb16 :::ctb17"
+                                          autoHeightRows="-1" binding="#{WorkOrderBean.woActivitiesTable}">
+                                    <af:clientListener method="handleTaskDoubleClick" type="dblClick"/><af:serverListener type="TaskDoubleClickEvent"
+                                                                                                                          method="#{WorkOrderBean.handleTaskDoubleClick}"/>
+                                    <af:column sortProperty="#{bindings.WOActivities.hints.ActAct.name}"
+                                               sortable="false" headerText="#{bindings.WOActivities.hints.ActAct.label}"
+                                               id="c1" width="20">
+                                        <af:outputText value="#{row.ActAct}" id="ot2">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.WOActivities.hints.ActAct.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.WOActivities.hints.ItsTaskdesc.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.WOActivities.hints.ItsTaskdesc.label}" id="c2"
+                                               width="150">
+                                        <af:outputText value="#{row.ItsTaskdesc}" id="ot3"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.WOActivities.hints.ItsComment.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.WOActivities.hints.ItsComment.label}" id="c3"
+                                               width="75">
+                                        <af:outputText value="#{row.ItsComment}" id="ot4"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.WOActivities.hints.ItsLocdesc.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.WOActivities.hints.ItsLocdesc.label}" id="c4"
+                                               width="75">
+                                        <af:outputText value="#{row.ItsLocdesc}" id="ot5"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.WOActivities.hints.ItsDamdesc.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.WOActivities.hints.ItsDamdesc.label}" id="c5"
+                                               width="75">
+                                        <af:outputText value="#{row.ItsDamdesc}" id="ot6"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.WOActivities.hints.ItsRepdesc.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.WOActivities.hints.ItsRepdesc.label}" id="c6"
+                                               width="75">
+                                        <af:outputText value="#{row.ItsRepdesc}" id="ot7"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.WOActivities.hints.ActUom.name}"
+                                               sortable="false" headerText="#{bindings.WOActivities.hints.ActUom.label}"
+                                               id="c7" width="45" align="center">
+                                        <af:outputText value="#{row.ActUom}" id="ot8"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.WOActivities.hints.ActRatetype.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.WOActivities.hints.ActRatetype.label}" id="c8"
+                                               width="35" align="center">
+                                        <af:outputText value="#{row.ActRatetype}" id="ot9"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.WOActivities.hints.ActTimetype.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.WOActivities.hints.ActTimetype.label}" id="c9"
+                                               width="35" align="center">
+                                        <af:selectOneChoice value="#{row.bindings.ActTimetype.inputValue}"
+                                                            label="#{row.bindings.ActTimetype.label}"
+                                                            required="#{bindings.WOActivities.hints.ActTimetype.mandatory}"
+                                                            shortDesc="#{bindings.WOActivities.hints.ActTimetype.tooltip}"
+                                                            readOnly="true" id="soc3">
+                                            <f:selectItems value="#{row.bindings.ActTimetype.items}" id="si3"/>
+                                        </af:selectOneChoice>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.WOActivities.hints.ActMechanicid.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.WOActivities.hints.ActMechanicid.label}" id="c10"
+                                               width="35">
+                                        <af:outputText value="#{row.ActMechanicid}" id="ot10"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.WOActivities.hints.ActBillableLbrHrs.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.WOActivities.hints.ActBillableLbrHrs.label}"
+                                               id="c11" width="35" align="center">
+                                        <af:outputText value="#{row.ActBillableLbrHrs}" id="ot11">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.WOActivities.hints.ActBillableLbrHrs.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column id="c15" align="center" headerText="Labor Cost">
+                                        <af:column sortProperty="#{bindings.WOActivities.hints.ActActualLbrCost.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.WOActivities.hints.ActActualLbrCost.label}"
+                                                   id="c12" width="50" align="center">
+                                            <af:outputText value="#{row.ActActualLbrCost}" id="ot12">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.WOActivities.hints.ActActualLbrCost.format}"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.WOActivities.hints.ActBillableLbrCost.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.WOActivities.hints.ActBillableLbrCost.label}"
+                                                   id="c13" width="50" align="center">
+                                            <af:outputText value="#{row.ActBillableLbrCost}" id="ot13">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.WOActivities.hints.ActBillableLbrCost.format}"/>
+                                            </af:outputText>
+                                        </af:column>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.WOActivities.hints.TotalPartCost.name}"
+                                               sortable="false"
+                                               headerText="#{bindings.WOActivities.hints.TotalPartCost.label}" id="c14"
+                                               width="45" align="center">
+                                        <af:outputText value="#{row.TotalPartCost}" id="ot14">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.WOActivities.hints.TotalPartCost.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                            <af:panelLabelAndMessage label="#{bindings.MtlCode.hints.label}" id="plam4" visible="false">
+                                <af:outputText value="#{bindings.MtlCode.inputValue}" id="ot29"/>
+                            </af:panelLabelAndMessage>
+                            <af:panelCollection id="pc2"
+                                                inlineStyle="height:150px; width:850px; width:inherit; margin:5px 3px 5px 10px;"
+                                                featuresOff="viewMenu" defaultToolbarItemDisplay="icon"
+                                                partialTriggers="::ctb1 ::ctb2 ::pc1:t1 ::pc1:ctb4">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar"/>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.Matlparts.collectionModel}" var="row"
+                                          rows="#{bindings.Matlparts.rangeSize}"
+                                          emptyText="#{bindings.Matlparts.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          fetchSize="#{bindings.Matlparts.rangeSize}" rowBandingInterval="1" id="t3"
+                                          rowSelection="single" columnStretching="column:c18" editingMode="clickToEdit"
+                                          partialTriggers=":::ctb10 :::ctb15 :::ctb16 :::ctb17 :::ctb18 :::ctb19">
+                                    <af:column sortProperty="#{bindings.Matlparts.hints.Act.name}" sortable="false"
+                                               headerText="#{bindings.Matlparts.hints.Act.label}" id="c16" width="20">
+                                        <af:inputText value="#{row.bindings.Act.inputValue}"
+                                                      label="#{bindings.Matlparts.hints.Act.label}"
+                                                      required="#{bindings.Matlparts.hints.Act.mandatory}"
+                                                      columns="#{bindings.Matlparts.hints.Act.displayWidth}"
+                                                      maximumLength="#{bindings.Matlparts.hints.Act.precision}"
+                                                      shortDesc="#{bindings.Matlparts.hints.Act.tooltip}" id="it8"
+                                                      readOnly="true">
+                                            <f:validator binding="#{row.bindings.Act.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.Matlparts.hints.MlpPart.label}" id="c17"
+                                               width="75">
+                                        <af:inputListOfValues id="mlpPartId"
+                                                              popupTitle="Search and Select: #{bindings.Matlparts.hints.MlpPart.label}"
+                                                              value="#{row.bindings.MlpPart.inputValue}"
+                                                              model="#{row.bindings.MlpPart.listOfValuesModel}"
+                                                              required="#{bindings.Matlparts.hints.MlpPart.mandatory}"
+                                                              columns="#{bindings.Matlparts.hints.MlpPart.displayWidth}"
+                                                              shortDesc="#{bindings.Matlparts.hints.MlpPart.tooltip}"
+                                                              readOnly="true" autoSubmit="true">
+                                            <f:validator binding="#{row.bindings.MlpPart.validator}"/>
+                                        </af:inputListOfValues>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Matlparts.hints.PartDesc.name}" sortable="false"
+                                               headerText="#{bindings.Matlparts.hints.PartDesc.label}" id="c18">
+                                        <af:inputText value="#{row.bindings.PartDesc.inputValue}"
+                                                      label="#{bindings.Matlparts.hints.PartDesc.label}"
+                                                      required="#{bindings.Matlparts.hints.PartDesc.mandatory}"
+                                                      columns="#{bindings.Matlparts.hints.PartDesc.displayWidth}"
+                                                      maximumLength="#{bindings.Matlparts.hints.PartDesc.precision}"
+                                                      shortDesc="#{bindings.Matlparts.hints.PartDesc.tooltip}" id="it9"
+                                                      readOnly="true">
+                                            <f:validator binding="#{row.bindings.PartDesc.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Matlparts.hints.MlpQty.name}" sortable="false"
+                                               headerText="#{bindings.Matlparts.hints.MlpQty.label}" id="c19"
+                                               width="30">
+                                        <af:inputText value="#{row.bindings.MlpQty.inputValue}"
+                                                      label="#{bindings.Matlparts.hints.MlpQty.label}"
+                                                      required="#{bindings.Matlparts.hints.MlpQty.mandatory}"
+                                                      columns="#{bindings.Matlparts.hints.MlpQty.displayWidth}"
+                                                      maximumLength="#{bindings.Matlparts.hints.MlpQty.precision}"
+                                                      shortDesc="#{bindings.Matlparts.hints.MlpQty.tooltip}" id="it13"
+                                                      readOnly="true" autoSubmit="true">
+                                            <f:validator binding="#{row.bindings.MlpQty.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Matlparts.hints.MlpQty.format}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column id="c31" headerText="Unit Cost" align="center">
+                                        <af:column sortProperty="#{bindings.Matlparts.hints.MlpActualUnitcost.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.Matlparts.hints.MlpActualUnitcost.label}"
+                                                   id="c20" width="50" align="center">
+                                            <af:inputText value="#{row.bindings.MlpActualUnitcost.inputValue}"
+                                                          label="#{bindings.Matlparts.hints.MlpActualUnitcost.label}"
+                                                          required="#{bindings.Matlparts.hints.MlpActualUnitcost.mandatory}"
+                                                          columns="#{bindings.Matlparts.hints.MlpActualUnitcost.displayWidth}"
+                                                          maximumLength="#{bindings.Matlparts.hints.MlpActualUnitcost.precision}"
+                                                          shortDesc="#{bindings.Matlparts.hints.MlpActualUnitcost.tooltip}"
+                                                          id="it14" readOnly="true">
+                                                <f:validator binding="#{row.bindings.MlpActualUnitcost.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.Matlparts.hints.MlpActualUnitcost.format}"
+                                                                  minFractionDigits="3" maxFractionDigits="3"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.Matlparts.hints.MlpBillableUnitcost.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.Matlparts.hints.MlpBillableUnitcost.label}"
+                                                   id="c21" width="50" align="center">
+                                            <af:inputText value="#{row.bindings.MlpBillableUnitcost.inputValue}"
+                                                          label="#{bindings.Matlparts.hints.MlpBillableUnitcost.label}"
+                                                          required="#{bindings.Matlparts.hints.MlpBillableUnitcost.mandatory}"
+                                                          columns="#{bindings.Matlparts.hints.MlpBillableUnitcost.displayWidth}"
+                                                          maximumLength="#{bindings.Matlparts.hints.MlpBillableUnitcost.precision}"
+                                                          shortDesc="#{bindings.Matlparts.hints.MlpBillableUnitcost.tooltip}"
+                                                          id="it15" readOnly="true">
+                                                <f:validator binding="#{row.bindings.MlpBillableUnitcost.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.Matlparts.hints.MlpBillableUnitcost.format}"
+                                                                  minFractionDigits="3" maxFractionDigits="3"/>
+                                            </af:inputText>
+                                        </af:column>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Matlparts.hints.PartUOM.name}" sortable="false"
+                                               headerText="#{bindings.Matlparts.hints.PartUOM.label}" id="c22"
+                                               width="30" align="center">
+                                        <af:inputText value="#{row.bindings.PartUOM.inputValue}"
+                                                      label="#{bindings.Matlparts.hints.PartUOM.label}"
+                                                      required="#{bindings.Matlparts.hints.PartUOM.mandatory}"
+                                                      columns="#{bindings.Matlparts.hints.PartUOM.displayWidth}"
+                                                      maximumLength="#{bindings.Matlparts.hints.PartUOM.precision}"
+                                                      shortDesc="#{bindings.Matlparts.hints.PartUOM.tooltip}" id="it16"
+                                                      readOnly="true">
+                                            <f:validator binding="#{row.bindings.PartUOM.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.Matlparts.hints.ItsBin.label}" id="c23" width="30"
+                                               align="center">
+                                        <af:inputText value="#{row.bindings.ItsBin.inputValue}"
+                                                      label="#{bindings.Matlparts.hints.ItsBin.label}"
+                                                      required="#{bindings.Matlparts.hints.ItsBin.mandatory}"
+                                                      columns="#{bindings.Matlparts.hints.ItsBin.displayWidth}"
+                                                      maximumLength="#{bindings.Matlparts.hints.ItsBin.precision}"
+                                                      shortDesc="#{bindings.Matlparts.hints.ItsBin.tooltip}" id="it17"
+                                                      readOnly="true">
+                                            <f:validator binding="#{row.bindings.ItsBin.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.Matlparts.hints.ItsLot.label}" id="c24" width="30"
+                                               align="center">
+                                        <af:inputText value="#{row.bindings.ItsLot.inputValue}"
+                                                      label="#{bindings.Matlparts.hints.ItsLot.label}"
+                                                      required="#{bindings.Matlparts.hints.ItsLot.mandatory}"
+                                                      columns="#{bindings.Matlparts.hints.ItsLot.displayWidth}"
+                                                      maximumLength="#{bindings.Matlparts.hints.ItsLot.precision}"
+                                                      shortDesc="#{bindings.Matlparts.hints.ItsLot.tooltip}" id="it18"
+                                                      readOnly="true">
+                                            <f:validator binding="#{row.bindings.ItsLot.validator}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.Matlparts.hints.Available.name}"
+                                               sortable="false" headerText="#{bindings.Matlparts.hints.Available.label}"
+                                               id="c25" width="50" align="center">
+                                        <af:inputText value="#{row.bindings.Available.inputValue}"
+                                                      label="#{bindings.Matlparts.hints.Available.label}"
+                                                      required="#{bindings.Matlparts.hints.Available.mandatory}"
+                                                      columns="#{bindings.Matlparts.hints.Available.displayWidth}"
+                                                      maximumLength="#{bindings.Matlparts.hints.Available.precision}"
+                                                      shortDesc="#{bindings.Matlparts.hints.Available.tooltip}"
+                                                      id="it19" readOnly="true">
+                                            <f:validator binding="#{row.bindings.Available.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.Matlparts.hints.Available.format}"/>
+                                        </af:inputText>
+                                    </af:column>
+                                    <af:column id="c28" headerText="Tax" align="center">
+                                        <af:column sortProperty="#{bindings.Matlparts.hints.ItsPartaxamt.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.Matlparts.hints.ItsPartaxamt.label}" id="c26"
+                                                   width="50" align="center">
+                                            <af:inputText value="#{row.bindings.ItsPartaxamt.inputValue}"
+                                                          label="#{bindings.Matlparts.hints.ItsPartaxamt.label}"
+                                                          required="#{bindings.Matlparts.hints.ItsPartaxamt.mandatory}"
+                                                          columns="#{bindings.Matlparts.hints.ItsPartaxamt.displayWidth}"
+                                                          maximumLength="#{bindings.Matlparts.hints.ItsPartaxamt.precision}"
+                                                          shortDesc="#{bindings.Matlparts.hints.ItsPartaxamt.tooltip}"
+                                                          id="it20" readOnly="true">
+                                                <f:validator binding="#{row.bindings.ItsPartaxamt.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.Matlparts.hints.ItsPartaxamt.format}"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.Matlparts.hints.ItsTaxper.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.Matlparts.hints.ItsTaxper.label}" id="c27"
+                                                   width="30" align="center">
+                                            <af:inputText value="#{row.bindings.ItsTaxper.inputValue}"
+                                                          label="#{bindings.Matlparts.hints.ItsTaxper.label}"
+                                                          required="#{bindings.Matlparts.hints.ItsTaxper.mandatory}"
+                                                          columns="#{bindings.Matlparts.hints.ItsTaxper.displayWidth}"
+                                                          maximumLength="#{bindings.Matlparts.hints.ItsTaxper.precision}"
+                                                          shortDesc="#{bindings.Matlparts.hints.ItsTaxper.tooltip}"
+                                                          id="it21" readOnly="true">
+                                                <f:validator binding="#{row.bindings.ItsTaxper.validator}"/>
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.Matlparts.hints.ItsTaxper.format}"/>
+                                            </af:inputText>
+                                        </af:column>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                            <af:panelFormLayout id="pfl2" maxColumns="3" rows="1" fieldWidth="200" labelWidth="75">
+                                <af:inputDate value="#{bindings.EvtStart.inputValue}"
+                                              label="#{bindings.EvtStart.hints.label}"
+                                              required="#{bindings.EvtStart.hints.mandatory}"
+                                              columns="#{bindings.EvtStart.hints.displayWidth}"
+                                              shortDesc="#{bindings.EvtStart.hints.tooltip}" id="id1" autoSubmit="true"
+                                              disabled="#{bindings.EvtStatus1.inputValue eq 'CBM'}">
+                                    <f:validator binding="#{bindings.EvtStart.validator}"/>
+                                    <af:convertDateTime pattern="#{bindings.EvtStart.format}"/>
+                                </af:inputDate>
+                                <af:inputDate value="#{bindings.EvtCreated.inputValue}"
+                                              label="#{bindings.EvtCreated.hints.label}"
+                                              required="#{bindings.EvtCreated.hints.mandatory}"
+                                              columns="#{bindings.EvtCreated.hints.displayWidth}"
+                                              shortDesc="#{bindings.EvtCreated.hints.tooltip}" id="id2" disabled="false"
+                                              readOnly="true">
+                                    <f:validator binding="#{bindings.EvtCreated.validator}"/>
+                                    <af:convertDateTime pattern="#{bindings.EvtCreated.format}"/>
+                                </af:inputDate>
+                                <af:inputDate value="#{bindings.EvtCompleted.inputValue}"
+                                              label="#{bindings.EvtCompleted.hints.label}"
+                                              required="#{bindings.EvtCompleted.hints.mandatory}"
+                                              columns="#{bindings.EvtCompleted.hints.displayWidth}"
+                                              shortDesc="#{bindings.EvtCompleted.hints.tooltip}" id="id3"
+                                              readOnly="true">
+                                    <f:validator binding="#{bindings.EvtCompleted.validator}"/>
+                                    <af:convertDateTime pattern="#{bindings.EvtCompleted.format}"/>
+                                </af:inputDate>
+                            </af:panelFormLayout>
+                            <af:panelStretchLayout id="pbl1" startWidth="200px" endWidth="199px" dimensionsFrom="auto"
+                                                   inlineStyle="margin:5px 3px 5px 10px;">
+                                <f:facet name="center">
+                                    <af:panelFormLayout id="pgl2" maxColumns="2" rows="2" fieldWidth="150"
+                                                        labelWidth="75"
+                                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:2px; background-color:White;"
+                                                        partialTriggers="pc1:ctb3 pc1:ctb4 pc1:t1">
+                                        <af:inputText value="#{bindings.TotalPartCst.inputValue}"
+                                                      label="#{bindings.TotalPartCst.hints.label}"
+                                                      required="#{bindings.TotalPartCst.hints.mandatory}"
+                                                      columns="#{bindings.TotalPartCst.hints.displayWidth}"
+                                                      maximumLength="#{bindings.TotalPartCst.hints.precision}"
+                                                      shortDesc="#{bindings.TotalPartCst.hints.tooltip}" id="it3"
+                                                      disabled="true" readOnly="true">
+                                            <f:validator binding="#{bindings.TotalPartCst.validator}"/>
+                                            <af:convertNumber type="currency"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.TotalLaborCst.inputValue}"
+                                                      label="#{bindings.TotalLaborCst.hints.label}"
+                                                      required="#{bindings.TotalLaborCst.hints.mandatory}"
+                                                      columns="#{bindings.TotalLaborCst.hints.displayWidth}"
+                                                      maximumLength="#{bindings.TotalLaborCst.hints.precision}"
+                                                      shortDesc="#{bindings.TotalLaborCst.hints.tooltip}" id="it4"
+                                                      disabled="true" readOnly="true">
+                                            <f:validator binding="#{bindings.TotalLaborCst.validator}"/>
+                                            <af:convertNumber type="currency"/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.TotalHours.inputValue}"
+                                                      label="#{bindings.TotalHours.hints.label}"
+                                                      required="#{bindings.TotalHours.hints.mandatory}"
+                                                      columns="#{bindings.TotalHours.hints.displayWidth}"
+                                                      maximumLength="#{bindings.TotalHours.hints.precision}"
+                                                      shortDesc="#{bindings.TotalHours.hints.tooltip}" id="it5"
+                                                      disabled="true"
+                                                      contentStyle="#{bindings.isTotalHourOver eq 'true' ?  'color: Red;' : null}"
+                                                      readOnly="true">
+                                            <f:validator binding="#{bindings.TotalHours.validator}"/>
+                                            <af:convertNumber/>
+                                        </af:inputText>
+                                        <af:inputText value="#{bindings.TotalPartsLabor.inputValue}"
+                                                      label="#{bindings.TotalPartsLabor.hints.label}"
+                                                      required="#{bindings.TotalPartsLabor.hints.mandatory}"
+                                                      columns="#{bindings.TotalPartsLabor.hints.displayWidth}"
+                                                      maximumLength="#{bindings.TotalPartsLabor.hints.precision}"
+                                                      shortDesc="#{bindings.TotalPartsLabor.hints.tooltip}" id="it6"
+                                                      disabled="true"
+                                                      contentStyle="#{bindings.isTotalPartsLaborOver  eq 'true'?  'color: Red;' : null}"
+                                                      readOnly="true">
+                                            <f:validator binding="#{bindings.TotalPartsLabor.validator}"/>
+                                            <af:convertNumber type="currency"/>
+                                        </af:inputText>
+                                    </af:panelFormLayout>
+                                </f:facet>
+                                <f:facet name="start">
+                                    <af:toolbar id="t4">
+                                        <af:panelGroupLayout id="pgl1" layout="vertical">
+                                            <af:button text="Custom Fields" id="ctb6"
+                                                       disabled="#{bindings.EvtCostcode2.inputValue eq '' or bindings.EvtJobtype.inputValue eq ''}"
+                                                       partialTriggers="evtCostcodeId evtJobtype1Id"
+                                                       actionListener="#{WorkOrderBean.customFieldsActionListener}"/>
+                                            <af:button text="Meter Reading" id="ctb7" windowHeight="650"
+                                                       windowWidth="550"
+                                                       disabled="#{bindings.ItsIsasset.attributeValue == 'N' or bindings.EvtCostcode2.inputValue eq '' or bindings.EvtJobtype.inputValue eq ''}"
+                                                       partialTriggers="evtCostcodeId evtJobtype1Id"
+                                                       action="callAssetReading" useWindow="true"
+                                                       windowEmbedStyle="window">
+                                                <af:setActionListener from="#{bindings.EvtDesc.inputValue}"
+                                                                      to="#{pageFlowScope.psfAssetCd}"/>
+                                                <af:setActionListener to="#{pageFlowScope.psfAssetOrg}"
+                                                                      from="#{bindings.EvtOrg.inputValue}"/>
+                                            </af:button>
+                                        </af:panelGroupLayout>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="end">
+                                    <af:spacer width="10" height="10" id="s5"/>
+                                </f:facet>
+                            </af:panelStretchLayout>
+                        </af:panelGroupLayout>
+                        <af:popup childCreation="deferred" autoCancel="disabled" id="pCustFields"
+                                  binding="#{WorkOrderBean.customFieldsPop}">
+                            <af:dialog id="d1" title="#{viewcontrollerBundle.CUSTOMFIELDS}" closeIconVisible="false"
+                                       type="ok">
+                                <f:facet name="buttonBar"/>
+                                <af:panelCollection id="pc3" inlineStyle="width:310px;" featuresOff="viewMenu">
+                                    <f:facet name="menus"/>
+                                    <f:facet name="toolbar">
+                                        <af:toolbar id="t7">
+                                            <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                                       disabled="#{!bindings.CreateInsert.enabled or bindings.EvtStatus1.attributeValue eq 'EST' or bindings.EvtStatus1.attributeValue eq 'APP' or bindings.EvtStatus1.attributeValue eq 'REJ' or bindings.EvtStatus1.attributeValue eq 'UNA' or bindings.EvtStatus1.attributeValue eq 'C' or bindings.EvtStatus1.attributeValue eq 'CANC' or bindings.EvtStatus1.attributeValue eq 'RFI' or bindings.EvtStatus1.attributeValue eq 'INV' or bindings.EvtStatus1.attributeValue eq 'EXC'  or bindings.EvtStatus1.inputValue eq 'CBM' or !securityContext.userGrantedResource['resourceName=WOEntryEdit;resourceType=UIControl;action=enabled']}"
+                                                       id="ctb11" icon="#{resource['images:add.png']}"
+                                                       shortDesc="#{viewcontrollerBundle.ADD_RECORD}" />
+                                            <af:spacer width="10" height="10" id="s2"/>
+                                            <af:button actionListener="#{bindings.Delete.execute}"
+                                                       disabled="#{!bindings.Delete.enabled or bindings.EvtStatus1.attributeValue eq 'EST' or bindings.EvtStatus1.attributeValue eq 'APP' or bindings.EvtStatus1.attributeValue eq 'REJ' or bindings.EvtStatus1.attributeValue eq 'UNA' or bindings.EvtStatus1.attributeValue eq 'C' or bindings.EvtStatus1.attributeValue eq 'CANC' or bindings.EvtStatus1.attributeValue eq 'RFI' or bindings.EvtStatus1.attributeValue eq 'INV' or bindings.EvtStatus1.attributeValue eq 'EXC'  or bindings.EvtStatus1.inputValue eq 'CBM' or !securityContext.userGrantedResource['resourceName=WOEntryEdit;resourceType=UIControl;action=enabled']}"
+                                                       id="ctb12" icon="#{resource['images:delete.png']}"
+                                                       shortDesc="#{viewcontrollerBundle.DELETERECORD}" immediate="true"/>
+                                        </af:toolbar>
+                                    </f:facet>
+                                    <f:facet name="statusbar"/>
+                                    <af:table value="#{bindings.CustomFields.collectionModel}" var="row"
+                                              rows="#{bindings.CustomFields.rangeSize}"
+                                              emptyText="#{bindings.CustomFields.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              fetchSize="#{bindings.CustomFields.rangeSize}" rowBandingInterval="1"
+                                              selectedRowKeys="#{bindings.CustomFields.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.CustomFields.collectionModel.makeCurrent}"
+                                              rowSelection="single" id="t6" inlineStyle="width:300px; height:225px;"
+                                              editingMode="clickToEdit" columnStretching="column:c32"
+                                              partialTriggers="::ctb11 ::ctb12">
+                                        <af:column sortProperty="#{bindings.CustomFields.hints.PrvProperty.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.CustomFields.hints.PrvProperty.label}"
+                                                   id="c32" width="150">
+                                            <af:selectOneChoice value="#{row.bindings.PrvProperty.inputValue}"
+                                                                label="#{row.bindings.PrvProperty.label}"
+                                                                required="#{bindings.CustomFields.hints.PrvProperty.mandatory}"
+                                                                shortDesc="#{bindings.CustomFields.hints.PrvProperty.tooltip}"
+                                                                id="soc4">
+                                                <f:selectItems value="#{row.bindings.PrvProperty.items}" id="si4"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.CustomFields.hints.PrvValue.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.CustomFields.hints.PrvValue.label}" id="c33"
+                                                   width="125">
+                                            <af:inputText value="#{row.bindings.PrvValue.inputValue}"
+                                                          label="#{bindings.CustomFields.hints.PrvValue.label}"
+                                                          required="#{bindings.CustomFields.hints.PrvValue.mandatory}"
+                                                          columns="#{bindings.CustomFields.hints.PrvValue.displayWidth}"
+                                                          maximumLength="#{bindings.CustomFields.hints.PrvValue.precision}"
+                                                          shortDesc="#{bindings.CustomFields.hints.PrvValue.tooltip}"
+                                                          id="it7">
+                                                <f:validator binding="#{row.bindings.PrvValue.validator}"/>
+                                            </af:inputText>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelCollection>
+                            </af:dialog>
+                        </af:popup>
+                        <af:popup childCreation="deferred" autoCancel="disabled" id="pReading"
+                                  binding="#{WorkOrderBean.meterReadingPop}">
+                            <af:dialog id="d2"
+                                       title="#{viewcontrollerBundle.METERREADING}: #{bindings.ObjCode.inputValue}"
+                                       closeIconVisible="false" type="ok">
+                                <f:facet name="buttonBar"/>
+                                <af:panelSplitter id="ps1" orientation="vertical" splitterPosition="100"
+                                                  dimensionsFrom="children">
+                                    <f:facet name="first">
+                                        <af:panelFormLayout id="pfl3" maxColumns="2" rows="4" fieldWidth="150"
+                                                            labelWidth="100" labelAlignment="start">
+                                            <af:panelLabelAndMessage label="#{bindings.ObjDesc.hints.label}:"
+                                                                     id="plam5">
+                                                <af:outputText value="#{bindings.ObjDesc.inputValue}" id="ot30"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="#{bindings.ObjCommiss.hints.label}:"
+                                                                     id="plam6">
+                                                <af:outputText value="#{bindings.ObjCommiss.inputValue}" id="ot31">
+                                                    <af:convertDateTime pattern="#{bindings.ObjCommiss.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="#{bindings.ObjWithdraw.hints.label}:"
+                                                                     id="plam7">
+                                                <af:outputText value="#{bindings.ObjWithdraw.inputValue}" id="ot32">
+                                                    <af:convertDateTime pattern="#{bindings.ObjWithdraw.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="#{bindings.OudLastreaddate.hints.label}:"
+                                                                     id="plam8">
+                                                <af:outputText value="#{bindings.OudLastreaddate.inputValue}" id="ot33">
+                                                    <af:convertDateTime pattern="#{bindings.OudLastreaddate.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="#{bindings.OudTotalusage.hints.label}:"
+                                                                     id="plam9">
+                                                <af:outputText value="#{bindings.OudTotalusage.inputValue}" id="ot34">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.OudTotalusage.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="#{bindings.ObjManufact.hints.label}:"
+                                                                     id="plam10">
+                                                <af:outputText value="#{bindings.ObjManufact.inputValue}" id="ot35"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelLabelAndMessage label="#{bindings.ObjManufactmodel.hints.label}:"
+                                                                     id="plam11">
+                                                <af:outputText value="#{bindings.ObjManufactmodel.inputValue}"
+                                                               id="ot36"/>
+                                            </af:panelLabelAndMessage>
+                                        </af:panelFormLayout>
+                                    </f:facet>
+                                    <f:facet name="second">
+                                        <af:panelCollection id="pc4" featuresOff="viewMenu"
+                                                            defaultToolbarItemDisplay="icon">
+                                            <f:facet name="menus"/>
+                                            <f:facet name="toolbar">
+                                                <af:toolbar id="t9">
+                                                    <af:button actionListener="#{bindings.CreateInsert1.execute}"
+                                                               disabled="#{!bindings.CreateInsert1.enabled or bindings.EvtStatus1.attributeValue eq 'EST' or bindings.EvtStatus1.attributeValue eq 'APP' or bindings.EvtStatus1.attributeValue eq 'REJ' or bindings.EvtStatus1.attributeValue eq 'UNA' or bindings.EvtStatus1.attributeValue eq 'C' or bindings.EvtStatus1.attributeValue eq 'CANC' or bindings.EvtStatus1.attributeValue eq 'RFI' or bindings.EvtStatus1.attributeValue eq 'INV' or bindings.EvtStatus1.attributeValue eq 'EXC'  or bindings.EvtStatus1.inputValue eq 'CBM' or !securityContext.userGrantedResource['resourceName=WOEntryEdit;resourceType=UIControl;action=enabled']}"
+                                                               id="ctb13" icon="#{resource['images:add.png']}"
+                                                               shortDesc="#{viewcontrollerBundle.ADD_RECORD}"/>
+                                                    <af:spacer width="10" height="10" id="s1"/>
+                                                    <af:button actionListener="#{bindings.Delete1.execute}"
+                                                               disabled="#{!bindings.Delete1.enabled or bindings.EvtStatus1.attributeValue eq 'EST' or bindings.EvtStatus1.attributeValue eq 'APP' or bindings.EvtStatus1.attributeValue eq 'REJ' or bindings.EvtStatus1.attributeValue eq 'UNA' or bindings.EvtStatus1.attributeValue eq 'C' or bindings.EvtStatus1.attributeValue eq 'CANC' or bindings.EvtStatus1.attributeValue eq 'RFI' or bindings.EvtStatus1.attributeValue eq 'INV' or bindings.EvtStatus1.attributeValue eq 'EXC'  or bindings.EvtStatus1.inputValue eq 'CBM' or !securityContext.userGrantedResource['resourceName=WOEntryEdit;resourceType=UIControl;action=enabled']}"
+                                                               id="ctb14" icon="#{resource['images:delete.png']}"
+                                                               shortDesc="#{viewcontrollerBundle.DELETERECORD}"/>
+                                                </af:toolbar>
+                                            </f:facet>
+                                            <f:facet name="statusbar"/>
+                                            <af:table value="#{bindings.MeterReadings1.collectionModel}" var="row"
+                                                      rows="#{bindings.MeterReadings1.rangeSize}"
+                                                      emptyText="#{bindings.MeterReadings1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                      fetchSize="#{bindings.MeterReadings1.rangeSize}"
+                                                      rowBandingInterval="1"
+                                                      selectedRowKeys="#{bindings.MeterReadings1.collectionModel.selectedRow}"
+                                                      selectionListener="#{bindings.MeterReadings1.collectionModel.makeCurrent}"
+                                                      rowSelection="single" id="t8" editingMode="clickToEdit"
+                                                      inlineStyle="width:550px; height:225px;"
+                                                      partialTriggers="::ctb13 ::ctb14">
+                                                <af:column sortProperty="#{bindings.MeterReadings1.hints.ReaDate.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.MeterReadings1.hints.ReaDate.label}"
+                                                           id="c35" width="75">
+                                                    <af:inputDate value="#{row.bindings.ReaDate.inputValue}"
+                                                                  label="#{bindings.MeterReadings1.hints.ReaDate.label}"
+                                                                  required="#{bindings.MeterReadings1.hints.ReaDate.mandatory}"
+                                                                  columns="#{bindings.MeterReadings1.hints.ReaDate.displayWidth}"
+                                                                  shortDesc="#{bindings.MeterReadings1.hints.ReaDate.tooltip}"
+                                                                  id="id4">
+                                                        <f:validator binding="#{row.bindings.ReaDate.validator}"/>
+                                                        <af:convertDateTime pattern="#{bindings.MeterReadings1.hints.ReaDate.format}"/>
+                                                    </af:inputDate>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MeterReadings1.hints.ReaReading.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.MeterReadings1.hints.ReaReading.label}"
+                                                           id="c36">
+                                                    <af:inputText value="#{row.bindings.ReaReading.inputValue}"
+                                                                  label="#{bindings.MeterReadings1.hints.ReaReading.label}"
+                                                                  required="#{bindings.MeterReadings1.hints.ReaReading.mandatory}"
+                                                                  columns="#{bindings.MeterReadings1.hints.ReaReading.displayWidth}"
+                                                                  maximumLength="#{bindings.MeterReadings1.hints.ReaReading.precision}"
+                                                                  shortDesc="#{bindings.MeterReadings1.hints.ReaReading.tooltip}"
+                                                                  id="it10" autoSubmit="true">
+                                                        <f:validator binding="#{row.bindings.ReaReading.validator}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MeterReadings1.hints.ReaDiff.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.MeterReadings1.hints.ReaDiff.label}"
+                                                           id="c37">
+                                                    <af:inputText value="#{row.bindings.ReaDiff.inputValue}"
+                                                                  label="#{bindings.MeterReadings1.hints.ReaDiff.label}"
+                                                                  required="#{bindings.MeterReadings1.hints.ReaDiff.mandatory}"
+                                                                  columns="#{bindings.MeterReadings1.hints.ReaDiff.displayWidth}"
+                                                                  maximumLength="#{bindings.MeterReadings1.hints.ReaDiff.precision}"
+                                                                  shortDesc="#{bindings.MeterReadings1.hints.ReaDiff.tooltip}"
+                                                                  id="it11" partialTriggers="it10">
+                                                        <f:validator binding="#{row.bindings.ReaDiff.validator}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                                <af:column sortProperty="#{bindings.MeterReadings1.hints.ReaUom.name}"
+                                                           sortable="false"
+                                                           headerText="#{bindings.MeterReadings1.hints.ReaUom.label}"
+                                                           id="c38">
+                                                    <af:inputText value="#{row.bindings.ReaUom.inputValue}"
+                                                                  label="#{bindings.MeterReadings1.hints.ReaUom.label}"
+                                                                  required="#{bindings.MeterReadings1.hints.ReaUom.mandatory}"
+                                                                  columns="#{bindings.MeterReadings1.hints.ReaUom.displayWidth}"
+                                                                  maximumLength="#{bindings.MeterReadings1.hints.ReaUom.precision}"
+                                                                  shortDesc="#{bindings.MeterReadings1.hints.ReaUom.tooltip}"
+                                                                  id="it12">
+                                                        <f:validator binding="#{row.bindings.ReaUom.validator}"/>
+                                                    </af:inputText>
+                                                </af:column>
+                                            </af:table>
+                                        </af:panelCollection>
+                                    </f:facet>
+                                </af:panelSplitter>
+                            </af:dialog>
+                        </af:popup>
+                        <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                  binding="#{WorkOrderBean.estReqPop}">
+                            <af:dialog id="d3" title="#{viewcontrollerBundle1.ESTIMATEREQUIRED}" type="yesNo"
+                                       dialogListener="#{WorkOrderBean.EstReqDiagListener}"
+                                       titleIconSource="#{resource['images:info.png']}" closeIconVisible="false">
+                                <f:facet name="buttonBar"/>
+                                <af:outputText value="#{viewcontrollerBundle1.WORKORDEREXCEEDSESTIMATECRITER}"
+                                               id="ot15"/>
+                            </af:dialog>
+                        </af:popup>
+                        <af:popup childCreation="deferred" autoCancel="disabled" id="p2"
+                                  binding="#{WorkOrderBean.pendingChangePop}">
+                            <af:dialog id="d4" type="yesNo" title="#{viewcontrollerBundle1.WARNING}"
+                                       dialogListener="#{WorkOrderBean.pendingChangeDiagListener}"
+                                       titleIconSource="#{resource['images:warning.png']}" closeIconVisible="false">
+                                <f:facet name="buttonBar"/>
+                                <af:outputText value="#{viewcontrollerBundle1.PENDINGCHANGESEXISTSSAVEANDCON}"
+                                               id="ot16"/>
+                            </af:dialog>
+                        </af:popup>
+                        <!--popupFetchListener="#{WorkOrderBean.woTaskPPFetchListnr}"-->
+                        <af:popup childCreation="deferred" autoCancel="disabled" id="pWOTask"
+                                  binding="#{WorkOrderBean.woTaskPop}" contentDelivery="lazyUncached"
+                                  popupCanceledListener="#{WorkOrderBean.woTaskPPCancel_action}">
+                            <af:dialog id="d5" type="none" title="Work Order Task"
+                                       binding="#{WorkOrderBean.woTaskDialog}" closeIconVisible="false">
+                                <af:panelHeader text=" " id="ph1"
+                                                inlineStyle="width:550px; height:550px; background-color:transparent;">
+                                    <f:facet name="context"/>
+                                    <f:facet name="menuBar">
+                                        <af:toolbar id="t12">
+                                            <af:button actionListener="#{bindings.CreateInsert4.execute}"
+                                                       disabled="#{!bindings.CreateInsert4.enabled or bindings.ItsTaskid1.inputValue eq null or !securityContext.userGrantedResource['resourceName=WOEntryEdit;resourceType=UIControl;action=enabled']}"
+                                                       id="ctb20" icon="#{resource['images:add.png']}"
+                                                       binding="#{WorkOrderBean.addNewWOTaskBttn}"/>
+                                            <af:spacer width="10" height="10" id="s18"/>
+                                            <af:button text="#{viewcontrollerBundle.APPLY}"
+                                                       disabled="#{!bindings.Commit.enabled or bindings.ItsTaskid1.inputValue eq null or bindings.ItsLoccode.inputValue eq null or bindings.ItsDamcode.inputValue eq null or bindings.ItsRepcode.inputValue eq null or bindings.ActBillableLbrHrs.inputValue eq null or bindings.ActMechanicid.inputValue eq null or bindings.ActUom.inputValue eq null or bindings.ActRatetype.inputValue eq null}"
+                                                       id="ctb21" icon="#{resource['images:commit.png']}" accessKey="a"
+                                                       action="#{WorkOrderBean.WOTaskCommit_action}"
+                                                       shortDesc="#{controllerContext.currentViewPort.dataDirty &amp;&amp; !bindings.Commit.enabled ? 'Required fields' : null}"
+                                                       binding="#{WorkOrderBean.applyWOTaskBttn}"/>
+                                            <af:button text="#{viewcontrollerBundle.CANCEL}"
+                                                       disabled="#{!bindings.Rollback.enabled}" immediate="true"
+                                                       id="ctb22" icon="#{resource['images:undo.png']}" accessKey="C"
+                                                       action="#{WorkOrderBean.woTaskRollback_action}"
+                                                       binding="#{WorkOrderBean.cancelWOTaskBttn}">
+                                                <af:resetActionListener/>
+                                                <af:setActionListener from="false" to="#{pageFlowScope.disabled}"/>
+                                            </af:button>
+                                            <af:spacer width="10" height="10" id="s19"/>
+                                            <af:button id="ctb23" action="#{WorkOrderBean.woTaskClose_action}"
+                                                       immediate="false" icon="#{resource['images:terminate.png']}"/>
+                                        </af:toolbar>
+                                    </f:facet>
+                                    <f:facet name="toolbar"/>
+                                    <f:facet name="legend"/>
+                                    <f:facet name="info"/>
+                                    <af:panelFormLayout id="pfl4" maxColumns="2" rows="2" labelWidth="150"
+                                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:10px 5px; padding:5px;">
+                                        <af:panelLabelAndMessage label="#{bindings.EvtCode.hints.label}" id="plam13">
+                                            <af:outputFormatted value="#{bindings.EvtCode.inputValue}" id="of3"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="#{bindings.EvtWOType.hints.label}" id="plam14">
+                                            <af:outputFormatted value="#{bindings.EvtWOType.inputValue}" id="of4"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="#{bindings.EvtDesc.hints.label}" id="plam15">
+                                            <af:outputFormatted value="#{bindings.EvtDesc.inputValue}" id="of5"/>
+                                        </af:panelLabelAndMessage>
+                                        <af:panelLabelAndMessage label="#{bindings.EvtCostcode2.hints.label}"
+                                                                 id="plam16">
+                                            <af:outputFormatted value="#{bindings.EvtCostcode2.inputValue}" id="of6"/>
+                                        </af:panelLabelAndMessage>
+                                    </af:panelFormLayout>
+                                    <af:panelGroupLayout id="pgl5">
+                                        <af:panelGroupLayout id="pgl11">
+                                            <af:panelGroupLayout id="pgl13" layout="horizontal">
+                                                <af:selectOneChoice id="nl1" autoSubmit="true"
+                                                                    value="#{bindings.WOActivities1.inputValue}"
+                                                                    label="#{bindings.WOActivities1.label}"
+                                                                    inlineStyle="margin:5px;"
+                                                                    binding="#{WorkOrderBean.actActChoice}">
+                                                    <f:selectItems value="#{bindings.WOActivities1.items}" id="si5"/>
+                                                </af:selectOneChoice>
+                                                <af:outputText value="#{bindings.ActAct.inputValue}"
+                                                               shortDesc="#{bindings.ActAct.hints.tooltip}" id="ot39"
+                                                               visible="false" partialTriggers="nl1">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.ActAct.format}"/>
+                                                </af:outputText>
+                                                <af:spacer width="10" height="10" id="s23"/>
+                                                <af:button text="Copy" id="cb4"
+                                                           disabled="#{empty(pageFlowScope.disabled)? true : pageFlowScope.disabled}"
+                                                           binding="#{WorkOrderBean.copyWOTaskBttn}"
+                                                           actionListener="#{WorkOrderBean.copyWOTask_action}"
+                                                           partialTriggers="ctb20 ctb21 ctb22"/>
+                                            </af:panelGroupLayout>
+                                            <af:panelHeader text="Activity Details" id="ph3" partialTriggers="nl1">
+                                                <af:panelFormLayout id="pgl6" maxColumns="1" rows="2" labelWidth="47">
+                                                    <af:panelLabelAndMessage label="Srv Grp" id="plam29">
+                                                        <af:selectOneChoice value="#{bindings.ItsSgid.inputValue}"
+                                                                            required="#{bindings.ItsSgid.hints.mandatory}"
+                                                                            shortDesc="#{bindings.ItsSgid.hints.tooltip}"
+                                                                            id="soc5" autoSubmit="true"
+                                                                            disabled="#{bindings.WOActivities1.inputValue eq null}">
+                                                            <f:selectItems value="#{bindings.ItsSgid.items}" id="si10"/>
+                                                        </af:selectOneChoice>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage id="plam28" label="Task">
+                                                        <af:selectOneChoice value="#{bindings.ItsTaskid1.inputValue}"
+                                                                            shortDesc="#{bindings.ItsTaskid1.hints.tooltip}"
+                                                                            id="soc12"
+                                                                            binding="#{WorkOrderBean.taskSOC}"
+                                                                            valueChangeListener="#{WorkOrderBean.taskDescChangeListener}"
+                                                                            disabled="#{bindings.WOActivities1.inputValue eq null}"
+                                                                            autoSubmit="true">
+                                                            <f:selectItems value="#{bindings.ItsTaskid1.items}"
+                                                                           id="si13"/>
+                                                        </af:selectOneChoice>
+                                                        <f:facet name="end">
+                                                            <af:group id="g4">
+                                                                <af:spacer width="10" height="10" id="s22"/>
+                                                                <af:outputLabel value="#{bindings.ActUom.hints.label}"
+                                                                                id="ol2"/>
+                                                                <af:outputFormatted value="#{bindings.ActUom.inputValue}"
+                                                                                    id="of7" partialTriggers="soc12"/>
+                                                                <af:spacer width="20" height="10" id="s11"/>
+                                                                <af:outputLabel value="#{bindings.ActRatetype.hints.label}"
+                                                                                id="ol3"/>
+                                                                <af:outputFormatted value="#{bindings.ActRatetype.inputValue}"
+                                                                                    id="of8" partialTriggers="soc12"/>
+                                                            </af:group>
+                                                        </f:facet>
+                                                    </af:panelLabelAndMessage>
+                                                    <af:panelLabelAndMessage label="#{bindings.ActUom.hints.label}"
+                                                                             id="plam17" visible="false"/>
+                                                    <af:panelLabelAndMessage label="#{bindings.ActRatetype.hints.label}"
+                                                                             id="plam18" visible="false"/>
+                                                </af:panelFormLayout>
+                                                <af:panelGroupLayout id="pgl7" layout="horizontal" valign="top">
+                                                    <af:panelGroupLayout id="pgl8" layout="vertical">
+                                                        <af:panelFormLayout id="pfl5">
+                                                            <af:panelLabelAndMessage label="#{bindings.ItsLoccode.label}"
+                                                                                     id="plam30">
+                                                                <af:selectOneChoice value="#{bindings.ItsLoccode.inputValue}"
+                                                                                    shortDesc="#{bindings.ItsLoccode.hints.tooltip}"
+                                                                                    id="soc6" partialTriggers="soc12"
+                                                                                    autoSubmit="true"
+                                                                                    disabled="#{bindings.ItsTaskid1.inputValue eq null}"
+                                                                                    binding="#{WorkOrderBean.loccode}">
+                                                                    <f:selectItems value="#{bindings.ItsLoccode.items}"
+                                                                                   id="si6"/>
+                                                                </af:selectOneChoice>
+                                                            </af:panelLabelAndMessage>
+                                                            <af:panelLabelAndMessage label="#{bindings.ItsDamcode.label}"
+                                                                                     id="plam31">
+                                                                <af:selectOneChoice value="#{bindings.ItsDamcode.inputValue}"
+                                                                                    shortDesc="#{bindings.ItsDamcode.hints.tooltip}"
+                                                                                    id="soc7"
+                                                                                    disabled="#{bindings.ItsTaskid1.inputValue eq null}"
+                                                                                    autoSubmit="true"
+                                                                                    partialTriggers="soc6 soc12"
+                                                                                    valueChangeListener="#{WorkOrderBean.damCodeChangeListener}"
+                                                                                    binding="#{WorkOrderBean.damcode}">
+                                                                    <f:selectItems value="#{bindings.ItsDamcode.items}"
+                                                                                   id="si7"/>
+                                                                </af:selectOneChoice>
+                                                            </af:panelLabelAndMessage>
+                                                            <af:panelLabelAndMessage label="#{bindings.ItsTaskdamid.hints.label}"
+                                                                                     id="plam20" visible="false">
+                                                                <af:outputText value="#{bindings.ItsTaskdamid.inputValue}"
+                                                                               id="ot19" partialTriggers="soc7"/>
+                                                            </af:panelLabelAndMessage>
+                                                            <af:panelLabelAndMessage label="#{bindings.ItsRepcode.label}"
+                                                                                     id="plam32"
+                                                                                     labelStyle="'background-color:#FBED87">
+                                                                <af:selectOneChoice value="#{bindings.ItsRepcode.inputValue}"
+                                                                                    shortDesc="#{bindings.ItsRepcode.hints.tooltip}"
+                                                                                    id="soc8"
+                                                                                    disabled="#{bindings.ItsDamcode.inputValue eq null}"
+                                                                                    partialTriggers="soc7"
+                                                                                    autoSubmit="true"
+                                                                                    binding="#{WorkOrderBean.repcode}">
+                                                                    <f:selectItems value="#{bindings.ItsRepcode.items}"
+                                                                                   id="si8"/>
+                                                                </af:selectOneChoice>
+                                                            </af:panelLabelAndMessage>
+                                                            <af:panelLabelAndMessage label="#{bindings.ActBillableLbrHrs.hints.label}"
+                                                                                     id="plam33">
+                                                                <af:inputText value="#{bindings.ActBillableLbrHrs.inputValue}"
+                                                                              columns="#{bindings.ActBillableLbrHrs.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.ActBillableLbrHrs.hints.precision}"
+                                                                              shortDesc="#{bindings.ActBillableLbrHrs.hints.tooltip}"
+                                                                              id="it22" autoSubmit="true"
+                                                                              disabled="#{bindings.ItsTaskid1.inputValue eq null}"
+                                                                              binding="#{WorkOrderBean.actHrs}"
+                                                                              required="false">
+                                                                    <f:validator binding="#{bindings.ActBillableLbrHrs.validator}"/>
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.ActBillableLbrHrs.format}"/>
+                                                                </af:inputText>
+                                                            </af:panelLabelAndMessage>
+                                                            <af:panelLabelAndMessage label="#{bindings.ActMechanicid.hints.label}"
+                                                                                     id="plam34">
+                                                                <af:inputText value="#{bindings.ActMechanicid.inputValue}"
+                                                                              columns="#{bindings.ActMechanicid.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.ActMechanicid.hints.precision}"
+                                                                              shortDesc="#{bindings.ActMechanicid.hints.tooltip}"
+                                                                              id="it23" autoSubmit="true"
+                                                                              disabled="#{bindings.ItsTaskid1.inputValue eq null}"
+                                                                              binding="#{WorkOrderBean.actMechIc}"
+                                                                              contentStyle="text-transform:uppercase; ">
+                                                                    <f:validator binding="#{bindings.ActMechanicid.validator}"/>
+                                                                </af:inputText>
+                                                            </af:panelLabelAndMessage>
+                                                            <af:panelLabelAndMessage label="#{bindings.ActTimetype.label}"
+                                                                                     id="plam35">
+                                                                <af:selectOneChoice value="#{bindings.ActTimetype.inputValue}"
+                                                                                    shortDesc="#{bindings.ActTimetype.hints.tooltip}"
+                                                                                    id="soc9" autoSubmit="true"
+                                                                                    disabled="#{bindings.ActMechanicid.inputValue eq null}"
+                                                                                    partialTriggers="it23">
+                                                                    <f:selectItems value="#{bindings.ActTimetype.items}"
+                                                                                   id="si9"/>
+                                                                </af:selectOneChoice>
+                                                            </af:panelLabelAndMessage>
+                                                            <af:inputText value="#{bindings.ActMatlist.inputValue}"
+                                                                          label="#{bindings.ActMatlist.hints.label}"
+                                                                          required="#{bindings.ActMatlist.hints.mandatory}"
+                                                                          columns="#{bindings.ActMatlist.hints.displayWidth}"
+                                                                          maximumLength="#{bindings.ActMatlist.hints.precision}"
+                                                                          shortDesc="#{bindings.ActMatlist.hints.tooltip}"
+                                                                          id="it27"
+                                                                          binding="#{WorkOrderBean.actMatList}"
+                                                                          visible="false">
+                                                                <f:validator binding="#{bindings.ActMatlist.validator}"/>
+                                                            </af:inputText>
+                                                            <af:panelLabelAndMessage label="#{bindings.MtlCode.hints.label}"
+                                                                                     id="plam21" visible="false">
+                                                                <af:outputText value="#{bindings.MtlCode.inputValue}"
+                                                                               id="ot20"/>
+                                                            </af:panelLabelAndMessage>
+                                                        </af:panelFormLayout>
+                                                    </af:panelGroupLayout>
+                                                    <af:spacer width="20" height="10" id="s12"/>
+                                                    <af:panelGroupLayout id="pgl9" halign="end" valign="top">
+                                                        <af:inputText value="#{bindings.ItsComment.inputValue}"
+                                                                      label="#{bindings.ItsComment.hints.label}"
+                                                                      required="#{bindings.ItsComment.hints.mandatory}"
+                                                                      columns="35"
+                                                                      maximumLength="#{bindings.ItsComment.hints.precision}"
+                                                                      shortDesc="#{bindings.ItsComment.hints.tooltip}"
+                                                                      id="it24" rows="10"
+                                                                      disabled="#{bindings.ItsTaskid1.inputValue eq null}"
+                                                                      autoSubmit="true" partialTriggers="soc12">
+                                                            <f:validator binding="#{bindings.ItsComment.validator}"/>
+                                                        </af:inputText>
+                                                    </af:panelGroupLayout>
+                                                </af:panelGroupLayout>
+                                                <af:panelBox id="pb1" inlineStyle="margin:5px;" text="Parts"
+                                                             showHeader="always" showDisclosure="false">
+                                                    <f:facet name="toolbar">
+                                                        <af:toolbar id="t11">
+                                                            <af:button disabled="#{!bindings.CreateInsert5.enabled or bindings.ItsTaskid1.inputValue eq null or bindings.ActBillableLbrHrs.inputValue eq null or bindings.ActMechanicid.inputValue eq null or !securityContext.userGrantedResource['resourceName=WOEntryEdit;resourceType=UIControl;action=enabled']}"
+                                                                       id="ctb18" icon="#{resource['images:add.png']}"
+                                                                       partialTriggers="soc12 it22 it23"
+                                                                       action="#{WorkOrderBean.addPart_action}"
+                                                                       partialSubmit="false"/>
+                                                            <af:spacer width="10" height="10" id="s17"/>
+                                                            <af:button disabled="#{!bindings.Delete3.enabled or !securityContext.userGrantedResource['resourceName=WOEntryEdit;resourceType=UIControl;action=enabled']}"
+                                                                       id="ctb19"
+                                                                       icon="#{resource['images:delete.png']}"
+                                                                       immediate="true"
+                                                                       action="#{WorkOrderBean.delPart_action}"
+                                                                       accessKey="D" shortDesc="hotkey:  Alt + D"/>
+                                                        </af:toolbar>
+                                                    </f:facet>
+                                                    <af:panelFormLayout id="pfl6" fieldWidth="250" labelWidth="50"
+                                                                        partialTriggers="ctb10 ctb15 ctb16 ctb17"
+                                                                        binding="#{WorkOrderBean.partsForm}">
+                                                        <af:inputListOfValues id="ilov1"
+                                                                              popupTitle="Search and Select: #{bindings.MlpPart.hints.label}"
+                                                                              value="#{bindings.MlpPart.inputValue}"
+                                                                              label="#{bindings.MlpPart.hints.label}"
+                                                                              model="#{bindings.MlpPart.listOfValuesModel}"
+                                                                              required="#{bindings.MlpPart.hints.mandatory}"
+                                                                              columns="#{bindings.MlpPart.hints.displayWidth}"
+                                                                              shortDesc="#{bindings.MlpPart.hints.tooltip}"
+                                                                              partialTriggers="ctb18 ctb19"
+                                                                              binding="#{WorkOrderBean.partlov}"
+                                                                              valueChangeListener="#{WorkOrderBean.partChangeListener}"
+                                                                              autoSubmit="true">
+                                                            <f:validator binding="#{bindings.MlpPart.validator}"/>
+                                                        </af:inputListOfValues>
+                                                        <af:inputText value="#{bindings.PartDesc.inputValue}"
+                                                                      label="#{bindings.PartDesc.hints.label}"
+                                                                      required="#{bindings.PartDesc.hints.mandatory}"
+                                                                      columns="100"
+                                                                      maximumLength="#{bindings.PartDesc.hints.precision}"
+                                                                      shortDesc="#{bindings.PartDesc.hints.tooltip}"
+                                                                      id="it25" rows="2" readOnly="true"
+                                                                      partialTriggers="ilov1"
+                                                                      binding="#{WorkOrderBean.partDesc}">
+                                                            <f:validator binding="#{bindings.PartDesc.validator}"/>
+                                                        </af:inputText>
+                                                        <af:inputText value="#{bindings.MlpQty.inputValue}"
+                                                                      label="#{bindings.MlpQty.hints.label}"
+                                                                      columns="#{bindings.MlpQty.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.MlpQty.hints.precision}"
+                                                                      shortDesc="#{bindings.MlpQty.hints.tooltip}"
+                                                                      id="it26"
+                                                                      readOnly="#{bindings.MlpPart.inputValue eq null}"
+                                                                      autoSubmit="true"
+                                                                      binding="#{WorkOrderBean.partQty}"
+                                                                      required="#{bindings.MlpQty.hints.mandatory}">
+                                                            <f:validator binding="#{bindings.MlpQty.validator}"/>
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.MlpQty.format}"/>
+                                                        </af:inputText>
+                                                        <af:panelGroupLayout id="pgl10" layout="horizontal"
+                                                                             inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:10px 5px; padding:5px;">
+                                                            <af:panelLabelAndMessage label="#{bindings.PartUOM.hints.label}"
+                                                                                     id="plam22">
+                                                                <af:outputText value="#{bindings.PartUOM.inputValue}"
+                                                                               id="ot21"/>
+                                                            </af:panelLabelAndMessage>
+                                                            <af:spacer width="10" height="10" id="s13"/>
+                                                            <af:panelLabelAndMessage label="#{bindings.ItsBin.hints.label}"
+                                                                                     id="plam23">
+                                                                <af:outputText value="#{bindings.ItsBin.inputValue}"
+                                                                               id="ot22"/>
+                                                            </af:panelLabelAndMessage>
+                                                            <af:spacer width="10" height="10" id="s14"/>
+                                                            <af:panelLabelAndMessage label="#{bindings.ItsLot.hints.label}"
+                                                                                     id="plam24">
+                                                                <af:outputText value="#{bindings.ItsLot.inputValue}"
+                                                                               id="ot23"/>
+                                                            </af:panelLabelAndMessage>
+                                                            <af:spacer width="10" height="10" id="s15"/>
+                                                            <af:panelLabelAndMessage label="#{bindings.Available.hints.label}"
+                                                                                     id="plam25">
+                                                                <af:outputText value="#{bindings.Available.inputValue}"
+                                                                               id="ot24">
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.Available.format}"/>
+                                                                </af:outputText>
+                                                            </af:panelLabelAndMessage>
+                                                        </af:panelGroupLayout>
+                                                        <f:facet name="footer">
+                                                            <af:toolbar id="t10">
+                                                                <af:button actionListener="#{bindings.First.execute}"
+                                                                           disabled="#{!bindings.First.enabled}"
+                                                                           partialSubmit="true" id="ctb10"
+                                                                           icon="#{resource['images:shuttle_leftall.png']}"/>
+                                                                <af:button actionListener="#{bindings.Previous1.execute}"
+                                                                           disabled="#{!bindings.Previous1.enabled}"
+                                                                           partialSubmit="true" id="ctb15"
+                                                                           icon="#{resource['images:shuttle_left.png']}"/>
+                                                                <af:button actionListener="#{bindings.Next1.execute}"
+                                                                           disabled="#{!bindings.Next1.enabled}"
+                                                                           partialSubmit="true" id="ctb16"
+                                                                           icon="#{resource['images:shuttle_right.png']}"/>
+                                                                <af:button actionListener="#{bindings.Last.execute}"
+                                                                           disabled="#{!bindings.Last.enabled}"
+                                                                           partialSubmit="true" id="ctb17"
+                                                                           icon="#{resource['images:shuttle_rightall.png']}"/>
+                                                                <af:spacer width="10" height="10" id="s16"/>
+                                                                <af:outputLabel value="#{bindings.MatlpartsIterator.rangeStart+bindings.MatlpartsIterator.currentRowIndexInRange+1}/#{bindings.MatlpartsIterator.estimatedRowCount} records"
+                                                                                id="ol1"
+                                                                                visible="#{bindings.MatlpartsIterator.estimatedRowCount ne 0}"/>
+                                                            </af:toolbar>
+                                                        </f:facet>
+                                                    </af:panelFormLayout>
+                                                </af:panelBox>
+                                            </af:panelHeader>
+                                        </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                </af:panelHeader>
+                            </af:dialog>
+                        </af:popup>
+                        <!--dialogListener="#{WorkOrderBean.assignFlagsToWODiagListener}"-->
+                        <af:popup childCreation="deferred" autoCancel="disabled" id="p4"
+                                  binding="#{WorkOrderBean.flagAssoc}" contentDelivery="lazyUncached">
+                            <af:dialog id="d7" title="Flags Association" type="none"
+                                       closeIconVisible="false" inlineStyle="width:500px;">
+                                <af:panelHeader text="" id="ph4" partialTriggers="ctb28">
+                                    <!--
+                                    <af:panelFormLayout id="pfl8" maxColumns="2" rows="4">
+                                       <af:selectManyCheckbox value="#{bindings.FlagAssoc_VVO1.inputValue}"
+                                                               label="#{bindings.FlagAssoc_VVO1.label}" id="smc1"
+                                                               disabled="#{(bindings.EvtStatus.attributeValue eq 'RFI') or( bindings.EvtStatus.attributeValue eq 'INV')}"
+                                                               simple="true">
+                                             <f:selectItems value="#{bindings.FlagAssoc_VVO1.items}" id="si1"/>
+                                        </af:selectManyCheckbox>
+                                                                            </af:panelFormLayout>-->
+                                    <f:facet name="menuBar">
+                                        <af:toolbar id="t15">
+                                            <af:button id="ctb28" icon="#{resource['images:add.png']}"
+                                                       actionListener="#{WorkOrderBean.CreateNewWOFlagAssociation_action}"
+                                                       binding="#{WorkOrderBean.addFlagAssocWOBttn}"
+                                                       visible="#{!((bindings.EvtStatus1.attributeValue eq 'EST' or bindings.EvtStatus1.attributeValue eq 'APP' or bindings.EvtStatus1.attributeValue eq 'REJ' or bindings.EvtStatus1.attributeValue eq 'UNA' or bindings.EvtStatus1.attributeValue eq 'C' or bindings.EvtStatus1.attributeValue eq 'CANC' or bindings.EvtStatus1.attributeValue eq 'RFI' or bindings.EvtStatus1.attributeValue eq 'INV' or bindings.EvtStatus1.attributeValue eq 'EXC'  or bindings.EvtStatus1.inputValue eq 'CBM'))}"
+                                                       rendered="#{(bindings.FlagAssoc_VVO1Iterator.estimatedRowCount le 0) and (securityContext.userGrantedResource['resourceName=WOEntryFlassAssociationsCreateEdit;resourceType=UIControl;action=enabled'])}"
+                                                       partialTriggers="ctb28"/>
+                                            <!--actionListener="#{bindings.Commit.execute}"-->
+                                            <af:button text="Apply" id="ctb26"
+                                                       actionListener="#{WorkOrderBean.SetWOFlagAssociation_action}"
+                                                       accessKey="a" icon="#{resource['images:commit.png']}"
+                                                       disabled="#{(bindings.EvtStatus1.attributeValue eq 'EST' or bindings.EvtStatus1.attributeValue eq 'APP' or bindings.EvtStatus1.attributeValue eq 'REJ' or bindings.EvtStatus1.attributeValue eq 'UNA' or bindings.EvtStatus1.attributeValue eq 'C' or bindings.EvtStatus1.attributeValue eq 'CANC' or bindings.EvtStatus1.attributeValue eq 'RFI' or bindings.EvtStatus1.attributeValue eq 'INV' or bindings.EvtStatus1.attributeValue eq 'EXC'  or bindings.EvtStatus1.inputValue eq 'CBM')or(!securityContext.userGrantedResource['resourceName=WOEntryFlassAssociationsCreateEdit;resourceType=UIControl;action=enabled'])}"/>
+                                            <af:button text="Cancel" id="ctb27" immediate="true"
+                                                       icon="#{resource['images:undo.png']}"
+                                                       actionListener="#{WorkOrderBean.flagAssocTblRollback_action}"
+                                                       disabled="#{(bindings.EvtStatus1.attributeValue eq 'EST' or bindings.EvtStatus1.attributeValue eq 'APP' or bindings.EvtStatus1.attributeValue eq 'REJ' or bindings.EvtStatus1.attributeValue eq 'UNA' or bindings.EvtStatus1.attributeValue eq 'C' or bindings.EvtStatus1.attributeValue eq 'CANC' or bindings.EvtStatus1.attributeValue eq 'RFI' or bindings.EvtStatus1.attributeValue eq 'INV' or bindings.EvtStatus1.attributeValue eq 'EXC'  or bindings.EvtStatus1.inputValue eq 'CBM')or(!securityContext.userGrantedResource['resourceName=WOEntryFlassAssociationsCreateEdit;resourceType=UIControl;action=enabled'])}"/>
+                                            <af:button id="ctb25" action="#{WorkOrderBean.flagPPClose_action}"
+                                                       immediate="false" icon="#{resource['images:terminate.png']}"/>
+                                        </af:toolbar>
+                                    </f:facet>
+                                    <f:facet name="context">
+                                        <af:outputText value="#WO: #{bindings.EvtCode.inputValue}"
+                                                       shortDesc="#{bindings.EvtCode.hints.tooltip}" id="ot38"/>
+                                    </f:facet>
+                                    <af:table value="#{bindings.FlagAssoc_VVO12.collectionModel}" var="row"
+                                                  rows="#{bindings.FlagAssoc_VVO12.rangeSize}"
+                                                  emptyText="#{bindings.FlagAssoc_VVO12.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.FlagAssoc_VVO12.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  selectedRowKeys="#{bindings.FlagAssoc_VVO12.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.FlagAssoc_VVO12.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t17"
+                                                  partialTriggers="::ctb28 ::ctb26 ::ctb27 ::ctb25"
+                                                  columnStretching="column:c39"  editingMode="clickToEdit"
+                                              inlineStyle="margin-right:10px;"
+                                              binding="#{WorkOrderBean.flagAssocTable}" width="460px">
+                                        <af:column sortProperty="#{bindings.FlagAssoc_VVO12.hints.Fname.name}"
+                                                   sortable="false" headerText="Name" id="c29" width="105">
+                                            <af:inputText value="#{row.bindings.Fname.inputValue}"
+                                                          label="#{bindings.FlagAssoc_VVO12.hints.Fname.label}"
+                                                          required="#{bindings.FlagAssoc_VVO12.hints.Fname.mandatory}"
+                                                          columns="#{bindings.FlagAssoc_VVO12.hints.Fname.displayWidth}"
+                                                          maximumLength="#{bindings.FlagAssoc_VVO12.hints.Fname.precision}"
+                                                          shortDesc="#{bindings.FlagAssoc_VVO12.hints.Fname.tooltip}"
+                                                          id="it28">
+                                                <f:validator binding="#{row.bindings.Fname.validator}"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.FlagAssoc_VVO12.hints.Faupdby.name}"
+                                                   sortable="false" headerText="Updated By" id="c30" width="105">
+                                            <af:inputText value="#{row.bindings.Faupdby.inputValue}"
+                                                          label="#{bindings.FlagAssoc_VVO12.hints.Faupdby.label}"
+                                                          required="#{bindings.FlagAssoc_VVO12.hints.Faupdby.mandatory}"
+                                                          columns="#{bindings.FlagAssoc_VVO12.hints.Faupdby.displayWidth}"
+                                                          maximumLength="#{bindings.FlagAssoc_VVO12.hints.Faupdby.precision}"
+                                                          shortDesc="#{bindings.FlagAssoc_VVO12.hints.Faupdby.tooltip}"
+                                                          id="it29" readOnly="true">
+                                                <f:validator binding="#{row.bindings.Faupdby.validator}"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.FlagAssoc_VVO12.hints.Faupddt.name}"
+                                                   sortable="false" headerText="Update date" id="c34" width="105">
+                                            <af:inputDate value="#{row.bindings.Faupddt.inputValue}"
+                                                          label="#{bindings.FlagAssoc_VVO12.hints.Faupddt.label}"
+                                                          required="#{bindings.FlagAssoc_VVO12.hints.Faupddt.mandatory}"
+                                                          columns="#{bindings.FlagAssoc_VVO12.hints.Faupddt.displayWidth}"
+                                                          shortDesc="#{bindings.FlagAssoc_VVO12.hints.Faupddt.tooltip}"
+                                                          id="id5" readOnly="true">
+                                                <f:validator binding="#{row.bindings.Faupddt.validator}"/>
+                                                <af:convertDateTime pattern="#{bindings.FlagAssoc_VVO12.hints.Faupddt.format}"/>
+                                            </af:inputDate>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.FlagAssoc_VVO12.hints.Faactive.name}"
+                                                   sortable="false" headerText="Active" id="c39" width="107">
+                                            <af:selectOneChoice value="#{row.bindings.Faactive.inputValue}"
+                                                                label="#{row.bindings.Faactive.label}"
+                                                                required="#{bindings.FlagAssoc_VVO12.hints.Faactive.mandatory}"
+                                                                shortDesc="#{bindings.FlagAssoc_VVO12.hints.Faactive.tooltip}"
+                                                                id="soc1"
+                                                                readOnly="#{(bindings.EvtStatus1.attributeValue eq 'EST' or bindings.EvtStatus1.attributeValue eq 'APP' or bindings.EvtStatus1.attributeValue eq 'REJ' or bindings.EvtStatus1.attributeValue eq 'UNA' or bindings.EvtStatus1.attributeValue eq 'C' or bindings.EvtStatus1.attributeValue eq 'CANC' or bindings.EvtStatus1.attributeValue eq 'RFI' or bindings.EvtStatus1.attributeValue eq 'INV' or bindings.EvtStatus1.attributeValue eq 'EXC'  or bindings.EvtStatus1.inputValue eq 'CBM')or(!securityContext.userGrantedResource['resourceName=WOEntryFlassAssociationsCreateEdit;resourceType=UIControl;action=enabled'])}">
+                                                <f:selectItems value="#{row.bindings.Faactive.items}" id="si2"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelHeader>
+                            </af:dialog>
+                        </af:popup>
+                    </af:group>
+                </f:facet>
+            </af:panelSplitter>
+        </f:facet>
+        <f:facet name="toolBar"/>
+        <f:facet name="menuBar">
+            <af:toolbar id="t5"
+                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; background-color:White; margin:2px;">
+                <af:menuBar id="mb1">
+                    <af:menu text="Actions" id="m1">
+                        <af:commandMenuItem text="New Work Order" id="cmi3" icon="#{resource['images:add.png']}"
+                                            disabled="#{!securityContext.userGrantedResource['resourceName=WOEntryCreateWorkOrderMenu;resourceType=UIControl;action=enabled']}"
+                                            action="#{WorkOrderBean.CreateNewWO_action}" accessKey="N"/>
+                        <af:commandMenuItem text="New Track WO" id="cmi4" icon="#{resource['images:add.png']}"
+                                            disabled="#{!securityContext.userGrantedResource['resourceName=WOEntryCreateWorkOrderMenu;resourceType=UIControl;action=enabled']}"
+                                            action="#{WorkOrderBean.CreateNewTrackWO_action}" accessKey="N"/>
+                        <!--
+                        <af:commandMenuItem text="New Track WO" 
+                                            icon="#{resource['images:add.png']}" id="cmi4"
+                                            actionListener="#{WorkOrderBean.CreateNewWOFlagAssociation_action}">
+                            <af:setPropertyListener from="#{bindings.EvtCode.inputValue}" to="#{pageFlowScope.Bind_EvtCode}"
+                                                    type="action"/>
+                        </af:commandMenuItem>-->
+                        <!--  action="callFlagAssociation"/>-->
+                        <af:commandMenuItem text="#{viewcontrollerBundle1.REFRESSCREEN}" id="cmi1"
+                                            icon="#{resource['images:refresh.png']}"
+                                            action="#{WorkOrderBean.refreshScreen_action}"/>
+                        <af:commandMenuItem text="#{viewcontrollerBundle1.REFRESHALL}" id="cmi2"
+                                            icon="#{resource['images:refresh.png']}"
+                                            action="#{WorkOrderBean.refreshAll_action}"
+                                            disabled="#{bindings.EvtCode.inputValue eq ''}"
+                                            rendered="#{securityContext.userName eq 'R5'}"/>
+                    </af:menu>
+                </af:menuBar>
+                <af:spacer width="10" height="10" id="s7"/>
+                <af:button disabled="#{!bindings.Commit.enabled or bindings.EvtDesc.inputValue eq null or bindings.EvtCostcode2.inputValue eq '' or bindings.EvtJobtype.inputValue eq '' or !securityContext.userGrantedResource['resourceName=WOEntryEdit;resourceType=UIControl;action=enabled']}"
+                           id="ctb9" icon="#{resource['images:commit.png']}" text="#{viewcontrollerBundle.APPLY}"
+                           shortDesc="#{viewcontrollerBundle.SAVERECORD}"
+                           partialTriggers="pc2 evtClassId evtCostcodeId evtJobtype1Id"
+                           action="#{WorkOrderBean.commit_action}" partialSubmit="true" accessKey="a"
+                           binding="#{WorkOrderBean.commbttn}">
+                    <af:clientListener method="enforcePreventUserInput" type="action"/>
+                </af:button>
+                <af:button text="#{viewcontrollerBundle.CANCEL}" disabled="#{!bindings.Rollback.enabled}"
+                           immediate="true" id="ctb8" icon="#{resource['images:undo.png']}"
+                           shortDesc="#{viewcontrollerBundle.CANCELCHANGE}" partialTriggers="pc2"
+                           action="#{WorkOrderBean.onRollback}" accessKey="C">
+                    <af:resetActionListener/>
+                </af:button>
+            </af:toolbar>
+        </f:facet>
+        <f:facet name="context"/>
+        <f:attribute name="title" value="Work Order Entry"/>
+    </af:pageTemplate>
+    <af:resource type="javascript">
+      function handleTaskDoubleClick(evt) {
+          var table = evt.getSource();
+          AdfCustomEvent.queue(table, "TaskDoubleClickEvent", 
+          {
+          },
+true);
+          evt.cancel();
+      }
+
+      function clientBlankWOCall(evt) {
+          component = evt.getSource();
+          AdfCustomEvent.queue(component, "customEvent", 
+          {
+          },
+true);
+          evt.cancel();
+      }
+    </af:resource>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:WorkOrderBean-->
+</ui:composition>

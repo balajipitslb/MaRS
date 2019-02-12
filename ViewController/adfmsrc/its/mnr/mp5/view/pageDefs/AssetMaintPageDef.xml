@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="AssetMaintPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator Binds="AssetDataControlNested.MrltAssetView" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="MrltAssetViewIterator" ChangeEventPolicy="ppr"/>
+    <searchRegion Criteria="#{pageFlowScope.pfsCalledFromWO eq true ? 'SearchAssetFromWO' : 'SearchAssets'}" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="MrltAssetViewIterator" id="SearchAssetsQuery" InitialQueryOverridden="false"/>
+    <iterator Binds="AssetDataControlNested.MrltCustattribvaluesView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrltCustattribvaluesViewIterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="AssetDataControlNested.AssetCommentsView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="AssetCommentsViewIterator" ChangeEventPolicy="ppr"/>
+    <iterator id="MrltDocumentsViewIterator" Binds="AssetDataControlNested.MrltDocumentsView"
+              DataControl="MNRDataControlDataControl" RangeSize="25">
+      <sortCriteria>
+        <sort attribute="Docid" ascending="false"/>
+      </sortCriteria>
+    </iterator>
+    <iterator Binds="AssetDataControlNested.MrltSparesView" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="MrltSparesViewIterator" ChangeEventPolicy="ppr">
+      <sortCriteria>
+        <sort attribute="Partnum" ascending="true"/>
+      </sortCriteria>
+    </iterator>
+    <iterator Binds="AssetDataControlNested.MrltAssetdocumentsView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrltAssetdocumentsViewIterator" ChangeEventPolicy="ppr" Refresh="deferred"/>
+    <iterator Binds="AssetDataControlNested.MrltReadingView" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="MrltReadingViewIterator" ChangeEventPolicy="ppr" >
+      <sortCriteria>
+        <sort attribute="Createdt" ascending="false"/>
+        <sort attribute="Readingdate" ascending="false"/>
+      </sortCriteria>
+    </iterator>
+    <iterator Binds="AssetDataControlNested.AssetWOTotalsView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="AssetWOTotalsViewIterator" ChangeEventPolicy="ppr"/>
+    <variableIterator id="variables">
+      <variable Type="java.lang.String" Name="copyAsset_return" IsQueriable="false" IsUpdateable="0"
+                DefaultValue="${bindings.copyAsset.result}"/>
+      <variable Type="java.lang.String" Name="copyAsset_PCOPYASSET" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="copyAsset_PCOPYORG" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="copyAsset_PNEWASSET" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="copyAsset_PNEWMODEL" IsQueriable="false"/>
+      <variable Type="java.lang.String" Name="copyAsset_PNEWSERIAL" IsQueriable="false"/>
+    </variableIterator>
+  </executables>
+  <bindings>
+    <tree IterBinding="MrltAssetViewIterator" id="MrltAssetView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.asset.MrltAssetView" Name="MrltAssetView0">
+        <AttrNames>
+          <Item Value="Assetcd"/>
+          <Item Value="Assetclass"/>
+          <Item Value="Assetmanufact"/>
+          <Item Value="Assetstatus"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="MrltAssetViewIterator" id="MrltAssetView1">
+      <nodeDefinition DefName="its.mnr.mp5.vo.asset.MrltAssetView" Name="MrltAssetView10">
+        <AttrNames>
+          <Item Value="Assetcd"/>
+          <Item Value="Assetmanufact"/>
+          <Item Value="Assetclass"/>
+          <Item Value="Assetstatus"/>
+          <Item Value="Notavailable"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="MrltAssetViewIterator" id="Assetcd">
+      <AttrNames>
+        <Item Value="Assetcd"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltAssetViewIterator" id="Commiss">
+      <AttrNames>
+        <Item Value="Commiss"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltAssetViewIterator" id="Withdraw">
+      <AttrNames>
+        <Item Value="Withdraw"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltAssetViewIterator" id="Model">
+      <AttrNames>
+        <Item Value="Model"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MrltAssetViewIterator" StaticList="false" Uses="LOV_Assetacctnum" id="Assetacctnum"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <tree IterBinding="MrltCustattribvaluesViewIterator" id="MrltCustattribvaluesView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrltCustattribvaluesView" Name="MrltCustattribvaluesView0">
+        <AttrNames>
+          <Item Value="tCustAttribDesc"/>
+          <Item Value="Custattribvalue"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="AssetCommentsViewIterator" id="Commcreated">
+      <AttrNames>
+        <Item Value="Commcreated"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssetCommentsViewIterator" id="Commcreatedby">
+      <AttrNames>
+        <Item Value="Commcreatedby"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssetCommentsViewIterator" id="Commitem">
+      <AttrNames>
+        <Item Value="Commitem"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssetCommentsViewIterator" id="Commline">
+      <AttrNames>
+        <Item Value="Commline"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssetCommentsViewIterator" id="Commtext">
+      <AttrNames>
+        <Item Value="Commtext"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssetCommentsViewIterator" id="Commtype">
+      <AttrNames>
+        <Item Value="Commtype"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssetCommentsViewIterator" id="Commupd">
+      <AttrNames>
+        <Item Value="Commupd"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssetCommentsViewIterator" id="Commupdby">
+      <AttrNames>
+        <Item Value="Commupdby"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="AssetCommentsViewIterator" id="Org">
+      <AttrNames>
+        <Item Value="Org"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="MNRDataControlDataControl"/>
+    <action IterBinding="AssetCommentsViewIterator" id="Create" RequiresUpdateModel="true" Action="createRow"/>
+    <action IterBinding="AssetCommentsViewIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="AssetCommentsViewIterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="AssetCommentsViewIterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+    <attributeValues IterBinding="MrltAssetViewIterator" id="Assetdocid">
+      <AttrNames>
+        <Item Value="Assetdocid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltDocumentsViewIterator" id="Docdesc">
+      <AttrNames>
+        <Item Value="Docdesc"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="MrltAssetViewIterator" Uses="LOV_Assetdocid" id="Assetdocid1"/>
+    <action IterBinding="MrltSparesViewIterator" id="DeleteSpare"
+            InstanceName="MNRDataControlDataControl.AssetDataControlNested.MrltSparesView"
+            DataControl="MNRDataControlDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="MrltSparesViewIterator" id="MrltSparesView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.asset.MrltSparesView" Name="MrltSparesView0">
+        <AttrNames>
+          <Item Value="tLabelDesc"/>
+          <Item Value="Partnum"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="PartsMaintView"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="its.mnr.mp5.vo.parts.PartsMaintView" Name="MrltSparesView1">
+        <AttrNames>
+          <Item Value="ParCode"/>
+          <Item Value="ParClassOrg"/>
+          <Item Value="ParClass"/>
+          <Item Value="ParBaseprice"/>
+          <Item Value="ParAvgprice"/>
+          <Item Value="ParBuyer"/>
+          <Item Value="ParCreated"/>
+          <Item Value="ParCreatedby"/>
+          <Item Value="ParDesc"/>
+          <Item Value="ParLastprice"/>
+          <Item Value="ParNotused"/>
+          <Item Value="ParOrg"/>
+          <Item Value="ParPrefsup"/>
+          <Item Value="ParPrefsupOrg"/>
+          <Item Value="ParPrefsupprice"/>
+          <Item Value="ParPrefuom"/>
+          <Item Value="ParStdprice"/>
+          <Item Value="ParTax"/>
+          <Item Value="ParUom"/>
+          <Item Value="ParUpdated"/>
+          <Item Value="ParUpdatedby"/>
+          <Item Value="tClassSwitcher"/>
+          <Item Value="ItsGl"/>
+          <Item Value="ItsCyclecnt"/>
+          <Item Value="tPrefSup"/>
+          <Item Value="tParCode"/>
+          <Item Value="tTotalStoQty"/>
+          <Item Value="tPostedParNotused"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MrltSparesViewIterator" id="CreateInsertSpare" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <attributeValues IterBinding="MrltSparesViewIterator" id="Item">
+      <AttrNames>
+        <Item Value="Item"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="MrltSparesViewIterator" Uses="LOV_Partnum" id="Partnum"/>
+    <action IterBinding="MrltAssetViewIterator" id="CreateInsert1" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <list IterBinding="MrltAssetViewIterator" StaticList="false" Uses="LOV_Assetstatus" id="Assetstatus"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="MrltAssetViewIterator" StaticList="false" Uses="LOV_Criticality" id="Criticality"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <listOfValues StaticList="false" IterBinding="MrltAssetViewIterator" Uses="LOV_Assetmanufact" id="Assetmanufact1"/>
+    <listOfValues StaticList="false" IterBinding="MrltAssetViewIterator" Uses="LOV_Assetclass" id="Assetclass1"/>
+    <listOfValues StaticList="false" IterBinding="MrltAssetViewIterator" Uses="LOV_Uom" id="Uom"/>
+    <action IterBinding="MrltCustattribvaluesViewIterator" id="CreateInsert2" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <methodAction id="createAssetCustAttributes" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createAssetCustAttributes" IsViewObjectMethod="false"
+                  DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.AssetDataControlNested"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.createAssetCustAttributes_MNRDataControlDataControl_dataProvider_Root_AssetDataControlNested_createAssetCustAttributes_result"/>
+    <tree IterBinding="MrltAssetdocumentsViewIterator" id="MrltAssetdocumentsView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.asset.MrltAssetdocumentsView" Name="MrltAssetdocumentsView0">
+        <AttrNames>
+          <Item Value="Docid"/>
+          <Item Value="tDocDesc"/>
+          <Item Value="tDocType"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="MrltDocumentsView"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrltDocumentsView" Name="MrltAssetdocumentsView1">
+        <AttrNames>
+          <Item Value="Docid"/>
+          <Item Value="Docdesc"/>
+          <Item Value="Filesize"/>
+          <Item Value="Docfile"/>
+          <Item Value="Org"/>
+          <Item Value="Doctype"/>
+          <Item Value="Filetype"/>
+          <Item Value="Docname"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MrltAssetdocumentsViewIterator" id="Delete2" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <list IterBinding="MrltDocumentsViewIterator" StaticList="false" Uses="LOV_Doctype" id="Doctype"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <action IterBinding="MrltAssetdocumentsViewIterator" id="CreateInsertAssetDoc" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <attributeValues IterBinding="MrltAssetViewIterator" id="AssetOrg">
+      <AttrNames>
+        <Item Value="Org"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="MrltReadingViewIterator" id="MrltReadingView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrltReadingView" Name="MrltReadingView0">
+        <AttrNames>
+          <Item Value="Createdt"/>
+          <Item Value="tLabelDesc"/>
+          <Item Value="Readingitem"/>
+          <Item Value="Readingdate"/>
+          <Item Value="Readingvalue"/>
+          <Item Value="Readingdiff"/>
+          <Item Value="Uom"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MrltDocumentsViewIterator" id="CreateInsertPhoto"
+            InstanceName="MNRDataControlDataControl.AssetDataControlNested.MrltDocumentsView"
+            DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues IterBinding="MrltAssetdocumentsViewIterator" id="tDocDesc">
+      <AttrNames>
+        <Item Value="tDocDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltAssetdocumentsViewIterator" id="tDocType">
+      <AttrNames>
+        <Item Value="tDocType"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="MrltAssetdocumentsViewIterator" Uses="LOV_Docid" id="Docid"/>
+    <list IterBinding="MrltAssetViewIterator" StaticList="false" Uses="LOV_Isresource" id="Isresource"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="MrltAssetViewIterator" StaticList="false" Uses="LOV_Notavailable" id="Notavailable"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="MrltAssetViewIterator" id="Serialno">
+      <AttrNames>
+        <Item Value="Serialno"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="AssetWOTotalsViewIterator" id="AssetWOTotalsView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.workorder.WOTotalsView" Name="AssetWOTotalsView0">
+        <AttrNames>
+          <Item Value="Wo"/>
+          <Item Value="Wodate"/>
+          <Item Value="Wocreated"/>
+          <Item Value="Wocompleted"/>
+          <Item Value="Wostatus"/>
+          <Item Value="Ttllbrhrs"/>
+          <Item Value="Ttllbrcst"/>
+          <Item Value="Ttlpartcst"/>
+          <Item Value="Ttlwo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="MrltSparesViewIterator" StaticList="false" Uses="LOV_Sparelabel" id="Sparelabel"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <methodAction IterBinding="MrltAssetViewIterator" id="copyAsset" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="copyAsset" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                  InstanceName="bindings.MrltAssetViewIterator.currentRow" IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.copyAsset_copyAsset_copyAsset_result">
+      <NamedData NDName="PCOPYASSET" NDType="java.lang.String" NDValue="${bindings.copyAsset_PCOPYASSET}"/>
+      <NamedData NDName="PCOPYORG" NDType="java.lang.String" NDValue="${bindings.copyAsset_PCOPYORG}"/>
+      <NamedData NDName="PNEWASSET" NDType="java.lang.String" NDValue="${bindings.copyAsset_PNEWASSET}"/>
+      <NamedData NDName="PNEWMODEL" NDType="java.lang.String" NDValue="${bindings.copyAsset_PNEWMODEL}"/>
+      <NamedData NDName="PNEWSERIAL" NDType="java.lang.String" NDValue="${bindings.copyAsset_PNEWSERIAL}"/>
+    </methodAction>
+    <attributeValues IterBinding="variables" id="PCOPYASSET">
+      <AttrNames>
+        <Item Value="copyAsset_PCOPYASSET"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="PCOPYORG">
+      <AttrNames>
+        <Item Value="copyAsset_PCOPYORG"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="PNEWASSET">
+      <AttrNames>
+        <Item Value="copyAsset_PNEWASSET"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="PNEWMODEL">
+      <AttrNames>
+        <Item Value="copyAsset_PNEWMODEL"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="PNEWSERIAL">
+      <AttrNames>
+        <Item Value="copyAsset_PNEWSERIAL"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="return">
+      <AttrNames>
+        <Item Value="copyAsset_return"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltAssetViewIterator" id="tPostedAssetDocId">
+      <AttrNames>
+        <Item Value="tPostedAssetDocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltDocumentsViewIterator" id="Docid1">
+      <AttrNames>
+        <Item Value="Docid"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltDocumentsViewIterator" id="Docfile">
+      <AttrNames>
+        <Item Value="Docfile"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MrltSparesViewIterator" id="Org1">
+      <AttrNames>
+        <Item Value="Org"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

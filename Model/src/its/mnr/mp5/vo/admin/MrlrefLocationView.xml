@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrlrefLocationView"
+  Version="11.1.2.60.81"
+  SelectList="MrlrefLocation.LOCATIONID, 
+       MrlrefLocation.COMPONENTID, 
+       MrlrefLocation.LOCDESCRIPTION, 
+       MrlrefLocation.LOCCODE, 
+       MrlrefLocation.LOCACTIVE, 
+       MrlrefLocation.LOCCDX"
+  FromList="MRLREF_LOCATION MrlrefLocation"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchSize="10"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All">
+  <ViewAccessor
+    Name="LocationListByCompId1"
+    ViewObjectName="its.mnr.mp5.lov.LocationListByCompId"
+    FetchSize="5">
+    <ParameterMap>
+      <PIMap Variable="BINDLocListByCompId">
+        <TransientExpression><![CDATA[Componentid]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <EntityUsage
+    Name="MrlrefLocation"
+    Entity="its.mnr.mp5.eo.master.MrlrefLocation"/>
+  <ViewAttribute
+    Name="Locationid"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Locationid"
+    EntityUsage="MrlrefLocation"
+    AliasName="LOCATIONID"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="Componentid"
+    IsUnique="true"
+    PrecisionRule="true"
+    EntityAttrName="Componentid"
+    EntityUsage="MrlrefLocation"
+    AliasName="COMPONENTID"/>
+  <ViewAttribute
+    Name="Locdescription"
+    PrecisionRule="true"
+    EntityAttrName="Locdescription"
+    EntityUsage="MrlrefLocation"
+    AliasName="LOCDESCRIPTION"/>
+  <ViewAttribute
+    Name="Loccode"
+    IsUnique="true"
+    PrecisionRule="true"
+    EntityAttrName="Loccode"
+    EntityUsage="MrlrefLocation"
+    AliasName="LOCCODE"/>
+  <ViewAttribute
+    Name="Locactive"
+    PrecisionRule="true"
+    EntityAttrName="Locactive"
+    EntityUsage="MrlrefLocation"
+    AliasName="LOCACTIVE"
+    DefaultValue="N"/>
+  <ViewAttribute
+    Name="Loccdx"
+    PrecisionRule="true"
+    EntityAttrName="Loccdx"
+    EntityUsage="MrlrefLocation"
+    AliasName="LOCCDX"
+    DefaultValue="N"/>
+</ViewObject>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltEstimatetaskdetailFk1Assoc"
+  Version="11.1.2.60.81">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="MrltEstimate"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.eo.local.MrltEstimate"
+    LockLevel="NONE">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="MrltEstimate"/>
+      <Attr Name="_foreignKey" Value="its.mnr.mp5.eo.local.MrltEstimate.MrltEstimatePk"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltEstimate.Estid"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="MrltEstimatetaskdetail"
+    Cardinality="-1"
+    Owner="its.mnr.mp5.eo.local.MrltEstimatetaskdetail">
+    <DesignTime>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="MrltEstimatetaskdetail"/>
+      <Attr Name="_foreignKey" Value="its.mnr.mp5.eo.local.MrltEstimatetaskdetail.MrltEstimatetaskdetailFk1"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltEstimatetaskdetail.Estid"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

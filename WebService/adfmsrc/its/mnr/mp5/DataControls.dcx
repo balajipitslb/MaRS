@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<DataControlConfigs xmlns="http://xmlns.oracle.com/adfm/configuration" version="11.1.2.60.81" id="DataControls"
+                    Package="its.mnr.mp5">
+  <AdapterDataControl id="MP5TMSWS" FactoryClass="oracle.adf.model.adapter.DataControlFactoryImpl"
+                      ImplDef="oracle.adfinternal.model.adapter.webservice.WSDefinition" SupportsTransactions="false"
+                      SupportsSortCollection="false" SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true" Definition="its.mnr.mp5.MP5TMSWS"
+                      BeanClass="its.mnr.mp5.MP5TMSWS" xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <Source>
+      <definition xmlns="http://xmlns.oracle.com/adfm/adapter/webservice" name="MP5TMSWS" version="1.0"
+                  provider="oracle.adfinternal.model.adapter.webservice.provider.soap.SOAPProvider"
+                  wsdl="http://marstmsws/MaRSWebSvc/MaRSWebSvc.asmx?WSDL" UsePersistedStructure="false">
+        <service name="MP5_x0020_Service" namespace="http://ITSLB.com/" connection="MP5TMSWS">
+          <port name="MP5_x0020_ServiceSoap">
+            <operation name="Get_USerInfo">
+              <dataformat format="XML"/>
+            </operation>
+            <operation name="Update_BIT">
+              <dataformat format="XML"/>
+            </operation>
+            <operation name="Get_EquipInfo"/>
+          </port>
+        </service>
+      </definition>
+    </Source>
+  </AdapterDataControl>
+</DataControlConfigs>

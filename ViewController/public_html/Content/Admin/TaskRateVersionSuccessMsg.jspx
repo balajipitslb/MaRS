@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.TaskRateVersionSuccessMsgBundle']}"/>
+    <af:document title="#{viewcontrollerBundle.ACCOUNTRATEVERSIONMESSAGE}" id="d1">
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelHeader text=" " id="ph1"
+                                    inlineStyle="background-color:White; border-color:Silver; border-style:solid; border-width:2px;"
+                                    icon="#{resource['images:info.png']}">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t1">
+                                <af:button id="ctb1" action="CancelExit"
+                                           shortDesc="#{viewcontrollerBundle.CLOSEANDRETURNTOPREVIOUSSCREEN}"
+                                           icon="#{resource['images:terminate.png']}">
+                                    <af:setActionListener from="#{pageFlowScope.Return}"
+                                                          to="#{pageFlowScope.NewAccountRateId}"/>
+                                </af:button>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                            <af:panelFormLayout id="pfl1"
+                                                inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px; padding:5px;">
+                            <af:spacer width="10" height="40" id="s1"/>
+                            <af:outputText value="#{pageFlowScope.Return}" id="ot5" inlineStyle="color:Red;"/>
+                            <af:spacer width="10" height="10" id="s2"/>
+                            <af:outputText value="New Account Rate Version created for  #{pageFlowScope.psfAcctnum} " id="ot1"/>
+                        </af:panelFormLayout>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

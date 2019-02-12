@@ -1,0 +1,157 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="its.mnr.mp5.model.MNRDataControl">
+      <AppModuleConfig jbo.project="its.mnr.mp5.model.Model1" DeployPlatform="LOCAL" name="MNRDataControlLocal" ApplicationName="its.mnr.mp5.model.MNRDataControl">
+         <AM-Pooling jbo.ampool.maxinactiveage="900000" jbo.ampool.initpoolsize="10" jbo.ampool.maxpoolsize="45" jbo.recyclethreshold="45" jbo.ampool.maxavailablesize="45" jbo.ampool.minavailablesize="10" jbo.ampool.monitorsleepinterval="900000"/>
+         <Database jbo.locking.mode="optimistic" jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.MNRDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+      <AppModuleConfig jbo.project="its.mnr.mp5.model.Model1" DeployPlatform="LOCAL" name="MNRDataControlShared" ApplicationName="its.mnr.mp5.model.MNRDataControl">
+         <AM-Pooling jbo.ampool.maxinactiveage="900000" jbo.ampool.initpoolsize="10" jbo.ampool.maxpoolsize="45" jbo.ampool.dynamicjdbccredentials="false" jbo.recyclethreshold="45" jbo.ampool.maxavailablesize="45" jbo.ampool.isuseexclusive="false" jbo.ampool.minavailablesize="10" jbo.ampool.resetnontransactionalstate="false" jbo.ampool.monitorsleepinterval="900000"/>
+         <Database jbo.locking.mode="optimistic" jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.MNRDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="its.mnr.mp5.model.MasterDataControl">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="MasterDataControlLocal" ApplicationName="its.mnr.mp5.model.MasterDataControl">
+         <AM-Pooling jbo.ampool.maxpoolsize="10"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.MasterDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="MasterDataControlShared" ApplicationName="its.mnr.mp5.model.MasterDataControl">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="10" jbo.ampool.resetnontransactionalstate="false"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.MasterDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="its.mnr.mp5.model.LOVDataControl">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="LOVDataControlLocal" ApplicationName="its.mnr.mp5.model.LOVDataControl">
+         <AM-Pooling jbo.ampool.maxpoolsize="10"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.LOVDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="LOVDataControlShared" ApplicationName="its.mnr.mp5.model.LOVDataControl">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="10" jbo.ampool.resetnontransactionalstate="false"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.LOVDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="its.mnr.mp5.model.BillingRatesDataControl">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="LocalDataControlLocal" ApplicationName="its.mnr.mp5.model.BillingRatesDataControl">
+         <AM-Pooling jbo.ampool.maxpoolsize="10"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.BillingRatesDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="LocalDataControlShared" ApplicationName="its.mnr.mp5.model.BillingRatesDataControl">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="10" jbo.ampool.resetnontransactionalstate="false"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.BillingRatesDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="its.mnr.mp5.model.WODataControl">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="WODataControlLocal" ApplicationName="its.mnr.mp5.model.WODataControl">
+         <AM-Pooling jbo.ampool.maxpoolsize="10"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.WODataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="WODataControlShared" ApplicationName="its.mnr.mp5.model.WODataControl">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="10" jbo.ampool.resetnontransactionalstate="false"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.WODataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="its.mnr.mp5.model.INVDataControl">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="INVDataControlLocal" ApplicationName="its.mnr.mp5.model.INVDataControl">
+         <AM-Pooling jbo.ampool.maxpoolsize="10"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.INVDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="INVDataControlShared" ApplicationName="its.mnr.mp5.model.INVDataControl">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="10" jbo.ampool.resetnontransactionalstate="false"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.INVDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="its.mnr.mp5.model.KPIDataControl">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="KPIDataControlLocal" ApplicationName="its.mnr.mp5.model.KPIDataControl">
+         <AM-Pooling jbo.ampool.maxpoolsize="10"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.KPIDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="KPIDataControlShared" ApplicationName="its.mnr.mp5.model.KPIDataControl">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="10" jbo.ampool.resetnontransactionalstate="false"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.KPIDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="its.mnr.mp5.model.PartsDataControl">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="PartsDataControlLocal" ApplicationName="its.mnr.mp5.model.PartsDataControl">
+         <AM-Pooling jbo.ampool.maxpoolsize="10"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.PartsDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="PartsDataControlShared" ApplicationName="its.mnr.mp5.model.PartsDataControl">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="10" jbo.ampool.resetnontransactionalstate="false"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.PartsDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="its.mnr.mp5.model.PORecvDataControl">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="PORecvDataControlLocal" ApplicationName="its.mnr.mp5.model.PORecvDataControl">
+         <AM-Pooling jbo.ampool.maxpoolsize="10"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.PORecvDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+      <AppModuleConfig jbo.project="its.mnr.mp5.model.Model1" DeployPlatform="LOCAL" name="PORecvDataControlShared" ApplicationName="its.mnr.mp5.model.PORecvDataControl">
+         <AM-Pooling jbo.ampool.maxpoolsize="10" jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.resetnontransactionalstate="false"/>
+         <Database jbo.locking.mode="optimistic" jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.PORecvDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="its.mnr.mp5.model.CCDataControl">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="CCDataControlLocal" ApplicationName="its.mnr.mp5.model.CCDataControl">
+         <AM-Pooling jbo.ampool.maxpoolsize="10"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.CCDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="CCDataControlShared" ApplicationName="its.mnr.mp5.model.CCDataControl">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="10" jbo.ampool.resetnontransactionalstate="false"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.CCDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <AppModuleConfigBag ApplicationName="its.mnr.mp5.model.AssetDataControl">
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="AssetDataControlLocal" ApplicationName="its.mnr.mp5.model.AssetDataControl">
+         <AM-Pooling jbo.ampool.maxpoolsize="10"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.AssetDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+      <AppModuleConfig DeployPlatform="LOCAL" jbo.project="its.mnr.mp5.model.Model1" name="AssetDataControlShared" ApplicationName="its.mnr.mp5.model.AssetDataControl">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.isuseexclusive="false" jbo.ampool.maxpoolsize="10" jbo.ampool.resetnontransactionalstate="false"/>
+         <Database jbo.TypeMapEntries="OracleApps" jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="its.mnr.mp5.model.AssetDataControl"/>
+         <Custom JDBCDataSource="java:comp/env/jdbc/MP5DS"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

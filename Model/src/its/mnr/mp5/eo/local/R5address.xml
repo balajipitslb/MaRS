@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5address"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="MP5PRD.R5ADDRESS"
+  AliasName="R5address"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.eo.local.R5addressImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|DML"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="AdrRentity"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="ADR_RENTITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdrCode"
+    IsNotNull="true"
+    Precision="40"
+    ColumnName="ADR_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdrRtype"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="ADR_RTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdrText"
+    Precision="2000"
+    ColumnName="ADR_TEXT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2000"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdrAddress1"
+    Precision="64"
+    ColumnName="ADR_ADDRESS1"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="64"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdrAddress2"
+    Precision="64"
+    ColumnName="ADR_ADDRESS2"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="64"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdrAddress3"
+    Precision="64"
+    ColumnName="ADR_ADDRESS3"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="64"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdrCity"
+    Precision="20"
+    ColumnName="ADR_CITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdrState"
+    Precision="30"
+    ColumnName="ADR_STATE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdrZip"
+    Precision="10"
+    ColumnName="ADR_ZIP"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdrCountry"
+    Precision="30"
+    ColumnName="ADR_COUNTRY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdrPhone"
+    Precision="50"
+    ColumnName="ADR_PHONE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdrPhoneextn"
+    Precision="50"
+    ColumnName="ADR_PHONEEXTN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdrFax"
+    Precision="50"
+    ColumnName="ADR_FAX"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdrEmail"
+    Precision="180"
+    ColumnName="ADR_EMAIL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDRESS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="180"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5companies"
+    Association="its.mnr.mp5.eo.assoc.CompanyAddressAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.CompanyAddressAssoc.R5companies"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.CompanyAddressAssoc.R5address"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="R5prikAdr"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_ADR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5address.AdrCode"/>
+      <Item Value="its.mnr.mp5.eo.local.R5address.AdrRentity"/>
+      <Item Value="its.mnr.mp5.eo.local.R5address.AdrRtype"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Adr">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_ENT"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_ADR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5address.AdrRentity"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_R5address">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="UK_R5COMPANIES"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_R5ADDRESS"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5address.AdrCode"/>
+    </AttrArray>
+  </Key>
+</Entity>

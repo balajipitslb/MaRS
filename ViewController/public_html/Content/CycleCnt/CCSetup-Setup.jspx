@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document id="d1" title="Create List">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/CCSetupTrainTemplate.jspx" id="pt1">
+                <f:facet name="body">
+                    <af:panelHeader text="Setup" id="ph1">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t1">
+                                <af:button id="ctb1" immediate="true" icon="#{resource['images:shuttle_left.png']}"
+                                           disabled="#{pageFlowScope.TrainControllerBean.previousDisabled}"
+                                           rendered="false"/>
+                                <af:button id="ctb2"
+                                           action="#{controllerContext.currentViewPort.taskFlowContext.trainModel.getNext}"
+                                           immediate="true" icon="#{resource['images:shuttle_right.png']}"
+                                           disabled="#{pageFlowScope.TrainControllerBean.nextDisabled or empty bindings.Ccdesc.inputValue or empty bindings.RangeType.inputValue}"
+                                           partialTriggers="it1 sor1">
+                                    <af:setActionListener from="#{bindings.RangeType.inputValue}"
+                                                          to="#{pageFlowScope.psfRangeType}"/>
+                                </af:button>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:panelFormLayout id="pfl1">
+                            <af:inputText value="#{bindings.Listid.inputValue}" label="#{bindings.Listid.hints.label}"
+                                          required="#{bindings.Listid.hints.mandatory}"
+                                          columns="#{bindings.Listid.hints.displayWidth}"
+                                          maximumLength="#{bindings.Listid.hints.precision}"
+                                          shortDesc="#{bindings.Listid.hints.tooltip}" id="it5" readOnly="true">
+                                <f:validator binding="#{bindings.Listid.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.Ccdesc.inputValue}" label="#{bindings.Ccdesc.hints.label}"
+                                          required="#{bindings.Ccdesc.hints.mandatory}"
+                                          columns="#{bindings.Ccdesc.hints.displayWidth}"
+                                          maximumLength="#{bindings.Ccdesc.hints.precision}"
+                                          shortDesc="#{bindings.Ccdesc.hints.tooltip}" id="it1" autoSubmit="true"
+                                          autoTab="true">
+                                <f:validator binding="#{bindings.Ccdesc.validator}"/>
+                            </af:inputText>
+                            <af:panelLabelAndMessage label="#{bindings.Ccstatus.hints.label}" id="plam1">
+                                <af:outputText value="#{bindings.Ccstatus.inputValue}" id="ot1"/>
+                            </af:panelLabelAndMessage>
+                            <af:inputDate value="#{bindings.Created.inputValue}" label="#{bindings.Created.hints.label}"
+                                          required="#{bindings.Created.hints.mandatory}"
+                                          columns="#{bindings.Created.hints.displayWidth}"
+                                          shortDesc="#{bindings.Created.hints.tooltip}" id="id1" autoSubmit="true"
+                                          readOnly="true">
+                                <f:validator binding="#{bindings.Created.validator}"/>
+                                <af:convertDateTime pattern="#{bindings.Created.format}"/>
+                            </af:inputDate>
+                            <af:inputText value="#{bindings.Store.inputValue}" label="#{bindings.Store.hints.label}"
+                                          required="#{bindings.Store.hints.mandatory}"
+                                          columns="#{bindings.Store.hints.displayWidth}"
+                                          maximumLength="#{bindings.Store.hints.precision}"
+                                          shortDesc="#{bindings.Store.hints.tooltip}" id="it3" autoSubmit="true"
+                                          readOnly="true">
+                                <f:validator binding="#{bindings.Store.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.Org.inputValue}" label="#{bindings.Org.hints.label}"
+                                          required="#{bindings.Org.hints.mandatory}"
+                                          columns="#{bindings.Org.hints.displayWidth}"
+                                          maximumLength="#{bindings.Org.hints.precision}"
+                                          shortDesc="#{bindings.Org.hints.tooltip}" id="it4" autoSubmit="true"
+                                          readOnly="true">
+                                <f:validator binding="#{bindings.Org.validator}"/>
+                            </af:inputText>
+                            <af:panelLabelAndMessage label="#{bindings.Sttknum.hints.label}" id="plam2">
+                                <af:outputText value="#{bindings.Sttknum.inputValue}" id="ot2"/>
+                            </af:panelLabelAndMessage>
+                            <af:spacer width="10" height="10" id="s1"/>
+                            <af:group id="g1">
+                                <af:selectOneRadio value="#{bindings.RangeType.inputValue}"
+                                                   label="#{bindings.RangeType.label}"
+                                                   required="#{bindings.RangeType.hints.mandatory}"
+                                                   shortDesc="#{bindings.RangeType.hints.tooltip}" id="sor1"
+                                                   layout="horizontal" autoSubmit="true"
+                                                   inlineStyle="margin-right:50.0pt;">
+                                    <f:selectItems value="#{bindings.RangeType.items}" id="si1"/>
+                                </af:selectOneRadio>
+                            </af:group>
+                        </af:panelFormLayout>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:TrainControllerBean-->
+</f:view>

@@ -1,0 +1,869 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5parts"
+  Version="11.1.2.64.36"
+  DBObjectType="table"
+  DBObjectName="R5PARTS"
+  AliasName="R5parts"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.eo.local.R5partsImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="SupplierExistenceChk"
+    ViewObjectName="its.mnr.mp5.lov.SupplierExistence"
+    MaxFetchSize="1">
+    <ParameterMap>
+      <PIMap Variable="BPART">
+        <TransientExpression><![CDATA[ParCode]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="BPARTORG">
+        <TransientExpression><![CDATA[ParOrg]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="BSUPP">
+        <TransientExpression><![CDATA[ParPrefsup]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="BSUPPORG">
+        <TransientExpression><![CDATA[ParPrefsupOrg]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <Attribute
+    Name="ParCode"
+    Precision="18"
+    ColumnName="PAR_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="18"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParDesc"
+    Precision="45"
+    ColumnName="PAR_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+      <Attr Name="_diagramName" Value="Description"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5parts.ParDesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="ParClass"
+    Precision="4"
+    ColumnName="PAR_CLASS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParUom"
+    Precision="8"
+    ColumnName="PAR_UOM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParByasset"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="PAR_BYASSET"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    DefaultValue="-">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParBylot"
+    Precision="1"
+    ColumnName="PAR_BYLOT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    DefaultValue="-">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParCategory"
+    Precision="24"
+    ColumnName="PAR_CATEGORY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="24"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParBaseprice"
+    ColumnName="PAR_BASEPRICE"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="ParAvgprice"
+    ColumnName="PAR_AVGPRICE"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="ParLastprice"
+    ColumnName="PAR_LASTPRICE"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="ParStdprice"
+    ColumnName="PAR_STDPRICE"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="ParPrefsup"
+    Precision="17"
+    ColumnName="PAR_PREFSUP"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="17"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParPrefsupprice"
+    ColumnName="PAR_PREFSUPPRICE"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="ParPrefuom"
+    Precision="8"
+    ColumnName="PAR_PREFUOM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParCommodity"
+    Precision="4"
+    ColumnName="PAR_COMMODITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParSubcommodity"
+    Precision="4"
+    ColumnName="PAR_SUBCOMMODITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParTax"
+    Precision="10"
+    ColumnName="PAR_TAX"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"
+    DefaultValue="LAX">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParBuyer"
+    Precision="12"
+    ColumnName="PAR_BUYER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParSourcesystem"
+    Precision="45"
+    ColumnName="PAR_SOURCESYSTEM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParSourcecode"
+    Precision="45"
+    ColumnName="PAR_SOURCECODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParInterface"
+    ColumnName="PAR_INTERFACE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5PARTS"/>
+  <Attribute
+    Name="ParNotused"
+    Precision="1"
+    ColumnName="PAR_NOTUSED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParTracktype"
+    Precision="4"
+    ColumnName="PAR_TRACKTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    DefaultValue="TRPQ">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParTrackrtype"
+    Precision="4"
+    ColumnName="PAR_TRACKRTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    DefaultValue="TRPQ">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParTool"
+    Precision="12"
+    ColumnName="PAR_TOOL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParWardays"
+    Precision="5"
+    Scale="0"
+    ColumnName="PAR_WARDAYS"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="R5PARTS"/>
+  <Attribute
+    Name="ParOrg"
+    Precision="8"
+    ColumnName="PAR_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParClassOrg"
+    Precision="8"
+    ColumnName="PAR_CLASS_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParPrefsupOrg"
+    Precision="8"
+    ColumnName="PAR_PREFSUP_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParInspect"
+    Precision="1"
+    ColumnName="PAR_INSPECT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    DefaultValue="-">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParInsmethod"
+    Precision="8"
+    ColumnName="PAR_INSMETHOD"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParCodestructure"
+    Precision="255"
+    ColumnName="PAR_CODESTRUCTURE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="255"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParCreated"
+    ColumnName="PAR_CREATED"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"/>
+  <Attribute
+    Name="ParCreatedby"
+    Precision="12"
+    ColumnName="PAR_CREATEDBY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParUpdated"
+    ColumnName="PAR_UPDATED"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="ParUpdatedby"
+    Precision="12"
+    ColumnName="PAR_UPDATEDBY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ItsCyclecnt"
+    Precision="1"
+    ColumnName="ITS_CYCLECNT"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="R5PARTS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ItsGl"
+    Precision="5"
+    ColumnName="ITS_GL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="R5PARTS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="tParCode"
+    Precision="80"
+    ColumnName="T_PAR_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <TransientExpression><![CDATA[(ParCode == null ? null : ParCode + '#1')]]></TransientExpression>
+    <Dependencies>
+      <Item
+        Value="ParCode"/>
+    </Dependencies>
+  </Attribute>
+  <Attribute
+    Name="tTotalStoQty"
+    ColumnName="T_TOTAL_STO_QTY"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    IsPersistent="false"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[R5stock.sum("StoQty")]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5parts.tTotalStoQty_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="tPostedParNotused"
+    Precision="80"
+    ColumnName="T_POSTED_PAR_NOTUSED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[adf.object.getPostedAttribute(adf.object.getAttributeIndexOf("ParNotused"))]]></TransientExpression>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5matlparts"
+    Association="its.mnr.mp5.eo.assoc.R5fok2MlpAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok2MlpAssoc.R5matlparts"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok2MlpAssoc.R5parts"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5objects"
+    Association="its.mnr.mp5.eo.assoc.R5fok2ObjAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok2ObjAssoc.R5objects"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok2ObjAssoc.R5parts"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5translines"
+    Association="its.mnr.mp5.eo.assoc.R5fok1TrlAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1TrlAssoc.R5translines"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1TrlAssoc.R5parts"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5binstock"
+    Association="its.mnr.mp5.eo.assoc.PartsBinStockAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.PartsBinStockAssoc.R5binstock"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.PartsBinStockAssoc.R5parts"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5uoms"
+    Association="its.mnr.mp5.eo.assoc.R5fok1ParAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1ParAssoc.R5uoms"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1ParAssoc.R5parts"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5taxrates"
+    Association="its.mnr.mp5.eo.assoc.PartsTaxRateAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.PartsTaxRateAssoc.R5taxrates"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.PartsTaxRateAssoc.R5parts"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5companies"
+    Association="its.mnr.mp5.eo.assoc.PartsCompanyAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.PartsCompanyAssoc.R5companies"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.PartsCompanyAssoc.R5parts"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5catalogue"
+    Association="its.mnr.mp5.eo.assoc.R5fok1CatAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1CatAssoc.R5catalogue"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1CatAssoc.R5parts"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5addetails"
+    Association="its.mnr.mp5.eo.assoc.R5PartsR5AddetailsAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5PartsR5AddetailsAssoc.R5addetails"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5PartsR5AddetailsAssoc.R5parts"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5stock"
+    Association="its.mnr.mp5.eo.assoc.R5fok1StoAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1StoAssoc.R5stock"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1StoAssoc.R5parts"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5orderlines"
+    Association="its.mnr.mp5.eo.assoc.R5orderlinesR5partsAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5orderlinesR5partsAssoc.R5orderlines"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5orderlinesR5partsAssoc.R5parts"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="MrltSpares"
+    Association="its.mnr.mp5.eo.assoc.SparesPartsAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.SparesPartsAssoc.MrltSpares"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.SparesPartsAssoc.R5parts"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <ViewLinkAccessor
+    Name="SupplierPref"
+    ViewLink="its.mnr.mp5.vo.link.PartsCompanyLink"
+    ViewLinkEnd="its.mnr.mp5.vo.link.PartsCompanyLink.SupplierPref"
+    ViewLinkOtherEnd="its.mnr.mp5.vo.link.PartsCompanyLink.PartsMaintView"
+    Type="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+    IsUpdateable="false"/>
+  <Key
+    Name="R5chk1Par">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK1_PAR"/>
+      <Attr Name="_checkCondition" Value="PAR_BYASSET IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk2Par">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK2_PAR"/>
+      <Attr Name="_checkCondition" Value="PAR_BASEPRICE >= 0 AND PAR_BASEPRICE &lt;= 9999999999999.99"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk3Par">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK3_PAR"/>
+      <Attr Name="_checkCondition" Value="PAR_AVGPRICE >= 0 AND PAR_AVGPRICE &lt;= 9999999999999.99"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk4Par">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK4_PAR"/>
+      <Attr Name="_checkCondition" Value="PAR_LASTPRICE >= 0 AND PAR_LASTPRICE &lt;= 9999999999999.99"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk5Par">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK5_PAR"/>
+      <Attr Name="_checkCondition" Value="PAR_STDPRICE >= 0 AND PAR_STDPRICE &lt;= 9999999999999.99"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk6Par">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK6_PAR"/>
+      <Attr Name="_checkCondition" Value="PAR_PREFSUPPRICE >= 0 AND PAR_PREFSUPPRICE &lt;= 9999999999999.99"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk7Par">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK7_PAR"/>
+      <Attr Name="_checkCondition" Value="PAR_BYLOT IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk8Par">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK8_PAR"/>
+      <Attr Name="_checkCondition" Value="PAR_NOTUSED IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chk9Par">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHK9_PAR"/>
+      <Attr Name="_checkCondition"
+        Value="(PAR_CLASS IS NULL AND PAR_CLASS_ORG IS NULL) OR (PAR_CLASS IS NOT NULL AND PAR_CLASS_ORG IS NOT NULL)"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chkaPar">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHKA_PAR"/>
+      <Attr Name="_checkCondition"
+        Value="(PAR_PREFSUP IS NULL AND PAR_PREFSUP_ORG IS NULL) OR (PAR_PREFSUP IS NOT NULL AND PAR_PREFSUP_ORG IS NOT NULL)"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5chkbPar">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5CHKB_PAR"/>
+      <Attr Name="_checkCondition" Value="PAR_INSPECT IN ('+', '-')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn01Par">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN01_PAR"/>
+      <Attr Name="_checkCondition" Value="PAR_DESC IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn02Par">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN02_PAR"/>
+      <Attr Name="_checkCondition" Value="PAR_BYASSET IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5nn03Par">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5NN03_PAR"/>
+      <Attr Name="_checkCondition" Value="PAR_UOM IS NOT NULL"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5prikPar"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_PAR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5parts.ParCode"/>
+      <Item Value="its.mnr.mp5.eo.local.R5parts.ParOrg"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Par">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_UOM"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_PAR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5parts.ParUom"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok2Par">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_CMD"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK2_PAR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5parts.ParCommodity"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok3Par">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_CMD"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK3_PAR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5parts.ParSubcommodity"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok4Par">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_TAX"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK4_PAR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5parts.ParTax"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok5Par">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_USR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK5_PAR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5parts.ParBuyer"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok7Par">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_TOO"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK7_PAR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5parts.ParTool"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok8Par">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_MTH"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK8_PAR"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5parts.ParInsmethod"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

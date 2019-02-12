@@ -1,0 +1,299 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.ComponentLocationMasterBundle']}"/>
+    <af:document title="#{viewcontrollerBundle.PAGEHEADING}" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelHeader text=" " id="ph2">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t5"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px; background-color:White;">
+                                <af:spacer width="10" height="10" id="s4"/>
+                                <af:button actionListener="#{bindings.Commit.execute}"
+                                           text="#{viewcontrollerBundle.APPLY}" disabled="#{!bindings.Commit.enabled}"
+                                           id="ctb5" icon="#{resource['images:commit.png']}"
+                                           shortDesc="#{viewcontrollerBundle.SAVE_RECORD}"
+                                           partialTriggers="pc1:t1 pc2:t3"/>
+                                <af:button actionListener="#{bindings.Rollback.execute}"
+                                           text="#{viewcontrollerBundle.CANCEL}"
+                                           disabled="#{!bindings.Rollback.enabled}" immediate="true" id="ctb6"
+                                           icon="#{resource['images:undo.png']}"
+                                           shortDesc="#{viewcontrollerBundle.CANCEL_CHANGES}"
+                                           partialTriggers="pc1:t1 pc2:t3">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button id="ctb7" icon="#{resource['images:terminate.png']}"
+                                           shortDesc="#{viewcontrollerBundle.CLOSE_AND_RETURN_TO_PREVIOUS_S}"
+                                           actionListener="#{ModuleNavBean.goExit}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:panelTabbed id="pt2">
+                            <af:showDetailItem text="#{viewcontrollerBundle.COMPONENT}" id="sdi1" inflexibleHeight="50"
+                                               flex="0">
+                                <af:panelGroupLayout layout="vertical" id="pgl1">
+                                    <af:panelHeader text=" " id="ph1">
+                                        <af:query id="qryId1" headerText="Search" disclosed="true"
+                                                  value="#{bindings.AllComponentsQuery1.queryDescriptor}"
+                                                  model="#{bindings.AllComponentsQuery1.queryModel}"
+                                                  queryListener="#{bindings.AllComponentsQuery1.processQuery}"
+                                                  queryOperationListener="#{bindings.AllComponentsQuery1.processQueryOperation}"
+                                                  resultComponentId="::pc1:t1"
+                                                  inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px;"
+                                                  rows="3" maxColumns="4" fieldWidth="200" modeChangeVisible="false"/>
+                                    </af:panelHeader>
+                                    <af:panelCollection id="pc1" inlineStyle="background-color:White; width:inherit;"
+                                                        defaultToolbarItemDisplay="icon">
+                                        <f:facet name="menus">
+                                            <af:menu text="#{viewcontrollerBundle.ACTION}" id="m2">
+                                                <af:commandMenuItem text="#{viewcontrollerBundle.EXPORT_ALL_TO_EXCEL}"
+                                                                    id="cmi1"
+                                                                    icon="#{resource['images:page_excel.png']}">
+                                                    <af:exportCollectionActionListener type="excelHTML" exportedId="t1"
+                                                                                       exportedRows="all"
+                                                                                       title="My Exported Components"
+                                                                                       filename="Components"/>
+                                                </af:commandMenuItem>
+                                                <af:commandMenuItem text="#{viewcontrollerBundle.EXPORT_SELECTED_TO_EXCEL}"
+                                                                    id="cmi2"
+                                                                    icon="#{resource['images:page_excel.png']}">
+                                                    <af:exportCollectionActionListener type="excelHTML" exportedId="t1"
+                                                                                       exportedRows="selected"
+                                                                                       filename="Components"
+                                                                                       title="My Exported Components"/>
+                                                </af:commandMenuItem>
+                                                <af:commandMenuItem text="#{viewcontrollerBundle.PRINTABLE_PAGE}"
+                                                                    id="cmi3" icon="#{resource['images:print.png']}">
+                                                    <af:showPrintablePageBehavior/>
+                                                </af:commandMenuItem>
+                                            </af:menu>
+                                        </f:facet>
+                                        <f:facet name="toolbar">
+                                            <af:toolbar id="t2">
+                                                <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                                           disabled="#{!bindings.CreateInsert.enabled}" id="ctb1"
+                                                           icon="#{resource['images:add.png']}"
+                                                           shortDesc="#{viewcontrollerBundle.ADD_RECORD}"/>
+                                                <af:spacer width="10" height="10" id="s1"/>
+                                                <af:button actionListener="#{bindings.Delete.execute}"
+                                                           disabled="#{!bindings.Delete.enabled}" id="ctb2"
+                                                           icon="#{resource['images:delete.png']}"
+                                                           shortDesc="#{viewcontrollerBundle.DELETE_RECORD}"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.MrlrefComponentView1.collectionModel}" var="row"
+                                                  rows="#{bindings.MrlrefComponentView1.rangeSize}"
+                                                  emptyText="#{bindings.MrlrefComponentView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.MrlrefComponentView1.rangeSize}"
+                                                  rowBandingInterval="1"
+                                                  selectedRowKeys="#{bindings.MrlrefComponentView1.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.MrlrefComponentView1.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t1" editingMode="clickToEdit"
+                                                  partialTriggers="::ctb1 ::ctb2">
+                                            <af:column sortProperty="#{bindings.MrlrefComponentView1.hints.Componentid.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.MrlrefComponentView1.hints.Componentid.label}"
+                                                       id="c1" width="40">
+                                                <af:inputText value="#{row.bindings.Componentid.inputValue}"
+                                                              label="#{bindings.MrlrefComponentView1.hints.Componentid.label}"
+                                                              required="#{bindings.MrlrefComponentView1.hints.Componentid.mandatory}"
+                                                              columns="#{bindings.MrlrefComponentView1.hints.Componentid.displayWidth}"
+                                                              maximumLength="#{bindings.MrlrefComponentView1.hints.Componentid.precision}"
+                                                              shortDesc="#{bindings.MrlrefComponentView1.hints.Componentid.tooltip}"
+                                                              id="it1" readOnly="true">
+                                                    <f:validator binding="#{row.bindings.Componentid.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrlrefComponentView1.hints.Servicegroupid.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.MrlrefComponentView1.hints.Servicegroupid.label}"
+                                                       id="c2" width="175">
+                                                <af:selectOneChoice value="#{row.bindings.Servicegroupid.inputValue}"
+                                                                    label="#{row.bindings.Servicegroupid.label}"
+                                                                    required="#{bindings.MrlrefComponentView1.hints.Servicegroupid.mandatory}"
+                                                                    shortDesc="#{bindings.MrlrefComponentView1.hints.Servicegroupid.tooltip}"
+                                                                    id="soc1" autoSubmit="true" showRequired="true">
+                                                    <f:selectItems value="#{row.bindings.Servicegroupid.items}"
+                                                                   id="si1"/>
+                                                </af:selectOneChoice>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrlrefComponentView1.hints.Compwotype.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.MrlrefComponentView1.hints.Compwotype.label}"
+                                                       id="c3" width="50" align="center">
+                                                <af:selectOneChoice value="#{row.bindings.Compwotype.inputValue}"
+                                                                    label="#{row.bindings.Compwotype.label}"
+                                                                    required="#{bindings.MrlrefComponentView1.hints.Compwotype.mandatory}"
+                                                                    shortDesc="#{bindings.MrlrefComponentView1.hints.Compwotype.tooltip}"
+                                                                    id="soc2" autoSubmit="true" showRequired="true"
+                                                                    partialTriggers="soc1">
+                                                    <f:selectItems value="#{row.bindings.Compwotype.items}" id="si2"/>
+                                                </af:selectOneChoice>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrlrefComponentView1.hints.Compdescription.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.MrlrefComponentView1.hints.Compdescription.label}"
+                                                       id="c4" width="175">
+                                                <af:inputText value="#{row.bindings.Compdescription.inputValue}"
+                                                              label="#{bindings.MrlrefComponentView1.hints.Compdescription.label}"
+                                                              required="#{bindings.MrlrefComponentView1.hints.Compdescription.mandatory}"
+                                                              columns="#{bindings.MrlrefComponentView1.hints.Compdescription.displayWidth}"
+                                                              maximumLength="#{bindings.MrlrefComponentView1.hints.Compdescription.precision}"
+                                                              shortDesc="#{bindings.MrlrefComponentView1.hints.Compdescription.tooltip}"
+                                                              id="it2" autoSubmit="true" showRequired="true">
+                                                    <f:validator binding="#{row.bindings.Compdescription.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrlrefComponentView1.hints.Compcode.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.MrlrefComponentView1.hints.Compcode.label}"
+                                                       id="c5" width="40" align="center">
+                                                <af:inputText value="#{row.bindings.Compcode.inputValue}"
+                                                              label="#{bindings.MrlrefComponentView1.hints.Compcode.label}"
+                                                              required="#{bindings.MrlrefComponentView1.hints.Compcode.mandatory}"
+                                                              columns="#{bindings.MrlrefComponentView1.hints.Compcode.displayWidth}"
+                                                              maximumLength="#{bindings.MrlrefComponentView1.hints.Compcode.precision}"
+                                                              shortDesc="#{bindings.MrlrefComponentView1.hints.Compcode.tooltip}"
+                                                              id="it3" autoSubmit="true" showRequired="true">
+                                                    <f:validator binding="#{row.bindings.Compcode.validator}"/>
+                                                </af:inputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrlrefComponentView1.hints.Compactive.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.MrlrefComponentView1.hints.Compactive.label}"
+                                                       id="c6" align="center" width="40">
+                                                <af:selectBooleanCheckbox value="#{row.bindings.Compactive.inputValue}"
+                                                                          label="#{row.bindings.Compactive.label}"
+                                                                          shortDesc="#{bindings.MrlrefComponentView1.hints.Compactive.tooltip}"
+                                                                          id="sbc1" autoSubmit="true"
+                                                                          showRequired="true"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.MrlrefComponentView1.hints.Compcdx.name}"
+                                                       sortable="true"
+                                                       headerText="#{bindings.MrlrefComponentView1.hints.Compcdx.label}"
+                                                       id="c7" align="center" width="40">
+                                                <af:selectBooleanCheckbox value="#{row.bindings.Compcdx.inputValue}"
+                                                                          label="#{row.bindings.Compcdx.label}"
+                                                                          shortDesc="#{bindings.MrlrefComponentView1.hints.Compcdx.tooltip}"
+                                                                          id="sbc2" autoSubmit="true"
+                                                                          showRequired="true"/>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelGroupLayout>
+                            </af:showDetailItem>
+                            <af:showDetailItem text="#{viewcontrollerBundle.LOCATION}" id="sdi2">
+                                <af:panelCollection id="pc2" inlineStyle="width:inherit;"
+                                                    defaultToolbarItemDisplay="icon">
+                                    <f:facet name="menus">
+                                        <af:menu text="#{viewcontrollerBundle.ACTION}" id="m3">
+                                            <af:commandMenuItem text="#{viewcontrollerBundle.EXPORT_ALL_TO_EXCEL}"
+                                                                id="cmi6" icon="#{resource['images:page_excel.png']}">
+                                                <af:exportCollectionActionListener type="excelHTML" exportedId="t3"
+                                                                                   exportedRows="all"
+                                                                                   filename="LocationCodes"
+                                                                                   title="My Export Location Codes"/>
+                                            </af:commandMenuItem>
+                                            <af:commandMenuItem text="#{viewcontrollerBundle.EXPORT_SELECTED_TO_EXCEL}"
+                                                                id="cmi5" icon="#{resource['images:page_excel.png']}">
+                                                <af:exportCollectionActionListener type="excelHTML" exportedId="t3"
+                                                                                   exportedRows="selected"
+                                                                                   filename="LocationCodes"
+                                                                                   title="My Export Location Codes"/>
+                                            </af:commandMenuItem>
+                                            <af:commandMenuItem text="#{viewcontrollerBundle.PRINTABLE_PAGE}" id="cmi4"
+                                                                icon="#{resource['images:print.png']}">
+                                                <af:showPrintablePageBehavior/>
+                                            </af:commandMenuItem>
+                                        </af:menu>
+                                    </f:facet>
+                                    <f:facet name="toolbar">
+                                        <af:toolbar id="t4">
+                                            <af:button actionListener="#{bindings.CreateInsert1.execute}"
+                                                       disabled="#{!bindings.CreateInsert1.enabled}" id="ctb3"
+                                                       icon="#{resource['images:add.png']}"
+                                                       shortDesc="#{viewcontrollerBundle.ADD_RECORD}"/>
+                                            <af:spacer width="10" height="10" id="s3"/>
+                                            <af:button actionListener="#{bindings.Delete1.execute}"
+                                                       disabled="#{!bindings.Delete1.enabled}" id="ctb4"
+                                                       icon="#{resource['images:delete.png']}"
+                                                       shortDesc="#{viewcontrollerBundle.DELETE_RECORD}"/>
+                                        </af:toolbar>
+                                    </f:facet>
+                                    <f:facet name="statusbar"/>
+                                    <af:table value="#{bindings.MrlrefLocationView2.collectionModel}" var="row"
+                                              rows="#{bindings.MrlrefLocationView2.rangeSize}"
+                                              emptyText="#{bindings.MrlrefLocationView2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              fetchSize="#{bindings.MrlrefLocationView2.rangeSize}"
+                                              rowBandingInterval="1"
+                                              selectedRowKeys="#{bindings.MrlrefLocationView2.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.MrlrefLocationView2.collectionModel.makeCurrent}"
+                                              rowSelection="single" id="t3" editingMode="clickToEdit"
+                                              partialTriggers="::ctb3 ::ctb4">
+                                        <af:column headerText="#{bindings.MrlrefLocationView2.hints.Locationid.label}"
+                                                   id="c12" width="50">
+                                            <af:outputText value="#{row.Locationid}" id="ot1"/>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.MrlrefLocationView2.hints.Loccode.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.MrlrefLocationView2.hints.Loccode.label}"
+                                                   id="c8" width="50">
+                                            <af:inputText value="#{row.bindings.Loccode.inputValue}" simple="true"
+                                                          required="#{bindings.MrlrefLocationView2.hints.Loccode.mandatory}"
+                                                          columns="#{bindings.MrlrefLocationView2.hints.Loccode.displayWidth}"
+                                                          maximumLength="#{bindings.MrlrefLocationView2.hints.Loccode.precision}"
+                                                          shortDesc="#{bindings.MrlrefLocationView2.hints.Loccode.tooltip}"
+                                                          id="it4" autoSubmit="true">
+                                                <f:validator binding="#{row.bindings.Loccode.validator}"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.MrlrefLocationView2.hints.Locdescription.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.MrlrefLocationView2.hints.Locdescription.label}"
+                                                   id="c9" width="250">
+                                            <af:inputText value="#{row.bindings.Locdescription.inputValue}"
+                                                          label="#{bindings.MrlrefLocationView2.hints.Locdescription.label}"
+                                                          required="#{bindings.MrlrefLocationView2.hints.Locdescription.mandatory}"
+                                                          columns="#{bindings.MrlrefLocationView2.hints.Locdescription.displayWidth}"
+                                                          maximumLength="#{bindings.MrlrefLocationView2.hints.Locdescription.precision}"
+                                                          shortDesc="#{bindings.MrlrefLocationView2.hints.Locdescription.tooltip}"
+                                                          id="it5" autoSubmit="true" showRequired="true">
+                                                <f:validator binding="#{row.bindings.Locdescription.validator}"/>
+                                            </af:inputText>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.MrlrefLocationView2.hints.Locactive.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.MrlrefLocationView2.hints.Locactive.label}"
+                                                   id="c10" align="center" width="40">
+                                            <af:selectBooleanCheckbox value="#{row.bindings.Locactive.inputValue}"
+                                                                      label="#{row.bindings.Locactive.label}"
+                                                                      shortDesc="#{bindings.MrlrefLocationView2.hints.Locactive.tooltip}"
+                                                                      id="sbc3" autoSubmit="true" showRequired="true"/>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.MrlrefLocationView2.hints.Loccdx.name}"
+                                                   sortable="true"
+                                                   headerText="#{bindings.MrlrefLocationView2.hints.Loccdx.label}"
+                                                   id="c11" align="center" width="40">
+                                            <af:selectBooleanCheckbox value="#{row.bindings.Loccdx.inputValue}"
+                                                                      label="#{row.bindings.Loccdx.label}"
+                                                                      shortDesc="#{bindings.MrlrefLocationView2.hints.Loccdx.tooltip}"
+                                                                      id="sbc4" autoSubmit="true" showRequired="true"/>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelCollection>
+                            </af:showDetailItem>
+                        </af:panelTabbed>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

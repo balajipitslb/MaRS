@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5orders"
+  Version="12.1.3.10.8"
+  DBObjectType="TABLE"
+  DBObjectName="MP5PRD.R5ORDERS"
+  AliasName="R5orders"
+  BindingStyle="OracleName"
+  RowClass="its.mnr.mp5.eo.local.R5ordersImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="POApprovers"
+    ViewObjectName="its.mnr.mp5.lov.POApprovers"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="POApproversByCode"
+      FullName="its.mnr.mp5.lov.POApprovers.POApproversByCode"/>
+    <ParameterMap>
+      <PIMap Variable="bUsrcode">
+        <TransientExpression><![CDATA[adf.context.securityContext.userName.toUpperCase()]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="POTransactionExistence"
+    ViewObjectName="its.mnr.mp5.lov.POTransactionExistence"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="POTransactionExistenceRecvClsd"
+      FullName="its.mnr.mp5.lov.POTransactionExistence.POTransactionExistenceRecvClsd"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="POTransactionExistenceCanc"
+    ViewObjectName="its.mnr.mp5.lov.POTransactionExistence"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="POTransactionExistenceCanc"
+      FullName="its.mnr.mp5.lov.POTransactionExistence.POTransactionExistenceCanc"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="POLines"
+    ViewObjectName="its.mnr.mp5.lov.POLines"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="POLinesByOrder"
+      FullName="its.mnr.mp5.lov.POLines.POLinesByOrder"/>
+    <ParameterMap>
+      <PIMap Variable="bOrder">
+        <TransientExpression><![CDATA[OrdCode]]></TransientExpression>
+      </PIMap>
+      <PIMap Variable="bOrderOrg">
+        <TransientExpression><![CDATA[OrdOrg]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <Attribute
+    Name="OrdCode"
+    Precision="8"
+    ColumnName="ORD_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS"
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"
+    IsUpdateable="while_insert">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrdDesc"
+    IsNotNull="true"
+    Precision="45"
+    ColumnName="ORD_DESC"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrdType"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="ORD_TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrdRtype"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="ORD_RTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrdSupplier"
+    Precision="17"
+    ColumnName="ORD_SUPPLIER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="17"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrdDate"
+    IsNotNull="true"
+    ColumnName="ORD_DATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="MP5PRD.R5ORDERS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
+  </Attribute>
+  <Attribute
+    Name="OrdDue"
+    IsNotNull="true"
+    ColumnName="ORD_DUE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="MP5PRD.R5ORDERS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <TransientExpression><![CDATA[adf.currentDate + 7]]></TransientExpression>
+  </Attribute>
+  <Attribute
+    Name="OrdApprov"
+    ColumnName="ORD_APPROV"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="MP5PRD.R5ORDERS"/>
+  <Attribute
+    Name="OrdStatus"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="ORD_STATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+    <validation:MethodValidationBean
+      Name="OrdStatus_Rule_0"
+      MethodName="validateOrdStatusRecvClsd"
+      ResId="its.mnr.mp5.eo.local.R5orders.OrdStatus_Rule_0">
+      <validation:OnCondition
+        Name="OnConditionExpr"><![CDATA[newValue == 'RC']]></validation:OnCondition>
+    </validation:MethodValidationBean>
+    <validation:MethodValidationBean
+      Name="OrdStatus_Rule_1"
+      MethodName="validateOrdStatusCanc"
+      ResId="its.mnr.mp5.eo.local.R5orders.OrdStatus_Rule_1">
+      <validation:OnCondition
+        Name="OnConditionExpr"><![CDATA[newValue == 'C']]></validation:OnCondition>
+    </validation:MethodValidationBean>
+  </Attribute>
+  <Attribute
+    Name="OrdRstatus"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="ORD_RSTATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrdAuth"
+    Precision="12"
+    ColumnName="ORD_AUTH"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrdDiscount"
+    ColumnName="ORD_DISCOUNT"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MP5PRD.R5ORDERS"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"/>
+  <Attribute
+    Name="OrdPrice"
+    ColumnName="ORD_PRICE"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MP5PRD.R5ORDERS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="OrdCurr"
+    IsNotNull="true"
+    Precision="3"
+    ColumnName="ORD_CURR"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrdExch"
+    IsNotNull="true"
+    ColumnName="ORD_EXCH"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MP5PRD.R5ORDERS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"/>
+  <Attribute
+    Name="OrdOrigin"
+    IsNotNull="true"
+    Precision="12"
+    ColumnName="ORD_ORIGIN"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrdStore"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="ORD_STORE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrdPrinted"
+    Precision="1"
+    ColumnName="ORD_PRINTED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrdBuyer"
+    Precision="12"
+    ColumnName="ORD_BUYER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS"
+    IsNotNull="true"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrdRevision"
+    Precision="4"
+    Scale="0"
+    ColumnName="ORD_REVISION"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="MP5PRD.R5ORDERS"/>
+  <Attribute
+    Name="OrdOrg"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="ORD_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="OrdSupplierOrg"
+    Precision="8"
+    ColumnName="ORD_SUPPLIER_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="tOrdCode"
+    Precision="80"
+    ColumnName="T_ORD_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <TransientExpression><![CDATA[(OrdCode == null ? null : OrdCode + '#1')]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <Dependencies>
+      <Item
+        Value="OrdCode"/>
+    </Dependencies>
+  </Attribute>
+  <Attribute
+    Name="ItsIsadf"
+    Precision="1"
+    ColumnName="ITS_ISADF"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="MP5PRD.R5ORDERS"
+    IsUpdateable="false"
+    DefaultValue="Y">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="tOrderlineSum"
+    ColumnName="T_ORDERLINE_SUM"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true"
+    IsPersistent="false"
+    IsQueriable="false">
+    <TransientExpression><![CDATA[(adf.object.R5orderlines.sum("tOrlPriceExtended") != null? adf.object.R5orderlines.sum("tOrlPriceExtended") : 0) + (adf.object.R5orderlines.sum("tItsTaskPriceExtended") != null? adf.object.R5orderlines.sum("tItsTaskPriceExtended") : 0)]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+  </Attribute>
+  <Attribute
+    Name="tPriceExtended"
+    ColumnName="T_ORDERLINE_DISCOUNT_SUM"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    IsPersistent="false"
+    IsQueriable="false">
+    <TransientExpression><![CDATA[adf.object.R5orderlines.sum("OrlTotextra") != null? adf.object.R5orderlines.sum("OrlTotextra") : 0]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+  </Attribute>
+  <Attribute
+    Name="ItsCustfld1"
+    Precision="4"
+    ColumnName="ITS_CUSTFLD1"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5orders.ItsCustfld1_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <validation:RegExpValidationBean
+      Name="ItsCustfld1_Rule_0"
+      ResId="FIRST_CHARACTER_MUST_BE_LETTER"
+      OnAttribute="ItsCustfld1"
+      Pattern="^[A-Z]{1}[0-9]{3}$"
+      Inverse="false"/>
+  </Attribute>
+  <Attribute
+    Name="ItsDeptcd"
+    Precision="20"
+    ColumnName="ITS_DEPTCD"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5orders.ItsDeptcd_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>    
+  </Attribute>
+  <Attribute
+    Name="ItsCustfld2"
+    Precision="500"
+    ColumnName="ITS_CUSTFLD2"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS"
+    IsQueriable="false">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5orders.ItsCustfld2_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>    
+  </Attribute>
+  <Attribute
+    Name="tGrandTot"
+    ColumnName="T_GRAND_TOT"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    IsPersistent="false"
+    IsQueriable="false">
+    <DesignTime>
+      <Attr Name="_description" Value="T Grand Tot"/>
+    </DesignTime>
+    <TransientExpression
+      trustMode="untrusted"><![CDATA[(adf.object.R5orderlines.sum("OrlTotextra") != null? adf.object.R5orderlines.sum("OrlTotextra") : 0)+(OrdPrice!=null?OrdPrice:0)]]></TransientExpression>
+    <RecalcCondition
+      trustMode="untrusted"><![CDATA[true]]></RecalcCondition>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5activities"
+    Association="its.mnr.mp5.eo.assoc.R5fok3ActAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok3ActAssoc.R5activities"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok3ActAssoc.R5orders"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5companies"
+    Association="its.mnr.mp5.eo.assoc.R5fok1OrdAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1OrdAssoc.R5companies"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1OrdAssoc.R5orders"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5users"
+    Association="its.mnr.mp5.eo.assoc.R5fok5OrdAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok5OrdAssoc.R5users"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok5OrdAssoc.R5orders"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5users1"
+    Association="its.mnr.mp5.eo.assoc.R5fok7OrdAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok7OrdAssoc.R5users1"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok7OrdAssoc.R5orders1"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5orderlines"
+    Association="its.mnr.mp5.eo.assoc.R5fok1OrlAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1OrlAssoc.R5orderlines"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1OrlAssoc.R5orders"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5addetails"
+    Association="its.mnr.mp5.eo.assoc.R5OrdersR5AddetailsAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5OrdersR5AddetailsAssoc.R5addetails"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5OrdersR5AddetailsAssoc.R5orders"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5transactions"
+    Association="its.mnr.mp5.eo.assoc.R5fok1TraAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1TraAssoc.R5transactions"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1TraAssoc.R5orders"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="POCompanies"
+    ViewLink="its.mnr.mp5.vo.link.POrdersCompaniesLink"
+    ViewLinkEnd="its.mnr.mp5.vo.link.POrdersCompaniesLink.POCompanies"
+    ViewLinkOtherEnd="its.mnr.mp5.vo.link.POrdersCompaniesLink.POrdersView"
+    Type="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+    IsUpdateable="false"/>
+  <Key
+    Name="R5prikOrd"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_ORD"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5orders.OrdCode"/>
+      <Item Value="its.mnr.mp5.eo.local.R5orders.OrdOrg"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Ord">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_COM"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_ORD"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5orders.OrdSupplier"/>
+      <Item Value="its.mnr.mp5.eo.local.R5orders.OrdSupplierOrg"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok3Ord">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_PER"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK3_ORD"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5orders.OrdOrigin"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok4Ord">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_STR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK4_ORD"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5orders.OrdStore"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok5Ord">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_USR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK5_ORD"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5orders.OrdAuth"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok6Ord">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_CUR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK6_ORD"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5orders.OrdCurr"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok7Ord">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_USR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK7_ORD"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5orders.OrdBuyer"/>
+    </AttrArray>
+  </Key>
+  <validation:CompareValidationBean
+    Name="R5orders_Rule_0"
+    ResId="DATE_MUST_BE_GREATER_THAN_OR_1"
+    OnAttribute="OrdDue"
+    OperandType="ATTR"
+    Inverse="false"
+    CompareType="GREATERTHANEQUALTO"
+    CompareValue="OrdDate">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="OrdDue"/>
+      <validation:Item
+        Value="OrdDate"/>
+    </validation:OnAttributes>
+    <validation:ResExpressions
+      Name="R5orders_Rule_0_ResExprList">
+      <validation:Expression
+        Name="cdate"><![CDATA[OrdDate]]></validation:Expression>
+    </validation:ResExpressions>
+  </validation:CompareValidationBean>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

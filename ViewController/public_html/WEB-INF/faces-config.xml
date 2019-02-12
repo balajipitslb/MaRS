@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<faces-config version="2.1" xmlns="http://java.sun.com/xml/ns/javaee">
+  <application>
+    <default-render-kit-id>oracle.adf.rich</default-render-kit-id>
+  </application>
+   <converter>
+    <converter-id>clobConverter</converter-id>
+    <converter-class>its.mnr.mp5.view.ClobConverter</converter-class>
+  </converter>
+ 
+</faces-config>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PartsIssuedExistence"
+  Version="11.1.2.60.81"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  OrderBy='"EVT_CODE"'>
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.lov.PartsIssuedExistence_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="Part"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="Bin"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="Lot"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT EVT_CODE,EVT_STATUS,MLP_PART
+FROM R5ACTIVITIES,R5EVENTS,R5MATLISTS,R5MATLPARTS
+WHERE ACT_EVENT = EVT_CODE
+AND ITS_ISADF='Y' 
+AND ACT_MATLIST=MTL_CODE
+AND MTL_CODE=MLP_MATLIST
+AND EVT_STATUS IN ('OPEN','C','RBF','CRV','EST','APP')
+AND MLP_PART = :Part
+AND ITS_BIN = :Bin
+AND ITS_LOT = :Lot]]></SQLQuery>
+  <ViewAttribute
+    Name="EvtCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EVT_CODE"
+    Expression="EVT_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EvtStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EVT_STATUS"
+    Expression="EVT_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MlpPart"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="18"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="MLP_PART"
+    Expression="MLP_PART"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="18"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

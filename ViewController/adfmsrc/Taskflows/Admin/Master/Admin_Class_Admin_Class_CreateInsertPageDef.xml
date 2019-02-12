@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81"
+                id="Admin_Class_Admin_Class_CreateInsertPageDef" Package="Taskflows.Admin.Master" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="MasterDataControlNested.MrlrefClassView1" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="MrlrefClassView1Iterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="MrlrefClassView1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

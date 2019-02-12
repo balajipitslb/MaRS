@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltWorkordertotalvw"
+  Version="11.1.2.60.81"
+  DBObjectType="VIEW"
+  DBObjectName="MP5PRD.MRLT_WORKORDERTOTALVW"
+  AliasName="MrltWorkordertotalvw"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="Wo"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="WO"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_WORKORDERTOTALVW"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Org"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_WORKORDERTOTALVW"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Equip"
+    IsNotNull="true"
+    Precision="45"
+    ColumnName="EQUIP"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_WORKORDERTOTALVW">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="45"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Wocreated"
+    ColumnName="WOCREATED"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="MP5PRD.MRLT_WORKORDERTOTALVW"/>
+  <Attribute
+    Name="Wocompleted"
+    ColumnName="WOCOMPLETED"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="MP5PRD.MRLT_WORKORDERTOTALVW"/>
+  <Attribute
+    Name="Wostatus"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="WOSTATUS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.MRLT_WORKORDERTOTALVW">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Ttllbrhrs"
+    ColumnName="TTLLBRHRS"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MP5PRD.MRLT_WORKORDERTOTALVW"/>
+  <Attribute
+    Name="Ttllbrcst"
+    ColumnName="TTLLBRCST"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MP5PRD.MRLT_WORKORDERTOTALVW"/>
+  <Attribute
+    Name="Ttlpartcst"
+    ColumnName="TTLPARTCST"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MP5PRD.MRLT_WORKORDERTOTALVW"/>
+  <Attribute
+    Name="Ttlwo"
+    ColumnName="TTLWO"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MP5PRD.MRLT_WORKORDERTOTALVW"/>
+  <Attribute
+    Name="Wodate"
+    ColumnName="WODATE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="MP5PRD.MRLT_WORKORDERTOTALVW"/>
+  <AccessorAttribute
+    Name="MrltAsset"
+    Association="its.mnr.mp5.eo.assoc.AssetsWOTotalAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.AssetsWOTotalAssoc.MrltAsset"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.AssetsWOTotalAssoc.MrltWorkordertotalvw"
+    Type="its.mnr.mp5.eo.local.MrltAssetImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrltworkordertotalvwPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLTWORKORDERTOTALVW_PRIMARY_K"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltWorkordertotalvw.Wo"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltWorkordertotalvw.Org"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_MrltWorkordertotalvw">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_ASSET_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_MRLT_WORKORDERTOTALVW"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.MrltWorkordertotalvw.Equip"/>
+      <Item Value="its.mnr.mp5.eo.local.MrltWorkordertotalvw.Org"/>
+    </AttrArray>
+  </Key>
+</Entity>

@@ -1,0 +1,469 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Company Receipts" id="d1" inlineStyle="height:475px;">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelSplitter id="ps1" splitterPosition="240" disabled="false">
+                        <f:facet name="first">
+                            <af:panelGroupLayout layout="vertical" id="pgl1"
+                                                 inlineStyle="background-color:White;"
+                                                 rendered="true">
+                                <af:panelHeader text=" " id="ph2">
+                                    <af:query id="qryId1" headerText="Search" disclosed="true"
+                                              value="#{bindings.POTransactionsCompRcptsCriteriaQuery.queryDescriptor}"
+                                              model="#{bindings.POTransactionsCompRcptsCriteriaQuery.queryModel}"
+                                              queryListener="#{POCompanyReceipts.processQuery}"
+                                              queryOperationListener="#{bindings.POTransactionsCompRcptsCriteriaQuery.processQueryOperation}"
+                                              resultComponentId="::resId1" saveQueryMode="hidden"
+                                              modeChangeVisible="false"/>
+                                    <af:table value="#{bindings.POTransactionsCompRcpts.collectionModel}" var="row"
+                                              rows="#{bindings.POTransactionsCompRcpts.rangeSize}"
+                                              emptyText="#{bindings.POTransactionsCompRcpts.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              fetchSize="#{bindings.POTransactionsCompRcpts.rangeSize}"
+                                              rowBandingInterval="0"
+                                              selectedRowKeys="#{bindings.POTransactionsCompRcpts.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.POTransactionsCompRcpts.collectionModel.makeCurrent}"
+                                              rowSelection="single" id="resId1"
+                                              inlineStyle=" width:226px; height:315px;border-color:Silver; border-style:solid; border-width:thin; background-color:White; margin:2px 2px 2px 0px;"
+                                              partialTriggers="::cmi1 ::cmi3"
+                                              binding="#{POCompanyReceipts.resultsSearchTable}">
+                                        <af:column sortProperty="#{bindings.POTransactionsCompRcpts.hints.TraCode.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.POTransactionsCompRcpts.hints.TraCode.label}"
+                                                   id="resId1c1" width="70">
+                                            <af:outputText value="#{row.TraCode}" id="ot2"/>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.POTransactionsCompRcpts.hints.TraStatus.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.POTransactionsCompRcpts.hints.TraStatus.label}"
+                                                   id="resId1c2" width="80">
+                                            <af:selectOneChoice value="#{row.bindings.TraStatus.inputValue}"
+                                                                label="#{row.bindings.TraStatus.label}"
+                                                                required="#{bindings.POTransactionsCompRcpts.hints.TraStatus.mandatory}"
+                                                                shortDesc="#{bindings.POTransactionsCompRcpts.hints.TraStatus.tooltip}"
+                                                                readOnly="true" id="soc1">
+                                                <f:selectItems value="#{row.bindings.TraStatus.items}" id="si1"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
+                                        <af:column sortProperty="#{bindings.POTransactionsCompRcpts.hints.TraDate.name}"
+                                                   sortable="false"
+                                                   headerText="#{bindings.POTransactionsCompRcpts.hints.TraDate.label}"
+                                                   id="resId1c3" width="60">
+                                            <af:outputText value="#{row.TraDate}" id="ot3">
+                                                <af:convertDateTime pattern="#{bindings.POTransactionsCompRcpts.hints.TraDate.format}"/>
+                                            </af:outputText>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelHeader>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="second">
+                            <af:panelHeader text=" " id="ph1" inlineStyle="background-color:White;"
+                                            partialTriggers="it2">
+                                <f:facet name="context"/>
+                                <f:facet name="menuBar">
+                                    <af:toolbar id="t1"
+                                                inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                        <af:menuBar id="mb1">
+                                            <af:menu text="Actions" id="m2">
+                                                <af:commandMenuItem text="New Receiving"
+                                                                    disabled="#{!bindings.CreateInsert.enabled or bindings.Commit.enabled }"
+                                                                    id="cmi1" immediate="true" partialSubmit="false"
+                                                                    action="#{POCompanyReceipts.newRecv_action}"/>
+                                                <af:commandMenuItem actionListener="#{bindings.Delete1.execute}"
+                                                                    text="Delete Receiving"
+                                                                    disabled="#{!bindings.Delete1.enabled}" id="cmi3"/>
+                                            </af:menu>
+                                        </af:menuBar>
+                                        <af:button text="Part in Stock" id="ctb6"
+                                                   action="#{POCompanyReceipts.callPartinStock}" rendered="false"/>
+                                        <af:button text="Apply"
+                                                   disabled="#{!bindings.Commit.enabled or empty bindings.TraDesc.inputValue or empty bindings.TraFromcode.inputValue or empty bindings.TraDate.inputValue}"
+                                                   id="ctb5" icon="#{resource['images:commit.png']}"
+                                                   partialTriggers="it2 traFromcodeId"
+                                                   action="#{POCompanyReceipts.commit_action}"/>
+                                        <af:button text="Cancel" disabled="#{!bindings.Rollback.enabled}"
+                                                   immediate="true" id="ctb2" action="#{POCompanyReceipts.on_rollback}"
+                                                   icon="#{resource['images:undo.png']}">
+                                            <af:resetActionListener/>
+                                        </af:button>
+                                        <af:button id="ctb1" icon="#{resource['images:terminate.png']}"
+                                                   action="#{POCompanyReceipts.exit_action}" immediate="true"/>
+                                    </af:toolbar>
+                                </f:facet>
+                                <f:facet name="toolbar"/>
+                                <f:facet name="legend"/>
+                                <f:facet name="info"/>
+                                <af:panelFormLayout id="pfl1" partialTriggers="resId1">
+                                    <af:panelLabelAndMessage label="#{bindings.TraCode.hints.label}" id="plam2">
+                                        <af:inputText value="#{bindings.TraCode.inputValue}"
+                                                      required="#{bindings.TraCode.hints.mandatory}"
+                                                      columns="#{bindings.TraCode.hints.displayWidth}"
+                                                      maximumLength="#{bindings.TraCode.hints.precision}"
+                                                      shortDesc="#{bindings.TraCode.hints.tooltip}" id="it1"
+                                                      contentStyle="width: 50px;" readOnly="true">
+                                            <f:validator binding="#{bindings.TraCode.validator}"/>
+                                        </af:inputText>
+                                        <f:facet name="end">
+                                            <af:outputText value="#{bindings.tEntityState.inputValue}" id="ot8"
+                                                           rendered="false"/>
+                                        </f:facet>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{bindings.TraDesc.hints.label}" id="plam3">
+                                        <af:inputText value="#{bindings.TraDesc.inputValue}" required="false"
+                                                      columns="#{bindings.TraDesc.hints.displayWidth}"
+                                                      maximumLength="#{bindings.TraDesc.hints.precision}"
+                                                      shortDesc="#{bindings.TraDesc.hints.tooltip}" id="it2"
+                                                      autoSubmit="true"
+                                                      binding="#{POCompanyReceipts.inTransDescription}">
+                                            <f:validator binding="#{bindings.TraDesc.validator}"/>
+                                        </af:inputText>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{bindings.TraFromcode.hints.label}" id="plam1">
+                                        <af:inputListOfValues id="traFromcodeId"
+                                                              popupTitle="Search and Select: #{bindings.TraFromcode.hints.label}"
+                                                              value="#{bindings.TraFromcode.inputValue}"
+                                                              model="#{bindings.TraFromcode.listOfValuesModel}"
+                                                              required="false"
+                                                              columns="#{bindings.TraFromcode.hints.displayWidth}"
+                                                              shortDesc="#{bindings.TraFromcode.hints.tooltip}"
+                                                              contentStyle="width: 50px;" autoSubmit="true"
+                                                              readOnly="#{ bindings.POTranslinesCompRcptsIterator.estimatedRowCount ne 0 }"
+                                                              binding="#{POCompanyReceipts.lovSupplier}">
+                                            <f:validator binding="#{bindings.TraFromcode.validator}"/>
+                                        </af:inputListOfValues>
+                                        <f:facet name="end">
+                                            <af:outputText value="#{bindings.tSupplierDesc.inputValue}" id="ot1"/>
+                                        </f:facet>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{bindings.TraStatus.hints.label}" id="plam4">
+                                        <af:inputComboboxListOfValues id="traStatusId"
+                                                                      popupTitle="Search and Select: #{bindings.TraStatus.hints.label}"
+                                                                      value="#{bindings.TraStatus.inputValue}"
+                                                                      model="#{bindings.TraStatus.listOfValuesModel}"
+                                                                      required="false"
+                                                                      columns="#{bindings.TraStatus.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.TraStatus.hints.tooltip}"
+                                                                      binding="#{POCompanyReceipts.inTraStatus}">
+                                            <f:validator binding="#{bindings.TraStatus.validator}"/>
+                                        </af:inputComboboxListOfValues>
+                                    </af:panelLabelAndMessage>
+                                    <af:panelLabelAndMessage label="#{bindings.TraDate.hints.label}" id="plam5">
+                                        <af:inputDate value="#{bindings.TraDate.inputValue}" required="false"
+                                                      columns="#{bindings.TraDate.hints.displayWidth}"
+                                                      shortDesc="#{bindings.TraDate.hints.tooltip}" id="id1"
+                                                      contentStyle="width: 50px;" autoSubmit="true"
+                                                      readOnly="#{ bindings.TraStatus.attributeValue ne 'U'}"
+                                                      partialTriggers="traStatusId">
+                                            <f:validator binding="#{bindings.TraDate.validator}"/>
+                                            <af:convertDateTime pattern="#{bindings.TraDate.format}"/>
+                                        </af:inputDate>
+                                        <f:facet name="end">
+                                            <af:selectBooleanCheckbox text="Fetch Supplier and Part#" id="sbc1"
+                                                                      value="#{pageFlowScope.pfsCalledFromStock ? true : false }"
+                                                                      readOnly="true"
+                                                                      binding="#{POCompanyReceipts.isFetchedChk}"/>
+                                        </f:facet>
+                                    </af:panelLabelAndMessage>
+                                </af:panelFormLayout>
+                                <af:panelFormLayout id="pfl3">
+                                    <f:facet name="footer"/>
+                                    <af:panelCollection id="pc1"
+                                                        partialTriggers="::ctb2 ctb7 ctb3 ::cb1 ::cb2 ::cb3 ::cb4 ::cmi2">
+                                        <f:facet name="menus"/>
+                                        <f:facet name="toolbar">
+                                            <af:toolbar id="t3" partialTriggers="::resId1">
+                                                <af:button disabled="#{!bindings.CreateInsert1.enabled}" id="ctb3"
+                                                           action="#{POCompanyReceipts.addPartLinePop}"
+                                                           icon="#{resource['images:add.png']}"/>
+                                                <af:button id="ctb7" icon="#{resource['images:delete.png']}"
+                                                           actionListener="#{bindings.Delete.execute}"
+                                                           disabled="#{!bindings.Delete.enabled}"/>
+                                                <af:button text="Edit Record" id="ctb4"
+                                                           action="#{POCompanyReceipts.editPartLine}"
+                                                           icon="#{resource['images:edit.png']}"
+                                                           disabled="#{bindings.POTranslinesCompRcptsIterator.estimatedRowCount eq 0 }"/>
+                                            </af:toolbar>
+                                        </f:facet>
+                                        <f:facet name="statusbar"/>
+                                        <af:table value="#{bindings.POTranslinesCompRcpts.collectionModel}" var="row"
+                                                  rows="#{bindings.POTranslinesCompRcpts.rangeSize}"
+                                                  emptyText="#{bindings.POTranslinesCompRcpts.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                  fetchSize="#{bindings.POTranslinesCompRcpts.rangeSize}"
+                                                  rowBandingInterval="0"
+                                                  selectedRowKeys="#{bindings.POTranslinesCompRcpts.collectionModel.selectedRow}"
+                                                  selectionListener="#{bindings.POTranslinesCompRcpts.collectionModel.makeCurrent}"
+                                                  rowSelection="single" id="t2"
+                                                  partialTriggers="::ctb3 ::ctb7 :::cb1 :::cb2 :::cb3 :::cb4">
+                                            <af:column sortProperty="#{bindings.POTranslinesCompRcpts.hints.TrlPart.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.POTranslinesCompRcpts.hints.TrlPart.label}"
+                                                       id="c1" width="55">
+                                                <af:outputText value="#{row.TrlPart}" id="ot10"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.POTranslinesCompRcpts.hints.tPartDesc.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.POTranslinesCompRcpts.hints.tPartDesc.label}"
+                                                       id="c2" width="55">
+                                                <af:outputText value="#{row.tPartDesc}" id="ot5"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.POTranslinesCompRcpts.hints.tPartUom.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.POTranslinesCompRcpts.hints.tPartUom.label}"
+                                                       id="c3" width="54">
+                                                <af:outputText value="#{row.tPartUom}" id="ot6"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.POTranslinesCompRcpts.hints.tAvail.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.POTranslinesCompRcpts.hints.tAvail.label}"
+                                                       id="c4" width="56">
+                                                <af:outputText value="#{row.tAvail}" id="ot7"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.POTranslinesCompRcpts.hints.TrlQty.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.POTranslinesCompRcpts.hints.TrlQty.label}"
+                                                       id="c5" width="55">
+                                                <af:outputText value="#{row.TrlQty}" id="ot12">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.POTranslinesCompRcpts.hints.TrlQty.format}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.POTranslinesCompRcpts.hints.TrlBin.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.POTranslinesCompRcpts.hints.TrlBin.label}"
+                                                       id="c6" width="55">
+                                                <af:outputText value="#{row.TrlBin}" id="ot4"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.POTranslinesCompRcpts.hints.TrlLot.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.POTranslinesCompRcpts.hints.TrlLot.label}"
+                                                       id="c7" width="55">
+                                                <af:outputText value="#{row.TrlLot}" id="ot9"/>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.POTranslinesCompRcpts.hints.TrlPrice.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.POTranslinesCompRcpts.hints.TrlPrice.label}"
+                                                       id="c8" width="49">
+                                                <af:outputText value="#{row.TrlPrice}" id="ot11">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.POTranslinesCompRcpts.hints.TrlPrice.format}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                            <af:column sortProperty="#{bindings.POTranslinesCompRcpts.hints.tBasePrice.name}"
+                                                       sortable="false"
+                                                       headerText="#{bindings.POTranslinesCompRcpts.hints.tBasePrice.label}"
+                                                       id="c9" width="50">
+                                                <af:outputText value="#{row.tBasePrice}" id="ot13">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.POTranslinesCompRcpts.hints.tBasePrice.format}"/>
+                                                </af:outputText>
+                                            </af:column>
+                                        </af:table>
+                                    </af:panelCollection>
+                                </af:panelFormLayout>
+                                <af:resource type="javascript">
+          function triggerOnLoad(event) {
+              AdfCustomEvent.queue(event.getSource(), "onloadEvent", {},false);
+              return true;
+          }
+        </af:resource>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="p4"
+                                          binding="#{POCompanyReceipts.addPartToStockPop}">
+                                    <af:dialog id="d6" type="yesNo" closeIconVisible="false"
+                                               title="Part Not in Stock"
+                                               dialogListener="#{POCompanyReceipts.partStockDiagLsnr}">
+                                        <f:facet name="buttonBar"/>
+                                        <af:outputLabel value="Add Part to Stock?" id="ol3"/>
+                                    </af:dialog>
+                                </af:popup>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                          binding="#{POCompanyReceipts.addPartPop}"
+                                          partialTriggers="pc1:t2 resId1" contentDelivery="lazyUncached">
+                                    <af:dialog id="d2" closeIconVisible="false" type="none"
+                                               title="Company Receipts - Part Line ">
+                                        <af:panelHeader text="#{bindings.TrlTrans.inputValue} - #{bindings.TrlLine.inputValue}"
+                                                        id="ph3" size="2">
+                                            <f:facet name="menuBar">
+                                                <af:toolbar id="t4"
+                                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                                    <af:menuBar id="mb2">
+                                                        <af:menu text="Actions" id="m3">
+                                                            <af:commandMenuItem text="New Part"
+                                                                                disabled="#{ bindings.Commit.enabled or !bindings.CreateInsert1.enabled or bindings.TraCode.inputValue eq null or bindings.TraFromcode.inputValue eq null or bindings.TraStatus.attributeValue ne 'U'}"
+                                                                                id="cmi2"
+                                                                                partialSubmit="false"
+                                                                                action="#{POCompanyReceipts.addTransline_action}"/>
+                                                        </af:menu>
+                                                    </af:menuBar>
+                                                    <af:button text="Apply"
+                                                               disabled="#{!bindings.Commit.enabled or empty bindings.TraDesc.inputValue or empty bindings.TraFromcode.inputValue or empty bindings.TraDate.inputValue}"
+                                                               id="ctb8" icon="#{resource['images:commit.png']}"
+                                                               partialTriggers="it2 traFromcodeId"
+                                                               action="#{POCompanyReceipts.commit_action}"/>
+                                                    <af:button text="Cancel" disabled="#{!bindings.Rollback.enabled}"
+                                                               immediate="true" id="ctb9"
+                                                               action="#{POCompanyReceipts.on_rollback}"
+                                                               icon="#{resource['images:undo.png']}">
+                                                        <af:resetActionListener/>
+                                                    </af:button>
+                                                    <af:button id="ctb10" icon="#{resource['images:terminate.png']}"
+                                                               immediate="true"
+                                                               action="#{POCompanyReceipts.closePartLinePop}"/>
+                                                </af:toolbar>
+                                            </f:facet>
+                                            <af:panelFormLayout id="pfl2" partialTriggers="cmi2">
+                                                <af:inputListOfValues id="ilov1"
+                                                                      popupTitle="Search and Select: #{bindings.TrlPart.hints.label}"
+                                                                      value="#{bindings.TrlPart.inputValue}"
+                                                                      label="#{bindings.TrlPart.hints.label}"
+                                                                      model="#{bindings.TrlPart.listOfValuesModel}"
+                                                                      required="#{bindings.TrlPart.hints.mandatory}"
+                                                                      columns="#{bindings.TrlPart.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.TrlPart.hints.tooltip}"
+                                                                      autoSubmit="true" autoTab="true"
+                                                                      partialTriggers="cmi2"
+                                                                      binding="#{POCompanyReceipts.itPart}"
+                                                                      readOnly="#{ bindings.TraStatus.attributeValue ne 'U'}"
+                                                                      valueChangeListener="#{POCompanyReceipts.partChangeLsnr}">
+                                                    <f:validator binding="#{bindings.TrlPart.validator}"/>
+                                                </af:inputListOfValues>
+                                                <af:panelLabelAndMessage label="#{bindings.tPartDesc.hints.label}"
+                                                                         id="plam6">
+                                                    <af:outputText value="#{bindings.tPartDesc.inputValue}" id="ot14"/>
+                                                </af:panelLabelAndMessage>
+                                                <af:inputText value="#{bindings.tPartDesc.inputValue}"
+                                                              label="#{bindings.tPartDesc.hints.label}"
+                                                              required="#{bindings.tPartDesc.hints.mandatory}"
+                                                              columns="#{bindings.tPartDesc.hints.displayWidth}"
+                                                              maximumLength="#{bindings.tPartDesc.hints.precision}"
+                                                              shortDesc="#{bindings.tPartDesc.hints.tooltip}" id="it7"
+                                                              readOnly="true" partialTriggers="ilov1" rendered="false">
+                                                    <f:validator binding="#{bindings.tPartDesc.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.tPartUom.inputValue}"
+                                                              label="#{bindings.tPartUom.hints.label}"
+                                                              required="#{bindings.tPartUom.hints.mandatory}"
+                                                              columns="#{bindings.tPartUom.hints.displayWidth}"
+                                                              maximumLength="#{bindings.tPartUom.hints.precision}"
+                                                              shortDesc="#{bindings.tPartUom.hints.tooltip}" id="it8"
+                                                              readOnly="true" partialTriggers="ilov1" rendered="false">
+                                                    <f:validator binding="#{bindings.tPartUom.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.tAvail.inputValue}"
+                                                              label="#{bindings.tAvail.hints.label}"
+                                                              required="#{bindings.tAvail.hints.mandatory}"
+                                                              columns="#{bindings.tAvail.hints.displayWidth}"
+                                                              maximumLength="#{bindings.tAvail.hints.precision}"
+                                                              shortDesc="#{bindings.tAvail.hints.tooltip}"
+                                                              id="it9" readOnly="true" partialTriggers="ilov1"
+                                                              rendered="false">
+                                                    <f:validator binding="#{bindings.tAvail.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.TrlQty.inputValue}"
+                                                              label="#{bindings.TrlQty.hints.label}"
+                                                              required="#{bindings.TrlQty.hints.mandatory}"
+                                                              columns="#{bindings.TrlQty.hints.displayWidth}"
+                                                              maximumLength="#{bindings.TrlQty.hints.precision}"
+                                                              shortDesc="#{bindings.TrlQty.hints.tooltip}" id="it10"
+                                                              autoSubmit="true" autoTab="true"
+                                                              readOnly="#{ bindings.TraStatus.attributeValue ne 'U'}">
+                                                    <f:validator binding="#{bindings.TrlQty.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.TrlQty.format}"/>
+                                                </af:inputText>
+                                                <af:inputListOfValues id="trlBin1Id"
+                                                                      popupTitle="Search and Select: #{bindings.TrlBin1.hints.label}"
+                                                                      value="#{bindings.TrlBin1.inputValue}"
+                                                                      label="#{bindings.TrlBin1.hints.label}"
+                                                                      model="#{bindings.TrlBin1.listOfValuesModel}"
+                                                                      required="#{bindings.TrlBin1.hints.mandatory}"
+                                                                      columns="#{bindings.TrlBin1.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.TrlBin1.hints.tooltip}"
+                                                                      autoSubmit="true" autoTab="true"
+                                                                      readOnly="#{ bindings.TraStatus.attributeValue ne 'U'}"
+                                                                      binding="#{POCompanyReceipts.txtBin}">
+                                                    <f:validator binding="#{bindings.TrlBin1.validator}"/>
+                                                </af:inputListOfValues>
+                                                <af:inputListOfValues id="ilov2"
+                                                                      popupTitle="Search and Select: #{bindings.TrlLot.hints.label}"
+                                                                      value="#{bindings.TrlLot.inputValue}"
+                                                                      label="#{bindings.TrlLot.hints.label}"
+                                                                      model="#{bindings.TrlLot.listOfValuesModel}"
+                                                                      required="#{bindings.TrlLot.hints.mandatory}"
+                                                                      columns="#{bindings.TrlLot.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.TrlLot.hints.tooltip}"
+                                                                      autoSubmit="true" autoTab="true"
+                                                                      readOnly="#{ bindings.TraStatus.attributeValue ne 'U'}"
+                                                                      binding="#{POCompanyReceipts.txtLot}">
+                                                    <f:validator binding="#{bindings.TrlLot.validator}"/>
+                                                </af:inputListOfValues>
+                                                <af:inputText value="#{bindings.TrlPrice.inputValue}"
+                                                              label="#{bindings.TrlPrice.hints.label}"
+                                                              required="#{bindings.TrlPrice.hints.mandatory}"
+                                                              columns="#{bindings.TrlPrice.hints.displayWidth}"
+                                                              maximumLength="#{bindings.TrlPrice.hints.precision}"
+                                                              shortDesc="#{bindings.TrlPrice.hints.tooltip}"
+                                                              partialTriggers="ilov1" id="it12" autoSubmit="true"
+                                                              autoTab="true" binding="#{POCompanyReceipts.itPrice}"
+                                                              readOnly="#{ bindings.TraStatus.attributeValue ne 'U'}">
+                                                    <f:validator binding="#{bindings.TrlPrice.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.TrlPrice.format}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.tBasePrice.inputValue}"
+                                                              label="Base Price"
+                                                              required="#{bindings.tBasePrice.hints.mandatory}"
+                                                              columns="#{bindings.tBasePrice.hints.displayWidth}"
+                                                              maximumLength="#{bindings.tBasePrice.hints.precision}"
+                                                              shortDesc="#{bindings.tBasePrice.hints.tooltip}"
+                                                              id="it13" readOnly="true" partialTriggers="ilov1"
+                                                              rendered="false">
+                                                    <f:validator binding="#{bindings.tBasePrice.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.tBasePrice.format}"/>
+                                                </af:inputText>
+                                                <f:facet name="footer">
+                                                    <af:panelGroupLayout layout="horizontal" id="pgl2"
+                                                                         inlineStyle="margin: 15px  5px  5px  15px;">
+                                                        <f:facet name="separator">
+                                                            <af:spacer width="10" height="1" id="s1"/>
+                                                        </f:facet>
+                                                        <af:button actionListener="#{bindings.First.execute}"
+                                                                   disabled="#{!bindings.First.enabled}"
+                                                                   partialSubmit="true" id="cb1"
+                                                                   icon="#{resource['images:shuttle_leftall.png']}"/>
+                                                        <af:button actionListener="#{bindings.Previous.execute}"
+                                                                   disabled="#{!bindings.Previous.enabled}"
+                                                                   partialSubmit="true" id="cb2"
+                                                                   icon="#{resource['images:shuttle_left.png']}"/>
+                                                        <af:button actionListener="#{bindings.Next.execute}"
+                                                                   disabled="#{!bindings.Next.enabled}"
+                                                                   partialSubmit="true" id="cb3"
+                                                                   icon="#{resource['images:shuttle_right.png']}"/>
+                                                        <af:button actionListener="#{bindings.Last.execute}"
+                                                                   disabled="#{!bindings.Last.enabled}"
+                                                                   partialSubmit="true" id="cb4"
+                                                                   icon="#{resource['images:shuttle_rightall.png']}"/>
+                                                    </af:panelGroupLayout>
+                                                </f:facet>
+                                            </af:panelFormLayout>
+                                        </af:panelHeader>
+                                    </af:dialog>
+                                </af:popup>
+                            </af:panelHeader>
+                        </f:facet>
+                    </af:panelSplitter>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+        <af:clientListener method="triggerOnLoad" type="load"/>
+        <af:serverListener type="onloadEvent" method="#{POCompanyReceipts.setFetched}"/>
+        <!--
+        <af:clientListener method="handleLineDoubleClick" type="dblClick"/>
+        <af:serverListener type="LineDoubleClickEvent" method="#{POCompanyReceipts.handleLineDoubleClick}"/> -->
+    </af:document>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:POCompanyReceipts-->
+</f:view>

@@ -1,0 +1,50 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1">
+      <property
+         name="linkStyle">Direct</property>
+   </OverallProperties>
+   <View
+      id="View2">
+      <property
+         name="activityId">WorkOrderMaster</property>
+      <property
+         name="page">/Content/Admin/WorkOrderMaster.jspx</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>WorkOrderMaster&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">245.09766</property>
+      <property
+         name="x">285.75195</property>
+   </View>
+   <TaskFlowReturn
+      id="TaskFlowReturn5">
+      <property
+         name="activityId">exit</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>exit&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  exit&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">244.64355</property>
+      <property
+         name="x">623.5</property>
+   </TaskFlowReturn>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="View2"
+      to="TaskFlowReturn5">
+      <property
+         name="fromOutcome">Exit</property>
+      <property
+         name="sdm:polyPoints">R50,326.75195,244.74707,582.5,244.29297,L50</property>
+   </ControlFlowCase>
+</SDM>

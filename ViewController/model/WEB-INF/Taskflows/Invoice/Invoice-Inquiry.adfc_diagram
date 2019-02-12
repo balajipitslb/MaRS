@@ -1,0 +1,56 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">InvoiceInquiry</property>
+      <property
+         name="page">/Content/Invoice/InvoiceInquiry.jspx</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>InvoiceInquiry&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">227.24707</property>
+      <property
+         name="x">361.0</property>
+   </View>
+   <WildcardControlFlowRule
+      id="WildcardControlFlowRule3">
+      <property
+         name="activityId">*</property>
+      <property
+         name="y">81.29883</property>
+      <property
+         name="x">326.0</property>
+   </WildcardControlFlowRule>
+   <TaskFlowReturn
+      id="TaskFlowReturn4">
+      <property
+         name="activityId">exit</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>exit&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  exit&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">81.59766</property>
+      <property
+         name="x">545.0</property>
+   </TaskFlowReturn>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="WildcardControlFlowRule3"
+      to="TaskFlowReturn4">
+      <property
+         name="fromOutcome">Exit</property>
+      <property
+         name="sdm:polyPoints">R50,362.0,81.44824,504.0,81.24707,L50</property>
+   </ControlFlowCase>
+</SDM>

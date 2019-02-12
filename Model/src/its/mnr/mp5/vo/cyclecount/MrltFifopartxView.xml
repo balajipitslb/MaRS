@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltFifopartxView"
+  Version="12.1.3.10.8"
+  SelectList="MrltFifopartx.FPXHID AS FPXID, 
+       MrltFifopartx.PARTNUM, 
+       MrltFifopartx.XTYPE, 
+       MrltFifopartx.PVALUE, 
+       MrltFifopartx.QVALUE, 
+       MrltFifopartx.REPTYPE, 
+       MrltFifopartx.CREATED, 
+       MrltFifopartx.PARTORG"
+  FromList="MRLT_FIFOPARTX MrltFifopartx"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All"
+  FetchSize="10"
+  RangeSize="11">
+  <ViewAccessor
+    Name="PartsMaintView"
+    ViewObjectName="its.mnr.mp5.vo.parts.PartsMaintView"
+    RowLevelBinds="true"
+    MaxFetchSize="10000">
+    <ViewCriteriaUsage
+      Name="PartSearch"
+      FullName="its.mnr.mp5.vo.parts.PartsMaintView.PartSearch"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="XTypeLOV1"
+    ViewObjectName="its.mnr.mp5.lov.XTypeLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="RepTypeLOV1"
+    ViewObjectName="its.mnr.mp5.lov.RepTypeLOV"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_Partnum"
+    ListVOName="PartsMaintView"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Partnum"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Partorg"/>
+      <Item Value="tPartDesc"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ParCode"/>
+      <Item Value="ParOrg"/>
+      <Item Value="ParDesc"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ParCode"/>
+      <Item Value="ParDesc"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="PartSearch"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Xtype"
+    ListVOName="XTypeLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Xtype"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="xtype"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="xtype"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Reptype"
+    ListVOName="RepTypeLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Reptype"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="repType"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="repType"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="MrltFifopartx"
+    Entity="its.mnr.mp5.eo.local.MrltFifopartx"/>
+  <ViewAttribute
+    Name="Fpxhid"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Fpxhid"
+    EntityUsage="MrltFifopartx"
+    AliasName="FPXID"
+    IsUpdateable="while_insert">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.cyclecount.MrltFifopartxView.Fpxhid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Partnum"
+    PrecisionRule="true"
+    EntityAttrName="Partnum"
+    EntityUsage="MrltFifopartx"
+    AliasName="PARTNUM"
+    LOVName="LOV_Partnum"
+    IsUpdateable="while_insert">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.cyclecount.MrltFifopartxView.Partnum_LABEL"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Xtype"
+    PrecisionRule="true"
+    EntityAttrName="Xtype"
+    EntityUsage="MrltFifopartx"
+    AliasName="XTYPE"
+    LOVName="LOV_Xtype">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.cyclecount.MrltFifopartxView.Xtype_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Pvalue"
+    PrecisionRule="true"
+    EntityAttrName="Pvalue"
+    EntityUsage="MrltFifopartx"
+    AliasName="PVALUE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.cyclecount.MrltFifopartxView.Pvalue_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Qvalue"
+    PrecisionRule="true"
+    EntityAttrName="Qvalue"
+    EntityUsage="MrltFifopartx"
+    AliasName="QVALUE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.cyclecount.MrltFifopartxView.Qvalue_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Reptype"
+    PrecisionRule="true"
+    EntityAttrName="Reptype"
+    EntityUsage="MrltFifopartx"
+    AliasName="REPTYPE"
+    LOVName="LOV_Reptype">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.cyclecount.MrltFifopartxView.Reptype_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Created"
+    PrecisionRule="true"
+    EntityAttrName="Created"
+    EntityUsage="MrltFifopartx"
+    AliasName="CREATED">
+    <TransientExpression><![CDATA[adf.currentDateTime]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tPartDesc"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    IsUpdateable="false">
+    <TransientExpression><![CDATA[Partnum != null ?PartsMaintViewFromFifo.ParDesc: null]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.cyclecount.MrltFifopartxView.tPartDesc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Partorg"
+    PrecisionRule="true"
+    EntityAttrName="Partorg"
+    EntityUsage="MrltFifopartx"
+    AliasName="PARTORG"
+    IsUpdateable="while_insert"/>
+  <ViewLinkAccessor
+    Name="PartsMaintViewFromFifo"
+    ViewLink="its.mnr.mp5.vo.link.MrltFifopartxPartsMaintLink"
+    Type="oracle.jbo.Row"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

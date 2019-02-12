@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrlrefAssetclasses"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="MRLREF_ASSETCLASSES"
+  AliasName="MrlrefAssetclasses"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="Clsentity"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="CLSENTITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_ASSETCLASSES"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Clscode"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="CLSCODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_ASSETCLASSES"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Clsorg"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="CLSORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_ASSETCLASSES"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Wotype"
+    Precision="5"
+    ColumnName="WOTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_ASSETCLASSES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5classes"
+    Association="its.mnr.mp5.eo.assoc.MrlrefAssetclassesFk1Assoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MrlrefAssetclassesFk1Assoc.R5classes"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MrlrefAssetclassesFk1Assoc.MrlrefAssetclasses"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrlrefAssetclassesPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLREF_ASSETCLASSES_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrlrefAssetclasses.Clsentity"/>
+      <Item Value="its.mnr.mp5.eo.master.MrlrefAssetclasses.Clscode"/>
+      <Item Value="its.mnr.mp5.eo.master.MrlrefAssetclasses.Clsorg"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrlrefAssetclassesFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_CLS"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLREF_ASSETCLASSES_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrlrefAssetclasses.Clsentity"/>
+      <Item Value="its.mnr.mp5.eo.master.MrlrefAssetclasses.Clscode"/>
+      <Item Value="its.mnr.mp5.eo.master.MrlrefAssetclasses.Clsorg"/>
+    </AttrArray>
+  </Key>
+</Entity>

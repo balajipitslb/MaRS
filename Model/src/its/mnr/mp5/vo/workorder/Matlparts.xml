@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Matlparts"
+  Version="11.1.2.64.36"
+  SelectList="R5matlparts.MLP_MATLIST, 
+       R5matlparts.MLP_LINE, 
+       R5matlparts.MLP_MATLREV, 
+       R5matlparts.ITS_BIN, 
+       R5matlparts.ITS_LOT, 
+       (select b.Bis_Qty from R5binstock b where b.Bis_Part=R5matlparts.Mlp_Part and b.Bis_Part_Org=R5matlparts.Mlp_Part_Org and R5matlparts.ITS_Bin = b.Bis_Bin and R5matlparts.ITS_Lot = b.Bis_Lot) AS AVAILABLE, 
+       R5matlparts.ITS_PARTAXAMT, 
+       R5matlparts.ITS_TAXPER, 
+       R5matlparts.MLP_ACTUAL_UNITCOST, 
+       R5matlparts.MLP_BILLABLE_UNITCOST, 
+       (select p.Par_Uom from R5parts  p where p.Par_Code=R5matlparts.Mlp_Part and p.Par_Org=R5matlparts.Mlp_Part_Org) AS PART_UOM, 
+       (select p.Par_Desc from R5parts  p where p.Par_Code=R5matlparts.Mlp_Part and p.Par_Org=R5matlparts.Mlp_Part_Org) AS PART_DESC, 
+       R5matlparts.MLP_PART, 
+       R5matlparts.MLP_PART_ORG, 
+       R5matlparts.MLP_QTY, 
+       (select a.mlp_qty from r5matlparts a where a.mlp_matlist=r5matlparts.mlp_matlist  AND a.mlp_line = r5matlparts.mlp_line and a.mlp_part = r5matlparts.mlp_part) AS DBQTY"
+  FromList="R5MATLPARTS R5matlparts"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchSize="5"
+  FetchMode="FETCH_AS_NEEDED"
+  RangeSize="5"
+  Passivate="All">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.workorder.Matlparts_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="PartsView"
+    ViewObjectName="its.mnr.mp5.lov.PartsView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="PartsInStock"
+      FullName="its.mnr.mp5.lov.PartsView.PartsInStock"/>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_MlpPart"
+    ListVOName="PartsView"
+    ListRangeSize="25"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="MlpPart"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ItsBin"/>
+      <Item Value="ItsLot"/>
+      <Item Value="Available"/>
+      <Item Value="PartDesc"/>
+      <Item Value="MlpActualUnitcost"/>
+      <Item Value="MlpPartOrg"/>
+      <Item Value="PartUOM"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ParCode"/>
+      <Item Value="BisBin"/>
+      <Item Value="BisLot"/>
+      <Item Value="BisQty"/>
+      <Item Value="ParDesc"/>
+      <Item Value="ParLastprice"/>
+      <Item Value="ParOrg"/>
+      <Item Value="ParUom"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="ParCode"/>
+      <Item Value="ParDesc"/>
+      <Item Value="BisBin"/>
+      <Item Value="BisLot"/>
+      <Item Value="BisQty"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="PartsInStock"/>
+  </ListBinding>
+  <EntityUsage
+    Name="R5matlparts"
+    Entity="its.mnr.mp5.eo.local.R5matlparts"/>
+  <ViewAttribute
+    Name="MlpMatlist"
+    PrecisionRule="true"
+    EntityAttrName="MlpMatlist"
+    EntityUsage="R5matlparts"
+    AliasName="MLP_MATLIST"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="MlpLine"
+    PrecisionRule="true"
+    EntityAttrName="MlpLine"
+    EntityUsage="R5matlparts"
+    AliasName="MLP_LINE"
+    IsUpdateable="false">
+    <TransientExpression><![CDATA[(object.getRowSet().max("MlpLine") == null ? 1 : object.getRowSet().max("MlpLine")+ 1)]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MlpMatlrev"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="MlpMatlrev"
+    EntityUsage="R5matlparts"
+    AliasName="MLP_MATLREV"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="Act"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    EntityAttrName="Act"
+    EntityUsage="R5matlparts"
+    AliasName="ACT"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="ItsBin"
+    PrecisionRule="true"
+    EntityAttrName="ItsBin"
+    EntityUsage="R5matlparts"
+    AliasName="ITS_BIN"/>
+  <ViewAttribute
+    Name="ItsLot"
+    PrecisionRule="true"
+    EntityAttrName="ItsLot"
+    EntityUsage="R5matlparts"
+    AliasName="ITS_LOT"/>
+  <ViewAttribute
+    Name="Available"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    EntityAttrName="Available"
+    EntityUsage="R5matlparts"
+    AliasName="AVAILABLE"/>
+  <ViewAttribute
+    Name="ItsPartaxamt"
+    PrecisionRule="true"
+    EntityAttrName="ItsPartaxamt"
+    EntityUsage="R5matlparts"
+    AliasName="ITS_PARTAXAMT">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMAT
+          ResId="its.mnr.mp5.vo.workorder.Matlparts.ItsPartaxamt_FMT_FORMAT"/>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.vo.workorder.Matlparts.ItsPartaxamt_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ItsTaxper"
+    PrecisionRule="true"
+    EntityAttrName="ItsTaxper"
+    EntityUsage="R5matlparts"
+    AliasName="ITS_TAXPER"/>
+  <ViewAttribute
+    Name="MlpActualUnitcost"
+    PrecisionRule="true"
+    EntityAttrName="MlpActualUnitcost"
+    EntityUsage="R5matlparts"
+    AliasName="MLP_ACTUAL_UNITCOST">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.vo.workorder.Matlparts.MlpActualUnitcost_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MlpBillableUnitcost"
+    PrecisionRule="true"
+    EntityAttrName="MlpBillableUnitcost"
+    EntityUsage="R5matlparts"
+    AliasName="MLP_BILLABLE_UNITCOST">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.vo.workorder.Matlparts.MlpBillableUnitcost_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartUOM"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    EntityAttrName="PartUOM"
+    EntityUsage="R5matlparts"
+    AliasName="PART_UOM"/>
+  <ViewAttribute
+    Name="PartDesc"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    EntityAttrName="PartDesc"
+    EntityUsage="R5matlparts"
+    AliasName="PART_DESC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="150"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MlpPart"
+    PrecisionRule="true"
+    EntityAttrName="MlpPart"
+    EntityUsage="R5matlparts"
+    AliasName="MLP_PART"
+    LOVName="LOV_MlpPart"
+    IsUpdateable="while_insert">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MlpPartOrg"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="MlpPartOrg"
+    EntityUsage="R5matlparts"
+    AliasName="MLP_PART_ORG"/>
+  <ViewAttribute
+    Name="MlpQty"
+    PrecisionRule="true"
+    EntityAttrName="MlpQty"
+    EntityUsage="R5matlparts"
+    AliasName="MLP_QTY">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="5"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DBQty"
+    IsQueriable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    EntityAttrName="DBQty"
+    EntityUsage="R5matlparts"
+    AliasName="DBQTY"/>
+  <ViewLinkAccessor
+    Name="AvailableQtyExistence"
+    ViewLink="its.mnr.mp5.vo.link.AvailableQtyExistenceLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

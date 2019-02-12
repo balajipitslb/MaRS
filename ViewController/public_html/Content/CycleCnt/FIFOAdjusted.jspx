@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="FIFO Parts Adjusted" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelBorderLayout id="pbl1" inlineStyle="height:600px;">
+                    <af:panelFormLayout id="pfl2" inlineStyle=" padding:20px 10px 10px 10px;"
+                                            rendered="#{empty bindings.tEntityState.inputValue or empty bindings.Accreated.inputValue}" labelWidth="25">
+                            <f:facet name="footer">
+                                <af:toolbar id="t2"
+                                            inlineStyle="padding:10px 10px 5px 10px; border-color:Silver; border-style:solid; border-width:thin; margin: 5px 5px 5px 190px; background-color:White;">
+                                    <af:button text="Cancel" id="ctb6" action="#{FifoBean.cancel_action}"
+                                               icon="#{resource['images:undo.png']}"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <af:outputLabel value="FIFO As Counted is required."
+                                            id="ol1" inlineStyle="font-size:small;"/>
+                            <af:spacer width="10" height="40" id="s2"/>
+                        </af:panelFormLayout>
+                        <af:panelFormLayout id="pfl1" partialTriggers="it1 ctb2"
+                                            inlineStyle=" padding:10px 10px 10px 10px;"
+                                            rendered="#{!empty bindings.tEntityState.inputValue or !empty bindings.Accreated.inputValue}" labelWidth="75">
+                            <af:inputText value="#{bindings.Fhid.inputValue}" label="#{bindings.Fhid.hints.label}"
+                                          required="#{bindings.Fhid.hints.mandatory}"
+                                          columns="#{bindings.Fhid.hints.displayWidth}"
+                                          maximumLength="#{bindings.Fhid.hints.precision}"
+                                          shortDesc="#{bindings.Fhid.hints.tooltip}" id="it1" autoSubmit="true"
+                                          readOnly="true">
+                                <f:validator binding="#{bindings.Fhid.validator}"/>
+                                <af:convertNumber groupingUsed="false" pattern="#{bindings.Fhid.format}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.Listid.inputValue}" label="#{bindings.Listid.hints.label}"
+                                          required="#{bindings.Listid.hints.mandatory}"
+                                          columns="#{bindings.Listid.hints.displayWidth}"
+                                          maximumLength="#{bindings.Listid.hints.precision}"
+                                          shortDesc="#{bindings.Listid.hints.tooltip}" id="it2" readOnly="true"
+                                          autoSubmit="true">
+                                <f:validator binding="#{bindings.Listid.validator}"/>
+                                <af:convertNumber groupingUsed="false" pattern="#{bindings.Listid.format}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.tCCDesc.inputValue}" label="#{bindings.tCCDesc.hints.label}"
+                                          required="#{bindings.tCCDesc.hints.mandatory}"
+                                          columns="#{bindings.tCCDesc.hints.displayWidth}"
+                                          maximumLength="#{bindings.tCCDesc.hints.precision}"
+                                          shortDesc="#{bindings.tCCDesc.hints.tooltip}" id="it3" readOnly="true"
+                                          autoSubmit="true">
+                                <f:validator binding="#{bindings.tCCDesc.validator}"/>
+                            </af:inputText>
+                            <af:selectOneChoice value="#{bindings.Fpxhid.inputValue}" label="#{bindings.Fpxhid.label}"
+                                                required="#{bindings.Fpxhid.hints.mandatory}"
+                                                shortDesc="#{bindings.Fpxhid.hints.tooltip}" id="soc1"
+                                                autoSubmit="true" readOnly="true">
+                                <f:selectItems value="#{bindings.Fpxhid.items}" id="si1"/>
+                            </af:selectOneChoice>
+                            <af:inputDate value="#{bindings.Adjcreated.inputValue}"
+                                          label="#{bindings.Adjcreated.hints.label}"
+                                          required="#{bindings.Adjcreated.hints.mandatory}"
+                                          columns="#{bindings.Accreated.hints.displayWidth}"
+                                          shortDesc="#{bindings.Adjcreated.hints.tooltip}" id="id1" readOnly="true" partialTriggers="ctb2"
+                                          binding="#{FifoBean.txtADJcreated}">
+                                <f:validator binding="#{bindings.Adjcreated.validator}"/>
+                                <af:convertDateTime pattern="#{bindings.Adjcreated.format}"/>
+                            </af:inputDate>
+                            <f:facet name="footer">
+                                <af:group id="g1">
+
+                                    <af:outputLabel value="Click button to Update FIFO Adjusted report, or Cancel to exit."
+                                                    id="ol2" inlineStyle="font-size:small;"/>
+                                    <af:panelFormLayout id="pfl3" labelAlignment="start" inlineStyle="text-align:left;"
+                                                        partialTriggers="sbc1 it4 it5">
+                                                        <!--rendered="#{FifoBean.emailSubChk.value}"-->
+                                        <af:inputText label="Email 1" id="it4" binding="#{FifoBean.email3}"
+                                                      validator="#{FifoBean.emailValidator}" autoSubmit="true"
+                                                      showRequired="true"/>
+                                        <af:selectBooleanCheckbox text="Would you like to another email address?"
+                                                                  id="sbc1" disabled="#{empty bindings.Fpxhid.inputValue}"
+                                                                  valueChangeListener="#{FifoBean.emailSubCheckbox}"
+                                                                  binding="#{FifoBean.emailSubChk}" autoSubmit="true"
+                                                                  simple="true" contentStyle="margin-left:-45px;"
+                                                                  immediate="true" partialTriggers="it4"/>
+                                        <af:inputText label="Email 2" id="it5" binding="#{FifoBean.email4}" rendered="#{(FifoBean.emailSubChk.value)}"
+                                                       autoSubmit="true" required="#{(FifoBean.emailSubChk.value)}"
+                                                      valueChangeListener="#{FifoBean.emailValChngLstnr}"
+                                                      showRequired="true"/>
+                                    </af:panelFormLayout>
+                                    <af:toolbar id="t1"
+                                                inlineStyle=" padding:10px 10px 5px 10px;border-color:Silver; border-style:solid; border-width:thin; margin:  5px 5px 5px 150px; background-color:White;">
+                                        <af:button text="Update" id="ctb2" action="#{FifoBean.okADJ_action}"
+                                                   icon="#{resource['images:commit.png']}"
+                                                   disabled="#{empty bindings.Fpxhid.inputValue}" partialTriggers="soc1"
+                                                   binding="#{FifoBean.btnADJUpdate}"/>
+                                        <af:button text="Cancel" id="ctb1" icon="#{resource['images:undo.png']}"
+                                                   action="#{FifoBean.cancel_action}"/>
+                                        <af:button actionListener="#{bindings.Commit.execute}" text="Commit"
+                                                   disabled="#{!bindings.Commit.enabled}" id="ctb4" rendered="false"/>
+                                        <af:button actionListener="#{bindings.Rollback.execute}" text="Rollback"
+                                                   disabled="#{!bindings.Rollback.enabled}" immediate="true" id="ctb5"
+                                                   rendered="false">
+                                            <af:resetActionListener/>
+                                        </af:button>
+                                    </af:toolbar>
+                                </af:group>
+                            </f:facet>
+                            <af:inputDate value="#{bindings.Adjtodate.inputValue}"
+                                          label="#{bindings.Adjtodate.hints.label}"
+                                          required="#{bindings.Adjtodate.hints.mandatory}"
+                                          columns="#{bindings.Adjtodate.hints.displayWidth}"
+                                          shortDesc="#{bindings.Adjtodate.hints.tooltip}" id="id2" autoSubmit="true">
+                                <f:validator binding="#{bindings.Adjtodate.validator}"/>
+                                <af:convertDateTime pattern="#{bindings.Adjtodate.format}"/>
+                            </af:inputDate>
+                            <af:panelLabelAndMessage label="#{bindings.Ccstatus.hints.label}" id="plam1">
+                                <af:outputText value="#{bindings.Ccstatus.inputValue}" id="ot1"/>
+                            </af:panelLabelAndMessage>
+                        </af:panelFormLayout>
+                    </af:panelBorderLayout>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

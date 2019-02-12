@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle1" value="#{adfBundle['viewcontroller.Content.Admin.TaskRateVersionBundle']}"/>
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.TaskRateVersionBundle']}"/>
+    <af:document title="#{viewcontrollerBundle.TASKRATEVERSION}" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:group id="g1">
+                        <af:spacer width="10" height="10" id="s4"/>
+                        <af:panelHeader text=" " id="ph1"
+                                        inlineStyle="background-color:White; height:350px; border-color:Silver; border-style:solid; border-width:2px;">
+                            <f:facet name="context"/>
+                            <f:facet name="menuBar">
+                                <af:toolbar id="t1"
+                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px;">
+                                    <af:button id="ctb1" icon="#{resource['images:terminate.png']}" action="Back"
+                                               shortDesc="#{viewcontrollerBundle1.CLOSE_AND_RETURN_TO_PREVIOUS_S}"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="legend"/>
+                            <f:facet name="info"/>
+                            <af:spacer width="10" height="10" id="s3"/>
+                            <af:panelFormLayout id="pfl1"
+                                                inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px; padding:5px;">
+                                <af:panelLabelAndMessage label="#{bindings.Acctnum.hints.label}" id="plam3">
+                                    <af:outputText value="#{bindings.Acctnum.inputValue}" id="ot3"/>
+                                    <f:facet name="end">
+                                        <af:group id="g2">
+                                            <af:spacer width="10" height="10" id="s7"/>
+                                            <af:outputText value="#{bindings.AcctNumDesc.inputValue}" id="ot5"/>
+                                            <af:spacer width="100" height="10" id="s5"/>
+                                            <af:outputText value="#{bindings.AcctBillType.attributeValue == 'B'? 'Billable' : 'Non-Billable'}" id="ot2"/>
+                                        </af:group>
+                                    </f:facet>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.Ver.hints.label}" id="plam4">
+                                    <af:outputText value="#{bindings.Ver.inputValue}" id="ot4"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.Base.hints.label}" id="plam6">
+                                    <af:outputText value="#{bindings.Base.inputValue}" id="ot6">
+                                        <af:convertNumber type="currency"/>
+                                    </af:outputText>
+                                    <f:facet name="end">
+                                        <af:group id="g3">
+                                            <af:spacer width="100" height="10" id="s6"/>
+                                            <af:panelLabelAndMessage label="#{bindings.Effectivedt.hints.label}"
+                                                                     id="plam1">
+                                                <af:outputText value="#{bindings.Effectivedt.inputValue}" id="ot1">
+                                                    <af:convertDateTime pattern="#{bindings.Effectivedt.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                        </af:group>
+                                    </f:facet>
+                                </af:panelLabelAndMessage>
+                            </af:panelFormLayout>
+                            <af:spacer width="10" height="20" id="s1"/>
+                            <af:outputLabel value="#{viewcontrollerBundle.SHIFT_MULTIPLIER}" id="ol1"/>
+                            <af:panelFormLayout id="pfl2" maxColumns="6" rows="1" fieldWidth="100" labelWidth="75"
+                                                labelAlignment="top"
+                                                inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px; padding:5px;">
+                                <af:inputText value="#{bindings.M1.inputValue}" label="#{bindings.M1.hints.label}"
+                                              required="#{bindings.M1.hints.mandatory}" columns="20"
+                                              maximumLength="#{bindings.M1.hints.precision}"
+                                              shortDesc="#{bindings.M1.hints.tooltip}" id="it1" readOnly="true">
+                                    <f:validator binding="#{bindings.M1.validator}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.M1o.inputValue}" label="#{bindings.M1o.hints.label}"
+                                              required="#{bindings.M1o.hints.mandatory}" columns="20"
+                                              maximumLength="#{bindings.M1o.hints.precision}"
+                                              shortDesc="#{bindings.M1o.hints.tooltip}" id="it2" readOnly="true">
+                                    <f:validator binding="#{bindings.M1o.validator}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.M2.inputValue}" label="#{bindings.M2.hints.label}"
+                                              required="#{bindings.M2.hints.mandatory}" columns="20"
+                                              maximumLength="#{bindings.M2.hints.precision}"
+                                              shortDesc="#{bindings.M2.hints.tooltip}" id="it3" readOnly="true">
+                                    <f:validator binding="#{bindings.M2.validator}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.M2o.inputValue}" label="#{bindings.M2o.hints.label}"
+                                              required="#{bindings.M2o.hints.mandatory}" columns="20"
+                                              maximumLength="#{bindings.M2o.hints.precision}"
+                                              shortDesc="#{bindings.M2o.hints.tooltip}" id="it4" readOnly="true">
+                                    <f:validator binding="#{bindings.M2o.validator}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.M3.inputValue}" label="#{bindings.M3.hints.label}"
+                                              required="#{bindings.M3.hints.mandatory}" columns="20"
+                                              maximumLength="#{bindings.M3.hints.precision}"
+                                              shortDesc="#{bindings.M3.hints.tooltip}" id="it5" readOnly="true">
+                                    <f:validator binding="#{bindings.M3.validator}"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.M3o.inputValue}" label="#{bindings.M3o.hints.label}"
+                                              required="#{bindings.M3o.hints.mandatory}" columns="20"
+                                              maximumLength="#{bindings.M3o.hints.precision}"
+                                              shortDesc="#{bindings.M3o.hints.tooltip}" id="it6" readOnly="true">
+                                    <f:validator binding="#{bindings.M3o.validator}"/>
+                                </af:inputText>
+                            </af:panelFormLayout>
+                            <af:spacer width="10" height="20" id="s2"/>
+                            <af:outputLabel value="#{viewcontrollerBundle.SHIFT_RATE}" id="ol2"/>
+                            <af:panelFormLayout id="pfl3" maxColumns="6" rows="1" fieldWidth="100" labelWidth="75"
+                                                labelAlignment="top"
+                                                inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px; padding:5px;">
+                                <af:inputText value="#{bindings.M1.inputValue * bindings.Base.inputValue}" label="#{bindings.M1.hints.label}"
+                                              required="#{bindings.M1.hints.mandatory}" columns="20"
+                                              maximumLength="#{bindings.M1.hints.precision}"
+                                              shortDesc="#{bindings.M1.hints.tooltip}" id="it7" disabled="true">
+                                    <f:validator binding="#{bindings.M1.validator}"/>
+                                    <af:convertNumber type="currency"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.M1o.inputValue * bindings.Base.inputValue}" label="#{bindings.M1o.hints.label}"
+                                              required="#{bindings.M1o.hints.mandatory}" columns="20"
+                                              maximumLength="#{bindings.M1o.hints.precision}"
+                                              shortDesc="#{bindings.M1o.hints.tooltip}" id="it8" disabled="true">
+                                    <f:validator binding="#{bindings.M1o.validator}"/>
+                                    <af:convertNumber type="currency"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.M2.inputValue * bindings.Base.inputValue}" label="#{bindings.M2.hints.label}"
+                                              required="#{bindings.M2.hints.mandatory}" columns="20"
+                                              maximumLength="#{bindings.M2.hints.precision}"
+                                              shortDesc="#{bindings.M2.hints.tooltip}" id="it9" disabled="true">
+                                    <f:validator binding="#{bindings.M2.validator}"/>
+                                    <af:convertNumber type="currency"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.M2o.inputValue * bindings.Base.inputValue}" label="#{bindings.M2o.hints.label}"
+                                              required="#{bindings.M2o.hints.mandatory}" columns="20"
+                                              maximumLength="#{bindings.M2o.hints.precision}"
+                                              shortDesc="#{bindings.M2o.hints.tooltip}" id="it10" disabled="true">
+                                    <f:validator binding="#{bindings.M2o.validator}"/>
+                                    <af:convertNumber type="currency"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.M3.inputValue * bindings.Base.inputValue}" label="#{bindings.M3.hints.label}"
+                                              required="#{bindings.M3.hints.mandatory}" columns="20"
+                                              maximumLength="#{bindings.M3.hints.precision}"
+                                              shortDesc="#{bindings.M3.hints.tooltip}" id="it11" disabled="true">
+                                    <f:validator binding="#{bindings.M3.validator}"/>
+                                    <af:convertNumber type="currency"/>
+                                </af:inputText>
+                                <af:inputText value="#{bindings.M3o.inputValue * bindings.Base.inputValue}" label="#{bindings.M3o.hints.label}"
+                                              required="#{bindings.M3o.hints.mandatory}" columns="20"
+                                              maximumLength="#{bindings.M3o.hints.precision}"
+                                              shortDesc="#{bindings.M3o.hints.tooltip}" id="it12" disabled="true">
+                                    <f:validator binding="#{bindings.M3o.validator}"/>
+                                    <af:convertNumber type="currency"/>
+                                </af:inputText>
+                            </af:panelFormLayout>
+                        </af:panelHeader>
+                    </af:group>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

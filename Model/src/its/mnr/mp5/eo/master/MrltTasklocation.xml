@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltTasklocation"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="MRLT_TASKLOCATION"
+  AliasName="MrltTasklocation"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.eo.master.MrltTasklocationImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="Tasklocationid"
+    Precision="20"
+    ColumnName="TASKLOCATIONID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_TASKLOCATION"
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    IsUpdateable="false"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrltTasklocation.Tasklocationid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Taskid"
+    IsUnique="true"
+    Precision="20"
+    ColumnName="TASKID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_TASKLOCATION"
+    RetrievedOnInsert="true"
+    IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrltTasklocation.Taskid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Taskloccode"
+    Precision="4"
+    ColumnName="TASKLOCCODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_TASKLOCATION"
+    IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrltTasklocation.Taskloccode_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Tasklocdescription"
+    Precision="40"
+    ColumnName="TASKLOCDESCRIPTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_TASKLOCATION">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrltTasklocation.Tasklocdescription_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Tasklocdflt"
+    Precision="1"
+    ColumnName="TASKLOCDFLT"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="MRLT_TASKLOCATION"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    DefaultValue="N"
+    IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrltTasklocation.Tasklocdflt_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="TaskLocCompCodeId"
+    Precision="80"
+    ColumnName="TASK_LOC_COMP_CODE_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[(MrltTask.TaskCompCodeId!=null?MrltTask.TaskCompCodeId:null)]]></TransientExpression>
+  </Attribute>
+  <AccessorAttribute
+    Name="MrltTask"
+    Association="its.mnr.mp5.eo.assoc.MrltTasklocationFk1Assoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MrltTasklocationFk1Assoc.MrltTask"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MrltTasklocationFk1Assoc.MrltTasklocation"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrltTasklocationPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLT_TASKLOCATION_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltTasklocation.Tasklocationid"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltTasklocationUk1">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_TASKLOCATION_UK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltTasklocation.Taskid"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltTasklocationFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_TASK_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_TASKLOCATION_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltTasklocation.Taskid"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="CC-CCSetupStorePartsTemp.jspx" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/CCSetupTrainTemplate.jspx" id="pt1">
+                <f:facet name="body">
+                    <af:group id="g1">
+                        <af:table value="#{bindings.MrltCyclecountpartstoresView.collectionModel}" var="row"
+                                  rows="#{bindings.MrltCyclecountpartstoresView.rangeSize}"
+                                  emptyText="#{bindings.MrltCyclecountpartstoresView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.MrltCyclecountpartstoresView.rangeSize}" rowBandingInterval="0"
+                                  id="t1" inlineStyle="height:60px;">
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartstoresView.hints.Listid.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltCyclecountpartstoresView.hints.Listid.label}" id="c1"
+                                       align="center">
+                                <af:inputText value="#{row.bindings.Listid.inputValue}"
+                                              label="#{bindings.MrltCyclecountpartstoresView.hints.Listid.label}"
+                                              required="#{bindings.MrltCyclecountpartstoresView.hints.Listid.mandatory}"
+                                              columns="#{bindings.MrltCyclecountpartstoresView.hints.Listid.displayWidth}"
+                                              maximumLength="#{bindings.MrltCyclecountpartstoresView.hints.Listid.precision}"
+                                              shortDesc="#{bindings.MrltCyclecountpartstoresView.hints.Listid.tooltip}"
+                                              id="it1">
+                                    <f:validator binding="#{row.bindings.Listid.validator}"/>
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.MrltCyclecountpartstoresView.hints.Listid.format}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartstoresView.hints.Srcd.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltCyclecountpartstoresView.hints.Srcd.label}" id="c2"
+                                       align="center">
+                                <af:outputText value="#{row.Srcd}" id="ot1"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.MrltCyclecountpartstoresView.hints.Used.label}" id="c3"
+                                       align="center">
+                                <af:selectBooleanCheckbox value="#{row.bindings.Used.inputValue}"
+                                                          label="#{row.bindings.Used.label}"
+                                                          shortDesc="#{bindings.MrltCyclecountpartstoresView.hints.Used.tooltip}"
+                                                          id="sbc1"/>
+                            </af:column>
+                        </af:table>
+                        <af:table value="#{bindings.MrltCyclecountpartsView.collectionModel}" var="row"
+                                  rows="#{bindings.MrltCyclecountpartsView.rangeSize}"
+                                  emptyText="#{bindings.MrltCyclecountpartsView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  fetchSize="#{bindings.MrltCyclecountpartsView.rangeSize}" rowBandingInterval="0"
+                                  id="t3" inlineStyle="height:75px;"
+                                  selectionListener="#{bindings.MrltCyclecountpartsView.collectionModel.makeCurrent}"
+                                  rowSelection="multiple">
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlTrans.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlTrans.label}" id="c4">
+                                <af:inputText value="#{row.bindings.StlTrans.inputValue}"
+                                              label="#{bindings.MrltCyclecountpartsView.hints.StlTrans.label}"
+                                              required="#{bindings.MrltCyclecountpartsView.hints.StlTrans.mandatory}"
+                                              columns="#{bindings.MrltCyclecountpartsView.hints.StlTrans.displayWidth}"
+                                              maximumLength="#{bindings.MrltCyclecountpartsView.hints.StlTrans.precision}"
+                                              shortDesc="#{bindings.MrltCyclecountpartsView.hints.StlTrans.tooltip}"
+                                              id="it2">
+                                    <f:validator binding="#{row.bindings.StlTrans.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlPart.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlPart.label}" id="c5">
+                                <af:inputText value="#{row.bindings.StlPart.inputValue}"
+                                              label="#{bindings.MrltCyclecountpartsView.hints.StlPart.label}"
+                                              required="#{bindings.MrltCyclecountpartsView.hints.StlPart.mandatory}"
+                                              columns="#{bindings.MrltCyclecountpartsView.hints.StlPart.displayWidth}"
+                                              maximumLength="#{bindings.MrltCyclecountpartsView.hints.StlPart.precision}"
+                                              shortDesc="#{bindings.MrltCyclecountpartsView.hints.StlPart.tooltip}"
+                                              id="it3">
+                                    <f:validator binding="#{row.bindings.StlPart.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlBin.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlBin.label}" id="c6">
+                                <af:inputText value="#{row.bindings.StlBin.inputValue}"
+                                              label="#{bindings.MrltCyclecountpartsView.hints.StlBin.label}"
+                                              required="#{bindings.MrltCyclecountpartsView.hints.StlBin.mandatory}"
+                                              columns="#{bindings.MrltCyclecountpartsView.hints.StlBin.displayWidth}"
+                                              maximumLength="#{bindings.MrltCyclecountpartsView.hints.StlBin.precision}"
+                                              shortDesc="#{bindings.MrltCyclecountpartsView.hints.StlBin.tooltip}"
+                                              id="it4">
+                                    <f:validator binding="#{row.bindings.StlBin.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlLot.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlLot.label}" id="c7">
+                                <af:inputText value="#{row.bindings.StlLot.inputValue}"
+                                              label="#{bindings.MrltCyclecountpartsView.hints.StlLot.label}"
+                                              required="#{bindings.MrltCyclecountpartsView.hints.StlLot.mandatory}"
+                                              columns="#{bindings.MrltCyclecountpartsView.hints.StlLot.displayWidth}"
+                                              maximumLength="#{bindings.MrltCyclecountpartsView.hints.StlLot.precision}"
+                                              shortDesc="#{bindings.MrltCyclecountpartsView.hints.StlLot.tooltip}"
+                                              id="it5">
+                                    <f:validator binding="#{row.bindings.StlLot.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlStore.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlStore.label}" id="c8">
+                                <af:inputText value="#{row.bindings.StlStore.inputValue}"
+                                              label="#{bindings.MrltCyclecountpartsView.hints.StlStore.label}"
+                                              required="#{bindings.MrltCyclecountpartsView.hints.StlStore.mandatory}"
+                                              columns="#{bindings.MrltCyclecountpartsView.hints.StlStore.displayWidth}"
+                                              maximumLength="#{bindings.MrltCyclecountpartsView.hints.StlStore.precision}"
+                                              shortDesc="#{bindings.MrltCyclecountpartsView.hints.StlStore.tooltip}"
+                                              id="it6">
+                                    <f:validator binding="#{row.bindings.StlStore.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlExpqty.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlExpqty.label}" id="c9">
+                                <af:inputText value="#{row.bindings.StlExpqty.inputValue}"
+                                              label="#{bindings.MrltCyclecountpartsView.hints.StlExpqty.label}"
+                                              required="#{bindings.MrltCyclecountpartsView.hints.StlExpqty.mandatory}"
+                                              columns="#{bindings.MrltCyclecountpartsView.hints.StlExpqty.displayWidth}"
+                                              maximumLength="#{bindings.MrltCyclecountpartsView.hints.StlExpqty.precision}"
+                                              shortDesc="#{bindings.MrltCyclecountpartsView.hints.StlExpqty.tooltip}"
+                                              id="it7">
+                                    <f:validator binding="#{row.bindings.StlExpqty.validator}"/>
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.MrltCyclecountpartsView.hints.StlExpqty.format}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlType.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlType.label}" id="c10">
+                                <af:inputText value="#{row.bindings.StlType.inputValue}"
+                                              label="#{bindings.MrltCyclecountpartsView.hints.StlType.label}"
+                                              required="#{bindings.MrltCyclecountpartsView.hints.StlType.mandatory}"
+                                              columns="#{bindings.MrltCyclecountpartsView.hints.StlType.displayWidth}"
+                                              maximumLength="#{bindings.MrltCyclecountpartsView.hints.StlType.precision}"
+                                              shortDesc="#{bindings.MrltCyclecountpartsView.hints.StlType.tooltip}"
+                                              id="it8">
+                                    <f:validator binding="#{row.bindings.StlType.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlPartOrg.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlPartOrg.label}" id="c11">
+                                <af:inputText value="#{row.bindings.StlPartOrg.inputValue}"
+                                              label="#{bindings.MrltCyclecountpartsView.hints.StlPartOrg.label}"
+                                              required="#{bindings.MrltCyclecountpartsView.hints.StlPartOrg.mandatory}"
+                                              columns="#{bindings.MrltCyclecountpartsView.hints.StlPartOrg.displayWidth}"
+                                              maximumLength="#{bindings.MrltCyclecountpartsView.hints.StlPartOrg.precision}"
+                                              shortDesc="#{bindings.MrltCyclecountpartsView.hints.StlPartOrg.tooltip}"
+                                              id="it9">
+                                    <f:validator binding="#{row.bindings.StlPartOrg.validator}"/>
+                                </af:inputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.MrltCyclecountpartsView.hints.StlListid.name}"
+                                       sortable="false"
+                                       headerText="#{bindings.MrltCyclecountpartsView.hints.StlListid.label}" id="c12">
+                                <af:inputText value="#{row.bindings.StlListid.inputValue}"
+                                              label="#{bindings.MrltCyclecountpartsView.hints.StlListid.label}"
+                                              required="#{bindings.MrltCyclecountpartsView.hints.StlListid.mandatory}"
+                                              columns="#{bindings.MrltCyclecountpartsView.hints.StlListid.displayWidth}"
+                                              maximumLength="#{bindings.MrltCyclecountpartsView.hints.StlListid.precision}"
+                                              shortDesc="#{bindings.MrltCyclecountpartsView.hints.StlListid.tooltip}"
+                                              id="it10">
+                                    <f:validator binding="#{row.bindings.StlListid.validator}"/>
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.MrltCyclecountpartsView.hints.StlListid.format}"/>
+                                </af:inputText>
+                            </af:column>
+                        </af:table>
+                        <af:toolbar id="t4">
+                            <af:button text="Process" id="ctb2" action="#{CycleCountBean.processStorePartsBtn}"/>
+                            <af:button text="Commit" disabled="#{!bindings.Commit.enabled}" id="ctb6"
+                                       action="#{CycleCountBean.commit_action}"/>
+                            <af:button text="Rollback" disabled="#{!bindings.Rollback.enabled}" immediate="true"
+                                       id="ctb7" action="#{CycleCountBean.rollback_action}">
+                                <af:resetActionListener/>
+                            </af:button>
+                        </af:toolbar>
+                        <af:toolbar id="t2">
+                            <af:button id="ctb3" icon="#{resource['images:shuttle_right.png']}" action="done"/>
+                        </af:toolbar>
+                    </af:group>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

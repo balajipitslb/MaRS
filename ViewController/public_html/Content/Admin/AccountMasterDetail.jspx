@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.AccountMasterDetailBundle']}"/>
+    <af:document title="#{viewcontrollerBundle.PAGEHEADING}" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:panelHeader text=" " id="ph1"
+                            inlineStyle="width:inherit; border-style:solid; border-width:thin; margin:5px;">
+                <f:facet name="context"/>
+                <f:facet name="menuBar">
+                    <af:toolbar id="t1"
+                                inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px;">
+                        <af:spacer width="10" height="10" id="s4"/>
+                        <af:button actionListener="#{bindings.Commit.execute}" text="#{viewcontrollerBundle.APPLY}"
+                                   disabled="#{!bindings.Commit.enabled}" id="ctb1"
+                                   icon="#{resource['images:commit.png']}"
+                                   partialTriggers="it1 it2 it3 sbc1 sbc2 sbc3 it4 soc1 sbc4"/>
+                        <af:button actionListener="#{bindings.Rollback.execute}" text="#{viewcontrollerBundle.CANCEL}"
+                                   disabled="#{!bindings.Rollback.enabled}" immediate="true" id="ctb2"
+                                   icon="#{resource['images:undo.png']}"
+                                   partialTriggers="it1 it2 it3 sbc1 sbc2 sbc3 it4 soc1 sbc4">
+                            <af:resetActionListener/>
+                        </af:button>
+                        <af:button id="ctb3" icon="#{resource['images:terminate.png']}" action="Back" text="button 1"/>
+                    </af:toolbar>
+                </f:facet>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelBox id="pgl2" showDisclosure="false">
+                    <af:panelFormLayout id="pfl2" labelAlignment="start" maxColumns="2" fieldWidth="400"
+                                        labelWidth="100"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px; padding:5px; width:375px;">
+                        <af:panelLabelAndMessage label="#{viewcontrollerBundle.ACCOUNTLABEL}" id="plam1">
+                            <af:inputText value="#{bindings.Acctnum.inputValue}" simple="true"
+                                          required="#{bindings.Acctnum.hints.mandatory}"
+                                          columns="#{bindings.Acctnum.hints.displayWidth}"
+                                          maximumLength="#{bindings.Acctnum.hints.precision}"
+                                          shortDesc="#{bindings.Acctnum.hints.tooltip}" id="it1" autoSubmit="true">
+                                <f:validator binding="#{bindings.Acctnum.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.Accountnm.inputValue}" simple="true"
+                                          required="#{bindings.Accountnm.hints.mandatory}"
+                                          columns="#{bindings.Accountnm.hints.displayWidth}"
+                                          maximumLength="#{bindings.Accountnm.hints.precision}"
+                                          shortDesc="#{bindings.Accountnm.hints.tooltip}" id="it2" autoSubmit="true">
+                                <f:validator binding="#{bindings.Accountnm.validator}"/>
+                            </af:inputText>
+                        </af:panelLabelAndMessage>
+                        <af:spacer width="10" height="10" id="s9"/>
+                        <af:inputText value="#{bindings.Accountnmlong.inputValue}"
+                                      label="#{bindings.Accountnmlong.hints.label}"
+                                      required="#{bindings.Accountnmlong.hints.mandatory}" columns="30"
+                                      maximumLength="#{bindings.Accountnmlong.hints.precision}"
+                                      shortDesc="#{bindings.Accountnmlong.hints.tooltip}" id="it5" rows="1">
+                            <f:validator binding="#{bindings.Accountnmlong.validator}"/>
+                        </af:inputText>
+                        <af:spacer width="10" height="10" id="s10"/>
+                        <af:spacer width="10" height="10" id="s2"/>
+                    </af:panelFormLayout>
+                    <f:facet name="toolbar"/>
+                    <af:outputLabel value="#{viewcontrollerBundle.DETAIL}" id="ol5" inlineStyle="font-size:medium;"/>
+                    <af:panelFormLayout id="pfl1" fieldWidth="400" labelWidth="100"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px; padding:5px; width:375px;">
+                            <af:inputText value="#{bindings.Locode.inputValue}" label="#{bindings.Locode.hints.label}"
+                                          required="#{bindings.Locode.hints.mandatory}"
+                                          columns="30"
+                                          maximumLength="#{bindings.Locode.hints.precision}"
+                                          shortDesc="#{bindings.Locode.hints.tooltip}" id="it3" autoSubmit="true">
+                                <f:validator binding="#{bindings.Locode.validator}"/>
+                            </af:inputText>
+                            <af:spacer width="10" height="10" id="s5"/>
+                            <af:panelGroupLayout id="pgl1" layout="horizontal">
+                                <af:selectBooleanCheckbox value="#{bindings.Billtype.inputValue}"
+                                                          shortDesc="#{bindings.Billtype.hints.tooltip}" id="sbc1"
+                                                          autoSubmit="true"/>
+                                <af:outputLabel value="#{viewcontrollerBundle.BILLABLE}" id="ol3"/>
+                                <af:spacer width="40" height="10" id="s1"/>
+                                <af:selectBooleanCheckbox value="#{bindings.Amstractive.inputValue}"
+                                                          shortDesc="#{bindings.Amstractive.hints.tooltip}" id="sbc2"
+                                                          autoSubmit="true"/>
+                                <af:outputLabel value="#{viewcontrollerBundle.ACTIVE}" id="ol4"/>
+                        </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl5" layout="horizontal">
+                            <af:selectBooleanCheckbox value="#{bindings.Parttax.inputValue}"
+                                                      shortDesc="#{bindings.Parttax.hints.tooltip}" id="sbc5"
+                                                      autoSubmit="true"/>
+                            <af:outputLabel value="#{bindings.Parttax.label}" id="ol7"/>
+                        </af:panelGroupLayout>
+                    </af:panelFormLayout>
+                    <af:outputLabel value="#{viewcontrollerBundle.ESTIMATE}" id="ol6" inlineStyle="font-size:medium;"/>
+                    <af:panelFormLayout id="pfl3" fieldWidth="400" labelWidth="100"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:5px; padding:5px; width:375px;">
+                            <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                <af:selectBooleanCheckbox value="#{bindings.Estimate.inputValue}"
+                                                          shortDesc="#{bindings.Estimate.hints.tooltip}" id="sbc3"
+                                                          disabled="#{!bindings.Billtype.inputValue or !bindings.Amstractive.inputValue}"
+                                                          autoSubmit="true"/>
+                                <af:outputLabel value="#{viewcontrollerBundle.REQUIRE_ESTIMATE}" id="ol1"/>
+                            </af:panelGroupLayout>
+                            <af:spacer width="10" height="10" id="s6"/>
+                            <af:panelLabelAndMessage label="#{viewcontrollerBundle.OVER}" id="plam2">
+                                <af:inputText value="#{bindings.Over.inputValue}" simple="true"
+                                              required="#{bindings.Over.hints.mandatory or bindings.Estimate.inputValue}"
+                                              columns="#{bindings.Over.hints.displayWidth}"
+                                              maximumLength="#{bindings.Over.hints.precision}"
+                                              shortDesc="#{bindings.Over.hints.tooltip}" id="it4"
+                                              disabled="#{!bindings.Estimate.inputValue or !bindings.Billtype.inputValue or !bindings.Amstractive.inputValue}"
+                                              autoSubmit="true" label="#{bindings.Over.hints.label}">
+                                    <f:validator binding="#{bindings.Over.validator}"/>
+                                </af:inputText>
+                                <f:facet name="end">
+                                <af:selectOneChoice id="soc1" value="#{bindings.Overuom.inputValue}" autoSubmit="true"
+                                                    required="#{ bindings.Estimate.inputValue}"
+                                                    disabled="#{!bindings.Estimate.inputValue or !bindings.Billtype.inputValue or !bindings.Amstractive.inputValue}">
+                                    <af:selectItem label="Hour(s)" value="H" id="si1"/>
+                                    <af:selectItem label="Dollar(s)" value="D" id="si2"/>
+                                </af:selectOneChoice>
+                            </f:facet>
+                            </af:panelLabelAndMessage>
+                            <af:spacer width="10" height="10" id="s7"/>
+                        <af:panelGroupLayout id="pgl6" layout="horizontal">
+                            <af:selectBooleanCheckbox value="#{bindings.Estcmpltn.inputValue}"
+                                                      shortDesc="#{bindings.Estcmpltn.hints.tooltip}" id="sbc6"
+                                                      autoSubmit="true"
+                                                      disabled="#{!bindings.Estimate.inputValue or !bindings.Billtype.inputValue or !bindings.Amstractive.inputValue}"/>
+                            <af:outputLabel value="Generate #{bindings.Estcmpltn.label}" id="ol8"/>
+                        </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl4" layout="horizontal">
+                                <af:selectBooleanCheckbox value="#{bindings.Invrej.inputValue}"
+                                                          shortDesc="#{bindings.Invrej.hints.tooltip}" id="sbc4"
+                                                          disabled="#{!bindings.Estimate.inputValue or !bindings.Billtype.inputValue or !bindings.Amstractive.inputValue}"
+                                                          autoSubmit="true"/>
+                                <af:outputLabel value="#{viewcontrollerBundle.INVOICE_REJECTED_ESTIMATES}" id="ol2"/>
+                            </af:panelGroupLayout>
+                    </af:panelFormLayout>
+                </af:panelBox>
+            </af:panelHeader>
+        </af:form>
+    </af:document>
+</f:view>

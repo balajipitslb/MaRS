@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrltFlagassociation_EO"
+  Version="11.1.2.64.36"
+  DBObjectType="table"
+  DBObjectName="MRLT_FLAGASSOCIATION"
+  AliasName="MrltFlagassociation_EO"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="Faid"
+    ColumnName="FAID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
+    TableName="MRLT_FLAGASSOCIATION"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    RetrievedOnInsert="true"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_SequenceName" Value="MRLT_FLAGASSOCIATION_SEQ"/>
+      <Attr Name="_SequenceStart" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Fid"
+    IsUnique="true"
+    ColumnName="FID"
+    SQLType="INTEGER"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    TableName="MRLT_FLAGASSOCIATION"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    IsUpdateable="while_insert"/>
+  <Attribute
+    Name="Faitem"
+    IsUnique="true"
+    Precision="8"
+    ColumnName="FAITEM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_FLAGASSOCIATION"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    IsUpdateable="while_insert">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Faupdby"
+    Precision="12"
+    ColumnName="FAUPDBY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLT_FLAGASSOCIATION"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Faupddt"
+    ColumnName="FAUPDDT"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="MRLT_FLAGASSOCIATION"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"/>
+  <Attribute
+    Name="Faactive"
+    Precision="1"
+    ColumnName="FAACTIVE"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="MRLT_FLAGASSOCIATION"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="MrltFlag_EO"
+    Association="its.mnr.mp5.eo.assoc.MrltFlagassociationFk1Assoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MrltFlagassociationFk1Assoc.MrltFlag_EO"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MrltFlagassociationFk1Assoc.MrltFlagassociation_EO"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrltFlagassociationCk1">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLT_FLAGASSOCIATION_CK1"/>
+      <Attr Name="_checkCondition" Value="FAACTIVE IN ('Y', 'N')"/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="MrltFlagassociationFaidCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_FLAGASSOCIATION_FAID_CHEC"/>
+      <Attr Name="_checkCondition" Value='"FAID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltFlagassociation_EO.Faid"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltFlagassociationPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLT_FLAGASSOCIATION_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltFlagassociation_EO.Faid"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltFlagassociationUk1">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_FLAGASSOCIATION_UK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltFlagassociation_EO.Fid"/>
+      <Item Value="its.mnr.mp5.eo.master.MrltFlagassociation_EO.Faitem"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrltFlagassociationFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLT_FLAG_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLT_FLAGASSOCIATION_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrltFlagassociation_EO.Fid"/>
+    </AttrArray>
+  </Key>
+</Entity>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5CurrenciesView"
+  Version="11.1.2.60.81"
+  SelectList="R5Currencies.CUR_CODE, 
+       R5Currencies.CUR_DESC, 
+       R5Currencies.CUR_NOTUSED"
+  FromList="MP5PRD.R5CURRENCIES R5Currencies"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  FetchSize="25"
+  RangeSize="26">
+  <EntityUsage
+    Name="R5Currencies"
+    Entity="its.mnr.mp5.eo.master.R5Currencies"/>
+  <ViewAttribute
+    Name="CurCode"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CurCode"
+    EntityUsage="R5Currencies"
+    AliasName="CUR_CODE"/>
+  <ViewAttribute
+    Name="CurDesc"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CurDesc"
+    EntityUsage="R5Currencies"
+    AliasName="CUR_DESC"/>
+  <ViewAttribute
+    Name="CurNotused"
+    PrecisionRule="true"
+    EntityAttrName="CurNotused"
+    EntityUsage="R5Currencies"
+    AliasName="CUR_NOTUSED"
+    IsQueriable="false"/>
+</ViewObject>

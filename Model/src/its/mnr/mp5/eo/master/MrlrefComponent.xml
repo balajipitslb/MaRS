@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MrlrefComponent"
+  Version="11.1.2.60.81"
+  DBObjectType="table"
+  DBObjectName="MRLREF_COMPONENT"
+  AliasName="MrlrefComponent"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <Attribute
+    Name="Componentid"
+    Precision="20"
+    ColumnName="COMPONENTID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_COMPONENT"
+    PrimaryKey="true"
+    IsUpdateable="false"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefComponent.Componentid"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrlrefComponent.Componentid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Servicegroupid"
+    Precision="20"
+    ColumnName="SERVICEGROUPID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_COMPONENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefComponent.Servicegroupid"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrlrefComponent.Servicegroupid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Compwotype"
+    IsUnique="true"
+    Precision="5"
+    ColumnName="COMPWOTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_COMPONENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefComponent.Compwotype"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrlrefComponent.Compwotype_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Compdescription"
+    Precision="50"
+    ColumnName="COMPDESCRIPTION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_COMPONENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefComponent.Compdescription"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrlrefComponent.Compdescription_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Compcode"
+    IsUnique="true"
+    Precision="4"
+    ColumnName="COMPCODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MRLREF_COMPONENT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefComponent.Compcode"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrlrefComponent.Compcode_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Compactive"
+    Precision="1"
+    ColumnName="COMPACTIVE"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="MRLREF_COMPONENT"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefComponent.Compactive"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrlrefComponent.Compactive_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="Compcdx"
+    Precision="1"
+    ColumnName="COMPCDX"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="MRLREF_COMPONENT"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Permission
+      target="its.mnr.mp5.eo.master.MrlrefComponent.Compcdx"
+      permissionClass="oracle.adf.share.security.authorization.EntityAttributePermission">
+      <privilege-map
+        operation="update"
+        privilege="update"/>
+    </Permission>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrlrefComponent.Compcdx_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <AccessorAttribute
+    Name="MrlrefLocation"
+    Association="its.mnr.mp5.eo.assoc.MrlrefLocationFk1Assoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MrlrefLocationFk1Assoc.MrlrefLocation"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MrlrefLocationFk1Assoc.MrlrefComponent"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="MrlrefWorkordermaster"
+    Association="its.mnr.mp5.eo.assoc.MrlrefComponentFk2Assoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.MrlrefComponentFk2Assoc.MrlrefWorkordermaster"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.MrlrefComponentFk2Assoc.MrlrefComponent"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="MrltTask"
+    Association="its.mnr.mp5.eo.assoc.CompCodeIdForTask"
+    AssociationEnd="its.mnr.mp5.eo.assoc.CompCodeIdForTask.MrltTask"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.CompCodeIdForTask.MrlrefComponent"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MrlrefComponentPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MRLREF_COMPONENT_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrlrefComponent.Componentid"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrlrefComponentUk1">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLREF_COMPONENT_UK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrlrefComponent.Compwotype"/>
+      <Item Value="its.mnr.mp5.eo.master.MrlrefComponent.Compcode"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MrlrefComponentFk2">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MRLREF_WORKORDERMASTER_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MRLREF_COMPONENT_FK2"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.master.MrlrefComponent.Compwotype"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

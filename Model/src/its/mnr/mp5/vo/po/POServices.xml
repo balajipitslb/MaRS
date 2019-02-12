@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="POServices"
+  Version="11.1.2.60.81"
+  SelectList="MrltPoservice.DESCRIPTION, 
+       MrltPoservice.POSACTIVE, 
+       MrltPoservice.POSID, 
+       MrltPoservice.PRICE, 
+       MrltPoservice.UOM, 
+       MrltPoservice.POSGL"
+  FromList="MP5PRD.MRLT_POSERVICE MrltPoservice"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
+  ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.po.POServices_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="R5uoms"
+    ViewObjectName="its.mnr.mp5.lov.R5uoms"
+    RowLevelBinds="true"
+    FetchSize="10"
+    RangeSize="11">
+    <ViewCriteriaUsage
+      Name="R5uomsActiveCriteria"
+      FullName="its.mnr.mp5.lov.R5uoms.R5uomsActiveCriteria"/>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_Uom"
+    ListVOName="R5uoms"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Uom"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UomCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="UomCode"/>
+      <Item Value="UomDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="MrltPoservice"
+    Entity="its.mnr.mp5.eo.local.MrltPoservice"/>
+  <ViewAttribute
+    Name="Description"
+    PrecisionRule="true"
+    EntityAttrName="Description"
+    EntityUsage="MrltPoservice"
+    AliasName="DESCRIPTION"/>
+  <ViewAttribute
+    Name="Posactive"
+    PrecisionRule="true"
+    EntityAttrName="Posactive"
+    EntityUsage="MrltPoservice"
+    AliasName="POSACTIVE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POServices.Posactive_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Posid"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Posid"
+    EntityUsage="MrltPoservice"
+    AliasName="POSID">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POServices.Posid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Price"
+    PrecisionRule="true"
+    EntityAttrName="Price"
+    EntityUsage="MrltPoservice"
+    AliasName="PRICE"/>
+  <ViewAttribute
+    Name="Uom"
+    PrecisionRule="true"
+    EntityAttrName="Uom"
+    EntityUsage="MrltPoservice"
+    AliasName="UOM"
+    LOVName="LOV_Uom">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POServices.Uom_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Posgl"
+    PrecisionRule="true"
+    EntityAttrName="Posgl"
+    EntityUsage="MrltPoservice"
+    AliasName="POSGL">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.po.POServices.Posgl_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

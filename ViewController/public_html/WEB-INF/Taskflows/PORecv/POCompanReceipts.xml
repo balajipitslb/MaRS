@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="POCompanReceipts">
+    <template-reference>
+      <document>/WEB-INF/error-handler-flow.xml</document>
+      <id>error-handler-flow</id>
+    </template-reference>
+    <default-activity>router1</default-activity>
+    <transaction>
+      <new-transaction/>
+    </transaction>
+    <input-parameter-definition id="__15">
+      <name>pfsPart</name>
+      <value>#{pageFlowScope.pfsPartNo}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__17">
+      <name>psfSupplier</name>
+      <value>#{pageFlowScope.pfsSupplierNo}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__20">
+      <name>psfcalledfromstock</name>
+      <value>#{pageFlowScope.pfsCalledFromStock}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__29">
+      <name>psfdescription</name>
+      <value>#{pageFlowScope.pfsDescription}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__48">
+      <name>psfbaseprice</name>
+      <value>#{pageFlowScope.pfsBasePrice}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__3">
+      <managed-bean-name>ModuleNavBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.ModuleNavBean</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__14">
+      <managed-bean-name>POCompanyReceipts</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.POCompanyReceipts</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <view id="CompanyReceipts">
+      <page>/Content/PORecv/CompanyReceipts.jspx</page>
+      <input-page-parameter id="__16">
+        <from-value>#{pageFlowScope.pfsPartNo}</from-value>
+        <to-value>#{pageFlowScope.pfsPart}</to-value>
+      </input-page-parameter>
+      <input-page-parameter id="__18">
+        <from-value>#{pageFlowScope.pfsSupplierNo}</from-value>
+        <to-value>#{pageFlowScope.pfsSupplier}</to-value>
+      </input-page-parameter>
+      <input-page-parameter id="__19">
+        <from-value>#{pageFlowScope.pfsCalledFromStock}</from-value>
+        <to-value>#{pageFlowScope.pfscalledfromstock}</to-value>
+      </input-page-parameter>
+      <input-page-parameter id="__49">
+        <from-value>#{pageFlowScope.pfsBasePrice}</from-value>
+        <to-value>#{pageFlowScope.pfsbaseprice}</to-value>
+      </input-page-parameter>
+    </view>
+    <task-flow-return id="exit">
+      <outcome>
+        <name>exit</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <method-call id="initCompanyRcpts">
+      <method>#{bindings.initCompanyRcpts.execute}</method>
+      <outcome>
+        <fixed-outcome>dlftCompanyReceipts</fixed-outcome>
+      </outcome>
+    </method-call>
+    <router id="router1">
+      <case id="__21">
+        <expression>#{empty pageFlowScope.pfsCalledFromStock ? false : pageFlowScope.pfsCalledFromStock}</expression>
+        <outcome>fetch</outcome>
+      </case>
+      <default-outcome>dlftInit</default-outcome>
+    </router>
+    <view id="Description">
+      <page>/Content/PORecv/CompReceiptsPromptDescDescription.jspx</page>
+      <input-page-parameter id="__31">
+        <from-value>#{pageFlowScope.pfsDescription}</from-value>
+        <to-value>#{pageFlowScope.pfsdescription}</to-value>
+      </input-page-parameter>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>Exit</from-outcome>
+        <to-activity-id>exit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>initCompanyRcpts</from-activity-id>
+      <control-flow-case id="__45">
+        <from-outcome>dlftCompanyReceipts</from-outcome>
+        <to-activity-id>CompanyReceipts</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__22">
+      <from-activity-id>router1</from-activity-id>
+      <control-flow-case id="__23">
+        <from-outcome>fetch</from-outcome>
+        <to-activity-id>Description</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__28">
+        <from-outcome>dlftInit</from-outcome>
+        <to-activity-id>initCompanyRcpts</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__26">
+      <from-activity-id>Description</from-activity-id>
+      <control-flow-case id="__27">
+        <from-outcome>goInit</from-outcome>
+        <to-activity-id>initCompanyRcpts</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="POHistPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="PartsDataControlNested.SuppliersSearch" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="SuppliersSearchIterator">
+      <sortCriteria>
+        <sort attribute="CatPart" ascending="true"/>
+        <sort attribute="CatSupplier" ascending="true"/>
+      </sortCriteria>
+    </iterator>
+    <searchRegion Criteria="SuppliersCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SuppliersSearchIterator" id="SuppliersCriteriaQuery"/>
+    <iterator Binds="PartsDataControlNested.Orderlines" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="OrderlinesIterator"/>
+    <iterator Binds="PartsDataControlNested.POOrderlineServices" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="POOrderlineServicesIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SuppliersSearchIterator" id="SuppliersSearch">
+      <nodeDefinition DefName="its.mnr.mp5.vo.parts.Suppliers" Name="SuppliersSearch0">
+        <AttrNames>
+          <Item Value="CatPart"/>
+          <Item Value="tPartDesc"/>
+          <Item Value="CatSupplier"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="Companies"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="its.mnr.mp5.lov.Companies" Name="SuppliersSearch1">
+        <AttrNames>
+          <Item Value="ComBuyer"/>
+          <Item Value="ComCode"/>
+          <Item Value="ComCurr"/>
+          <Item Value="ComDesc"/>
+          <Item Value="ComLang"/>
+          <Item Value="ComMinord"/>
+          <Item Value="ComNotused"/>
+          <Item Value="ComOrg"/>
+          <Item Value="ComParent"/>
+          <Item Value="ComPeople"/>
+          <Item Value="ComPhone"/>
+          <Item Value="ComPurchasesite"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="OrderlinesIterator" id="Orderlines">
+      <nodeDefinition DefName="its.mnr.mp5.vo.parts.MrltPorderlinesvwView" Name="Orderlines0">
+        <AttrNames>
+          <Item Value="Ponum"/>
+          <Item Value="Postatus"/>
+          <Item Value="Podate"/>
+          <Item Value="Poline"/>
+          <Item Value="Linestatus"/>
+          <Item Value="Lineordqty"/>
+          <Item Value="Lineuom"/>
+          <Item Value="Unitprice"/>
+          <Item Value="Recvqty"/>
+          <Item Value="Recvvalue"/>
+          <Item Value="Extracharges"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="POOrderlineServicesIterator" id="POOrderlineServices">
+      <nodeDefinition DefName="its.mnr.mp5.vo.po.POOrderlineServices" Name="POOrderlineServices0">
+        <AttrNames>
+          <Item Value="OrlOrder"/>
+          <Item Value="OrlOrdline"/>
+          <Item Value="OrlStatus"/>
+          <Item Value="OrlDue"/>
+          <Item Value="OrlTask"/>
+          <Item Value="OrlTaskqty"/>
+          <Item Value="ItsTaskprice"/>
+          <Item Value="ItsTaskuom"/>
+          <Item Value="OrlTotextra"/>
+          <Item Value="ItsOrltype"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SuppliersSearchIterator" id="CatSupplier">
+      <AttrNames>
+        <Item Value="CatSupplier"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SuppliersSearchIterator" id="CatPart">
+      <AttrNames>
+        <Item Value="CatPart"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SuppliersSearchIterator" id="tPartDesc">
+      <AttrNames>
+        <Item Value="tPartDesc"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

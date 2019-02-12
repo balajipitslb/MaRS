@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="POTest.jspx" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/bodyMainTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelGroupLayout layout="vertical" id="pgl1">
+                        <af:panelHeader text="POrdersView" id="ph1">
+                            <af:panelFormLayout id="pfl1">
+                                <af:panelLabelAndMessage label="#{bindings.OrdApprov.hints.label}" id="plam1">
+                                    <af:outputText value="#{bindings.OrdApprov.inputValue}" id="ot1">
+                                        <af:convertDateTime pattern="#{bindings.OrdApprov.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrdAuth.hints.label}" id="plam2">
+                                    <af:outputText value="#{bindings.OrdAuth.inputValue}" id="ot2"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrdBuyer.hints.label}" id="plam3">
+                                    <af:outputText value="#{bindings.OrdBuyer.inputValue}" id="ot3"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrdCode.hints.label}" id="plam4">
+                                    <af:outputText value="#{bindings.OrdCode.inputValue}" id="ot4"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.tPriceExtended.hints.label}" id="plam25">
+                                    <af:outputText value="#{bindings.tPriceExtended.inputValue}" id="ot25">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.tPriceExtended.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <f:facet name="footer">
+                                    <af:panelGroupLayout layout="horizontal" id="pgl2">
+                                        <f:facet name="separator">
+                                            <af:spacer width="10" height="1" id="s1"/>
+                                        </f:facet>
+                                        <af:button actionListener="#{bindings.First.execute}" text="First"
+                                                   disabled="#{!bindings.First.enabled}" partialSubmit="true" id="cb1"/>
+                                        <af:button actionListener="#{bindings.Previous.execute}" text="Previous"
+                                                   disabled="#{!bindings.Previous.enabled}" partialSubmit="true"
+                                                   id="cb2"/>
+                                        <af:button actionListener="#{bindings.Next.execute}" text="Next"
+                                                   disabled="#{!bindings.Next.enabled}" partialSubmit="true" id="cb3"/>
+                                        <af:button actionListener="#{bindings.Last.execute}" text="Last"
+                                                   disabled="#{!bindings.Last.enabled}" partialSubmit="true" id="cb4"/>
+                                    </af:panelGroupLayout>
+                                </f:facet>
+                            </af:panelFormLayout>
+                        </af:panelHeader>
+                        <af:panelHeader text="POrderlinesView" id="ph2">
+                            <af:panelFormLayout id="pfl2" maxColumns="3">
+                                <af:panelLabelAndMessage label="#{bindings.OrlOrder.hints.label}" id="plam27">
+                                    <af:outputText value="#{bindings.OrlOrder.inputValue}" id="ot27" rendered="false"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlOrdline.hints.label}" id="plam28">
+                                    <af:outputText value="#{bindings.OrlOrdline.inputValue}" id="ot28">
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.OrlOrdline.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlSupplier.hints.label}" id="plam29">
+                                    <af:outputText value="#{bindings.OrlSupplier.inputValue}" id="ot29"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlPart.hints.label}" id="plam30">
+                                    <af:outputText value="#{bindings.OrlPart.inputValue}" id="ot30"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlDue.hints.label}" id="plam31">
+                                    <af:outputText value="#{bindings.OrlDue.inputValue}" id="ot31">
+                                        <af:convertDateTime pattern="#{bindings.OrlDue.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlPrice.hints.label}" id="plam32">
+                                    <af:outputText value="#{bindings.OrlPrice.inputValue}" id="ot32">
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.OrlPrice.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlCurr.hints.label}" id="plam33"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlCurr.inputValue}" id="ot33"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlExch.hints.label}" id="plam34"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlExch.inputValue}" id="ot34">
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.OrlExch.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlOrdqty.hints.label}" id="plam35"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlOrdqty.inputValue}" id="ot35">
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.OrlOrdqty.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlRecvqty.hints.label}" id="plam36"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlRecvqty.inputValue}" id="ot36">
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.OrlRecvqty.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlRecvvalue.hints.label}" id="plam37"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlRecvvalue.inputValue}" id="ot37">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.OrlRecvvalue.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlDiscperc.hints.label}" id="plam38"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlDiscperc.inputValue}" id="ot38">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.OrlDiscperc.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlStore.hints.label}" id="plam39"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlStore.inputValue}" id="ot39"/>
+                                </af:panelLabelAndMessage>
+                                <af:selectOneChoice value="#{bindings.OrlPuruom.inputValue}"
+                                                    label="#{bindings.OrlPuruom.label}"
+                                                    required="#{bindings.OrlPuruom.hints.mandatory}"
+                                                    shortDesc="#{bindings.OrlPuruom.hints.tooltip}" readOnly="true"
+                                                    id="soc2" rendered="false">
+                                    <f:selectItems value="#{bindings.OrlPuruom.items}" id="si2"/>
+                                </af:selectOneChoice>
+                                <af:panelLabelAndMessage label="#{bindings.OrlRtype.hints.label}" id="plam40"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlRtype.inputValue}" id="ot40"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlType.hints.label}" id="plam41"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlType.inputValue}" id="ot41"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlActive.hints.label}" id="plam42"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlActive.inputValue}" id="ot42"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlMultiply.hints.label}" id="plam43"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlMultiply.inputValue}" id="ot43">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.OrlMultiply.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlTax.hints.label}" id="plam44"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlTax.inputValue}" id="ot44"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlRstatus.hints.label}" id="plam45"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlRstatus.inputValue}" id="ot45"/>
+                                </af:panelLabelAndMessage>
+                                <af:selectOneChoice value="#{bindings.OrlStatus.inputValue}"
+                                                    label="#{bindings.OrlStatus.label}"
+                                                    required="#{bindings.OrlStatus.hints.mandatory}"
+                                                    shortDesc="#{bindings.OrlStatus.hints.tooltip}" readOnly="true"
+                                                    id="soc3" rendered="false">
+                                    <f:selectItems value="#{bindings.OrlStatus.items}" id="si3"/>
+                                </af:selectOneChoice>
+                                <af:panelLabelAndMessage label="#{bindings.OrlAcd.hints.label}" id="plam46"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlAcd.inputValue}" id="ot46">
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.OrlAcd.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlDeladdress.hints.label}" id="plam47"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlDeladdress.inputValue}" id="ot47"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlSupplierOrg.hints.label}" id="plam48"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlSupplierOrg.inputValue}" id="ot48"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlOrderOrg.hints.label}" id="plam49"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlOrderOrg.inputValue}" id="ot49"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlPartOrg.hints.label}" id="plam50"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlPartOrg.inputValue}" id="ot50"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlInspect.hints.label}" id="plam51"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.OrlInspect.inputValue}" id="ot51"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlExchfix.hints.label}" id="plam52">
+                                    <af:outputText value="#{bindings.OrlExchfix.inputValue}" id="ot52"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlTottaxamount.hints.label}" id="plam53">
+                                    <af:outputText value="#{bindings.OrlTottaxamount.inputValue}" id="ot53">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.OrlTottaxamount.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.OrlTotextra.hints.label}" id="plam54">
+                                    <af:outputText value="#{bindings.OrlTotextra.inputValue}" id="ot54">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.OrlTotextra.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:selectOneChoice value="#{bindings.OrlTask.inputValue}"
+                                                    label="#{bindings.OrlTask.label}"
+                                                    required="#{bindings.OrlTask.hints.mandatory}"
+                                                    shortDesc="#{bindings.OrlTask.hints.tooltip}" readOnly="true"
+                                                    id="soc4">
+                                    <f:selectItems value="#{bindings.OrlTask.items}" id="si4"/>
+                                </af:selectOneChoice>
+                                <af:panelLabelAndMessage label="#{bindings.OrlTaskqty.hints.label}" id="plam55">
+                                    <af:outputText value="#{bindings.OrlTaskqty.inputValue}" id="ot55">
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.OrlTaskqty.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.ItsGl.hints.label}" id="plam56">
+                                    <af:outputText value="#{bindings.ItsGl.inputValue}" id="ot56"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.ItsOrltype.hints.label}" id="plam57">
+                                    <af:outputText value="#{bindings.ItsOrltype.inputValue}" id="ot57"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.ItsRetnqty.hints.label}" id="plam58">
+                                    <af:outputText value="#{bindings.ItsRetnqty.inputValue}" id="ot58">
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.ItsRetnqty.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.ItsRecvqty.hints.label}" id="plam59"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.ItsRecvqty.inputValue}" id="ot59">
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.ItsRecvqty.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.Recvqty.hints.label}" id="plam60"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.Recvqty.inputValue}" id="ot60">
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.Recvqty.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.Retnqty.hints.label}" id="plam61"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.Retnqty.inputValue}" id="ot61">
+                                        <af:convertNumber groupingUsed="false" pattern="#{bindings.Retnqty.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.tPartDesc.hints.label}" id="plam62"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.tPartDesc.inputValue}" id="ot62"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.tOrlPriceExtended.hints.label}" id="plam63"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.tOrlPriceExtended.inputValue}" id="ot63">
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.tOrlPriceExtended.format}"/>
+                                    </af:outputText>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.tTaskDesc.hints.label}" id="plam64"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.tTaskDesc.inputValue}" id="ot64"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.tIsOrdTypePart.hints.label}" id="plam65"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.tIsOrdTypePart.inputValue}" id="ot65"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.tEntityState.hints.label}" id="plam66"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.tEntityState.inputValue}" id="ot66"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.tPostedOrlStatus.hints.label}" id="plam67"
+                                                         rendered="false">
+                                    <af:outputText value="#{bindings.tPostedOrlStatus.inputValue}" id="ot67"/>
+                                </af:panelLabelAndMessage>
+                                <af:panelLabelAndMessage label="#{bindings.ItsNote.hints.label}" id="plam68">
+                                    <af:outputText value="#{bindings.ItsNote.inputValue}" id="ot68"/>
+                                </af:panelLabelAndMessage>
+                                <f:facet name="footer">
+                                    <af:panelGroupLayout layout="horizontal" id="pgl3">
+                                        <f:facet name="separator">
+                                            <af:spacer width="10" height="1" id="s2"/>
+                                        </f:facet>
+                                        <af:button actionListener="#{bindings.First1.execute}" text="First1"
+                                                   disabled="#{!bindings.First1.enabled}" partialSubmit="true"
+                                                   id="cb5"/>
+                                        <af:button actionListener="#{bindings.Previous1.execute}" text="Previous1"
+                                                   disabled="#{!bindings.Previous1.enabled}" partialSubmit="true"
+                                                   id="cb6"/>
+                                        <af:button actionListener="#{bindings.Next1.execute}" text="Next1"
+                                                   disabled="#{!bindings.Next1.enabled}" partialSubmit="true" id="cb7"/>
+                                        <af:button actionListener="#{bindings.Last1.execute}" text="Last1"
+                                                   disabled="#{!bindings.Last1.enabled}" partialSubmit="true" id="cb8"/>
+                                    </af:panelGroupLayout>
+                                </f:facet>
+                            </af:panelFormLayout>
+                        </af:panelHeader>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="toolBar">
+                    <af:toolbar id="t1">
+                        <af:button text="exit" id="ctb1" action="Exit"/>
+                    </af:toolbar>
+                </f:facet>
+                <f:facet name="menuBar"/>
+                <f:facet name="context"/>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

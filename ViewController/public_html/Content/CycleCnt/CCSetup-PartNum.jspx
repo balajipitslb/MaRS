@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Create List" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/CCSetupTrainTemplate.jspx" id="pt1">
+                <f:facet name="body">
+                    <af:panelHeader text="Part #" id="ph1">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t1">
+                                <af:button text="Cancel" immediate="true" id="ctb1"
+                                           icon="#{resource['images:undo.png']}"
+                                           binding="#{CycleCountBean.setupRangeCancelBtn}" visible="false"
+                                           action="#{CycleCountBean.ccSetupRangeCanc_action}">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button text="Back to Setup" id="ctb2" action="gotoStart"
+                                           icon="#{resource['images:shuttle_leftall.png']}"
+                                           binding="#{CycleCountBean.setupRangeReturnBtn}" visible="false"/>
+                                <af:button id="ctb3" icon="#{resource['images:shuttle_right.png']}"
+                                           disabled="#{empty bindings.P1.inputValue and empty bindings.P2.inputValue and empty bindings.P3.inputValue and empty bindings.P4.inputValue and empty bindings.P5.inputValue and empty bindings.P6.inputValue}"
+                                           partialTriggers="it1 it2 it3 it4 it5 it6" action="gotoEmailNotification"
+                                           actionListener="#{CycleCountBean.RangeNext_action}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="toolbar">
+                            <af:group id="g1">
+                                <af:button actionListener="#{bindings.writeCCListXML.execute}" text="writeCCListXML"
+                                           disabled="#{!bindings.writeCCListXML.enabled}" id="ctb5" rendered="false"/>
+                                <af:button actionListener="#{bindings.writeCCStoreListXML.execute}"
+                                           text="writeCCStoreListXML"
+                                           disabled="#{!bindings.writeCCStoreListXML.enabled}" id="ctb4"
+                                           rendered="false"/>
+                            </af:group>
+                        </f:facet>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:panelFormLayout id="pfl1" maxColumns="3" rows="2">
+                            <af:inputText value="#{bindings.P1.inputValue}" label="#{bindings.P1.hints.label}"
+                                          required="#{bindings.P1.hints.mandatory}"
+                                          columns="#{bindings.P1.hints.displayWidth}"
+                                          maximumLength="#{bindings.P1.hints.precision}"
+                                          shortDesc="#{bindings.P1.hints.tooltip}" id="it1" autoTab="true"
+                                          autoSubmit="true" contentStyle="text-transform:uppercase; ">
+                                <f:validator binding="#{bindings.P1.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.P2.inputValue}" label="#{bindings.P2.hints.label}"
+                                          required="#{bindings.P2.hints.mandatory}"
+                                          columns="#{bindings.P2.hints.displayWidth}"
+                                          maximumLength="#{bindings.P2.hints.precision}"
+                                          shortDesc="#{bindings.P2.hints.tooltip}" id="it2" autoTab="true"
+                                          autoSubmit="true" contentStyle="text-transform:uppercase; ">
+                                <f:validator binding="#{bindings.P2.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.P3.inputValue}" label="#{bindings.P3.hints.label}"
+                                          required="#{bindings.P3.hints.mandatory}"
+                                          columns="#{bindings.P3.hints.displayWidth}"
+                                          maximumLength="#{bindings.P3.hints.precision}"
+                                          shortDesc="#{bindings.P3.hints.tooltip}" id="it3" autoTab="true"
+                                          autoSubmit="true" contentStyle="text-transform:uppercase; ">
+                                <f:validator binding="#{bindings.P3.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.P4.inputValue}" label="#{bindings.P4.hints.label}"
+                                          required="#{bindings.P4.hints.mandatory}"
+                                          columns="#{bindings.P4.hints.displayWidth}"
+                                          maximumLength="#{bindings.P4.hints.precision}"
+                                          shortDesc="#{bindings.P4.hints.tooltip}" id="it4" autoTab="true"
+                                          autoSubmit="true" contentStyle="text-transform:uppercase; ">
+                                <f:validator binding="#{bindings.P4.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.P5.inputValue}" label="#{bindings.P5.hints.label}"
+                                          required="#{bindings.P5.hints.mandatory}"
+                                          columns="#{bindings.P5.hints.displayWidth}"
+                                          maximumLength="#{bindings.P5.hints.precision}"
+                                          shortDesc="#{bindings.P5.hints.tooltip}" id="it5" autoTab="true"
+                                          autoSubmit="true" contentStyle="text-transform:uppercase; ">
+                                <f:validator binding="#{bindings.P5.validator}"/>
+                            </af:inputText>
+                            <af:inputText value="#{bindings.P6.inputValue}" label="#{bindings.P6.hints.label}"
+                                          required="#{bindings.P6.hints.mandatory}"
+                                          columns="#{bindings.P6.hints.displayWidth}"
+                                          maximumLength="#{bindings.P6.hints.precision}"
+                                          shortDesc="#{bindings.P6.hints.tooltip}" id="it6" autoTab="true"
+                                          autoSubmit="true" contentStyle="text-transform:uppercase; ">
+                                <f:validator binding="#{bindings.P6.validator}"/>
+                            </af:inputText>
+                        </af:panelFormLayout>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+            <!--<af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                      binding="#{CycleCountBean.popCCListConfirm}">
+                <af:dialog id="d2" type="ok" dialogListener="#{CycleCountBean.diagLsnrCCListConfirm}"
+                           title="Cycle Count List Confirmation" closeIconVisible="false">
+                    <f:facet name="buttonBar"/>
+                    <af:inputText id="ot1" readOnly="true" binding="#{CycleCountBean.ccListConfTxt}"
+                                  autoSubmit="true" value="List # #{bindings.Listid.inputValue} created successfully"/>
+                </af:dialog>
+            </af:popup>-->
+        </af:form>
+    </af:document>
+</f:view>

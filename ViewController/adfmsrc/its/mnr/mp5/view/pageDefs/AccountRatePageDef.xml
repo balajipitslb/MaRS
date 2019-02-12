@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="AccountRatePageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BillingRatesDataControlNested.AccountMasterView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="AccountMasterViewIterator"/>
+    <iterator Binds="BillingRatesDataControlNested.AccountRateView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="AccountRateViewIterator"/>
+  </executables>
+  <bindings>
+    <navigationlist IterBinding="AccountMasterViewIterator" ListOperMode="navigation"
+                    ListIter="AccountMasterViewIterator" id="AccountMasterView" DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="Acctnum"/>
+        <Item Value="Accountnm"/>
+      </AttrNames>
+    </navigationlist>
+    <tree IterBinding="AccountRateViewIterator" id="AccountRateView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrltAccountrateView" Name="AccountRateView0">
+        <AttrNames>
+          <Item Value="Accountrateid"/>
+          <Item Value="Ver"/>
+          <Item Value="Acctnum"/>
+          <Item Value="AcctNumDesc"/>
+          <Item Value="Effectivedt"/>
+          <Item Value="Base"/>
+          <Item Value="M1"/>
+          <Item Value="M1o"/>
+          <Item Value="M2"/>
+          <Item Value="M2o"/>
+          <Item Value="M3"/>
+          <Item Value="M3o"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+  </bindings>
+</pageDefinition>

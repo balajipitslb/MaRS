@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.Content.Report.reportBundle']}"/>
+    <af:document title="#{viewcontrollerBundle.MARS}" id="d1">
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/MP5BaseTemplate.jspx" id="pt1">
+                <f:facet name="GlobalTop">
+                    <af:navigationPane id="np1">
+                        <af:commandNavigationItem text="Home" id="cni1" accessKey="H"
+                                                  selected="false" actionListener="#{ModuleNavBean.goHomeModule}"/>
+                        <af:commandNavigationItem text="Work Order" id="cni2" accessKey="W"
+                                                  actionListener="#{ModuleNavBean.goWOModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=WorkOrder;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Invoice" id="cni3" accessKey="I"
+                                                  actionListener="#{ModuleNavBean.goInvoiceModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Invoice;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="PO &amp; Receivings" id="cni4" accessKey="P"
+                                                  actionListener="#{ModuleNavBean.goPORecvModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=PORecv;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Stock" id="cni5" accessKey="S"
+                                                  actionListener="#{ModuleNavBean.goStockModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Stock;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Asset" id="cni8" accessKey="S"
+                                                  actionListener="#{ModuleNavBean.goAssetModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Asset;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Report (This)" id="cni6" accessKey="R" selected="true"
+                                                  action="goReport"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Report;resourceType=GlobalNav;action=view']}"/>
+                        <af:commandNavigationItem text="Admin" id="cni7" accessKey="M"
+                                                  actionListener="#{ModuleNavBean.goAdminModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Admin;resourceType=GlobalNav;action=view']}"/>
+                    </af:navigationPane>
+                </f:facet>
+                <f:facet name="Main">
+                            <af:panelBox id="pb1" showDisclosure="false"
+                                         inlineStyle="height:350px; padding:10px; margin:20px 0px 0px;">
+                                <f:facet name="toolbar"/>
+                        <af:spacer width="10" height="10" id="s5" inlineStyle="height:20px;"/>
+                        <af:link text="Work Orders" id="gl1"
+                                 destination="http://itsgp31/MaRSReport/Pages/Folder.aspx?ItemPath=%2fWork+Orders&amp;ViewMode=List"
+                                 targetFrame="_blank" icon="#{resource['images:workorder.png']}"
+                                 inlineStyle="font-size:medium; margin:40px 40px 40px 200px; padding:20px;"/>
+                        <af:spacer width="10" height="10" id="s1" inlineStyle="height:20px;"/>
+                        <af:link text="Invoices" id="gil1" icon="#{resource['images:invoiceReport.png']}"
+                                 destination="http://itsgp31/MaRSReport/Pages/Folder.aspx?ItemPath=%2fInvoices&amp;ViewMode=List"
+                                 targetFrame="_blank"
+                                 inlineStyle="font-size:medium; margin:40px 40px 40px 200px; padding:20px;"/>
+                        <af:spacer width="10" height="10" id="s2" inlineStyle="height:20px;"/>
+                        <af:link text="Purchase Orders &amp; Receivings" id="gl2" icon="#{resource['images:PORcv.png']}"
+                                 destination="http://itsgp31/MaRSReport/Pages/Folder.aspx?ItemPath=%2fPO+Receivings&amp;ViewMode=List"
+                                 targetFrame="_blank"
+                                 inlineStyle="font-size:medium; margin:40px 40px 40px 200px; padding:20px;"/>
+                        <af:spacer width="10" height="10" id="s3" inlineStyle="height:20px;"/>
+                        <af:link text="Stock" id="gil3" icon="#{resource['images:barcode.png']}"
+                                 destination="http://itsgp31/MaRSReport/Pages/Folder.aspx?ItemPath=%2fStock&amp;ViewMode=List"
+                                 targetFrame="_blank"
+                                 inlineStyle="font-size:medium; margin:40px 40px 40px 200px; padding:20px;"/>
+                        <af:spacer width="10" height="10" id="s4" inlineStyle="height:20px;"/>
+                        <af:link text="Admin" id="gil2" icon="#{resource['images:Admin.png']}"
+                                 destination="http://itsgp31/MaRSReport/Pages/Folder.aspx?ItemPath=%2fAdmin&amp;ViewMode=List"
+                                 targetFrame="_blank"
+                                 inlineStyle="font-size:medium; margin:40px 40px 40px 200px; padding:20px;"/>
+                    </af:panelBox>
+                </f:facet>
+                <f:facet name="LHS"/>
+                <f:attribute name="LHSSplitterCollapsed" value="true"/>
+                <f:attribute name="LHSSplitterDisabled" value="true"/>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

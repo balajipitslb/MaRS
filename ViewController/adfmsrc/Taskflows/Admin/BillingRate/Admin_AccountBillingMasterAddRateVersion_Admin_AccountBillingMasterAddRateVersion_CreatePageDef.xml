@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81"
+                id="Admin_AccountBillingMasterAddRateVersion_Admin_AccountBillingMasterAddRateVersion_CreatePageDef"
+                Package="Taskflows.Admin.BillingRate" SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="BillingRatesDataControlNested.AccountRateView" DataControl="MNRDataControlDataControl"
+              RangeSize="25" id="AccountRateViewIterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="AccountRateViewIterator" id="Create" RequiresUpdateModel="true" Action="createRow"/>
+  </bindings>
+</pageDefinition>

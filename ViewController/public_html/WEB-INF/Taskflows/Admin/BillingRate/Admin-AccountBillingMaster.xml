@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Admin-AccountBillingMaster">
+    <template-reference>
+      <document>/WEB-INF/error-handler-flow.xml</document>
+      <id>error-handler-flow</id>
+    </template-reference>
+    <default-activity>AccountBillingMaster</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__3">
+      <managed-bean-name>WOSGrpTreeBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.WOSGrpTreeBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__13">
+      <managed-bean-name>AccountBillingMasterBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.AccountBillingMasterBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__27">
+      <managed-bean-name>ModuleNavBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.ModuleNavBean</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="AccountBillingMaster">
+      <page>/Content/Admin/AccountBillingMaster.jspx</page>
+    </view>
+    <task-flow-return id="Exit">
+      <outcome>
+        <name>Exit</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-call id="Admin-AccountBillingMasterAddRateVersion">
+      <task-flow-reference>
+        <document>/WEB-INF/Taskflows/Admin/BillingRate/Admin-AccountBillingMasterAddRateVersion.xml</document>
+        <id>Admin-AccountBillingMasterAddRateVersion</id>
+      </task-flow-reference>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <router id="AddEdit">
+      <case id="__16">
+        <expression>#{pageFlowScope.TaskAction=='Edit'}</expression>
+        <outcome>Edit</outcome>
+      </case>
+      <case id="__18">
+        <expression>#{pageFlowScope.TaskAction=='Add'}</expression>
+        <outcome>Add</outcome>
+      </case>
+      <default-outcome>Edit</default-outcome>
+    </router>
+    <view id="ServiceTaskRateEdit">
+      <page>/Content/Admin/ServiceTaskRateEdit.jspx</page>
+    </view>
+    <method-call id="setServiceGroupId">
+      <method>#{bindings.CreateWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="RemoveRowWithKey">
+      <method>#{bindings.removeRowWithKey.execute}</method>
+      <outcome>
+        <fixed-outcome>removeRowWithKey</fixed-outcome>
+      </outcome>
+    </method-call>
+    <router id="Cancel">
+      <case id="__22">
+        <expression>#{pageFlowScope.TaskAction=='Add'}</expression>
+        <outcome>CancelAdd</outcome>
+      </case>
+      <case id="__23">
+        <expression>#{pageFlowScope.TaskAction=='Edit'}</expression>
+        <outcome>Return</outcome>
+      </case>
+      <case id="__7">
+        <expression>#{pageFlowScope.TaskAction=='Applied'}</expression>
+        <outcome>Return</outcome>
+      </case>
+      <default-outcome>Return</default-outcome>
+    </router>
+    <control-flow-rule id="__4">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>Exit</from-outcome>
+        <to-activity-id>Exit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>AccountBillingMaster</from-activity-id>
+      <control-flow-case id="__1">
+        <from-outcome>launchTaskRateVersionAdd</from-outcome>
+        <to-activity-id>Admin-AccountBillingMasterAddRateVersion</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>launchServiceTaskRate</from-outcome>
+        <to-activity-id>AddEdit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__25">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__26">
+        <from-outcome>Back</from-outcome>
+        <to-activity-id>AccountBillingMaster</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
+      <from-activity-id>AddEdit</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome>Edit</from-outcome>
+        <to-activity-id>ServiceTaskRateEdit</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__17">
+        <from-outcome>Add</from-outcome>
+        <to-activity-id>setServiceGroupId</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__19">
+      <from-activity-id>setServiceGroupId</from-activity-id>
+      <control-flow-case id="__20">
+        <from-outcome>CreateWithParams</from-outcome>
+        <to-activity-id>ServiceTaskRateEdit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__2">
+      <from-activity-id>ServiceTaskRateEdit</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>Cancel</from-outcome>
+        <to-activity-id>Cancel</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__9">
+      <from-activity-id>RemoveRowWithKey</from-activity-id>
+      <control-flow-case id="__10">
+        <from-outcome>removeRowWithKey</from-outcome>
+        <to-activity-id>AccountBillingMaster</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__12">
+      <from-activity-id>Cancel</from-activity-id>
+      <control-flow-case id="__21">
+        <from-outcome>CancelAdd</from-outcome>
+        <to-activity-id>RemoveRowWithKey</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__24">
+        <from-outcome>Return</from-outcome>
+        <to-activity-id>AccountBillingMaster</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

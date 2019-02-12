@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5addetails"
+  Version="11.1.2.60.81"
+  DBObjectType="TABLE"
+  DBObjectName="MP5PRD.R5ADDETAILS"
+  AliasName="R5addetails"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.eo.local.R5addetailsImpl"
+  DefClass="its.mnr.mp5.eo.local.R5addetailsDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Def"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="AddEntity"
+    Precision="4"
+    ColumnName="ADD_ENTITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDETAILS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AddRentity"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="ADD_RENTITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDETAILS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AddType"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="ADD_TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDETAILS"
+    PrimaryKey="true"
+    DefaultValue="*">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AddRtype"
+    Precision="4"
+    ColumnName="ADD_RTYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDETAILS"
+    DefaultValue="*">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AddCode"
+    IsNotNull="true"
+    Precision="40"
+    ColumnName="ADD_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDETAILS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AddLang"
+    IsNotNull="true"
+    Precision="2"
+    ColumnName="ADD_LANG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDETAILS"
+    PrimaryKey="true"
+    DefaultValue="EN">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AddLine"
+    IsNotNull="true"
+    Precision="4"
+    Scale="0"
+    ColumnName="ADD_LINE"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="MP5PRD.R5ADDETAILS"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="AddPrint"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="ADD_PRINT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDETAILS"
+    DefaultValue="+">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AddText"
+    ColumnName="ADD_TEXT"
+    SQLType="LONGVARCHAR"
+    Type="java.lang.String"
+    ColumnType="LONG"
+    TableName="MP5PRD.R5ADDETAILS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5addetails.AddText_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <validation:ExpressionValidationBean
+      Name="AddText_Rule_0"
+      OperandType="EXPR"
+      Inverse="false">
+      <validation:MsgIds>
+        <validation:Item
+          Value="COMMENT_CAN_NOT_BE_BLANK"/>
+      </validation:MsgIds>
+      <validation:TransientExpression><![CDATA[if (newValue == null){
+adf.error.raise("COMMENT_CAN_NOT_BE_BLANK")
+return false
+}
+return true]]></validation:TransientExpression>
+    </validation:ExpressionValidationBean>
+  </Attribute>
+  <Attribute
+    Name="AddCreated"
+    ColumnName="ADD_CREATED"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="MP5PRD.R5ADDETAILS"
+    IsUpdateable="while_insert">
+    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5addetails.AddCreated_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="AddUser"
+    Precision="12"
+    ColumnName="ADD_USER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDETAILS"
+    IsUpdateable="while_insert">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+    <TransientExpression><![CDATA[adf.context.securityContext.userName.toUpperCase()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5addetails.AddUser_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="AddUpdated"
+    ColumnName="ADD_UPDATED"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="MP5PRD.R5ADDETAILS">
+    <TransientExpression><![CDATA[adf.currentDate]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5addetails.AddUpdated_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="AddUpduser"
+    Precision="12"
+    ColumnName="ADD_UPDUSER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ADDETAILS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="12"/>
+    </DesignTime>
+    <TransientExpression><![CDATA[adf.context.securityContext.userName.toUpperCase()]]></TransientExpression>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5addetails.AddUpduser_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5users"
+    Association="its.mnr.mp5.eo.assoc.R5fok4AddAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok4AddAssoc.R5users"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok4AddAssoc.R5addetails"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5users1"
+    Association="its.mnr.mp5.eo.assoc.R5fok3AddAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok3AddAssoc.R5users1"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok3AddAssoc.R5addetails1"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5parts"
+    Association="its.mnr.mp5.eo.assoc.R5PartsR5AddetailsAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5PartsR5AddetailsAssoc.R5parts"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5PartsR5AddetailsAssoc.R5addetails"
+    Type="its.mnr.mp5.eo.local.R5partsImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5orders"
+    Association="its.mnr.mp5.eo.assoc.R5OrdersR5AddetailsAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5OrdersR5AddetailsAssoc.R5orders"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5OrdersR5AddetailsAssoc.R5addetails"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5orderlines"
+    Association="its.mnr.mp5.eo.assoc.R5OrderlinesR5AddetailsAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5OrderlinesR5AddetailsAssoc.R5orderlines"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5OrderlinesR5AddetailsAssoc.R5addetails"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="R5prikAdd"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_ADD"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5addetails.AddCode"/>
+      <Item Value="its.mnr.mp5.eo.local.R5addetails.AddRentity"/>
+      <Item Value="its.mnr.mp5.eo.local.R5addetails.AddType"/>
+      <Item Value="its.mnr.mp5.eo.local.R5addetails.AddLang"/>
+      <Item Value="its.mnr.mp5.eo.local.R5addetails.AddLine"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Add">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_LAN"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_ADD"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5addetails.AddLang"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok2Add">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_ENT"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK2_ADD"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5addetails.AddRentity"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok3Add">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_USR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK3_ADD"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5addetails.AddUser"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok4Add">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_USR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK4_ADD"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5addetails.AddUpduser"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

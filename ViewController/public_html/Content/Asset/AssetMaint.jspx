@@ -1,0 +1,1160 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Asset Maintenance" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1" usesUpload="true">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelHeader text=" " id="ph1">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t1"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
+                                <af:menuBar id="mb1">
+                                    <af:menu text="Actions" id="m2" partialTriggers="resId1">
+                                        <af:commandMenuItem actionListener="#{bindings.CreateInsert1.execute}"
+                                                            text="New Asset"
+                                                            disabled="#{!securityContext.userGrantedResource['resourceName=AssetCreateNewAssetMenu;resourceType=UIControl;action=enabled']}" id="cmi1"
+                                                            icon="#{resource['images:add.png']}"/>
+                                        <af:commandMenuItem text="Add Reading" id="cmi6"
+                                                            action="#{assetMaintBean.addReadingMenuItm}"
+                                                            icon="#{resource['images:add.png']}"
+                                                            disabled="#{ !securityContext.userGrantedResource['resourceName=AssetAddReading;resourceType=UIControl;action=enabled']}">
+                                            <af:setActionListener from="#{bindings.Assetcd.inputValue}"
+                                                                  to="#{pageFlowScope.psfAssetCd}"/>
+                                            <af:setActionListener to="#{pageFlowScope.psfAssetOrg}"
+                                                                  from="#{bindings.AssetOrg.inputValue}"/>
+                                            <af:setActionListener from="#{bindings.Uom.inputValue}"
+                                                                  to="#{pageFlowScope.psfAssetUom}"/>
+                                        </af:commandMenuItem>
+                                        <af:commandMenuItem
+                                                            text="Copy Asset" disabled="#{!bindings.copyAsset.enabled}"
+                                                            id="cmi2" action="#{assetMaintBean.callCopyPop}"
+                                                            icon="#{resource['images:copy.png']}"
+                                                            visible="#{securityContext.userGrantedResource['resourceName=AssetEditCommissDate;resourceType=UIControl;action=enabled']}"/>
+                                    </af:menu>
+                                </af:menuBar>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:button text="TabDisclosed" id="cb9" rendered="false"/>
+                                <af:button text="Apply" disabled="#{!bindings.Commit.enabled}" id="ctb1"
+                                           icon="#{resource['images:commit.png']}"
+                                           actionListener="#{bindings.Commit.execute}"
+                                           partialTriggers="pc3:ctb10 pc3:ctb13"/>
+                                <af:button text="Cancel" disabled="#{!bindings.Rollback.enabled}" immediate="true"
+                                           id="ctb2" icon="#{resource['images:undo.png']}"
+                                           action="#{assetMaintBean.doRollback}" partialTriggers="pc3:ctb10 pc3:ctb13">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button id="ctb3" actionListener="#{ModuleNavBean.goExit}"
+                                           icon="#{resource['images:terminate.png']}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:panelSplitter id="ps1" splitterPosition="300"
+                                          collapsed='#{ pageFlowScope.pfsCalledFromWO eq true ?true: false}'
+                                          disabled="#{ pageFlowScope.pfsCalledFromWO eq true ?true: false}">
+                            <f:facet name="first">
+                                <af:panelGroupLayout layout="vertical" id="pgl1">
+                                    <af:panelHeader text="Search" id="ph2">
+                                        <af:query id="qryId2" headerText="Search"
+                                                  value="#{bindings.SearchAssetsQuery.queryDescriptor}"
+                                                  model="#{bindings.SearchAssetsQuery.queryModel}"
+                                                  queryListener="#{bindings.SearchAssetsQuery.processQuery}"
+                                                  queryOperationListener="#{bindings.SearchAssetsQuery.processQueryOperation}"
+                                                  resultComponentId="::resId1" saveQueryMode="hidden"
+                                                  modeChangeVisible="false" disclosed="true"/>
+                                    </af:panelHeader>
+                                    
+                                    <af:table value="#{bindings.MrltAssetView1.collectionModel}" var="row"
+                                              rows="#{bindings.MrltAssetView1.rangeSize}"
+                                              emptyText="#{bindings.MrltAssetView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              fetchSize="#{bindings.MrltAssetView1.rangeSize}" rowBandingInterval="1"
+                                              selectedRowKeys="#{bindings.MrltAssetView1.collectionModel.selectedRow}"
+                                              selectionListener="#{bindings.MrltAssetView1.collectionModel.makeCurrent}"
+                                              rowSelection="single" id="resId1" columnStretching="column:resId1c2"
+                                              inlineStyle="width:300px; height:442px; border-style:solid; border-width:thin; background-color:White; margin:2px 2px 0px;"
+                                              partialTriggers="::cmi1 ::cmi2 ::cb8">
+                                        <af:column sortable="false" headerText="Asset" id="resId1c1" width="50">
+                                            <af:outputText value="#{row.Assetcd}" id="ot1"/>
+                                        </af:column>
+                                        <af:column sortable="false"
+                                                   headerText="#{bindings.MrltAssetView1.hints.Assetmanufact.label}"
+                                                   id="c2" width="107">
+                                            <af:outputText value="#{row.Assetmanufact}" id="ot5"/>
+                                        </af:column>
+                                        <af:column sortable="false"
+                                                   headerText="#{bindings.MrltAssetView1.hints.Assetclass.label}"
+                                                   id="c1" width="30" align="center" displayIndex="-1">
+                                            <af:outputText value="#{row.Assetclass}" id="ot6"/>
+                                        </af:column>
+                                        <af:column sortable="false"
+                                                   headerText="#{bindings.MrltAssetView1.hints.Assetstatus.label}"
+                                                   id="c23" width="35" align="center">
+                                            <af:outputText value="#{row.Assetstatus}" id="ot29"/>
+                                        </af:column>
+                                        <af:column sortable="false"
+                                                   headerText="#{bindings.MrltAssetView1.hints.Notavailable.label}"
+                                                   id="c22" width="50" align="center">
+                                            <af:outputText value="#{row.Notavailable}" id="ot26"/>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                            <f:facet name="second">
+                                <af:panelGroupLayout id="pgl7" layout="vertical">
+                                    <af:panelTabbed id="pt2" dimensionsFrom="auto" partialTriggers="qryId2 resId1">
+                                        <af:showDetailItem text="Record" id="sdi1"
+                                                           stretchChildren="first"
+                                                           inlineStyle="height:617px; "
+                                                           binding="#{assetMaintBean.tabRecord}">
+                                            <af:panelStretchLayout id="psl1" endWidth="199px" topHeight="100px"
+                                                                   bottomHeight="49px"
+                                                                   inlineStyle="margin-top:10px;"
+                                                                   dimensionsFrom="children">
+                                                <f:facet name="bottom">
+                                                    <af:panelGroupLayout layout="scroll" id="pgl10">
+                                                        <af:separator id="s6"/>
+                                                        <af:panelFormLayout id="pgl4" labelAlignment="start"
+                                                                            maxColumns="4" fieldWidth="50"
+                                                                            labelWidth="100" inlineStyle="margin:5px;" rows="1">
+                                                            <af:selectOneChoice value="#{bindings.Isresource.inputValue}"
+                                                                                label="#{bindings.Isresource.label}"
+                                                                                required="#{bindings.Isresource.hints.mandatory}"
+                                                                                shortDesc="#{bindings.Isresource.hints.tooltip}"
+                                                                                id="soc2" autoSubmit="true"
+                                                                                disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditProperties;resourceType=UIControl;action=enabled'] }">
+                                                                <f:selectItems value="#{bindings.Isresource.items}"
+                                                                               id="si2"/>
+                                                            </af:selectOneChoice>
+                                                            <af:selectOneChoice value="#{bindings.Notavailable.inputValue}"
+                                                                                required="#{bindings.Notavailable.hints.mandatory}"
+                                                                                shortDesc="#{bindings.Notavailable.hints.tooltip}"
+                                                                                id="soc4" autoSubmit="true"
+                                                                                disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditProperties;resourceType=UIControl;action=enabled'] }"
+                                                                                label="#{bindings.Notavailable.label}">
+                                                                <f:selectItems value="#{bindings.Notavailable.items}"
+                                                                               id="si4"/>
+                                                            </af:selectOneChoice>
+                                                            <af:selectOneChoice value="#{bindings.Criticality.inputValue}"
+                                                                                label="#{bindings.Criticality.label}"
+                                                                                required="#{bindings.Criticality.hints.mandatory}"
+                                                                                shortDesc="#{bindings.Criticality.hints.tooltip}"
+                                                                                id="soc8" autoSubmit="true"
+                                                                                disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditProperties;resourceType=UIControl;action=enabled']}">
+                                                                <f:selectItems value="#{bindings.Criticality.items}"
+                                                                               id="si8"/>
+                                                            </af:selectOneChoice>
+                                                            <af:selectOneChoice value="#{bindings.Assetstatus.inputValue}"
+                                                                                label="#{bindings.Assetstatus.label}"
+                                                                                required="#{bindings.Assetstatus.hints.mandatory}"
+                                                                                shortDesc="#{bindings.Assetstatus.hints.tooltip}"
+                                                                                id="soc3" autoSubmit="true"
+                                                                                disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditCommissDate;resourceType=UIControl;action=enabled'] }"
+                                                                                visible="#{securityContext.userGrantedResource['resourceName=AssetEditCommissDate;resourceType=UIControl;action=enabled']}">
+                                                                <f:selectItems value="#{bindings.Assetstatus.items}"
+                                                                               id="si3"/>
+                                                            </af:selectOneChoice>
+                                                        </af:panelFormLayout>
+                                                        <af:separator id="s7"/>
+                                                    </af:panelGroupLayout>
+                                                </f:facet>
+                                                <f:facet name="center">
+                                                    <af:panelFormLayout id="pgl3" labelAlignment="start">
+                                                        <af:inputText value="#{bindings.Assetcd.inputValue}"
+                                                                      label="Asset"
+                                                                      required="#{bindings.Assetcd.hints.mandatory}"
+                                                                      columns="#{bindings.Assetcd.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Assetcd.hints.precision}"
+                                                                      shortDesc="#{bindings.Assetcd.hints.tooltip}"
+                                                                      id="it1">
+                                                            <f:validator binding="#{bindings.Assetcd.validator}"/>
+                                                        </af:inputText>
+                                                        <af:inputText value="#{bindings.AssetOrg.inputValue}"
+                                                                      label="#{bindings.AssetOrg.hints.label}"
+                                                                      required="#{bindings.Org1.hints.mandatory}"
+                                                                      columns="#{bindings.Org1.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Org1.hints.precision}"
+                                                                      shortDesc="#{bindings.Org1.hints.tooltip}"
+                                                                      id="it13" rendered="false">
+                                                            <f:validator binding="#{bindings.Org1.validator}"/>
+                                                        </af:inputText>
+                                                        <af:inputListOfValues id="assetclass1Id"
+                                                                              popupTitle="Search and Select: #{bindings.Assetclass1.hints.label}"
+                                                                              value="#{bindings.Assetclass1.inputValue}"
+                                                                              label="#{bindings.Assetclass1.hints.label}"
+                                                                              model="#{bindings.Assetclass1.listOfValuesModel}"
+                                                                              required="#{bindings.Assetclass1.hints.mandatory}"
+                                                                              columns="#{bindings.Assetclass1.hints.displayWidth}"
+                                                                              shortDesc="#{bindings.Assetclass1.hints.tooltip}"
+                                                                              autoSubmit="true"
+                                                                              disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditCommissDate;resourceType=UIControl;action=enabled']}">
+                                                            <f:validator binding="#{bindings.Assetclass1.validator}"/>
+                                                        </af:inputListOfValues>
+                                                        <af:inputComboboxListOfValues id="uomId"
+                                                                                      popupTitle="Search and Select: #{bindings.Uom.hints.label}"
+                                                                                      value="#{bindings.Uom.inputValue}"
+                                                                                      label="#{bindings.Uom.hints.label}"
+                                                                                      model="#{bindings.Uom.listOfValuesModel}"
+                                                                                      required="#{bindings.Uom.hints.mandatory}"
+                                                                                      columns="#{bindings.Uom.hints.displayWidth}"
+                                                                                      shortDesc="#{bindings.Uom.hints.tooltip}"
+                                                                                      autoSubmit="true"
+                                                                                      disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditCommissDate;resourceType=UIControl;action=enabled']}">
+                                                            <f:validator binding="#{bindings.Uom.validator}"/>
+                                                        </af:inputComboboxListOfValues>
+                                                        <af:inputListOfValues id="assetmanufact1Id"
+                                                                              popupTitle="Search and Select: #{bindings.Assetmanufact1.hints.label}"
+                                                                              value="#{bindings.Assetmanufact1.inputValue}"
+                                                                              label="#{bindings.Assetmanufact1.hints.label}"
+                                                                              model="#{bindings.Assetmanufact1.listOfValuesModel}"
+                                                                              required="#{bindings.Assetmanufact1.hints.mandatory}"
+                                                                              columns="#{bindings.Assetmanufact1.hints.displayWidth}"
+                                                                              shortDesc="#{bindings.Assetmanufact1.hints.tooltip}"
+                                                                              autoSubmit="true"
+                                                                              disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditCommissDate;resourceType=UIControl;action=enabled']}">
+                                                            <f:validator binding="#{bindings.Assetmanufact1.validator}"/>
+                                                        </af:inputListOfValues>
+                                                        <af:inputText value="#{bindings.Model.inputValue}"
+                                                                      label="#{bindings.Model.hints.label}"
+                                                                      required="#{bindings.Model.hints.mandatory}"
+                                                                      columns="#{bindings.Model.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Model.hints.precision}"
+                                                                      shortDesc="#{bindings.Model.hints.tooltip}"
+                                                                      id="it2" autoSubmit="true"
+                                                                      disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditCommissDate;resourceType=UIControl;action=enabled']}">
+                                                            <f:validator binding="#{bindings.Model.validator}"/>
+                                                        </af:inputText>
+                                                        <af:inputText value="#{bindings.Serialno.inputValue}"
+                                                                      label="#{bindings.Serialno.hints.label}"
+                                                                      required="#{bindings.Serialno.hints.mandatory}"
+                                                                      columns="#{bindings.Serialno.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.Serialno.hints.precision}"
+                                                                      shortDesc="#{bindings.Serialno.hints.tooltip}"
+                                                                      id="it6"
+                                                                      disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditCommissDate;resourceType=UIControl;action=enabled']}"
+                                                                      autoSubmit="true">
+                                                            <f:validator binding="#{bindings.Serialno.validator}"/>
+                                                        </af:inputText>
+                                                        <af:selectOneChoice value="#{bindings.Assetacctnum.inputValue}"
+                                                                            label="Acct"
+                                                                            required="#{bindings.Assetacctnum.hints.mandatory}"
+                                                                            shortDesc="#{bindings.Assetacctnum.hints.tooltip}"
+                                                                            id="soc6" autoSubmit="true"
+                                                                            disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditAcctCode;resourceType=UIControl;action=enabled']}">
+                                                            <f:selectItems value="#{bindings.Assetacctnum.items}"
+                                                                           id="si6"/>
+                                                        </af:selectOneChoice>
+                                                        <af:inputDate value="#{bindings.Commiss.inputValue}"
+                                                                      label="#{bindings.Commiss.hints.label}"
+                                                                      required="#{bindings.Commiss.hints.mandatory}"
+                                                                      columns="#{bindings.Commiss.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.Commiss.hints.tooltip}"
+                                                                      id="id1" autoSubmit="true"
+                                                                      disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditCommissDate;resourceType=UIControl;action=enabled']}">
+                                                            <f:validator binding="#{bindings.Commiss.validator}"/>
+                                                            <af:convertDateTime pattern="#{bindings.Commiss.format}"/>
+                                                        </af:inputDate>
+                                                        <af:inputDate value="#{bindings.Withdraw.inputValue}"
+                                                                      label="#{bindings.Withdraw.hints.label}"
+                                                                      required="#{bindings.Withdraw.hints.mandatory}"
+                                                                      columns="#{bindings.Withdraw.hints.displayWidth}"
+                                                                      shortDesc="#{bindings.Withdraw.hints.tooltip}"
+                                                                      id="id2" autoSubmit="true" disabled="true">
+                                                            <f:validator binding="#{bindings.Withdraw.validator}"/>
+                                                            <af:convertDateTime pattern="#{bindings.Withdraw.format}"/>
+                                                        </af:inputDate>
+                                                    </af:panelFormLayout>
+                                                </f:facet>
+                                                <f:facet name="end">
+                                                    <af:panelGroupLayout id="pgl5" layout="vertical"
+                                                                         partialTriggers="ctb1 assetdocid1Id">
+                                                        <af:image source="/docservlet?id=#{bindings.Assetdocid.inputValue}"
+                                                                  shortDesc="Click to Change" id="i1" styleClass="assetImg"
+                                                                  inlineStyle="border-color:Black; border-style:solid;"
+                                                                  rendered="#{bindings.Assetdocid.attributeValue ne null ? true : false}">
+                                                            <af:showPopupBehavior popupId="pAssetPhoto"
+                                                                                  triggerType="click"/>
+                                                        </af:image>
+                                                        <af:button text="Photo"
+                                                                   disabled="#{!bindings.CreateInsertPhoto.enabled || !securityContext.userGrantedResource['resourceName=AssetEditProperties;resourceType=UIControl;action=enabled']}"
+                                                                   id="cb3" icon="#{resource['images:add.png']}"
+                                                                   rendered="#{(bindings.Assetdocid.attributeValue eq null ? true : false) &amp;&amp; bindings.Assetcd.attributeValue ne null}">
+                                                            <af:showPopupBehavior popupId="pAssetPhoto"
+                                                                                  triggerType="click"/>
+                                                        </af:button>
+                                                    </af:panelGroupLayout>
+                                                </f:facet>
+                                            </af:panelStretchLayout>
+                                            <af:panelGroupLayout id="pgl2" valign="top"
+                                                                 partialTriggers="resId1 qryId2" layout="horizontal">
+                                                <af:showDetailHeader text="#{bindings.MrltCustattribvaluesViewIterator.estimatedRowCount gt 0 ? 'Details (Available)': 'Details (None)'}"
+                                                                     id="sdh1" inlineStyle="margin:5px;"
+                                                                     partialTriggers="pc5:ctb12">
+                                                    <f:facet name="context"/>
+                                                    <f:facet name="menuBar"/>
+                                                    <f:facet name="toolbar"/>
+                                                    <af:panelCollection id="pc5" featuresOff="viewMenu detach"
+                                                                        inlineStyle="margin:5px 0px 0px 5px;">
+                                                        <f:facet name="menus"/>
+                                                        <f:facet name="toolbar">
+                                                            <af:toolbar id="t8" inlineStyle="margin: 0px 0px 0px 15px;">
+                                                                <af:button disabled="#{bindings.MrltCustattribvaluesViewIterator.estimatedRowCount gt 0  || bindings.Assetcd.inputValue == null? true : false || !securityContext.userGrantedResource['resourceName=AssetEditCommissDate;resourceType=UIControl;action=enabled']  || bindings.Assetstatus.attributeValue eq 'OS'}"
+                                                                           id="ctb12"
+                                                                           action="#{assetMaintBean.crCustAttribAsset_action}"
+                                                                           icon="#{resource['images:add.png']}"/>
+                                                            </af:toolbar>
+                                                        </f:facet>
+                                                        <f:facet name="statusbar"/>
+                                                        <af:table value="#{bindings.MrltCustattribvaluesView.collectionModel}"
+                                                                  var="row"
+                                                                  rows="#{bindings.MrltCustattribvaluesView.rangeSize}"
+                                                                  emptyText="#{bindings.MrltCustattribvaluesView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                                  fetchSize="#{bindings.MrltCustattribvaluesView.rangeSize}"
+                                                                  rowBandingInterval="1" id="t2" columnStretching="last"
+                                                                  inlineStyle="height:250px;margin: 5px;"
+                                                                  selectionListener="#{bindings.MrltCustattribvaluesView.collectionModel.makeCurrent}"
+                                                                  rowSelection="multiple"
+                                                                  binding="#{assetMaintBean.custAttribsTable}">
+                                                            <af:column headerText="#{bindings.MrltCustattribvaluesView.hints.tCustAttribDesc.label}"
+                                                                       id="c6"
+                                                                       sortProperty="#{bindings.MrltCustattribvaluesView.hints.tCustAttribDesc.name}"
+                                                                       sortable="false">
+                                                                <af:outputText value="#{row.tCustAttribDesc}" id="ot2"/>
+                                                            </af:column>
+                                                            <af:column sortProperty="#{bindings.MrltCustattribvaluesView.hints.Custattribvalue.name}"
+                                                                       sortable="false"
+                                                                       headerText="#{bindings.MrltCustattribvaluesView.hints.Custattribvalue.label}"
+                                                                       id="c5" width="150">
+                                                                <af:inputText value="#{row.bindings.Custattribvalue.inputValue}"
+                                                                              label="#{bindings.MrltCustattribvaluesView.hints.Custattribvalue.label}"
+                                                                              required="#{bindings.MrltCustattribvaluesView.hints.Custattribvalue.mandatory}"
+                                                                              columns="#{bindings.MrltCustattribvaluesView.hints.Custattribvalue.displayWidth}"
+                                                                              maximumLength="#{bindings.MrltCustattribvaluesView.hints.Custattribvalue.precision}"
+                                                                              shortDesc="#{bindings.MrltCustattribvaluesView.hints.Custattribvalue.tooltip}"
+                                                                              id="it7" autoSubmit="true"
+                                                                              disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditCommissDate;resourceType=UIControl;action=enabled']}">
+                                                                    <f:validator binding="#{row.bindings.Custattribvalue.validator}"/>
+                                                                </af:inputText>
+                                                            </af:column>
+                                                        </af:table>
+                                                    </af:panelCollection>
+                                                </af:showDetailHeader>
+                                                <af:showDetailHeader text="#{bindings.AssetCommentsViewIterator.estimatedRowCount gt 0? 'Comments (Available)': 'Comments (None)'}"
+                                                                     id="sdh2" inlineStyle="margin:5px;"
+                                                                     partialTriggers="ctb4 ctb5">
+                                                    <f:facet name="context"/>
+                                                    <f:facet name="menuBar"/>
+                                                    <f:facet name="toolbar"/>
+                                                    <af:panelStretchLayout id="pgl11">
+                                                        <f:facet name="center">
+                                                            <af:panelFormLayout id="pfl1">
+                                                                <af:inputDate value="#{bindings.Commcreated.inputValue}"
+                                                                              label="#{bindings.Commcreated.hints.label}"
+                                                                              required="#{bindings.Commcreated.hints.mandatory}"
+                                                                              columns="#{bindings.Commcreated.hints.displayWidth}"
+                                                                              shortDesc="#{bindings.Commcreated.hints.tooltip}"
+                                                                              id="id3"
+                                                                              disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditCommissDate;resourceType=UIControl;action=enabled']}">
+                                                                    <f:validator binding="#{bindings.Commcreated.validator}"/>
+                                                                    <af:convertDateTime pattern="#{bindings.Commcreated.format}"/>
+                                                                </af:inputDate>
+                                                                <af:inputText value="#{bindings.Commcreatedby.inputValue}"
+                                                                              label="#{bindings.Commcreatedby.hints.label}"
+                                                                              required="#{bindings.Commcreatedby.hints.mandatory}"
+                                                                              columns="#{bindings.Commcreatedby.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.Commcreatedby.hints.precision}"
+                                                                              shortDesc="#{bindings.Commcreatedby.hints.tooltip}"
+                                                                              id="it3"
+                                                                              disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditCommissDate;resourceType=UIControl;action=enabled']}">
+                                                                    <f:validator binding="#{bindings.Commcreatedby.validator}"/>
+                                                                </af:inputText>
+                                                                <af:inputText value="#{bindings.Commitem.inputValue}"
+                                                                              label="#{bindings.Commitem.hints.label}"
+                                                                              required="#{bindings.Commitem.hints.mandatory}"
+                                                                              columns="#{bindings.Commitem.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.Commitem.hints.precision}"
+                                                                              shortDesc="#{bindings.Commitem.hints.tooltip}"
+                                                                              id="it4" visible="false">
+                                                                    <f:validator binding="#{bindings.Commitem.validator}"/>
+                                                                </af:inputText>
+                                                                <af:inputText value="#{bindings.Commline.inputValue}"
+                                                                              label="#{bindings.Commline.hints.label}"
+                                                                              required="#{bindings.Commline.hints.mandatory}"
+                                                                              columns="#{bindings.Commline.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.Commline.hints.precision}"
+                                                                              shortDesc="#{bindings.Commline.hints.tooltip}"
+                                                                              id="it5" readOnly="true">
+                                                                    <f:validator binding="#{bindings.Commline.validator}"/>
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.Commline.format}"/>
+                                                                </af:inputText>
+                                                                <af:inputText value="#{bindings.Commtext.inputValue}"
+                                                                              label="#{bindings.Commtext.hints.label}"
+                                                                              required="#{bindings.Commtext.hints.mandatory}"
+                                                                              columns="#{bindings.Commtext.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.Commtext.hints.precision}"
+                                                                              shortDesc="#{bindings.Commtext.hints.tooltip}"
+                                                                              id="it8" rows="8" autoSubmit="true"
+                                                                              disabled="#{!securityContext.userGrantedResource['resourceName=AssetEditCommissDate;resourceType=UIControl;action=enabled']}">
+                                                                    <f:validator binding="#{bindings.Commtext.validator}"/>
+                                                                    <f:converter converterId="clobConverter"/>
+                                                                </af:inputText>
+                                                                <af:inputText value="#{bindings.Commtype.inputValue}"
+                                                                              label="#{bindings.Commtype.hints.label}"
+                                                                              required="#{bindings.Commtype.hints.mandatory}"
+                                                                              columns="#{bindings.Commtype.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.Commtype.hints.precision}"
+                                                                              shortDesc="#{bindings.Commtype.hints.tooltip}"
+                                                                              id="it9" readOnly="true" visible="false">
+                                                                    <f:validator binding="#{bindings.Commtype.validator}"/>
+                                                                </af:inputText>
+                                                                <af:inputDate value="#{bindings.Commupd.inputValue}"
+                                                                              label="#{bindings.Commupd.hints.label}"
+                                                                              required="#{bindings.Commupd.hints.mandatory}"
+                                                                              columns="#{bindings.Commupd.hints.displayWidth}"
+                                                                              shortDesc="#{bindings.Commupd.hints.tooltip}"
+                                                                              id="id4">
+                                                                    <f:validator binding="#{bindings.Commupd.validator}"/>
+                                                                    <af:convertDateTime pattern="#{bindings.Commupd.format}"/>
+                                                                </af:inputDate>
+                                                                <af:inputText value="#{bindings.Commupdby.inputValue}"
+                                                                              label="#{bindings.Commupdby.hints.label}"
+                                                                              required="#{bindings.Commupdby.hints.mandatory}"
+                                                                              columns="#{bindings.Commupdby.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.Commupdby.hints.precision}"
+                                                                              shortDesc="#{bindings.Commupdby.hints.tooltip}"
+                                                                              id="it10">
+                                                                    <f:validator binding="#{bindings.Commupdby.validator}"/>
+                                                                </af:inputText>
+                                                                <af:inputText value="#{bindings.Org.inputValue}"
+                                                                              label="#{bindings.Org.hints.label}"
+                                                                              required="#{bindings.Org.hints.mandatory}"
+                                                                              columns="#{bindings.Org.hints.displayWidth}"
+                                                                              maximumLength="#{bindings.Org.hints.precision}"
+                                                                              shortDesc="#{bindings.Org.hints.tooltip}"
+                                                                              id="it11" visible="false">
+                                                                    <f:validator binding="#{bindings.Org.validator}"/>
+                                                                </af:inputText>
+                                                                <f:facet name="footer">
+                                                                    <af:toolbar id="t4"
+                                                                                inlineStyle="margin:  5px 5px 5px 75px;">
+                                                                        <af:button actionListener="#{bindings.Previous.execute}"
+                                                                                   disabled="#{!bindings.Previous.enabled}"
+                                                                                   partialSubmit="true" id="cb2"
+                                                                                   icon="#{resource['images:shuttle_left.png']}"
+                                                                                   text="button 1"/>
+                                                                        <af:button actionListener="#{bindings.Next.execute}"
+                                                                                   disabled="#{!bindings.Next.enabled}"
+                                                                                   partialSubmit="true" id="cb1"
+                                                                                   icon="#{resource['images:shuttle_right.png']}"/>
+                                                                        <af:outputFormatted value="#{bindings.AssetCommentsViewIterator.rangeStart+bindings.AssetCommentsViewIterator.currentRowIndexInRange+1}/#{bindings.AssetCommentsViewIterator.estimatedRowCount} records"
+                                                                                            id="of1"
+                                                                                            partialTriggers="cb1 cb2"/>
+                                                                    </af:toolbar>
+                                                                </f:facet>
+                                                            </af:panelFormLayout>
+                                                        </f:facet>
+                                                        <f:facet name="top">
+                                                            <af:toolbar id="t3" inlineStyle="margin: 0px 0px 0px 15px;">
+                                                                <af:button disabled="#{!bindings.Create.enabled  || bindings.Assetcd.inputValue == null || !securityContext.userGrantedResource['resourceName=AssetEditProperties;resourceType=UIControl;action=enabled']  || bindings.Assetstatus.attributeValue eq 'OS'}"
+                                                                           id="ctb4"
+                                                                           icon="#{resource['images:add.png']}"
+                                                                           action="#{bindings.Create.execute}"/>
+                                                                <af:button disabled="#{!bindings.Delete.enabled   || bindings.Assetcd.inputValue == null || !securityContext.userGrantedResource['resourceName=AssetEditProperties;resourceType=UIControl;action=enabled']  || bindings.Assetstatus.attributeValue eq 'OS'}"
+                                                                           id="ctb5"
+                                                                           icon="#{resource['images:delete.png']}"
+                                                                           action="#{bindings.Delete.execute}"
+                                                                           inlineStyle="margin: 0px 0px 0px 15px;"/>
+                                                            </af:toolbar>
+                                                        </f:facet>
+                                                    </af:panelStretchLayout>
+                                                </af:showDetailHeader>
+                                            </af:panelGroupLayout>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="pAssetPhoto"
+                                                      contentDelivery="immediate"
+                                                      binding="#{assetMaintBean.popAssetPhoto}"
+                                                      popupCanceledListener="#{assetMaintBean.assetPhotoPopCancLsnr}">
+                                                <af:dialog id="d2" type="none" closeIconVisible="false"
+                                                           title=" #{bindings.Assetcd.inputValue} Asset Photo">
+                                                    <f:facet name="buttonBar"/>
+                                                    <af:panelHeader id="pgl12" inlineStyle="padding:0px 0px 30px 0px;"
+                                                                    text=" ">
+                                                        <af:panelFormLayout id="pfl6" labelAlignment="top"
+                                                                            fieldWidth="200" labelWidth="100"
+                                                                            inlineStyle="background-color:White; border-color:Gray; border-style:solid; border-width:thin;">
+                                                            <af:image source="/docservlet?id=#{bindings.Assetdocid1.inputValue}"
+                                                                      shortDesc="Asset Photo" id="i2"
+                                                                      styleClass="assetImg"
+                                                                      inlineStyle="border-color:Black; border-style:solid;padding:5px;"
+                                                                      rendered="#{bindings.Assetdocid.attributeValue ne null ? true : false}"
+                                                                      partialTriggers="assetdocid1Id"/>
+                                                            <af:selectOneRadio label="Photo Action" id="sor2"
+                                                                               layout="horizontal" autoSubmit="true"
+                                                                               value="#{assetMaintBean.selectedItem}"
+                                                                               disabled="#{bindings.Commit.enabled || !securityContext.userGrantedResource['resourceName=AssetEditProperties;resourceType=UIControl;action=enabled']}"
+                                                                               inlineStyle="padding:10px;"
+                                                                               valueChangeListener="#{assetMaintBean.photoActionLsnr}">
+                                                                <af:selectItem label="Edit" value="Edit" id="si7"/>
+                                                                <af:selectItem label="Upload" value="Upload" id="si9"/>
+                                                            </af:selectOneRadio>
+                                                        </af:panelFormLayout>
+                                                        <f:facet name="context"/>
+                                                        <f:facet name="menuBar">
+                                                            <af:button id="cb10"
+                                                                       icon="#{resource['images:terminate.png']}"
+                                                                       inlineStyle="margin: 5px;"
+                                                                       actionListener="#{assetMaintBean.closeAssetPhotoPop}"/>
+                                                        </f:facet>
+                                                        <f:facet name="toolbar"/>
+                                                        <f:facet name="legend"/>
+                                                        <f:facet name="info"/>
+                                                        <af:panelFormLayout id="pfl7" fieldWidth="200" labelWidth="100"
+                                                                            partialTriggers="sor2"
+                                                                            visible="#{assetMaintBean.selectedItem eq 'Edit'}">
+                                                            <af:panelLabelAndMessage label="#{bindings.tPostedAssetDocId.hints.label}"
+                                                                                     id="plam3">
+                                                                <af:outputFormatted value="#{bindings.tPostedAssetDocId.inputValue}"
+                                                                                    id="of3"/>
+                                                            </af:panelLabelAndMessage>
+                                                            <af:inputListOfValues id="assetdocid1Id"
+                                                                                  popupTitle="Search and Select: #{bindings.Assetdocid1.hints.label}"
+                                                                                  value="#{bindings.Assetdocid1.inputValue}"
+                                                                                  label="#{bindings.Assetdocid1.hints.label}"
+                                                                                  model="#{bindings.Assetdocid1.listOfValuesModel}"
+                                                                                  required="#{bindings.Assetdocid1.hints.mandatory}"
+                                                                                  columns="#{bindings.Assetdocid1.hints.displayWidth}"
+                                                                                  shortDesc="#{bindings.Assetdocid1.hints.tooltip}"
+                                                                                  autoSubmit="true">
+                                                                <f:validator binding="#{bindings.Assetdocid1.validator}"/>
+                                                                <af:convertNumber groupingUsed="false"
+                                                                                  pattern="#{bindings.Assetdocid1.format}"/>
+                                                            </af:inputListOfValues>
+                                                            <f:facet name="footer">
+                                                                <af:panelGroupLayout id="pgl13" halign="right"
+                                                                                     layout="horizontal">
+                                                                    <af:spacer width="50" height="10" id="s8"/>
+                                                                    <af:button text="Update Photo" id="cb12"
+                                                                               icon="#{resource['images:commit.png']}"
+                                                                               disabled="#{!bindings.Commit.enabled}"
+                                                                               inlineStyle="margin: 5px;"
+                                                                               action="#{assetMaintBean.doCommit}"/>
+                                                                    <af:button text="Cancel" id="cb13"
+                                                                               icon="#{resource['images:undo.png']}"
+                                                                               action="#{assetMaintBean.doRollback}"
+                                                                               disabled="#{!bindings.Rollback.enabled}"
+                                                                               inlineStyle="margin: 5px;"/>
+                                                                </af:panelGroupLayout>
+                                                            </f:facet>
+                                                        </af:panelFormLayout>
+                                                        <af:panelFormLayout id="pfl2"
+                                                                            binding="#{assetMaintBean.uploadPhotoForm}"
+                                                                            fieldWidth="200" labelWidth="100"
+                                                                            partialTriggers="sor2"
+                                                                            visible="#{assetMaintBean.selectedItem eq 'Upload'}">
+                                                            <af:toolbar id="t9">
+                                                                <af:button text="+" id="cb11" partialSubmit="true"
+                                                                           action="#{assetMaintBean.createInsertAssetPhoto}"
+                                                                           rendered="false"/>
+                                                            </af:toolbar>
+                                                            <af:panelLabelAndMessage label="#{bindings.Docid1.hints.label}"
+                                                                                     id="plam9">
+                                                                <af:outputText value="#{bindings.Docid1.inputValue}"
+                                                                               id="ot17">
+                                                                    <af:convertNumber groupingUsed="false"
+                                                                                      pattern="#{bindings.Docid1.format}"/>
+                                                                </af:outputText>
+                                                            </af:panelLabelAndMessage>
+                                                            <af:inputText value="#{bindings.Docdesc.inputValue}"
+                                                                          label="#{bindings.Docdesc.hints.label}"
+                                                                          required="#{bindings.Docdesc.hints.mandatory}"
+                                                                          columns="#{bindings.Docdesc.hints.displayWidth}"
+                                                                          maximumLength="#{bindings.Docdesc.hints.precision}"
+                                                                          shortDesc="#{bindings.Docdesc.hints.tooltip}"
+                                                                          id="it12" autoSubmit="true" rows="5"
+                                                                          binding="#{assetMaintBean.txtFileDesc}">
+                                                                <f:validator binding="#{bindings.Docdesc.validator}"/>
+                                                            </af:inputText>
+                                                            <f:facet name="footer">
+                                                                <af:panelGroupLayout id="pgl6" halign="right"
+                                                                                     layout="horizontal">
+                                                                    <af:spacer width="50" height="10" id="s1"/>
+                                                                    <af:button text="Save Photo" id="cb6"
+                                                                               icon="#{resource['images:commit.png']}"
+                                                                               disabled="#{!bindings.Commit.enabled ||  empty bindings.Docdesc.inputValue || empty bindings.Docfile.inputValue}"
+                                                                               inlineStyle="margin: 5px;"
+                                                                               action="#{assetMaintBean.saveNewPhoto}"/>
+                                                                    <af:button text="Cancel" id="cb4"
+                                                                               icon="#{resource['images:undo.png']}"
+                                                                               action="#{assetMaintBean.doRollback}"
+                                                                               disabled="#{!bindings.Rollback.enabled}"
+                                                                               inlineStyle="margin: 5px;"/>
+                                                                </af:panelGroupLayout>
+                                                            </f:facet>
+                                                            <af:inputFile label="Upload File" id="if1" autoSubmit="true"
+                                                                          valueChangeListener="#{assetMaintBean.uploadFileLsnr}"
+                                                                          binding="#{assetMaintBean.uploadFileInput}"/>
+                                                        </af:panelFormLayout>
+                                                    </af:panelHeader>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p2"
+                                                      binding="#{assetMaintBean.pendingChangePop}">
+                                                <af:dialog id="d4" type="yesNo" title="Warning"
+                                                           dialogListener="#{assetMaintBean.pendingChangeDiagListener}"
+                                                           titleIconSource="#{resource['images:warning.png']}"
+                                                           closeIconVisible="false">
+                                                    <f:facet name="buttonBar"/>
+                                                    <af:outputText value="Pending changes exist. Do you want to Save?"
+                                                                   id="ot16"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:panelGroupLayout id="psl2">
+                                                <af:panelCollection id="pc3" styleClass="AFStretchWidth"
+                                                                    featuresOff="viewMenu"
+                                                                    inlineStyle="margin:5px 0px 0px 5px;">
+                                                    <f:facet name="menus">
+                                                        <af:menu text="Actions" id="m4">
+                                                            <af:commandMenuItem text="Doc Manager" id="cmi5"
+                                                                                action="goDocs" useWindow="true"
+                                                                                icon="#{resource['images:document_gearSM.png']}"
+                                                                                disabled="#{bindings.Assetcd.inputValue == null}"/>
+                                                        </af:menu>
+                                                    </f:facet>
+                                                    <f:facet name="toolbar">
+                                                            <af:toolbar id="t11">
+                                                            <af:button disabled="#{!bindings.CreateInsertAssetDoc.enabled || bindings.Assetcd.inputValue == null || !securityContext.userGrantedResource['resourceName=AssetEditDoc;resourceType=UIControl;action=enabled']  || bindings.Assetstatus.attributeValue eq 'OS'}"
+                                                                       id="ctb17" icon="#{resource['images:add.png']}"
+                                                                       action="#{assetMaintBean.addNewAssetDoc}"/>
+                                                            <af:button actionListener="#{bindings.Delete2.execute}"
+                                                                       disabled="#{!bindings.Delete2.enabled  || bindings.Assetcd.inputValue == null || !securityContext.userGrantedResource['resourceName=AssetEditDoc;resourceType=UIControl;action=enabled']  || bindings.Assetstatus.attributeValue eq 'OS'}"
+                                                                       id="ctb13"
+                                                                       icon="#{resource['images:delete.png']}"/>
+                                                            <af:spacer width="20" height="10" id="s5"/>
+                                                            <af:button id="ctb10" icon="#{resource['images:edit.png']}"
+                                                                       text="Edit"
+                                                                       disabled="#{bindings.Assetcd.inputValue == null || !securityContext.userGrantedResource['resourceName=AssetEditDoc;resourceType=UIControl;action=enabled']  || bindings.Assetstatus.attributeValue eq 'OS'}">
+                                                                <af:showPopupBehavior popupId="::popAssetDocs"
+                                                                                      triggerType="click"/>
+                                                            </af:button>
+                                                        </af:toolbar>
+                                                    </f:facet>
+                                                    <f:facet name="statusbar"/>
+                                                    <af:table value="#{bindings.MrltAssetdocumentsView.collectionModel}"
+                                                              var="row"
+                                                              rows="#{bindings.MrltAssetdocumentsView.rangeSize}"
+                                                              emptyText="#{bindings.MrltAssetdocumentsView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                              fetchSize="#{bindings.MrltAssetdocumentsView.rangeSize}"
+                                                              rowBandingInterval="0" id="t10"
+                                                              selectedRowKeys="#{bindings.MrltAssetdocumentsView.collectionModel.selectedRow}"
+                                                              selectionListener="#{bindings.MrltAssetdocumentsView.collectionModel.makeCurrent}"
+                                                              rowSelection="single" columnStretching="column:c25"
+                                                              autoHeightRows="-1"
+                                                              partialTriggers="::ctb13 ::ctb17 ::ctb10"
+                                                              contentDelivery="immediate"
+                                                              binding="#{assetMaintBean.assetDocsTable}">
+                                                        <af:column sortProperty="#{bindings.MrltAssetdocumentsView.hints.Docid.name}"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.MrltAssetdocumentsView.hints.Docid.label}"
+                                                                   id="c21" align="center" width="75">
+                                                            <af:outputText value="#{row.Docid}" id="ot25">
+                                                                <af:convertNumber groupingUsed="false"
+                                                                                  pattern="#{bindings.MrltAssetdocumentsView.hints.Docid.format}"/>
+                                                            </af:outputText>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.MrltAssetdocumentsView.hints.tDocDesc.name}"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.MrltAssetdocumentsView.hints.tDocDesc.label}"
+                                                                   id="c25">
+                                                            <af:outputText value="#{row.tDocDesc}" id="ot30"/>
+                                                        </af:column>
+                                                        <af:column sortProperty="#{bindings.MrltAssetdocumentsView.hints.tDocType.name}"
+                                                                   sortable="false"
+                                                                   headerText="#{bindings.MrltAssetdocumentsView.hints.tDocType.label}"
+                                                                   id="c24" align="center">
+                                                            <af:outputText value="#{row.tDocType}" id="ot28"/>
+                                                        </af:column>
+                                                    </af:table>
+                                                </af:panelCollection>
+                                            </af:panelGroupLayout>
+                                            <af:popup childCreation="deferred" id="popAssetDocs"
+                                                      contentDelivery="immediate"
+                                                      binding="#{assetMaintBean.popAssetDocs}" autoCancel="disabled">
+                                                <af:dialog id="d5"
+                                                           title=" #{bindings.Assetcd.inputValue} Asset Documents"
+                                                           type="none"
+                                                           dialogListener="#{assetMaintBean.assetDocDiagLsnr}">
+                                                    <f:facet name="buttonBar"/>
+                                                    <af:panelFormLayout id="pfl4" inlineStyle="margin:20px;">
+                                                        <f:facet name="footer">
+                                                            <af:panelGroupLayout id="pgl8" halign="right"
+                                                                                 layout="horizontal">
+                                                                <af:spacer width="50" height="10" id="s4"/>
+                                                                <af:button text="Apply" id="cb5"
+                                                                           icon="#{resource['images:commit.png']}"
+                                                                           action="#{assetMaintBean.saveNewAssetDoc}"
+                                                                           disabled="#{!bindings.Commit.enabled  ||  empty bindings.Docdesc.inputValue || empty bindings.Doctype.inputValue }"
+                                                                           inlineStyle="margin: 5px;"/>
+                                                                <af:button text="Cancel" id="cb7"
+                                                                           icon="#{resource['images:undo.png']}"
+                                                                           action="#{assetMaintBean.cancelNewAssetDoc}"
+                                                                           disabled="#{!bindings.Rollback.enabled}"
+                                                                           inlineStyle="margin: 5px;"/>
+                                                            </af:panelGroupLayout>
+                                                        </f:facet>
+                                                        <af:inputListOfValues id="docidId"
+                                                                              popupTitle="Search and Select: #{bindings.Docid.hints.label}"
+                                                                              value="#{bindings.Docid.inputValue}"
+                                                                              label="#{bindings.Docid.hints.label}"
+                                                                              model="#{bindings.Docid.listOfValuesModel}"
+                                                                              required="#{bindings.Docid.hints.mandatory}"
+                                                                              columns="#{bindings.Docid.hints.displayWidth}"
+                                                                              shortDesc="#{bindings.Docid.hints.tooltip}"
+                                                                              autoSubmit="true"
+                                                                              binding="#{assetMaintBean.txtAssetDocId}"
+                                                                              launchPopupListener="#{assetMaintBean.onAssetDocIdLovLaunch}">
+                                                            <f:validator binding="#{bindings.Docid.validator}"/>
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.Docid.format}"/>
+                                                        </af:inputListOfValues>
+                                                        <af:panelLabelAndMessage label="#{bindings.tDocDesc.hints.label}"
+                                                                                 id="plam4">
+                                                            <af:outputText value="#{bindings.tDocDesc.inputValue}"
+                                                                           id="ot27"/>
+                                                        </af:panelLabelAndMessage>
+                                                        <af:panelLabelAndMessage label="#{bindings.tDocType.hints.label}"
+                                                                                 id="plam6">
+                                                            <af:outputFormatted value="#{bindings.tDocType.inputValue}"
+                                                                                id="of2"/>
+                                                        </af:panelLabelAndMessage>
+                                                    </af:panelFormLayout>
+                                                    <af:panelGroupLayout id="pgl9" halign="center" layout="vertical">
+                                                        <af:inlineFrame id="if2"
+                                                                        source="/docservlet?id=#{bindings.Docid.inputValue}"
+                                                                        inlineStyle="height:475px;width:700px;background-color:White; margin:5px 0px 0px 5px; border-color:Menu; border-style:solid;"
+                                                                        sizing="preferred"
+                                                                        shortDesc="Preview Document"
+                                                                        binding="#{assetMaintBean.inlineframeDocId}"/>
+                                                    </af:panelGroupLayout>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="popCopyAsset"
+                                                      binding="#{assetMaintBean.popCopyAsset}">
+                                                <af:dialog id="d6" title="Copy Asset">
+                                                    <f:facet name="buttonBar"/>
+                                                    <af:panelFormLayout id="pfl5" fieldWidth="200" labelWidth="75">
+                                                        <af:outputLabel value="Copy" id="ol1"
+                                                                        inlineStyle="margin:10px; font-size:medium;"/>
+                                                        <af:inputText value="#{bindings.PCOPYASSET.inputValue}"
+                                                                      label="Asset"
+                                                                      required="#{bindings.PCOPYASSET.hints.mandatory}"
+                                                                      columns="#{bindings.PCOPYASSET.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.PCOPYASSET.hints.precision}"
+                                                                      shortDesc="#{bindings.PCOPYASSET.hints.tooltip}"
+                                                                      id="it14"
+                                                                      binding="#{assetMaintBean.txtCopyAssetAsset}">
+                                                            <f:validator binding="#{bindings.PCOPYASSET.validator}"/>
+                                                        </af:inputText>
+                                                        <af:inputText value="#{bindings.PCOPYORG.inputValue}"
+                                                                      label="Org"
+                                                                      required="#{bindings.PCOPYORG.hints.mandatory}"
+                                                                      columns="#{bindings.PCOPYORG.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.PCOPYORG.hints.precision}"
+                                                                      shortDesc="#{bindings.PCOPYORG.hints.tooltip}"
+                                                                      id="it15"
+                                                                      binding="#{assetMaintBean.txtCopyAssetOrg}"
+                                                                      readOnly="true">
+                                                            <f:validator binding="#{bindings.PCOPYORG.validator}"/>
+                                                        </af:inputText>
+                                                        <af:group id="g1">
+                                                            <af:outputLabel value="New" id="ol2"
+                                                                            inlineStyle="margin:10px; font-size:medium;"/>
+                                                            <af:inputText value="#{bindings.PNEWASSET.inputValue}"
+                                                                          label="Asset"
+                                                                          required="#{bindings.PNEWASSET.hints.mandatory}"
+                                                                          columns="#{bindings.PNEWASSET.hints.displayWidth}"
+                                                                          maximumLength="#{bindings.PNEWASSET.hints.precision}"
+                                                                          shortDesc="#{bindings.PNEWASSET.hints.tooltip}"
+                                                                          id="it16">
+                                                                <f:validator binding="#{bindings.PNEWASSET.validator}"/>
+                                                            </af:inputText>
+                                                            <af:inputText value="#{bindings.PNEWMODEL.inputValue}"
+                                                                          label="Model"
+                                                                          required="#{bindings.PNEWMODEL.hints.mandatory}"
+                                                                          columns="#{bindings.PNEWMODEL.hints.displayWidth}"
+                                                                          maximumLength="#{bindings.PNEWMODEL.hints.precision}"
+                                                                          shortDesc="#{bindings.PNEWMODEL.hints.tooltip}"
+                                                                          id="it17">
+                                                                <f:validator binding="#{bindings.PNEWMODEL.validator}"/>
+                                                            </af:inputText>
+                                                            <af:inputText value="#{bindings.PNEWSERIAL.inputValue}"
+                                                                          label="Serial No."
+                                                                          required="#{bindings.PNEWSERIAL.hints.mandatory}"
+                                                                          columns="#{bindings.PNEWSERIAL.hints.displayWidth}"
+                                                                          maximumLength="#{bindings.PNEWSERIAL.hints.precision}"
+                                                                          shortDesc="#{bindings.PNEWSERIAL.hints.tooltip}"
+                                                                          id="it18">
+                                                                <f:validator binding="#{bindings.PNEWSERIAL.validator}"/>
+                                                            </af:inputText>
+                                                        </af:group>
+                                                        <af:button actionListener="#{bindings.copyAsset.execute}"
+                                                                   text="Copy" disabled="#{!bindings.copyAsset.enabled}"
+                                                                   id="cb8" inlineStyle="margin: 10px;"/>
+                                                        <af:panelLabelAndMessage label="Status"
+                                                                                 id="plam8">
+                                                            <af:outputText value="#{bindings.return.inputValue}"
+                                                                           id="ot15" inlineStyle="font-style:italic;"/>
+                                                        </af:panelLabelAndMessage>
+                                                    </af:panelFormLayout>
+                                                </af:dialog>
+                                            </af:popup>
+                                        </af:showDetailItem>
+                                        <af:showDetailItem text="Spares" id="sdi2" inlineStyle="height:622px; ">
+                                            <af:panelLabelAndMessage label="#{bindings.Assetcd.hints.label}" id="plam1"
+                                                                     inlineStyle="margin:5px;">
+                                                <af:outputText value="#{bindings.Assetcd.inputValue}" id="ot4"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelCollection id="pc1" featuresOff="viewMenu detach"
+                                                                styleClass="AFStretchWidth"
+                                                                inlineStyle="margin:5px 0px 0px 5px; height:600px;">
+                                                <f:facet name="menus"/>
+                                                <f:facet name="toolbar">
+                                                    <af:toolbar id="t6"
+                                                                rendered="#{bindings.Assetcd.inputValue != null}">
+                                                        <af:spacer width="60" height="10" id="s14"/>
+                                                        <af:button id="ctb6" icon="#{resource['images:add.png']}"
+                                                                   actionListener="#{assetMaintBean.callAddSparePart}"
+                                                                   disabled="#{!securityContext.userGrantedResource['resourceName=AssetAddSpare;resourceType=UIControl;action=enabled']  || bindings.Assetstatus.attributeValue eq 'OS'}"/>
+                                                        <af:button id="ctb7" icon="#{resource['images:delete.png']}"
+                                                                   action="#{bindings.DeleteSpare.execute}"
+                                                                   partialSubmit="false"
+                                                                   disabled="#{!securityContext.userGrantedResource['resourceName=AssetAddSpare;resourceType=UIControl;action=enabled']  || bindings.Assetstatus.attributeValue eq 'OS'}"/>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                                <f:facet name="statusbar"/>
+                                                <af:table value="#{bindings.MrltSparesView.collectionModel}" var="row"
+                                                          rows="#{bindings.MrltSparesView.rangeSize}"
+                                                          emptyText="#{bindings.MrltSparesView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                          fetchSize="#{bindings.MrltSparesView.rangeSize}"
+                                                          rowBandingInterval="0" id="t5"
+                                                          partialTriggers="::ctb6 ::ctb7"
+                                                          binding="#{assetMaintBean.spareTable}"
+                                                          columnStretching="column:c10">
+                                                    <af:column sortProperty="#{bindings.MrltSparesView.hints.tLabelDesc.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.MrltSparesView.hints.tLabelDesc.label}"
+                                                               id="c41" align="center" width="100">
+                                                        <af:outputText value="#{row.tLabelDesc}" id="ot48"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.MrltSparesView.hints.Partnum.name}"
+                                                               sortable="false" headerText="Part" id="c4" width="50"
+                                                               align="center">
+                                                        <af:outputText value="#{row.Partnum}" id="ot12"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.MrltSparesView.hints.PartsMaintView.ParDesc.name}"
+                                                               sortable="false" headerText="Description" id="c10">
+                                                        <af:outputText value="#{row.PartsMaintView.bindings.ParDesc.inputValue}"
+                                                                       id="ot11"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.MrltSparesView.hints.PartsMaintView.ParNotused.name}"
+                                                               sortable="false" headerText="Not Used" id="c11"
+                                                               width="60" displayIndex="-1" align="center">
+                                                        <af:outputText value="#{row.PartsMaintView.bindings.ParNotused.inputValue}"
+                                                                       id="ot8"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.MrltSparesView.hints.PartsMaintView.ParLastprice.name}"
+                                                               sortable="false" headerText="Last Price" id="c8"
+                                                               width="50" displayIndex="-1" align="center">
+                                                        <af:outputText value="#{row.PartsMaintView.bindings.ParLastprice.inputValue}"
+                                                                       id="ot7">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.MrltSparesView.hints.PartsMaintView.ParLastprice.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.MrltSparesView.hints.PartsMaintView.tTotalStoQty.name}"
+                                                               sortable="false" headerText="In Stock" id="c12"
+                                                               width="50" displayIndex="-1" align="center">
+                                                        <af:outputText value="#{row.PartsMaintView.bindings.tTotalStoQty.inputValue}"
+                                                                       id="ot9">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.MrltSparesView.hints.PartsMaintView.tTotalStoQty.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                </af:table>
+                                            </af:panelCollection>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="popAddSpare"
+                                                      contentDelivery="immediate"
+                                                      binding="#{assetMaintBean.popAddSpare}">
+                                                <af:dialog id="d3" type="none" closeIconVisible="false">
+                                                    <f:facet name="buttonBar"/>
+                                                    <af:panelFormLayout id="pfl3">
+                                                        <f:facet name="footer">
+                                                            <af:toolbar id="t7">
+                                                                <af:button text="Apply" id="ctb8"
+                                                                           icon="#{resource['images:commit.png']}"
+                                                                           action="#{assetMaintBean.doApplySparePop}"
+                                                                           disabled="#{!bindings.Commit.enabled}"/>
+                                                                <af:button text="Cancel" id="ctb9"
+                                                                           icon="#{resource['images:undo.png']}"
+                                                                           action="#{assetMaintBean.doCancelSparePop}"
+                                                                           disabled="#{!bindings.Rollback.enabled}"/>
+                                                            </af:toolbar>
+                                                        </f:facet>
+                                                        <af:panelLabelAndMessage label="Asset"
+                                                                                 id="plam2">
+                                                            <af:outputText value="#{bindings.Item.inputValue}"
+                                                                           id="ot14"/>
+                                                        </af:panelLabelAndMessage>
+                                                        <af:inputListOfValues id="partnumId"
+                                                                              popupTitle="Search and Select: #{bindings.Partnum.hints.label}"
+                                                                              value="#{bindings.Partnum.inputValue}"
+                                                                              label="Part"
+                                                                              model="#{bindings.Partnum.listOfValuesModel}"
+                                                                              required="#{bindings.Partnum.hints.mandatory}"
+                                                                              columns="#{bindings.Partnum.hints.displayWidth}"
+                                                                              shortDesc="#{bindings.Partnum.hints.tooltip}"
+                                                                              autoSubmit="true">
+                                                            <f:validator binding="#{bindings.Partnum.validator}"/>
+                                                        </af:inputListOfValues>
+                                                        <af:selectOneChoice value="#{bindings.Sparelabel.inputValue}"
+                                                                            label="#{bindings.Sparelabel.label}"
+                                                                            required="#{bindings.Sparelabel.hints.mandatory}"
+                                                                            shortDesc="#{bindings.Sparelabel.hints.tooltip}"
+                                                                            id="soc5" autoSubmit="true">
+                                                            <f:selectItems value="#{bindings.Sparelabel.items}"
+                                                                           id="si5"/>
+                                                        </af:selectOneChoice>
+                                                    </af:panelFormLayout>
+                                                </af:dialog>
+                                            </af:popup>
+                                        </af:showDetailItem>
+                                        <af:showDetailItem text="History" id="sdi5" inlineStyle="height:622px; ">
+                                            <af:panelLabelAndMessage label="#{bindings.Assetcd.hints.label}" id="plam7"
+                                                                     inlineStyle="margin:5px;">
+                                                <af:outputText value="#{bindings.Assetcd.inputValue}" id="ot32"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelCollection id="pc6" styleClass="AFStretchWidth"
+                                                                inlineStyle="margin:5px 0px 0px 5px; height:600px;"
+                                                                featuresOff="viewMenu">
+                                                <f:facet name="menus">
+                                                    <af:menu text="Action" id="m5"
+                                                             rendered="#{bindings.Assetcd.inputValue != null}">
+                                                        <af:commandMenuItem text="Export to Excel" id="cmi7"
+                                                                            icon="#{resource['images:page_excel.png']}">
+                                                            <af:exportCollectionActionListener type="excelHTML"
+                                                                                               exportedId="t14"
+                                                                                               filename="WO History"
+                                                                                               title="My Exported WO History"
+                                                                                               exportedRows="all"/>
+                                                        </af:commandMenuItem>
+                                                        <af:commandMenuItem text="Export selected to Excel" id="cmi8"
+                                                                            icon="#{resource['images:page_excel.png']}">
+                                                            <af:exportCollectionActionListener type="excelHTML"
+                                                                                               exportedId="t14"
+                                                                                               exportedRows="selected"
+                                                                                               filename="WO History"
+                                                                                               title="My Exported WO History"/>
+                                                        </af:commandMenuItem>
+                                                        <af:commandMenuItem text="Printable Page" id="cmi9"
+                                                                            icon="#{resource['images:print.png']}"
+                                                                            rendered="false">
+                                                            <af:showPrintablePageBehavior/>
+                                                        </af:commandMenuItem>
+                                                    </af:menu>
+                                                </f:facet>
+                                                <f:facet name="toolbar"/>
+                                                <f:facet name="statusbar"/>
+                                                <af:table value="#{bindings.AssetWOTotalsView.collectionModel}"
+                                                          var="row" rows="#{bindings.AssetWOTotalsView.rangeSize}"
+                                                          emptyText="#{bindings.AssetWOTotalsView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                          fetchSize="#{bindings.AssetWOTotalsView.rangeSize}"
+                                                          rowBandingInterval="0" id="t14">
+                                                    <af:column sortProperty="#{bindings.AssetWOTotalsView.hints.Wo.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.AssetWOTotalsView.hints.Wo.label}"
+                                                               id="c26" align="center" width="75">
+                                                        <af:outputText value="#{row.Wo}" id="ot33" visible="false"/>
+                                                        <af:link text="#{row.Wo}" id="gl2"
+                                                                 destination="http://itsgp31/MaRSReportServer?%2fMaRSIntegrated%2fMaRSWO&amp;rs:Command=Render&amp;rc:Toolbar=false&amp;WONUM=#{row.Wo}"
+                                                                 targetFrame="_blank"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.AssetWOTotalsView.hints.Wodate.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.AssetWOTotalsView.hints.Wodate.label}"
+                                                               id="c27" width="75" align="center">
+                                                        <af:outputText value="#{row.Wodate}" id="ot39">
+                                                            <af:convertDateTime pattern="#{bindings.AssetWOTotalsView.hints.Wodate.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.AssetWOTotalsView.hints.Wocreated.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.AssetWOTotalsView.hints.Wocreated.label}"
+                                                               id="c33" align="center" width="75">
+                                                        <af:outputText value="#{row.Wocreated}" id="ot40">
+                                                            <af:convertDateTime pattern="#{bindings.AssetWOTotalsView.hints.Wocreated.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.AssetWOTotalsView.hints.Wocompleted.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.AssetWOTotalsView.hints.Wocompleted.label}"
+                                                               id="c34" align="center" width="75">
+                                                        <af:outputText value="#{row.Wocompleted}" id="ot41">
+                                                            <af:convertDateTime pattern="#{bindings.AssetWOTotalsView.hints.Wocompleted.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.AssetWOTotalsView.hints.Wostatus.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.AssetWOTotalsView.hints.Wostatus.label}"
+                                                               id="c35" align="center" width="75">
+                                                        <af:outputText value="#{row.Wostatus}" id="ot42"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.AssetWOTotalsView.hints.Ttllbrhrs.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.AssetWOTotalsView.hints.Ttllbrhrs.label}"
+                                                               id="c36" align="center">
+                                                        <af:outputText value="#{row.Ttllbrhrs}" id="ot43">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.AssetWOTotalsView.hints.Ttllbrhrs.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.AssetWOTotalsView.hints.Ttllbrcst.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.AssetWOTotalsView.hints.Ttllbrcst.label}"
+                                                               id="c37" align="center">
+                                                        <af:outputText value="#{row.Ttllbrcst}" id="ot44">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.AssetWOTotalsView.hints.Ttllbrcst.format}"
+                                                                              type="currency"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.AssetWOTotalsView.hints.Ttlpartcst.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.AssetWOTotalsView.hints.Ttlpartcst.label}"
+                                                               id="c38" align="center">
+                                                        <af:outputText value="#{row.Ttlpartcst}" id="ot45">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.AssetWOTotalsView.hints.Ttlpartcst.format}"
+                                                                              type="currency"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.AssetWOTotalsView.hints.Ttlwo.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.AssetWOTotalsView.hints.Ttlwo.label}"
+                                                               id="c39" align="center">
+                                                        <af:outputText value="#{row.Ttlwo}" id="ot46">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.AssetWOTotalsView.hints.Ttlwo.format}"
+                                                                              type="currency"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                </af:table>
+                                            </af:panelCollection>
+                                        </af:showDetailItem>
+                                        <af:showDetailItem text="Readings" id="sdi4" inlineStyle="height:622px; "
+                                                           binding="#{assetMaintBean.tabReading}">
+                                            <af:panelLabelAndMessage label="#{bindings.Assetcd.hints.label}" id="plam5"
+                                                                     inlineStyle="margin:5px;">
+                                                <af:outputText value="#{bindings.Assetcd.inputValue}" id="ot31"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:panelCollection id="pc4" styleClass="AFStretchWidth"
+                                                                inlineStyle="margin:5px 0px 0px 5px; height:600px;"
+                                                                featuresOff="viewMenu detach"
+                                                                defaultToolbarItemDisplay="icon"
+                                                                binding="#{assetMaintBean.assetsReadingTableContainer}"
+                                                                partialTriggers="ctb14">
+                                                <f:facet name="menus"/>
+                                                <f:facet name="toolbar">
+                                                    <af:toolbar id="t13"
+                                                                rendered="#{bindings.Assetcd.inputValue != null}">
+                                                        <af:spacer width="60" height="10" id="s3"/>
+                                                        <af:button id="ctb14" icon="#{resource['images:add.png']}"
+                                                                   action="goMeterReading" useWindow="true"
+                                                                   windowHeight="400" windowWidth="400"
+                                                                   disabled="#{!securityContext.userGrantedResource['resourceName=AssetAddReading;resourceType=UIControl;action=enabled']  || bindings.Assetstatus.attributeValue eq 'OS'}">
+                                                            <af:setActionListener from="#{bindings.Assetcd.inputValue}"
+                                                                                  to="#{pageFlowScope.psfAssetCd}"/>
+                                                            <af:setActionListener to="#{pageFlowScope.psfAssetOrg}"
+                                                                                  from="#{bindings.AssetOrg.inputValue}"/>
+                                                            <af:setActionListener from="#{bindings.Uom.inputValue}"
+                                                                                  to="#{pageFlowScope.psfAssetUom}"/>
+                                                        </af:button>
+                                                    </af:toolbar>
+                                                </f:facet>
+                                                <f:facet name="statusbar"/>
+                                                <af:table value="#{bindings.MrltReadingView.collectionModel}" var="row"
+                                                          rows="#{bindings.MrltReadingView.rangeSize}"
+                                                          emptyText="#{bindings.MrltReadingView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                                          fetchSize="#{bindings.MrltReadingView.rangeSize}"
+                                                          rowBandingInterval="0" id="t12"
+                                                          partialTriggers="::ctb14 :::cmi6" contentDelivery="immediate"
+                                                          autoHeightRows="-1"
+                                                          binding="#{assetMaintBean.assetReadingTable}">
+                                                    <af:column sortProperty="#{bindings.MrltReadingView.hints.Createdt.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.MrltReadingView.hints.Createdt.label}"
+                                                               id="c3" align="center" width="125">
+                                                        <af:outputText value="#{row.Createdt}" id="ot13">
+                                                            <af:convertDateTime pattern="#{bindings.MrltReadingView.hints.Createdt.format}"
+                                                                                type="both" timeStyle="medium"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.MrltReadingView.hints.tLabelDesc.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.MrltReadingView.hints.tLabelDesc.label}"
+                                                               id="c42" align="center" width="100">
+                                                        <af:outputText value="#{row.tLabelDesc}" id="ot49"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.MrltReadingView.hints.Readingitem.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.MrltReadingView.hints.Readingitem.label}"
+                                                               id="c28" align="center" width="75">
+                                                        <af:outputText value="#{row.Readingitem}" id="ot34"/>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.MrltReadingView.hints.Readingdate.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.MrltReadingView.hints.Readingdate.label}"
+                                                               id="c29" align="center" width="75">
+                                                        <af:outputText value="#{row.Readingdate}" id="ot35">
+                                                            <af:convertDateTime pattern="#{bindings.MrltReadingView.hints.Readingdate.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.MrltReadingView.hints.Readingvalue.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.MrltReadingView.hints.Readingvalue.label}"
+                                                               id="c30" align="center" width="75">
+                                                        <af:outputText value="#{row.Readingvalue}" id="ot36">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.MrltReadingView.hints.Readingvalue.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.MrltReadingView.hints.Readingdiff.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.MrltReadingView.hints.Readingdiff.label}"
+                                                               id="c31" align="center" width="75">
+                                                        <af:outputText value="#{row.Readingdiff}" id="ot37">
+                                                            <af:convertNumber groupingUsed="false"
+                                                                              pattern="#{bindings.MrltReadingView.hints.Readingdiff.format}"/>
+                                                        </af:outputText>
+                                                    </af:column>
+                                                    <af:column sortProperty="#{bindings.MrltReadingView.hints.Uom.name}"
+                                                               sortable="false"
+                                                               headerText="#{bindings.MrltReadingView.hints.Uom.label}"
+                                                               id="c32" align="center" width="50">
+                                                        <af:outputText value="#{row.Uom}" id="ot38"/>
+                                                    </af:column>
+                                                </af:table>
+                                            </af:panelCollection>
+                                        </af:showDetailItem>
+                                    </af:panelTabbed>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                        </af:panelSplitter>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:assetMaintBean-->
+</f:view>

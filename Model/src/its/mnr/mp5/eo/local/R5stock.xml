@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="R5stock"
+  Version="11.1.2.60.81"
+  DBObjectType="TABLE"
+  DBObjectName="MP5PRD.R5STOCK"
+  AliasName="R5stock"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="its.mnr.mp5.eo.local.R5stockImpl"
+  DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="StoPart"
+    IsNotNull="true"
+    Precision="18"
+    ColumnName="STO_PART"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5STOCK"
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="18"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StoStore"
+    IsNotNull="true"
+    Precision="4"
+    ColumnName="STO_STORE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5STOCK"
+    PrimaryKey="true"
+    DefaultValue="01"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StoForinv"
+    ColumnName="STO_FORINV"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MP5PRD.R5STOCK"/>
+  <Attribute
+    Name="StoMinlev"
+    ColumnName="STO_MINLEV"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MP5PRD.R5STOCK"/>
+  <Attribute
+    Name="StoOrdlev"
+    ColumnName="STO_ORDLEV"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MP5PRD.R5STOCK"/>
+  <Attribute
+    Name="StoOrdqty"
+    ColumnName="STO_ORDQTY"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MP5PRD.R5STOCK"/>
+  <Attribute
+    Name="StoStocktake"
+    ColumnName="STO_STOCKTAKE"
+    SQLType="DATE"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    TableName="MP5PRD.R5STOCK"/>
+  <Attribute
+    Name="StoPrefsup"
+    Precision="17"
+    ColumnName="STO_PREFSUP"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5STOCK"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="17"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StoLeadtime"
+    ColumnName="STO_LEADTIME"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MP5PRD.R5STOCK"/>
+  <Attribute
+    Name="StoQty"
+    ColumnName="STO_QTY"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MP5PRD.R5STOCK"/>
+  <Attribute
+    Name="StoAvgprice"
+    ColumnName="STO_AVGPRICE"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MP5PRD.R5STOCK"/>
+  <Attribute
+    Name="StoLastprice"
+    ColumnName="STO_LASTPRICE"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MP5PRD.R5STOCK"/>
+  <Attribute
+    Name="StoStdprice"
+    ColumnName="STO_STDPRICE"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MP5PRD.R5STOCK"/>
+  <Attribute
+    Name="StoBaseprice"
+    ColumnName="STO_BASEPRICE"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    TableName="MP5PRD.R5STOCK"/>
+  <Attribute
+    Name="StoStockout"
+    Precision="1"
+    ColumnName="STO_STOCKOUT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5STOCK">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StoConsignment"
+    Precision="1"
+    ColumnName="STO_CONSIGNMENT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5STOCK"
+    DefaultValue="-">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StoPrefsupOrg"
+    Precision="8"
+    ColumnName="STO_PREFSUP_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5STOCK"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StoPartOrg"
+    IsNotNull="true"
+    Precision="8"
+    ColumnName="STO_PART_ORG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5STOCK"
+    PrimaryKey="true"
+    RetrievedOnInsert="true"
+    RetrievedOnUpdate="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StoOndemand"
+    Precision="1"
+    ColumnName="STO_ONDEMAND"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5STOCK"
+    DefaultValue="-">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ItsRorder"
+    Precision="1"
+    ColumnName="ITS_RORDER"
+    SQLType="CHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="MP5PRD.R5STOCK"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true"
+    DefaultValue="N">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5stock.ItsRorder_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <validation:ExpressionValidationBean
+      Name="ItsRorder_Rule_0"
+      OperandType="EXPR"
+      Inverse="false">
+      <validation:MsgIds>
+        <validation:Item
+          Value="MININUM_AND_ORDER_LEVELS_REQUI"/>
+      </validation:MsgIds>
+      <validation:TransientExpression><![CDATA[if (newValue == 'Y' && ( (StoMinlev == null) || 
+                         (StoMinlev <= 0) || 
+                         (StoOrdlev == null) ||
+                         (StoOrdlev <= 0) ) ){
+adf.error.raise("MININUM_AND_ORDER_LEVELS_REQUI")
+return false
+}
+return true]]></validation:TransientExpression>
+    </validation:ExpressionValidationBean>
+  </Attribute>
+  <AccessorAttribute
+    Name="R5binstock"
+    Association="its.mnr.mp5.eo.assoc.R5fok1BisAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1BisAssoc.R5binstock"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1BisAssoc.R5stock"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="R5companies"
+    Association="its.mnr.mp5.eo.assoc.R5fok5StoAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok5StoAssoc.R5companies"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok5StoAssoc.R5stock"
+    Type="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="R5parts"
+    Association="its.mnr.mp5.eo.assoc.R5fok1StoAssoc"
+    AssociationEnd="its.mnr.mp5.eo.assoc.R5fok1StoAssoc.R5parts"
+    AssociationOtherEnd="its.mnr.mp5.eo.assoc.R5fok1StoAssoc.R5stock"
+    Type="its.mnr.mp5.eo.local.R5partsImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="R5prikSto"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="R5PRIK_STO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5stock.StoPart"/>
+      <Item Value="its.mnr.mp5.eo.local.R5stock.StoPartOrg"/>
+      <Item Value="its.mnr.mp5.eo.local.R5stock.StoStore"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok1Sto">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_PAR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK1_STO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5stock.StoPart"/>
+      <Item Value="its.mnr.mp5.eo.local.R5stock.StoPartOrg"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok2Sto">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_STR"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK2_STO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5stock.StoStore"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="R5fok5Sto">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="R5PRIK_COM"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5FOK5_STO"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5stock.StoPrefsup"/>
+      <Item Value="its.mnr.mp5.eo.local.R5stock.StoPrefsupOrg"/>
+    </AttrArray>
+  </Key>
+  <validation:CompareValidationBean
+    Name="R5stock_Rule_0"
+    ResId="MININUM_AND_ORDER_LEVELS_REQUI"
+    OnAttribute="StoMinlev"
+    OperandType="ATTR"
+    Inverse="false"
+    CompareType="LESSTHANEQUALTO"
+    CompareValue="StoOrdlev">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="StoMinlev"/>
+      <validation:Item
+        Value="StoOrdlev"/>
+    </validation:OnAttributes>
+  </validation:CompareValidationBean>
+  <validation:CompareValidationBean
+    Name="R5stock_Rule_1"
+    ResId="LEAD_TIME_MUST_BE_GREATER_THAN"
+    OnAttribute="StoLeadtime"
+    OperandType="LITERAL"
+    Inverse="false"
+    CompareType="GREATERTHAN"
+    CompareValue="0">
+    <validation:OnAttributes>
+      <validation:Item
+        Value="StoLeadtime"/>
+    </validation:OnAttributes>
+  </validation:CompareValidationBean>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

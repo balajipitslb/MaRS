@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TransactionsTranslineLink"
+  Version="11.1.2.60.81">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="its.mnr.mp5.vo.link.TransactionsTranslineLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="Transactions"
+    Cardinality="1"
+    Source="true"
+    Owner="its.mnr.mp5.vo.workorder.Transactions">
+    <DesignTime>
+      <Attr Name="_entityAccessor" Value="true"/>
+      <Attr Name="_finderName" Value="Transactions"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.workorder.Transactions.TraCode"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="Translines"
+    Cardinality="-1"
+    Owner="its.mnr.mp5.vo.workorder.Translines">
+    <DesignTime>
+      <Attr Name="_entityAccessor" Value="true"/>
+      <Attr Name="_finderName" Value="Translines"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.vo.workorder.Translines.TrlTrans"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

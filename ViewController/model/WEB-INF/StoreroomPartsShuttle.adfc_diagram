@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1">
+      <property
+         name="y">258.8506</property>
+      <property
+         name="x">118.700195</property>
+   </OverallProperties>
+   <MethodCall
+      id="MethodCall2">
+      <property
+         name="activityId">SetCurrentRowWithKeyValue</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>SetCurrentRowWithKeyValue&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">304.79883</property>
+      <property
+         name="x">108.700195</property>
+   </MethodCall>
+   <TaskFlowReturn
+      id="TaskFlowReturn3">
+      <property
+         name="activityId">CycleCount</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>CycleCount&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  returnCC&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">98.79883</property>
+      <property
+         name="x">511.9004</property>
+   </TaskFlowReturn>
+   <View
+      id="View4">
+      <property
+         name="activityId">shuttleTst</property>
+      <property
+         name="page">/Content/CycleCnt/StoreroomParts.jspx</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>shuttleTst&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">98.79883</property>
+      <property
+         name="x">328.9004</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="View4"
+      to="TaskFlowReturn3">
+      <property
+         name="fromOutcome">returnCC</property>
+      <property
+         name="sdm:polyPoints">R50,369.9004,98.44824,470.9004,98.44824,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="MethodCall2"
+      to="View4">
+      <property
+         name="fromOutcome">setCurrentRowWithKeyValue</property>
+      <property
+         name="sdm:polyPoints">R50,149.7002,304.44824,328.9004,152.44824,B50</property>
+   </ControlFlowCase>
+</SDM>
