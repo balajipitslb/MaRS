@@ -578,5 +578,12 @@
         <Item Value="ItsCustfld2"/>
       </AttrNames>
     </attributeValues>
+    <methodAction id="isPartInactive"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.PORecvDataControlNested"
+                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="isPartInactive" IsViewObjectMethod="false"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.isPartInactive_MNRDataControlDataControl_dataProvider_Root_PORecvDataControlNested_isPartInactive_result">
+      <NamedData NDName="sPart" NDValue="#{pageFlowScope.sPart}" NDType="java.lang.String"/>
+    </methodAction>    
   </bindings>
 </pageDefinition>

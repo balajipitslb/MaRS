@@ -4,7 +4,7 @@
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="POParts"
-  Version="11.1.2.64.36"
+  Version="12.1.3.10.8"
   SelectList="R5parts.ITS_CYCLECNT, 
        R5parts.ITS_GL, 
        R5parts.PAR_AVGPRICE, 
@@ -35,7 +35,6 @@
   ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
   DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
   PageIterMode="Full"
-  UseGlueCode="false"
   FetchSize="25"
   RangeSize="26">
   <Properties>
@@ -44,6 +43,10 @@
         ResId="its.mnr.mp5.vo.po.POParts_LABEL"/>
     </SchemaBasedProperties>
   </Properties>
+  <Variable
+    Name="Bind_parcode"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <EntityUsage
     Name="R5parts"
     Entity="its.mnr.mp5.eo.local.R5parts"/>
@@ -332,6 +335,42 @@
         ViewAttribute="ParPrefsup"
         Operator="="
         Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="findPartByParCode"
+    ViewObjectName="its.mnr.mp5.vo.po.POParts"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="POPartsCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="ParCode"
+        ViewAttribute="ParCode"
+        Operator="="
+        Conjunction="AND"
+        Value=":Bind_parcode"
+        IsBindVarValue="true"
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>

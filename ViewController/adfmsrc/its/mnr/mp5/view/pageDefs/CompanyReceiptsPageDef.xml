@@ -151,5 +151,11 @@
                   ReturnName="data.MNRDataControlDataControl.methodResults.getDefaultBinLot_getDefaultBinLot_getDefaultBinLot_result"/>
     <action IterBinding="POTransactionsCompRcptsIterator" id="Delete1" RequiresUpdateModel="false"
             Action="removeCurrentRow"/>
+    <methodAction id="isPartInactive" RequiresUpdateModel="true" Action="invokeMethod" MethodName="isPartInactive"
+                  IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.PORecvDataControlNested"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.isPartInactive_MNRDataControlDataControl_dataProvider_PORecvDataControlNested_isPartInactive_result">
+      <NamedData NDName="sPart" NDType="java.lang.String"/>
+    </methodAction>
   </bindings>
 </pageDefinition>

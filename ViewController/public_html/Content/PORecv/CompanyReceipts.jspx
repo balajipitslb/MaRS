@@ -458,6 +458,15 @@
                     </af:panelSplitter>
                 </f:facet>
             </af:pageTemplate>
+                                        <af:popup childCreation="deferred" autoCancel="disabled" id="p5"
+                                                  binding="#{POCompanyReceipts.inactivePartPop}">
+                                            <af:dialog id="d8" type="ok" title="Warning"
+                                            titleIconSource="#{resource['images:warning.png']}"
+                                                       closeIconVisible="false"
+                                                       dialogListener="#{POCompanyReceipts.inactivePartDiagLstnr}">
+                                                        <af:outputText value="This is an Inactive part. Please choose another part." id="ot67"/>
+                                            </af:dialog>
+                                        </af:popup>                
         </af:form>
         <af:clientListener method="triggerOnLoad" type="load"/>
         <af:serverListener type="onloadEvent" method="#{POCompanyReceipts.setFetched}"/>
