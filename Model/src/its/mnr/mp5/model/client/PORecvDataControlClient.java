@@ -18,17 +18,28 @@ public class PORecvDataControlClient extends ApplicationModuleImpl implements PO
 
 
     public void clearFullyRecd() {
-        Object _ret = this.riInvokeExportedMethod(this,"clearFullyRecd",null,null);
+        Object _ret = this.riInvokeExportedMethod(this, "clearFullyRecd", null, null);
         return;
     }
 
     public void clearFullyRetn() {
-        Object _ret = this.riInvokeExportedMethod(this,"clearFullyRetn",null,null);
+        Object _ret = this.riInvokeExportedMethod(this, "clearFullyRetn", null, null);
         return;
     }
 
     public void initCompanyRcpts() {
-        Object _ret = this.riInvokeExportedMethod(this,"initCompanyRcpts",null,null);
+        Object _ret = this.riInvokeExportedMethod(this, "initCompanyRcpts", null, null);
+        return;
+    }
+
+    public boolean isPartInactive(String sPart) {
+        Object _ret = this.riInvokeExportedMethod(this, "isPartInactive", new String[] { "java.lang.String" }, new Object[] {
+                                                  sPart });
+        return ((Boolean) _ret).booleanValue();
+    }
+
+    public void printRecd() {
+        Object _ret = this.riInvokeExportedMethod(this, "printRecd", null, null);
         return;
     }
 }

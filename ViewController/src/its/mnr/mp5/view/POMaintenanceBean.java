@@ -53,8 +53,10 @@ import oracle.adf.view.rich.context.AdfFacesContext;
 import oracle.adf.view.rich.event.ContextInfoEvent;
 import oracle.adf.view.rich.event.DialogEvent;
 
+import oracle.adf.view.rich.event.LaunchPopupEvent;
 import oracle.adf.view.rich.event.PopupFetchEvent;
 import oracle.adf.view.rich.event.QueryEvent;
+import oracle.adf.view.rich.event.ReturnPopupEvent;
 import oracle.adf.view.rich.model.QueryDescriptor;
 import oracle.adf.view.rich.render.ClientEvent;
 
@@ -134,6 +136,8 @@ public class POMaintenanceBean {
     private RichPanelFormLayout ordSummaryForm;
     private RichPanelSplitter mainPanelSplitter;
     private RichPanelTabbed poTab;
+    private RichPopup inactivePartPop;
+    private RichButton cancelPartBttn;
 
     public POMaintenanceBean() {
     }
@@ -631,6 +635,29 @@ public class POMaintenanceBean {
         }
     }
 
+    public boolean isPartInactive(String sPart){
+           Boolean ret=false;
+            ADFUtil.setEL("#{pageFlowScope.sPart}", sPart);
+            
+            RichPopup.PopupHints hints = new RichPopup.PopupHints();
+        
+            BindingContainer bindings = getBindings();
+            OperationBinding operationBinding = bindings.getOperationBinding("isPartInactive");
+            //operationBinding.getParamsMap().put("sPart", sPart);
+            operationBinding.execute(); 
+            
+        if (!operationBinding.getErrors().isEmpty()) {
+            return ret;
+        } else {
+            ret = (Boolean)operationBinding.getResult();
+            System.out.println("Inside isPartInactive ret: " + ret);
+            if(ret){
+                inactivePartPop.show(hints);
+            }
+        }  
+        return ret;
+    }
+
     public String applyOLine_action() {
         //update Order Price and Discount
         //        updOrderPriceDiscount();
@@ -665,7 +692,6 @@ public class POMaintenanceBean {
         DCIteratorBinding iterEch = (DCIteratorBinding)getDCBindingContainer().get("POExchargesViewIterator");
         Row rowEch = iterEch.getCurrentRow();
         //iterEch.getViewObject().executeQuery();
-
 
         // perform rollback operation
         OperationBinding operationBinding = bindings.getOperationBinding("Commit");
@@ -929,7 +955,111 @@ public class POMaintenanceBean {
         //        }
         return null;
     }
+    
+    public String on_rollback() {
+        String sOrdCode = (String)ADFUtil.evaluateEL("#{bindings.OrdCode.inputValue}");
+        String sAddCode = (String)ADFUtil.evaluateEL("#{bindings.AddCode.inputValue}");
+        Integer sOLineCode = (Integer)ADFUtil.evaluateEL("#{bindings.OrlOrdline.inputValue}");
+        String sOLinePart = "";
+        String sEchInvOrdCd = (String)ADFUtil.evaluateEL("#{bindings.EchInvordCode.inputValue}");
+        
+        if((ADFUtil.evaluateEL("#{bindings.OrlPart.inputValue}"))!=null){
+            sOLinePart = (String)ADFUtil.evaluateEL("#{bindings.OrlPart.inputValue}");
+        }
+        BindingContainer bindings = getBindings();
+        if (StringUtils.isBlank(sOrdCode)) {
+            // perform rollback operation
+            OperationBinding operationBinding = bindings.getOperationBinding("Rollback");
+            Object result = operationBinding.execute();
+            if (!operationBinding.getErrors().isEmpty()) {
+                return null;
+            }
+        } else {
 
+            // get current rows
+            DCIteratorBinding iter = (DCIteratorBinding)getDCBindingContainer().get("POrdersViewIterator");
+            Row rowKey = iter.getCurrentRow();
+
+            DCIteratorBinding iterCmt = (DCIteratorBinding)getDCBindingContainer().get("POrdersCommentIterator");
+            Row rowCmt = iterCmt.getCurrentRow();
+
+            DCIteratorBinding iterLine = (DCIteratorBinding)getDCBindingContainer().get("POrderlinesViewIterator");
+            Row rowLine = iterLine.getCurrentRow();
+
+            DCIteratorBinding iterEch = (DCIteratorBinding)getDCBindingContainer().get("POExchargesViewIterator");
+            Row rowEch = iterEch.getCurrentRow();
+
+            // perform rollback operation
+            OperationBinding operationBinding = bindings.getOperationBinding("Rollback");
+            Object result = operationBinding.execute();
+            if (!operationBinding.getErrors().isEmpty()) {
+                return null;
+            }
+            //set current rows
+            if (StringUtils.isNotBlank(sOrdCode)) {
+                if (rowKey != null) {
+                    Key parentKey = rowKey.getKey();
+                    try {
+                        iter.setCurrentRowWithKey(parentKey.toStringFormat(true));
+                        //System.out.println("Setting Orders");
+                    } catch (RowNotFoundException ex) {
+                        iter.getViewObject().applyViewCriteria(null);
+                        iter.executeQuery();
+                        //iter.setCurrentRowWithKey(parentKey.toStringFormat(true));
+                    }
+                }
+            }
+
+            if (StringUtils.isNotBlank(sAddCode)) {
+                if (rowCmt != null) {
+                    Key parentKeyCmt = rowCmt.getKey();
+                    try {
+                        iterCmt.setCurrentRowWithKey(parentKeyCmt.toStringFormat(true));
+                        //System.out.println("Setting Comments");
+                    } catch (RowNotFoundException ex) {
+                        iterCmt.getViewObject().applyViewCriteria(null);
+                        iterCmt.executeQuery();
+                        //iterCmt.setCurrentRowWithKey(parentKeyCmt.toStringFormat(true));
+                    }
+                }
+            }
+
+            if (sOLineCode != null) {
+                if (rowLine != null) {
+                    Key parentKeyLine = rowLine.getKey();
+                    try {
+                        System.out.println("Setting Orderlines lovPart.getValue(): "+lovPart.getValue());
+                            if((sOLinePart!=null)||(sOLinePart!=""))
+                                if(parentKeyLine!=null)
+                                   if( iterLine.containsValue(parentKeyLine.toStringFormat(true)))
+                                        iterLine.setCurrentRowWithKey(parentKeyLine.toStringFormat(true));
+                        //System.out.println("Setting Orderlines");
+                    } catch (Exception ex) {
+                        iterLine.getViewObject().applyViewCriteria(null);
+                        iterLine.executeQuery();
+                        //iterLine.setCurrentRowWithKey(parentKeyLine.toStringFormat(true));
+                    }
+                }
+            }
+            if (StringUtils.isNotBlank(sEchInvOrdCd)) {
+                if (rowEch != null) {
+                    Key parentKeyEch = rowEch.getKey();
+                    try {
+                        iterEch.setCurrentRowWithKey(parentKeyEch.toStringFormat(true));
+                        //System.out.println("Setting Extra Charges");
+                    } catch (RowNotFoundException ex) {
+                        iterEch.getViewObject().applyViewCriteria(null);
+                        iterEch.executeQuery();
+                        //iterEch.setCurrentRowWithKey(parentKeyEch.toStringFormat(true));
+                    }
+                }
+            }
+        }
+        return null;
+
+    }    
+    
+/*
     public String on_rollback() {
         String sOrdCode = (String)ADFUtil.evaluateEL("#{bindings.OrdCode.inputValue}");
         String sAddCode = (String)ADFUtil.evaluateEL("#{bindings.AddCode.inputValue}");
@@ -1023,7 +1153,7 @@ public class POMaintenanceBean {
         return null;
 
     }
-
+*/
     public void resetFieldsRollback() {
         //        System.out.println("Receive Tab Disclosed: " + this.sdiReceive.isDisclosed());
         //        System.out.println("Return Tab Disclosed: " + this.sdiReturn.isDisclosed());
@@ -1420,9 +1550,17 @@ public class POMaintenanceBean {
 
     public void linePartChangeListener(ValueChangeEvent valueChangeEvent) {
         //get current instance of change
-        //System.out.println("LOV ID: " + valueChangeEvent.getComponent().getId());
+        System.out.println("LOV ID: " + valueChangeEvent.getComponent().getId());
         valueChangeEvent.getComponent().processUpdates(FacesContext.getCurrentInstance());
         String sPart = (String)ADFUtil.evaluateEL("#{bindings.OrlPart.inputValue}");
+
+        if((lovPart!=null)&&(lovPart.getValue()!="")){            
+            boolean isInact = false;
+            isInact = isPartInactive(sPart);
+            if((isInact)){
+                return;
+            }
+        }
 
         if (!isPartInCat() && StringUtils.isNotBlank(sPart)) {
             RichPopup.PopupHints hints = new RichPopup.PopupHints();
@@ -1430,6 +1568,79 @@ public class POMaintenanceBean {
         }
 
     }
+
+/********************************************************/
+/*
+    public void linePartChangeListener(ValueChangeEvent vce) {
+        //get current instance of change
+        System.out.println("LOV ID: " + vce.getComponent().getId());
+        String oldVal = "";
+        String newVal = "";
+        String sPart = "";
+        //String notUsed = "";
+        boolean ret = false;
+        
+        BindingContainer bindings = getBindings();
+        RichPopup.PopupHints hints = new RichPopup.PopupHints();
+        if (vce.getOldValue() != null) {
+            oldVal = (String)vce.getOldValue();
+        }
+        if (vce.getNewValue() != null) {
+            newVal = (String)vce.getNewValue();
+            if (newVal != "") {
+                sPart = newVal;
+                ADFUtil.setEL("#{pageFlowScope.sPart}", sPart);
+
+                OperationBinding operationBinding = bindings.getOperationBinding("isPartInactive");
+                //operationBinding.getParamsMap().put("sPart", sPart);
+                operationBinding.execute();
+
+                if (!operationBinding.getErrors().isEmpty()) {
+                    return;
+                } else {
+                    ret = (Boolean)operationBinding.getResult();
+                    System.out.println("Inside linePartChangeListener ret: " + ret);
+                }
+            }
+        }
+        vce.getComponent().processUpdates(FacesContext.getCurrentInstance());
+        sPart = (String)ADFUtil.evaluateEL("#{bindings.OrlPart.inputValue}");
+        if (ret) {
+            inactivePartPop.show(hints);
+        } else if (!isPartInCat() && StringUtils.isNotBlank(sPart) && !(ret)) {
+
+            addPartToSuppPop.show(hints);
+        }
+
+    }
+
+*/
+    public void inactivePartDiagLstnr(DialogEvent de) {
+        DialogEvent.Outcome result = de.getOutcome();
+        RichPopup.PopupHints hints = new RichPopup.PopupHints();
+        String cLinePartType = "PS";
+
+        System.out.println("Inside inactivePartDiagLstnr ok");
+        if (result == DialogEvent.Outcome.ok) {
+            System.out.println("Inside inactivePartDiagLstnr ok 1");
+             // on_rollback();
+            // poLinePop.hide();
+          ////  refreshIterators();
+            oracle.adf.view.rich.util.ResetUtils.reset(lovPart);
+            BindingContainer bindings = getBindings();
+         
+                // perform rollback operation
+           ////     OperationBinding operationBinding = bindings.getOperationBinding("Rollback");
+            ////    operationBinding.execute();
+            ////on_rollback();
+            ADFUtil.setEL("#{bindings.OrlPart.inputValue}", "");
+            AdfFacesContext.getCurrentInstance().addPartialTarget(lovPart);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(poLineDiag);
+            
+        }
+    }
+
+/*************************************/
 
     public void addPartToSuppDiagLsnr(DialogEvent dialogEvent) {
         DialogEvent.Outcome result = dialogEvent.getOutcome();
@@ -2538,55 +2749,6 @@ public class POMaintenanceBean {
     public RichColumn getPerc() {
         return perc;
     }
-    /*
-    public void echParPriceLstnr(ValueChangeEvent vce) {
-        // Add event code here...
-        Boolean oldVal;
-        Boolean newVal;
-        String include = "";
-        Integer echCode;
-
-        if (vce.getOldValue() != null) {
-            oldVal = (Boolean)vce.getOldValue();
-        }
-
-        if (vce.getNewValue() != null) {
-            newVal = (Boolean)vce.getNewValue();
-            //  System.out.println("Inside echParPriceLstnr newVal: " + newVal);
-            BindingContainer bindings = BindingContext.getCurrent().getCurrentBindingsEntry();
-            DCIteratorBinding dc = (DCIteratorBinding)bindings.get("POExchargesViewIterator");
-            ViewObjectImpl vo = (ViewObjectImpl)dc.getViewObject();
-            Row rex = vo.getCurrentRow();
-            if (rex != null) {
-                echCode = (Integer)rex.getAttribute("EchCode");
-
-                if (rex.getAttributeIndexOf("EchParprice") != -1) {
-                    include = (String)rex.getAttribute("EchParprice");
-                    //       System.out.println("Inside echParPriceLstnr echCode: " + echCode + " include: " + include);
-                    if (newVal == true) {
-                        // System.out.println("Inside echParPriceLstnr newVal is true");
-                        rex.setAttribute("EchParprice", "+");
-                    }
-                    if (newVal == false) {
-                        // System.out.println("Inside echParPriceLstnr newVal is false");
-                        rex.setAttribute("EchParprice", "-");
-                    }
-
-                    OperationBinding operationBinding = bindings.getOperationBinding("Commit");
-                    Object result = operationBinding.execute();
-                    //System.out.println(result);
-                    if (!operationBinding.getErrors().isEmpty()) {
-                        return;
-                    }
-                    include = (String)rex.getAttribute("EchParprice");
-                    //System.out.println("Inside echParPriceLstnr after commit echCode: " + echCode + " include: " + include);
-                }
-            }
-
-        }
-        // AdfFacesContext.getCurrentInstance().addPartialTarget(this.perc);
-    }
-*/
 
     public void setCommentssec(RichShowDetailHeader commentssec) {
         this.commentssec = commentssec;
@@ -2666,5 +2828,21 @@ public class POMaintenanceBean {
 
     public RichPanelTabbed getPoTab() {
         return poTab;
+    }
+
+    public void setInactivePartPop(RichPopup inactivePartPop) {
+        this.inactivePartPop = inactivePartPop;
+    }
+
+    public RichPopup getInactivePartPop() {
+        return inactivePartPop;
+    }
+
+    public void setCancelPartBttn(RichButton cancelPartBttn) {
+        this.cancelPartBttn = cancelPartBttn;
+}
+
+    public RichButton getCancelPartBttn() {
+        return cancelPartBttn;
     }
 }
