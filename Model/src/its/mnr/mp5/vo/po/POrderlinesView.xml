@@ -15,7 +15,8 @@
   Passivate="All"
   FetchSize="15"
   RangeSize="16"
-  RowInterface="its.mnr.mp5.vo.po.common.POrderlinesViewRow">
+  RowInterface="its.mnr.mp5.vo.po.common.POrderlinesViewRow"
+  ClientRowProxyName="its.mnr.mp5.vo.po.client.POrderlinesViewRowClient">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access|Coll|Prog|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
@@ -821,7 +822,8 @@ AND ORL_ORDLINE = RETN.TRL_ORDLINE(+)]]></SQLQuery>
     ColumnType="VARCHAR2"
     AliasName="VIEW_ATTR"
     SQLType="VARCHAR">
-    <TransientExpression><![CDATA[OrlOrdqty == null || Recvqty == null? null: OrlOrdqty - Recvqty]]></TransientExpression>
+    <!--<TransientExpression><![CDATA[OrlOrdqty == null || Recvqty == null? null: OrlOrdqty - Recvqty]]></TransientExpression>-->
+    <TransientExpression><![CDATA[OrlOrdqty == null || Recvqty==null? null :(Retnqty == null? (OrlOrdqty - Recvqty): (OrlOrdqty - (Recvqty-Retnqty)))]]></TransientExpression>
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
   </ViewAttribute>
   <ViewAttribute
