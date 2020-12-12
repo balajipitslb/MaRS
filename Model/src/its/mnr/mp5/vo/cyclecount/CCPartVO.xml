@@ -194,9 +194,9 @@
       <Attr Name="_description" Value="T Discrepant"/>
     </DesignTime>
     <TransientExpression
-      trustMode="untrusted"><![CDATA[StlExpqty != (StlPhyqty == null ? 0 : StlPhyqty )? Y : N]]></TransientExpression>
+      trustMode="trusted"><![CDATA[StlExpqty != (StlPhyqty == null ? 0 : StlPhyqty )? Y : N]]></TransientExpression>
     <RecalcCondition
-      trustMode="untrusted"><![CDATA[true]]></RecalcCondition>
+      trustMode="trusted"><![CDATA[true]]></RecalcCondition>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -228,9 +228,9 @@
       <Attr Name="_description" Value="T Part Desc"/>
     </DesignTime>
     <TransientExpression
-      trustMode="untrusted"><![CDATA[PartsMaintView != null ? PartsMaintView.ParDesc : '']]></TransientExpression>
+      trustMode="trusted"><![CDATA[PartsMaintView != null ? PartsMaintView.ParDesc : '']]></TransientExpression>
     <RecalcCondition
-      trustMode="untrusted"><![CDATA[true]]></RecalcCondition>
+      trustMode="trusted"><![CDATA[true]]></RecalcCondition>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -254,9 +254,9 @@
       <Attr Name="_description" Value="T Time Stamp"/>
     </DesignTime>
     <TransientExpression
-      trustMode="untrusted"><![CDATA[adf.currentDateTime]]></TransientExpression>
+      trustMode="trusted"><![CDATA[adf.currentDateTime]]></TransientExpression>
     <RecalcCondition
-      trustMode="untrusted"><![CDATA[(StlPhyqty != null || StlPhyqty != '')? true : false]]></RecalcCondition>
+      trustMode="trusted"><![CDATA[(StlPhyqty != null || StlPhyqty != '')? true : false]]></RecalcCondition>
     <Dependencies>
       <Item
         Value="StlPhyqty"/>
@@ -278,9 +278,9 @@
       <Attr Name="_description" Value="T Show Cycle Count"/>
     </DesignTime>
     <TransientExpression
-      trustMode="untrusted"><![CDATA[adf.userSession.userData.ShowCycleCount]]></TransientExpression>
+      trustMode="trusted"><![CDATA[adf.userSession.userData.ShowCycleCount]]></TransientExpression>
     <RecalcCondition
-      trustMode="untrusted"><![CDATA[true]]></RecalcCondition>
+      trustMode="trusted"><![CDATA[true]]></RecalcCondition>
     <Properties>
       <SchemaBasedProperties>
         <LABEL

@@ -4,12 +4,11 @@
 <Entity
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="R5activities"
-  Version="11.1.2.60.81"
+  Version="12.1.3.10.8"
   DBObjectType="table"
   DBObjectName="R5ACTIVITIES"
   AliasName="R5activities"
   BindingStyle="OracleName"
-  UseGlueCode="false"
   RowClass="its.mnr.mp5.eo.local.R5activitiesImpl"
   DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
   CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
@@ -22,7 +21,8 @@
     Name="LaborCost"
     ViewObjectName="its.mnr.mp5.vo.workorder.LaborCost"
     MaxFetchSize="1"
-    AccessMode="FORWARD_ONLY">
+    AccessMode="FORWARD_ONLY"
+    RowLevelBinds="true">
     <ViewCriteriaUsage
       Name="LaborCostByARTaskIdShiftCD"
       FullName="its.mnr.mp5.vo.workorder.LaborCost.LaborCostByARTaskIdShiftCD"/>
@@ -689,12 +689,14 @@
       Name="ActBillableLbrHrs_Rule_0"
       OperandType="EXPR"
       Inverse="false">
-      <validation:OnCondition><![CDATA[ItsTaskid != null && newValue != null]]></validation:OnCondition>
+      <validation:OnCondition
+        Name="OnConditionExpr"><![CDATA[ItsTaskid != null && newValue != null]]></validation:OnCondition>
       <validation:MsgIds>
         <validation:Item
           Value="NEWHR_IS_NOT_A_QUARTER_HOUR_UN"/>
       </validation:MsgIds>
-      <validation:ResExpressions>
+      <validation:ResExpressions
+        Name="ActBillableLbrHrs_Rule_0_ResExprList">
         <validation:Expression
           Name="newHR"><![CDATA[newValue]]></validation:Expression>
       </validation:ResExpressions>
@@ -774,7 +776,8 @@ null;
       ResId="MECHID_IS_AN_INVALID_USER"
       OperandType="VO_USAGE"
       Target="UsersActive">
-      <validation:ResExpressions>
+      <validation:ResExpressions
+        Name="ActMechanicid_Rule_0_ResExprList">
         <validation:Expression
           Name="mechid"><![CDATA[newValue]]></validation:Expression>
       </validation:ResExpressions>
@@ -1009,8 +1012,8 @@ null;
     ColumnType="VARCHAR2"
     IsPersistent="false"
     IsQueriable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[R5events.EvtWOType]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
   </Attribute>
   <Attribute
     Name="TotalPartCost"
@@ -1020,7 +1023,10 @@ null;
     ColumnType="DOUBLE PRECISION"
     IsPersistent="false"
     IsQueriable="false">
+    <!--
     <TransientExpression><![CDATA[R5matlparts.sum("((MlpBillableUnitcost != null?MlpBillableUnitcost:0) + (ItsPartaxamt != null?ItsPartaxamt:0)) * (MlpQty!=null?MlpQty:0)")]]></TransientExpression>
+    -->
+    <TransientExpression><![CDATA[R5matlparts.sum("((MlpBillableUnitcost != null?MlpBillableUnitcost:0)) * (MlpQty!=null?MlpQty:0)")]]></TransientExpression>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -1039,8 +1045,8 @@ null;
     ColumnType="VARCHAR2"
     IsPersistent="false"
     IsQueriable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[R5events.ItsAccountrateid]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
   </Attribute>
   <Attribute
     Name="ItsSgid"
@@ -1059,6 +1065,17 @@ null;
           ResId="its.mnr.mp5.eo.local.R5activities.ItsSgid_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
+  </Attribute>
+  <Attribute
+    Name="tTotTax"
+    ColumnName="T_TOT_TAX"
+    SQLType="DOUBLE"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    IsPersistent="false"
+    IsQueriable="false">
+    <TransientExpression><![CDATA[R5matlparts.sum("((ItsPartaxamt != null?ItsPartaxamt:0)) * (MlpQty!=null?MlpQty:0)")]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
   </Attribute>
   <AccessorAttribute
     Name="R5events"

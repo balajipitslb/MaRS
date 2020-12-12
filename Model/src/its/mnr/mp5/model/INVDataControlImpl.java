@@ -62,10 +62,12 @@ public class INVDataControlImpl extends ExtendedApplicationModuleImpl implements
         Row[] existingRows = criteriaVO.getAllRowsInRange();
         if (existingRows != null || existingRows.length > 0) {
             InvoiceAssemblyCriteriaRowImpl criteriaRow = (InvoiceAssemblyCriteriaRowImpl)existingRows[0];
-            whereClause.append("\n EVT_CODE = ACT.ACT_EVENT")
-                       .append("\n AND  EVT_CODE= PAR.MTL_EVENT(+)")
-                       .append("\n AND ITS_ISADF='Y'")
-                       .append("\n AND EVT_STATUS = 'C'");
+            whereClause.append("\n EVT.EVT_CODE = ACT.ACT_EVENT")
+                       .append("\n AND  EVT.EVT_CODE= PAR.MTL_EVENT(+)")
+                       .append("\n AND EVT.ITS_ISADF='Y'")
+                       .append("\n AND EVT.EVT_STATUS = 'C'")
+                       .append("\n AND EVT.EVT_COSTCODE= T_TAX_PERC.ACCTNUM(+)")
+                        .append("\n AND EVT.EVT_CODE = T_TAX_PERC.EVT_CODE(+)");
             
             if (criteriaRow.getAccountNum() != null) {
                 whereClause.append("\n AND  EVT.EVT_COSTCODE = '" + criteriaRow.getAccountNum() + "'");
@@ -81,7 +83,7 @@ public class INVDataControlImpl extends ExtendedApplicationModuleImpl implements
                                    "','rrrr/mm/dd')  + 1");
             }
             resultVO.addWhereClause(whereClause.toString());
-            //System.out.println(resultVO.getQuery());
+           //// System.out.println(resultVO.getQuery());
             resultVO.executeQuery();
         }
     }

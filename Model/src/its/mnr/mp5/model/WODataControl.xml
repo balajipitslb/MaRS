@@ -4,7 +4,7 @@
 <AppModule
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="WODataControl"
-  Version="11.1.2.64.36"
+  Version="12.1.3.10.8"
   ComponentClass="its.mnr.mp5.model.WODataControlImpl"
   DefClass="its.mnr.mp5.model.WODataControlDefImpl"
   ClearCacheOnRollback="true"
@@ -108,6 +108,13 @@
   <ViewUsage
     Name="AvailableQtyExistence1"
     ViewObjectName="its.mnr.mp5.lov.AvailableQtyExistence"/>
+  <ViewUsage
+    Name="WOEvents2"
+    ViewObjectName="its.mnr.mp5.vo.workorder.WOEvents">
+    <ViewCriteriaUsage
+      Name="WObyEvtCode"
+      FullName="its.mnr.mp5.vo.workorder.WOEvents.WObyEvtCode"/>
+  </ViewUsage>
   <ViewLinkUsage
     Name="CurrentARVersionLaborCostLink1"
     ViewLinkObjectName="its.mnr.mp5.vo.link.CurrentARVersionLaborCostLink"
@@ -204,12 +211,14 @@
     SrcViewUsageName="its.mnr.mp5.model.WODataControl.Matlparts"
     DstViewUsageName="its.mnr.mp5.model.WODataControl.AvailableQtyExistence1"
     Reversed="false"/>
-  <ClientInterface>
+  <ClientInterface
+    Name="__clientInterface">
     <Method
       Name="createFlagAssociation"
       MethodName="createFlagAssociation">
       <Return
-        Type="void"/>
+        Type="void"
+        Name="_return_type_"/>
       <Parameter
         Name="fid"
         Type="java.lang.Integer"/>
@@ -224,13 +233,15 @@
       Name="doQueryResultReset"
       MethodName="doQueryResultReset">
       <Return
-        Type="void"/>
+        Type="void"
+        Name="_return_type_"/>
     </Method>
     <Method
       Name="isFlagUsedInWO"
       MethodName="isFlagUsedInWO">
       <Return
-        Type="java.lang.String"/>
+        Type="java.lang.String"
+        Name="_return_type_"/>
       <Parameter
         Name="Fidval"
         Type="java.lang.Integer"/>
@@ -239,7 +250,8 @@
       Name="CopyWOTask"
       MethodName="CopyWOTask">
       <Return
-        Type="java.lang.String"/>
+        Type="java.lang.String"
+        Name="_return_type_"/>
       <Parameter
         Name="ACTEVENT"
         Type="java.lang.String"/>

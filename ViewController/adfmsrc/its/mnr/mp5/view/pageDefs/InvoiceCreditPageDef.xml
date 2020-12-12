@@ -4,9 +4,9 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="Root.INVDataControl.InvoiceCreditCriteria" DataControl="MNRDataControlDataControl" RangeSize="100"
+    <iterator Binds="INVDataControl.InvoiceCreditCriteria" DataControl="MNRDataControlDataControl" RangeSize="100"
               id="InvoiceCreditCriteriaIterator"/>
-    <iterator Binds="Root.INVDataControl.InvoiceCreditResults" DataControl="MNRDataControlDataControl" RangeSize="5000"
+    <iterator Binds="INVDataControl.InvoiceCreditResults" DataControl="MNRDataControlDataControl" RangeSize="5000"
               id="InvoiceCreditResultsIterator"/>
   </executables>
   <bindings>

@@ -569,4 +569,12 @@ public class WODataControlImpl extends ExtendedApplicationModuleImpl implements 
     public ViewLinkImpl getAvailableQtyExistenceLink1() {
         return (ViewLinkImpl)findViewLink("AvailableQtyExistenceLink1");
     }
+
+    /**
+     * Container's getter for WOEvents2.
+     * @return WOEvents2
+     */
+    public WOEventsImpl getWOEvents2() {
+        return (WOEventsImpl) findViewObject("WOEvents2");
+    }
 }

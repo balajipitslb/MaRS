@@ -277,7 +277,7 @@
       <CustomProperties>
         <Property
           Name="displayOperators"
-          Value="Always"/>
+          Value="Never"/>
         <Property
           Name="autoExecute"
           Value="false"/>
@@ -300,20 +300,44 @@
         ViewAttribute="ParClass"
         Operator="="
         Conjunction="AND"
-        Required="Optional"/>
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="renderedMode"
+              Value="Basic"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
       <ViewCriteriaItem
         Name="ParCode"
         ViewAttribute="ParCode"
         Operator="="
         Conjunction="AND"
-        Required="Optional"/>
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="renderedMode"
+              Value="Basic"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
       <ViewCriteriaItem
         Name="ParDesc"
         ViewAttribute="ParDesc"
         Operator="CONTAINS"
         Conjunction="AND"
         Required="Optional"
-        UpperColumns="1"/>
+        UpperColumns="1">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="renderedMode"
+              Value="Basic"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
       <ViewCriteriaItem
         Name="ParNotused"
         ViewAttribute="ParNotused"
@@ -335,7 +359,15 @@
         ViewAttribute="ParPrefsup"
         Operator="="
         Conjunction="AND"
-        Required="Optional"/>
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="renderedMode"
+              Value="Basic"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
     </ViewCriteriaRow>
   </ViewCriteria>
   <ViewCriteria

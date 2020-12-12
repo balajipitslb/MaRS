@@ -24,9 +24,9 @@
               RangeSize="25" id="jobRunningView1Iterator"/>
     <searchRegion Binds="jobRunningView1Iterator" Criteria=""
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="jobRunningView1Query"/>
-    <iterator Binds="Root.INVDataControl.MrltInvoiceheaderView" DataControl="MNRDataControlDataControl" RangeSize="10"
+    <iterator Binds="INVDataControl.MrltInvoiceheaderView" DataControl="MNRDataControlDataControl" RangeSize="10"
               id="MrltInvoiceheaderViewIterator"/>
-    <iterator Binds="Root.INVDataControl.MrltInvoiceheaderView1" DataControl="MNRDataControlDataControl" RangeSize="10"
+    <iterator Binds="INVDataControl.MrltInvoiceheaderView1" DataControl="MNRDataControlDataControl" RangeSize="10"
               id="MrltInvoiceheaderView1Iterator"/>                  
     <iterator Binds="WODataControlNested.ActiveMrltFlag" DataControl="MNRDataControlDataControl" RangeSize="10"
               id="ActiveMrltFlagIterator1"/>
