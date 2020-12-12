@@ -4,17 +4,17 @@
   <parameters/>
   <executables>
     <variableIterator id="variables"/>
-    <iterator Binds="Root.INVDataControl.MrltInvoiceheaderView" DataControl="MNRDataControlDataControl" RangeSize="25"
+    <iterator Binds="INVDataControl.MrltInvoiceheaderView" DataControl="MNRDataControlDataControl" RangeSize="25"
               id="MrltInvoiceheaderViewIterator"/>
     <searchRegion Criteria="InvoiceInquiryCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
                   Binds="MrltInvoiceheaderViewIterator" id="InvoiceInquiryCriteriaQuery"/>
-    <iterator Binds="Root.INVDataControl.MrltInvoiceitemView" DataControl="MNRDataControlDataControl"
+    <iterator Binds="INVDataControl.MrltInvoiceitemView" DataControl="MNRDataControlDataControl"
               id="MrltInvoiceitemViewIterator"/>
-    <iterator Binds="Root.INVDataControl.MrltInvoiceheaderView1" DataControl="MNRDataControlDataControl" RangeSize="10"
+    <iterator Binds="INVDataControl.MrltInvoiceheaderView1" DataControl="MNRDataControlDataControl" RangeSize="10"
               id="MrltInvoiceheaderView1Iterator"/>
-    <iterator Binds="Root.INVDataControl.MrltInvoicecritemView" DataControl="MNRDataControlDataControl" RangeSize="25"
+    <iterator Binds="INVDataControl.MrltInvoicecritemView" DataControl="MNRDataControlDataControl" RangeSize="25"
               id="MrltInvoicecritemViewIterator"/>
-    <iterator Binds="Root.INVDataControl.MrltInvoicertroitemView" DataControl="MNRDataControlDataControl" RangeSize="25"
+    <iterator Binds="INVDataControl.MrltInvoicertroitemView" DataControl="MNRDataControlDataControl" RangeSize="25"
               id="MrltInvoicertroitemViewIterator"/>
   </executables>
   <bindings>

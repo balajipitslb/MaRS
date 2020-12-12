@@ -1,5 +1,9 @@
 package its.mnr.mp5.view;
 
+import java.math.BigDecimal;
+
+import java.text.DecimalFormat;
+
 import javax.faces.event.ValueChangeEvent;
 
 import oracle.adf.model.BindingContext;
@@ -16,7 +20,7 @@ import oracle.binding.BindingContainer;
 import oracle.binding.OperationBinding;
 
 import org.apache.commons.lang.StringUtils;
-
+import org.apache.*;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -122,6 +126,7 @@ public class invoiceAssemblyBean {
         //AttributeBinding assetNm = (AttributeBinding)getBindings().get("EvtDesc");
         //System.out.println("getAssetDetail() Equipment #: " + assetNm);
         //optional
+        System.out.println("Inside createInvoiceItem pTax:" + pTax);
         operationBinding.getParamsMap().put("pHeaderId", pHeaderId);
         operationBinding.getParamsMap().put("pWO", pWO);
         operationBinding.getParamsMap().put("pEquip", pEquip);
@@ -184,7 +189,10 @@ public class invoiceAssemblyBean {
                     String sVer = (String)row.getAttribute("Ver");
                     Double sLabor = (Double)row.getAttribute("Laborcost");
                     Double sPart = (Double)row.getAttribute("Parttotal");
-                    Double sTax = (Double)row.getAttribute("Salestax");
+                    Double sTax1 = (Double)row.getAttribute("Salestax");
+                    DecimalFormat df = new DecimalFormat("#.00");
+                    Double sTax =new Double(df.format(sTax1));
+                    System.out.println("Inside createInvoiceRec sTax:" + sTax+" sTax1: "+sTax1);
                     Double sTotal = (Double)row.getAttribute("Wototal");
                     Date sCompdt = (Date)row.getAttribute("EvtCompleted");
                     Date sStartdt = (Date)row.getAttribute("EvtStart");
@@ -259,12 +267,19 @@ public class invoiceAssemblyBean {
         }
 
         if (chk1 && chk2){
+            System.out.println("Inside Apply_action chk1: "+chk1+" chk2: "+chk2);
         BindingContainer bindings = getBindings();
+        try{
         OperationBinding operationBinding = bindings.getOperationBinding("Commit");
         Object result = operationBinding.execute();
         if (!operationBinding.getErrors().isEmpty()) {
             return null;
-        }     
+        } 
+        }
+        catch(Exception e){
+            System.out.println("Inside Apply_action commit error: "+e.getMessage());
+            e.printStackTrace();
+        }
         showInvoiceNumber(headerId);
         UIfieldsDisable(true);  
         RichPopup.PopupHints hints = new RichPopup.PopupHints();

@@ -4,7 +4,7 @@
 <AppModule
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="INVDataControl"
-  Version="11.1.2.60.81"
+  Version="11.1.2.64.36"
   ComponentClass="its.mnr.mp5.model.INVDataControlImpl"
   DefClass="its.mnr.mp5.baseclass.ExtendedApplicationModuleDefImpl"
   ClearCacheOnRollback="true"

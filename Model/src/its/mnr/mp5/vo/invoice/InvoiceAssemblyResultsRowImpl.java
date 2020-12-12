@@ -5,7 +5,11 @@ import its.mnr.mp5.baseclass.ExtendedViewRowImpl;
 import its.mnr.mp5.vo.invoice.common.InvoiceAssemblyResultsRow;
 import its.mnr.mp5.vo.workorder.WOEventsImpl;
 
+import java.math.BigDecimal;
+
 import java.sql.Timestamp;
+
+import java.text.DecimalFormat;
 
 import oracle.jbo.Row;
 import oracle.jbo.RowSet;
@@ -28,7 +32,10 @@ public class InvoiceAssemblyResultsRowImpl extends ExtendedViewRowImpl implement
         Number pHeaderId;
         Double dLabor = this.getTotalLaborCost();
         Double dPart = this.getTotalPartTotal();
-        Double pTax = this.getTotalSalesTax();
+        Double pTax1 = this.getTotalSalesTax();
+        DecimalFormat df = new DecimalFormat("#.00");
+        Double pTax =new Double(df.format(pTax1));
+        System.out.println("inside InvoiceAssemblyResultsRowImpl : createInvoiceHeader() pTax: "+pTax+" pTax1: "+pTax1);
         Double pTotal = this.getTotalWOTotal();
         String pAcctNum = this.getEvtCostcode();
         String pInt = "N";
@@ -140,9 +147,9 @@ public class InvoiceAssemblyResultsRowImpl extends ExtendedViewRowImpl implement
      * AttributesEnum: generated enum for identifying attributes and accessors. Do not modify.
      */
     public enum AttributesEnum {
-        EvtCode {
+        EvtClass {
             public Object get(InvoiceAssemblyResultsRowImpl obj) {
-                return obj.getEvtCode();
+                return obj.getEvtClass();
             }
 
             public void put(InvoiceAssemblyResultsRowImpl obj, Object value) {
@@ -150,9 +157,9 @@ public class InvoiceAssemblyResultsRowImpl extends ExtendedViewRowImpl implement
             }
         }
         ,
-        EvtDesc {
+        EvtCode {
             public Object get(InvoiceAssemblyResultsRowImpl obj) {
-                return obj.getEvtDesc();
+                return obj.getEvtCode();
             }
 
             public void put(InvoiceAssemblyResultsRowImpl obj, Object value) {
@@ -170,16 +177,6 @@ public class InvoiceAssemblyResultsRowImpl extends ExtendedViewRowImpl implement
             }
         }
         ,
-        EvtStart {
-            public Object get(InvoiceAssemblyResultsRowImpl obj) {
-                return obj.getEvtStart();
-            }
-
-            public void put(InvoiceAssemblyResultsRowImpl obj, Object value) {
-                obj.setAttributeInternal(index(), value);
-            }
-        }
-        ,
         EvtCostcode {
             public Object get(InvoiceAssemblyResultsRowImpl obj) {
                 return obj.getEvtCostcode();
@@ -190,9 +187,9 @@ public class InvoiceAssemblyResultsRowImpl extends ExtendedViewRowImpl implement
             }
         }
         ,
-        EvtClass {
+        EvtDesc {
             public Object get(InvoiceAssemblyResultsRowImpl obj) {
-                return obj.getEvtClass();
+                return obj.getEvtDesc();
             }
 
             public void put(InvoiceAssemblyResultsRowImpl obj, Object value) {
@@ -203,6 +200,16 @@ public class InvoiceAssemblyResultsRowImpl extends ExtendedViewRowImpl implement
         EvtJobtype {
             public Object get(InvoiceAssemblyResultsRowImpl obj) {
                 return obj.getEvtJobtype();
+            }
+
+            public void put(InvoiceAssemblyResultsRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
+        EvtStart {
+            public Object get(InvoiceAssemblyResultsRowImpl obj) {
+                return obj.getEvtStart();
             }
 
             public void put(InvoiceAssemblyResultsRowImpl obj, Object value) {
@@ -223,6 +230,26 @@ public class InvoiceAssemblyResultsRowImpl extends ExtendedViewRowImpl implement
         Ver {
             public Object get(InvoiceAssemblyResultsRowImpl obj) {
                 return obj.getVer();
+            }
+
+            public void put(InvoiceAssemblyResultsRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
+        isSelected {
+            public Object get(InvoiceAssemblyResultsRowImpl obj) {
+                return obj.getisSelected();
+            }
+
+            public void put(InvoiceAssemblyResultsRowImpl obj, Object value) {
+                obj.setisSelected((String) value);
+            }
+        }
+        ,
+        tTaxPerc {
+            public Object get(InvoiceAssemblyResultsRowImpl obj) {
+                return obj.gettTaxPerc();
             }
 
             public void put(InvoiceAssemblyResultsRowImpl obj, Object value) {
@@ -267,16 +294,6 @@ public class InvoiceAssemblyResultsRowImpl extends ExtendedViewRowImpl implement
 
             public void put(InvoiceAssemblyResultsRowImpl obj, Object value) {
                 obj.setAttributeInternal(index(), value);
-            }
-        }
-        ,
-        isSelected {
-            public Object get(InvoiceAssemblyResultsRowImpl obj) {
-                return obj.getisSelected();
-            }
-
-            public void put(InvoiceAssemblyResultsRowImpl obj, Object value) {
-                obj.setisSelected((String) value);
             }
         }
         ,
@@ -380,7 +397,8 @@ public class InvoiceAssemblyResultsRowImpl extends ExtendedViewRowImpl implement
             }
         }
         ;
-        private static AttributesEnum[] vals = null;
+        static AttributesEnum[] vals = null;
+        ;
         private static int firstIndex = 0;
 
         public abstract Object get(InvoiceAssemblyResultsRowImpl object);
@@ -408,20 +426,21 @@ public class InvoiceAssemblyResultsRowImpl extends ExtendedViewRowImpl implement
     }
 
 
-    public static final int EVTCODE = AttributesEnum.EvtCode.index();
-    public static final int EVTDESC = AttributesEnum.EvtDesc.index();
-    public static final int EVTCOMPLETED = AttributesEnum.EvtCompleted.index();
-    public static final int EVTSTART = AttributesEnum.EvtStart.index();
-    public static final int EVTCOSTCODE = AttributesEnum.EvtCostcode.index();
     public static final int EVTCLASS = AttributesEnum.EvtClass.index();
+    public static final int EVTCODE = AttributesEnum.EvtCode.index();
+    public static final int EVTCOMPLETED = AttributesEnum.EvtCompleted.index();
+    public static final int EVTCOSTCODE = AttributesEnum.EvtCostcode.index();
+    public static final int EVTDESC = AttributesEnum.EvtDesc.index();
     public static final int EVTJOBTYPE = AttributesEnum.EvtJobtype.index();
+    public static final int EVTSTART = AttributesEnum.EvtStart.index();
     public static final int ITSACCOUNTRATEID = AttributesEnum.ItsAccountrateid.index();
     public static final int VER = AttributesEnum.Ver.index();
+    public static final int ISSELECTED = AttributesEnum.isSelected.index();
+    public static final int TTAXPERC = AttributesEnum.tTaxPerc.index();
     public static final int LABORCOST = AttributesEnum.Laborcost.index();
     public static final int PARTTOTAL = AttributesEnum.Parttotal.index();
     public static final int SALESTAX = AttributesEnum.Salestax.index();
     public static final int WOTOTAL = AttributesEnum.Wototal.index();
-    public static final int ISSELECTED = AttributesEnum.isSelected.index();
     public static final int TOTALLABORCOST = AttributesEnum.TotalLaborCost.index();
     public static final int TOTALPARTTOTAL = AttributesEnum.TotalPartTotal.index();
     public static final int TOTALSALESTAX = AttributesEnum.TotalSalesTax.index();
@@ -571,6 +590,24 @@ public class InvoiceAssemblyResultsRowImpl extends ExtendedViewRowImpl implement
     public void setisSelected(String value) {
         setAttributeInternal(ISSELECTED, value);
     }
+
+
+    /**
+     * Gets the attribute value for the calculated attribute tTaxPerc.
+     * @return the tTaxPerc
+     */
+    public Double gettTaxPerc() {
+        return (Double) getAttributeInternal(TTAXPERC);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute Ttaxperc.
+     * @return the Ttaxperc
+     */
+    public Double getTtaxperc() {
+        return (Double) getAttributeInternal(TTAXPERC);
+    }
+
 
     /**
      * Gets the attribute value for the calculated attribute TotalLaborCost.

@@ -436,12 +436,14 @@ public class R5eventsImpl extends ExtendedEntityImpl {
     public void lock() {
         try {
             super.lock();
-        } catch
-        (RowInconsistentException e)
-        {
+        } ////catch (RowInconsistentException e) {
+        catch (Exception e) {
+            System.out.println("Inside lock() exception: " + e.getMessage());
+            checkInconsistentAttrs();
             refresh(REFRESH_WITH_DB_ONLY_IF_UNCHANGED | REFRESH_CONTAINEES);
             //checkInconsistentAttrs();
             //throw (e);
+          ////  e.printStackTrace();
             super.lock();
         }
     }
@@ -469,9 +471,9 @@ public class R5eventsImpl extends ExtendedEntityImpl {
                   ! origValue.equals(currDbValue))))
               {
                  // If they don't match, tell us about it.
-                 //System.out.println("Inconsistent attribute " + getAttributeNames()[i]);
-                 //System.out.println("  Queried from DB = " + origValue);
-                 //System.out.println("  Now in DB = " + currDbValue);
+                 System.out.println("Inconsistent attribute " + getAttributeNames()[i]);
+                 System.out.println("  Queried from DB = " + origValue);
+                 System.out.println("  Now in DB = " + currDbValue);
              }
              // Set this EO instance back to the way it was
              if (attributeChanges[i]) {

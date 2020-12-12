@@ -694,5 +694,32 @@
     <action IterBinding="AvailableQtyExistence1Iterator" id="AvailableQtyExecute"
             InstanceName="MNRDataControlDataControl.WODataControlNested.AvailableQtyExistence1"
             DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues IterBinding="WOEventsIterator" id="EvtAcd">
+      <AttrNames>
+        <Item Value="EvtAcd"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WOEventsIterator" id="tTotalTax">
+      <AttrNames>
+        <Item Value="tTotalTax"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WOEventsIterator" id="tWOTotal">
+      <AttrNames>
+        <Item Value="tWOTotal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WOEventsIterator" id="tTaxPerc">
+      <AttrNames>
+        <Item Value="tTaxPerc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WOEventsIterator" id="tt">
+      <AttrNames>
+        <Item Value="tt"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="WOEventsIterator" StaticList="false" Uses="LOV_tt" id="tt1" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
   </bindings>
 </pageDefinition>

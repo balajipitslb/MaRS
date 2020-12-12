@@ -922,6 +922,46 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
             }
         }
         ,
+        tTaxPerc {
+            public Object get(WOEventsRowImpl obj) {
+                return obj.gettTaxPerc();
+            }
+
+            public void put(WOEventsRowImpl obj, Object value) {
+                obj.settTaxPerc((Double) value);
+            }
+        }
+        ,
+        tTotalTax {
+            public Object get(WOEventsRowImpl obj) {
+                return obj.gettTotalTax();
+            }
+
+            public void put(WOEventsRowImpl obj, Object value) {
+                obj.settTotalTax((Double) value);
+            }
+        }
+        ,
+        tWOTotal {
+            public Object get(WOEventsRowImpl obj) {
+                return obj.gettWOTotal();
+            }
+
+            public void put(WOEventsRowImpl obj, Object value) {
+                obj.settWOTotal((Double) value);
+            }
+        }
+        ,
+        tt {
+            public Object get(WOEventsRowImpl obj) {
+                return obj.gettt();
+            }
+
+            public void put(WOEventsRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
         MrltAccountmasterView1 {
             public Object get(WOEventsRowImpl obj) {
                 return obj.getMrltAccountmasterView1();
@@ -1111,6 +1151,16 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
                 obj.setAttributeInternal(index(), value);
             }
         }
+        ,
+        TaxRateValues1 {
+            public Object get(WOEventsRowImpl obj) {
+                return obj.getTaxRateValues1();
+            }
+
+            public void put(WOEventsRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
         ;
         static AttributesEnum[] vals = null;
         ;
@@ -1190,6 +1240,10 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
     public static final int ITSPERFORMDT = AttributesEnum.ItsPerformdt.index();
     public static final int ITSPERFORMED = AttributesEnum.ItsPerformed.index();
     public static final int ITSPERFORMEDBY = AttributesEnum.ItsPerformedby.index();
+    public static final int TTAXPERC = AttributesEnum.tTaxPerc.index();
+    public static final int TTOTALTAX = AttributesEnum.tTotalTax.index();
+    public static final int TWOTOTAL = AttributesEnum.tWOTotal.index();
+    public static final int TT = AttributesEnum.tt.index();
     public static final int MRLTACCOUNTMASTERVIEW1 = AttributesEnum.MrltAccountmasterView1.index();
     public static final int ESTIMATE1 = AttributesEnum.Estimate1.index();
     public static final int MRLTFLAGASSOCIATION_VO = AttributesEnum.MrltFlagassociation_VO.index();
@@ -1209,6 +1263,7 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
     public static final int WOACCOUNTMASTERAFQUERY = AttributesEnum.WOAccountMasterAFQuery.index();
     public static final int ISACCOUNTACTIVE = AttributesEnum.isAccountActive.index();
     public static final int YESNOBOOLEAN = AttributesEnum.YesNoBoolean.index();
+    public static final int TAXRATEVALUES1 = AttributesEnum.TaxRateValues1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -1976,6 +2031,63 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
 
 
     /**
+     * Gets the attribute value for T_TAX_PERC using the alias name tTaxPerc.
+     * @return the T_TAX_PERC
+     */
+    public Double gettTaxPerc() {
+        return (Double) getAttributeInternal(TTAXPERC);
+    }
+
+
+    /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute tTaxPerc.
+     * @param value value to set the  tTaxPerc
+     */
+    public void settTaxPerc(Double value) {
+        setAttributeInternal(TTAXPERC, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute tTotalTax.
+     * @return the tTotalTax
+     */
+    public Double gettTotalTax() {
+        return (Double) getAttributeInternal(TTOTALTAX);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute tTotalTax.
+     * @param value value to set the  tTotalTax
+     */
+    public void settTotalTax(Double value) {
+        setAttributeInternal(TTOTALTAX, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute tWOTotal.
+     * @return the tWOTotal
+     */
+    public Double gettWOTotal() {
+        return (Double) getAttributeInternal(TWOTOTAL);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute tWOTotal.
+     * @param value value to set the  tWOTotal
+     */
+    public void settWOTotal(Double value) {
+        setAttributeInternal(TWOTOTAL, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute tt.
+     * @return the tt
+     */
+    public String gettt() {
+        return (String) getAttributeInternal(TT);
+    }
+
+    /**
      * Gets the associated <code>Row</code> using master-detail link MrltAccountmasterView1.
      */
     public Row getMrltAccountmasterView1() {
@@ -2117,6 +2229,13 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
      */
     public RowSet getYesNoBoolean() {
         return (RowSet)getAttributeInternal(YESNOBOOLEAN);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> TaxRateValues1.
+     */
+    public RowSet getTaxRateValues1() {
+        return (RowSet) getAttributeInternal(TAXRATEVALUES1);
     }
 
     /**

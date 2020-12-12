@@ -173,7 +173,7 @@
     EntityUsage="MrltFifopartx"
     AliasName="CREATED">
     <TransientExpression
-      trustMode="untrusted"><![CDATA[adf.currentDateTime]]></TransientExpression>
+      trustMode="trusted"><![CDATA[adf.currentDateTime]]></TransientExpression>
   </ViewAttribute>
   <ViewAttribute
     Name="Partorg"

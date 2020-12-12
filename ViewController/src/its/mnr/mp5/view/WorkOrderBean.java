@@ -1711,6 +1711,7 @@ public class WorkOrderBean {
                 return null;
             }
             //System.out.println("refreshing"); refreshEventIter();
+            refreshAll_action();
             refreshCurrentPage();
         }
         return null;

@@ -200,7 +200,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActSupplier((String)value);
+                obj.setActSupplier((String) value);
             }
         }
         ,
@@ -210,7 +210,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActStart((Date)value);
+                obj.setActStart((Date) value);
             }
         }
         ,
@@ -220,7 +220,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActTime((BigDecimal)value);
+                obj.setActTime((BigDecimal) value);
             }
         }
         ,
@@ -230,7 +230,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActNewstart((Timestamp)value);
+                obj.setActNewstart((Timestamp) value);
             }
         }
         ,
@@ -240,7 +240,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActHire((String)value);
+                obj.setActHire((String) value);
             }
         }
         ,
@@ -250,7 +250,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActOrdered((String)value);
+                obj.setActOrdered((String) value);
             }
         }
         ,
@@ -260,7 +260,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActFixh((String)value);
+                obj.setActFixh((String) value);
             }
         }
         ,
@@ -270,7 +270,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActMinhours((String)value);
+                obj.setActMinhours((String) value);
             }
         }
         ,
@@ -280,7 +280,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActMrc((String)value);
+                obj.setActMrc((String) value);
             }
         }
         ,
@@ -290,7 +290,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActTrade((String)value);
+                obj.setActTrade((String) value);
             }
         }
         ,
@@ -300,7 +300,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActShift((String)value);
+                obj.setActShift((String) value);
             }
         }
         ,
@@ -310,7 +310,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActPersons((Integer)value);
+                obj.setActPersons((Integer) value);
             }
         }
         ,
@@ -320,7 +320,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActProject((String)value);
+                obj.setActProject((String) value);
             }
         }
         ,
@@ -330,7 +330,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActProjbud((String)value);
+                obj.setActProjbud((String) value);
             }
         }
         ,
@@ -340,7 +340,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActRoute((String)value);
+                obj.setActRoute((String) value);
             }
         }
         ,
@@ -350,7 +350,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActDuration((Integer)value);
+                obj.setActDuration((Integer) value);
             }
         }
         ,
@@ -360,7 +360,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActNewdur((Integer)value);
+                obj.setActNewdur((Integer) value);
             }
         }
         ,
@@ -370,7 +370,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActMaxdur((Integer)value);
+                obj.setActMaxdur((Integer) value);
             }
         }
         ,
@@ -380,7 +380,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActEst((Integer)value);
+                obj.setActEst((Integer) value);
             }
         }
         ,
@@ -390,7 +390,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActRem((Integer)value);
+                obj.setActRem((Integer) value);
             }
         }
         ,
@@ -400,7 +400,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActNt((Integer)value);
+                obj.setActNt((Integer) value);
             }
         }
         ,
@@ -410,7 +410,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActNtrate((Integer)value);
+                obj.setActNtrate((Integer) value);
             }
         }
         ,
@@ -420,7 +420,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActOt((Integer)value);
+                obj.setActOt((Integer) value);
             }
         }
         ,
@@ -430,7 +430,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActOtrate((Integer)value);
+                obj.setActOtrate((Integer) value);
             }
         }
         ,
@@ -440,7 +440,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActPurrate((BigDecimal)value);
+                obj.setActPurrate((BigDecimal) value);
             }
         }
         ,
@@ -450,7 +450,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActTask((String)value);
+                obj.setActTask((String) value);
             }
         }
         ,
@@ -460,7 +460,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActMatlist((String)value);
+                obj.setActMatlist((String) value);
             }
         }
         ,
@@ -470,7 +470,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActSpecial((String)value);
+                obj.setActSpecial((String) value);
             }
         }
         ,
@@ -480,7 +480,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActGraph((String)value);
+                obj.setActGraph((String) value);
             }
         }
         ,
@@ -490,7 +490,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActLevel((Integer)value);
+                obj.setActLevel((Integer) value);
             }
         }
         ,
@@ -500,7 +500,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActOrder((String)value);
+                obj.setActOrder((String) value);
             }
         }
         ,
@@ -510,7 +510,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActOrdline((Integer)value);
+                obj.setActOrdline((Integer) value);
             }
         }
         ,
@@ -520,7 +520,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActOrdtype((String)value);
+                obj.setActOrdtype((String) value);
             }
         }
         ,
@@ -530,7 +530,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActOrdrtype((String)value);
+                obj.setActOrdrtype((String) value);
             }
         }
         ,
@@ -540,7 +540,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActSchedhrs((Integer)value);
+                obj.setActSchedhrs((Integer) value);
             }
         }
         ,
@@ -550,7 +550,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActLatestsched((Timestamp)value);
+                obj.setActLatestsched((Timestamp) value);
             }
         }
         ,
@@ -560,7 +560,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActCompleted((String)value);
+                obj.setActCompleted((String) value);
             }
         }
         ,
@@ -570,7 +570,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActMatlrev((Integer)value);
+                obj.setActMatlrev((Integer) value);
             }
         }
         ,
@@ -580,7 +580,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActTaskrev((Integer)value);
+                obj.setActTaskrev((Integer) value);
             }
         }
         ,
@@ -590,7 +590,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActQty((BigDecimal)value);
+                obj.setActQty((BigDecimal) value);
             }
         }
         ,
@@ -600,7 +600,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActUom((String)value);
+                obj.setActUom((String) value);
             }
         }
         ,
@@ -610,7 +610,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActReq((String)value);
+                obj.setActReq((String) value);
             }
         }
         ,
@@ -620,7 +620,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActReqline((Integer)value);
+                obj.setActReqline((Integer) value);
             }
         }
         ,
@@ -630,7 +630,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActSupplierOrg((String)value);
+                obj.setActSupplierOrg((String) value);
             }
         }
         ,
@@ -640,7 +640,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActOrderOrg((String)value);
+                obj.setActOrderOrg((String) value);
             }
         }
         ,
@@ -650,7 +650,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActAcode((String)value);
+                obj.setActAcode((String) value);
             }
         }
         ,
@@ -660,7 +660,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActBcode((String)value);
+                obj.setActBcode((String) value);
             }
         }
         ,
@@ -670,7 +670,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActUnitqty((Integer)value);
+                obj.setActUnitqty((Integer) value);
             }
         }
         ,
@@ -680,7 +680,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActAccountcode((String)value);
+                obj.setActAccountcode((String) value);
             }
         }
         ,
@@ -690,7 +690,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActRatetype((String)value);
+                obj.setActRatetype((String) value);
             }
         }
         ,
@@ -700,7 +700,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActTimetype((String)value);
+                obj.setActTimetype((String) value);
             }
         }
         ,
@@ -710,7 +710,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActActualLbrHrs((Double)value);
+                obj.setActActualLbrHrs((Double) value);
             }
         }
         ,
@@ -720,7 +720,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActActualLbrCost((Double)value);
+                obj.setActActualLbrCost((Double) value);
             }
         }
         ,
@@ -730,7 +730,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActBillableLbrHrs((Double)value);
+                obj.setActBillableLbrHrs((Double) value);
             }
         }
         ,
@@ -740,7 +740,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActBillableLbrCost((Double)value);
+                obj.setActBillableLbrCost((Double) value);
             }
         }
         ,
@@ -750,7 +750,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActBillablePartCost((Double)value);
+                obj.setActBillablePartCost((Double) value);
             }
         }
         ,
@@ -760,7 +760,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setActMechanicid((String)value);
+                obj.setActMechanicid((String) value);
             }
         }
         ,
@@ -770,7 +770,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setItsTaskid((String)value);
+                obj.setItsTaskid((String) value);
             }
         }
         ,
@@ -780,7 +780,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setItsTaskdesc((String)value);
+                obj.setItsTaskdesc((String) value);
             }
         }
         ,
@@ -790,7 +790,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setItsComment((String)value);
+                obj.setItsComment((String) value);
             }
         }
         ,
@@ -800,7 +800,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setItsCompcode((String)value);
+                obj.setItsCompcode((String) value);
             }
         }
         ,
@@ -810,7 +810,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setItsLoccode((String)value);
+                obj.setItsLoccode((String) value);
             }
         }
         ,
@@ -820,7 +820,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setItsLocdesc((String)value);
+                obj.setItsLocdesc((String) value);
             }
         }
         ,
@@ -830,7 +830,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setItsDamcode((String)value);
+                obj.setItsDamcode((String) value);
             }
         }
         ,
@@ -840,7 +840,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setItsRepcode((String)value);
+                obj.setItsRepcode((String) value);
             }
         }
         ,
@@ -850,7 +850,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setItsRepdesc((String)value);
+                obj.setItsRepdesc((String) value);
             }
         }
         ,
@@ -860,7 +860,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setItsDamdesc((String)value);
+                obj.setItsDamdesc((String) value);
             }
         }
         ,
@@ -870,7 +870,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setItsTaskdamid((String)value);
+                obj.setItsTaskdamid((String) value);
             }
         }
         ,
@@ -880,7 +880,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setItsAccountratetaskid((String)value);
+                obj.setItsAccountratetaskid((String) value);
             }
         }
         ,
@@ -890,7 +890,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setWOType((String)value);
+                obj.setWOType((String) value);
             }
         }
         ,
@@ -900,7 +900,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setTotalPartCost((Double)value);
+                obj.setTotalPartCost((Double) value);
             }
         }
         ,
@@ -910,7 +910,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setItsAccountRateId((String)value);
+                obj.setItsAccountRateId((String) value);
             }
         }
         ,
@@ -920,7 +920,17 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setItsSgid((String)value);
+                obj.setItsSgid((String) value);
+            }
+        }
+        ,
+        tTotTax {
+            public Object get(R5activitiesImpl obj) {
+                return obj.gettTotTax();
+            }
+
+            public void put(R5activitiesImpl obj, Object value) {
+                obj.settTotTax((Double) value);
             }
         }
         ,
@@ -930,7 +940,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setR5events((R5eventsImpl)value);
+                obj.setR5events((R5eventsImpl) value);
             }
         }
         ,
@@ -940,7 +950,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setR5matlists((ExtendedEntityImpl)value);
+                obj.setR5matlists((ExtendedEntityImpl) value);
             }
         }
         ,
@@ -980,7 +990,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setR5uoms((ExtendedEntityImpl)value);
+                obj.setR5uoms((ExtendedEntityImpl) value);
             }
         }
         ,
@@ -990,7 +1000,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5activitiesImpl obj, Object value) {
-                obj.setR5orders((R5ordersImpl)value);
+                obj.setR5orders((R5ordersImpl) value);
             }
         }
         ,
@@ -1117,6 +1127,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
     public static final int TOTALPARTCOST = AttributesEnum.TotalPartCost.index();
     public static final int ITSACCOUNTRATEID = AttributesEnum.ItsAccountRateId.index();
     public static final int ITSSGID = AttributesEnum.ItsSgid.index();
+    public static final int TTOTTAX = AttributesEnum.tTotTax.index();
     public static final int R5EVENTS = AttributesEnum.R5events.index();
     public static final int R5MATLISTS = AttributesEnum.R5matlists.index();
     public static final int R5MATLISTS1 = AttributesEnum.R5matlists1.index();
@@ -1133,13 +1144,13 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
     public R5activitiesImpl() {
     }
 
-
     /**
      * @return the definition object for this instance class.
      */
     public static synchronized EntityDefImpl getDefinitionObject() {
         return EntityDefImpl.findDefObject("its.mnr.mp5.eo.local.R5activities");
     }
+
 
     /**
      * Gets the attribute value for ActEvent, using the alias name ActEvent.
@@ -2326,6 +2337,22 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
     }
 
     /**
+     * Gets the attribute value for tTotTax, using the alias name tTotTax.
+     * @return the value of tTotTax
+     */
+    public Double gettTotTax() {
+        return (Double) getAttributeInternal(TTOTTAX);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for tTotTax.
+     * @param value value to set the tTotTax
+     */
+    public void settTotTax(Double value) {
+        setAttributeInternal(TTOTTAX, value);
+    }
+
+    /**
      * getAttrInvokeAccessor: generated method. Do not modify.
      * @param index the index identifying the attribute
      * @param attrDef the attribute
@@ -2455,7 +2482,7 @@ public class R5activitiesImpl extends ExtendedEntityImpl {
      * @return a Key object based on given key constituents.
      */
     public static Key createPrimaryKey(String actEvent, Number actAct) {
-        return new Key(new Object[]{actEvent, actAct});
+        return new Key(new Object[] { actEvent, actAct });
     }
 
 

@@ -41,7 +41,8 @@
        R5events.ITS_REVIEWDT, 
        R5events.ITS_PERFORMDT, 
        R5events.ITS_PERFORMED, 
-       R5events.ITS_PERFORMEDBY"
+       R5events.ITS_PERFORMEDBY, 
+       (select nvl(Txv_Percent,0) from R5TAXRATEVALUES t,MRLT_ACCOUNTMASTER m               where Txv_Rate='LAX'         and m.PARTTAX='Y'        and        R5EVENTS.EVT_COSTCODE= m.ACCTNUM) AS tTaxPerc"
   FromList="R5EVENTS R5events"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -204,6 +205,10 @@
   <ViewAccessor
     Name="YesNoBoolean"
     ViewObjectName="its.mnr.mp5.lov.YesNoBoolean"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="TaxRateValues1"
+    ViewObjectName="its.mnr.mp5.vo.workorder.TaxRateValues"
     RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_EvtClass"
@@ -414,6 +419,24 @@
     </AttrArray>
     <AttrArray Name="ListDisplayAttrNames">
       <Item Value="description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_tt"
+    ListVOName="TaxRateValues1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tt"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="TxvPercent"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="TxvRate"/>
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
@@ -974,7 +997,7 @@
     PrecisionRule="true"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    AliasName="VIEW_ATTR"
+    AliasName="StatusSwitcher"
     SQLType="VARCHAR">
     <TransientExpression><![CDATA[(adf.isCriteriaRow) ? "LOV_EvtStatusAll" : "LOV_EvtStatus"]]></TransientExpression>
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
@@ -1127,6 +1150,96 @@
           ResId="its.mnr.mp5.vo.workorder.WOEvents.ItsPerformedby_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tTaxPerc"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="tTaxPerc"
+    SQLType="DOUBLE"
+    Expression="select nvl(Txv_Percent,0) from R5TAXRATEVALUES t,MRLT_ACCOUNTMASTER m               where Txv_Rate='LAX'         and m.PARTTAX='Y'        and        R5EVENTS.EVT_COSTCODE= m.ACCTNUM">
+    <Dependencies>
+      <Item
+        Value="TotalPartCst"/>
+    </Dependencies>
+  </ViewAttribute>
+  <!--
+  <ViewAttribute
+    Name="tTaxPerc"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="tTaxPerc"
+    SQLType="DOUBLE"
+    Expression="select Txv_Percent from R5TAXRATEVALUES where Txv_Rate='LAX'"/>
+    -->
+  <ViewAttribute
+    Name="tTotalTax"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="tTotalTax"
+    SQLType="DOUBLE">
+    <TransientExpression><![CDATA[((TotalPartCst !=null) && (tTaxPerc !=null))?(TotalPartCst*(tTaxPerc/100)):0.00]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.WOEvents.tTotalTax_LABEL"/>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.vo.workorder.WOEvents.tTotalTax_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tWOTotal"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="tWOTotal"
+    SQLType="DOUBLE">
+    <TransientExpression><![CDATA[(TotalPartCst != null && TotalLaborCst !=null && tTotalTax!=null ? Math.round((TotalPartCst + TotalLaborCst +tTotalTax)* 100) / 100:null)]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.WOEvents.tWOTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tt"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_tt">
+    <TransientExpression
+      trustMode="trusted"><![CDATA[tTaxPerc]]></TransientExpression>
+    <RecalcCondition
+      trustMode="trusted"><![CDATA[true]]></RecalcCondition>
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <Dependencies>
+      <Item
+        Value="tTaxPerc"/>
+    </Dependencies>
   </ViewAttribute>
   <ViewCriteria
     Name="WorkOrderList"
