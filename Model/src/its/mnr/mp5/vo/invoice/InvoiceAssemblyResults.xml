@@ -66,22 +66,53 @@
     </AttrArray>
     <DisplayCriteria/>
   </ListBinding>
-  <SQLQuery><![CDATA[/*              
-select evt_code,evt_desc,evt_completed,evt_start, evt_costcode,evt_class,evt_jobtype, ITS_ACCOUNTRATEID,               
-        (select ver from MRLT_ACCOUNTRATE  where ACCOUNTRATEID = evt.ITS_ACCOUNTRATEID) ver,              
-    act."LaborCost",              
-    nvl(par."PartTotal",0) "PartTotal",nvl(par."SalesTax",0) "SalesTax" ,(act."LaborCost" +  nvl(par."PartTotal",0)+ nvl(par."SalesTax",0)) "WOTotal"              
-from r5events evt,(select act_event, sum(act_billable_lbr_cost) as "LaborCost"              
-                        from r5activities               
-                        group by act_event)  act,              
-                        (select mtl_event,               
-                        sum(mlp_billable_unitcost*mlp_qty) "PartTotal",              
-                        sum(nvl(its_partaxamt,0)*mlp_qty) "SalesTax"              
-                        from r5matlparts,r5matlists              
-                        where mlp_matlist= mtl_code              
-                        group by mtl_event) par              
-                        */      
-/*                            
+  <SQLQuery><![CDATA[/*               
+select evt_code,evt_desc,evt_completed,evt_start, evt_costcode,evt_class,evt_jobtype, ITS_ACCOUNTRATEID,                
+        (select ver from MRLT_ACCOUNTRATE  where ACCOUNTRATEID = evt.ITS_ACCOUNTRATEID) ver,               
+    act."LaborCost",               
+    nvl(par."PartTotal",0) "PartTotal", 
+    round(nvl(par."SalesTax",0),2) "SalesTax" , 
+    round((act."LaborCost" +  nvl(par."PartTotal",0)+ nvl(par."SalesTax",0)),2) "WOTotal"               
+from r5events evt,(select act_event, sum(act_billable_lbr_cost) as "LaborCost"               
+                        from r5activities                
+                        group by act_event)  act,               
+                        (select mtl_event,                
+                        sum(mlp_billable_unitcost*mlp_qty) "PartTotal",               
+                        sum(nvl(its_partaxamt,0)*mlp_qty) "SalesTax"               
+                        from r5matlparts,r5matlists               
+                        where mlp_matlist= mtl_code               
+                        group by mtl_event) par               
+                        */       
+/*                             
+SELECT EVT.EVT_CLASS,                                  
+EVT.EVT_CODE,                                  
+EVT.EVT_COMPLETED,                                  
+EVT.EVT_COSTCODE,                                  
+EVT.EVT_DESC,                                  
+EVT.EVT_JOBTYPE,                                  
+EVT.EVT_START,                                  
+EVT.ITS_ACCOUNTRATEID,                                  
+(select ver from MRLT_ACCOUNTRATE  where ACCOUNTRATEID = EVT.ITS_ACCOUNTRATEID) AS Ver,                                  
+--(SELECT 'N' from Dual) AS isSelected,                                  
+--(SELECT CAST(TRUNC(EVT.EVT_COMPLETED) AS DATE) from dual) "tEvtComp",                                  
+  T_TAX_PERC.Txv_Percent  "tTaxPerc",      
+--(SELECT CAST(TRUNC(EVT.EVT_START) AS DATE) from dual) "tEvtStart",                         
+NVL(act."LaborCost",0) "LaborCost",                         
+nvl(par."PartTotal",0) "PartTotal",                         
+((nvl(par."PartTotal",0)*(T_TAX_PERC.Txv_Percent))/100) "SalesTax",                         
+(act."LaborCost" +  nvl(par."PartTotal",0)+ ((nvl(par."PartTotal",0)*(T_TAX_PERC.Txv_Percent))/100)) "WOTotal"                         
+FROM R5EVENTS EVT,               
+(select act_event,               
+sum(act_billable_lbr_cost) as "LaborCost"               
+ from r5activities               
+  group by act_event)  act,               
+  (select Txv_Percent from R5TAXRATEVALUES where Txv_Rate='LAX') T_TAX_PERC,               
+(select mtl_event,               
+ sum(mlp_billable_unitcost*mlp_qty) "PartTotal"               
+from r5matlparts,r5matlists               
+where mlp_matlist= mtl_code               
+  group by mtl_event) par     
+  */     
 SELECT EVT.EVT_CLASS,                                 
 EVT.EVT_CODE,                                 
 EVT.EVT_COMPLETED,                                 
@@ -90,54 +121,25 @@ EVT.EVT_DESC,
 EVT.EVT_JOBTYPE,                                 
 EVT.EVT_START,                                 
 EVT.ITS_ACCOUNTRATEID,                                 
-(select ver from MRLT_ACCOUNTRATE  where ACCOUNTRATEID = EVT.ITS_ACCOUNTRATEID) AS Ver,                                 
---(SELECT 'N' from Dual) AS isSelected,                                 
---(SELECT CAST(TRUNC(EVT.EVT_COMPLETED) AS DATE) from dual) "tEvtComp",                                 
-  T_TAX_PERC.Txv_Percent  "tTaxPerc",     
---(SELECT CAST(TRUNC(EVT.EVT_START) AS DATE) from dual) "tEvtStart",                        
+(select ver from MRLT_ACCOUNTRATE  where ACCOUNTRATEID = EVT.ITS_ACCOUNTRATEID) AS Ver,                             
+ T_TAX_PERC.Txv_Percent  "tTaxPerc",                           
 NVL(act."LaborCost",0) "LaborCost",                        
 nvl(par."PartTotal",0) "PartTotal",                        
-((nvl(par."PartTotal",0)*(T_TAX_PERC.Txv_Percent))/100) "SalesTax",                        
-(act."LaborCost" +  nvl(par."PartTotal",0)+ ((nvl(par."PartTotal",0)*(T_TAX_PERC.Txv_Percent))/100)) "WOTotal"                        
+round(((nvl(par."PartTotal",0)*(NVL(T_TAX_PERC.Txv_Percent,0.00)))/100),2) "SalesTax",                        
+round((act."LaborCost" +  nvl(par."PartTotal",0)+ ((nvl(par."PartTotal",0)*(NVL(T_TAX_PERC.Txv_Percent,0.00)))/100)),2) "WOTotal"                        
 FROM R5EVENTS EVT,              
 (select act_event,              
 sum(act_billable_lbr_cost) as "LaborCost"              
  from r5activities              
-  group by act_event)  act,              
-  (select Txv_Percent from R5TAXRATEVALUES where Txv_Rate='LAX') T_TAX_PERC,              
+  group by act_event)  act,               
 (select mtl_event,              
  sum(mlp_billable_unitcost*mlp_qty) "PartTotal"              
 from r5matlparts,r5matlists              
 where mlp_matlist= mtl_code              
-  group by mtl_event) par    
-  */    
-SELECT EVT.EVT_CLASS,                                
-EVT.EVT_CODE,                                
-EVT.EVT_COMPLETED,                                
-EVT.EVT_COSTCODE,                                
-EVT.EVT_DESC,                                
-EVT.EVT_JOBTYPE,                                
-EVT.EVT_START,                                
-EVT.ITS_ACCOUNTRATEID,                                
-(select ver from MRLT_ACCOUNTRATE  where ACCOUNTRATEID = EVT.ITS_ACCOUNTRATEID) AS Ver,                            
- T_TAX_PERC.Txv_Percent  "tTaxPerc",                          
-NVL(act."LaborCost",0) "LaborCost",                       
-nvl(par."PartTotal",0) "PartTotal",                       
-((nvl(par."PartTotal",0)*(NVL(T_TAX_PERC.Txv_Percent,0.00)))/100) "SalesTax",                       
-(act."LaborCost" +  nvl(par."PartTotal",0)+ ((nvl(par."PartTotal",0)*(NVL(T_TAX_PERC.Txv_Percent,0.00)))/100)) "WOTotal"                       
-FROM R5EVENTS EVT,             
-(select act_event,             
-sum(act_billable_lbr_cost) as "LaborCost"             
- from r5activities             
-  group by act_event)  act,              
-(select mtl_event,             
- sum(mlp_billable_unitcost*mlp_qty) "PartTotal"             
-from r5matlparts,r5matlists             
-where mlp_matlist= mtl_code             
-  group by mtl_event) par,    
-    (select Txv_Percent,m.ACCTNUM , E.EVT_CODE from R5TAXRATEVALUES t,MRLT_ACCOUNTMASTER m , R5EVENTS E        
-       where Txv_Rate='LAX'      
-       and m.PARTTAX='Y'     
+  group by mtl_event) par,     
+    (select Txv_Percent,m.ACCTNUM , E.EVT_CODE from R5TAXRATEVALUES t,MRLT_ACCOUNTMASTER m , R5EVENTS E         
+       where Txv_Rate='LAX'       
+       and m.PARTTAX='Y'      
        )T_TAX_PERC]]></SQLQuery>
   <ViewAttribute
     Name="EvtClass"

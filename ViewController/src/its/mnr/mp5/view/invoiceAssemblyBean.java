@@ -194,10 +194,12 @@ public class invoiceAssemblyBean {
                     Double sTax =new Double(df.format(sTax1));
                     System.out.println("Inside createInvoiceRec sTax:" + sTax+" sTax1: "+sTax1);
                     Double sTotal = (Double)row.getAttribute("Wototal");
+                    Double sTotal1 =new Double(df.format(sTotal));
+                    System.out.println("Inside createInvoiceRec sTotal:" + sTotal+" sTotal1: "+sTotal1);
                     Date sCompdt = (Date)row.getAttribute("EvtCompleted");
                     Date sStartdt = (Date)row.getAttribute("EvtStart");
                     String sHrdCode = (String)row.getAttribute("EvtClass");
-                    chk = createInvoiceItem(nHeaderId, sWO, sEquip, sVer, sLabor, sPart, sTax, sTotal, sCompdt, sStartdt, sHrdCode);
+                    chk = createInvoiceItem(nHeaderId, sWO, sEquip, sVer, sLabor, sPart, sTax, sTotal1, sCompdt, sStartdt, sHrdCode);
 
                     if (chk) {
                         // /* update Work Order status to RFI
