@@ -972,7 +972,14 @@
     PrecisionRule="true"
     EntityAttrName="TotalLaborCst"
     EntityUsage="R5events"
-    AliasName="TOTAL_LABOR_CST"/>
+    AliasName="TOTAL_LABOR_CST">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.vo.workorder.WOEvents.TotalLaborCst_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="TotalPartCst"
     IsQueriable="false"
@@ -980,7 +987,14 @@
     PrecisionRule="true"
     EntityAttrName="TotalPartCst"
     EntityUsage="R5events"
-    AliasName="TOTAL_PART_CST"/>
+    AliasName="TOTAL_PART_CST">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.vo.workorder.WOEvents.TotalPartCst_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="TotalPartsLabor"
     IsQueriable="false"
@@ -988,7 +1002,14 @@
     PrecisionRule="true"
     EntityAttrName="TotalPartsLabor"
     EntityUsage="R5events"
-    AliasName="TOTAL_PARTS_LABOR"/>
+    AliasName="TOTAL_PARTS_LABOR">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.vo.workorder.WOEvents.TotalPartsLabor_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="StatusSwitcher"
     IsUpdateable="false"
@@ -1211,6 +1232,8 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="its.mnr.mp5.vo.workorder.WOEvents.tWOTotal_LABEL"/>
+        <FMT_FORMATTER
+          ResId="its.mnr.mp5.vo.workorder.WOEvents.tWOTotal_FMT_FORMATTER"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
@@ -1226,10 +1249,8 @@
     AliasName="VIEW_ATTR"
     SQLType="VARCHAR"
     LOVName="LOV_tt">
-    <TransientExpression
-      trustMode="trusted"><![CDATA[tTaxPerc]]></TransientExpression>
-    <RecalcCondition
-      trustMode="trusted"><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[tTaxPerc]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
