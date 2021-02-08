@@ -137,6 +137,15 @@ public class MNRDataControlImpl extends ExtendedApplicationModuleImpl implements
         return ret;
     }
 
+    public String CreateFlagAssoc(String faitem) {
+        String UpdBy=getCurrentUser();
+        System.out.println("Inside MNRDataControlImpl calling Function CreateFlagAssoc faitem: "+faitem+" UpdBy: "+UpdBy);
+
+        return (String) callStoredFunction(VARCHAR2, "mnrpkglk6.CreateFlagAssoc(?,?)", new Object[] {
+                                            faitem,UpdBy
+                                        });
+    }
+
     public String CreateNewAccountRateVersion(String CurrAcctNum, String CopyAcctNum, String InEffDt, Number InBase,
                                               Number InM1, Number InM1o, Number InM2, Number InM2o, Number InM3,
                                               Number InM3o, String UsePrevVersion, String UseOtherAccount) {

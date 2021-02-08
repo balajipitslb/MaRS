@@ -149,9 +149,37 @@
                                         </af:showDetailHeader>
                                         <af:spacer width="10" height="10" id="s8"/>
                                         <af:toolbar id="t16">
+                                                                                    <!--
+                                        #{WorkOrderBean.ShowWOFlagAssociation_action}
+                                        <af:showPopupBehavior popupId="p4"/>
+                                        <af:setActionListener from="#{bindings.EvtCode.inputValue}" to="psfEvtcode"/>
+                                        -->
+                                        <!--
                                             <af:button text="#{viewcontrollerBundle.FLAG}" id="cb1"
+                                                       icon="#{resource['images:flag.png']}" accessKey="f"
                                                        actionListener="#{WorkOrderBean.ShowWOFlagAssociation_action}"
-                                                       icon="#{resource['images:flag.png']}" accessKey="f"/>
+                                                       useWindow="true" windowModalityType="modeless"
+                                                       windowHeight="500" windowWidth="450"
+                                                       windowEmbedStyle="inlineDocument" partialSubmit="false">
+                                                <af:clientListener method="enforcePreventUserInput" type="action"/>
+                                            </af:button>
+                                            -->
+                                            <!--
+                                            <af:button text="#{viewcontrollerBundle.FLAG}" id="cb1"
+                                                useWindow="true"
+                                                     windowHeight="500" windowWidth="550"
+                                                       icon="#{resource['images:flag.png']}" accessKey="f" action="goFlag">
+                                                <af:setActionListener from="#{bindings.EvtCode.inputValue}" to="#{pageFlowScope.psfEvtcode}"/>
+                                            </af:button>
+                                            -->
+                                            <af:button text="#{viewcontrollerBundle.FLAG}" id="cb1"
+                                                       icon="#{resource['images:flag.png']}" accessKey="f"
+                                                       actionListener="#{WorkOrderBean.ShowWOFlagAssociation_action}"
+                                                       useWindow="true" windowModalityType="modeless"
+                                                       windowHeight="350" windowWidth="450"
+                                                       windowEmbedStyle="inlineDocument" partialSubmit="false">
+                                                <af:clientListener method="enforcePreventUserInput" type="action"/>
+                                            </af:button>
                                         </af:toolbar>
                                     </af:panelGroupLayout>
                                 </f:facet>

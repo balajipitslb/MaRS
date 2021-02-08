@@ -1523,7 +1523,24 @@
             <display-name>AdminToolsPanel-InvoiceXMLTool</display-name>
             <description>Access to AdminToolsPanel-InvoiceXML file generator tool.</description>
             <type-name-ref>UIControl</type-name-ref>
-          </resource>          
+          </resource>
+          <resource>
+            <name>/WEB-INF/Taskflows/WorkOrder/Flag-flow.xml#Flag-flow</name>
+            <type-name-ref>TaskFlowResourceType</type-name-ref>
+            <display-name>Flag-flow(/WEB-INF/Taskflows/WorkOrder)</display-name>
+            <description>/WEB-INF/Taskflows/WorkOrder/Flag-flow.xml#Flag-flow</description>
+          </resource>
+          <resource>
+            <name>its.mnr.mp5.view.pageDefs.FlagsPageDef</name>
+            <type-name-ref>RegionResourceType</type-name-ref>
+            <display-name>Flags (its.mnr.mp5.view.pageDefs)</display-name>
+            <description>its.mnr.mp5.view.pageDefs.FlagsPageDef</description>
+          </resource>
+          <resource>
+            <type-name-ref>UIControl</type-name-ref>
+            <name>FlagUI</name>
+            <display-name>FlagUI</display-name>
+          </resource>
         </resources>
         <permission-sets>
           <permission-set>
@@ -2865,6 +2882,36 @@
               </member-resource>
             </member-resources>
           </permission-set>
+          <permission-set>
+            <name>Flags</name>
+            <display-name>Flags</display-name>
+            <member-resources>
+              <member-resource>
+                <type-name-ref>TaskFlowResourceType</type-name-ref>
+                <resource-name>/WEB-INF/Taskflows/WorkOrder/Flag-flow.xml#Flag-flow</resource-name>
+                <display-name>Flag-flow(/WEB-INF/Taskflows/WorkOrder)</display-name>
+                <actions>view</actions>
+              </member-resource>
+              <member-resource>
+                <type-name-ref>RegionResourceType</type-name-ref>
+                <resource-name>its.mnr.mp5.view.pageDefs.FlagsPageDef</resource-name>
+                <display-name>Flags (its.mnr.mp5.view.pageDefs)</display-name>
+                <actions>view</actions>
+              </member-resource>
+            </member-resources>
+          </permission-set>
+          <permission-set>
+            <name>Flags|Create and Edit Flag Associations</name>
+            <display-name>Flags - Create and Edit Flag Associations</display-name>
+            <member-resources>
+              <member-resource>
+                <type-name-ref>UIControl</type-name-ref>
+                <resource-name>FlagUI</resource-name>
+                <display-name>FlagUI</display-name>
+                <actions>enabled</actions>
+              </member-resource>
+            </member-resources>
+          </permission-set>
         </permission-sets>
         <jazn-policy>
           <grant>
@@ -3133,6 +3180,12 @@
               </permission-set-ref>
               <permission-set-ref>
                 <name>Admin|Admin-FlagsPanel</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags|Create and Edit Flag Associations</name>
               </permission-set-ref>
             </permission-set-refs>
           </grant>
@@ -3690,7 +3743,12 @@
               <permission-set-ref>
                 <name>Admin|Admin-ToolsPanel-InvoiceXMLTool</name>
               </permission-set-ref>
-              
+              <permission-set-ref>
+                <name>Flags</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags|Create and Edit Flag Associations</name>
+              </permission-set-ref>
             </permission-set-refs>
           </grant>
           <grant>
@@ -3781,6 +3839,12 @@
               <permission-set-ref>
                 <name>WorkOrder|CreateEditFlagAssoc</name>
               </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags|Create and Edit Flag Associations</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
+              </permission-set-ref>
             </permission-set-refs>
           </grant>
           <grant>
@@ -3845,6 +3909,9 @@
               <permission-set-ref>
                 <name>Stock - Cycle Count View</name>
               </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
+              </permission-set-ref>
             </permission-set-refs>
           </grant>
           <grant>
@@ -3893,6 +3960,12 @@
               <permission-set-ref>
                 <name>WorkOrder|CreateEditFlagAssoc</name>
               </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags|Create and Edit Flag Associations</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
+              </permission-set-ref>
             </permission-set-refs>
           </grant>
           <grant>
@@ -3935,6 +4008,12 @@
               <permission-set-ref>
                 <name>WorkOrder|CreateEditFlagAssoc</name>
               </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags|Create and Edit Flag Associations</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
+              </permission-set-ref>
             </permission-set-refs>
           </grant>
           <grant>
@@ -3949,6 +4028,9 @@
             <permission-set-refs>
               <permission-set-ref>
                 <name>WorkOrder|WorkOrderEntry</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
               </permission-set-ref>
             </permission-set-refs>
           </grant>
@@ -4038,6 +4120,9 @@
               <permission-set-ref>
                 <name>Admin|Admin-ToolsPanel</name>
               </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
+              </permission-set-ref>
             </permission-set-refs>
           </grant>
           <grant>
@@ -4088,6 +4173,9 @@
               </permission-set-ref>
               <permission-set-ref>
                 <name>Admin|Admin</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
               </permission-set-ref>
             </permission-set-refs>
           </grant>

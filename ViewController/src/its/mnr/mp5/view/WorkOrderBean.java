@@ -406,7 +406,7 @@ public class WorkOrderBean {
     public String getFirstWOResult() {
         BindingContainer bindings = getBindings();
         DCIteratorBinding dc = (DCIteratorBinding)bindings.get("WOEventsQueryIterator");
-        System.out.println("EstimatedRowCount: " + dc.getViewObject().getEstimatedRowCount());
+       // System.out.println("EstimatedRowCount: " + dc.getViewObject().getEstimatedRowCount());
 
         if (dc.getViewObject().getEstimatedRowCount() > 0) {
             int i = 0;
@@ -425,7 +425,7 @@ public class WorkOrderBean {
         DCIteratorBinding dc = (DCIteratorBinding)bindings.get("WOEventsIterator");
         ViewObjectImpl vo = (ViewObjectImpl)dc.getViewObject();
 
-        System.out.println("Previous: " + vo.getCurrentRow().getAttribute("EvtCode"));
+       // System.out.println("Previous: " + vo.getCurrentRow().getAttribute("EvtCode"));
 
         vo.setApplyViewCriteriaName("WObyEvtCode");
         //        ViewCriteria vc = vo.getViewCriteriaManager().getViewCriteria("WObyEvtCode");
@@ -437,15 +437,15 @@ public class WorkOrderBean {
         //        vo.applyViewCriteria(vc);
 
         // set bind variable for ViewObject and execute
-        System.out.println("Bind Variable Passed: " + sWONum);
+       // System.out.println("Bind Variable Passed: " + sWONum);
         //        vo.ensureVariableManager().setVariableValue("WOEvtCodeBind", sWONum);
         vo.setNamedWhereClauseParam("WOEvtCodeBind", sWONum);
         vo.executeQuery();
 
-        System.out.println("Estimated Row Count: " + vo.getEstimatedRowCount());
+      //  System.out.println("Estimated Row Count: " + vo.getEstimatedRowCount());
         String sEvtCode = (String)ADFUtil.evaluateEL("#{bindings.EvtCode.inputValue}");
-        System.out.println("After executeQuery: " + vo.getCurrentRow().getAttribute("EvtCode") + ":" + sEvtCode);
-        System.out.println("");
+     //   System.out.println("After executeQuery: " + vo.getCurrentRow().getAttribute("EvtCode") + ":" + sEvtCode);
+     //   System.out.println("");
         AdfFacesContext.getCurrentInstance().addPartialTarget(this.panelGroupLayoutDetail);
     }
 
@@ -961,11 +961,11 @@ public class WorkOrderBean {
         String sBIT90TaskId = getMP5Profile("BIT90TaskId");
         String sPIFHWATaskId = getMP5Profile("PIFHWATaskId");
         String adminemail = getMP5Profile("AdminEmailAddress");
-
+        /*
         System.out.println("Inside processBITPI adminemail: "+adminemail+" sEvtCode: 1026584");
         sendEstimateFailure("lakshmi.kumar@itslb.com", "Chassis BIT/FHWA I/F Error",
                             "Failed to update BIT/FHWA for WO#: 1026584");
-
+        */
         DCIteratorBinding dciter = (DCIteratorBinding)getDCBindingContainer().get("WOActivitiesIterator");
 
         for (int i = 0; i < dciter.getViewObject().getEstimatedRowCount(); i++) {
@@ -1256,8 +1256,28 @@ public class WorkOrderBean {
 
     }
 
-
     public void ShowWOFlagAssociation_action(ActionEvent actionEvent) {
+        String evtcode = (String)ADFUtil.evaluateEL("#{bindings.EvtCode.inputValue}");
+        System.out.println("Inside WorkOrderBean ShowWOFlagAssociation_action evtcode: "+evtcode);
+        if (isDirty()) {
+            //System.out.println("Dirty");
+            //call popup
+            RichPopup.PopupHints hints = new RichPopup.PopupHints();
+            pendingChangePop.show(hints);
+
+        } else {
+            chkSplitter();
+            
+            if(AdfFacesContext.getCurrentInstance().getPageFlowScope().containsKey("psfEvtcode")){
+                AdfFacesContext.getCurrentInstance().getPageFlowScope().remove("psfEvtcode");
+            }
+            AdfFacesContext.getCurrentInstance().getPageFlowScope().put("psfEvtcode",evtcode);
+            
+            refreshFlagAssocVVO(evtcode);
+            goToControlFlow(null,"goFlag");
+        }
+    }
+    public void ShowWOFlagAssociation_action_orig(ActionEvent actionEvent) {
         if (isDirty()) {
             //System.out.println("Dirty");
             //call popup
@@ -1479,6 +1499,13 @@ public class WorkOrderBean {
         FacesContext context = FacesContext.getCurrentInstance();
         //context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Apply or Cancel Changes First!", null));
         //}
+    }
+
+    public void goToControlFlow(String asaction, String soutcome) {
+        //navigate to controlcase_to_follow"
+        FacesContext context = FacesContext.getCurrentInstance();
+        NavigationHandler nh = context.getApplication().getNavigationHandler();
+        nh.handleNavigation(context, asaction, soutcome);
     }
 
     public void goToControlFlow(String sbinding, String asaction, String soutcome) {

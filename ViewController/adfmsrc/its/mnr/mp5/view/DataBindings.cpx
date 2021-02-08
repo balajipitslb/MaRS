@@ -115,6 +115,9 @@
           usageId="its_mnr_mp5_view_setupEmailNotificationPageDef"/>
     <page path="/WEB-INF/Taskflows/Invoice/Invoice-Credit.xml#Invoice-Credit@Commit"
           usageId="its_mnr_mp5_view_Invoice_Credit_Invoice_Credit_CommitPageDef"/>
+    <page path="/Content/WorkOrder/Flags.jspx" usageId="its_mnr_mp5_view_FlagsPageDef"/>
+    <page path="/WEB-INF/Taskflows/WorkOrder/Flag-flow.xml#Flag-flow@ExecuteWithParams"
+          usageId="its_mnr_mp5_view_Flag_flow_Flag_flow_ExecuteWithParamsPageDef"/>
   </pageMap>
   <pageDefinitionUsages>
     <page id="its_mnr_mp5_view_AdminPageDef" path="its.mnr.mp5.view.pageDefs.AdminPageDef"/>
@@ -237,6 +240,9 @@
     <page id="its_mnr_mp5_view_setupEmailNotificationPageDef" path="Content.CycleCnt.setupEmailNotificationPageDef"/>
     <page id="its_mnr_mp5_view_Invoice_Credit_Invoice_Credit_CommitPageDef"
           path="Taskflows.Invoice.Invoice_Credit_Invoice_Credit_CommitPageDef"/>
+    <page id="its_mnr_mp5_view_FlagsPageDef" path="its.mnr.mp5.view.pageDefs.FlagsPageDef"/>
+    <page id="its_mnr_mp5_view_Flag_flow_Flag_flow_ExecuteWithParamsPageDef"
+          path="Taskflows.WorkOrder.Flag_flow_Flag_flow_ExecuteWithParamsPageDef"/>
   </pageDefinitionUsages>
   <dataControlUsages>
     <dc id="MP5TMSWS" path="its.mnr.mp5.MP5TMSWS"/>

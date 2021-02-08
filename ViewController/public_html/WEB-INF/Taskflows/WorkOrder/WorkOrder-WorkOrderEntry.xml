@@ -14,6 +14,11 @@
       <managed-bean-class>its.mnr.mp5.view.WorkOrderBean</managed-bean-class>
       <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean id="__15">
+      <managed-bean-name>FlagBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.FlagBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
     <view id="WOEntry">
       <page>/Content/WorkOrder/WOEntry.jspx</page>
     </view>
@@ -63,6 +68,26 @@
         </display-type>
       </run-as-dialog>
     </task-flow-call>
+    <task-flow-return id="Exit">
+      <outcome>
+        <name>Exit</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-call id="Flag-flow">
+      <task-flow-reference>
+        <document>/WEB-INF/Taskflows/WorkOrder/Flag-flow.xml</document>
+        <id>Flag-flow</id>
+      </task-flow-reference>
+      <input-parameter id="__14">
+        <name>psfEvtcode</name>
+        <value>#{pageFlowScope.psfEvtcode}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
     <control-flow-rule id="__2">
       <from-activity-id>WOEntry</from-activity-id>
       <control-flow-case id="__3">
@@ -72,6 +97,17 @@
       <control-flow-case id="__10">
         <from-outcome>callAsset</from-outcome>
         <to-activity-id>assetMaint</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__6">
+        <from-outcome>goFlag</from-outcome>
+        <to-activity-id>Flag-flow</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>Exit</from-outcome>
+        <to-activity-id>Exit</to-activity-id>
       </control-flow-case>
     </control-flow-rule>
   </task-flow-definition>

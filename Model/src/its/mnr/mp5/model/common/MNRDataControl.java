@@ -48,5 +48,8 @@ public interface MNRDataControl extends ApplicationModule {
 
     void throwException();
 
+    String CreateFlagAssoc(String faitem);
+
+    void sendMessage(String toaddress, String subject, String body, String host, Integer port, String fromemail);
 }
 
