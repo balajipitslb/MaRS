@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="PerMasterPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <iterator Binds="MasterDataControlNested.MrlrefPerView1" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="MrlrefPerView1Iterator"/>
-  </executables>
-  <bindings>
-    <tree IterBinding="MrlrefPerView1Iterator" id="MrlrefPerView1">
-      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrlrefPerView" Name="MrlrefPerView10">
-        <AttrNames>
-          <Item Value="Peruom"/>
-          <Item Value="Description"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <action IterBinding="MrlrefPerView1Iterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
-    <action IterBinding="MrlrefPerView1Iterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
-            DataControl="MNRDataControlDataControl"/>
-  </bindings>
+    <parameters/>
+    <executables>
+        <iterator Binds="MasterDataControlNested.MrlrefPerView1" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="MrlrefPerView1Iterator"/>
+    </executables>
+    <bindings>
+        <tree IterBinding="MrlrefPerView1Iterator" id="MrlrefPerView1">
+            <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrlrefPerView" Name="MrlrefPerView10">
+                <AttrNames>
+                    <Item Value="Peruom"/>
+                    <Item Value="Description"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="MrlrefPerView1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="MrlrefPerView1Iterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="MNRDataControlDataControl"/>
+    </bindings>
 </pageDefinition>

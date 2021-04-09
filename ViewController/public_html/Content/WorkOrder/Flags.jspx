@@ -18,11 +18,11 @@
                                                        rendered="#{(bindings.FlagAssoc_VVO1Iterator.estimatedRowCount le 0) and (securityContext.userGrantedResource['resourceName=WOEntryFlassAssociationsCreateEdit;resourceType=UIControl;action=enabled'])}"/>
                                 <af:button text="Apply" icon="#{resource['images:commit.png']}" id="b2"
                                            actionListener="#{bindings.Commit.execute}"
-                                           disabled="#{(!bindings.Commit.enabled)and(securityContext.userGrantedResource['resourceName=WOEntryFlassAssociationsCreateEdit;resourceType=UIControl;action=enabled'])}" binding="#{FlagBean.apply}"/>
+                                           disabled="#{(!bindings.Commit.enabled)}" binding="#{FlagBean.apply}"/>
                                            <!--actionListener="#{bindings.Rollback.execute}"-->
                                 <af:button text="Cancel" icon="#{resource['images:undo.png']}" id="b3"
                                            actionListener="#{FlagBean.flagAssocTblRollback_action}"
-                                           disabled="#{(!bindings.Rollback.enabled)and(securityContext.userGrantedResource['resourceName=WOEntryFlassAssociationsCreateEdit;resourceType=UIControl;action=enabled'])}" immediate="true">
+                                           disabled="#{(!bindings.Rollback.enabled)}" immediate="true">
                                     <af:resetActionListener/>
                                 </af:button>
                                 <af:button id="b4" immediate="false" actionListener="#{FlagBean.flagPPClose_action}"

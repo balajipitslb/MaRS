@@ -2,10 +2,10 @@
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81"
                 id="Admin_Class_Admin_Class_ExecuteWithParamsPageDef" Package="Taskflows.Admin.Master"
                 SkipValidation="true">
-  <parameters/>
-  <executables>
-    <iterator Binds="MasterDataControlNested.MrlrefClassView1" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrlrefClassView1Iterator"/>
-  </executables>
-  <bindings/>
+    <parameters/>
+    <executables>
+        <iterator Binds="MasterDataControlNested.MrlrefClassView1" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrlrefClassView1Iterator"/>
+    </executables>
+    <bindings/>
 </pageDefinition>

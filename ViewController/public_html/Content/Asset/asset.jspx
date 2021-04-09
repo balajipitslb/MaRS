@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
     <af:document title=" " id="d1">
+        <af:messages id="m1"/>
         <af:form id="f1">
             <af:pageTemplate viewId="/templates/MP5BaseTemplate.jspx" id="pt1">
                 <f:facet name="GlobalTop">
@@ -12,7 +13,10 @@
                         <af:commandNavigationItem text="Work Order" id="cni2" selected="false" accessKey="W"
                                                   actionListener="#{ModuleNavBean.goWOModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=WorkOrder;resourceType=GlobalNav;action=view']}"/>
-                        <af:commandNavigationItem text="Invoice" id="cni3" accessKey="I"
+                        <af:commandNavigationItem text="Estimates" id="cni9" accessKey="E"
+                                                  actionListener="#{ModuleNavBean.goEstimatesModule}"
+                                                  visible="#{(securityContext.userGrantedResource['resourceName=Estimates;resourceType=GlobalNav;action=view'])and(ModuleNavBean.showEstimate eq 'Y')}"/>  
+                       <af:commandNavigationItem text="Invoice" id="cni3" accessKey="I"
                                                   actionListener="#{ModuleNavBean.goInvoiceModule}"/>
                         <af:commandNavigationItem text="PO &amp; Receivings" id="cni4" accessKey="P"
                                                   actionListener="#{ModuleNavBean.goPORecvModule}"
@@ -20,7 +24,7 @@
                         <af:commandNavigationItem text="Stock" id="cni5" accessKey="S"
                                                   actionListener="#{ModuleNavBean.goStockModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=Stock;resourceType=GlobalNav;action=view']}"/>
-                        <af:commandNavigationItem text="Asset (This) " id="cni8" accessKey="S"
+                        <af:commandNavigationItem text="Asset (This) " id="cni8" accessKey="A"
                                                   actionListener="#{ModuleNavBean.goAssetModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=Asset;resourceType=GlobalNav;action=view']}"
                                                   selected="true"/>
@@ -32,17 +36,32 @@
                     </af:navigationPane>
                 </f:facet>
                 <f:facet name="Main">
-                    <af:panelGroupLayout id="g1" layout="vertical" inlineStyle="margin:50px;">
-                        <af:link text="Asset Maintenance" id="cil2" action="goAssetMaint" useWindow="true"
-                                 windowEmbedStyle="inlineDocument" windowModalityType="modeless" windowHeight="700"
-                                 windowWidth="850" inlineStyle="font-size:medium;"
-                                 icon="#{resource['images:truck.png']}"/>
-                        <af:spacer width="10" height="30" id="s1"/>
-                        <af:link text="Documents" id="cil1" action="goDocs" useWindow="true"
-                                 windowEmbedStyle="inlineDocument" windowModalityType="modeless" windowHeight="700"
-                                 windowWidth="730" inlineStyle="font-size:medium; "
-                                 icon="#{resource['images:document_gear.png']}"/>
-                    </af:panelGroupLayout>
+                    <af:panelDashboard id="pd1" inlineStyle="margin:20px; padding:10px;" rowHeight="75px" columns="1">
+                        <af:panelBox text="PanelBox1" id="pb1" showDisclosure="false" showHeader="never">
+                            <f:facet name="toolbar"/>
+                            <af:panelGroupLayout id="pgl1" layout="horizontal"
+                                                 inlineStyle="margin:10px 10px 10px 30px;" valign="middle">
+                                <af:image source="#{resource['images:truck.png']}" shortDesc="Asset Maintenance"
+                                          id="i1"/>
+                                <af:spacer width="10" height="10" id="s2"/>
+                                <af:link text="Asset Maintenance" id="cil2" action="goAssetMaint" useWindow="true"
+                                         windowEmbedStyle="inlineDocument" windowModalityType="modeless"
+                                         windowHeight="700" windowWidth="850" inlineStyle="font-size:medium;"/>
+                            </af:panelGroupLayout>
+                        </af:panelBox>
+                        <af:panelBox text="PanelBox2" id="pb2" showDisclosure="false" showHeader="never">
+                            <f:facet name="toolbar"/>
+                            <af:panelGroupLayout id="pgl2" layout="horizontal"
+                                                 inlineStyle="margin:10px 10px 10px 30px;">
+                                <af:image source="#{resource['images:document_gear.png']}" shortDesc="Asset Documents"
+                                          id="i2"/>
+                                <af:spacer width="10" height="10" id="s1"/>
+                                <af:link text="Documents" id="cil1" action="goDocs" useWindow="true"
+                                         windowEmbedStyle="inlineDocument" windowModalityType="modeless"
+                                         windowHeight="700" windowWidth="730" inlineStyle="font-size:medium; "/>
+                            </af:panelGroupLayout>
+                        </af:panelBox>
+                    </af:panelDashboard>
                 </f:facet>
                 <f:facet name="LHS"/>
                 <f:attribute name="LHSSplitterCollapsed" value="true"/>

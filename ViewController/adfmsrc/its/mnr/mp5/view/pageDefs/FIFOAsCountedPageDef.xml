@@ -1,71 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="FIFOAsCountedPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="CCDataControlNested.MrltFifoheaderView" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="MrltFifoheaderViewIterator" CacheResults="true"/>
-    <iterator Binds="CCDataControlNested.MrltCyclecountheaderView" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrltCyclecountheaderViewIterator"/>
-  </executables>
-  <bindings>
-    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Fhid">
-      <AttrNames>
-        <Item Value="Fhid"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Listid">
-      <AttrNames>
-        <Item Value="Listid"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="tCCDesc">
-      <AttrNames>
-        <Item Value="tCCDesc"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="MrltFifoheaderViewIterator" StaticList="false" Uses="LOV_Fpxhid" id="Fpxhid"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Accreated">
-      <AttrNames>
-        <Item Value="Accreated"/>
-      </AttrNames>
-    </attributeValues>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" InstanceName="MNRDataControlDataControl"
-            DataControl="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
-            InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
-    <methodAction IterBinding="MrltFifoheaderViewIterator" id="ccFIFO" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="ccFIFO" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
-                  InstanceName="bindings.MrltFifoheaderViewIterator.currentRow" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.ccFIFO_ccFIFO_ccFIFO_result">
-      <NamedData NDName="iListid" NDType="java.lang.Integer"/>
-      <NamedData NDName="iFxhdid" NDType="java.lang.Integer"/>
-      <NamedData NDName="emailStr" NDType="java.lang.String"/>
-    </methodAction>
-    <action IterBinding="MrltFifoheaderViewIterator" id="Create" RequiresUpdateModel="true" Action="createRow"/>
-    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="tEntityState">
-      <AttrNames>
-        <Item Value="tEntityState"/>
-      </AttrNames>
-    </attributeValues>
-    <action IterBinding="MrltFifoheaderViewIterator" id="CreateInsert" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Ccstatus">
-      <AttrNames>
-        <Item Value="Ccstatus"/>
-      </AttrNames>
-    </attributeValues>
-    <methodAction IterBinding="MrltCyclecountheaderViewIterator" id="getMP5Profile"
-                  InstanceName="bindings.MrltCyclecountheaderViewIterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="getMP5Profile" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.getMP5Profile_getMP5Profile_getMP5Profile_result">
-      <NamedData NDName="sprofile" NDType="java.lang.String"/>
-    </methodAction>
-    <action IterBinding="MrltFifoheaderViewIterator" id="Delete"
-            InstanceName="MNRDataControlDataControl.CCDataControlNested.MrltFifoheaderView"
-            DataControl="MNRDataControlDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="CCDataControlNested.MrltFifoheaderView" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="MrltFifoheaderViewIterator" CacheResults="true"/>
+        <iterator Binds="CCDataControlNested.MrltCyclecountheaderView" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrltCyclecountheaderViewIterator"/>
+    </executables>
+    <bindings>
+        <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Fhid">
+            <AttrNames>
+                <Item Value="Fhid"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Listid">
+            <AttrNames>
+                <Item Value="Listid"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltFifoheaderViewIterator" id="tCCDesc">
+            <AttrNames>
+                <Item Value="tCCDesc"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="MrltFifoheaderViewIterator" StaticList="false" Uses="LOV_Fpxhid" id="Fpxhid"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Accreated">
+            <AttrNames>
+                <Item Value="Accreated"/>
+            </AttrNames>
+        </attributeValues>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
+        <methodAction IterBinding="MrltFifoheaderViewIterator" id="ccFIFO" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="ccFIFO" IsViewObjectMethod="false"
+                      DataControl="MNRDataControlDataControl"
+                      InstanceName="bindings.MrltFifoheaderViewIterator.currentRow" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.ccFIFO_ccFIFO_ccFIFO_result">
+            <NamedData NDName="iListid" NDType="java.lang.Integer"/>
+            <NamedData NDName="iFxhdid" NDType="java.lang.Integer"/>
+            <NamedData NDName="emailStr" NDType="java.lang.String"/>
+        </methodAction>
+        <action IterBinding="MrltFifoheaderViewIterator" id="Create" RequiresUpdateModel="true" Action="createRow"/>
+        <attributeValues IterBinding="MrltFifoheaderViewIterator" id="tEntityState">
+            <AttrNames>
+                <Item Value="tEntityState"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="MrltFifoheaderViewIterator" id="CreateInsert" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Ccstatus">
+            <AttrNames>
+                <Item Value="Ccstatus"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction IterBinding="MrltCyclecountheaderViewIterator" id="getMP5Profile"
+                      InstanceName="bindings.MrltCyclecountheaderViewIterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getMP5Profile" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.getMP5Profile_getMP5Profile_getMP5Profile_result">
+            <NamedData NDName="sprofile" NDType="java.lang.String"/>
+        </methodAction>
+        <action IterBinding="MrltFifoheaderViewIterator" id="Delete"
+                InstanceName="MNRDataControlDataControl.CCDataControlNested.MrltFifoheaderView"
+                DataControl="MNRDataControlDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    </bindings>
 </pageDefinition>

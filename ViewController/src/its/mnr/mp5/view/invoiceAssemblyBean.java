@@ -196,6 +196,7 @@ public class invoiceAssemblyBean {
                     Double sTotal = (Double)row.getAttribute("Wototal");
                     Double sTotal1 =new Double(df.format(sTotal));
                     System.out.println("Inside createInvoiceRec sTotal:" + sTotal+" sTotal1: "+sTotal1);
+
                     Date sCompdt = (Date)row.getAttribute("EvtCompleted");
                     Date sStartdt = (Date)row.getAttribute("EvtStart");
                     String sHrdCode = (String)row.getAttribute("EvtClass");

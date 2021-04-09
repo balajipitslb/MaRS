@@ -2,11 +2,11 @@
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8"
                 id="Invoice_Credit_Invoice_Credit_initInvoiceCreditPageDef" Package="Taskflows.Invoice"
                 SkipValidation="true">
-  <parameters/>
-  <executables/>
-  <bindings>
-    <action id="initInvoiceCredit" RequiresUpdateModel="true" Action="invokeMethod" MethodName="initInvoiceCredit"
-            IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
-            InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"/>
-  </bindings>
+    <parameters/>
+    <executables/>
+    <bindings>
+        <action id="initInvoiceCredit" RequiresUpdateModel="true" Action="invokeMethod" MethodName="initInvoiceCredit"
+                IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"/>
+    </bindings>
 </pageDefinition>

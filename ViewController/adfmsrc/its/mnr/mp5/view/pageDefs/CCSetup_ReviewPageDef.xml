@@ -1,103 +1,104 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="CCSetup_ReviewPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="CCDataControlNested.MrltCyclecountheaderView" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrltCyclecountheaderViewIterator" ChangeEventPolicy="ppr"/>
-    <iterator Binds="CCDataControlNested.MrltCyclecountpartsView" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrltCyclecountpartsViewIterator" ChangeEventPolicy="ppr"/>
-    <searchRegion Binds="MrltCyclecountpartsViewIterator" Criteria=""
-                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="MrltCyclecountpartsViewQuery"/>
-  </executables>
-  <bindings>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Listid">
-      <AttrNames>
-        <Item Value="Listid"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Ccdesc">
-      <AttrNames>
-        <Item Value="Ccdesc"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Created">
-      <AttrNames>
-        <Item Value="Created"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Binstart">
-      <AttrNames>
-        <Item Value="Binstart"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Binend">
-      <AttrNames>
-        <Item Value="Binend"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Partclass">
-      <AttrNames>
-        <Item Value="Partclass"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Partstart">
-      <AttrNames>
-        <Item Value="Partstart"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Partend">
-      <AttrNames>
-        <Item Value="Partend"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P1">
-      <AttrNames>
-        <Item Value="P1"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P2">
-      <AttrNames>
-        <Item Value="P2"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P3">
-      <AttrNames>
-        <Item Value="P3"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P4">
-      <AttrNames>
-        <Item Value="P4"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P5">
-      <AttrNames>
-        <Item Value="P5"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P6">
-      <AttrNames>
-        <Item Value="P6"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Sttknum">
-      <AttrNames>
-        <Item Value="Sttknum"/>
-      </AttrNames>
-    </attributeValues>
-    <tree IterBinding="MrltCyclecountpartsViewIterator" id="MrltCyclecountpartsView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltCyclecountpartsView" Name="MrltCyclecountpartsView0">
-        <AttrNames>
-          <Item Value="StlListid"/>
-          <Item Value="StlType"/>
-          <Item Value="StlPart"/>
-          <Item Value="StlBin"/>
-          <Item Value="StlLot"/>
-          <Item Value="StlExpqty"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="CCDataControlNested.MrltCyclecountheaderView" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrltCyclecountheaderViewIterator" ChangeEventPolicy="ppr"/>
+        <iterator Binds="CCDataControlNested.MrltCyclecountpartsView" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrltCyclecountpartsViewIterator" ChangeEventPolicy="ppr"/>
+        <searchRegion Binds="MrltCyclecountpartsViewIterator" Criteria=""
+                      Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                      id="MrltCyclecountpartsViewQuery"/>
+    </executables>
+    <bindings>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Listid">
+            <AttrNames>
+                <Item Value="Listid"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Ccdesc">
+            <AttrNames>
+                <Item Value="Ccdesc"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Created">
+            <AttrNames>
+                <Item Value="Created"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Binstart">
+            <AttrNames>
+                <Item Value="Binstart"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Binend">
+            <AttrNames>
+                <Item Value="Binend"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Partclass">
+            <AttrNames>
+                <Item Value="Partclass"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Partstart">
+            <AttrNames>
+                <Item Value="Partstart"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Partend">
+            <AttrNames>
+                <Item Value="Partend"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P1">
+            <AttrNames>
+                <Item Value="P1"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P2">
+            <AttrNames>
+                <Item Value="P2"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P3">
+            <AttrNames>
+                <Item Value="P3"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P4">
+            <AttrNames>
+                <Item Value="P4"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P5">
+            <AttrNames>
+                <Item Value="P5"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="P6">
+            <AttrNames>
+                <Item Value="P6"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Sttknum">
+            <AttrNames>
+                <Item Value="Sttknum"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="MrltCyclecountpartsViewIterator" id="MrltCyclecountpartsView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltCyclecountpartsView" Name="MrltCyclecountpartsView0">
+                <AttrNames>
+                    <Item Value="StlListid"/>
+                    <Item Value="StlType"/>
+                    <Item Value="StlPart"/>
+                    <Item Value="StlBin"/>
+                    <Item Value="StlLot"/>
+                    <Item Value="StlExpqty"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+    </bindings>
 </pageDefinition>

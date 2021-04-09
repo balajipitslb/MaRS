@@ -32,6 +32,8 @@ import oracle.jbo.server.ApplicationModuleImpl;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class MNRDataControlImpl extends ExtendedApplicationModuleImpl implements MNRDataControl {
+    
+    
     public void setSessionUserData(String key, Object val) {
         Hashtable userData = getDBTransaction().getSession().getUserData();
         if (userData == null) {
@@ -61,6 +63,12 @@ public class MNRDataControlImpl extends ExtendedApplicationModuleImpl implements
         return (String) callStoredFunction(VARCHAR2, "mnrpkg.getUserGroup(?)", new Object[] { user });
     }
 
+    public String getShowEstimate() {
+        String s = (String)getMP5Profile("ShowEstimate");
+        System.out.println("Inside MNRDataControlImpl getShowEstimate: s: "+s);
+        return s;
+    }
+
     public void setUserGroupSessionData() {
         // set authenicated user's group from db
         String user = getCurrentUser();
@@ -82,9 +90,10 @@ public class MNRDataControlImpl extends ExtendedApplicationModuleImpl implements
     }
 
     public String getMP5Profile(String sProfile) {
-        // System.out.println("Function getWOJobType");
+         ////System.out.println("Function getMP5Profile sProfile:"+sProfile);
         String ret = (String) callStoredFunction(VARCHAR2, "mnrpkg.getMP5Profile(?)", new Object[] { sProfile });
-        //System.out.println("Function getWOJobType = " + ret);
+        ////System.out.println("Function getMP5Profile showEstimate " + callStoredFunction(VARCHAR2, "mnrpkg.getMP5Profile(?)", new Object[] {"ShowEstimate"}));
+        ////System.out.println("Function getMP5Profile ret= " + ret);
         return ret;
     }
 
@@ -137,15 +146,6 @@ public class MNRDataControlImpl extends ExtendedApplicationModuleImpl implements
         return ret;
     }
 
-    public String CreateFlagAssoc(String faitem) {
-        String UpdBy=getCurrentUser();
-        System.out.println("Inside MNRDataControlImpl calling Function CreateFlagAssoc faitem: "+faitem+" UpdBy: "+UpdBy);
-
-        return (String) callStoredFunction(VARCHAR2, "mnrpkglk6.CreateFlagAssoc(?,?)", new Object[] {
-                                            faitem,UpdBy
-                                        });
-    }
-
     public String CreateNewAccountRateVersion(String CurrAcctNum, String CopyAcctNum, String InEffDt, Number InBase,
                                               Number InM1, Number InM1o, Number InM2, Number InM2o, Number InM3,
                                               Number InM3o, String UsePrevVersion, String UseOtherAccount) {
@@ -193,6 +193,9 @@ public class MNRDataControlImpl extends ExtendedApplicationModuleImpl implements
         //System.out.println("group:" + getSessionUserData("UserGroup"));
         setSessionUserData("ShowCycleCount", getMP5Profile("ShowCycleCount"));
         //System.out.println("getShowCycleCount(): " +getMP5Profile("ShowCycleCount"));
+        ////setSessionUserData("ShowEstimate", getMP5Profile("ShowEstimate"));
+       //// System.out.println("ShowEstimate: " +getMP5Profile("ShowEstimate"));
+        
     }
 
     // Some constants
@@ -226,6 +229,7 @@ public class MNRDataControlImpl extends ExtendedApplicationModuleImpl implements
                     // 7. Close the statement
                     st.close();
                 } catch (SQLException e) {
+                    System.out.println("Inside callStoredFunction e.getMessage(): "+e.getMessage());
                 }
             }
         }
@@ -253,6 +257,7 @@ public class MNRDataControlImpl extends ExtendedApplicationModuleImpl implements
                     // 5. Close the statement
                     st.close();
                 } catch (SQLException e) {
+                    System.out.println("Inside callStoredProcedure e.getMessage(): "+e.getMessage());
                 }
             }
         }

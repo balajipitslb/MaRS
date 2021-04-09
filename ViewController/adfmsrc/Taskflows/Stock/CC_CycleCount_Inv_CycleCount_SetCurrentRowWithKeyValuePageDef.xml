@@ -2,15 +2,15 @@
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
                 id="CC_CycleCount_Inv_CycleCount_SetCurrentRowWithKeyValuePageDef" Package="Taskflows.Stock"
                 SkipValidation="true">
-  <parameters/>
-  <executables>
-    <iterator Binds="MrltCyclecountheaderView" RangeSize="25" DataControl="CCDataControlDataControl"
-              id="MrltCyclecountheaderViewIterator"/>
-  </executables>
-  <bindings>
-    <action IterBinding="MrltCyclecountheaderViewIterator" id="setCurrentRowWithKeyValue" RequiresUpdateModel="false"
-            Action="setCurrentRowWithKeyValue">
-      <NamedData NDName="rowKey" NDValue="#{pageFlowScope.listID}" NDType="java.lang.String"/>
-    </action>
-  </bindings>
+    <parameters/>
+    <executables>
+        <iterator Binds="MrltCyclecountheaderView" RangeSize="25" DataControl="CCDataControlDataControl"
+                  id="MrltCyclecountheaderViewIterator"/>
+    </executables>
+    <bindings>
+        <action IterBinding="MrltCyclecountheaderViewIterator" id="setCurrentRowWithKeyValue"
+                RequiresUpdateModel="false" Action="setCurrentRowWithKeyValue">
+            <NamedData NDName="rowKey" NDValue="#{pageFlowScope.listID}" NDType="java.lang.String"/>
+        </action>
+    </bindings>
 </pageDefinition>

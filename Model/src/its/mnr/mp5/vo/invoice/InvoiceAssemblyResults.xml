@@ -70,9 +70,7 @@
 select evt_code,evt_desc,evt_completed,evt_start, evt_costcode,evt_class,evt_jobtype, ITS_ACCOUNTRATEID,                
         (select ver from MRLT_ACCOUNTRATE  where ACCOUNTRATEID = evt.ITS_ACCOUNTRATEID) ver,               
     act."LaborCost",               
-    nvl(par."PartTotal",0) "PartTotal", 
-    round(nvl(par."SalesTax",0),2) "SalesTax" , 
-    round((act."LaborCost" +  nvl(par."PartTotal",0)+ nvl(par."SalesTax",0)),2) "WOTotal"               
+    nvl(par."PartTotal",0) "PartTotal",nvl(par."SalesTax",0) "SalesTax" ,(act."LaborCost" +  nvl(par."PartTotal",0)+ nvl(par."SalesTax",0)) "WOTotal"               
 from r5events evt,(select act_event, sum(act_billable_lbr_cost) as "LaborCost"               
                         from r5activities                
                         group by act_event)  act,               

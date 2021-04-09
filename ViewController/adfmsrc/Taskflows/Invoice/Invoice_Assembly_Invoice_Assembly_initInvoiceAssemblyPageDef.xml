@@ -2,11 +2,11 @@
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81"
                 id="Invoice_Assembly_Invoice_Assembly_initInvoiceAssemblyPageDef" Package="Taskflows.Invoice"
                 SkipValidation="true">
-  <parameters/>
-  <executables/>
-  <bindings>
-    <action id="initInvoiceAssembly" RequiresUpdateModel="true" Action="invokeMethod" MethodName="initInvoiceAssembly"
-            IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
-            InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"/>
-  </bindings>
+    <parameters/>
+    <executables/>
+    <bindings>
+        <action id="initInvoiceAssembly" RequiresUpdateModel="true" Action="invokeMethod"
+                MethodName="initInvoiceAssembly" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"/>
+    </bindings>
 </pageDefinition>

@@ -2,289 +2,319 @@
 <Application xmlns="http://xmlns.oracle.com/adfm/application" version="11.1.2.60.81" id="DataBindings"
              SeparateXMLFiles="false" Package="its.mnr.mp5.view" ClientType="Generic"
              ErrorHandlerClass="its.mnr.mp5.view.CustomErrorHandler">
-  <definitionFactories>
-    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
-             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
-    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
-    <factory nameSpace="http://xmlns.oracle.com/adfm/dvt"
-             className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"/>
-  </definitionFactories>
-  <pageMap>
-    <page path="/Content/Admin/Admin.jspx" usageId="its_mnr_mp5_view_AdminPageDef"/>
-    <page path="/Content/Admin/WorkOrderMaster.jspx" usageId="its_mnr_mp5_view_WorkOrderMasterPageDef"/>
-    <page path="/home.jspx" usageId="its_mnr_mp5_view_homePageDef"/>
-    <page path="/Content/Admin/ServiceGroupMaster.jspx" usageId="its_mnr_mp5_view_ServiceGroupMasterPageDef"/>
-    <page path="/Content/Admin/DamageRepairMaster.jspx" usageId="its_mnr_mp5_view_DamageRepairMasterPageDef"/>
-    <page path="/Content/Admin/ComponentLocationMaster.jspx" usageId="its_mnr_mp5_view_ComponentLocationMasterPageDef"/>
-    <page path="/Content/Admin/PerMaster.jspx" usageId="its_mnr_mp5_view_PerMasterPageDef"/>
-    <page path="/Content/Admin/ProfileMaster.jspx" usageId="its_mnr_mp5_view_ProfileMasterPageDef"/>
-    <page path="/Content/Admin/AccountMaster.jspx" usageId="its_mnr_mp5_view_AccountMasterPageDef"/>
-    <page path="/Content/Admin/AccountMasterDetail.jspx" usageId="its_mnr_mp5_view_AccountMasterDetailPageDef"/>
-    <page path="/error.jspx" usageId="its_mnr_mp5_view_errorPageDef"/>
-    <page path="/login.jspx" usageId="its_mnr_mp5_view_loginPageDef"/>
-    <page path="/Content/Admin/ServiceTask.jspx" usageId="its_mnr_mp5_view_TaskSetupPageDef"/>
-    <page path="/Content/Admin/TaskSetup.jspx" usageId="its_mnr_mp5_view_TaskSetupPageDef1"/>
-    <page path="/Content/Admin/AccountBillingMaster.jspx" usageId="its_mnr_mp5_view_AccountBillingMasterPageDef"/>
-    <page path="/Content/Admin/TaskRateVersion.jspx" usageId="its_mnr_mp5_view_TaskRateVersionPageDef"/>
-    <page path="/Content/Admin/TaskRateVersionAdd.jspx" usageId="its_mnr_mp5_view_TaskRateVersionAddPageDef"/>
-    <page path="/WEB-INF/Taskflows/Admin/BillingRate/Admin-AccountBillingMasterAddRateVersion.xml#Admin-AccountBillingMasterAddRateVersion@CreateNewAccountRateVersion"
-          usageId="its_mnr_mp5_view_Admin_AccountBillingMasterAddRateVersion_Admin_AccountBillingMasterAddRateVersion_CreateNewAccountRateVersionPageDef"/>
-    <page path="/WEB-INF/Taskflows/Admin/BillingRate/Admin-AccountBillingMasterAddRateVersion.xml#Admin-AccountBillingMasterAddRateVersion@Create"
-          usageId="its_mnr_mp5_view_Admin_AccountBillingMasterAddRateVersion_Admin_AccountBillingMasterAddRateVersion_CreatePageDef"/>
-    <page path="/Content/Admin/ServiceTaskRateEdit.jspx" usageId="its_mnr_mp5_view_ServiceTaskRateEditPageDef"/>
-    <page path="/WEB-INF/Taskflows/Admin/BillingRate/Admin-AccountBillingMaster.xml#Admin-AccountBillingMaster@setServiceGroupId"
-          usageId="its_mnr_mp5_view_Admin_AccountBillingMaster_Admin_AccountBillingMaster_CreateWithParametersPageDef"/>
-    <page path="/WEB-INF/Taskflows/Admin/BillingRate/Admin-AccountBillingMaster.xml#Admin-AccountBillingMaster@RemoveRowWithKey"
-          usageId="its_mnr_mp5_view_Admin_AccountBillingMaster_Admin_AccountBillingMaster_RemoveRowWithKeyPageDef"/>
-    <page path="/Content/Admin/admin.jspx" usageId="its_mnr_mp5_view_AdminPageDef"/>
-    <page path="/Content/WorkOrder/workorder.jspx" usageId="its_mnr_mp5_view_workorderPageDef"/>
-    <page path="/Content/Invoice/InvoiceAssembly.jspx" usageId="its_mnr_mp5_view_InvoiceAssemblyPageDef"/>
-    <page path="/Content/Invoice/invoice.jspx" usageId="its_mnr_mp5_view_invoicePageDef"/>
-    <page path="/WEB-INF/Taskflows/Invoice/Invoice-Assembly.xml#Invoice-Assembly@initInvoiceAssembly"
-          usageId="its_mnr_mp5_view_Invoice_Assembly_Invoice_Assembly_initInvoiceAssemblyPageDef"/>
-    <page path="/Content/Invoice/InvoiceInquiry.jspx" usageId="its_mnr_mp5_view_InvoiceInquiryPageDef"/>
-    <page path="/WEB-INF/Taskflows/Invoice/Invoice-Credit.xml#Invoice-Credit@initInvoiceCredit"
-          usageId="its_mnr_mp5_view_Invoice_Credit_Invoice_Credit_initInvoiceCreditPageDef"/>
-    <page path="/Content/Invoice/InvoiceCredit.jspx" usageId="its_mnr_mp5_view_InvoiceCreditPageDef"/>
-    <page path="/WEB-INF/Taskflows/Invoice/Invoice-Retro.xml#Invoice-Retro@initInvoiceRetro"
-          usageId="its_mnr_mp5_view_Invoice_Retro_Invoice_Retro_initInvoiceRetroPageDef"/>
-    <page path="/Content/Invoice/InvoiceRetro.jspx" usageId="its_mnr_mp5_view_InvoiceRetroPageDef"/>
-    <page path="/Content/WorkOrder/WOEntry.jspx" usageId="its_mnr_mp5_view_WOEntryPageDef"/>
-    <page path="/Content/Stock/stock.jspx" usageId="its_mnr_mp5_view_stockPageDef"/>
-    <page path="/Content/Stock/PartMaintenance.jspx" usageId="its_mnr_mp5_view_PartMaintenancePageDef"/>
-    <page path="/Content/PORecv/POMaintenance.jspx" usageId="its_mnr_mp5_view_PORecvPageDef"/>
-    <page path="/Content/PORecv/PORecv.jspx" usageId="its_mnr_mp5_view_PORecvPageDef1"/>
-    <page path="/POTest.jspx" usageId="its_mnr_mp5_view_POTestPageDef"/>
-    <page path="/Content/PORecv/CompanyReceipts.jspx" usageId="its_mnr_mp5_view_CompanyReceiptsPageDef"/>
-    <page path="/WEB-INF/Taskflows/PORecv/POCompanReceipts.xml#POCompanReceipts@initCompanyRcpts"
-          usageId="its_mnr_mp5_view_POCompanReceipts_POCompanReceipts_initCompanyRcptsPageDef"/>
-    <page path="/Content/CycleCnt/CycleCount.jspx" usageId="its_mnr_mp5_view_CycleCountPageDef"/>
-    <page path="/Content/CycleCnt/CCSetup-BinRange.jspx" usageId="its_mnr_mp5_view_CCSetup_BinRangePageDef"/>
-    <page path="/Content/CycleCnt/CCSetup-Review.jspx" usageId="its_mnr_mp5_view_CCSetup_ReviewPageDef"/>
-    <page path="/Content/CycleCnt/CCSetup-Setup.jspx" usageId="its_mnr_mp5_view_CCSetup_SetupPageDef"/>
-    <page path="/Content/CycleCnt/CCSetup-Stores.jspx" usageId="its_mnr_mp5_view_CCSetup_StoresPageDef"/>
-    <page path="/WEB-INF/Taskflows/Stock/CC-CCSetupTrain.xml#CC-CCSetupTrain@CreateInsert"
-          usageId="its_mnr_mp5_view_CC_CCSetupTrain_CC_CCSetupTrain_CreateInsertPageDef"/>
-    <page path="/Content/CycleCnt/CCSetup-PartClass.jspx" usageId="its_mnr_mp5_view_PartClassPageDef"/>
-    <page path="/Content/CycleCnt/CCSetup-PartRange.jspx" usageId="its_mnr_mp5_view_CCSetup_PartRangePageDef"/>
-    <page path="/Content/CycleCnt/CCSetup-PartNum.jspx" usageId="its_mnr_mp5_view_CCSetup_PartNumPageDef"/>
-    <page path="/Content/CycleCnt/CCSetup-StoreParts.jspx" usageId="its_mnr_mp5_view_CCSetup_StorePartsPageDef"/>
-    <page path="/CC-CCSetupStorePartsTemp.jspx" usageId="its_mnr_mp5_view_CC_CCSetupStorePartsTempPageDef"/>
-    <page path="/Content/CycleCnt/FIFOExceptions.jspx" usageId="its_mnr_mp5_view_FIFOExceptionsPageDef"/>
-    <page path="/Content/CycleCnt/FIFOAsCounted.jspx" usageId="its_mnr_mp5_view_FIFOAsCountedPageDef"/>
-    <page path="/Content/CycleCnt/FIFOAdjusted.jspx" usageId="its_mnr_mp5_view_FIFOAdjustedPageDef"/>
-    <page path="/Content/CycleCnt/StoreroomParts.jspx" usageId="its_mnr_mp5_view_shuttleTstPageDef"/>
-    <page path="/Content/Asset/AssetMaint.jspx" usageId="its_mnr_mp5_view_AssetMaintPageDef"/>
-    <page path="/Content/Asset/AssetDocs.jspx" usageId="its_mnr_mp5_view_AssetDocsPageDef"/>
-    <page path="/WEB-INF/Taskflows/Asset/Asset-Docs.xml#Asset-Docs@CreateInsert"
-          usageId="its_mnr_mp5_view_Asset_Docs_Asset_Docs_CreateInsertPageDef"/>
-    <page path="/Content/Asset/EditDoc.jspx" usageId="its_mnr_mp5_view_EditDocPageDef"/>
-    <page path="/WEB-INF/Taskflows/Asset/Asset-Maint.xml#assetMaint@CreateInsert"
-          usageId="its_mnr_mp5_view_Asset_Maint_assetMaint_CreateInsertPageDef"/>
-    <page path="/Content/Asset/AddSpares.jspx" usageId="its_mnr_mp5_view_AddSparesPageDef"/>
-    <page path="/Content/Asset/AssetMeterReading.jspx" usageId="its_mnr_mp5_view_AssetMeterReadingPageDef"/>
-    <page path="/WEB-INF/Taskflows/Asset/Asset-MeterReading.xml#Asset-MeterReading@ExecuteWithParams"
-          usageId="its_mnr_mp5_view_Asset_MeterReading_Asset_MeterReading_ExecuteWithParamsPageDef"/>
-    <page path="/WEB-INF/Taskflows/Asset/Asset-Maint.xml#assetMaint@SetCurrentRowWithKey"
-          usageId="its_mnr_mp5_view_Asset_Maint_assetMaint_SetCurrentRowWithKeyPageDef"/>
-    <page path="/WEB-INF/Taskflows/Asset/Asset-Maint.xml#assetMaint@SetCurrentRowWithKeyValue1"
-          usageId="its_mnr_mp5_view_Asset_Maint_assetMaint_SetCurrentRowWithKeyValue1PageDef"/>
-    <page path="/WEB-INF/Taskflows/Asset/Asset-Maint.xml#assetMaint@SetCurrentRowWithKeyValue"
-          usageId="its_mnr_mp5_view_Asset_Maint_assetMaint_SetCurrentRowWithKeyValuePageDef"/>
-    <page path="/WEB-INF/Taskflows/Asset/Asset-Maint.xml#assetMaint@ExecuteWithParams"
-          usageId="its_mnr_mp5_view_Asset_Maint_assetMaint_ExecuteWithParamsPageDef"/>
-    <page path="/Content/Admin/Class.jspx" usageId="its_mnr_mp5_view_ClassPageDef"/>
-    <page path="/WEB-INF/Taskflows/Admin/Master/Admin-Class.xml#Admin-Class@ExecuteWithParams"
-          usageId="its_mnr_mp5_view_Admin_Class_Admin_Class_ExecuteWithParamsPageDef"/>
-    <page path="/WEB-INF/Taskflows/Admin/Master/Admin-Class.xml#Admin-Class@CreateInsert"
-          usageId="its_mnr_mp5_view_Admin_Class_Admin_Class_CreateInsertPageDef"/>
-    <page path="/Content/Admin/AddEdit.jspx" usageId="its_mnr_mp5_view_AddEditPageDef"/>
-    <page path="/WEB-INF/Taskflows/Asset/Asset-Maint.xml#assetMaint@Execute"
-          usageId="its_mnr_mp5_view_Asset_Maint_assetMaint_ExecutePageDef"/>
-    <page path="/Content/Stock/Supplier.jspx" usageId="its_mnr_mp5_view_SupplierPageDef"/>
-    <page path="/WEB-INF/Taskflows/Stock/Suppliers.xml#Suppliers@CreateInsert"
-          usageId="its_mnr_mp5_view_Suppliers_Suppliers_CreateInsertPageDef"/>
-    <page path="/Content/Stock/EditSupplier.jspx" usageId="its_mnr_mp5_view_EditSupplierPageDef"/>
-    <page path="/Content/PORecv/POHist.jspx" usageId="its_mnr_mp5_view_POHistPageDef"/>
-    <page path="/WEB-INF/Taskflows/Stock/CC-CycleCount.xml#Inv-CycleCount@Commit"
-          usageId="its_mnr_mp5_view_CC_CycleCount_Inv_CycleCount_CommitPageDef"/>
-    <page path="/WEB-INF/StoreroomPartsShuttle.xml#StoreroomPartsShuttle@SetCurrentRowWithKeyValue"
-          usageId="its_mnr_mp5_view_CC_CycleCount_Inv_CycleCount_SetCurrentRowWithKeyValuePageDef"/>
-    <page path="/Content/CycleCnt/CCSetup-BinNum.jspx" usageId="its_mnr_mp5_view_CCSetup_BinNumPageDef"/>
-    <page path="/Content/CycleCnt/CCsetup-EmailNotification.jspx"
-          usageId="its_mnr_mp5_view_setupEmailNotificationPageDef"/>
-    <page path="/WEB-INF/Taskflows/Invoice/Invoice-Credit.xml#Invoice-Credit@Commit"
-          usageId="its_mnr_mp5_view_Invoice_Credit_Invoice_Credit_CommitPageDef"/>
-    <page path="/Content/WorkOrder/Flags.jspx" usageId="its_mnr_mp5_view_FlagsPageDef"/>
-    <page path="/WEB-INF/Taskflows/WorkOrder/Flag-flow.xml#Flag-flow@ExecuteWithParams"
-          usageId="its_mnr_mp5_view_Flag_flow_Flag_flow_ExecuteWithParamsPageDef"/>
-  </pageMap>
-  <pageDefinitionUsages>
-    <page id="its_mnr_mp5_view_AdminPageDef" path="its.mnr.mp5.view.pageDefs.AdminPageDef"/>
-    <page id="its_mnr_mp5_view_WorkOrderMasterPageDef" path="its.mnr.mp5.view.pageDefs.WorkOrderMasterPageDef"/>
-    <page id="its_mnr_mp5_view_homePageDef" path="its.mnr.mp5.view.pageDefs.homePageDef"/>
-    <page id="its_mnr_mp5_view_ServiceGroupMasterPageDef" path="its.mnr.mp5.view.pageDefs.ServiceGroupMasterPageDef"/>
-    <page id="its_mnr_mp5_view_DamageRepairMasterPageDef" path="its.mnr.mp5.view.pageDefs.DamageRepairMasterPageDef"/>
-    <page id="its_mnr_mp5_view_ComponentLocationMasterPageDef"
-          path="its.mnr.mp5.view.pageDefs.ComponentLocationMasterPageDef"/>
-    <page id="its_mnr_mp5_view_PerMasterPageDef" path="its.mnr.mp5.view.pageDefs.PerMasterPageDef"/>
-    <page id="its_mnr_mp5_view_ProfileMasterPageDef" path="its.mnr.mp5.view.pageDefs.ProfileMasterPageDef"/>
-    <page id="its_mnr_mp5_view_AccountMasterPageDef" path="its.mnr.mp5.view.pageDefs.AccountMasterPageDef"/>
-    <page id="its_mnr_mp5_view_AccountMasterDetailPageDef" path="its.mnr.mp5.view.pageDefs.AccountMasterDetailPageDef"/>
-    <page id="its_mnr_mp5_view_loginPageDef" path="its.mnr.mp5.view.pageDefs.loginPageDef"/>
-    <page id="its_mnr_mp5_view_errorPageDef" path="its.mnr.mp5.view.pageDefs.errorPageDef"/>
-    <page id="its_mnr_mp5_view_TaskSetupPageDef" path="its.mnr.mp5.view.pageDefs.TaskSetupPageDef"/>
-    <page id="its_mnr_mp5_view_TaskSetupPageDef1" path="its.mnr.mp5.view.pageDefs.TaskSetupPageDef1"/>
-    <page id="its_mnr_mp5_view_AccountBillingMasterPageDef" path="Content.Admin.AccountBillingMasterPageDef"/>
-    <page id="its_mnr_mp5_view_TaskRateVersionPageDef" path="its.mnr.mp5.view.pageDefs.TaskRateVersionPageDef"/>
-    <page id="its_mnr_mp5_view_TaskRateVersionAddPageDef" path="Content.Admin.TaskRateVersionAddPageDef"/>
-    <page id="its_mnr_mp5_view_Admin_AccountBillingMasterAddRateVersion_Admin_AccountBillingMasterAddRateVersion_CreateNewAccountRateVersionPageDef"
-          path="Taskflows.Admin.BillingRate.Admin_AccountBillingMasterAddRateVersion_Admin_AccountBillingMasterAddRateVersion_CreateNewAccountRateVersionPageDef"/>
-    <page id="its_mnr_mp5_view_Admin_AccountBillingMasterAddRateVersion_Admin_AccountBillingMasterAddRateVersion_CreatePageDef"
-          path="Taskflows.Admin.BillingRate.Admin_AccountBillingMasterAddRateVersion_Admin_AccountBillingMasterAddRateVersion_CreatePageDef"/>
-    <page id="its_mnr_mp5_view_ServiceTaskRateEditPageDef" path="its.mnr.mp5.view.pageDefs.ServiceTaskRateEditPageDef"/>
-    <page id="its_mnr_mp5_view_hcPageDef" path="its.mnr.mp5.view.pageDefs.hcPageDef"/>
-    <page id="its_mnr_mp5_view_Admin_AccountBillingMasterServiceTaskRate_Admin_AccountBillingMasterServiceTaskRate_CreateWithParametersPageDef"
-          path="Taskflows.Admin.BillingRate.Admin_AccountBillingMasterServiceTaskRate_Admin_AccountBillingMasterServiceTaskRate_CreateWithParametersPageDef"/>
-    <page id="its_mnr_mp5_view_Admin_AccountBillingMaster_Admin_AccountBillingMaster_CreateWithParametersPageDef"
-          path="Taskflows.Admin.BillingRate.Admin_AccountBillingMaster_Admin_AccountBillingMaster_CreateWithParametersPageDef"/>
-    <page id="its_mnr_mp5_view_Admin_AccountBillingMaster_Admin_AccountBillingMaster_RemoveRowWithKeyPageDef"
-          path="Taskflows.Admin.BillingRate.Admin_AccountBillingMaster_Admin_AccountBillingMaster_RemoveRowWithKeyPageDef"/>
-    <page id="its_mnr_mp5_view_AccountRatePageDef" path="its.mnr.mp5.view.pageDefs.AccountRatePageDef"/>
-    <page id="its_mnr_mp5_view_workorderPageDef" path="its.mnr.mp5.view.pageDefs.workorderPageDef"/>
-    <page id="its_mnr_mp5_view_preferencesPageDef" path="its.mnr.mp5.view.pageDefs.preferencesPageDef"/>
-    <page id="its_mnr_mp5_view_WOEntryPageDef" path="its.mnr.mp5.view.pageDefs.WOEntryPageDef"/>
-    <page id="its_mnr_mp5_view_WorkOrderEntryPageDef" path="its.mnr.mp5.view.pageDefs.WorkOrderEntryPageDef"/>
-    <page id="its_mnr_mp5_view_WOTaskPageDef" path="its.mnr.mp5.view.pageDefs.WOTaskPageDef"/>
-    <page id="its_mnr_mp5_view_testPageDef" path="its.mnr.mp5.view.pageDefs.testPageDef"/>
-    <page id="its_mnr_mp5_view_InvoiceAssemblyPageDef" path="Content.Invoice.InvoiceAssemblyPageDef"/>
-    <page id="its_mnr_mp5_view_invoicePageDef" path="Content.Invoice.invoicePageDef"/>
-    <page id="its_mnr_mp5_view_Invoice_Assembly_Invoice_Assembly_initInvoiceAssemblyPageDef"
-          path="Taskflows.Invoice.Invoice_Assembly_Invoice_Assembly_initInvoiceAssemblyPageDef"/>
-    <page id="its_mnr_mp5_view_inquiryTempPageDef" path="its.mnr.mp5.view.pageDefs.inquiryTempPageDef"/>
-    <page id="its_mnr_mp5_view_InvoiceInquiryPageDef" path="its.mnr.mp5.view.pageDefs.InvoiceInquiryPageDef"/>
-    <page id="its_mnr_mp5_view_Invoice_Credit_Invoice_Credit_initInvoiceCreditPageDef"
-          path="Taskflows.Invoice.Invoice_Credit_Invoice_Credit_initInvoiceCreditPageDef"/>
-    <page id="its_mnr_mp5_view_InvoiceCreditPageDef" path="its.mnr.mp5.view.pageDefs.InvoiceCreditPageDef"/>
-    <page id="its_mnr_mp5_view_Invoice_Retro_Invoice_Retro_initInvoiceRetroPageDef"
-          path="Taskflows.Invoice.Invoice_Retro_Invoice_Retro_initInvoiceRetroPageDef"/>
-    <page id="its_mnr_mp5_view_InvoiceRetroPageDef" path="Content.Invoice.InvoiceRetroPageDef"/>
-    <page id="its_mnr_mp5_view_PartMaintPageDef" path="its.mnr.mp5.view.pageDefs.PartMaintPageDef"/>
-    <page id="its_mnr_mp5_view_stockPageDef" path="Content.Stock.stockPageDef"/>
-    <page id="its_mnr_mp5_view_PartMaintenancePageDef" path="its.mnr.mp5.view.pageDefs.PartMaintenancePageDef"/>
-    <page id="its_mnr_mp5_view_PORecvPageDef" path="its.mnr.mp5.view.pageDefs.PORecvPageDef"/>
-    <page id="its_mnr_mp5_view_PORecvPageDef1" path="Content.PORecv.PORecvPageDef"/>
-    <page id="its_mnr_mp5_view_POTestPageDef" path="its.mnr.mp5.view.pageDefs.POTestPageDef"/>
-    <page id="its_mnr_mp5_view_CompanyReceiptsPageDef" path="its.mnr.mp5.view.pageDefs.CompanyReceiptsPageDef"/>
-    <page id="its_mnr_mp5_view_POCompanReceipts_POCompanReceipts_initCompanyRcptsPageDef"
-          path="Taskflows.PORecv.POCompanReceipts_POCompanReceipts_initCompanyRcptsPageDef"/>
-    <page id="its_mnr_mp5_view_CycleCountPageDef" path="its.mnr.mp5.view.pageDefs.CycleCountPageDef"/>
-    <page id="its_mnr_mp5_view_CCSetup_BinRangePageDef" path="its.mnr.mp5.view.pageDefs.CCSetup_BinRangePageDef"/>
-    <page id="its_mnr_mp5_view_CCSetup_ReviewPageDef" path="its.mnr.mp5.view.pageDefs.CCSetup_ReviewPageDef"/>
-    <page id="its_mnr_mp5_view_CCSetup_SetupPageDef" path="its.mnr.mp5.view.pageDefs.CCSetup_SetupPageDef"/>
-    <page id="its_mnr_mp5_view_CCSetup_StoresPageDef" path="its.mnr.mp5.view.pageDefs.CCSetup_StoresPageDef"/>
-    <page id="its_mnr_mp5_view_CC_CCSetupTrain_CC_CCSetupTrain_CreateInsertPageDef"
-          path="Taskflows.Stock.CC_CCSetupTrain_CC_CCSetupTrain_CreateInsertPageDef"/>
-    <page id="its_mnr_mp5_view_PartClassPageDef" path="its.mnr.mp5.view.pageDefs.PartClassPageDef"/>
-    <page id="its_mnr_mp5_view_CCSetup_PartRangePageDef" path="its.mnr.mp5.view.pageDefs.CCSetup_PartRangePageDef"/>
-    <page id="its_mnr_mp5_view_CCSetup_PartNumPageDef" path="its.mnr.mp5.view.pageDefs.CCSetup_PartNumPageDef"/>
-    <page id="its_mnr_mp5_view_CCSetup_StorePartsPageDef" path="its.mnr.mp5.view.pageDefs.CCSetup_StorePartsPageDef"/>
-    <page id="its_mnr_mp5_view_CC_CCSetupStorePartsTempPageDef"
-          path="its.mnr.mp5.view.pageDefs.CC_CCSetupStorePartsTempPageDef"/>
-    <page id="its_mnr_mp5_view_FIFOExceptionsPageDef" path="Content.CycleCnt.FIFOExceptionsPageDef"/>
-    <page id="its_mnr_mp5_view_FIFOAsCountedPageDef" path="its.mnr.mp5.view.pageDefs.FIFOAsCountedPageDef"/>
-    <page id="its_mnr_mp5_view_FIFOAdjustedPageDef" path="Content.CycleCnt.FIFOAdjustedPageDef"/>
-    <page id="its_mnr_mp5_view_shuttleTstPageDef" path="its.mnr.mp5.view.pageDefs.shuttleTstPageDef"/>
-    <page id="its_mnr_mp5_view_FIFODeletePageDef" path="its.mnr.mp5.view.pageDefs.FIFODeletePageDef"/>
-    <page id="its_mnr_mp5_view_AssetMaintPageDef" path="its.mnr.mp5.view.pageDefs.AssetMaintPageDef"/>
-    <page id="its_mnr_mp5_view_AssetDocsPageDef" path="its.mnr.mp5.view.pageDefs.AssetDocsPageDef"/>
-    <page id="its_mnr_mp5_view_Asset_Docs_Asset_Docs_CreateInsertPageDef"
-          path="Taskflows.Asset.Asset_Docs_Asset_Docs_CreateInsertPageDef"/>
-    <page id="its_mnr_mp5_view_EditDocPageDef" path="its.mnr.mp5.view.pageDefs.EditDocPageDef"/>
-    <page id="its_mnr_mp5_view_Asset_Maint_assetMaint_CreateInsertPageDef"
-          path="Taskflows.Asset.Asset_Maint_assetMaint_CreateInsertPageDef"/>
-    <page id="its_mnr_mp5_view_AddSparesPageDef" path="its.mnr.mp5.view.pageDefs.AddSparesPageDef"/>
-    <page id="its_mnr_mp5_view_AssignDocsPageDef" path="its.mnr.mp5.view.pageDefs.AssignDocsPageDef"/>
-    <page id="its_mnr_mp5_view_AssetMeterReadingPageDef" path="its.mnr.mp5.view.pageDefs.AssetMeterReadingPageDef"/>
-    <page id="its_mnr_mp5_view_Asset_MeterReading_Asset_MeterReading_ExecuteWithParamsPageDef"
-          path="Taskflows.Asset.Asset_MeterReading_Asset_MeterReading_ExecuteWithParamsPageDef"/>
-    <page id="its_mnr_mp5_view_Asset_Maint_assetMaint_SetCurrentRowWithKeyPageDef"
-          path="Taskflows.Asset.Asset_Maint_assetMaint_SetCurrentRowWithKeyPageDef"/>
-    <page id="its_mnr_mp5_view_Asset_Maint_assetMaint_SetCurrentRowWithKeyValue1PageDef"
-          path="Taskflows.Asset.Asset_Maint_assetMaint_SetCurrentRowWithKeyValue1PageDef"/>
-    <page id="its_mnr_mp5_view_Asset_Maint_assetMaint_SetCurrentRowWithKeyValuePageDef"
-          path="Taskflows.Asset.Asset_Maint_assetMaint_SetCurrentRowWithKeyValuePageDef"/>
-    <page id="its_mnr_mp5_view_Asset_Maint_assetMaint_ExecuteWithParamsPageDef"
-          path="Taskflows.Asset.Asset_Maint_assetMaint_ExecuteWithParamsPageDef"/>
-    <page id="its_mnr_mp5_view_ClassPageDef" path="its.mnr.mp5.view.pageDefs.ClassPageDef"/>
-    <page id="its_mnr_mp5_view_Admin_Class_Admin_Class_ExecuteWithParamsPageDef"
-          path="Taskflows.Admin.Master.Admin_Class_Admin_Class_ExecuteWithParamsPageDef"/>
-    <page id="its_mnr_mp5_view_Admin_Class_Admin_Class_CreateInsertPageDef"
-          path="Taskflows.Admin.Master.Admin_Class_Admin_Class_CreateInsertPageDef"/>
-    <page id="its_mnr_mp5_view_AddEditPageDef" path="its.mnr.mp5.view.pageDefs.AddEditPageDef"/>
-    <page id="its_mnr_mp5_view_AssetMeterTypeSelPageDef" path="Content.Asset.AssetMeterTypeSelPageDef"/>
-    <page id="its_mnr_mp5_view_AssetAddReadingPageDef" path="Content.Asset.AssetAddReadingPageDef"/>
-    <page id="its_mnr_mp5_view_Asset_Maint_assetMaint_ExecutePageDef"
-          path="Taskflows.Asset.Asset_Maint_assetMaint_ExecutePageDef"/>
-    <page id="its_mnr_mp5_view_SupplierPageDef" path="its.mnr.mp5.view.pageDefs.SupplierPageDef"/>
-    <page id="its_mnr_mp5_view_Suppliers_Suppliers_CreateInsertPageDef"
-          path="Taskflows.Stock.Suppliers_Suppliers_CreateInsertPageDef"/>
-    <page id="its_mnr_mp5_view_EditSupplierPageDef" path="its.mnr.mp5.view.pageDefs.EditSupplierPageDef"/>
-    <page id="its_mnr_mp5_view_POHistPageDef" path="its.mnr.mp5.view.pageDefs.POHistPageDef"/>
-    <page id="its_mnr_mp5_view_CC_CycleCount_Inv_CycleCount_SetCurrentRowWithKeyValuePageDef"
-          path="Taskflows.Stock.CC_CycleCount_Inv_CycleCount_SetCurrentRowWithKeyValuePageDef"/>
-    <page id="its_mnr_mp5_view_CC_CycleCount_Inv_CycleCount_CommitPageDef"
-          path="Taskflows.Stock.CC_CycleCount_Inv_CycleCount_CommitPageDef"/>
-    <page id="its_mnr_mp5_view_CCSetup_BinNumPageDef" path="Content.CycleCnt.CCSetup_BinNumPageDef"/>
-    <!--<page id="its_mnr_mp5_view_flagPageDef1" path="Content.WorkOrder.flagPageDef"/>-->
-    <page id="its_mnr_mp5_view_setupEmailNotificationPageDef" path="Content.CycleCnt.setupEmailNotificationPageDef"/>
-    <page id="its_mnr_mp5_view_Invoice_Credit_Invoice_Credit_CommitPageDef"
-          path="Taskflows.Invoice.Invoice_Credit_Invoice_Credit_CommitPageDef"/>
-    <page id="its_mnr_mp5_view_FlagsPageDef" path="its.mnr.mp5.view.pageDefs.FlagsPageDef"/>
-    <page id="its_mnr_mp5_view_Flag_flow_Flag_flow_ExecuteWithParamsPageDef"
-          path="Taskflows.WorkOrder.Flag_flow_Flag_flow_ExecuteWithParamsPageDef"/>
-  </pageDefinitionUsages>
-  <dataControlUsages>
-    <dc id="MP5TMSWS" path="its.mnr.mp5.MP5TMSWS"/>
-    <BC4JDataControl id="MNRDataControlDataControl" Package="its.mnr.mp5.model"
-                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
-                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
-                     SupportsSortCollection="true" Configuration="MNRDataControlLocal" syncMode="Immediate"
-                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
-    <BC4JDataControl id="MasterDataControlDataControl" Package="its.mnr.mp5.model"
-                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
-                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
-                     SupportsSortCollection="true" Configuration="MasterDataControlLocal" syncMode="Immediate"
-                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
-    <BC4JDataControl id="BillingRatesDataControlDataControl" Package="its.mnr.mp5.model"
-                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
-                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
-                     SupportsSortCollection="true" Configuration="LocalDataControlLocal" syncMode="Immediate"
-                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
-    <BC4JDataControl id="WODataControlDataControl" Package="its.mnr.mp5.model"
-                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
-                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
-                     SupportsSortCollection="true" Configuration="WODataControlLocal" syncMode="Immediate"
-                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
-    <BC4JDataControl id="INVDataControlDataControl" Package="its.mnr.mp5.model"
-                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
-                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
-                     SupportsSortCollection="true" Configuration="INVDataControlLocal" syncMode="Immediate"
-                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
-    <BC4JDataControl id="CCDataControlDataControl" Package="its.mnr.mp5.model"
-                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
-                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
-                     SupportsSortCollection="true" Configuration="CCDataControlLocal" syncMode="Immediate"
-                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
-    <BC4JDataControl id="AssetDataControlDataControl" Package="its.mnr.mp5.model"
-                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
-                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
-                     SupportsSortCollection="true" Configuration="AssetDataControlLocal" syncMode="Immediate"
-                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
-    <BC4JDataControl id="PORecvDataControlDataControl" Package="its.mnr.mp5.model"
-                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
-                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
-                     SupportsSortCollection="true" Configuration="PORecvDataControlLocal" syncMode="Immediate"
-                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
-  </dataControlUsages>
+    <definitionFactories>
+        <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+                 className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+        <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+        <factory nameSpace="http://xmlns.oracle.com/adfm/dvt"
+                 className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"/>
+    </definitionFactories>
+    <pageMap>
+        <page path="/Content/Admin/Admin.jspx" usageId="its_mnr_mp5_view_AdminPageDef"/>
+        <page path="/Content/Admin/WorkOrderMaster.jspx" usageId="its_mnr_mp5_view_WorkOrderMasterPageDef"/>
+        <page path="/home.jspx" usageId="its_mnr_mp5_view_homePageDef"/>
+        <page path="/Content/Admin/ServiceGroupMaster.jspx" usageId="its_mnr_mp5_view_ServiceGroupMasterPageDef"/>
+        <page path="/Content/Admin/DamageRepairMaster.jspx" usageId="its_mnr_mp5_view_DamageRepairMasterPageDef"/>
+        <page path="/Content/Admin/ComponentLocationMaster.jspx"
+              usageId="its_mnr_mp5_view_ComponentLocationMasterPageDef"/>
+        <page path="/Content/Admin/PerMaster.jspx" usageId="its_mnr_mp5_view_PerMasterPageDef"/>
+        <page path="/Content/Admin/ProfileMaster.jspx" usageId="its_mnr_mp5_view_ProfileMasterPageDef"/>
+        <page path="/Content/Admin/AccountMaster.jspx" usageId="its_mnr_mp5_view_AccountMasterPageDef"/>
+        <page path="/Content/Admin/AccountMasterDetail.jspx" usageId="its_mnr_mp5_view_AccountMasterDetailPageDef"/>
+        <page path="/error.jspx" usageId="its_mnr_mp5_view_errorPageDef"/>
+        <page path="/login.jspx" usageId="its_mnr_mp5_view_loginPageDef"/>
+        <page path="/Content/Admin/ServiceTask.jspx" usageId="its_mnr_mp5_view_TaskSetupPageDef"/>
+        <page path="/Content/Admin/TaskSetup.jspx" usageId="its_mnr_mp5_view_TaskSetupPageDef1"/>
+        <page path="/Content/Admin/AccountBillingMaster.jspx" usageId="its_mnr_mp5_view_AccountBillingMasterPageDef"/>
+        <page path="/Content/Admin/TaskRateVersion.jspx" usageId="its_mnr_mp5_view_TaskRateVersionPageDef"/>
+        <page path="/Content/Admin/TaskRateVersionAdd.jspx" usageId="its_mnr_mp5_view_TaskRateVersionAddPageDef"/>
+        <page path="/WEB-INF/Taskflows/Admin/BillingRate/Admin-AccountBillingMasterAddRateVersion.xml#Admin-AccountBillingMasterAddRateVersion@CreateNewAccountRateVersion"
+              usageId="its_mnr_mp5_view_Admin_AccountBillingMasterAddRateVersion_Admin_AccountBillingMasterAddRateVersion_CreateNewAccountRateVersionPageDef"/>
+        <page path="/WEB-INF/Taskflows/Admin/BillingRate/Admin-AccountBillingMasterAddRateVersion.xml#Admin-AccountBillingMasterAddRateVersion@Create"
+              usageId="its_mnr_mp5_view_Admin_AccountBillingMasterAddRateVersion_Admin_AccountBillingMasterAddRateVersion_CreatePageDef"/>
+        <page path="/Content/Admin/ServiceTaskRateEdit.jspx" usageId="its_mnr_mp5_view_ServiceTaskRateEditPageDef"/>
+        <page path="/WEB-INF/Taskflows/Admin/BillingRate/Admin-AccountBillingMaster.xml#Admin-AccountBillingMaster@setServiceGroupId"
+              usageId="its_mnr_mp5_view_Admin_AccountBillingMaster_Admin_AccountBillingMaster_CreateWithParametersPageDef"/>
+        <page path="/WEB-INF/Taskflows/Admin/BillingRate/Admin-AccountBillingMaster.xml#Admin-AccountBillingMaster@RemoveRowWithKey"
+              usageId="its_mnr_mp5_view_Admin_AccountBillingMaster_Admin_AccountBillingMaster_RemoveRowWithKeyPageDef"/>
+        <page path="/Content/Admin/admin.jspx" usageId="its_mnr_mp5_view_AdminPageDef"/>
+        <page path="/Content/WorkOrder/workorder.jspx" usageId="its_mnr_mp5_view_workorderPageDef"/>
+        <page path="/Content/Invoice/InvoiceAssembly.jspx" usageId="its_mnr_mp5_view_InvoiceAssemblyPageDef"/>
+        <page path="/Content/Invoice/invoice.jspx" usageId="its_mnr_mp5_view_invoicePageDef"/>
+        <page path="/WEB-INF/Taskflows/Invoice/Invoice-Assembly.xml#Invoice-Assembly@initInvoiceAssembly"
+              usageId="its_mnr_mp5_view_Invoice_Assembly_Invoice_Assembly_initInvoiceAssemblyPageDef"/>
+        <page path="/Content/Invoice/InvoiceInquiry.jspx" usageId="its_mnr_mp5_view_InvoiceInquiryPageDef"/>
+        <page path="/WEB-INF/Taskflows/Invoice/Invoice-Credit.xml#Invoice-Credit@initInvoiceCredit"
+              usageId="its_mnr_mp5_view_Invoice_Credit_Invoice_Credit_initInvoiceCreditPageDef"/>
+        <page path="/Content/Invoice/InvoiceCredit.jspx" usageId="its_mnr_mp5_view_InvoiceCreditPageDef"/>
+        <page path="/WEB-INF/Taskflows/Invoice/Invoice-Retro.xml#Invoice-Retro@initInvoiceRetro"
+              usageId="its_mnr_mp5_view_Invoice_Retro_Invoice_Retro_initInvoiceRetroPageDef"/>
+        <page path="/Content/Invoice/InvoiceRetro.jspx" usageId="its_mnr_mp5_view_InvoiceRetroPageDef"/>
+        <page path="/Content/WorkOrder/WOEntry.jspx" usageId="its_mnr_mp5_view_WOEntryPageDef"/>
+        <page path="/Content/Stock/stock.jspx" usageId="its_mnr_mp5_view_stockPageDef"/>
+        <page path="/Content/Stock/PartMaintenance.jspx" usageId="its_mnr_mp5_view_PartMaintenancePageDef"/>
+        <page path="/Content/PORecv/POMaintenance.jspx" usageId="its_mnr_mp5_view_PORecvPageDef"/>
+        <page path="/Content/PORecv/PORecv.jspx" usageId="its_mnr_mp5_view_PORecvPageDef1"/>
+        <page path="/Content/PORecv/CompanyReceipts.jspx" usageId="its_mnr_mp5_view_CompanyReceiptsPageDef"/>
+        <page path="/WEB-INF/Taskflows/PORecv/POCompanReceipts.xml#POCompanReceipts@initCompanyRcpts"
+              usageId="its_mnr_mp5_view_POCompanReceipts_POCompanReceipts_initCompanyRcptsPageDef"/>
+        <page path="/Content/CycleCnt/CycleCount.jspx" usageId="its_mnr_mp5_view_CycleCountPageDef"/>
+        <page path="/Content/CycleCnt/CCSetup-BinRange.jspx" usageId="its_mnr_mp5_view_CCSetup_BinRangePageDef"/>
+        <page path="/Content/CycleCnt/CCSetup-Review.jspx" usageId="its_mnr_mp5_view_CCSetup_ReviewPageDef"/>
+        <page path="/Content/CycleCnt/CCSetup-Setup.jspx" usageId="its_mnr_mp5_view_CCSetup_SetupPageDef"/>
+        <page path="/Content/CycleCnt/CCSetup-Stores.jspx" usageId="its_mnr_mp5_view_CCSetup_StoresPageDef"/>
+        <page path="/WEB-INF/Taskflows/Stock/CC-CCSetupTrain.xml#CC-CCSetupTrain@CreateInsert"
+              usageId="its_mnr_mp5_view_CC_CCSetupTrain_CC_CCSetupTrain_CreateInsertPageDef"/>
+        <page path="/Content/CycleCnt/CCSetup-PartClass.jspx" usageId="its_mnr_mp5_view_PartClassPageDef"/>
+        <page path="/Content/CycleCnt/CCSetup-PartRange.jspx" usageId="its_mnr_mp5_view_CCSetup_PartRangePageDef"/>
+        <page path="/Content/CycleCnt/CCSetup-PartNum.jspx" usageId="its_mnr_mp5_view_CCSetup_PartNumPageDef"/>
+        <page path="/Content/CycleCnt/CCSetup-StoreParts.jspx" usageId="its_mnr_mp5_view_CCSetup_StorePartsPageDef"/>
+        <page path="/CC-CCSetupStorePartsTemp.jspx" usageId="its_mnr_mp5_view_CC_CCSetupStorePartsTempPageDef"/>
+        <page path="/Content/CycleCnt/FIFOExceptions.jspx" usageId="its_mnr_mp5_view_FIFOExceptionsPageDef"/>
+        <page path="/Content/CycleCnt/FIFOAsCounted.jspx" usageId="its_mnr_mp5_view_FIFOAsCountedPageDef"/>
+        <page path="/Content/CycleCnt/FIFOAdjusted.jspx" usageId="its_mnr_mp5_view_FIFOAdjustedPageDef"/>
+        <page path="/Content/CycleCnt/StoreroomParts.jspx" usageId="its_mnr_mp5_view_shuttleTstPageDef"/>
+        <page path="/Content/Asset/AssetMaint.jspx" usageId="its_mnr_mp5_view_AssetMaintPageDef"/>
+        <page path="/Content/Asset/AssetDocs.jspx" usageId="its_mnr_mp5_view_AssetDocsPageDef"/>
+        <page path="/WEB-INF/Taskflows/Asset/Asset-Docs.xml#Asset-Docs@CreateInsert"
+              usageId="its_mnr_mp5_view_Asset_Docs_Asset_Docs_CreateInsertPageDef"/>
+        <page path="/Content/Asset/EditDoc.jspx" usageId="its_mnr_mp5_view_EditDocPageDef"/>
+        <page path="/WEB-INF/Taskflows/Asset/Asset-Maint.xml#assetMaint@CreateInsert"
+              usageId="its_mnr_mp5_view_Asset_Maint_assetMaint_CreateInsertPageDef"/>
+        <page path="/Content/Asset/AddSpares.jspx" usageId="its_mnr_mp5_view_AddSparesPageDef"/>
+        <page path="/Content/Asset/AssetMeterReading.jspx" usageId="its_mnr_mp5_view_AssetMeterReadingPageDef"/>
+        <page path="/WEB-INF/Taskflows/Asset/Asset-MeterReading.xml#Asset-MeterReading@ExecuteWithParams"
+              usageId="its_mnr_mp5_view_Asset_MeterReading_Asset_MeterReading_ExecuteWithParamsPageDef"/>
+        <page path="/WEB-INF/Taskflows/Asset/Asset-Maint.xml#assetMaint@SetCurrentRowWithKey"
+              usageId="its_mnr_mp5_view_Asset_Maint_assetMaint_SetCurrentRowWithKeyPageDef"/>
+        <page path="/WEB-INF/Taskflows/Asset/Asset-Maint.xml#assetMaint@SetCurrentRowWithKeyValue1"
+              usageId="its_mnr_mp5_view_Asset_Maint_assetMaint_SetCurrentRowWithKeyValue1PageDef"/>
+        <page path="/WEB-INF/Taskflows/Asset/Asset-Maint.xml#assetMaint@SetCurrentRowWithKeyValue"
+              usageId="its_mnr_mp5_view_Asset_Maint_assetMaint_SetCurrentRowWithKeyValuePageDef"/>
+        <page path="/WEB-INF/Taskflows/Asset/Asset-Maint.xml#assetMaint@ExecuteWithParams"
+              usageId="its_mnr_mp5_view_Asset_Maint_assetMaint_ExecuteWithParamsPageDef"/>
+        <page path="/Content/Admin/Class.jspx" usageId="its_mnr_mp5_view_ClassPageDef"/>
+        <page path="/WEB-INF/Taskflows/Admin/Master/Admin-Class.xml#Admin-Class@ExecuteWithParams"
+              usageId="its_mnr_mp5_view_Admin_Class_Admin_Class_ExecuteWithParamsPageDef"/>
+        <page path="/WEB-INF/Taskflows/Admin/Master/Admin-Class.xml#Admin-Class@CreateInsert"
+              usageId="its_mnr_mp5_view_Admin_Class_Admin_Class_CreateInsertPageDef"/>
+        <page path="/Content/Admin/AddEdit.jspx" usageId="its_mnr_mp5_view_AddEditPageDef"/>
+        <page path="/WEB-INF/Taskflows/Asset/Asset-Maint.xml#assetMaint@Execute"
+              usageId="its_mnr_mp5_view_Asset_Maint_assetMaint_ExecutePageDef"/>
+        <page path="/Content/Stock/Supplier.jspx" usageId="its_mnr_mp5_view_SupplierPageDef"/>
+        <page path="/WEB-INF/Taskflows/Stock/Suppliers.xml#Suppliers@CreateInsert"
+              usageId="its_mnr_mp5_view_Suppliers_Suppliers_CreateInsertPageDef"/>
+        <page path="/Content/Stock/EditSupplier.jspx" usageId="its_mnr_mp5_view_EditSupplierPageDef"/>
+        <page path="/Content/PORecv/POHist.jspx" usageId="its_mnr_mp5_view_POHistPageDef"/>
+        <page path="/WEB-INF/Taskflows/Stock/CC-CycleCount.xml#Inv-CycleCount@Commit"
+              usageId="its_mnr_mp5_view_CC_CycleCount_Inv_CycleCount_CommitPageDef"/>
+        <page path="/WEB-INF/StoreroomPartsShuttle.xml#StoreroomPartsShuttle@SetCurrentRowWithKeyValue"
+              usageId="its_mnr_mp5_view_CC_CycleCount_Inv_CycleCount_SetCurrentRowWithKeyValuePageDef"/>
+        <page path="/Content/CycleCnt/CCSetup-BinNum.jspx" usageId="its_mnr_mp5_view_CCSetup_BinNumPageDef"/>
+        <page path="/Content/CycleCnt/CCsetup-EmailNotification.jspx"
+              usageId="its_mnr_mp5_view_setupEmailNotificationPageDef"/>
+        <page path="/WEB-INF/Taskflows/Invoice/Invoice-Credit.xml#Invoice-Credit@Commit"
+              usageId="its_mnr_mp5_view_Invoice_Credit_Invoice_Credit_CommitPageDef"/>
+        <page path="/Content/Estimates/Estimates.jspx" usageId="its_mnr_mp5_view_EstimatesPageDef"/>
+        <page path="/Content/Estimates/EstimatesEntry.jspx" usageId="its_mnr_mp5_view_EstimatesEntryPageDef"/>
+        <page path="/Content/Estimates/EstimateWO.jspx" usageId="its_mnr_mp5_view_view1PageDef"/>
+        <page path="/Content/Report/report.jspx" usageId="its_mnr_mp5_view_reportPageDef"/>
+        <page path="/Content/Asset/asset.jspx" usageId="its_mnr_mp5_view_assetPageDef"/>
+        <!--
+        <page path="/WEB-INF/Taskflows/Estimates/Estimates-EstimatesEntry.xml#Estimates-EstimatesEntry@Execute"
+              usageId="its_mnr_mp5_view_Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecutePageDef"/>
+        -->
+        <page path="/Content/WorkOrder/Flags.jspx" usageId="its_mnr_mp5_view_FlagsPageDef"/>
+        <page path="/WEB-INF/Taskflows/Estimates/Estimates-EstimatesEntry.xml#Estimates-EstimatesEntry@Execute"
+              usageId="its_mnr_mp5_view_Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecutePageDef"/>
+        <page path="/WEB-INF/Taskflows/Estimates/Estimates-EstimatesEntry.xml#Estimates-EstimatesEntry@ExecuteWithParams1"
+              usageId="its_mnr_mp5_view_Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecuteWithParams1PageDef1"/>
+        <page path="/WEB-INF/Taskflows/Estimates/Estimates-EstimatesEntry.xml#Estimates-EstimatesEntry@Commit"
+              usageId="its_mnr_mp5_view_Estimates_EstimatesEntry_Estimates_EstimatesEntry_CommitPageDef"/>
+    </pageMap>
+    <pageDefinitionUsages>
+        <page id="its_mnr_mp5_view_AdminPageDef" path="its.mnr.mp5.view.pageDefs.AdminPageDef"/>
+        <page id="its_mnr_mp5_view_WorkOrderMasterPageDef" path="its.mnr.mp5.view.pageDefs.WorkOrderMasterPageDef"/>
+        <page id="its_mnr_mp5_view_homePageDef" path="its.mnr.mp5.view.pageDefs.homePageDef"/>
+        <page id="its_mnr_mp5_view_ServiceGroupMasterPageDef"
+              path="its.mnr.mp5.view.pageDefs.ServiceGroupMasterPageDef"/>
+        <page id="its_mnr_mp5_view_DamageRepairMasterPageDef"
+              path="its.mnr.mp5.view.pageDefs.DamageRepairMasterPageDef"/>
+        <page id="its_mnr_mp5_view_ComponentLocationMasterPageDef"
+              path="its.mnr.mp5.view.pageDefs.ComponentLocationMasterPageDef"/>
+        <page id="its_mnr_mp5_view_PerMasterPageDef" path="its.mnr.mp5.view.pageDefs.PerMasterPageDef"/>
+        <page id="its_mnr_mp5_view_ProfileMasterPageDef" path="its.mnr.mp5.view.pageDefs.ProfileMasterPageDef"/>
+        <page id="its_mnr_mp5_view_AccountMasterPageDef" path="its.mnr.mp5.view.pageDefs.AccountMasterPageDef"/>
+        <page id="its_mnr_mp5_view_AccountMasterDetailPageDef"
+              path="its.mnr.mp5.view.pageDefs.AccountMasterDetailPageDef"/>
+        <page id="its_mnr_mp5_view_loginPageDef" path="its.mnr.mp5.view.pageDefs.loginPageDef"/>
+        <page id="its_mnr_mp5_view_errorPageDef" path="its.mnr.mp5.view.pageDefs.errorPageDef"/>
+        <page id="its_mnr_mp5_view_TaskSetupPageDef" path="its.mnr.mp5.view.pageDefs.TaskSetupPageDef"/>
+        <page id="its_mnr_mp5_view_TaskSetupPageDef1" path="its.mnr.mp5.view.pageDefs.TaskSetupPageDef1"/>
+        <page id="its_mnr_mp5_view_AccountBillingMasterPageDef" path="Content.Admin.AccountBillingMasterPageDef"/>
+        <page id="its_mnr_mp5_view_TaskRateVersionPageDef" path="its.mnr.mp5.view.pageDefs.TaskRateVersionPageDef"/>
+        <page id="its_mnr_mp5_view_TaskRateVersionAddPageDef" path="Content.Admin.TaskRateVersionAddPageDef"/>
+        <page id="its_mnr_mp5_view_Admin_AccountBillingMasterAddRateVersion_Admin_AccountBillingMasterAddRateVersion_CreateNewAccountRateVersionPageDef"
+              path="Taskflows.Admin.BillingRate.Admin_AccountBillingMasterAddRateVersion_Admin_AccountBillingMasterAddRateVersion_CreateNewAccountRateVersionPageDef"/>
+        <page id="its_mnr_mp5_view_Admin_AccountBillingMasterAddRateVersion_Admin_AccountBillingMasterAddRateVersion_CreatePageDef"
+              path="Taskflows.Admin.BillingRate.Admin_AccountBillingMasterAddRateVersion_Admin_AccountBillingMasterAddRateVersion_CreatePageDef"/>
+        <page id="its_mnr_mp5_view_ServiceTaskRateEditPageDef"
+              path="its.mnr.mp5.view.pageDefs.ServiceTaskRateEditPageDef"/>
+        <page id="its_mnr_mp5_view_hcPageDef" path="its.mnr.mp5.view.pageDefs.hcPageDef"/>
+        <page id="its_mnr_mp5_view_Admin_AccountBillingMasterServiceTaskRate_Admin_AccountBillingMasterServiceTaskRate_CreateWithParametersPageDef"
+              path="Taskflows.Admin.BillingRate.Admin_AccountBillingMasterServiceTaskRate_Admin_AccountBillingMasterServiceTaskRate_CreateWithParametersPageDef"/>
+        <page id="its_mnr_mp5_view_Admin_AccountBillingMaster_Admin_AccountBillingMaster_CreateWithParametersPageDef"
+              path="Taskflows.Admin.BillingRate.Admin_AccountBillingMaster_Admin_AccountBillingMaster_CreateWithParametersPageDef"/>
+        <page id="its_mnr_mp5_view_Admin_AccountBillingMaster_Admin_AccountBillingMaster_RemoveRowWithKeyPageDef"
+              path="Taskflows.Admin.BillingRate.Admin_AccountBillingMaster_Admin_AccountBillingMaster_RemoveRowWithKeyPageDef"/>
+        <page id="its_mnr_mp5_view_AccountRatePageDef" path="its.mnr.mp5.view.pageDefs.AccountRatePageDef"/>
+        <page id="its_mnr_mp5_view_workorderPageDef" path="its.mnr.mp5.view.pageDefs.workorderPageDef"/>
+        <page id="its_mnr_mp5_view_preferencesPageDef" path="its.mnr.mp5.view.pageDefs.preferencesPageDef"/>
+        <page id="its_mnr_mp5_view_WOEntryPageDef" path="its.mnr.mp5.view.pageDefs.WOEntryPageDef"/>
+        <page id="its_mnr_mp5_view_WorkOrderEntryPageDef" path="its.mnr.mp5.view.pageDefs.WorkOrderEntryPageDef"/>
+        <page id="its_mnr_mp5_view_WOTaskPageDef" path="its.mnr.mp5.view.pageDefs.WOTaskPageDef"/>
+        <page id="its_mnr_mp5_view_testPageDef" path="its.mnr.mp5.view.pageDefs.testPageDef"/>
+        <page id="its_mnr_mp5_view_InvoiceAssemblyPageDef" path="Content.Invoice.InvoiceAssemblyPageDef"/>
+        <page id="its_mnr_mp5_view_invoicePageDef" path="Content.Invoice.invoicePageDef"/>
+        <page id="its_mnr_mp5_view_Invoice_Assembly_Invoice_Assembly_initInvoiceAssemblyPageDef"
+              path="Taskflows.Invoice.Invoice_Assembly_Invoice_Assembly_initInvoiceAssemblyPageDef"/>
+        <page id="its_mnr_mp5_view_inquiryTempPageDef" path="its.mnr.mp5.view.pageDefs.inquiryTempPageDef"/>
+        <page id="its_mnr_mp5_view_InvoiceInquiryPageDef" path="its.mnr.mp5.view.pageDefs.InvoiceInquiryPageDef"/>
+        <page id="its_mnr_mp5_view_Invoice_Credit_Invoice_Credit_initInvoiceCreditPageDef"
+              path="Taskflows.Invoice.Invoice_Credit_Invoice_Credit_initInvoiceCreditPageDef"/>
+        <page id="its_mnr_mp5_view_InvoiceCreditPageDef" path="its.mnr.mp5.view.pageDefs.InvoiceCreditPageDef"/>
+        <page id="its_mnr_mp5_view_Invoice_Retro_Invoice_Retro_initInvoiceRetroPageDef"
+              path="Taskflows.Invoice.Invoice_Retro_Invoice_Retro_initInvoiceRetroPageDef"/>
+        <page id="its_mnr_mp5_view_InvoiceRetroPageDef" path="Content.Invoice.InvoiceRetroPageDef"/>
+        <page id="its_mnr_mp5_view_PartMaintPageDef" path="its.mnr.mp5.view.pageDefs.PartMaintPageDef"/>
+        <page id="its_mnr_mp5_view_stockPageDef" path="Content.Stock.stockPageDef"/>
+        <page id="its_mnr_mp5_view_PartMaintenancePageDef" path="its.mnr.mp5.view.pageDefs.PartMaintenancePageDef"/>
+        <page id="its_mnr_mp5_view_PORecvPageDef" path="its.mnr.mp5.view.pageDefs.PORecvPageDef"/>
+        <page id="its_mnr_mp5_view_PORecvPageDef1" path="Content.PORecv.PORecvPageDef"/>
+        <page id="its_mnr_mp5_view_POTestPageDef" path="its.mnr.mp5.view.pageDefs.POTestPageDef"/>
+        <page id="its_mnr_mp5_view_CompanyReceiptsPageDef" path="its.mnr.mp5.view.pageDefs.CompanyReceiptsPageDef"/>
+        <page id="its_mnr_mp5_view_POCompanReceipts_POCompanReceipts_initCompanyRcptsPageDef"
+              path="Taskflows.PORecv.POCompanReceipts_POCompanReceipts_initCompanyRcptsPageDef"/>
+        <page id="its_mnr_mp5_view_CycleCountPageDef" path="its.mnr.mp5.view.pageDefs.CycleCountPageDef"/>
+        <page id="its_mnr_mp5_view_CCSetup_BinRangePageDef" path="its.mnr.mp5.view.pageDefs.CCSetup_BinRangePageDef"/>
+        <page id="its_mnr_mp5_view_CCSetup_ReviewPageDef" path="its.mnr.mp5.view.pageDefs.CCSetup_ReviewPageDef"/>
+        <page id="its_mnr_mp5_view_CCSetup_SetupPageDef" path="its.mnr.mp5.view.pageDefs.CCSetup_SetupPageDef"/>
+        <page id="its_mnr_mp5_view_CCSetup_StoresPageDef" path="its.mnr.mp5.view.pageDefs.CCSetup_StoresPageDef"/>
+        <page id="its_mnr_mp5_view_CC_CCSetupTrain_CC_CCSetupTrain_CreateInsertPageDef"
+              path="Taskflows.Stock.CC_CCSetupTrain_CC_CCSetupTrain_CreateInsertPageDef"/>
+        <page id="its_mnr_mp5_view_PartClassPageDef" path="its.mnr.mp5.view.pageDefs.PartClassPageDef"/>
+        <page id="its_mnr_mp5_view_CCSetup_PartRangePageDef" path="its.mnr.mp5.view.pageDefs.CCSetup_PartRangePageDef"/>
+        <page id="its_mnr_mp5_view_CCSetup_PartNumPageDef" path="its.mnr.mp5.view.pageDefs.CCSetup_PartNumPageDef"/>
+        <page id="its_mnr_mp5_view_CCSetup_StorePartsPageDef"
+              path="its.mnr.mp5.view.pageDefs.CCSetup_StorePartsPageDef"/>
+        <page id="its_mnr_mp5_view_CC_CCSetupStorePartsTempPageDef"
+              path="its.mnr.mp5.view.pageDefs.CC_CCSetupStorePartsTempPageDef"/>
+        <page id="its_mnr_mp5_view_FIFOExceptionsPageDef" path="Content.CycleCnt.FIFOExceptionsPageDef"/>
+        <page id="its_mnr_mp5_view_FIFOAsCountedPageDef" path="its.mnr.mp5.view.pageDefs.FIFOAsCountedPageDef"/>
+        <page id="its_mnr_mp5_view_FIFOAdjustedPageDef" path="Content.CycleCnt.FIFOAdjustedPageDef"/>
+        <page id="its_mnr_mp5_view_shuttleTstPageDef" path="its.mnr.mp5.view.pageDefs.shuttleTstPageDef"/>
+        <page id="its_mnr_mp5_view_FIFODeletePageDef" path="its.mnr.mp5.view.pageDefs.FIFODeletePageDef"/>
+        <page id="its_mnr_mp5_view_AssetMaintPageDef" path="its.mnr.mp5.view.pageDefs.AssetMaintPageDef"/>
+        <page id="its_mnr_mp5_view_AssetDocsPageDef" path="its.mnr.mp5.view.pageDefs.AssetDocsPageDef"/>
+        <page id="its_mnr_mp5_view_Asset_Docs_Asset_Docs_CreateInsertPageDef"
+              path="Taskflows.Asset.Asset_Docs_Asset_Docs_CreateInsertPageDef"/>
+        <page id="its_mnr_mp5_view_EditDocPageDef" path="its.mnr.mp5.view.pageDefs.EditDocPageDef"/>
+        <page id="its_mnr_mp5_view_Asset_Maint_assetMaint_CreateInsertPageDef"
+              path="Taskflows.Asset.Asset_Maint_assetMaint_CreateInsertPageDef"/>
+        <page id="its_mnr_mp5_view_AddSparesPageDef" path="its.mnr.mp5.view.pageDefs.AddSparesPageDef"/>
+        <page id="its_mnr_mp5_view_AssignDocsPageDef" path="its.mnr.mp5.view.pageDefs.AssignDocsPageDef"/>
+        <page id="its_mnr_mp5_view_AssetMeterReadingPageDef" path="its.mnr.mp5.view.pageDefs.AssetMeterReadingPageDef"/>
+        <page id="its_mnr_mp5_view_Asset_MeterReading_Asset_MeterReading_ExecuteWithParamsPageDef"
+              path="Taskflows.Asset.Asset_MeterReading_Asset_MeterReading_ExecuteWithParamsPageDef"/>
+        <page id="its_mnr_mp5_view_Asset_Maint_assetMaint_SetCurrentRowWithKeyPageDef"
+              path="Taskflows.Asset.Asset_Maint_assetMaint_SetCurrentRowWithKeyPageDef"/>
+        <page id="its_mnr_mp5_view_Asset_Maint_assetMaint_SetCurrentRowWithKeyValue1PageDef"
+              path="Taskflows.Asset.Asset_Maint_assetMaint_SetCurrentRowWithKeyValue1PageDef"/>
+        <page id="its_mnr_mp5_view_Asset_Maint_assetMaint_SetCurrentRowWithKeyValuePageDef"
+              path="Taskflows.Asset.Asset_Maint_assetMaint_SetCurrentRowWithKeyValuePageDef"/>
+        <page id="its_mnr_mp5_view_Asset_Maint_assetMaint_ExecuteWithParamsPageDef"
+              path="Taskflows.Asset.Asset_Maint_assetMaint_ExecuteWithParamsPageDef"/>
+        <page id="its_mnr_mp5_view_ClassPageDef" path="its.mnr.mp5.view.pageDefs.ClassPageDef"/>
+        <page id="its_mnr_mp5_view_Admin_Class_Admin_Class_ExecuteWithParamsPageDef"
+              path="Taskflows.Admin.Master.Admin_Class_Admin_Class_ExecuteWithParamsPageDef"/>
+        <page id="its_mnr_mp5_view_Admin_Class_Admin_Class_CreateInsertPageDef"
+              path="Taskflows.Admin.Master.Admin_Class_Admin_Class_CreateInsertPageDef"/>
+        <page id="its_mnr_mp5_view_AddEditPageDef" path="its.mnr.mp5.view.pageDefs.AddEditPageDef"/>
+        <page id="its_mnr_mp5_view_AssetMeterTypeSelPageDef" path="Content.Asset.AssetMeterTypeSelPageDef"/>
+        <page id="its_mnr_mp5_view_AssetAddReadingPageDef" path="Content.Asset.AssetAddReadingPageDef"/>
+        <page id="its_mnr_mp5_view_Asset_Maint_assetMaint_ExecutePageDef"
+              path="Taskflows.Asset.Asset_Maint_assetMaint_ExecutePageDef"/>
+        <page id="its_mnr_mp5_view_SupplierPageDef" path="its.mnr.mp5.view.pageDefs.SupplierPageDef"/>
+        <page id="its_mnr_mp5_view_Suppliers_Suppliers_CreateInsertPageDef"
+              path="Taskflows.Stock.Suppliers_Suppliers_CreateInsertPageDef"/>
+        <page id="its_mnr_mp5_view_EditSupplierPageDef" path="its.mnr.mp5.view.pageDefs.EditSupplierPageDef"/>
+        <page id="its_mnr_mp5_view_POHistPageDef" path="its.mnr.mp5.view.pageDefs.POHistPageDef"/>
+        <page id="its_mnr_mp5_view_CC_CycleCount_Inv_CycleCount_SetCurrentRowWithKeyValuePageDef"
+              path="Taskflows.Stock.CC_CycleCount_Inv_CycleCount_SetCurrentRowWithKeyValuePageDef"/>
+        <page id="its_mnr_mp5_view_CC_CycleCount_Inv_CycleCount_CommitPageDef"
+              path="Taskflows.Stock.CC_CycleCount_Inv_CycleCount_CommitPageDef"/>
+        <page id="its_mnr_mp5_view_CCSetup_BinNumPageDef" path="Content.CycleCnt.CCSetup_BinNumPageDef"/>
+        <!--<page id="its_mnr_mp5_view_flagPageDef1" path="Content.WorkOrder.flagPageDef"/>-->
+        <page id="its_mnr_mp5_view_setupEmailNotificationPageDef"
+              path="Content.CycleCnt.setupEmailNotificationPageDef"/>
+        <page id="its_mnr_mp5_view_Invoice_Credit_Invoice_Credit_CommitPageDef"
+              path="Taskflows.Invoice.Invoice_Credit_Invoice_Credit_CommitPageDef"/>
+        <page id="its_mnr_mp5_view_WorkOrder_Estimates_WorkOrder_Estimates_ExecuteWithParamsPageDef"
+              path="Taskflows.WorkOrder.WorkOrder_Estimates_WorkOrder_Estimates_ExecuteWithParamsPageDef"/>
+        <page id="its_mnr_mp5_view_EstimatesPageDef" path="Content.Estimates.EstimatesPageDef"/>
+        <page id="its_mnr_mp5_view_EstimatesEntryPageDef" path="Content.Estimates.EstimatesEntryPageDef"/>
+        <page id="its_mnr_mp5_view_view1PageDef" path="Content.Estimates.view1PageDef"/>
+        <page id="its_mnr_mp5_view_reportPageDef" path="Content.Report.reportPageDef"/>
+        <page id="its_mnr_mp5_view_assetPageDef" path="Content.Asset.assetPageDef"/>
+        <page id="its_mnr_mp5_view_FlagsPageDef" path="Content.WorkOrder.FlagsPageDef"/>
+        <page id="its_mnr_mp5_view_Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecutePageDef"
+              path="Taskflows.Estimates.Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecutePageDef"/>
+        <page id="its_mnr_mp5_view_Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecuteWithParams1PageDef1"
+              path="Taskflows.Estimates.Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecuteWithParams1PageDef1"/>
+        <page id="its_mnr_mp5_view_Estimates_EstimatesEntry_Estimates_EstimatesEntry_CommitPageDef"
+              path="Taskflows.Estimates.Estimates_EstimatesEntry_Estimates_EstimatesEntry_CommitPageDef"/>
+    </pageDefinitionUsages>
+    <dataControlUsages>
+        <dc id="MP5TMSWS" path="its.mnr.mp5.MP5TMSWS"/>
+        <BC4JDataControl id="MNRDataControlDataControl" Package="its.mnr.mp5.model"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="MNRDataControlLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="MasterDataControlDataControl" Package="its.mnr.mp5.model"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="MasterDataControlLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="BillingRatesDataControlDataControl" Package="its.mnr.mp5.model"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="LocalDataControlLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="WODataControlDataControl" Package="its.mnr.mp5.model"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="WODataControlLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="INVDataControlDataControl" Package="its.mnr.mp5.model"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="INVDataControlLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="CCDataControlDataControl" Package="its.mnr.mp5.model"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="CCDataControlLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="AssetDataControlDataControl" Package="its.mnr.mp5.model"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="AssetDataControlLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="PORecvDataControlDataControl" Package="its.mnr.mp5.model"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="PORecvDataControlLocal" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    </dataControlUsages>
 </Application>

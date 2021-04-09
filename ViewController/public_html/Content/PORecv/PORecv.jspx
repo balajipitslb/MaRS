@@ -11,17 +11,20 @@
                         <af:commandNavigationItem text="Work Order" id="cni2" accessKey="W"
                                                   actionListener="#{ModuleNavBean.goWOModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=WorkOrder;resourceType=GlobalNav;action=view']}"/>
-                        <af:commandNavigationItem text="Invoice" id="cni3" accessKey="I"
+                        <af:commandNavigationItem text="Estimates" id="cni9" accessKey="E"
+                                                  actionListener="#{ModuleNavBean.goEstimatesModule}"
+                                                  visible="#{(securityContext.userGrantedResource['resourceName=Estimates;resourceType=GlobalNav;action=view'])and(ModuleNavBean.showEstimate eq 'Y')}"/>
+                        <af:commandNavigationItem text="Invoice" id="cni3" accessKey="I" 
                                                   actionListener="#{ModuleNavBean.goInvoiceModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=Invoice;resourceType=GlobalNav;action=view']}"/>
-                        <af:commandNavigationItem text="PO &amp; Receivings (This)" id="cni4" accessKey="P"
+                        <af:commandNavigationItem text="PO &amp; Receivings (This)" id="cni4" accessKey="P" selected="true"
                                                   actionListener="#{ModuleNavBean.goPORecvModule}"
-                                                  visible="#{securityContext.userGrantedResource['resourceName=PORecv;resourceType=GlobalNav;action=view']}"
-                                                  selected="true"/>
+                                                  visible="#{securityContext.userGrantedResource['resourceName=PORecv;resourceType=GlobalNav;action=view']}"/>
                         <af:commandNavigationItem text="Stock" id="cni5" accessKey="S"
                                                   actionListener="#{ModuleNavBean.goStockModule}"
-                                                  visible="#{securityContext.userGrantedResource['resourceName=Stock;resourceType=GlobalNav;action=view']}"/>
-                        <af:commandNavigationItem text="Asset" id="cni8" accessKey="S"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Stock;resourceType=GlobalNav;action=view']}"
+                                                  />
+                        <af:commandNavigationItem text="Asset" id="cni8" accessKey="A"
                                                   actionListener="#{ModuleNavBean.goAssetModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=Asset;resourceType=GlobalNav;action=view']}"/>
                         <af:commandNavigationItem text="Report" id="cni6" accessKey="R"

@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="WorkOrderMasterPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <iterator Binds="MasterDataControlNested.MrlrefWorkordermasterView1" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrlrefWorkordermasterView1Iterator"/>
-  </executables>
-  <bindings>
-    <tree IterBinding="MrlrefWorkordermasterView1Iterator" id="MrlrefWorkordermasterView1">
-      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrlrefWorkordermasterView" Name="MrlrefWorkordermasterView10">
-        <AttrNames>
-          <Item Value="Wotype"/>
-          <Item Value="Workorder"/>
-          <Item Value="Eventjobtype"/>
-          <Item Value="Seq"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <action IterBinding="MrlrefWorkordermasterView1Iterator" id="CreateInsert" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
-            DataControl="MNRDataControlDataControl"/>
-    <action IterBinding="MrlrefWorkordermasterView1Iterator" id="Delete" RequiresUpdateModel="false"
-            Action="removeCurrentRow"/>
-  </bindings>
+    <parameters/>
+    <executables>
+        <iterator Binds="MasterDataControlNested.MrlrefWorkordermasterView1" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrlrefWorkordermasterView1Iterator"/>
+    </executables>
+    <bindings>
+        <tree IterBinding="MrlrefWorkordermasterView1Iterator" id="MrlrefWorkordermasterView1">
+            <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrlrefWorkordermasterView" Name="MrlrefWorkordermasterView10">
+                <AttrNames>
+                    <Item Value="Wotype"/>
+                    <Item Value="Workorder"/>
+                    <Item Value="Eventjobtype"/>
+                    <Item Value="Seq"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="MrlrefWorkordermasterView1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="MNRDataControlDataControl"/>
+        <action IterBinding="MrlrefWorkordermasterView1Iterator" id="Delete" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+    </bindings>
 </pageDefinition>

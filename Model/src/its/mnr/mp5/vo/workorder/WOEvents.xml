@@ -1031,7 +1031,7 @@
     PrecisionRule="true"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    AliasName="VIEW_ATTR"
+    AliasName="CostcodeSwitcher"
     SQLType="VARCHAR">
     <TransientExpression><![CDATA[(adf.isCriteriaRow) ? "LOV_EvtCostcodeAFQuery" : "LOV_EvtCostcode"]]></TransientExpression>
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
@@ -1218,6 +1218,29 @@
     </Properties>
   </ViewAttribute>
   <ViewAttribute
+    Name="tt"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="tt"
+    SQLType="VARCHAR"
+    LOVName="LOV_tt">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <Dependencies>
+      <Item
+        Value="tTaxPerc"/>
+    </Dependencies>
+  </ViewAttribute>
+  <ViewAttribute
     Name="tWOTotal"
     IsSelected="false"
     IsPersistent="false"
@@ -1238,7 +1261,7 @@
     </Properties>
   </ViewAttribute>
   <ViewAttribute
-    Name="tt"
+    Name="tShowEstimate"
     IsUpdateable="false"
     IsSelected="false"
     IsPersistent="false"
@@ -1247,19 +1270,15 @@
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     AliasName="VIEW_ATTR"
-    SQLType="VARCHAR"
-    LOVName="LOV_tt">
-    <TransientExpression><![CDATA[tTaxPerc]]></TransientExpression>
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_description" Value="T Show Estimate"/>
+    </DesignTime>
+    <TransientExpression><![CDATA[adf.userSession.userData.ShowEstimate]]></TransientExpression>
     <RecalcCondition><![CDATA[true]]></RecalcCondition>
-    <Properties>
-      <SchemaBasedProperties>
-        <CONTROLTYPE
-          Value="choice"/>
-      </SchemaBasedProperties>
-    </Properties>
     <Dependencies>
       <Item
-        Value="tTaxPerc"/>
+        Value="ItsEstid"/>
     </Dependencies>
   </ViewAttribute>
   <ViewCriteria
@@ -2479,6 +2498,11 @@
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
   <ViewLinkAccessor
+    Name="Estimate2"
+    ViewLink="its.mnr.mp5.vo.link.R5EventsEstimatesWOLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
     Name="FlagAssoc_VVO"
     ViewLink="its.mnr.mp5.vo.link.FlagAssocChkboxLink"
     Type="oracle.jbo.RowIterator"
@@ -2644,6 +2668,16 @@
       MethodName="getEstimateCriteriaFBK">
       <Return
         Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="setEstId"
+      MethodName="setEstId">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="sestid"
         Type="java.lang.String"/>
     </Method>
   </ClientRowInterface>

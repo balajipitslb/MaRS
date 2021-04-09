@@ -1,126 +1,126 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="testPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="WODataControlNested.WOActivities" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="WOActivitiesIterator"/>
-  </executables>
-  <bindings>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ActAccountcode">
-      <AttrNames>
-        <Item Value="ActAccountcode"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ActEvent">
-      <AttrNames>
-        <Item Value="ActEvent"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ActAct">
-      <AttrNames>
-        <Item Value="ActAct"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ActActualLbrCost">
-      <AttrNames>
-        <Item Value="ActActualLbrCost"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ActBillableLbrCost">
-      <AttrNames>
-        <Item Value="ActBillableLbrCost"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ActBillableLbrHrs">
-      <AttrNames>
-        <Item Value="ActBillableLbrHrs"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ActBillablePartCost">
-      <AttrNames>
-        <Item Value="ActBillablePartCost"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ActMechanicid">
-      <AttrNames>
-        <Item Value="ActMechanicid"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ActStart">
-      <AttrNames>
-        <Item Value="ActStart"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ActRatetype">
-      <AttrNames>
-        <Item Value="ActRatetype"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="WOActivitiesIterator" StaticList="false" Uses="LOV_ActTimetype" id="ActTimetype"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ActUom">
-      <AttrNames>
-        <Item Value="ActUom"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ItsAccountratetaskid">
-      <AttrNames>
-        <Item Value="ItsAccountratetaskid"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ItsComment">
-      <AttrNames>
-        <Item Value="ItsComment"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ItsCompcode">
-      <AttrNames>
-        <Item Value="ItsCompcode"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="WOActivitiesIterator" StaticList="false" Uses="LOV_ItsDamcode" id="ItsDamcode"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ItsDamdesc">
-      <AttrNames>
-        <Item Value="ItsDamdesc"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="WOActivitiesIterator" StaticList="false" Uses="LOV_ItsLoccode" id="ItsLoccode"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ItsLocdesc">
-      <AttrNames>
-        <Item Value="ItsLocdesc"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="WOActivitiesIterator" StaticList="false" Uses="LOV_ItsRepcode" id="ItsRepcode"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ItsRepdesc">
-      <AttrNames>
-        <Item Value="ItsRepdesc"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ItsTaskdamid">
-      <AttrNames>
-        <Item Value="ItsTaskdamid"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="ItsTaskid">
-      <AttrNames>
-        <Item Value="ItsTaskid"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="WOType">
-      <AttrNames>
-        <Item Value="WOType"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="WOActivitiesIterator" id="TotalPartCost">
-      <AttrNames>
-        <Item Value="TotalPartCost"/>
-      </AttrNames>
-    </attributeValues>
-    <listOfValues StaticList="false" IterBinding="WOActivitiesIterator" Uses="LOV_ItsTaskdesc" id="ItsTaskdesc"/>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="WODataControlNested.WOActivities" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="WOActivitiesIterator"/>
+    </executables>
+    <bindings>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ActAccountcode">
+            <AttrNames>
+                <Item Value="ActAccountcode"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ActEvent">
+            <AttrNames>
+                <Item Value="ActEvent"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ActAct">
+            <AttrNames>
+                <Item Value="ActAct"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ActActualLbrCost">
+            <AttrNames>
+                <Item Value="ActActualLbrCost"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ActBillableLbrCost">
+            <AttrNames>
+                <Item Value="ActBillableLbrCost"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ActBillableLbrHrs">
+            <AttrNames>
+                <Item Value="ActBillableLbrHrs"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ActBillablePartCost">
+            <AttrNames>
+                <Item Value="ActBillablePartCost"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ActMechanicid">
+            <AttrNames>
+                <Item Value="ActMechanicid"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ActStart">
+            <AttrNames>
+                <Item Value="ActStart"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ActRatetype">
+            <AttrNames>
+                <Item Value="ActRatetype"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="WOActivitiesIterator" StaticList="false" Uses="LOV_ActTimetype" id="ActTimetype"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ActUom">
+            <AttrNames>
+                <Item Value="ActUom"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ItsAccountratetaskid">
+            <AttrNames>
+                <Item Value="ItsAccountratetaskid"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ItsComment">
+            <AttrNames>
+                <Item Value="ItsComment"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ItsCompcode">
+            <AttrNames>
+                <Item Value="ItsCompcode"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="WOActivitiesIterator" StaticList="false" Uses="LOV_ItsDamcode" id="ItsDamcode"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ItsDamdesc">
+            <AttrNames>
+                <Item Value="ItsDamdesc"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="WOActivitiesIterator" StaticList="false" Uses="LOV_ItsLoccode" id="ItsLoccode"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ItsLocdesc">
+            <AttrNames>
+                <Item Value="ItsLocdesc"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="WOActivitiesIterator" StaticList="false" Uses="LOV_ItsRepcode" id="ItsRepcode"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ItsRepdesc">
+            <AttrNames>
+                <Item Value="ItsRepdesc"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ItsTaskdamid">
+            <AttrNames>
+                <Item Value="ItsTaskdamid"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="ItsTaskid">
+            <AttrNames>
+                <Item Value="ItsTaskid"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="WOType">
+            <AttrNames>
+                <Item Value="WOType"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="WOActivitiesIterator" id="TotalPartCost">
+            <AttrNames>
+                <Item Value="TotalPartCost"/>
+            </AttrNames>
+        </attributeValues>
+        <listOfValues StaticList="false" IterBinding="WOActivitiesIterator" Uses="LOV_ItsTaskdesc" id="ItsTaskdesc"/>
+    </bindings>
 </pageDefinition>

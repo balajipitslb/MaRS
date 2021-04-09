@@ -1,208 +1,210 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="EditSupplierPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="PartsDataControlNested.Companies" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="CompaniesIterator"/>
-    <iterator Binds="PartsDataControlNested.AddressMail" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="AddressMailIterator"/>
-    <iterator Binds="PartsDataControlNested.AddressInvoice" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="AddressInvoiceIterator"/>
-  </executables>
-  <bindings>
-    <attributeValues IterBinding="CompaniesIterator" id="ComCode">
-      <AttrNames>
-        <Item Value="ComCode"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="CompaniesIterator" id="ComDesc">
-      <AttrNames>
-        <Item Value="ComDesc"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="CompaniesIterator" id="ComMinord">
-      <AttrNames>
-        <Item Value="ComMinord"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="CompaniesIterator" id="ComOrg">
-      <AttrNames>
-        <Item Value="ComOrg"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="CompaniesIterator" id="ComPhone">
-      <AttrNames>
-        <Item Value="ComPhone"/>
-      </AttrNames>
-    </attributeValues>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
-            DataControl="MNRDataControlDataControl"/>
-    <button IterBinding="CompaniesIterator" id="ComNotused" DTSupportsMRU="false" StaticList="true">
-      <AttrNames>
-        <Item Value="ComNotused"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="+"/>
-        <Item Value="-"/>
-      </ValueList>
-    </button>
-    <attributeValues IterBinding="CompaniesIterator" id="ComFax">
-      <AttrNames>
-        <Item Value="ComFax"/>
-      </AttrNames>
-    </attributeValues>
-    <listOfValues StaticList="false" IterBinding="CompaniesIterator" Uses="LOV_ComBuyer" id="ComBuyer"/>
-    <attributeValues IterBinding="AddressMailIterator" id="AdrCode1">
-      <AttrNames>
-        <Item Value="AdrCode"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressMailIterator" id="AdrRentity1">
-      <AttrNames>
-        <Item Value="AdrRentity"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="AddressMailIterator" StaticList="false" Uses="LOV_AdrRtype" id="AdrRtype1"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="AddressMailIterator" id="AdrAddress11">
-      <AttrNames>
-        <Item Value="AdrAddress1"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressMailIterator" id="AdrAddress21">
-      <AttrNames>
-        <Item Value="AdrAddress2"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressMailIterator" id="AdrAddress31">
-      <AttrNames>
-        <Item Value="AdrAddress3"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressMailIterator" id="AdrCity1">
-      <AttrNames>
-        <Item Value="AdrCity"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressMailIterator" id="AdrCountry1">
-      <AttrNames>
-        <Item Value="AdrCountry"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressMailIterator" id="AdrState1">
-      <AttrNames>
-        <Item Value="AdrState"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressMailIterator" id="AdrZip1">
-      <AttrNames>
-        <Item Value="AdrZip"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressMailIterator" id="AdrEmail1">
-      <AttrNames>
-        <Item Value="AdrEmail"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressMailIterator" id="AdrFax1">
-      <AttrNames>
-        <Item Value="AdrFax"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressMailIterator" id="AdrPhone1">
-      <AttrNames>
-        <Item Value="AdrPhone"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressMailIterator" id="AdrPhoneextn1">
-      <AttrNames>
-        <Item Value="AdrPhoneextn"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressMailIterator" id="AdrText1">
-      <AttrNames>
-        <Item Value="AdrText"/>
-      </AttrNames>
-    </attributeValues>
-    <action IterBinding="AddressMailIterator" id="CreateInsertAddressMail" RequiresUpdateModel="true" Action="createInsertRow"/>
-    <attributeValues IterBinding="AddressInvoiceIterator" id="AdrAddress1">
-      <AttrNames>
-        <Item Value="AdrAddress1"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressInvoiceIterator" id="AdrAddress2">
-      <AttrNames>
-        <Item Value="AdrAddress2"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressInvoiceIterator" id="AdrAddress3">
-      <AttrNames>
-        <Item Value="AdrAddress3"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressInvoiceIterator" id="AdrCity">
-      <AttrNames>
-        <Item Value="AdrCity"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressInvoiceIterator" id="AdrCode">
-      <AttrNames>
-        <Item Value="AdrCode"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressInvoiceIterator" id="AdrCountry">
-      <AttrNames>
-        <Item Value="AdrCountry"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressInvoiceIterator" id="AdrEmail">
-      <AttrNames>
-        <Item Value="AdrEmail"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressInvoiceIterator" id="AdrFax">
-      <AttrNames>
-        <Item Value="AdrFax"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressInvoiceIterator" id="AdrPhone">
-      <AttrNames>
-        <Item Value="AdrPhone"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressInvoiceIterator" id="AdrPhoneextn">
-      <AttrNames>
-        <Item Value="AdrPhoneextn"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressInvoiceIterator" id="AdrRentity">
-      <AttrNames>
-        <Item Value="AdrRentity"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="AddressInvoiceIterator" StaticList="false" Uses="LOV_AdrRtype" id="AdrRtype"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="AddressInvoiceIterator" id="AdrState">
-      <AttrNames>
-        <Item Value="AdrState"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressInvoiceIterator" id="AdrText">
-      <AttrNames>
-        <Item Value="AdrText"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AddressInvoiceIterator" id="AdrZip">
-      <AttrNames>
-        <Item Value="AdrZip"/>
-      </AttrNames>
-    </attributeValues>
-    <action IterBinding="AddressInvoiceIterator" id="CreateInsertAddressInvoice" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
-    <listOfValues StaticList="false" IterBinding="CompaniesIterator" Uses="LOV_ComCurr" id="ComCurr"/>
-    <listOfValues StaticList="false" IterBinding="CompaniesIterator" Uses="LOV_ComLang" id="ComLang"/>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="PartsDataControlNested.Companies" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="CompaniesIterator"/>
+        <iterator Binds="PartsDataControlNested.AddressMail" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="AddressMailIterator"/>
+        <iterator Binds="PartsDataControlNested.AddressInvoice" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="AddressInvoiceIterator"/>
+    </executables>
+    <bindings>
+        <attributeValues IterBinding="CompaniesIterator" id="ComCode">
+            <AttrNames>
+                <Item Value="ComCode"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CompaniesIterator" id="ComDesc">
+            <AttrNames>
+                <Item Value="ComDesc"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CompaniesIterator" id="ComMinord">
+            <AttrNames>
+                <Item Value="ComMinord"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CompaniesIterator" id="ComOrg">
+            <AttrNames>
+                <Item Value="ComOrg"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="CompaniesIterator" id="ComPhone">
+            <AttrNames>
+                <Item Value="ComPhone"/>
+            </AttrNames>
+        </attributeValues>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="MNRDataControlDataControl"/>
+        <button IterBinding="CompaniesIterator" id="ComNotused" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="ComNotused"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="+"/>
+                <Item Value="-"/>
+            </ValueList>
+        </button>
+        <attributeValues IterBinding="CompaniesIterator" id="ComFax">
+            <AttrNames>
+                <Item Value="ComFax"/>
+            </AttrNames>
+        </attributeValues>
+        <listOfValues StaticList="false" IterBinding="CompaniesIterator" Uses="LOV_ComBuyer" id="ComBuyer"/>
+        <attributeValues IterBinding="AddressMailIterator" id="AdrCode1">
+            <AttrNames>
+                <Item Value="AdrCode"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressMailIterator" id="AdrRentity1">
+            <AttrNames>
+                <Item Value="AdrRentity"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="AddressMailIterator" StaticList="false" Uses="LOV_AdrRtype" id="AdrRtype1"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="AddressMailIterator" id="AdrAddress11">
+            <AttrNames>
+                <Item Value="AdrAddress1"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressMailIterator" id="AdrAddress21">
+            <AttrNames>
+                <Item Value="AdrAddress2"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressMailIterator" id="AdrAddress31">
+            <AttrNames>
+                <Item Value="AdrAddress3"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressMailIterator" id="AdrCity1">
+            <AttrNames>
+                <Item Value="AdrCity"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressMailIterator" id="AdrCountry1">
+            <AttrNames>
+                <Item Value="AdrCountry"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressMailIterator" id="AdrState1">
+            <AttrNames>
+                <Item Value="AdrState"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressMailIterator" id="AdrZip1">
+            <AttrNames>
+                <Item Value="AdrZip"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressMailIterator" id="AdrEmail1">
+            <AttrNames>
+                <Item Value="AdrEmail"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressMailIterator" id="AdrFax1">
+            <AttrNames>
+                <Item Value="AdrFax"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressMailIterator" id="AdrPhone1">
+            <AttrNames>
+                <Item Value="AdrPhone"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressMailIterator" id="AdrPhoneextn1">
+            <AttrNames>
+                <Item Value="AdrPhoneextn"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressMailIterator" id="AdrText1">
+            <AttrNames>
+                <Item Value="AdrText"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="AddressMailIterator" id="CreateInsertAddressMail" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <attributeValues IterBinding="AddressInvoiceIterator" id="AdrAddress1">
+            <AttrNames>
+                <Item Value="AdrAddress1"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressInvoiceIterator" id="AdrAddress2">
+            <AttrNames>
+                <Item Value="AdrAddress2"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressInvoiceIterator" id="AdrAddress3">
+            <AttrNames>
+                <Item Value="AdrAddress3"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressInvoiceIterator" id="AdrCity">
+            <AttrNames>
+                <Item Value="AdrCity"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressInvoiceIterator" id="AdrCode">
+            <AttrNames>
+                <Item Value="AdrCode"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressInvoiceIterator" id="AdrCountry">
+            <AttrNames>
+                <Item Value="AdrCountry"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressInvoiceIterator" id="AdrEmail">
+            <AttrNames>
+                <Item Value="AdrEmail"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressInvoiceIterator" id="AdrFax">
+            <AttrNames>
+                <Item Value="AdrFax"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressInvoiceIterator" id="AdrPhone">
+            <AttrNames>
+                <Item Value="AdrPhone"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressInvoiceIterator" id="AdrPhoneextn">
+            <AttrNames>
+                <Item Value="AdrPhoneextn"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressInvoiceIterator" id="AdrRentity">
+            <AttrNames>
+                <Item Value="AdrRentity"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="AddressInvoiceIterator" StaticList="false" Uses="LOV_AdrRtype" id="AdrRtype"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="AddressInvoiceIterator" id="AdrState">
+            <AttrNames>
+                <Item Value="AdrState"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressInvoiceIterator" id="AdrText">
+            <AttrNames>
+                <Item Value="AdrText"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AddressInvoiceIterator" id="AdrZip">
+            <AttrNames>
+                <Item Value="AdrZip"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="AddressInvoiceIterator" id="CreateInsertAddressInvoice" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <listOfValues StaticList="false" IterBinding="CompaniesIterator" Uses="LOV_ComCurr" id="ComCurr"/>
+        <listOfValues StaticList="false" IterBinding="CompaniesIterator" Uses="LOV_ComLang" id="ComLang"/>
+    </bindings>
 </pageDefinition>

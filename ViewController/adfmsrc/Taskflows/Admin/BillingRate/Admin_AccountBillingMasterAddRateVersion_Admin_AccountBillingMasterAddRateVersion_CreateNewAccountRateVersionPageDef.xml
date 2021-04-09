@@ -2,25 +2,26 @@
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81"
                 id="Admin_AccountBillingMasterAddRateVersion_Admin_AccountBillingMasterAddRateVersion_CreateNewAccountRateVersionPageDef"
                 Package="Taskflows.Admin.BillingRate" SkipValidation="true">
-  <parameters/>
-  <executables/>
-  <bindings>
-<methodAction id="CreateNewAccountRateVersion" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="CreateNewAccountRateVersion" IsViewObjectMethod="false"
-                  DataControl="MNRDataControlDataControl" InstanceName="data.MNRDataControlDataControl.dataProvider"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.CreateNewAccountRateVersion_MNRDataControlDataControl_dataProvider_CreateNewAccountRateVersion_result">
-      <NamedData NDName="CurrAcctNum" NDValue="#{pageFlowScope.psfAcctnum}" NDType="java.lang.String"/>
-      <NamedData NDName="CopyAcctNum" NDValue="#{pageFlowScope.psfAcctNumLov}" NDType="java.lang.String"/>
-      <NamedData NDName="InEffDt" NDValue="#{pageFlowScope.psfEffectivedt}" NDType="java.lang.String"/>
-      <NamedData NDName="InBase" NDValue="#{pageFlowScope.psfBase}" NDType="oracle.jbo.domain.Number"/>
-      <NamedData NDName="InM1" NDValue="#{pageFlowScope.psfM1}" NDType="oracle.jbo.domain.Number"/>
-      <NamedData NDName="InM1o" NDValue="#{pageFlowScope.psfM1o}" NDType="oracle.jbo.domain.Number"/>
-      <NamedData NDName="InM2" NDValue="#{pageFlowScope.psfM2}" NDType="oracle.jbo.domain.Number"/>
-      <NamedData NDName="InM2o" NDValue="#{pageFlowScope.psfM2o}" NDType="oracle.jbo.domain.Number"/>
-      <NamedData NDName="InM3" NDValue="#{pageFlowScope.psfM3}" NDType="oracle.jbo.domain.Number"/>
-      <NamedData NDName="InM3o" NDValue="#{pageFlowScope.psfM3o}" NDType="oracle.jbo.domain.Number"/>
-      <NamedData NDName="UsePrevVersion" NDValue="#{pageFlowScope.psfVerAccountChk}" NDType="java.lang.String"/>
-      <NamedData NDName="UseOtherAccount" NDValue="#{pageFlowScope.psfotherAccountChk}" NDType="java.lang.String"/>
-    </methodAction>
-  </bindings>
+    <parameters/>
+    <executables/>
+    <bindings>
+        <methodAction id="CreateNewAccountRateVersion" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="CreateNewAccountRateVersion" IsViewObjectMethod="false"
+                      DataControl="MNRDataControlDataControl" InstanceName="data.MNRDataControlDataControl.dataProvider"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.CreateNewAccountRateVersion_MNRDataControlDataControl_dataProvider_CreateNewAccountRateVersion_result">
+            <NamedData NDName="CurrAcctNum" NDValue="#{pageFlowScope.psfAcctnum}" NDType="java.lang.String"/>
+            <NamedData NDName="CopyAcctNum" NDValue="#{pageFlowScope.psfAcctNumLov}" NDType="java.lang.String"/>
+            <NamedData NDName="InEffDt" NDValue="#{pageFlowScope.psfEffectivedt}" NDType="java.lang.String"/>
+            <NamedData NDName="InBase" NDValue="#{pageFlowScope.psfBase}" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="InM1" NDValue="#{pageFlowScope.psfM1}" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="InM1o" NDValue="#{pageFlowScope.psfM1o}" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="InM2" NDValue="#{pageFlowScope.psfM2}" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="InM2o" NDValue="#{pageFlowScope.psfM2o}" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="InM3" NDValue="#{pageFlowScope.psfM3}" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="InM3o" NDValue="#{pageFlowScope.psfM3o}" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="UsePrevVersion" NDValue="#{pageFlowScope.psfVerAccountChk}" NDType="java.lang.String"/>
+            <NamedData NDName="UseOtherAccount" NDValue="#{pageFlowScope.psfotherAccountChk}"
+                       NDType="java.lang.String"/>
+        </methodAction>
+    </bindings>
 </pageDefinition>

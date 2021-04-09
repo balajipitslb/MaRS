@@ -88,10 +88,10 @@ WHERE
     EntityUsage="MrltFlagassociation_EO"
     AliasName="FAACTIVE"
     LOVName="LOV_Faactive">
-        <Properties>
+    <Properties>
       <SchemaBasedProperties>
         <CONTROLTYPE
-          Value="choice"/>
+          Value="default"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

@@ -279,13 +279,10 @@
         Type="void"/>
     </Method>
     <Method
-      Name="CreateFlagAssoc"
-      MethodName="CreateFlagAssoc">
+      Name="getShowEstimate"
+      MethodName="getShowEstimate">
       <Return
         Name="_return_type_"
-        Type="java.lang.String"/>
-      <Parameter
-        Name="faitem"
         Type="java.lang.String"/>
     </Method>
     <Method

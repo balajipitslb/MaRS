@@ -1,54 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="SupplierPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="PartsDataControlNested.Companies" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="CompaniesIterator">
-      <sortCriteria>
-        <sort attribute="ComDesc" ascending="true"/>
-      </sortCriteria>
-    </iterator>
-    <searchRegion Criteria="CompaniesCriteriaUsed" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  Binds="CompaniesIterator" id="CompaniesCriteriaQuery"/>
-    <iterator Binds="PartsDataControlNested.Address" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="AddressIterator"/>
-  </executables>
-  <bindings>
-    <tree IterBinding="CompaniesIterator" id="Companies">
-      <nodeDefinition DefName="its.mnr.mp5.vo.parts.Companies" Name="Companies0">
-        <AttrNames>
-          <Item Value="ComCode"/>
-          <Item Value="ComDesc"/>
-          <Item Value="ComPhone"/>
-          <Item Value="ComFax"/>
-          <Item Value="ComMinord"/>
-          <Item Value="ComNotused"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
-            DataControl="MNRDataControlDataControl"/>
-    <tree IterBinding="AddressIterator" id="Address">
-      <nodeDefinition DefName="its.mnr.mp5.vo.parts.Address" Name="Address0">
-        <AttrNames>
-          <Item Value="AdrRtype"/>
-          <Item Value="AdrText"/>
-          <Item Value="AdrAddress1"/>
-          <Item Value="AdrAddress2"/>
-          <Item Value="AdrAddress3"/>
-          <Item Value="AdrCity"/>
-          <Item Value="AdrState"/>
-          <Item Value="AdrZip"/>
-          <Item Value="AdrCountry"/>
-          <Item Value="AdrPhone"/>
-          <Item Value="AdrPhoneextn"/>
-          <Item Value="AdrFax"/>
-          <Item Value="AdrEmail"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="PartsDataControlNested.Companies" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="CompaniesIterator">
+            <sortCriteria>
+                <sort attribute="ComDesc" ascending="true"/>
+            </sortCriteria>
+        </iterator>
+        <searchRegion Criteria="CompaniesCriteriaUsed" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                      Binds="CompaniesIterator" id="CompaniesCriteriaQuery"/>
+        <iterator Binds="PartsDataControlNested.Address" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="AddressIterator"/>
+    </executables>
+    <bindings>
+        <tree IterBinding="CompaniesIterator" id="Companies">
+            <nodeDefinition DefName="its.mnr.mp5.vo.parts.Companies" Name="Companies0">
+                <AttrNames>
+                    <Item Value="ComCode"/>
+                    <Item Value="ComDesc"/>
+                    <Item Value="ComPhone"/>
+                    <Item Value="ComFax"/>
+                    <Item Value="ComMinord"/>
+                    <Item Value="ComNotused"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="MNRDataControlDataControl"/>
+        <tree IterBinding="AddressIterator" id="Address">
+            <nodeDefinition DefName="its.mnr.mp5.vo.parts.Address" Name="Address0">
+                <AttrNames>
+                    <Item Value="AdrRtype"/>
+                    <Item Value="AdrText"/>
+                    <Item Value="AdrAddress1"/>
+                    <Item Value="AdrAddress2"/>
+                    <Item Value="AdrAddress3"/>
+                    <Item Value="AdrCity"/>
+                    <Item Value="AdrState"/>
+                    <Item Value="AdrZip"/>
+                    <Item Value="AdrCountry"/>
+                    <Item Value="AdrPhone"/>
+                    <Item Value="AdrPhoneextn"/>
+                    <Item Value="AdrFax"/>
+                    <Item Value="AdrEmail"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+    </bindings>
 </pageDefinition>

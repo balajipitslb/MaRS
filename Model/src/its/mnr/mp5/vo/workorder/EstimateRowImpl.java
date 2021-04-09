@@ -1,16 +1,13 @@
 package its.mnr.mp5.vo.workorder;
 
-import its.mnr.mp5.baseclass.ExtendedEntityImpl;
 import its.mnr.mp5.baseclass.ExtendedViewRowImpl;
-import its.mnr.mp5.model.Util;
+import its.mnr.mp5.eo.local.MrltEstimateImpl;
 
 import java.math.BigDecimal;
 
-import java.util.Calendar;
-
-import oracle.adf.share.ADFContext;
-
+import oracle.jbo.Row;
 import oracle.jbo.RowIterator;
+import oracle.jbo.RowSet;
 import oracle.jbo.domain.Number;
 import oracle.jbo.domain.Timestamp;
 import oracle.jbo.server.AttributeDefImpl;
@@ -35,7 +32,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setEstid((Number)value);
+                obj.setEstid((Number) value);
             }
         }
         ,
@@ -45,7 +42,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setWonum((String)value);
+                obj.setWonum((String) value);
             }
         }
         ,
@@ -55,7 +52,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setVer((String)value);
+                obj.setVer((String) value);
             }
         }
         ,
@@ -65,7 +62,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setEstdt((Timestamp)value);
+                obj.setEstdt((Timestamp) value);
             }
         }
         ,
@@ -75,7 +72,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setStatus((String)value);
+                obj.setStatus((String) value);
             }
         }
         ,
@@ -85,7 +82,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setUpdby((String)value);
+                obj.setUpdby((String) value);
             }
         }
         ,
@@ -95,7 +92,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setAppnum((String)value);
+                obj.setAppnum((String) value);
             }
         }
         ,
@@ -105,7 +102,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setUpddt((Timestamp)value);
+                obj.setUpddt((Timestamp) value);
             }
         }
         ,
@@ -115,7 +112,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setReason((String)value);
+                obj.setReason((String) value);
             }
         }
         ,
@@ -125,7 +122,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setEquipnum((String)value);
+                obj.setEquipnum((String) value);
             }
         }
         ,
@@ -135,7 +132,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setAcctnum((String)value);
+                obj.setAcctnum((String) value);
             }
         }
         ,
@@ -145,7 +142,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setHdrcd((String)value);
+                obj.setHdrcd((String) value);
             }
         }
         ,
@@ -155,7 +152,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setTlbrhrs((BigDecimal)value);
+                obj.setTlbrhrs((BigDecimal) value);
             }
         }
         ,
@@ -165,7 +162,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setTlbrcst((BigDecimal)value);
+                obj.setTlbrcst((BigDecimal) value);
             }
         }
         ,
@@ -175,7 +172,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setTpartcst((BigDecimal)value);
+                obj.setTpartcst((BigDecimal) value);
             }
         }
         ,
@@ -185,7 +182,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setIp((String)value);
+                obj.setIp((String) value);
             }
         }
         ,
@@ -195,7 +192,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setRsptype((String)value);
+                obj.setRsptype((String) value);
             }
         }
         ,
@@ -205,7 +202,7 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setEqtype((String)value);
+                obj.setEqtype((String) value);
             }
         }
         ,
@@ -215,7 +212,17 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
             }
 
             public void put(EstimateRowImpl obj, Object value) {
-                obj.setLocode((String)value);
+                obj.setLocode((String) value);
+            }
+        }
+        ,
+        EstStatusSwitcher {
+            public Object get(EstimateRowImpl obj) {
+                return obj.getEstStatusSwitcher();
+            }
+
+            public void put(EstimateRowImpl obj, Object value) {
+                obj.setEstStatusSwitcher((String) value);
             }
         }
         ,
@@ -228,8 +235,79 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
                 obj.setAttributeInternal(index(), value);
             }
         }
+        ,
+        EstimateStatusApprLOV1 {
+            public Object get(EstimateRowImpl obj) {
+                return obj.getEstimateStatusApprLOV1();
+            }
+
+            public void put(EstimateRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
+        EstimateStatusLOV {
+            public Object get(EstimateRowImpl obj) {
+                return obj.getEstimateStatusLOV();
+            }
+
+            public void put(EstimateRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
+        EstimateStatusRejLOV {
+            public Object get(EstimateRowImpl obj) {
+                return obj.getEstimateStatusRejLOV();
+            }
+
+            public void put(EstimateRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
+        EstimateStatusUnapprLOV {
+            public Object get(EstimateRowImpl obj) {
+                return obj.getEstimateStatusUnapprLOV();
+            }
+
+            public void put(EstimateRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
+        EstimateVerLov1 {
+            public Object get(EstimateRowImpl obj) {
+                return obj.getEstimateVerLov1();
+            }
+
+            public void put(EstimateRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
+        WOAccountMaster {
+            public Object get(EstimateRowImpl obj) {
+                return obj.getWOAccountMaster();
+            }
+
+            public void put(EstimateRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
+        Estimate1 {
+            public Object get(EstimateRowImpl obj) {
+                return obj.getEstimate1();
+            }
+
+            public void put(EstimateRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
         ;
-        private static AttributesEnum[] vals = null;
+        static AttributesEnum[] vals = null;
+        ;
         private static int firstIndex = 0;
 
         public abstract Object get(EstimateRowImpl object);
@@ -257,6 +335,9 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
     }
 
 
+    // public static final int ESTIMATEQUERYVO = AttributesEnum.EstimateQueryVO.index();
+
+
     public static final int ESTID = AttributesEnum.Estid.index();
     public static final int WONUM = AttributesEnum.Wonum.index();
     public static final int VER = AttributesEnum.Ver.index();
@@ -276,7 +357,15 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
     public static final int RSPTYPE = AttributesEnum.Rsptype.index();
     public static final int EQTYPE = AttributesEnum.Eqtype.index();
     public static final int LOCODE = AttributesEnum.Locode.index();
+    public static final int ESTSTATUSSWITCHER = AttributesEnum.EstStatusSwitcher.index();
     public static final int ESTIMATETASK = AttributesEnum.EstimateTask.index();
+    public static final int ESTIMATESTATUSAPPRLOV1 = AttributesEnum.EstimateStatusApprLOV1.index();
+    public static final int ESTIMATESTATUSLOV = AttributesEnum.EstimateStatusLOV.index();
+    public static final int ESTIMATESTATUSREJLOV = AttributesEnum.EstimateStatusRejLOV.index();
+    public static final int ESTIMATESTATUSUNAPPRLOV = AttributesEnum.EstimateStatusUnapprLOV.index();
+    public static final int ESTIMATEVERLOV1 = AttributesEnum.EstimateVerLov1.index();
+    public static final int WOACCOUNTMASTER = AttributesEnum.WOAccountMaster.index();
+    public static final int ESTIMATE1 = AttributesEnum.Estimate1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -288,8 +377,8 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
      * Gets MrltEstimate entity object.
      * @return the MrltEstimate
      */
-    public ExtendedEntityImpl getMrltEstimate() {
-        return (ExtendedEntityImpl)getEntity(ENTITY_MRLTESTIMATE);
+    public MrltEstimateImpl getMrltEstimate() {
+        return (MrltEstimateImpl) getEntity(ENTITY_MRLTESTIMATE);
     }
 
     /**
@@ -597,10 +686,75 @@ public class EstimateRowImpl extends ExtendedViewRowImpl {
     }
 
     /**
+     * Gets the attribute value for the calculated attribute EstStatusSwitcher.
+     * @return the EstStatusSwitcher
+     */
+    public String getEstStatusSwitcher() {
+        return (String) getAttributeInternal(ESTSTATUSSWITCHER);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute EstStatusSwitcher.
+     * @param value value to set the  EstStatusSwitcher
+     */
+    public void setEstStatusSwitcher(String value) {
+        setAttributeInternal(ESTSTATUSSWITCHER, value);
+    }
+
+    /**
      * Gets the associated <code>RowIterator</code> using master-detail link EstimateTask.
      */
     public RowIterator getEstimateTask() {
-        return (RowIterator)getAttributeInternal(ESTIMATETASK);
+        return (RowIterator) getAttributeInternal(ESTIMATETASK);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> EstimateStatusApprLOV1.
+     */
+    public RowSet getEstimateStatusApprLOV1() {
+        return (RowSet) getAttributeInternal(ESTIMATESTATUSAPPRLOV1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> EstimateStatusLOV.
+     */
+    public RowSet getEstimateStatusLOV() {
+        return (RowSet) getAttributeInternal(ESTIMATESTATUSLOV);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> EstimateStatusRejLOV.
+     */
+    public RowSet getEstimateStatusRejLOV() {
+        return (RowSet) getAttributeInternal(ESTIMATESTATUSREJLOV);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> EstimateStatusUnapprLOV.
+     */
+    public RowSet getEstimateStatusUnapprLOV() {
+        return (RowSet) getAttributeInternal(ESTIMATESTATUSUNAPPRLOV);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> EstimateVerLov1.
+     */
+    public RowSet getEstimateVerLov1() {
+        return (RowSet) getAttributeInternal(ESTIMATEVERLOV1);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> WOAccountMaster.
+     */
+    public RowSet getWOAccountMaster() {
+        return (RowSet) getAttributeInternal(WOACCOUNTMASTER);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> Estimate1.
+     */
+    public RowSet getEstimate1() {
+        return (RowSet) getAttributeInternal(ESTIMATE1);
     }
 
     /**

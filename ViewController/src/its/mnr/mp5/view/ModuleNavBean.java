@@ -38,9 +38,20 @@ public class ModuleNavBean  implements Serializable{
 
     @SuppressWarnings("compatibility:834200296238744337")
     private static final long serialVersionUID = 1L;
+    private String showEstimate;
 
     public ModuleNavBean() {
     }
+
+    public void setShowEstimate(String showEstimate) {
+        this.showEstimate = showEstimate;
+    }
+
+    public String getShowEstimate() {
+        return returnShowEstimate();
+    }
+
+
     /* Helper methods */
         public oracle.binding.BindingContainer getBindings() {
             return BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -73,6 +84,11 @@ public class ModuleNavBean  implements Serializable{
          Boolean bindingsChanged = getBindingContext().findDataControlFrame(dataControl).isTransactionDirty();
          */        
         //BindingContext bindingContext = getBindingContext();
+        /**
+        DCBindingContainer dbc = (DCBindingContainer)BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCDataControl dc = dbc.findDataControl("MNRDataControlDataControl");
+        MNRDataControlImpl am = (MNRDataControlImpl)dc.getDataProvider();
+        **/
         DCDataControl dc = getBindingContext().findDataControl("MNRDataControlDataControl");
         MNRDataControlImpl am = (MNRDataControlImpl)dc.getDataProvider();
         transDirty = am.getTransaction().isDirty();
@@ -88,6 +104,7 @@ public class ModuleNavBean  implements Serializable{
                                new FacesMessage(FacesMessage.SEVERITY_INFO, "Apply or Cancel Changes First!", null));
             return true;
         }
+        ////System.out.println("Inside ModuleNavBean showEstimate: "+am.getMP5Profile("ShowEstimate"));
         return false;
     }
     public void goToControlFlow (String asaction, String soutcome){
@@ -107,6 +124,12 @@ public class ModuleNavBean  implements Serializable{
         if (isDirty() == false) {
             // go to WOTask
             goToControlFlow(null,"goWorkOrder");  
+        }
+    }
+    public void goEstimatesModule(ActionEvent actionEvent) {
+        if (isDirty() == false) {
+            // go to WOTask
+            goToControlFlow(null,"goEstimates");  
         }
     }
     public void goInvoiceModule(ActionEvent actionEvent) {
@@ -155,6 +178,33 @@ public class ModuleNavBean  implements Serializable{
             // go to WOTask
             goToControlFlow(null,"Exit");
         }
+    }
+
+    public String returnShowEstimate(){
+        Boolean transDirty = false;
+        String s="";
+        DCBindingContainer dbc = (DCBindingContainer)BindingContext.getCurrent().getCurrentBindingsEntry();
+        DCDataControl dc = dbc.findDataControl("MNRDataControlDataControl");
+        MNRDataControlImpl am = (MNRDataControlImpl)dc.getDataProvider();
+      ////  transDirty = am.getTransaction().isDirty();
+
+        //BindingContext bc = getBindingContext();
+     ////   String dataControl = getBindingContext().getCurrentDataControlFrame();
+        ////Boolean bindingsChanged = getBindingContext().findDataControlFrame(dataControl).isTransactionDirty();
+/*
+        if (transDirty || bindingsChanged) {
+           // System.out.println("transDirty:" + transDirty + "       bindingsChanged:" + bindingsChanged);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null,
+                               new FacesMessage(FacesMessage.SEVERITY_INFO, "Apply or Cancel Changes First!", null));
+            return "";
+        }
+*/
+        s = am.getMP5Profile("ShowEstimate");
+       // showEstimate=s;
+        //setShowEstimate(am.getMP5Profile("ShowEstimate"));
+       //// System.out.println("Inside ModuleNavBean showEstimate: "+am.getMP5Profile("ShowEstimate"));
+    return s;
     }
 
 }

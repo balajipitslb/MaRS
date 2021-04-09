@@ -31,24 +31,41 @@ public class WODataControlClient extends ApplicationModuleImpl implements WOData
 
 
     public String CopyWOTask(String ACTEVENT, Integer ACTACT, String ACTMATLIST, String pUser, String pOrg) {
-        Object _ret =
-            this.riInvokeExportedMethod(this,"CopyWOTask",new String [] {"java.lang.String","java.lang.Integer","java.lang.String","java.lang.String","java.lang.String"},new Object[] {ACTEVENT, ACTACT, ACTMATLIST, pUser, pOrg});
-        return (String)_ret;
+        Object _ret = this.riInvokeExportedMethod(this, "CopyWOTask", new String[] {
+                                                  "java.lang.String", "java.lang.Integer", "java.lang.String",
+                                                  "java.lang.String", "java.lang.String"
+        }, new Object[] { ACTEVENT, ACTACT, ACTMATLIST, pUser, pOrg });
+        return (String) _ret;
+    }
+
+    public String RejWOPartsReturn(String pEvtCode) {
+        Object _ret = this.riInvokeExportedMethod(this, "RejWOPartsReturn", new String[] { "java.lang.String" }, new Object[] {
+                                                  pEvtCode });
+        return (String) _ret;
+    }
+
+    public String UpdateWOStatus(String evntCd, String pstatus, String pUser) {
+        Object _ret = this.riInvokeExportedMethod(this, "UpdateWOStatus", new String[] {
+                                                  "java.lang.String", "java.lang.String", "java.lang.String"
+        }, new Object[] { evntCd, pstatus, pUser });
+        return (String) _ret;
     }
 
     public void createFlagAssociation(Integer fid, String faitem, String faactive) {
-        Object _ret =
-            this.riInvokeExportedMethod(this,"createFlagAssociation",new String [] {"java.lang.Integer","java.lang.String","java.lang.String"},new Object[] {fid, faitem, faactive});
+        Object _ret = this.riInvokeExportedMethod(this, "createFlagAssociation", new String[] {
+                                                  "java.lang.Integer", "java.lang.String", "java.lang.String"
+        }, new Object[] { fid, faitem, faactive });
         return;
     }
 
     public void doQueryResultReset() {
-        Object _ret = this.riInvokeExportedMethod(this,"doQueryResultReset",null,null);
+        Object _ret = this.riInvokeExportedMethod(this, "doQueryResultReset", null, null);
         return;
     }
 
     public String isFlagUsedInWO(Integer Fidval) {
-        Object _ret = this.riInvokeExportedMethod(this,"isFlagUsedInWO",new String [] {"java.lang.Integer"},new Object[] {Fidval});
-        return (String)_ret;
+        Object _ret = this.riInvokeExportedMethod(this, "isFlagUsedInWO", new String[] { "java.lang.Integer" }, new Object[] {
+                                                  Fidval });
+        return (String) _ret;
     }
 }

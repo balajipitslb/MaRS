@@ -1,104 +1,104 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="AssetMeterReadingPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <iterator Binds="AssetDataControlNested.AssetReading" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="AssetReadingIterator">
-      <sortCriteria>
-        <sort attribute="Createdt" ascending="false"/>
-        <sort attribute="Readingdate" ascending="false"/>
-      </sortCriteria>
-    </iterator>
-    <iterator id="LastReadingTypeIterator" Binds="AssetDataControlNested.LastReadingType"
-              DataControl="MNRDataControlDataControl" RangeSize="25"/>
-  </executables>
-  <bindings>
-    <tree IterBinding="AssetReadingIterator" id="AssetReading">
-      <nodeDefinition DefName="its.mnr.mp5.vo.asset.AssetReading" Name="AssetReading0">
-        <AttrNames>
-          <Item Value="Createdt"/>
-          <Item Value="Org"/>
-
-          <Item Value="Readingdate"/>
-          <Item Value="Readingdiff"/>
-
-          <Item Value="Readingitem"/>
-          <Item Value="Readinglabel"/><Item Value="Readingvalue"/>
-          <Item Value="Rowid"/>
-
-          <Item Value="tAssetClass"/>
-          <Item Value="tAssetStatus"/>
-          <Item Value="tLabelDesc"/>
-<Item Value="tLastReadingDate"/><Item Value="tLastReadingValue"/>
-          <Item Value="Uom"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <attributeValues IterBinding="AssetReadingIterator" id="Org">
-      <AttrNames>
-        <Item Value="Org"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="Readingitem">
-      <AttrNames>
-        <Item Value="Readingitem"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="Readingdate">
-      <AttrNames>
-        <Item Value="Readingdate"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="Readingvalue">
-      <AttrNames>
-        <Item Value="Readingvalue"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="Readingdiff">
-      <AttrNames>
-        <Item Value="Readingdiff"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="Uom">
-      <AttrNames>
-        <Item Value="Uom"/>
-      </AttrNames>
-    </attributeValues>
-    <action IterBinding="AssetReadingIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
-            DataControl="MNRDataControlDataControl"/>
-    <attributeValues IterBinding="AssetReadingIterator" id="tLastReadingValue">
-      <AttrNames>
-        <Item Value="tLastReadingValue"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="tLastReadingDate">
-      <AttrNames>
-        <Item Value="tLastReadingDate"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="AssetReadingIterator" StaticList="false" Uses="LOV_Readinglabel" id="Readinglabel"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="AssetReadingIterator" id="tAssetStatus">
-      <AttrNames>
-        <Item Value="tAssetStatus"/>
-      </AttrNames>
-    </attributeValues>
-    <methodAction id="getAssetStatusFnc" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getAssetStatusFnc"
-                  IsViewObjectMethod="true" DataControl="MNRDataControlDataControl"
-                  InstanceName="data.MNRDataControlDataControl.dataProvider.AssetDataControlNested.AssetReading"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.getAssetStatusFnc_MNRDataControlDataControl_dataProvider_Root_AssetDataControlNested_AssetReading_getAssetStatusFnc_result"
-                  IterBinding="AssetReadingIterator">
-      <NamedData NDName="PASSET" NDValue="#{pageFlowScope.psfAssetCd}" NDType="java.lang.String"/>
-      <NamedData NDName="PORG" NDValue="#{pageFlowScope.psfAssetOrg}" NDType="java.lang.String"/>
-    </methodAction>
-<attributeValues IterBinding="AssetReadingIterator" id="Createdt">
-      <AttrNames>
-        <Item Value="Createdt"/>
-      </AttrNames>
-    </attributeValues>
-    
-  </bindings>
+    <parameters/>
+    <executables>
+        <iterator Binds="AssetDataControlNested.AssetReading" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="AssetReadingIterator">
+            <sortCriteria>
+                <sort attribute="Createdt" ascending="false"/>
+                <sort attribute="Readingdate" ascending="false"/>
+            </sortCriteria>
+        </iterator>
+        <iterator id="LastReadingTypeIterator" Binds="AssetDataControlNested.LastReadingType"
+                  DataControl="MNRDataControlDataControl" RangeSize="25"/>
+    </executables>
+    <bindings>
+        <tree IterBinding="AssetReadingIterator" id="AssetReading">
+            <nodeDefinition DefName="its.mnr.mp5.vo.asset.AssetReading" Name="AssetReading0">
+                <AttrNames>
+                    <Item Value="Createdt"/>
+                    <Item Value="Org"/>
+                    <Item Value="Readingdate"/>
+                    <Item Value="Readingdiff"/>
+                    <Item Value="Readingitem"/>
+                    <Item Value="Readinglabel"/>
+                    <Item Value="Readingvalue"/>
+                    <Item Value="Rowid"/>
+                    <Item Value="tAssetClass"/>
+                    <Item Value="tAssetStatus"/>
+                    <Item Value="tLabelDesc"/>
+                    <Item Value="tLastReadingDate"/>
+                    <Item Value="tLastReadingValue"/>
+                    <Item Value="Uom"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="AssetReadingIterator" id="Org">
+            <AttrNames>
+                <Item Value="Org"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="Readingitem">
+            <AttrNames>
+                <Item Value="Readingitem"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="Readingdate">
+            <AttrNames>
+                <Item Value="Readingdate"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="Readingvalue">
+            <AttrNames>
+                <Item Value="Readingvalue"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="Readingdiff">
+            <AttrNames>
+                <Item Value="Readingdiff"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="Uom">
+            <AttrNames>
+                <Item Value="Uom"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="AssetReadingIterator" id="CreateInsert" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="MNRDataControlDataControl"/>
+        <attributeValues IterBinding="AssetReadingIterator" id="tLastReadingValue">
+            <AttrNames>
+                <Item Value="tLastReadingValue"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="tLastReadingDate">
+            <AttrNames>
+                <Item Value="tLastReadingDate"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="AssetReadingIterator" StaticList="false" Uses="LOV_Readinglabel" id="Readinglabel"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="AssetReadingIterator" id="tAssetStatus">
+            <AttrNames>
+                <Item Value="tAssetStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="getAssetStatusFnc" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getAssetStatusFnc" IsViewObjectMethod="true" DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.AssetDataControlNested.AssetReading"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.getAssetStatusFnc_MNRDataControlDataControl_dataProvider_Root_AssetDataControlNested_AssetReading_getAssetStatusFnc_result"
+                      IterBinding="AssetReadingIterator">
+            <NamedData NDName="PASSET" NDValue="#{pageFlowScope.psfAssetCd}" NDType="java.lang.String"/>
+            <NamedData NDName="PORG" NDValue="#{pageFlowScope.psfAssetOrg}" NDType="java.lang.String"/>
+        </methodAction>
+        <attributeValues IterBinding="AssetReadingIterator" id="Createdt">
+            <AttrNames>
+                <Item Value="Createdt"/>
+            </AttrNames>
+        </attributeValues>
+    </bindings>
 </pageDefinition>

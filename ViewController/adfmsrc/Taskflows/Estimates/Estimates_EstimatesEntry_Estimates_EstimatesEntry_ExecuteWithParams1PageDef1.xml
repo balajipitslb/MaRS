@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8"
+                id="Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecuteWithParams1PageDef1"
+                Package="Taskflows.Estimates" SkipValidation="true">
+    <parameters/>
+    <executables>
+        <iterator Binds="WODataControlNested.EstimateWO" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="EstimateWOIterator" />
+    </executables>
+    <bindings>
+        <action IterBinding="EstimateWOIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+                Action="executeWithParams">
+            <NamedData NDName="EIdBind" NDValue="#{pageFlowScope.psfEstid}" NDType="java.lang.String"/>
+        </action>
+    </bindings>
+</pageDefinition>

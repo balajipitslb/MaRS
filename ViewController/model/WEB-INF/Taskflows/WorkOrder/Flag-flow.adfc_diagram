@@ -3,7 +3,7 @@
    <OverallProperties
       id="OverallProperties1"/>
    <WildcardControlFlowRule
-      id="WildcardControlFlowRule8">
+      id="WildcardControlFlowRule2">
       <property
          name="activityId">*</property>
       <property
@@ -13,23 +13,8 @@
       <property
          name="x">50.0</property>
    </WildcardControlFlowRule>
-   <TaskFlowReturn
-      id="TaskFlowReturn9">
-      <property
-         name="activityId">Exit</property>
-      <property
-         name="finish">true</property>
-      <property
-         name="description">&lt;html>&lt;p>&lt;b>Exit&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  Exit&lt;/p></property>
-      <property
-         name="exceptionHandler">false</property>
-      <property
-         name="y">189.79883</property>
-      <property
-         name="x">76.5</property>
-   </TaskFlowReturn>
    <View
-      id="View10">
+      id="View3">
       <property
          name="activityId">Flags</property>
       <property
@@ -41,15 +26,30 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">377.79883</property>
+         name="y">188.44824</property>
       <property
-         name="x">55.5</property>
+         name="x">113.5</property>
    </View>
+   <TaskFlowReturn
+      id="TaskFlowReturn4">
+      <property
+         name="activityId">Exit</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>Exit&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  Exit&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">75.09766</property>
+      <property
+         name="x">442.5</property>
+   </TaskFlowReturn>
    <ControlFlowCase
       islink="true"
-      id="ControlFlowCase11"
-      from="WildcardControlFlowRule8"
-      to="TaskFlowReturn9">
+      id="ControlFlowCase5"
+      from="WildcardControlFlowRule2"
+      to="TaskFlowReturn4">
       <property
          name="fromOutcome">Exit</property>
       <property
@@ -57,6 +57,6 @@
       <property
          name="fromsrcid">__1</property>
       <property
-         name="sdm:polyPoints">B50,50.0,103.5,76.5,135.79883,T50</property>
+         name="sdm:polyPoints">R50,86.0,61.0,401.5,74.74707,L50</property>
    </ControlFlowCase>
 </SDM>

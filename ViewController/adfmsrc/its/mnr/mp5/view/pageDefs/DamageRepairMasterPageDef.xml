@@ -1,82 +1,86 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="DamageRepairMasterPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <iterator Binds="MasterDataControlNested.MrlrefDamageView1" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrlrefDamageView1Iterator"/>
-    <searchRegion Criteria="__ImplicitViewCriteria__" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  Binds="MrlrefDamageView1Iterator" id="ImplicitViewCriteriaQuery"/>
-    <iterator Binds="MasterDataControlNested.MrlrefRepairView2" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrlrefRepairView2Iterator"/>
-  </executables>
-  <bindings>
-    <tree IterBinding="MrlrefDamageView1Iterator" id="MrlrefDamageView1">
-      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrlrefDamageView" Name="MrlrefDamageView10">
-        <AttrNames>
-          <Item Value="Damageid"/>
-          <Item Value="Damdescription"/>
-          <Item Value="Damcode"/>
-          <Item Value="Damactive" Binds="Damactive"/>
-          <Item Value="Damcdx" Binds="Damcdx"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <button IterBinding="MrlrefDamageView1Iterator" id="Damactive" DTSupportsMRU="false" StaticList="true">
-      <AttrNames>
-        <Item Value="Damactive"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="Y"/>
-        <Item Value="N"/>
-      </ValueList>
-    </button>
-    <button IterBinding="MrlrefDamageView1Iterator" id="Damcdx" DTSupportsMRU="false" StaticList="true">
-      <AttrNames>
-        <Item Value="Damcdx"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="Y"/>
-        <Item Value="N"/>
-      </ValueList>
-    </button>
-    <tree IterBinding="MrlrefRepairView2Iterator" id="MrlrefRepairView2">
-      <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrlrefRepairView" Name="MrlrefRepairView20">
-        <AttrNames>
-          <Item Value="Repairid"/>
-          <Item Value="Repcode"/>
-          <Item Value="Repdescription"/>
-          <Item Value="Repactive" Binds="Repactive"/>
-          <Item Value="Repcdx" Binds="Repcdx"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <button IterBinding="MrlrefRepairView2Iterator" id="Repactive" DTSupportsMRU="false" StaticList="true">
-      <AttrNames>
-        <Item Value="Repactive"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="Y"/>
-        <Item Value="N"/>
-      </ValueList>
-    </button>
-    <button IterBinding="MrlrefRepairView2Iterator" id="Repcdx" DTSupportsMRU="false" StaticList="true">
-      <AttrNames>
-        <Item Value="Repcdx"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="Y"/>
-        <Item Value="N"/>
-      </ValueList>
-    </button>
-    <action IterBinding="MrlrefDamageView1Iterator" id="CreateInsert" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
-    <action IterBinding="MrlrefDamageView1Iterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
-    <action IterBinding="MrlrefRepairView2Iterator" id="CreateInsert1" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
-    <action IterBinding="MrlrefRepairView2Iterator" id="Delete1" RequiresUpdateModel="false" Action="removeCurrentRow"/>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
-            DataControl="MNRDataControlDataControl"/>
-  </bindings>
+    <parameters/>
+    <executables>
+        <iterator Binds="MasterDataControlNested.MrlrefDamageView1" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrlrefDamageView1Iterator"/>
+        <searchRegion Criteria="__ImplicitViewCriteria__"
+                      Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" Binds="MrlrefDamageView1Iterator"
+                      id="ImplicitViewCriteriaQuery"/>
+        <iterator Binds="MasterDataControlNested.MrlrefRepairView2" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrlrefRepairView2Iterator"/>
+    </executables>
+    <bindings>
+        <tree IterBinding="MrlrefDamageView1Iterator" id="MrlrefDamageView1">
+            <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrlrefDamageView" Name="MrlrefDamageView10">
+                <AttrNames>
+                    <Item Value="Damageid"/>
+                    <Item Value="Damdescription"/>
+                    <Item Value="Damcode"/>
+                    <Item Value="Damactive" Binds="Damactive"/>
+                    <Item Value="Damcdx" Binds="Damcdx"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <button IterBinding="MrlrefDamageView1Iterator" id="Damactive" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="Damactive"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="MrlrefDamageView1Iterator" id="Damcdx" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="Damcdx"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <tree IterBinding="MrlrefRepairView2Iterator" id="MrlrefRepairView2">
+            <nodeDefinition DefName="its.mnr.mp5.vo.admin.MrlrefRepairView" Name="MrlrefRepairView20">
+                <AttrNames>
+                    <Item Value="Repairid"/>
+                    <Item Value="Repcode"/>
+                    <Item Value="Repdescription"/>
+                    <Item Value="Repactive" Binds="Repactive"/>
+                    <Item Value="Repcdx" Binds="Repcdx"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <button IterBinding="MrlrefRepairView2Iterator" id="Repactive" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="Repactive"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <button IterBinding="MrlrefRepairView2Iterator" id="Repcdx" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="Repcdx"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <action IterBinding="MrlrefDamageView1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="MrlrefDamageView1Iterator" id="Delete" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <action IterBinding="MrlrefRepairView2Iterator" id="CreateInsert1" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="MrlrefRepairView2Iterator" id="Delete1" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="MNRDataControlDataControl"/>
+    </bindings>
 </pageDefinition>

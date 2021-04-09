@@ -1,46 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="FIFODeletePageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="CCDataControlNested.MrltFifoheaderView" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="MrltFifoheaderViewIterator"/>
-  </executables>
-  <bindings>
-    <action IterBinding="MrltFifoheaderViewIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
-    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Listid">
-      <AttrNames>
-        <Item Value="Listid"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Accreated">
-      <AttrNames>
-        <Item Value="Accreated"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Adjcreated">
-      <AttrNames>
-        <Item Value="Adjcreated"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Adjtodate">
-      <AttrNames>
-        <Item Value="Adjtodate"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="MrltFifoheaderViewIterator" StaticList="false" Uses="LOV_Fpxhid" id="Fpxhid"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="tCCDesc">
-      <AttrNames>
-        <Item Value="tCCDesc"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltFifoheaderViewIterator" id="tCCStatus">
-      <AttrNames>
-        <Item Value="tCCStatus"/>
-      </AttrNames>
-    </attributeValues>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="CCDataControlNested.MrltFifoheaderView" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="MrltFifoheaderViewIterator"/>
+    </executables>
+    <bindings>
+        <action IterBinding="MrltFifoheaderViewIterator" id="Delete" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Listid">
+            <AttrNames>
+                <Item Value="Listid"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Accreated">
+            <AttrNames>
+                <Item Value="Accreated"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Adjcreated">
+            <AttrNames>
+                <Item Value="Adjcreated"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltFifoheaderViewIterator" id="Adjtodate">
+            <AttrNames>
+                <Item Value="Adjtodate"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="MrltFifoheaderViewIterator" StaticList="false" Uses="LOV_Fpxhid" id="Fpxhid"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="MrltFifoheaderViewIterator" id="tCCDesc">
+            <AttrNames>
+                <Item Value="tCCDesc"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltFifoheaderViewIterator" id="tCCStatus">
+            <AttrNames>
+                <Item Value="tCCStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+    </bindings>
 </pageDefinition>

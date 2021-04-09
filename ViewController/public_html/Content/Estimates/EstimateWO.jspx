@@ -1,0 +1,503 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Estimates" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+        <!--
+            <af:pageTemplate viewId="/templates/bodyMainTemplate.jspx" id="pt1">
+                -->
+                            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <!--
+                    <af:panelSplitter id="ps1" splitterPosition="420" dimensionsFrom="children" collapsed="true"
+                                      disabled="#{pageFlowScope.pfsCalledFromWO eq true ?true: false}">
+                        <f:facet name="first">
+                            <af:panelGroupLayout layout="vertical" id="pgl1" rendered="false">
+                                <af:panelHeader text=" " id="ph1">
+                                -->
+                    <!--
+                        #{bindings.EstimateSearchQuery.processQuery}
+                        -->
+                    <!--
+                                    <af:query id="qryId1" headerText="Search" disclosed="true"
+                                              value="#{bindings.EstimateSearchQuery.queryDescriptor}"
+                                              model="#{bindings.EstimateSearchQuery.queryModel}"
+                                              queryListener="#{estimatesBean.processQuery}"
+                                              queryOperationListener="#{bindings.EstimateSearchQuery.processQueryOperation}"
+                                              resultComponentId="::resId1" saveQueryMode="readOnly"
+                                              modeChangeVisible="false" searchButtonAccessKey="s"
+                                              resetButtonAccessKey="r" inlineStyle="width:410px;"/>
+                                    <af:table value="#{bindings.Estimate.collectionModel}" var="row"
+                                              rows="#{bindings.Estimate.rangeSize}"
+                                              emptyText="#{bindings.Estimate.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                              rowBandingInterval="0"
+                                              selectedRowKeys="#{bindings.Estimate.collectionModel.selectedRow}"
+                                              selectionListener="#{estimatesBean.eventsTableSelectionListener}"
+                                              rowSelection="single" fetchSize="#{bindings.Estimate.rangeSize}"
+                                              id="resId1"
+                                              inlineStyle="width:400px; height:325px; border-color:Silver; border-style:solid; border-width:thin; background-color:White; margin:2px;"
+                                              binding="#{estimatesBean.resultTable}">
+                                        <af:column headerText="#{bindings.Estimate.hints.Estid.label}" id="c5"
+                                                   width="45">
+                                            <af:outputText value="#{row.Estid}"
+                                                           shortDesc="#{bindings.Estimate.hints.Estid.tooltip}"
+                                                           id="ot5">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.Estimate.hints.Estid.format}"/>
+                                            </af:outputText>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.Estimate.hints.Wonum.label}" id="c2"
+                                                   width="45">
+                                            <af:outputText value="#{row.Wonum}"
+                                                           shortDesc="#{bindings.Estimate.hints.Wonum.tooltip}"
+                                                           id="ot2"/>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.Estimate.hints.Equipnum.label}" id="c4"
+                                                   width="120">
+                                            <af:outputText value="#{row.Equipnum}"
+                                                           shortDesc="#{bindings.Estimate.hints.Equipnum.tooltip}"
+                                                           id="ot1"/>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.Estimate.hints.Status.label}" id="c1"
+                                                   width="60">
+                                            <af:selectOneChoice value="#{row.bindings.Status.inputValue}"
+                                                                label="#{row.bindings.Status.label}"
+                                                                required="#{bindings.Estimate.hints.Status.mandatory}"
+                                                                shortDesc="#{bindings.Estimate.hints.Status.tooltip}"
+                                                                readOnly="true" id="soc2">
+                                                <f:selectItems value="#{row.bindings.Status.items}" id="si2"/>
+                                                <f:validator binding="#{row.bindings.Status.validator}"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
+                                        <af:column headerText="#{bindings.Estimate.hints.Acctnum.label}" id="c3"
+                                                   width="105">
+                                            <af:selectOneChoice value="#{row.bindings.Acctnum.inputValue}"
+                                                                label="#{row.bindings.Acctnum.label}"
+                                                                required="#{bindings.Estimate.hints.Acctnum.mandatory}"
+                                                                shortDesc="#{bindings.Estimate.hints.Acctnum.tooltip}"
+                                                                readOnly="true" id="soc1">
+                                                <f:selectItems value="#{row.bindings.Acctnum.items}" id="si1"/>
+                                                <f:validator binding="#{row.bindings.Acctnum.validator}"/>
+                                            </af:selectOneChoice>
+                                        </af:column>
+                                    </af:table>
+                                </af:panelHeader>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="second">
+                        -->
+                    <af:panelHeader id="g1" text=" ">
+                        <!--
+                    partialTriggers="qryId1 resId1"
+                    -->
+                        <af:panelGroupLayout id="pgl3" layout="vertical">
+                            <!--
+                            <af:selectOneChoice value="#{bindings.Ver2.inputValue}" label="#{bindings.Ver2.label}"
+                                                required="#{bindings.Ver2.hints.mandatory}"
+                                                shortDesc="#{bindings.Ver2.hints.tooltip}" id="soc1">
+                                <f:selectItems value="#{bindings.Ver2.items}" id="si1"/>
+                                <f:validator binding="#{bindings.Ver2.validator}"/>
+                            </af:selectOneChoice>
+                            -->
+                            <af:panelGridLayout id="pgl1" inlineStyle="width:880px">
+                                <af:gridRow marginTop="5px" height="auto" id="gr1">
+                                    <af:gridCell marginStart="5px" width="23%" id="gc1">
+                                        <af:panelFormLayout id="pfl4" maxColumns="1" rows="3">
+                                            <af:selectOneChoice value="#{bindings.Ver.inputValue}" autoSubmit="true"
+                                                                label="#{bindings.Ver.label}"
+                                                                required="#{bindings.Ver.hints.mandatory}"
+                                                                shortDesc="#{bindings.Ver.hints.tooltip}" id="soc35"
+                                                                inlineStyle="margin:5px;"
+                                                                valueChangeListener="#{estimatesBean.verRefreshEstWOIterLstnr}">
+                                                <f:selectItems value="#{bindings.Ver.items}" id="si35"/>
+                                                <f:validator binding="#{bindings.Ver.validator}"/>
+                                            </af:selectOneChoice>
+                                            <af:inputComboboxListOfValues id="status1Id"
+                                                                          popupTitle="Search and Select: #{bindings.Status1.hints.label}"
+                                                                          value="#{bindings.Status1.inputValue}"
+                                                                          label="#{bindings.Status1.hints.label}"
+                                                                          model="#{bindings.Status1.listOfValuesModel}"
+                                                                          required="#{bindings.Status1.hints.mandatory}"
+                                                                          columns="#{bindings.Status1.hints.displayWidth}"
+                                                                          shortDesc="#{bindings.Status1.hints.tooltip}"
+                                                                          autoSubmit="true"
+                                                                          valueChangeListener="#{estimatesBean.updEstStatusLstnr}">
+                                                <f:validator binding="#{bindings.Status1.validator}"/>
+                                            </af:inputComboboxListOfValues>
+                                            <af:inputText value="#{bindings.Appnum.inputValue}"
+                                                          label="#{bindings.Appnum.hints.label}"
+                                                          required="#{bindings.Appnum.hints.mandatory}"
+                                                          maximumLength="#{bindings.Appnum.hints.precision}"
+                                                          shortDesc="#{bindings.Appnum.hints.tooltip}" id="it41"
+                                                          autoSubmit="true" inlineStyle="margin:5px;"
+                                                          columns="#{bindings.Appnum.hints.displayWidth}">
+                                                <f:validator binding="#{bindings.Appnum.validator}"/>
+                                            </af:inputText>
+                                        </af:panelFormLayout>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="33%" id="gc2">
+                                        <af:panelFormLayout id="pfl6" inlineStyle="margin-left:20px">
+                                            <af:inputText value="#{bindings.Estid.inputValue}"
+                                                          shortDesc="#{bindings.Estid.hints.tooltip}" id="ot39"
+                                                          label="#{bindings.Estid.hints.label}" readOnly="true"
+                                                          inlineStyle="margin-bottom:15px;">
+                                                <af:convertNumber groupingUsed="false"
+                                                                  pattern="#{bindings.Estid.format}"/>
+                                            </af:inputText>
+                                            <af:inputText value="#{bindings.Reason.inputValue}"
+                                                          label="#{bindings.Reason.hints.label}"
+                                                          required="#{bindings.Reason.hints.mandatory}" columns="50"
+                                                          maximumLength="#{bindings.Reason.hints.precision}"
+                                                          shortDesc="#{bindings.Reason.hints.tooltip}" id="it40"
+                                                          rows="4" autoSubmit="true" inlineStyle="margin-top:20px;"
+                                                          labelStyle="margin-top:10px;" contentStyle="margin-left:5px;">
+                                                <f:validator binding="#{bindings.Reason.validator}"/>
+                                            </af:inputText>
+                                        </af:panelFormLayout>
+                                        <af:panelFormLayout id="pfl5" rendered="false">
+                                            <af:spacer width="250" height="10" id="s11"/>
+                                            <af:spacer width="250" height="10" id="s8"/>
+                                            <af:spacer width="10" height="10" id="s9"/>
+                                        </af:panelFormLayout>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="43%" marginEnd="5px" id="gc4"/>
+                                </af:gridRow>
+                                <af:gridRow marginTop="5px" height="auto" id="gr4">
+                                    <af:gridCell marginStart="5px" width="23%" id="gc6">
+                                        <af:inputText value="#{bindings.Wonum.inputValue}"
+                                                      shortDesc="#{bindings.Wonum.hints.tooltip}" id="ot42"
+                                                      label="#{bindings.Wonum.hints.label}" readOnly="true"
+                                                      labelStyle="width:75px;"/>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="33%" id="gc7">
+                                        <af:inputText value="#{bindings.Equipnum.inputValue}"
+                                                      shortDesc="#{bindings.Equipnum.hints.tooltip}" id="ot43"
+                                                      label="#{bindings.Equipnum.hints.label}" readOnly="true"/>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="43%" marginEnd="5px" id="gc8">
+                                        <af:selectOneChoice value="#{bindings.Acctnum.inputValue}"
+                                                            label="#{bindings.Acctnum.label}"
+                                                            required="#{bindings.Acctnum.hints.mandatory}"
+                                                            shortDesc="#{bindings.Acctnum.hints.tooltip}"
+                                                            readOnly="true" id="soc44" labelStyle="width:45px">
+                                            <f:selectItems value="#{bindings.Acctnum.items}" id="si45"/>
+                                            <f:validator binding="#{bindings.Acctnum.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            <!--
+                            <af:panelGridLayout id="pgl2" binding="#{estimatesBean.panelGroupLayoutDetail}"
+                                                rendered="false">
+                                <af:gridRow marginTop="5px" height="auto" id="gr2" marginBottom="5px">
+                                    <af:gridCell width="100%" id="gc3" columnSpan="2" marginStart="10px">
+                                        <af:panelFormLayout id="pfl1" maxColumns="3" rows="3">
+                                            <af:selectOneChoice id="nl1" autoSubmit="true"
+                                                                value="#{bindings.Ver.inputValue}"
+                                                                label="#{bindings.Ver.label}" inlineStyle="margin:5px;"
+                                                                binding="#{estimatesBean.verChoice}">
+                                                <f:selectItems value="#{bindings.Ver.items}" id="si5"/>
+                                            </af:selectOneChoice>
+                                            <af:selectOneChoice value="#{bindings.Status.inputValue}"
+                                                                label="#{bindings.Status.label}"
+                                                                required="#{bindings.Status.hints.mandatory}"
+                                                                shortDesc="#{bindings.Status.hints.tooltip}" id="soc3"
+                                                                autoSubmit="true" inlineStyle="margin:5px;">
+                                                <f:selectItems value="#{bindings.Status.items}" id="si3"/>
+                                                <f:validator binding="#{bindings.Status.validator}"/>
+                                            </af:selectOneChoice>
+                                            <af:inputText value="#{bindings.Appnum.inputValue}"
+                                                          label="#{bindings.Appnum.hints.label}"
+                                                          required="#{bindings.Appnum.hints.mandatory}"
+                                                          columns="#{bindings.Appnum.hints.displayWidth}"
+                                                          maximumLength="#{bindings.Appnum.hints.precision}"
+                                                          shortDesc="#{bindings.Appnum.hints.tooltip}" id="it1"
+                                                          autoSubmit="true" inlineStyle="margin:5px;">
+                                                <f:validator binding="#{bindings.Appnum.validator}"/>
+                                            </af:inputText>
+                                            <af:spacer width="100" height="10" id="s1"/>
+                                            <af:spacer width="100" height="10" id="s2"/>
+                                            <af:spacer width="100" height="10" id="s3"/>
+                                            <af:panelLabelAndMessage label="#{bindings.Estid.hints.label}" id="plam2"
+                                                                     inlineStyle="margin:5px;">
+                                                <af:outputText value="#{bindings.Estid.inputValue}"
+                                                               shortDesc="#{bindings.Estid.hints.tooltip}" id="ot4">
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.Estid.format}"/>
+                                                </af:outputText>
+                                            </af:panelLabelAndMessage>
+                                            <af:inputText value="#{bindings.Reason.inputValue}"
+                                                          label="#{bindings.Reason.hints.label}"
+                                                          required="#{bindings.Reason.hints.mandatory}" columns="50"
+                                                          maximumLength="#{bindings.Reason.hints.precision}"
+                                                          shortDesc="#{bindings.Reason.hints.tooltip}" id="it2" rows="4"
+                                                          autoSubmit="true" contentStyle="margin:5px;">
+                                                <f:validator binding="#{bindings.Reason.validator}"/>
+                                            </af:inputText>
+                                        </af:panelFormLayout>
+                                    </af:gridCell>
+                                </af:gridRow>
+                                <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr3">
+                                    <af:gridCell width="100%" id="gc5" columnSpan="2" marginStart="10px">
+                                        <af:panelFormLayout id="pfl2" maxColumns="6" rows="1"
+                                                            styleClass="AFStretchWidth">
+                                            <af:panelLabelAndMessage label="#{bindings.Wonum.hints.label}" id="plam3">
+                                                <af:outputText value="#{bindings.Wonum.inputValue}"
+                                                               shortDesc="#{bindings.Wonum.hints.tooltip}" id="ot6"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:spacer width="100" height="10" id="s4"/>
+                                            <af:panelLabelAndMessage label="#{bindings.Equipnum.hints.label}"
+                                                                     id="plam4">
+                                                <af:outputText value="#{bindings.Equipnum.inputValue}"
+                                                               shortDesc="#{bindings.Equipnum.hints.tooltip}" id="ot7"/>
+                                            </af:panelLabelAndMessage>
+                                            <af:spacer width="100" height="10" id="s5"/>
+                                            <af:selectOneChoice value="#{bindings.Acctnum.inputValue}"
+                                                                label="#{bindings.Acctnum.label}"
+                                                                required="#{bindings.Acctnum.hints.mandatory}"
+                                                                shortDesc="#{bindings.Acctnum.hints.tooltip}"
+                                                                readOnly="true" id="soc4">
+                                                <f:selectItems value="#{bindings.Acctnum.items}" id="si4"/>
+                                                <f:validator binding="#{bindings.Acctnum.validator}"/>
+                                            </af:selectOneChoice>
+                                        </af:panelFormLayout>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                            -->
+                            <af:panelCollection id="pc1"
+                                                inlineStyle="height:175px; width:880px; width:inherit; margin:5px 3px 5px 10px;"
+                                                featuresOff="viewMenu">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar"/>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.EstimateTask.collectionModel}" var="row"
+                                          rows="#{bindings.EstimateTask.rangeSize}"
+                                          emptyText="#{bindings.EstimateTask.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.EstimateTask.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.EstimateTask.collectionModel.makeCurrent}"
+                                          rowSelection="single" fetchSize="#{bindings.EstimateTask.rangeSize}" id="t1"
+                                          styleClass="AFStretchWidth" autoHeightRows="-1" columnStretching="column:c7">
+                                    <af:column headerText="#{bindings.EstimateTask.hints.Task.label}" id="c6"
+                                               width="155">
+                                        <af:outputText value="#{row.Task}"
+                                                       shortDesc="#{bindings.EstimateTask.hints.Task.tooltip}"
+                                                       id="ot8"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimateTask.hints.Cmt.label}" id="c7" width="90">
+                                        <af:outputText value="#{row.Cmt}"
+                                                       shortDesc="#{bindings.EstimateTask.hints.Cmt.tooltip}" id="ot9"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimateTask.hints.Uom.label}" id="c8" width="45">
+                                        <af:outputText value="#{row.Uom}"
+                                                       shortDesc="#{bindings.EstimateTask.hints.Uom.tooltip}"
+                                                       id="ot10"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimateTask.hints.Loc.label}" id="c9" width="75">
+                                        <af:outputText value="#{row.Loc}"
+                                                       shortDesc="#{bindings.EstimateTask.hints.Loc.tooltip}"
+                                                       id="ot11"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimateTask.hints.Dmg.label}" id="c10"
+                                               width="75">
+                                        <af:outputText value="#{row.Dmg}"
+                                                       shortDesc="#{bindings.EstimateTask.hints.Dmg.tooltip}"
+                                                       id="ot12"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimateTask.hints.Rep.label}" id="c11"
+                                               width="80">
+                                        <af:outputText value="#{row.Rep}"
+                                                       shortDesc="#{bindings.EstimateTask.hints.Rep.tooltip}"
+                                                       id="ot13"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimateTask.hints.Shift.label}" id="c12"
+                                               width="35">
+                                        <af:outputText value="#{row.Shift}"
+                                                       shortDesc="#{bindings.EstimateTask.hints.Shift.tooltip}"
+                                                       id="ot14"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimateTask.hints.Mechid.label}" id="c13"
+                                               width="35">
+                                        <af:outputText value="#{row.Mechid}"
+                                                       shortDesc="#{bindings.EstimateTask.hints.Mechid.tooltip}"
+                                                       id="ot15"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimateTask.hints.Lbrhr.label}" id="c14"
+                                               width="35">
+                                        <af:outputText value="#{row.Lbrhr}"
+                                                       shortDesc="#{bindings.EstimateTask.hints.Lbrhr.tooltip}"
+                                                       id="ot16">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.EstimateTask.hints.Lbrhr.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimateTask.hints.Rate.label}" id="c15"
+                                               width="35">
+                                        <af:outputText value="#{row.Rate}"
+                                                       shortDesc="#{bindings.EstimateTask.hints.Rate.tooltip}"
+                                                       id="ot17"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimateTask.hints.Lbrcst.label}" id="c16"
+                                               width="57">
+                                        <af:outputText value="#{row.Lbrcst}"
+                                                       shortDesc="#{bindings.EstimateTask.hints.Lbrcst.tooltip}"
+                                                       id="ot18">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.EstimateTask.hints.Lbrcst.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimateTask.hints.Compcd.label}" id="c17"
+                                               width="50">
+                                        <af:outputText value="#{row.Compcd}"
+                                                       shortDesc="#{bindings.EstimateTask.hints.Compcd.tooltip}"
+                                                       id="ot19"/>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                            <af:panelCollection id="pc2"
+                                                inlineStyle="height:175px; width:880px; width:inherit; margin:5px 3px 5px 10px;"
+                                                featuresOff="viewMenu" partialTriggers="::pc1:t1">
+                                <f:facet name="menus"/>
+                                <f:facet name="toolbar"/>
+                                <f:facet name="statusbar"/>
+                                <af:table value="#{bindings.EstimatePart.collectionModel}" var="row"
+                                          rows="#{bindings.EstimatePart.rangeSize}"
+                                          emptyText="#{bindings.EstimatePart.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          rowBandingInterval="0"
+                                          selectedRowKeys="#{bindings.EstimatePart.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.EstimatePart.collectionModel.makeCurrent}"
+                                          rowSelection="single" fetchSize="#{bindings.EstimatePart.rangeSize}" id="t2"
+                                          columnStretching="column:c19">
+                                    <af:column headerText="#{bindings.EstimatePart.hints.Partnum.label}" id="c18"
+                                               width="75">
+                                        <af:outputText value="#{row.Partnum}"
+                                                       shortDesc="#{bindings.EstimatePart.hints.Partnum.tooltip}"
+                                                       id="ot20"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimatePart.hints.Partdesc.label}" id="c19"
+                                               width="150">
+                                        <af:outputText value="#{row.Partdesc}"
+                                                       shortDesc="#{bindings.EstimatePart.hints.Partdesc.tooltip}"
+                                                       id="ot21"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimatePart.hints.Qty.label}" id="c20"
+                                               width="30">
+                                        <af:outputText value="#{row.Qty}"
+                                                       shortDesc="#{bindings.EstimatePart.hints.Qty.tooltip}" id="ot22">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.EstimatePart.hints.Qty.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimatePart.hints.Uom.label}" id="c21"
+                                               width="30">
+                                        <af:outputText value="#{row.Uom}"
+                                                       shortDesc="#{bindings.EstimatePart.hints.Uom.tooltip}"
+                                                       id="ot23"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimatePart.hints.Partcst.label}" id="c22"
+                                               width="75">
+                                        <af:outputText value="#{row.Partcst}"
+                                                       shortDesc="#{bindings.EstimatePart.hints.Partcst.tooltip}"
+                                                       id="ot24">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.EstimatePart.hints.Partcst.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimatePart.hints.Parttotal.label}" id="c23"
+                                               width="75" rendered="false">
+                                        <af:outputText value="#{row.Parttotal}"
+                                                       shortDesc="#{bindings.EstimatePart.hints.Parttotal.tooltip}"
+                                                       id="ot25">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.EstimatePart.hints.Parttotal.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimatePart.hints.Ptax.label}" id="c24"
+                                               rendered="false">
+                                        <af:outputText value="#{row.Ptax}"
+                                                       shortDesc="#{bindings.EstimatePart.hints.Ptax.tooltip}"
+                                                       id="ot26">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.EstimatePart.hints.Ptax.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.EstimatePart.hints.Ptaxamt.label}" id="c25"
+                                               rendered="false">
+                                        <af:outputText value="#{row.Ptaxamt}"
+                                                       shortDesc="#{bindings.EstimatePart.hints.Ptaxamt.tooltip}"
+                                                       id="ot27">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.EstimatePart.hints.Ptaxamt.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                </af:table>
+                            </af:panelCollection>
+                            <af:panelFormLayout id="pfl3" maxColumns="6" rows="1"
+                                                inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:10px; background-color:White;padding:10px;">
+                                <af:inputText value="#{bindings.Tlbrhrs.inputValue}"
+                                              label="#{bindings.Tlbrhrs.hints.label}"
+                                              required="#{bindings.Tlbrhrs.hints.mandatory}" readOnly="true"
+                                              columns="#{bindings.Tlbrhrs.hints.displayWidth}"
+                                              maximumLength="#{bindings.Tlbrhrs.hints.precision}"
+                                              shortDesc="#{bindings.Tlbrhrs.hints.tooltip}" id="it3"
+                                              styleClass="AFStretchWidth">
+                                    <f:validator binding="#{bindings.Tlbrhrs.validator}"/>
+                                    <af:convertNumber groupingUsed="false" pattern="#{bindings.Tlbrhrs.format}"/>
+                                </af:inputText>
+                                <af:spacer width="120" height="10" id="s6"/>
+                                <af:inputText value="#{bindings.Tlbrcst.inputValue}"
+                                              label="#{bindings.Tlbrcst.hints.label}"
+                                              required="#{bindings.Estid.hints.mandatory}" readOnly="true"
+                                              columns="#{bindings.Tlbrcst.hints.displayWidth}"
+                                              maximumLength="#{bindings.Estid.hints.precision}"
+                                              shortDesc="#{bindings.Tlbrcst.hints.tooltip}" id="it4">
+                                    <f:validator binding="#{bindings.Estid.validator}"/>
+                                    <af:convertNumber groupingUsed="false" pattern="#{bindings.Estid.format}"/>
+                                </af:inputText>
+                                <af:spacer width="120" height="10" id="s7"/>
+                                <af:inputText value="#{bindings.Tpartcst.inputValue}"
+                                              label="#{bindings.Tpartcst.hints.label}"
+                                              required="#{bindings.Wonum.hints.mandatory}" readOnly="true"
+                                              columns="#{bindings.Tpartcst.hints.displayWidth}"
+                                              maximumLength="#{bindings.Wonum.hints.precision}"
+                                              shortDesc="#{bindings.Tpartcst.hints.tooltip}" id="it5">
+                                    <f:validator binding="#{bindings.Wonum.validator}"/>
+                                </af:inputText>
+                            </af:panelFormLayout>
+                        </af:panelGroupLayout>
+                        <!--
+                <f:facet name="toolBar">
+                    <af:outputLabel value="#{pageFlowScope.psfEstid}" id="ol1" rendered="false"/>
+                </f:facet>
+                -->
+                <f:facet name="menuBar">
+                    <af:toolbar id="t3"
+                                inlineStyle="border-color:Silver; border-style:solid; border-width:thin; background-color:White; margin:2px;">
+                        <!--action="#{bindings.Commit.execute}"-->
+                        <af:button text="Apply" id="b3" icon="#{resource['images:commit.png']}" disabled="#{!bindings.Commit.enabled}"
+                                   actionListener="#{estimatesBean.commit_actionWO}"/>
+                                   <!--action="#{estimatesBean.doRollback}"-->
+                        <af:button text="Cancel" id="b2" icon="#{resource['images:undo.png']}"
+                                   disabled="#{!bindings.Rollback.enabled}" action="#{estimatesBean.doRollback}">
+                                   <af:resetActionListener/>
+                                   </af:button>
+                        <af:button id="b1" icon="#{resource['images:terminate.png']}"
+                                   actionListener="#{ModuleNavBean.goExit}"/>
+                    </af:toolbar>
+                </f:facet>
+                <f:facet name="context"/>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                    </af:panelHeader>
+                </f:facet>
+                <!--
+                    </af:panelSplitter>
+                    -->
+
+                <f:attribute name="title" value=" "/>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>
