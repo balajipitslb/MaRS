@@ -2,11 +2,11 @@
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81"
                 id="POCompanReceipts_POCompanReceipts_initCompanyRcptsPageDef" Package="Taskflows.PORecv"
                 SkipValidation="true">
-  <parameters/>
-  <executables/>
-  <bindings>
-    <action id="initCompanyRcpts" RequiresUpdateModel="true" Action="invokeMethod" MethodName="initCompanyRcpts"
-            IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
-            InstanceName="data.MNRDataControlDataControl.dataProvider.PORecvDataControlNested"/>
-  </bindings>
+    <parameters/>
+    <executables/>
+    <bindings>
+        <action id="initCompanyRcpts" RequiresUpdateModel="true" Action="invokeMethod" MethodName="initCompanyRcpts"
+                IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                InstanceName="data.MNRDataControlDataControl.dataProvider.PORecvDataControlNested"/>
+    </bindings>
 </pageDefinition>

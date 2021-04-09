@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36"
                 id="CC_CycleCount_Inv_CycleCount_CommitPageDef" Package="Taskflows.Stock" SkipValidation="true">
-  <parameters/>
-  <executables/>
-  <bindings>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="CCDataControlDataControl"/>
-  </bindings>
+    <parameters/>
+    <executables/>
+    <bindings>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="CCDataControlDataControl"/>
+    </bindings>
 </pageDefinition>

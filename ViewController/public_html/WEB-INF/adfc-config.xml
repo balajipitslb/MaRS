@@ -269,6 +269,9 @@
       </display-type>
     </run-as-dialog>
   </task-flow-call>
+  <view id="WOEstimates">
+    <page>/Content/Estimates/Estimates.jspx</page>
+ </view>
   <control-flow-rule id="__1">
     <from-activity-id>*</from-activity-id>
     <control-flow-case id="__2">
@@ -302,6 +305,10 @@
     <control-flow-case id="__35">
       <from-outcome>goAsset</from-outcome>
       <to-activity-id>asset</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__42">
+      <from-outcome>goEstimates</from-outcome>
+      <to-activity-id>WOEstimates</to-activity-id>
     </control-flow-case>
   </control-flow-rule>
   <control-flow-rule id="__6">
@@ -445,6 +452,21 @@
   <managed-bean id="__34">
     <managed-bean-name>AdminBean</managed-bean-name>
     <managed-bean-class>its.mnr.mp5.view.AdminBean</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__43">
+    <managed-bean-name>estimatesBean</managed-bean-name>
+    <managed-bean-class>its.mnr.mp5.view.estimatesBean</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__44">
+    <managed-bean-name>WorkOrderBean</managed-bean-name>
+    <managed-bean-class>its.mnr.mp5.view.WorkOrderBean</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__45">
+    <managed-bean-name>FlagBean</managed-bean-name>
+    <managed-bean-class>its.mnr.mp5.view.FlagBean</managed-bean-class>
     <managed-bean-scope>request</managed-bean-scope>
   </managed-bean>
 </adfc-config>

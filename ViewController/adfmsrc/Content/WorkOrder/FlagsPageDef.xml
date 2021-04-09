@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="FlagsPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="WODataControlNested.FlagAssoc_VVO1" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="FlagAssoc_VVO1Iterator"/>
+        <iterator id="WOEventsIterator" Binds="WODataControlNested.WOEvents" DataControl="MNRDataControlDataControl"
+                  RangeSize="25"/>
+        <iterator id="ActiveMrltFlagIterator" Binds="WODataControlNested.ActiveMrltFlag"
+                  DataControl="MNRDataControlDataControl" RangeSize="25"/>
+    </executables>
+    <bindings>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="MNRDataControlDataControl"/>
+        <tree IterBinding="FlagAssoc_VVO1Iterator" id="FlagAssoc_VVO1">
+            <nodeDefinition DefName="its.mnr.mp5.vo.workorder.FlagAssoc_VVO" Name="FlagAssoc_VVO10">
+                <AttrNames>
+                    <Item Value="Fname"/>
+                    <Item Value="Faupdby"/>
+                    <Item Value="Faupddt"/>
+                    <Item Value="Faitem"/>
+                    <Item Value="Faactive"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="WOEventsIterator" id="EvtStatus1">
+            <AttrNames>
+                <Item Value="EvtStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="createFlagAssociation" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="createFlagAssociation" IsViewObjectMethod="false"
+                      DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.WODataControlNested"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.createFlagAssociation_MNRDataControlDataControl_dataProvider_WODataControlNested_createFlagAssociation_result">
+            <NamedData NDName="fid" NDType="java.lang.Integer"/>
+            <NamedData NDName="faitem" NDType="java.lang.String"/>
+            <NamedData NDName="faactive" NDType="java.lang.String"/>
+        </methodAction>
+    </bindings>
+</pageDefinition>

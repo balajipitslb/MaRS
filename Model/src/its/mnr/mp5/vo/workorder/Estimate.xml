@@ -4,36 +4,19 @@
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="Estimate"
-  Version="11.1.2.60.81"
-  SelectList="MrltEstimate.ESTID, 
-       MrltEstimate.WONUM, 
-       MrltEstimate.VER, 
-       MrltEstimate.ESTDT, 
-       MrltEstimate.STATUS, 
-       MrltEstimate.UPDBY, 
-       MrltEstimate.APPNUM, 
-       MrltEstimate.UPDDT, 
-       MrltEstimate.REASON, 
-       MrltEstimate.EQUIPNUM, 
-       MrltEstimate.ACCTNUM, 
-       MrltEstimate.HDRCD, 
-       MrltEstimate.TLBRHRS, 
-       MrltEstimate.TLBRCST, 
-       MrltEstimate.TPARTCST, 
-       MrltEstimate.IP, 
-       MrltEstimate.RSPTYPE, 
-       MrltEstimate.EQTYPE, 
-       MrltEstimate.LOCODE"
-  FromList="MRLT_ESTIMATE MrltEstimate"
+  Version="12.1.3.10.8"
   BindingStyle="OracleName"
   CustomQuery="false"
   RowClass="its.mnr.mp5.vo.workorder.EstimateRowImpl"
   ComponentClass="its.mnr.mp5.vo.workorder.EstimateImpl"
   DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
   PageIterMode="Full"
-  UseGlueCode="false"
   FetchMode="FETCH_AS_NEEDED"
-  Passivate="All">
+  Passivate="All"
+  SelectListFlags="1"
+  FromListFlags="1"
+  WhereFlags="1"
+  SelectAllAttributes="false">
   <DesignTime>
     <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
     <Attr Name="_isCodegen" Value="true"/>
@@ -42,6 +25,133 @@
     Name="EIdBind"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <ViewAccessor
+    Name="EstimateStatusApprLOV1"
+    ViewObjectName="its.mnr.mp5.lov.EstimateStatusApprLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="EstimateStatusLOV"
+    ViewObjectName="its.mnr.mp5.lov.EstimateStatusLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="EstimateStatusRejLOV"
+    ViewObjectName="its.mnr.mp5.lov.EstimateStatusRejLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="EstimateStatusUnapprLOV"
+    ViewObjectName="its.mnr.mp5.lov.EstimateStatusUnapprLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="EstimateVerLov1"
+    ViewObjectName="its.mnr.mp5.lov.EstimateVerLov"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="WOAccountMaster"
+    ViewObjectName="its.mnr.mp5.vo.workorder.WOAccountMaster"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="Estimate1"
+    ViewObjectName="its.mnr.mp5.vo.workorder.Estimate"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_Ver"
+    ListVOName="Estimate1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Ver"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Ver"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Ver"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Acctnum"
+    ListVOName="WOAccountMaster"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Acctnum"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Acctnum"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Accountnm"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Status"
+    ListVOName="EstimateStatusLOV"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Status"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Val"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ApprStatus"
+    ListVOName="EstimateStatusApprLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Status"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Val"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RejStatus"
+    ListVOName="EstimateStatusRejLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Status"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Val"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_UnapprStatus"
+    ListVOName="EstimateStatusUnapprLOV"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Status"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Val"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
   <EntityUsage
     Name="MrltEstimate"
     Entity="its.mnr.mp5.eo.local.MrltEstimate"/>
@@ -51,7 +161,7 @@
     PrecisionRule="true"
     EntityAttrName="Estid"
     EntityUsage="MrltEstimate"
-    AliasName="ESTID"/>
+    AliasName="ESTID"><Properties><SchemaBasedProperties><LABEL ResId="its.mnr.mp5.vo.workorder.Estimate.Estid_LABEL"/></SchemaBasedProperties></Properties></ViewAttribute>
   <ViewAttribute
     Name="Wonum"
     IsUnique="true"
@@ -59,7 +169,7 @@
     PrecisionRule="true"
     EntityAttrName="Wonum"
     EntityUsage="MrltEstimate"
-    AliasName="WONUM"/>
+    AliasName="WONUM"><Properties><SchemaBasedProperties><LABEL ResId="its.mnr.mp5.vo.workorder.Estimate.Wonum_LABEL"/></SchemaBasedProperties></Properties></ViewAttribute>
   <ViewAttribute
     Name="Ver"
     IsUnique="true"
@@ -67,7 +177,15 @@
     PrecisionRule="true"
     EntityAttrName="Ver"
     EntityUsage="MrltEstimate"
-    AliasName="VER"/>
+    AliasName="VER"
+    LOVName="LOV_Ver">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Estdt"
     IsNotNull="true"
@@ -81,7 +199,18 @@
     PrecisionRule="true"
     EntityAttrName="Status"
     EntityUsage="MrltEstimate"
-    AliasName="STATUS"/>
+    AliasName="STATUS"
+    LOVName="LOV_Status"
+    LOVFinder="EstStatusSwitcher">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="10"/>
+<CONTROLTYPE
+          Value="combo_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Updby"
     IsNotNull="true"
@@ -94,7 +223,7 @@
     PrecisionRule="true"
     EntityAttrName="Appnum"
     EntityUsage="MrltEstimate"
-    AliasName="APPNUM"/>
+    AliasName="APPNUM"><Properties><SchemaBasedProperties><DISPLAYWIDTH Value="10"/></SchemaBasedProperties></Properties></ViewAttribute>
   <ViewAttribute
     Name="Upddt"
     PrecisionRule="true"
@@ -113,14 +242,24 @@
     PrecisionRule="true"
     EntityAttrName="Equipnum"
     EntityUsage="MrltEstimate"
-    AliasName="EQUIPNUM"/>
+    AliasName="EQUIPNUM"><Properties><SchemaBasedProperties><LABEL ResId="its.mnr.mp5.vo.workorder.Estimate.Equipnum_LABEL"/></SchemaBasedProperties></Properties></ViewAttribute>
   <ViewAttribute
     Name="Acctnum"
     IsNotNull="true"
     PrecisionRule="true"
     EntityAttrName="Acctnum"
     EntityUsage="MrltEstimate"
-    AliasName="ACCTNUM"/>
+    AliasName="ACCTNUM"
+    LOVName="LOV_Acctnum">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.Estimate.Acctnum_LABEL"/></SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Hdrcd"
     PrecisionRule="true"
@@ -172,6 +311,16 @@
     EntityAttrName="Locode"
     EntityUsage="MrltEstimate"
     AliasName="LOCODE"/>
+  <ViewAttribute
+    Name="EstStatusSwitcher"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="$none$"
+    SQLType="VARCHAR">
+    <TransientExpression><![CDATA[Status=="OPEN"? "LOV_Status" :(Status=="UNA"? "LOV_UnapprStatus" :(Status=="APP"? "LOV_ApprStatus" :(Status=="REJ" ? "LOV_RejStatus" : "LOV_Status")))]]></TransientExpression>
+  </ViewAttribute>
   <ViewCriteria
     Name="EstimateCriteria"
     ViewObjectName="its.mnr.mp5.vo.workorder.Estimate"
@@ -208,9 +357,141 @@
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
+  <ViewCriteria
+    Name="EstimateCriteriaByWO"
+    ViewObjectName="its.mnr.mp5.vo.workorder.Estimate"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="EstimateCriteria1_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Wonum"
+        ViewAttribute="Wonum"
+        Operator="="
+        Conjunction="AND"
+        Value=":EIdBind"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
   <ViewLinkAccessor
     Name="EstimateTask"
     ViewLink="its.mnr.mp5.vo.link.MrltEstimatetaskdetailFk1Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <!--
+  <ViewCriteria
+    Name="EstimateSearch"
+    ViewObjectName="its.mnr.mp5.vo.workorder.Estimate"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="Never"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="false"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="EstimateCriteria1_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Estid"
+        ViewAttribute="Estid"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="WonumQ"
+        ViewAttribute="WonumQ"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="EquipnumQ"
+        ViewAttribute="EquipnumQ"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="StatusQ"
+        ViewAttribute="StatusQ"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="AcctnumQ"
+        ViewAttribute="AcctnumQ"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  -->
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
+  <SortCriteria>
+    <Sort
+      Attribute="Estid"
+      Ascending="false"/>
+    <Sort
+      Attribute="Ver"
+      Ascending="false"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="Estid"
+      Ascending="false"/>
+    <Sort
+      Attribute="Ver"
+      Ascending="false"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="Estid"
+      Ascending="false"/>
+    <Sort
+      Attribute="Ver"
+      Ascending="false"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="Estid"
+      Ascending="false"/>
+    <Sort
+      Attribute="Ver"
+      Ascending="false"/>
+  </SortCriteria>
 </ViewObject>

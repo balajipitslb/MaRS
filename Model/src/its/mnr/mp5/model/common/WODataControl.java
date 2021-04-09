@@ -15,4 +15,8 @@ public interface WODataControl extends ApplicationModule {
 
 
     String CopyWOTask(String ACTEVENT, Integer ACTACT, String ACTMATLIST, String pUser, String pOrg);
+
+    String UpdateWOStatus(String evntCd, String pstatus, String pUser);
+
+    String RejWOPartsReturn(String pEvtCode);
 }

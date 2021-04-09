@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81"
                 id="Asset_Docs_Asset_Docs_CreateInsertPageDef" Package="Taskflows.Asset" SkipValidation="true">
-  <parameters/>
-  <executables>
-    <iterator Binds="AssetDataControlNested.MrltDocumentsView" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrltDocumentsViewIterator"/>
-  </executables>
-  <bindings>
-    <action IterBinding="MrltDocumentsViewIterator" id="CreateInsert" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
-  </bindings>
+    <parameters/>
+    <executables>
+        <iterator Binds="AssetDataControlNested.MrltDocumentsView" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrltDocumentsViewIterator"/>
+    </executables>
+    <bindings>
+        <action IterBinding="MrltDocumentsViewIterator" id="CreateInsert" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+    </bindings>
 </pageDefinition>

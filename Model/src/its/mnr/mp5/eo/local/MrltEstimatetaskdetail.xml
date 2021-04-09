@@ -4,12 +4,11 @@
 <Entity
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="MrltEstimatetaskdetail"
-  Version="11.1.2.60.81"
+  Version="12.1.3.10.8"
   DBObjectType="table"
   DBObjectName="MRLT_ESTIMATETASKDETAIL"
   AliasName="MrltEstimatetaskdetail"
   BindingStyle="OracleName"
-  UseGlueCode="false"
   RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
   DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
   CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">

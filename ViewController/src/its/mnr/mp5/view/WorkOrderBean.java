@@ -62,6 +62,7 @@ import oracle.adf.view.rich.event.QueryEvent;
 import oracle.adf.view.rich.event.ReturnPopupEvent;
 
 import oracle.adf.view.rich.model.QueryDescriptor;
+import oracle.adf.view.rich.model.QueryModel;
 import oracle.adf.view.rich.render.ClientEvent;
 
 import oracle.binding.BindingContainer;
@@ -90,6 +91,7 @@ import oracle.jbo.uicli.binding.JUIteratorBinding;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.myfaces.trinidad.context.RequestContext;
+import org.apache.myfaces.trinidad.event.ReturnEvent;
 import org.apache.myfaces.trinidad.event.SelectionEvent;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 import org.apache.myfaces.trinidad.model.RowKeySetImpl;
@@ -141,10 +143,20 @@ public class WorkOrderBean {
     private RichSelectOneChoice actActChoice;
     private RichTable woActivitiesTable;
     private RichTable flagAssocTable;
+    
+    private String showEst;
+    private RichQuery woQuery;
 
     public WorkOrderBean() {
     }
 
+    public void setShowEst(String showEst) {
+        this.showEst = showEst;
+    }
+
+    public String getShowEst() {
+        return getMP5Profile("ShowEstimate");
+    }
     /* Helper methods */
 
     public oracle.binding.BindingContainer getBindings() {
@@ -827,16 +839,20 @@ public class WorkOrderBean {
             //check errors
             List errors = operationBinding.getErrors();
         }
+        System.out.println("Inside MNRDatacontrol method getMP5Profile sprofile: "+sprofile+" result: "+result);
         return result;
     }
 
     public Boolean sendEstimateFailure(String toaddress, String subject, String body) {
+  //// public void sendEstimateFailure(String toaddress, String subject, String body) {
+       System.out.println("Inside sendEstimateFailure toaddress: "+toaddress+" subject: "+subject+" body: "+body);
         OperationBinding operationBinding = getOperationBinding("sendEstimateFailure");
         operationBinding.getParamsMap().put("toaddress", toaddress);
         operationBinding.getParamsMap().put("subject", subject);
         operationBinding.getParamsMap().put("body", body);
         //invoke method
         Boolean result = (Boolean)operationBinding.execute();
+      //// operationBinding.execute();
         if (!operationBinding.getErrors().isEmpty()) {
             //check errors
             List errors = operationBinding.getErrors();
@@ -902,16 +918,19 @@ public class WorkOrderBean {
     //*/
 
     public Boolean updateWOEstId(String sestid) {
-        OperationBinding operationBinding = getOperationBinding("setEstId");
-        operationBinding.getParamsMap().put("sestid", sestid);
-        //invoke method
-        Boolean result = (Boolean)operationBinding.execute();
-        if (!operationBinding.getErrors().isEmpty()) {
-            //check errors
-            List errors = operationBinding.getErrors();
+  ////      if(sestid!=null){
+            OperationBinding operationBinding = getOperationBinding("setEstId");
+            operationBinding.getParamsMap().put("sestid", sestid);
+            //invoke method
+            Boolean result = (Boolean)operationBinding.execute();
+            if (!operationBinding.getErrors().isEmpty()) {
+                //check errors
+                List errors = operationBinding.getErrors();
+            }
+            return result;
         }
-        return result;
-    }
+  ////      return false;
+  ////  }
 
     public String updateEstimateStatus(String pStatus) {
 
@@ -940,7 +959,7 @@ public class WorkOrderBean {
         Boolean processChk = false;
         String CHASSISJOBTYPE = "1";
         String sSendBITFIThruEDI = getMP5Profile("SendBITFHWAThruEDIFlg");
-        System.out.println("Inside processBITPI()");
+        System.out.println("Inside processBITPI() sSendBITFIThruEDI: "+sSendBITFIThruEDI);
         String sEvtJobtype = (String)ADFUtil.evaluateEL("#{bindings.EvtJobtype.inputValue}");
         Timestamp tEvtStart = (Timestamp)ADFUtil.evaluateEL("#{bindings.EvtStart.inputValue}");
 
@@ -954,18 +973,19 @@ public class WorkOrderBean {
         //exit if SendBITFHWAThruEDIFlg is not Y
         if((sSendBITFIThruEDI!=null)&&(!sSendBITFIThruEDI.equals(null))){
             if (!sSendBITFIThruEDI.equals("Y")) {
-                //System.out.println("SendBITFHWAThruEDIFlg = " + sSendBITFIThruEDI);
+                System.out.println("SendBITFHWAThruEDIFlg = " + sSendBITFIThruEDI);
                 return true;
             }
         }
         String sBIT90TaskId = getMP5Profile("BIT90TaskId");
         String sPIFHWATaskId = getMP5Profile("PIFHWATaskId");
         String adminemail = getMP5Profile("AdminEmailAddress");
-
+        System.out.println("Inside processBITPI adminemail: "+adminemail+" sBIT90TaskId: "+sBIT90TaskId+" sPIFHWATaskId: "+sPIFHWATaskId);
+        /*
         System.out.println("Inside processBITPI adminemail: "+adminemail+" sEvtCode: 1026584");
         sendEstimateFailure("lakshmi.kumar@itslb.com", "Chassis BIT/FHWA I/F Error",
                             "Failed to update BIT/FHWA for WO#: 1026584");
-
+        */
         DCIteratorBinding dciter = (DCIteratorBinding)getDCBindingContainer().get("WOActivitiesIterator");
 
         for (int i = 0; i < dciter.getViewObject().getEstimatedRowCount(); i++) {
@@ -1256,8 +1276,29 @@ public class WorkOrderBean {
 
     }
 
-
     public void ShowWOFlagAssociation_action(ActionEvent actionEvent) {
+        String evtcode = (String)ADFUtil.evaluateEL("#{bindings.EvtCode.inputValue}");
+        System.out.println("Inside WorkOrderBean ShowWOFlagAssociation_action evtcode: "+evtcode);
+        if (isDirty()) {
+            System.out.println("Dirty");
+            //call popup
+            RichPopup.PopupHints hints = new RichPopup.PopupHints();
+            pendingChangePop.show(hints);
+
+        } else {
+            chkSplitter();
+            
+            if(AdfFacesContext.getCurrentInstance().getPageFlowScope().containsKey("psfEvtcode")){
+                AdfFacesContext.getCurrentInstance().getPageFlowScope().remove("psfEvtcode");
+            }
+            AdfFacesContext.getCurrentInstance().getPageFlowScope().put("psfEvtcode",evtcode);
+            
+            refreshFlagAssocVVO(evtcode);
+            goToControlFlow(null,"goFlag");
+        }
+    }
+
+    public void ShowWOFlagAssociation_action_orig(ActionEvent actionEvent) {
         if (isDirty()) {
             //System.out.println("Dirty");
             //call popup
@@ -1354,6 +1395,7 @@ public class WorkOrderBean {
         return;
     }
 
+
     public void SetWOFlagAssociation_action(ActionEvent ae) {
         BindingContainer bindings = getBindings();
 
@@ -1447,13 +1489,15 @@ public class WorkOrderBean {
         DialogEvent.Outcome response = dialogEvent.getOutcome();
         if (response == DialogEvent.Outcome.yes) {
             String sEvtCode = (String)ADFUtil.evaluateEL("#{bindings.EvtCode.inputValue}");
-            Boolean chk = processEstimateLogic(sEvtCode);
-            //Everything is okay, Commit
-            if (chk) {
-                OperationBinding operationBinding = getOperationBinding("Commit");
-                Object result = operationBinding.execute();
-                //refresh Iterator so WO Status can get new status flows
-                //refreshEventIter();
+            if(sEvtCode!=null){
+                Boolean chk = processEstimateLogic(sEvtCode);
+                //Everything is okay, Commit
+                if (chk) {
+                    OperationBinding operationBinding = getOperationBinding("Commit");
+                    Object result = operationBinding.execute();
+                    //refresh Iterator so WO Status can get new status flows
+                    //refreshEventIter();
+                }
             }
         }
     }
@@ -1481,6 +1525,13 @@ public class WorkOrderBean {
         //}
     }
 
+    public void goToControlFlow(String asaction, String soutcome) {
+        //navigate to controlcase_to_follow"
+        FacesContext context = FacesContext.getCurrentInstance();
+        NavigationHandler nh = context.getApplication().getNavigationHandler();
+        nh.handleNavigation(context, asaction, soutcome);
+    }
+
     public void goToControlFlow(String sbinding, String asaction, String soutcome) {
         if (StringUtils.isNotBlank(sbinding)) {
             OperationBinding operationBinding = getOperationBinding(sbinding);
@@ -1495,6 +1546,8 @@ public class WorkOrderBean {
     public void refreshEventIter() {
         //System.out.println("refreshEventIter()");
         // refresh the iterator
+        Boolean exists=true;
+       //     DCIteratorBinding iterQ = (DCIteratorBinding)getDCBindingContainer().get("WOEventsQueryIterator");
         DCIteratorBinding iter = (DCIteratorBinding)getDCBindingContainer().get("WOEventsIterator");
         DCIteratorBinding iterAct = (DCIteratorBinding)getDCBindingContainer().get("WOActivitiesIterator");
         DCIteratorBinding iterMatlist = (DCIteratorBinding)getDCBindingContainer().get("MatlistsIterator");
@@ -1507,76 +1560,92 @@ public class WorkOrderBean {
             (DCIteratorBinding)getDCBindingContainer().get("MrltFlagassociation_VO1Iterator");
         DCIteratorBinding iterFlagpopup = (DCIteratorBinding)getDCBindingContainer().get("FlagAssoc_VVO1Iterator");
         //DCIteratorBinding iterEstimate = (DCIteratorBinding)getDCBindingContainer().get("EstimateIterator");
-
         Row rowKey = iter.getCurrentRow();
         if (rowKey != null) {
             Key parentKey = rowKey.getKey();
-            iter.executeQuery();
-            iter.setCurrentRowWithKey(parentKey.toStringFormat(true));
-        }
+            if(parentKey!=null)
+                try{
+                    iter.getViewObject().applyViewCriteria(null);
+                iter.executeQuery();
+                iter.setCurrentRowWithKey(parentKey.toStringFormat(true));
+                }
+                catch (RowNotFoundException ex) {
+                    System.out.println("Inside refreshEventIter");
+                    /*
+                    RichQuery queryComp = getWoQuery();  
+                    QueryModel queryModel = queryComp.getModel();  
+                    QueryDescriptor queryDescriptor = queryComp.getValue();  
+                    queryModel.reset(queryDescriptor);  
+                    queryComp.refresh(FacesContext.getCurrentInstance());  
+                    */
+                    iter.getViewObject().applyViewCriteria(null);
+                    iter.executeQuery();
+                    iter.setCurrentRowWithKey(parentKey.toStringFormat(true));
+                }
+            }
 
-        Row rowAct = iterAct.getCurrentRow();
-        if (rowAct != null) {
-            Key parentKeyAct = rowAct.getKey();
-            iterAct.executeQuery();
-            iterAct.setCurrentRowWithKey(parentKeyAct.toStringFormat(true));
-        }
-        // Key parentKeyMatlist = iterMatlist.getCurrentRow().getKey();
-        Row rowMatlist = iterMatlist.getCurrentRow();
-        if (rowMatlist != null) {
-            Key parentKeyMatlist = rowMatlist.getKey();
-            iterMatlist.executeQuery();
-            iterMatlist.setCurrentRowWithKey(parentKeyMatlist.toStringFormat(true));
-        }
-
-        Row rowMatlparts = iterMatlparts.getCurrentRow();
-        if (rowMatlparts != null) {
-            Key parentKeyMatlparts = rowMatlparts.getKey();
-            iterMatlparts.executeQuery();
-            iterMatlparts.setCurrentRowWithKey(parentKeyMatlparts.toStringFormat(true));
-        }
-
-        Row rowCFields = iterCFields.getCurrentRow();
-        if (rowCFields != null) {
-            Key parentKeyCFields = rowCFields.getKey();
-            iterCFields.executeQuery();
-            iterCFields.setCurrentRowWithKey(parentKeyCFields.toStringFormat(true));
-        }
-
-        Row rowMeter = iterMeter.getCurrentRow();
-        if (rowMeter != null) {
-            Key parentKeyMeter = rowMeter.getKey();
-            iterMeter.executeQuery();
-            iterMeter.setCurrentRowWithKey(parentKeyMeter.toStringFormat(true));
-        }
-
-        Row rowAssets = iterAssets.getCurrentRow();
-        if (rowAssets != null) {
-            Key parentKeyAssets = rowAssets.getKey();
-            iterAssets.executeQuery();
-            iterAssets.setCurrentRowWithKey(parentKeyAssets.toStringFormat(true));
-        }
-
-        Row rowFlags = iterFlags.getCurrentRow();
-        if (rowFlags != null) {
-            Key parentKeyFlags = rowFlags.getKey();
-            iterFlags.executeQuery();
-            iterFlags.setCurrentRowWithKey(parentKeyFlags.toStringFormat(true));
-        }
-
-        Row rowFlagAssoc = iterFlagAssoc.getCurrentRow();
-        if (rowFlagAssoc != null) {
-            Key parentKeyFlagAssoc = rowFlagAssoc.getKey();
-            iterFlagAssoc.executeQuery();
-            iterFlagAssoc.setCurrentRowWithKey(parentKeyFlagAssoc.toStringFormat(true));
-        }
-
-        Row rowFlagpopup = iterFlagpopup.getCurrentRow();
-        if (rowFlagpopup != null) {
-            Key parentKeyFlagpopup = rowFlagpopup.getKey();
-            iterFlagpopup.executeQuery();
-            iterFlagpopup.setCurrentRowWithKey(parentKeyFlagpopup.toStringFormat(true));
-        }
+            Row rowAct = iterAct.getCurrentRow();
+            if (rowAct != null) {
+                Key parentKeyAct = rowAct.getKey();
+                iterAct.executeQuery();
+                iterAct.setCurrentRowWithKey(parentKeyAct.toStringFormat(true));
+            }
+            // Key parentKeyMatlist = iterMatlist.getCurrentRow().getKey();
+            Row rowMatlist = iterMatlist.getCurrentRow();
+            if (rowMatlist != null) {
+                Key parentKeyMatlist = rowMatlist.getKey();
+                iterMatlist.executeQuery();
+                iterMatlist.setCurrentRowWithKey(parentKeyMatlist.toStringFormat(true));
+            }
+    
+            Row rowMatlparts = iterMatlparts.getCurrentRow();
+            if (rowMatlparts != null) {
+                Key parentKeyMatlparts = rowMatlparts.getKey();
+                iterMatlparts.executeQuery();
+                iterMatlparts.setCurrentRowWithKey(parentKeyMatlparts.toStringFormat(true));
+            }
+    
+            Row rowCFields = iterCFields.getCurrentRow();
+            if (rowCFields != null) {
+                Key parentKeyCFields = rowCFields.getKey();
+                iterCFields.executeQuery();
+                iterCFields.setCurrentRowWithKey(parentKeyCFields.toStringFormat(true));
+            }
+    
+            Row rowMeter = iterMeter.getCurrentRow();
+            if (rowMeter != null) {
+                Key parentKeyMeter = rowMeter.getKey();
+                iterMeter.executeQuery();
+                iterMeter.setCurrentRowWithKey(parentKeyMeter.toStringFormat(true));
+            }
+    
+            Row rowAssets = iterAssets.getCurrentRow();
+            if (rowAssets != null) {
+                Key parentKeyAssets = rowAssets.getKey();
+                iterAssets.executeQuery();
+                iterAssets.setCurrentRowWithKey(parentKeyAssets.toStringFormat(true));
+            }
+    
+            Row rowFlags = iterFlags.getCurrentRow();
+            if (rowFlags != null) {
+                Key parentKeyFlags = rowFlags.getKey();
+                iterFlags.executeQuery();
+                iterFlags.setCurrentRowWithKey(parentKeyFlags.toStringFormat(true));
+            }
+    
+            Row rowFlagAssoc = iterFlagAssoc.getCurrentRow();
+            if (rowFlagAssoc != null) {
+                Key parentKeyFlagAssoc = rowFlagAssoc.getKey();
+                iterFlagAssoc.executeQuery();
+                iterFlagAssoc.setCurrentRowWithKey(parentKeyFlagAssoc.toStringFormat(true));
+            }
+    
+            Row rowFlagpopup = iterFlagpopup.getCurrentRow();
+            if (rowFlagpopup != null) {
+                Key parentKeyFlagpopup = rowFlagpopup.getKey();
+                iterFlagpopup.executeQuery();
+                iterFlagpopup.setCurrentRowWithKey(parentKeyFlagpopup.toStringFormat(true));
+            }
         /*
         Row rowEstimate = iterEstimate.getCurrentRow();
         if (rowEstimate != null) {
@@ -1584,7 +1653,9 @@ public class WorkOrderBean {
             iterEstimate.executeQuery();
             iterEstimate.setCurrentRowWithKey(parentKeyEstimate.toStringFormat(true));
         }*/
-    }
+        ////    }
+
+        }
 
     public void refreshVO() {
         DCIteratorBinding dc = (DCIteratorBinding)ADFUtil.evaluateEL("#{bindings.WOEventsIterator}");
@@ -1857,6 +1928,33 @@ public class WorkOrderBean {
             ret = true;
         }
         return ret;
+    }
+
+    public void createEstimateWO_action(ActionEvent ae){
+        if (isDirty()) {
+            System.out.println("Inside createEstimateWO_action isDirty");
+            RichPopup.PopupHints hints = new RichPopup.PopupHints();
+            pendingChangePop.show(hints);
+
+        } else {
+            if (ADFContext.getCurrent().getPageFlowScope().containsKey("psfEstid"))
+                System.out.println("Inside createEstimateWO_action psfEstid: "+ADFContext.getCurrent().getPageFlowScope().get("psfEstid"));
+           // ADFContext.getCurrent().getPageFlowScope().remove("disabled");
+            
+            if (ADFContext.getCurrent().getPageFlowScope().containsKey("pfsCalledFromWO"))
+                System.out.println("Inside createEstimateWO_action pfsCalledFromWO: "+ADFContext.getCurrent().getPageFlowScope().get("pfsCalledFromWO"));
+               // ADFContext.getCurrent().getPageFlowScope().remove("disabled");
+           // ADFContext.getCurrent().getPageFlowScope().remove("disabled");
+            
+            DCIteratorBinding iterEstimate = (DCIteratorBinding)getDCBindingContainer().get("EstimateIterator");
+            if(iterEstimate!=null){
+                iterEstimate.executeQuery();
+            }
+            
+            
+            goToControlFlow(null,"callWOEstimates");
+        }
+        
     }
 
     public Boolean createEstimateInvoice(String pEvtCode) {
@@ -2640,5 +2738,21 @@ public class WorkOrderBean {
 
     public RichTable getFlagAssocTable() {
         return flagAssocTable;
+    }
+
+    public void estimateReturnLstnr(ReturnEvent re) {
+        System.out.println("Inside estimateReturnLstnr");
+        //refreshVO();
+        // Add event code here...
+        refreshAll_action();
+        refreshCurrentPage();
+    }
+
+    public void setWoQuery(RichQuery woQuery) {
+        this.woQuery = woQuery;
+    }
+
+    public RichQuery getWoQuery() {
+        return woQuery;
     }
 }

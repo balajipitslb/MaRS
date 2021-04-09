@@ -6,6 +6,9 @@
       <id>error-handler-flow</id>
     </template-reference>
     <default-activity>report</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
     <managed-bean id="__1">
       <managed-bean-name>ModuleNavBean</managed-bean-name>
       <managed-bean-class>its.mnr.mp5.view.ModuleNavBean</managed-bean-class>
@@ -14,5 +17,17 @@
     <view id="report">
       <page>/Content/Report/report.jspx</page>
     </view>
+    <task-flow-return id="Exit">
+      <outcome>
+        <name>Exit</name>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__2">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>exit</from-outcome>
+        <to-activity-id>Exit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
   </task-flow-definition>
 </adfc-config>

@@ -1,127 +1,127 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="InvoiceCreditPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="INVDataControl.InvoiceCreditCriteria" DataControl="MNRDataControlDataControl" RangeSize="100"
-              id="InvoiceCreditCriteriaIterator"/>
-    <iterator Binds="INVDataControl.InvoiceCreditResults" DataControl="MNRDataControlDataControl" RangeSize="5000"
-              id="InvoiceCreditResultsIterator"/>
-  </executables>
-  <bindings>
-    <listOfValues StaticList="false" IterBinding="InvoiceCreditCriteriaIterator" Uses="LOV_RefInvoice" id="RefInvoice"/>
-    <attributeValues IterBinding="InvoiceCreditResultsIterator" id="Acctnum">
-      <AttrNames>
-        <Item Value="Acctnum"/>
-      </AttrNames>
-    </attributeValues>
-    <button IterBinding="InvoiceCreditResultsIterator" id="Internal" DTSupportsMRU="false" StaticList="true">
-      <AttrNames>
-        <Item Value="Internal"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="Y"/>
-        <Item Value="N"/>
-      </ValueList>
-    </button>
-    <attributeValues IterBinding="InvoiceCreditResultsIterator" id="InvoiceCr">
-      <AttrNames>
-        <Item Value="InvoiceCr"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="InvoiceCreditResultsIterator" id="Invcr">
-      <AttrNames>
-        <Item Value="Invcr"/>
-      </AttrNames>
-    </attributeValues>
-    <tree IterBinding="InvoiceCreditResultsIterator" id="InvoiceCreditResults">
-      <nodeDefinition DefName="its.mnr.mp5.vo.invoice.InvoiceCreditResults" Name="InvoiceCreditResults0">
-        <AttrNames>
-          <Item Value="Wo"/>
-          <Item Value="Labor"/>
-          <Item Value="Part"/>
-          <Item Value="Tax"/>
-          <Item Value="Total"/>
-          <Item Value="Invcr"/>
-          <Item Value="Invlaborcr"/>
-          <Item Value="Invpartcr"/>
-          <Item Value="Invtotalcr"/>
-          <Item Value="Wolaborcr"/>
-          <Item Value="Wopartcr"/>
-          <Item Value="Wototalcr"/>
-          <Item Value="LaborCr"/>
-          <Item Value="PartCr"/>
-          <Item Value="CurrentCr"/>
-          <Item Value="AvailableLaborCr"/>
-          <Item Value="AvailablePartCr"/>
-          <Item Value="AvailableInvoiceCr"/>
-          <Item Value="TaxCr"/>
-          <Item Value="AvailableTaxCr"/>
-          <Item Value="Wotaxcr"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <attributeValues IterBinding="InvoiceCreditResultsIterator" id="Invtotal">
-      <AttrNames>
-        <Item Value="Invtotal"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="InvoiceCreditResultsIterator" id="Invtotalcr">
-      <AttrNames>
-        <Item Value="Invtotalcr"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="InvoiceCreditResultsIterator" id="CurCrTotal">
-      <AttrNames>
-        <Item Value="CurCrTotal"/>
-      </AttrNames>
-    </attributeValues>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"
-            InstanceName="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
-            DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
-    <methodAction id="executeInvoiceCreditSearch" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="executeInvoiceCreditSearch" IsViewObjectMethod="false"
-                  DataControl="MNRDataControlDataControl"
-                  InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"/>
-    <methodAction id="initInvoiceCredit" RequiresUpdateModel="true" Action="invokeMethod" MethodName="initInvoiceCredit"
-                  IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
-                  InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"
-                  />
-    <attributeValues IterBinding="InvoiceCreditResultsIterator" id="AvailableInvoiceCr">
-      <AttrNames>
-        <Item Value="AvailableInvoiceCr"/>
-      </AttrNames>
-    </attributeValues>
-    <methodAction IterBinding="InvoiceCreditResultsIterator" id="createInvoiceHeader"
-                  InstanceName="bindings.InvoiceCreditResultsIterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="createInvoiceHeader" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.createInvoiceHeader_createInvoiceHeader_createInvoiceHeader_result"/>
-    <methodAction IterBinding="InvoiceCreditResultsIterator" id="getInvoiceNum"
-                  InstanceName="bindings.InvoiceCreditResultsIterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="getInvoiceNum" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.getInvoiceNum_getInvoiceNum_getInvoiceNum_result">
-      <NamedData NDName="pHeaderId" NDType="oracle.jbo.domain.Number"/>
-    </methodAction>
-    <methodAction IterBinding="InvoiceCreditResultsIterator" id="createInvoiceCrItem"
-                  InstanceName="bindings.InvoiceCreditResultsIterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="createInvoiceCrItem" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.createInvoiceCrItem_createInvoiceCrItem_createInvoiceCrItem_result">
-      <NamedData NDName="pHeaderId" NDType="oracle.jbo.domain.Number"/>
-      <NamedData NDName="pWO" NDType="java.lang.String"/>
-      <NamedData NDName="pLabor" NDType="java.lang.Double"/>
-      <NamedData NDName="pPart" NDType="java.lang.Double"/>
-      <NamedData NDName="pTax" NDType="java.lang.Double"/>
-      <NamedData NDName="pTaxPer" NDType="java.lang.Double"/>
-      <NamedData NDName="pLaborCr" NDType="java.lang.Double"/>
-      <NamedData NDName="pPartCr" NDType="java.lang.Double"/>
-      <NamedData NDName="pTaxCr" NDType="java.lang.Double"/>
-      <NamedData NDName="pTotal" NDType="java.lang.Double"/>
-      <NamedData NDName="pHdrCode" NDType="java.lang.String"/>
-    </methodAction>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="Root.INVDataControl.InvoiceCreditCriteria" DataControl="MNRDataControlDataControl"
+                  RangeSize="100" id="InvoiceCreditCriteriaIterator"/>
+        <iterator Binds="Root.INVDataControl.InvoiceCreditResults" DataControl="MNRDataControlDataControl"
+                  RangeSize="5000" id="InvoiceCreditResultsIterator"/>
+    </executables>
+    <bindings>
+        <listOfValues StaticList="false" IterBinding="InvoiceCreditCriteriaIterator" Uses="LOV_RefInvoice"
+                      id="RefInvoice"/>
+        <attributeValues IterBinding="InvoiceCreditResultsIterator" id="Acctnum">
+            <AttrNames>
+                <Item Value="Acctnum"/>
+            </AttrNames>
+        </attributeValues>
+        <button IterBinding="InvoiceCreditResultsIterator" id="Internal" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="Internal"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <attributeValues IterBinding="InvoiceCreditResultsIterator" id="InvoiceCr">
+            <AttrNames>
+                <Item Value="InvoiceCr"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="InvoiceCreditResultsIterator" id="Invcr">
+            <AttrNames>
+                <Item Value="Invcr"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="InvoiceCreditResultsIterator" id="InvoiceCreditResults">
+            <nodeDefinition DefName="its.mnr.mp5.vo.invoice.InvoiceCreditResults" Name="InvoiceCreditResults0">
+                <AttrNames>
+                    <Item Value="Wo"/>
+                    <Item Value="Labor"/>
+                    <Item Value="Part"/>
+                    <Item Value="Tax"/>
+                    <Item Value="Total"/>
+                    <Item Value="Invcr"/>
+                    <Item Value="Invlaborcr"/>
+                    <Item Value="Invpartcr"/>
+                    <Item Value="Invtotalcr"/>
+                    <Item Value="Wolaborcr"/>
+                    <Item Value="Wopartcr"/>
+                    <Item Value="Wototalcr"/>
+                    <Item Value="LaborCr"/>
+                    <Item Value="PartCr"/>
+                    <Item Value="CurrentCr"/>
+                    <Item Value="AvailableLaborCr"/>
+                    <Item Value="AvailablePartCr"/>
+                    <Item Value="AvailableInvoiceCr"/>
+                    <Item Value="TaxCr"/>
+                    <Item Value="AvailableTaxCr"/>
+                    <Item Value="Wotaxcr"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="InvoiceCreditResultsIterator" id="Invtotal">
+            <AttrNames>
+                <Item Value="Invtotal"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="InvoiceCreditResultsIterator" id="Invtotalcr">
+            <AttrNames>
+                <Item Value="Invtotalcr"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="InvoiceCreditResultsIterator" id="CurCrTotal">
+            <AttrNames>
+                <Item Value="CurCrTotal"/>
+            </AttrNames>
+        </attributeValues>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+        <methodAction id="executeInvoiceCreditSearch" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="executeInvoiceCreditSearch" IsViewObjectMethod="false"
+                      DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"/>
+        <methodAction id="initInvoiceCredit" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="initInvoiceCredit" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"/>
+        <attributeValues IterBinding="InvoiceCreditResultsIterator" id="AvailableInvoiceCr">
+            <AttrNames>
+                <Item Value="AvailableInvoiceCr"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction IterBinding="InvoiceCreditResultsIterator" id="createInvoiceHeader"
+                      InstanceName="bindings.InvoiceCreditResultsIterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="createInvoiceHeader" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.createInvoiceHeader_createInvoiceHeader_createInvoiceHeader_result"/>
+        <methodAction IterBinding="InvoiceCreditResultsIterator" id="getInvoiceNum"
+                      InstanceName="bindings.InvoiceCreditResultsIterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getInvoiceNum" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.getInvoiceNum_getInvoiceNum_getInvoiceNum_result">
+            <NamedData NDName="pHeaderId" NDType="oracle.jbo.domain.Number"/>
+        </methodAction>
+        <methodAction IterBinding="InvoiceCreditResultsIterator" id="createInvoiceCrItem"
+                      InstanceName="bindings.InvoiceCreditResultsIterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="createInvoiceCrItem" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.createInvoiceCrItem_createInvoiceCrItem_createInvoiceCrItem_result">
+            <NamedData NDName="pHeaderId" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="pWO" NDType="java.lang.String"/>
+            <NamedData NDName="pLabor" NDType="java.lang.Double"/>
+            <NamedData NDName="pPart" NDType="java.lang.Double"/>
+            <NamedData NDName="pTax" NDType="java.lang.Double"/>
+            <NamedData NDName="pTaxPer" NDType="java.lang.Double"/>
+            <NamedData NDName="pLaborCr" NDType="java.lang.Double"/>
+            <NamedData NDName="pPartCr" NDType="java.lang.Double"/>
+            <NamedData NDName="pTaxCr" NDType="java.lang.Double"/>
+            <NamedData NDName="pTotal" NDType="java.lang.Double"/>
+            <NamedData NDName="pHdrCode" NDType="java.lang.String"/>
+        </methodAction>
+    </bindings>
 </pageDefinition>

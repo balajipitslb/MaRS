@@ -10,24 +10,29 @@
                 <f:facet name="GlobalTop">
                     <af:navigationPane id="np1">
                         <af:commandNavigationItem text="Home" id="cni1" accessKey="H"
-                                                  actionListener="#{ModuleNavBean.goHomeModule}"
-                                                  visible="#{securityContext.userGrantedResource['resourceName=Invoice;resourceType=GlobalNav;action=view']}"/>
-                        <af:commandNavigationItem text="Work Order" id="cni2" selected="false" accessKey="W"
+                                                  actionListener="#{ModuleNavBean.goHomeModule}"/>
+                        <af:commandNavigationItem text="Work Order" id="cni2" accessKey="W"
                                                   actionListener="#{ModuleNavBean.goWOModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=WorkOrder;resourceType=GlobalNav;action=view']}"/>
-                        <af:commandNavigationItem text="Invoice (This)" id="cni3" accessKey="I"
-                                                  actionListener="#{ModuleNavBean.goInvoiceModule}" selected="true"/>
+                        <af:commandNavigationItem text="Estimates" id="cni9" accessKey="E"
+                                                  actionListener="#{ModuleNavBean.goEstimatesModule}"
+                                                  visible="#{(securityContext.userGrantedResource['resourceName=Estimates;resourceType=GlobalNav;action=view'])and(ModuleNavBean.showEstimate eq 'Y')}"/>
+                        <af:commandNavigationItem text="Invoice (This)" id="cni3" accessKey="I" selected="true"
+                                                  actionListener="#{ModuleNavBean.goInvoiceModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Invoice;resourceType=GlobalNav;action=view']}"/>
                         <af:commandNavigationItem text="PO &amp; Receivings" id="cni4" accessKey="P"
                                                   actionListener="#{ModuleNavBean.goPORecvModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=PORecv;resourceType=GlobalNav;action=view']}"/>
                         <af:commandNavigationItem text="Stock" id="cni5" accessKey="S"
                                                   actionListener="#{ModuleNavBean.goStockModule}"
-                                                  visible="#{securityContext.userGrantedResource['resourceName=Stock;resourceType=GlobalNav;action=view']}"/>
-                        <af:commandNavigationItem text="Asset" id="cni8" accessKey="S"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Stock;resourceType=GlobalNav;action=view']}"
+                                                  />
+                        <af:commandNavigationItem text="Asset" id="cni8" accessKey="A"
                                                   actionListener="#{ModuleNavBean.goAssetModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=Asset;resourceType=GlobalNav;action=view']}"/>
                         <af:commandNavigationItem text="Report" id="cni6" accessKey="R"
-                                                  actionListener="#{ModuleNavBean.goReportModule}"/>
+                                                  actionListener="#{ModuleNavBean.goReportModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Report;resourceType=GlobalNav;action=view']}"/>
                         <af:commandNavigationItem text="Admin" id="cni7" accessKey="M"
                                                   actionListener="#{ModuleNavBean.goAdminModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=Admin;resourceType=GlobalNav;action=view']}"/>

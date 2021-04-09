@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Estimates-EstimatesEntry">
+    <template-reference>
+      <document>/WEB-INF/error-handler-flow.xml</document>
+      <id>error-handler-flow</id>
+    </template-reference>
+    <default-activity>router1</default-activity>
+    <transaction>
+      <requires-transaction/>
+    </transaction>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__1">
+      <name>psfEstid</name>
+      <value>#{pageFlowScope.psfEstid}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name>pfsCalledFromWO</name>
+      <value>#{pageFlowScope.pfsCalledFromWO}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__4">
+      <managed-bean-name>estimatesBean</managed-bean-name>
+      <managed-bean-class>its.mnr.mp5.view.estimatesBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <view id="EstimatesEntry">
+      <page>/Content/Estimates/EstimatesEntry.jspx</page>
+    </view>
+    <task-flow-return id="exit">
+      <outcome>
+        <name>exit</name>
+        <commit/>
+      </outcome>
+    </task-flow-return>
+    <view id="EstimateWO">
+      <page>/Content/Estimates/EstimateWO.jspx</page>
+    </view>
+    <router id="router1">
+      <case id="__11">
+        <expression>#{pageFlowScope.pfsCalledFromWO eq true}</expression>
+        <outcome>fromWO</outcome>
+      </case>
+      <case id="__12">
+        <expression>#{pageFlowScope.pfsCalledFromWO eq false}</expression>
+        <outcome>fromEstimates</outcome>
+      </case>
+      <default-outcome>fromEstimates</default-outcome>
+    </router>
+<!--
+    <view id="testest">
+      <page>/Content/Estimates/testest.jspx</page>
+    </view>
+    -->
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome>
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteWithParams1">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__5">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>Exit</from-outcome>
+        <to-activity-id>exit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__8">
+      <from-activity-id>router1</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>fromEstimates</from-outcome>
+        <to-activity-id>Execute</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__10">
+        <from-outcome>fromWO</from-outcome>
+        <to-activity-id>ExecuteWithParams1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>Execute</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>Execute</from-outcome>
+        <to-activity-id>EstimatesEntry</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__2">
+      <from-activity-id>ExecuteWithParams1</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>EstimateWO</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    
+  </task-flow-definition>
+</adfc-config>

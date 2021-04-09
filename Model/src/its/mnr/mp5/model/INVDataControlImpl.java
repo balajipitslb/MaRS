@@ -83,7 +83,7 @@ public class INVDataControlImpl extends ExtendedApplicationModuleImpl implements
                                    "','rrrr/mm/dd')  + 1");
             }
             resultVO.addWhereClause(whereClause.toString());
-           //// System.out.println(resultVO.getQuery());
+            System.out.println(resultVO.getQuery());
             resultVO.executeQuery();
         }
     }

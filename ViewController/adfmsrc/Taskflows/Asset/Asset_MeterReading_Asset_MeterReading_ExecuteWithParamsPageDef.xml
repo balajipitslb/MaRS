@@ -2,16 +2,16 @@
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81"
                 id="Asset_MeterReading_Asset_MeterReading_ExecuteWithParamsPageDef" Package="Taskflows.Asset"
                 SkipValidation="true">
-  <parameters/>
-  <executables>
-    <iterator Binds="AssetDataControlNested.AssetReading" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="AssetReadingIterator" />
-  </executables>
-  <bindings>
-    <action IterBinding="AssetReadingIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
-            Action="executeWithParams">
-      <NamedData NDName="Bind_AssetCd" NDValue="#{pageFlowScope.psfAssetCd}" NDType="java.lang.String"/>
-      <NamedData NDName="Bind_AssetOrg" NDValue="#{pageFlowScope.psfAssetOrg}" NDType="java.lang.String"/>
-    </action>
-  </bindings>
+    <parameters/>
+    <executables>
+        <iterator Binds="AssetDataControlNested.AssetReading" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="AssetReadingIterator"/>
+    </executables>
+    <bindings>
+        <action IterBinding="AssetReadingIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+                Action="executeWithParams">
+            <NamedData NDName="Bind_AssetCd" NDValue="#{pageFlowScope.psfAssetCd}" NDType="java.lang.String"/>
+            <NamedData NDName="Bind_AssetOrg" NDValue="#{pageFlowScope.psfAssetOrg}" NDType="java.lang.String"/>
+        </action>
+    </bindings>
 </pageDefinition>

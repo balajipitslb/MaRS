@@ -1,71 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="AssetAddReadingPageDef"
                 Package="Content.Asset">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="AssetDataControlNested.AssetReading" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="AssetReadingIterator"/>
-  </executables>
-  <bindings>
-    <attributeValues IterBinding="AssetReadingIterator" id="Org">
-      <AttrNames>
-        <Item Value="Org"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="Readingitem">
-      <AttrNames>
-        <Item Value="Readingitem"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="Readingdate">
-      <AttrNames>
-        <Item Value="Readingdate"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="Readingvalue">
-      <AttrNames>
-        <Item Value="Readingvalue"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="Readingdiff">
-      <AttrNames>
-        <Item Value="Readingdiff"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="Uom">
-      <AttrNames>
-        <Item Value="Uom"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="AssetReadingIterator" StaticList="false" Uses="LOV_Readinglabel" id="Readinglabel"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="AssetReadingIterator" id="tAssetClass">
-      <AttrNames>
-        <Item Value="tAssetClass"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="tLastReadingValue">
-      <AttrNames>
-        <Item Value="tLastReadingValue"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="tLastReadingDate">
-      <AttrNames>
-        <Item Value="tLastReadingDate"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="tLabelDesc">
-      <AttrNames>
-        <Item Value="tLabelDesc"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AssetReadingIterator" id="tAssetStatus">
-      <AttrNames>
-        <Item Value="tAssetStatus"/>
-      </AttrNames>
-    </attributeValues>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="AssetDataControlNested.AssetReading" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="AssetReadingIterator"/>
+    </executables>
+    <bindings>
+        <attributeValues IterBinding="AssetReadingIterator" id="Org">
+            <AttrNames>
+                <Item Value="Org"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="Readingitem">
+            <AttrNames>
+                <Item Value="Readingitem"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="Readingdate">
+            <AttrNames>
+                <Item Value="Readingdate"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="Readingvalue">
+            <AttrNames>
+                <Item Value="Readingvalue"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="Readingdiff">
+            <AttrNames>
+                <Item Value="Readingdiff"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="Uom">
+            <AttrNames>
+                <Item Value="Uom"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="AssetReadingIterator" StaticList="false" Uses="LOV_Readinglabel" id="Readinglabel"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="AssetReadingIterator" id="tAssetClass">
+            <AttrNames>
+                <Item Value="tAssetClass"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="tLastReadingValue">
+            <AttrNames>
+                <Item Value="tLastReadingValue"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="tLastReadingDate">
+            <AttrNames>
+                <Item Value="tLastReadingDate"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="tLabelDesc">
+            <AttrNames>
+                <Item Value="tLabelDesc"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AssetReadingIterator" id="tAssetStatus">
+            <AttrNames>
+                <Item Value="tAssetStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+    </bindings>
 </pageDefinition>

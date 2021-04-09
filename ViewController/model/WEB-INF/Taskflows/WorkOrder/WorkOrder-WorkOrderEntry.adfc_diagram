@@ -40,16 +40,6 @@
       <property
          name="x">617.6992</property>
    </TaskFlowCall>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase6"
-      from="View3"
-      to="TaskFlowCall5">
-      <property
-         name="fromOutcome">callAssetReading</property>
-      <property
-         name="sdm:polyPoints">R50,390.0,225.89648,576.6992,320.79883,L50</property>
-   </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall7">
       <property
@@ -69,14 +59,153 @@
       <property
          name="x">348.5</property>
    </TaskFlowCall>
+   <MethodCall
+      id="MethodCall8">
+      <property
+         name="activityId">ErrorHandler</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>ErrorHandler&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="inherited">true</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">58.344727</property>
+      <property
+         name="x">44.424805</property>
+   </MethodCall>
+   <TaskFlowCall
+      id="TaskFlowCall11">
+      <property
+         name="taskFlowId">Estimates-EstimatesEntry</property>
+      <property
+         name="activityId">Estimates-EstimatesEntry</property>
+      <property
+         name="documentReference">/WEB-INF/Taskflows/Estimates/Estimates-EstimatesEntry.xml</property>
+      <property
+         name="runAsDialog">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>Estimates-EstimatesEntry&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">126.149414</property>
+      <property
+         name="x">722.6836</property>
+   </TaskFlowCall>
+   <TaskFlowReturn
+      id="TaskFlowReturn16">
+      <property
+         name="activityId">Exit</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>Exit&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  Exit&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">87.79883</property>
+      <property
+         name="x">166.5</property>
+   </TaskFlowReturn>
+   <WildcardControlFlowRule
+      id="WildcardControlFlowRule17">
+      <property
+         name="activityId">*</property>
+      <property
+         name="srcid">__14</property>
+      <property
+         name="y">61.0</property>
+      <property
+         name="x">320.0</property>
+   </WildcardControlFlowRule>
+   <TaskFlowCall
+      id="TaskFlowCall18">
+      <property
+         name="taskFlowId">Flag-flow</property>
+      <property
+         name="activityId">Flag-flow</property>
+      <property
+         name="documentReference">/WEB-INF/Taskflows/WorkOrder/Flag-flow.xml</property>
+      <property
+         name="runAsDialog">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>Flag-flow&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">71.79883</property>
+      <property
+         name="x">415.5</property>
+   </TaskFlowCall>
    <ControlFlowCase
       islink="true"
-      id="ControlFlowCase8"
+      id="ControlFlowCase19"
+      from="WildcardControlFlowRule17"
+      to="TaskFlowReturn16">
+      <property
+         name="fromOutcome">exit</property>
+      <property
+         name="tosrcid">__15</property>
+      <property
+         name="fromsrcid">__14</property>
+      <property
+         name="sdm:polyPoints">L50,284.0,61.0,207.5,87.79883,R50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase20"
+      from="View3"
+      to="TaskFlowCall18">
+      <property
+         name="fromOutcome">goFlag</property>
+      <property
+         name="tosrcid">__17</property>
+      <property
+         name="fromsrcid">__2</property>
+      <property
+         name="sdm:polyPoints">T50,349.0,171.89648,415.5,126.5,B50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase21"
+      from="View3"
+      to="TaskFlowCall11">
+      <property
+         name="fromOutcome">callWOEstimates</property>
+      <property
+         name="tosrcid">__4</property>
+      <property
+         name="fromsrcid">__2</property>
+      <property
+         name="sdm:polyPoints">R46,390.0,222.39648,681.6836,125.79883,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase22"
       from="View3"
       to="TaskFlowCall7">
       <property
          name="fromOutcome">callAsset</property>
       <property
+         name="tosrcid">__10</property>
+      <property
+         name="fromsrcid">__2</property>
+      <property
          name="sdm:polyPoints">B50,349.0,279.89648,348.5,352.39648,T50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase23"
+      from="View3"
+      to="TaskFlowCall5">
+      <property
+         name="fromOutcome">callAssetReading</property>
+      <property
+         name="tosrcid">__3</property>
+      <property
+         name="fromsrcid">__2</property>
+      <property
+         name="sdm:polyPoints">R54,390.0,229.39648,576.6992,320.79883,L50</property>
    </ControlFlowCase>
 </SDM>

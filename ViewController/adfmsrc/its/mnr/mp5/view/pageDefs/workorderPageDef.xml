@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="workorderPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <taskFlow id="dynamicRegion1" taskFlowId="${Region.dynamicTaskFlowId}" activation="deferred"
-              xmlns="http://xmlns.oracle.com/adf/controller/binding">
-      <parameters/>
-    </taskFlow>
-  </executables>
-  <bindings/>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <taskFlow id="dynamicRegion1" taskFlowId="${Region.dynamicTaskFlowId}" activation="deferred"
+                  xmlns="http://xmlns.oracle.com/adf/controller/binding">
+            <parameters/>
+        </taskFlow>
+        <iterator id="MNRDataControlDataControlIter" Binds="MNRDataControlDataControl"
+                  DataControl="MNRDataControlDataControl" RangeSize="25"/>
+    </executables>
+    <bindings>
+        <methodAction id="getMP5Profile" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getMP5Profile"
+                      IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.getMP5Profile_MNRDataControlDataControl_dataProvider_getMP5Profile_result">
+            <NamedData NDName="sProfile" NDValue="ShowEstimate" NDType="java.lang.String"/>
+        </methodAction>
+    </bindings>
 </pageDefinition>

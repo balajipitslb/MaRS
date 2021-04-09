@@ -1,125 +1,124 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.64.36" id="CCSetup_BinNumPageDef"
                 Package="Content.CycleCnt">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="CCDataControlNested.MrltCyclecountheaderView" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrltCyclecountheaderViewIterator"/>
-    <iterator Binds="CCDataControlNested.CycleCountPartsMainSelected" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="CycleCountPartsMainSelectedIterator"/>
-    <iterator Binds="CCDataControlNested.CycleCountParts" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="CycleCountPartsIterator"/>
-  </executables>
-  <bindings>
-
-<attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Bin">
-      <AttrNames>
-        <Item Value="Bin"/>
-      </AttrNames>
-    </attributeValues>
-   
-    
-    
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
-            InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" InstanceName="MNRDataControlDataControl"
-            DataControl="MNRDataControlDataControl"/>
-    <methodAction id="initCycleCountParts" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="initCycleCountParts" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
-                  InstanceName="data.MNRDataControlDataControl.dataProvider.CCDataControlNested"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.initCycleCountParts_MNRDataControlDataControl_dataProvider_Root_CCDataControlNested_initCycleCountParts_result"/>
-    <methodAction id="executeCycleCountParts" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="executeCycleCountParts" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
-                  InstanceName="data.MNRDataControlDataControl.dataProvider.CCDataControlNested"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.executeCycleCountParts_MNRDataControlDataControl_dataProvider_Root_CCDataControlNested_executeCycleCountParts_result">
-      <NamedData NDName="sListid" NDType="java.lang.Integer"/>
-    </methodAction>
-    <methodAction id="createCCList" RequiresUpdateModel="true" Action="invokeMethod" MethodName="createCCList"
-                  IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
-                  InstanceName="data.MNRDataControlDataControl.dataProvider.CCDataControlNested"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.createCCList_MNRDataControlDataControl_dataProvider_Root_CCDataControlNested_createCCList_result">
-      <NamedData NDName="iListId" NDType="java.lang.Integer"/>
-      <NamedData NDName="sTrans" NDType="java.lang.String"/>
-      <NamedData NDName="sStoreroom" NDType="java.lang.String"/>
-    </methodAction>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Sttknum">
-      <AttrNames>
-        <Item Value="Sttknum"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Store">
-      <AttrNames>
-        <Item Value="Store"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Listid">
-      <AttrNames>
-        <Item Value="Listid"/>
-      </AttrNames>
-    </attributeValues>
-    <methodAction IterBinding="MrltCyclecountheaderViewIterator" id="chkPartsMultiBins" RequiresUpdateModel="true"
-                  Action="invokeMethod" MethodName="chkPartsMultiBins" IsViewObjectMethod="false"
-                  DataControl="MNRDataControlDataControl"
-                  InstanceName="bindings.MrltCyclecountheaderViewIterator.currentRow" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.chkPartsMultiBins_chkPartsMultiBins_chkPartsMultiBins_result">
-      <NamedData NDName="pBIN" NDType="java.lang.String"/>
-      <NamedData NDName="pBINSTART" NDType="java.lang.String"/>
-      <NamedData NDName="pBINEND" NDType="java.lang.String"/>
-      <NamedData NDName="pPARTCLASS" NDType="java.lang.String"/>
-      <NamedData NDName="pPARTSTART" NDType="java.lang.String"/>
-      <NamedData NDName="pPARTEND" NDType="java.lang.String"/>
-      <NamedData NDName="pP1" NDType="java.lang.String"/>
-      <NamedData NDName="pP2" NDType="java.lang.String"/>
-      <NamedData NDName="pP3" NDType="java.lang.String"/>
-      <NamedData NDName="pP4" NDType="java.lang.String"/>
-      <NamedData NDName="pP5" NDType="java.lang.String"/>
-      <NamedData NDName="pP6" NDType="java.lang.String"/>
-    </methodAction>
-    <methodAction IterBinding="MrltCyclecountheaderViewIterator" id="chkPartsOtherCount" RequiresUpdateModel="true"
-                  Action="invokeMethod" MethodName="chkPartsOtherCount" IsViewObjectMethod="false"
-                  DataControl="MNRDataControlDataControl"
-                  InstanceName="bindings.MrltCyclecountheaderViewIterator.currentRow" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.chkPartsOtherCount_chkPartsOtherCount_chkPartsOtherCount_result">
-      <NamedData NDName="pBIN" NDType="java.lang.String"/>
-      <NamedData NDName="pBINSTART" NDType="java.lang.String"/>
-      <NamedData NDName="pBINEND" NDType="java.lang.String"/>
-      <NamedData NDName="pPARTCLASS" NDType="java.lang.String"/>
-      <NamedData NDName="pPARTSTART" NDType="java.lang.String"/>
-      <NamedData NDName="pPARTEND" NDType="java.lang.String"/>
-      <NamedData NDName="pP1" NDType="java.lang.String"/>
-      <NamedData NDName="pP2" NDType="java.lang.String"/>
-      <NamedData NDName="pP3" NDType="java.lang.String"/>
-      <NamedData NDName="pP4" NDType="java.lang.String"/>
-      <NamedData NDName="pP5" NDType="java.lang.String"/>
-      <NamedData NDName="pP6" NDType="java.lang.String"/>
-    </methodAction>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="RangeType">
-      <AttrNames>
-        <Item Value="RangeType"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Ccstatus">
-      <AttrNames>
-        <Item Value="Ccstatus"/>
-      </AttrNames>
-    </attributeValues>
-    <methodAction IterBinding="CycleCountPartsMainSelectedIterator" id="writeCCStoreListXML" RequiresUpdateModel="true"
-                  Action="invokeMethod" MethodName="writeCCStoreListXML" IsViewObjectMethod="false"
-                  DataControl="MNRDataControlDataControl"
-                  InstanceName="bindings.CycleCountPartsMainSelectedIterator.currentRow" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.writeCCStoreListXML_writeCCStoreListXML_writeCCStoreListXML_result">
-      <NamedData NDName="pList" NDType="java.lang.String"/>
-      <NamedData NDName="pType" NDType="java.lang.String"/>
-    </methodAction>
-    <methodAction IterBinding="CycleCountPartsIterator" id="writeCCListXML" RequiresUpdateModel="true"
-                  Action="invokeMethod" MethodName="writeCCListXML" IsViewObjectMethod="false"
-                  DataControl="MNRDataControlDataControl" InstanceName="bindings.CycleCountPartsIterator.currentRow"
-                  IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.writeCCListXML_writeCCListXML_writeCCListXML_result">
-      <NamedData NDName="pList" NDType="java.lang.String"/>
-      <NamedData NDName="pType" NDType="java.lang.String"/>
-      <NamedData NDName="recEmail" NDType="java.lang.String"/>
-    </methodAction>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="CCDataControlNested.MrltCyclecountheaderView" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrltCyclecountheaderViewIterator"/>
+        <iterator Binds="CCDataControlNested.CycleCountPartsMainSelected" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="CycleCountPartsMainSelectedIterator"/>
+        <iterator Binds="CCDataControlNested.CycleCountParts" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="CycleCountPartsIterator"/>
+    </executables>
+    <bindings>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Bin">
+            <AttrNames>
+                <Item Value="Bin"/>
+            </AttrNames>
+        </attributeValues>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
+        <methodAction id="initCycleCountParts" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="initCycleCountParts" IsViewObjectMethod="false"
+                      DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.CCDataControlNested"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.initCycleCountParts_MNRDataControlDataControl_dataProvider_Root_CCDataControlNested_initCycleCountParts_result"/>
+        <methodAction id="executeCycleCountParts" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="executeCycleCountParts" IsViewObjectMethod="false"
+                      DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.CCDataControlNested"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.executeCycleCountParts_MNRDataControlDataControl_dataProvider_Root_CCDataControlNested_executeCycleCountParts_result">
+            <NamedData NDName="sListid" NDType="java.lang.Integer"/>
+        </methodAction>
+        <methodAction id="createCCList" RequiresUpdateModel="true" Action="invokeMethod" MethodName="createCCList"
+                      IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.CCDataControlNested"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.createCCList_MNRDataControlDataControl_dataProvider_Root_CCDataControlNested_createCCList_result">
+            <NamedData NDName="iListId" NDType="java.lang.Integer"/>
+            <NamedData NDName="sTrans" NDType="java.lang.String"/>
+            <NamedData NDName="sStoreroom" NDType="java.lang.String"/>
+        </methodAction>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Sttknum">
+            <AttrNames>
+                <Item Value="Sttknum"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Store">
+            <AttrNames>
+                <Item Value="Store"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Listid">
+            <AttrNames>
+                <Item Value="Listid"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction IterBinding="MrltCyclecountheaderViewIterator" id="chkPartsMultiBins" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="chkPartsMultiBins" IsViewObjectMethod="false"
+                      DataControl="MNRDataControlDataControl"
+                      InstanceName="bindings.MrltCyclecountheaderViewIterator.currentRow" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.chkPartsMultiBins_chkPartsMultiBins_chkPartsMultiBins_result">
+            <NamedData NDName="pBIN" NDType="java.lang.String"/>
+            <NamedData NDName="pBINSTART" NDType="java.lang.String"/>
+            <NamedData NDName="pBINEND" NDType="java.lang.String"/>
+            <NamedData NDName="pPARTCLASS" NDType="java.lang.String"/>
+            <NamedData NDName="pPARTSTART" NDType="java.lang.String"/>
+            <NamedData NDName="pPARTEND" NDType="java.lang.String"/>
+            <NamedData NDName="pP1" NDType="java.lang.String"/>
+            <NamedData NDName="pP2" NDType="java.lang.String"/>
+            <NamedData NDName="pP3" NDType="java.lang.String"/>
+            <NamedData NDName="pP4" NDType="java.lang.String"/>
+            <NamedData NDName="pP5" NDType="java.lang.String"/>
+            <NamedData NDName="pP6" NDType="java.lang.String"/>
+        </methodAction>
+        <methodAction IterBinding="MrltCyclecountheaderViewIterator" id="chkPartsOtherCount" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="chkPartsOtherCount" IsViewObjectMethod="false"
+                      DataControl="MNRDataControlDataControl"
+                      InstanceName="bindings.MrltCyclecountheaderViewIterator.currentRow" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.chkPartsOtherCount_chkPartsOtherCount_chkPartsOtherCount_result">
+            <NamedData NDName="pBIN" NDType="java.lang.String"/>
+            <NamedData NDName="pBINSTART" NDType="java.lang.String"/>
+            <NamedData NDName="pBINEND" NDType="java.lang.String"/>
+            <NamedData NDName="pPARTCLASS" NDType="java.lang.String"/>
+            <NamedData NDName="pPARTSTART" NDType="java.lang.String"/>
+            <NamedData NDName="pPARTEND" NDType="java.lang.String"/>
+            <NamedData NDName="pP1" NDType="java.lang.String"/>
+            <NamedData NDName="pP2" NDType="java.lang.String"/>
+            <NamedData NDName="pP3" NDType="java.lang.String"/>
+            <NamedData NDName="pP4" NDType="java.lang.String"/>
+            <NamedData NDName="pP5" NDType="java.lang.String"/>
+            <NamedData NDName="pP6" NDType="java.lang.String"/>
+        </methodAction>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="RangeType">
+            <AttrNames>
+                <Item Value="RangeType"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Ccstatus">
+            <AttrNames>
+                <Item Value="Ccstatus"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction IterBinding="CycleCountPartsMainSelectedIterator" id="writeCCStoreListXML"
+                      RequiresUpdateModel="true" Action="invokeMethod" MethodName="writeCCStoreListXML"
+                      IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                      InstanceName="bindings.CycleCountPartsMainSelectedIterator.currentRow"
+                      IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.writeCCStoreListXML_writeCCStoreListXML_writeCCStoreListXML_result">
+            <NamedData NDName="pList" NDType="java.lang.String"/>
+            <NamedData NDName="pType" NDType="java.lang.String"/>
+        </methodAction>
+        <methodAction IterBinding="CycleCountPartsIterator" id="writeCCListXML" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="writeCCListXML" IsViewObjectMethod="false"
+                      DataControl="MNRDataControlDataControl" InstanceName="bindings.CycleCountPartsIterator.currentRow"
+                      IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.writeCCListXML_writeCCListXML_writeCCListXML_result">
+            <NamedData NDName="pList" NDType="java.lang.String"/>
+            <NamedData NDName="pType" NDType="java.lang.String"/>
+            <NamedData NDName="recEmail" NDType="java.lang.String"/>
+        </methodAction>
+    </bindings>
 </pageDefinition>

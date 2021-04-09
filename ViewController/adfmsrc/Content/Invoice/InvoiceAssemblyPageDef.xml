@@ -1,125 +1,127 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="InvoiceAssemblyPageDef"
                 Package="Content.Invoice">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="INVDataControl.InvoiceAssemblyCriteria" DataControl="MNRDataControlDataControl"
-              RangeSize="100"
-              id="InvoiceAssemblyCriteriaIterator"/>
-    <iterator Binds="INVDataControl.InvoiceAssemblyResults" DataControl="MNRDataControlDataControl"
-              id="InvoiceAssemblyResultsIterator" RangeSize="5000"/>
-  </executables>
-  <bindings>
-    <list IterBinding="InvoiceAssemblyCriteriaIterator" StaticList="false" Uses="LOV_AccountNum" id="AccountNum"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
-    <list IterBinding="InvoiceAssemblyCriteriaIterator" StaticList="false" Uses="LOV_WOType" id="WOType"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
-    <list IterBinding="InvoiceAssemblyCriteriaIterator" StaticList="false" Uses="LOV_HeaderCd" id="HeaderCd"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="InvoiceAssemblyCriteriaIterator" id="WeekEnding">
-      <AttrNames>
-        <Item Value="WeekEnding"/>
-      </AttrNames>
-    </attributeValues>
-    <methodAction id="executeInvoiceAssemblySearch" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="executeInvoiceAssemblySearch" IsViewObjectMethod="false"
-                  DataControl="MNRDataControlDataControl"
-                  InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.executeInvoiceAssemblySearch_MNRDataControlDataControl_dataProvider_INVDataControl_executeInvoiceAssemblySearch_result"/>
-    <methodAction id="initInvoiceAssembly" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="initInvoiceAssembly" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
-                  InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.initInvoiceAssembly_MNRDataControlDataControl_dataProvider_INVDataControl_initInvoiceAssembly_result"/>
-    <tree IterBinding="InvoiceAssemblyResultsIterator" id="InvoiceAssemblyResults">
-      <nodeDefinition DefName="its.mnr.mp5.vo.invoice.InvoiceAssemblyResults" Name="InvoiceAssemblyResults0">
-        <AttrNames>
-          <Item Value="EvtCode"/>
-          <Item Value="EvtDesc"/>
-          <Item Value="EvtCompleted"/>
-          <Item Value="EvtCostcode"/>
-          <Item Value="EvtJobtype"/>
-          <Item Value="EvtClass"/>
-          <Item Value="Laborcost"/>
-          <Item Value="Parttotal"/>
-          <Item Value="Salestax"/>
-          <Item Value="Wototal"/>
-          <Item Value="isSelected" Binds="isSelected"/>
-          <Item Value="EvtStart"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <button IterBinding="InvoiceAssemblyResultsIterator" id="isSelected" DTSupportsMRU="false" StaticList="true">
-      <AttrNames>
-        <Item Value="isSelected"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="Y"/>
-        <Item Value="N"/>
-      </ValueList>
-    </button>
-    <attributeValues IterBinding="InvoiceAssemblyResultsIterator" id="isSelectedCount">
-      <AttrNames>
-        <Item Value="isSelectedCount"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="InvoiceAssemblyResultsIterator" id="TotalLaborCost">
-      <AttrNames>
-        <Item Value="TotalLaborCost"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="InvoiceAssemblyResultsIterator" id="TotalPartTotal">
-      <AttrNames>
-        <Item Value="TotalPartTotal"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="InvoiceAssemblyResultsIterator" id="TotalSalesTax">
-      <AttrNames>
-        <Item Value="TotalSalesTax"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="InvoiceAssemblyResultsIterator" id="TotalWOTotal">
-      <AttrNames>
-        <Item Value="TotalWOTotal"/>
-      </AttrNames>
-    </attributeValues>
-    <methodAction IterBinding="InvoiceAssemblyResultsIterator" id="createInvoiceHeader"
-                  InstanceName="bindings.InvoiceAssemblyResultsIterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="createInvoiceHeader" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.createInvoiceHeader_createInvoiceHeader_createInvoiceHeader_result"/>
-    <methodAction IterBinding="InvoiceAssemblyResultsIterator" id="updateWORFI"
-                  InstanceName="bindings.InvoiceAssemblyResultsIterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="updateWORFI" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.updateWORFI_updateWORFI_updateWORFI_result">
-      <NamedData NDName="pevtcode" NDType="java.lang.String"/>
-    </methodAction>
-    <methodAction IterBinding="InvoiceAssemblyResultsIterator" id="getInvoiceNum"
-                  InstanceName="bindings.InvoiceAssemblyResultsIterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="getInvoiceNum" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.getInvoiceNum_getInvoiceNum_getInvoiceNum_result">
-      <NamedData NDName="pHeaderId" NDType="oracle.jbo.domain.Number"/>
-    </methodAction>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
-    <methodAction IterBinding="InvoiceAssemblyResultsIterator" id="createInvoiceItem"
-                  InstanceName="bindings.InvoiceAssemblyResultsIterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="createInvoiceItem" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.createInvoiceItem_createInvoiceItem_createInvoiceItem_result">
-      <NamedData NDName="pHeaderId" NDType="oracle.jbo.domain.Number"/>
-      <NamedData NDName="pWO" NDType="java.lang.String"/>
-      <NamedData NDName="pEquip" NDType="java.lang.String"/>
-      <NamedData NDName="pVer" NDType="java.lang.String"/>
-      <NamedData NDName="pLabor" NDType="java.lang.Double"/>
-      <NamedData NDName="pPart" NDType="java.lang.Double"/>
-      <NamedData NDName="pTax" NDType="java.lang.Double"/>
-      <NamedData NDName="pTotal" NDType="java.lang.Double"/>
-      <NamedData NDName="pCompdt" NDType="oracle.jbo.domain.Date"/>
-      <NamedData NDName="pStartdt" NDType="oracle.jbo.domain.Date"/>
-      <NamedData NDName="pHdrCode" NDType="java.lang.String"/>
-    </methodAction>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="INVDataControl.InvoiceAssemblyCriteria" DataControl="MNRDataControlDataControl" RangeSize="100"
+                  id="InvoiceAssemblyCriteriaIterator"/>
+        <iterator Binds="INVDataControl.InvoiceAssemblyResults" DataControl="MNRDataControlDataControl"
+                  id="InvoiceAssemblyResultsIterator" RangeSize="5000"/>
+    </executables>
+    <bindings>
+        <list IterBinding="InvoiceAssemblyCriteriaIterator" StaticList="false" Uses="LOV_AccountNum" id="AccountNum"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="InvoiceAssemblyCriteriaIterator" StaticList="false" Uses="LOV_WOType" id="WOType"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="InvoiceAssemblyCriteriaIterator" StaticList="false" Uses="LOV_HeaderCd" id="HeaderCd"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="InvoiceAssemblyCriteriaIterator" id="WeekEnding">
+            <AttrNames>
+                <Item Value="WeekEnding"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="executeInvoiceAssemblySearch" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="executeInvoiceAssemblySearch" IsViewObjectMethod="false"
+                      DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.executeInvoiceAssemblySearch_MNRDataControlDataControl_dataProvider_INVDataControl_executeInvoiceAssemblySearch_result"/>
+        <methodAction id="initInvoiceAssembly" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="initInvoiceAssembly" IsViewObjectMethod="false"
+                      DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.initInvoiceAssembly_MNRDataControlDataControl_dataProvider_INVDataControl_initInvoiceAssembly_result"/>
+        <tree IterBinding="InvoiceAssemblyResultsIterator" id="InvoiceAssemblyResults">
+            <nodeDefinition DefName="its.mnr.mp5.vo.invoice.InvoiceAssemblyResults" Name="InvoiceAssemblyResults0">
+                <AttrNames>
+                    <Item Value="EvtCode"/>
+                    <Item Value="EvtDesc"/>
+                    <Item Value="EvtCompleted"/>
+                    <Item Value="EvtCostcode"/>
+                    <Item Value="EvtJobtype"/>
+                    <Item Value="EvtClass"/>
+                    <Item Value="Laborcost"/>
+                    <Item Value="Parttotal"/>
+                    <Item Value="Salestax"/>
+                    <Item Value="Wototal"/>
+                    <Item Value="isSelected" Binds="isSelected"/>
+                    <Item Value="EvtStart"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <button IterBinding="InvoiceAssemblyResultsIterator" id="isSelected" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="isSelected"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <attributeValues IterBinding="InvoiceAssemblyResultsIterator" id="isSelectedCount">
+            <AttrNames>
+                <Item Value="isSelectedCount"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="InvoiceAssemblyResultsIterator" id="TotalLaborCost">
+            <AttrNames>
+                <Item Value="TotalLaborCost"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="InvoiceAssemblyResultsIterator" id="TotalPartTotal">
+            <AttrNames>
+                <Item Value="TotalPartTotal"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="InvoiceAssemblyResultsIterator" id="TotalSalesTax">
+            <AttrNames>
+                <Item Value="TotalSalesTax"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="InvoiceAssemblyResultsIterator" id="TotalWOTotal">
+            <AttrNames>
+                <Item Value="TotalWOTotal"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction IterBinding="InvoiceAssemblyResultsIterator" id="createInvoiceHeader"
+                      InstanceName="bindings.InvoiceAssemblyResultsIterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="createInvoiceHeader" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.createInvoiceHeader_createInvoiceHeader_createInvoiceHeader_result"/>
+        <methodAction IterBinding="InvoiceAssemblyResultsIterator" id="updateWORFI"
+                      InstanceName="bindings.InvoiceAssemblyResultsIterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateWORFI" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.updateWORFI_updateWORFI_updateWORFI_result">
+            <NamedData NDName="pevtcode" NDType="java.lang.String"/>
+        </methodAction>
+        <methodAction IterBinding="InvoiceAssemblyResultsIterator" id="getInvoiceNum"
+                      InstanceName="bindings.InvoiceAssemblyResultsIterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getInvoiceNum" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.getInvoiceNum_getInvoiceNum_getInvoiceNum_result">
+            <NamedData NDName="pHeaderId" NDType="oracle.jbo.domain.Number"/>
+        </methodAction>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+        <methodAction IterBinding="InvoiceAssemblyResultsIterator" id="createInvoiceItem"
+                      InstanceName="bindings.InvoiceAssemblyResultsIterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="createInvoiceItem" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.createInvoiceItem_createInvoiceItem_createInvoiceItem_result">
+            <NamedData NDName="pHeaderId" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="pWO" NDType="java.lang.String"/>
+            <NamedData NDName="pEquip" NDType="java.lang.String"/>
+            <NamedData NDName="pVer" NDType="java.lang.String"/>
+            <NamedData NDName="pLabor" NDType="java.lang.Double"/>
+            <NamedData NDName="pPart" NDType="java.lang.Double"/>
+            <NamedData NDName="pTax" NDType="java.lang.Double"/>
+            <NamedData NDName="pTotal" NDType="java.lang.Double"/>
+            <NamedData NDName="pCompdt" NDType="oracle.jbo.domain.Date"/>
+            <NamedData NDName="pStartdt" NDType="oracle.jbo.domain.Date"/>
+            <NamedData NDName="pHdrCode" NDType="java.lang.String"/>
+        </methodAction>
+    </bindings>
 </pageDefinition>

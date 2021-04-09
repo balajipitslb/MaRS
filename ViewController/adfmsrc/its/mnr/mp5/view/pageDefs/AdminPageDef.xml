@@ -1,165 +1,168 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="AdminPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables">
-      <variable Type="java.lang.String" Name="updateWODates_return" IsQueriable="false" IsUpdateable="0"
-                DefaultValue="${bindings.updateWODates.result}"/>
-      <variable Type="java.lang.String" Name="updateWODates_sEvtcode" IsQueriable="false"/>
-      <variable Type="oracle.jbo.domain.Date" Name="updateWODates_newDate" IsQueriable="false"/>
-    </variableIterator>
-    <iterator Binds="WODataControlNested.WOEvents" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="WOEventsIterator"/>
-    <iterator Binds="WODataControlNested.MrltFlag_VO2" RangeSize="25" DataControl="MNRDataControlDataControl" id="ActiveMrltFlagIterator"/>
-    <iterator Binds="PORecvDataControlNested.POrdersView" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="POrdersViewIterator"/>
-    <searchRegion Criteria="POrdersOrdCd" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  Binds="POrdersViewIterator" id="POrdersOrdCdQuery"/>
-    <iterator Binds="MasterDataControlNested.joblogView1" DataControl="MNRDataControlDataControl" RangeSize="10"
-              id="joblogView1Iterator"/>
-    <searchRegion Binds="joblogView1Iterator" Criteria=""
-                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="joblogView11Query"/>
-    <iterator Binds="MasterDataControlNested.jobRunningView1" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="jobRunningView1Iterator"/>
-    <searchRegion Binds="jobRunningView1Iterator" Criteria=""
-                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="jobRunningView1Query"/>
-    <iterator Binds="INVDataControl.MrltInvoiceheaderView" DataControl="MNRDataControlDataControl" RangeSize="10"
-              id="MrltInvoiceheaderViewIterator"/>
-    <iterator Binds="INVDataControl.MrltInvoiceheaderView1" DataControl="MNRDataControlDataControl" RangeSize="10"
-              id="MrltInvoiceheaderView1Iterator"/>                  
-    <iterator Binds="WODataControlNested.ActiveMrltFlag" DataControl="MNRDataControlDataControl" RangeSize="10"
-              id="ActiveMrltFlagIterator1"/>
-  </executables>
-  <bindings>
-    <methodAction IterBinding="WOEventsIterator" id="updateWODates" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="updateWODates" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
-                  InstanceName="bindings.WOEventsIterator.currentRow" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.updateWODates_updateWODates_updateWODates_result">
-      <NamedData NDName="sEvtcode" NDType="java.lang.String" NDValue="${bindings.updateWODates_sEvtcode}"/>
-      <NamedData NDName="newDate" NDType="oracle.jbo.domain.Date" NDValue="${bindings.updateWODates_newDate}"/>
-    </methodAction>
-    <attributeValues IterBinding="variables" id="sEvtcode">
-      <AttrNames>
-        <Item Value="updateWODates_sEvtcode"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="variables" id="newDate">
-      <AttrNames>
-        <Item Value="updateWODates_newDate"/>
-      </AttrNames>
-    </attributeValues>
-    <tree IterBinding="ActiveMrltFlagIterator" id="ActiveMrltFlag">
-      <nodeDefinition DefName="its.mnr.mp5.vo.workorder.MrltFlag_VO" Name="ActiveMrltFlag0">
-        <AttrNames>
-          <Item Value="Fname"/>
-          <Item Value="Ftype"/>
-          <Item Value="Factive"/>
-          <Item Value="Fid"/>
-          <Item Value="Forg"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <action IterBinding="ActiveMrltFlagIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
-    <action IterBinding="ActiveMrltFlagIterator1" id="Execute" RequiresUpdateModel="false" Action="iteratorExecute"
-            InstanceName="MNRDataControlDataControl.WODataControlNested.ActiveMrltFlag"
-            DataControl="MNRDataControlDataControl"/>
-    <action IterBinding="ActiveMrltFlagIterator" id="Create" RequiresUpdateModel="true" Action="createRow"/>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
-            DataControl="MNRDataControlDataControl"/>
-    <methodAction id="isFlagUsedInWO" RequiresUpdateModel="true" Action="invokeMethod" MethodName="isFlagUsedInWO"
-                  IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
-                  InstanceName="data.MNRDataControlDataControl.dataProvider.WODataControlNested"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.isFlagUsedInWO_MNRDataControlDataControl_dataProvider_Root_WODataControlNested_isFlagUsedInWO_result">
-      <NamedData NDName="Fidval" NDType="java.lang.Integer"/>
-    </methodAction>
-    <tree IterBinding="ActiveMrltFlagIterator" id="MrltFlag_VO2">
-      <nodeDefinition DefName="its.mnr.mp5.vo.workorder.MrltFlag_VO" Name="MrltFlag_VO210">
-        <AttrNames>
-          <Item Value="Fname"/>
-          <Item Value="Ftype"/>
-          <Item Value="Factive"/>
-          <Item Value="Fid"/>
-          <Item Value="Forg"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <action IterBinding="ActiveMrltFlagIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
-    <attributeValues IterBinding="POrdersViewIterator" id="OrdCode">
-      <AttrNames>
-        <Item Value="OrdCode"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrdersViewIterator" id="OrdDesc">
-      <AttrNames>
-        <Item Value="OrdDesc"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrdersViewIterator" id="ItsCustfld1">
-      <AttrNames>
-        <Item Value="ItsCustfld1"/>
-      </AttrNames>
-    </attributeValues>
-    <tree IterBinding="joblogView1Iterator" id="joblogView11">
-      <nodeDefinition DefName="its.mnr.mp5.vo.admin.joblogView" Name="joblogView110">
-        <AttrNames>
-          <Item Value="LogID"/>
-          <Item Value="JobName"/>
-          <Item Value="Status"/>
-          <Item Value="ActualStartDate"/>
-          <Item Value="RunDuration"/>
-          <Item Value="AdditionalInfo"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <tree IterBinding="jobRunningView1Iterator" id="jobRunningView1">
-      <nodeDefinition DefName="its.mnr.mp5.vo.admin.jobRunningView" Name="jobRunningView10">
-        <AttrNames>
-          <Item Value="LogId"/>
-          <Item Value="SessionId"/>
-          <Item Value="JobName"/>
-          <Item Value="ElapsedTime"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <attributeValues IterBinding="MrltInvoiceheaderViewIterator" id="Invnum">
-      <AttrNames>
-        <Item Value="Invnum"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltInvoiceheaderViewIterator" id="Type">
-      <AttrNames>
-        <Item Value="Type"/>
-      </AttrNames>
-    </attributeValues>
-    <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceStdXML"
-                  InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="writeInvoiceStdXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceStdXML_writeInvoiceStdXML_writeInvoiceStdXML_result">
-      <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
-    </methodAction>
-    <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceCrXML"
-                  InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="writeInvoiceCrXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceCrXML_writeInvoiceCrXML_writeInvoiceCrXML_result">
-      <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
-    </methodAction>
-    <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceEstXML"
-                  InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="writeInvoiceEstXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceEstXML_writeInvoiceEstXML_writeInvoiceEstXML_result">
-      <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
-    </methodAction>
-    <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceRtroXML"
-                  InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="writeInvoiceRtroXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceRtroXML_writeInvoiceRtroXML_writeInvoiceRtroXML_result">
-      <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
-    </methodAction>    
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables">
+            <variable Type="java.lang.String" Name="updateWODates_return" IsQueriable="false" IsUpdateable="0"
+                      DefaultValue="${bindings.updateWODates.result}"/>
+            <variable Type="java.lang.String" Name="updateWODates_sEvtcode" IsQueriable="false"/>
+            <variable Type="oracle.jbo.domain.Date" Name="updateWODates_newDate" IsQueriable="false"/>
+        </variableIterator>
+        <iterator Binds="WODataControlNested.WOEvents" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="WOEventsIterator"/>
+        <iterator Binds="WODataControlNested.MrltFlag_VO2" RangeSize="25" DataControl="MNRDataControlDataControl"
+                  id="ActiveMrltFlagIterator"/>
+        <iterator Binds="PORecvDataControlNested.POrdersView" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="POrdersViewIterator"/>
+        <searchRegion Criteria="POrdersOrdCd" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                      Binds="POrdersViewIterator" id="POrdersOrdCdQuery"/>
+        <iterator Binds="MasterDataControlNested.joblogView1" DataControl="MNRDataControlDataControl" RangeSize="10"
+                  id="joblogView1Iterator"/>
+        <searchRegion Binds="joblogView1Iterator" Criteria=""
+                      Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="joblogView11Query"/>
+        <iterator Binds="MasterDataControlNested.jobRunningView1" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="jobRunningView1Iterator"/>
+        <searchRegion Binds="jobRunningView1Iterator" Criteria=""
+                      Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="jobRunningView1Query"/>
+        <iterator Binds="Root.INVDataControl.MrltInvoiceheaderView" DataControl="MNRDataControlDataControl"
+                  RangeSize="10" id="MrltInvoiceheaderViewIterator"/>
+        <iterator Binds="Root.INVDataControl.MrltInvoiceheaderView1" DataControl="MNRDataControlDataControl"
+                  RangeSize="10" id="MrltInvoiceheaderView1Iterator"/>
+        <iterator Binds="WODataControlNested.ActiveMrltFlag" DataControl="MNRDataControlDataControl" RangeSize="10"
+                  id="ActiveMrltFlagIterator1"/>
+    </executables>
+    <bindings>
+        <methodAction IterBinding="WOEventsIterator" id="updateWODates" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateWODates" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                      InstanceName="bindings.WOEventsIterator.currentRow" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.updateWODates_updateWODates_updateWODates_result">
+            <NamedData NDName="sEvtcode" NDType="java.lang.String" NDValue="${bindings.updateWODates_sEvtcode}"/>
+            <NamedData NDName="newDate" NDType="oracle.jbo.domain.Date" NDValue="${bindings.updateWODates_newDate}"/>
+        </methodAction>
+        <attributeValues IterBinding="variables" id="sEvtcode">
+            <AttrNames>
+                <Item Value="updateWODates_sEvtcode"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="variables" id="newDate">
+            <AttrNames>
+                <Item Value="updateWODates_newDate"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="ActiveMrltFlagIterator" id="ActiveMrltFlag">
+            <nodeDefinition DefName="its.mnr.mp5.vo.workorder.MrltFlag_VO" Name="ActiveMrltFlag0">
+                <AttrNames>
+                    <Item Value="Fname"/>
+                    <Item Value="Ftype"/>
+                    <Item Value="Factive"/>
+                    <Item Value="Fid"/>
+                    <Item Value="Forg"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="ActiveMrltFlagIterator" id="CreateInsert" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="ActiveMrltFlagIterator1" id="Execute" RequiresUpdateModel="false" Action="iteratorExecute"
+                InstanceName="MNRDataControlDataControl.WODataControlNested.ActiveMrltFlag"
+                DataControl="MNRDataControlDataControl"/>
+        <action IterBinding="ActiveMrltFlagIterator" id="Create" RequiresUpdateModel="true" Action="createRow"/>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="MNRDataControlDataControl"/>
+        <methodAction id="isFlagUsedInWO" RequiresUpdateModel="true" Action="invokeMethod" MethodName="isFlagUsedInWO"
+                      IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.WODataControlNested"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.isFlagUsedInWO_MNRDataControlDataControl_dataProvider_Root_WODataControlNested_isFlagUsedInWO_result">
+            <NamedData NDName="Fidval" NDType="java.lang.Integer"/>
+        </methodAction>
+        <tree IterBinding="ActiveMrltFlagIterator" id="MrltFlag_VO2">
+            <nodeDefinition DefName="its.mnr.mp5.vo.workorder.MrltFlag_VO" Name="MrltFlag_VO210">
+                <AttrNames>
+                    <Item Value="Fname"/>
+                    <Item Value="Ftype"/>
+                    <Item Value="Factive"/>
+                    <Item Value="Fid"/>
+                    <Item Value="Forg"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="ActiveMrltFlagIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+        <attributeValues IterBinding="POrdersViewIterator" id="OrdCode">
+            <AttrNames>
+                <Item Value="OrdCode"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrdersViewIterator" id="OrdDesc">
+            <AttrNames>
+                <Item Value="OrdDesc"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrdersViewIterator" id="ItsCustfld1">
+            <AttrNames>
+                <Item Value="ItsCustfld1"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="joblogView1Iterator" id="joblogView11">
+            <nodeDefinition DefName="its.mnr.mp5.vo.admin.joblogView" Name="joblogView110">
+                <AttrNames>
+                    <Item Value="LogID"/>
+                    <Item Value="JobName"/>
+                    <Item Value="Status"/>
+                    <Item Value="ActualStartDate"/>
+                    <Item Value="RunDuration"/>
+                    <Item Value="AdditionalInfo"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="jobRunningView1Iterator" id="jobRunningView1">
+            <nodeDefinition DefName="its.mnr.mp5.vo.admin.jobRunningView" Name="jobRunningView10">
+                <AttrNames>
+                    <Item Value="LogId"/>
+                    <Item Value="SessionId"/>
+                    <Item Value="JobName"/>
+                    <Item Value="ElapsedTime"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="MrltInvoiceheaderViewIterator" id="Invnum">
+            <AttrNames>
+                <Item Value="Invnum"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltInvoiceheaderViewIterator" id="Type">
+            <AttrNames>
+                <Item Value="Type"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceStdXML"
+                      InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="writeInvoiceStdXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceStdXML_writeInvoiceStdXML_writeInvoiceStdXML_result">
+            <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
+        </methodAction>
+        <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceCrXML"
+                      InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="writeInvoiceCrXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceCrXML_writeInvoiceCrXML_writeInvoiceCrXML_result">
+            <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
+        </methodAction>
+        <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceEstXML"
+                      InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="writeInvoiceEstXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceEstXML_writeInvoiceEstXML_writeInvoiceEstXML_result">
+            <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
+        </methodAction>
+        <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceRtroXML"
+                      InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="writeInvoiceRtroXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceRtroXML_writeInvoiceRtroXML_writeInvoiceRtroXML_result">
+            <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
+        </methodAction>
+    </bindings>
 </pageDefinition>

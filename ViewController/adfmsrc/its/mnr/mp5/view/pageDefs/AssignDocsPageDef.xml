@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="AssignDocsPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="AssetDataControlNested.MrltAssetView" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="MrltAssetViewIterator"/>
-    <iterator Binds="AssetDataControlNested.MrltDocumentsView" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrltDocumentsViewIterator"/>
-    <iterator id="MrltAssetdocumentsViewIterator" Binds="AssetDataControlNested.MrltAssetdocumentsView"
-              DataControl="MNRDataControlDataControl" RangeSize="25"/>
-  </executables>
-  <bindings>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
-    <attributeValues IterBinding="MrltAssetViewIterator" id="Assetcd">
-      <AttrNames>
-        <Item Value="Assetcd"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="MrltDocumentsViewIterator" ListOperMode="multiSelect" ListIter="MrltDocumentsViewIterator"
-          id="MrltDocumentsView" SelectItemValueMode="ListObject">
-      <AttrNames>
-        <Item Value="Docid"/>
-      </AttrNames>
-      <ListDisplayAttrNames>
-        <Item Value="Docdesc"/>
-        <Item Value="Doctype"/>
-      </ListDisplayAttrNames>
-    </list>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="AssetDataControlNested.MrltAssetView" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="MrltAssetViewIterator"/>
+        <iterator Binds="AssetDataControlNested.MrltDocumentsView" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrltDocumentsViewIterator"/>
+        <iterator id="MrltAssetdocumentsViewIterator" Binds="AssetDataControlNested.MrltAssetdocumentsView"
+                  DataControl="MNRDataControlDataControl" RangeSize="25"/>
+    </executables>
+    <bindings>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+        <attributeValues IterBinding="MrltAssetViewIterator" id="Assetcd">
+            <AttrNames>
+                <Item Value="Assetcd"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="MrltDocumentsViewIterator" ListOperMode="multiSelect" ListIter="MrltDocumentsViewIterator"
+              id="MrltDocumentsView" SelectItemValueMode="ListObject">
+            <AttrNames>
+                <Item Value="Docid"/>
+            </AttrNames>
+            <ListDisplayAttrNames>
+                <Item Value="Docdesc"/>
+                <Item Value="Doctype"/>
+            </ListDisplayAttrNames>
+        </list>
+    </bindings>
 </pageDefinition>

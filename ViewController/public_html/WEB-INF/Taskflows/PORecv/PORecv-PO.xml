@@ -27,9 +27,6 @@
     <view id="POMaintenance">
       <page>/Content/PORecv/POMaintenance.jspx</page>
     </view>
-    <view id="POTest">
-      <page>/POTest.jspx</page>
-    </view>
     <control-flow-rule id="__3">
       <from-activity-id>*</from-activity-id>
       <control-flow-case id="__4">

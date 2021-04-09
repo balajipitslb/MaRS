@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="EstimatesEntryPageDef"
+                Package="Content.Estimates">
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="WODataControlNested.Estimate2" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="EstimateIterator"/>
+        <searchRegion Criteria="EstimateSearch" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                      Binds="EstimateQueryIterator" id="EstimateSearchQuery" Refresh="always"/>
+        <iterator id="EstimateQueryIterator" Binds="WODataControlNested.EstimateQuery"
+                  DataControl="MNRDataControlDataControl" RangeSize="50"/>
+        <iterator Binds="WODataControlNested.EstimateQueryTask" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="EstimateTaskIterator"/>
+        <iterator Binds="WODataControlNested.EstimateQueryPart" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="EstimatePartIterator"/>
+        <iterator Binds="WODataControlNested.WOEvents" DataControl="MNRDataControlDataControl" RangeSize="10"
+                  id="WOEventsIterator"/>
+    </executables>
+    <bindings>
+        <tree IterBinding="EstimateQueryIterator" id="Estimate">
+            <nodeDefinition DefName="its.mnr.mp5.vo.workorder.EstimateQueryVO" Name="Estimate0">
+                <AttrNames>
+                    <Item Value="Estid"/>
+                    <Item Value="Wonum"/>
+                    <Item Value="Ver"/>
+                    <Item Value="Equipnum"/>
+                    <Item Value="Acctnum"/>
+                    <Item Value="Status"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <navigationlist ListOperMode="navigation" IterBinding="EstimateIterator" id="Ver" ListIter="EstimateIterator"
+                        SelectItemValueMode="ListObject">
+            <AttrNames>
+                <Item Value="Ver"/>
+            </AttrNames>
+        </navigationlist>
+        <attributeValues IterBinding="EstimateIterator" id="Estid">
+            <AttrNames>
+                <Item Value="Estid"/>
+            </AttrNames>
+        </attributeValues>
+        <action id="Rollback" DataControl="MNRDataControlDataControl" RequiresUpdateModel="false"
+                Action="rollbackTransaction"/>
+        <list IterBinding="EstimateIterator" StaticList="false" Uses="LOV_Status" id="Status" DTSupportsMRU="false"
+              SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="EstimateIterator" id="Appnum">
+            <AttrNames>
+                <Item Value="Appnum"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="EstimateIterator" id="Reason">
+            <AttrNames>
+                <Item Value="Reason"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="EstimateIterator" id="Wonum">
+            <AttrNames>
+                <Item Value="Wonum"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="EstimateIterator" id="Equipnum">
+            <AttrNames>
+                <Item Value="Equipnum"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="EstimateIterator" StaticList="false" Uses="LOV_Acctnum" id="Acctnum" DTSupportsMRU="false"
+              SelectItemValueMode="ListObject"/>
+        <tree IterBinding="EstimateTaskIterator" id="EstimateTask">
+            <nodeDefinition DefName="its.mnr.mp5.vo.workorder.EstimateTask" Name="EstimateTask0">
+                <AttrNames>
+                    <Item Value="Task"/>
+                    <Item Value="Cmt"/>
+                    <Item Value="Uom"/>
+                    <Item Value="Loc"/>
+                    <Item Value="Dmg"/>
+                    <Item Value="Rep"/>
+                    <Item Value="Shift"/>
+                    <Item Value="Mechid"/>
+                    <Item Value="Lbrhr"/>
+                    <Item Value="Rate"/>
+                    <Item Value="Lbrcst"/>
+                    <Item Value="Compcd"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="EstimatePartIterator" id="EstimatePart">
+            <nodeDefinition DefName="its.mnr.mp5.vo.workorder.EstimatePart" Name="EstimatePart0">
+                <AttrNames>
+                    <Item Value="Partnum"/>
+                    <Item Value="Partdesc"/>
+                    <Item Value="Qty"/>
+                    <Item Value="Uom"/>
+                    <Item Value="Partcst"/>
+                    <Item Value="Parttotal"/>
+                    <Item Value="Ptax"/>
+                    <Item Value="Ptaxamt"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="EstimateIterator" id="Tlbrhrs">
+            <AttrNames>
+                <Item Value="Tlbrhrs"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="EstimateIterator" id="Tlbrcst">
+            <AttrNames>
+                <Item Value="Tlbrcst"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="EstimateIterator" id="Tpartcst">
+            <AttrNames>
+                <Item Value="Tpartcst"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="EstimateTaskIterator" id="EstimateTask1">
+            <nodeDefinition DefName="its.mnr.mp5.vo.workorder.EstimateTask" Name="EstimateTask10">
+                <AttrNames>
+                    <Item Value="Esttaskdtlid"/>
+                    <Item Value="Seq"/>
+                    <Item Value="Task"/>
+                    <Item Value="Cmt"/>
+                    <Item Value="Uom"/>
+                    <Item Value="Loc"/>
+                    <Item Value="Dmg"/>
+                    <Item Value="Rep"/>
+                    <Item Value="Mechid"/>
+                    <Item Value="Shift"/>
+                    <Item Value="Rate"/>
+                    <Item Value="Lbrhr"/>
+                    <Item Value="Lbrcst"/>
+                    <Item Value="Compcd"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action id="Commit" DataControl="MNRDataControlDataControl" RequiresUpdateModel="true"
+                Action="commitTransaction"/>
+        <!--
+        <list IterBinding="EstimateIterator" StaticList="false" Uses="LOV_Ver" id="Ver" DTSupportsMRU="true"
+              SelectItemValueMode="ListObject" />
+              -->
+        <attributeValues IterBinding="EstimateIterator" id="Ver1">
+            <AttrNames>
+                <Item Value="Ver"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction IterBinding="WOEventsIterator" id="ITS_EstimateUpd" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="ITS_EstimateUpd" IsViewObjectMethod="false"
+                      DataControl="MNRDataControlDataControl" InstanceName="bindings.WOEventsIterator.currentRow"
+                      IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.ITS_EstimateUpd_ITS_EstimateUpd_ITS_EstimateUpd_result">
+            <NamedData NDName="pEstId" NDType="java.lang.String"/>
+            <NamedData NDName="pStatus" NDType="java.lang.String"/>
+            <NamedData NDName="pUpdBy" NDType="java.lang.String"/>
+            <NamedData NDName="pAppNum" NDType="java.lang.String"/>
+            <NamedData NDName="pReason" NDType="java.lang.String"/>
+            <NamedData NDName="pRspType" NDType="java.lang.String"/>
+            <NamedData NDName="pIp" NDType="java.lang.String"/>
+        </methodAction>
+        <listOfValues IterBinding="EstimateIterator" StaticList="false" Uses="LOV_Status" id="Status1"/>
+        <list IterBinding="EstimateIterator" StaticList="false" Uses="LOV_Ver" id="Ver2" DTSupportsMRU="false"
+              SelectItemValueMode="ListObject"/>
+        <methodAction id="UpdateWOStatus" RequiresUpdateModel="true" Action="invokeMethod" MethodName="UpdateWOStatus"
+                      IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.WODataControlNested"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.UpdateWOStatus_MNRDataControlDataControl_dataProvider_WODataControlNested_UpdateWOStatus_result">
+            <NamedData NDName="evntCd" NDType="java.lang.String"/>
+            <NamedData NDName="pStatus" NDType="java.lang.String"/>
+            <NamedData NDName="pUser" NDType="java.lang.String"/>
+        </methodAction>
+        <methodAction id="RejWOPartsReturn" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="RejWOPartsReturn" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.WODataControlNested"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.RejWOPartsReturn_MNRDataControlDataControl_dataProvider_WODataControlNested_RejWOPartsReturn_result">
+            <NamedData NDName="pEvtCode" NDType="java.lang.String"/>
+        </methodAction>
+        <action IterBinding="EstimateIterator" id="setCurrentRowWithKeyValue"
+                InstanceName="MNRDataControlDataControl.WODataControlNested.Estimate2"
+                DataControl="MNRDataControlDataControl" RequiresUpdateModel="false" Action="setCurrentRowWithKeyValue">
+            <NamedData NDName="rowKey" NDType="java.lang.String"/>
+        </action>
+        <attributeValues IterBinding="EstimateQueryIterator" id="Estid1">
+            <AttrNames>
+                <Item Value="Estid"/>
+            </AttrNames>
+        </attributeValues>
+    </bindings>
+</pageDefinition>

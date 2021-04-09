@@ -4,15 +4,22 @@
 <Entity
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="MrltEstimate"
-  Version="11.1.2.60.81"
+  Version="12.1.3.10.8"
   DBObjectType="table"
   DBObjectName="MRLT_ESTIMATE"
   AliasName="MrltEstimate"
   BindingStyle="OracleName"
-  UseGlueCode="false"
-  RowClass="its.mnr.mp5.baseclass.ExtendedEntityImpl"
+  RowClass="its.mnr.mp5.eo.local.MrltEstimateImpl"
   DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
   CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
+  </DesignTime>
+  <ViewAccessor
+    Name="WOEvents"
+    ViewObjectName="its.mnr.mp5.vo.workorder.WOEvents"
+    RowLevelBinds="true"/>
   <Attribute
     Name="Estid"
     IsNotNull="true"
@@ -23,7 +30,14 @@
     Type="oracle.jbo.domain.Number"
     ColumnType="NUMBER"
     TableName="MRLT_ESTIMATE"
-    PrimaryKey="true"/>
+    PrimaryKey="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltEstimate.Estid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Wonum"
     IsNotNull="true"
@@ -36,6 +50,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="10"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltEstimate.Wonum_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Ver"
@@ -46,7 +66,9 @@
     SQLType="CHAR"
     Type="java.lang.String"
     ColumnType="CHAR"
-    TableName="MRLT_ESTIMATE">
+    TableName="MRLT_ESTIMATE"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
@@ -67,7 +89,9 @@
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
-    TableName="MRLT_ESTIMATE">
+    TableName="MRLT_ESTIMATE"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="10"/>
     </DesignTime>
@@ -96,6 +120,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="10"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltEstimate.Appnum_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Upddt"
@@ -128,6 +158,12 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="15"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltEstimate.Equipnum_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Acctnum"
@@ -163,7 +199,14 @@
     SQLType="NUMERIC"
     Type="java.math.BigDecimal"
     ColumnType="NUMBER"
-    TableName="MRLT_ESTIMATE"/>
+    TableName="MRLT_ESTIMATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltEstimate.Tlbrhrs_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
   <Attribute
     Name="Tlbrcst"
     IsNotNull="true"
@@ -178,6 +221,8 @@
       <SchemaBasedProperties>
         <FMT_FORMATTER
           ResId="its.mnr.mp5.eo.local.MrltEstimate.Tlbrcst_FMT_FORMATTER"/>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltEstimate.Tlbrcst_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -195,6 +240,8 @@
       <SchemaBasedProperties>
         <FMT_FORMATTER
           ResId="its.mnr.mp5.eo.local.MrltEstimate.Tpartcst_FMT_FORMATTER"/>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.MrltEstimate.Tpartcst_LABEL"/>
       </SchemaBasedProperties>
     </Properties>
   </Attribute>
@@ -245,6 +292,37 @@
     <DesignTime>
       <Attr Name="_DisplaySize" Value="9"/>
     </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="isCurVer"
+    ColumnName="IS_CUR_VER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false"
+    Expression="case  
+         when (ver &lt; (select max(e.ver)
+         from MRLT_ESTIMATE e where e.wonum =MrltEstimate.wonum group by e.wonum)) then 'F'
+         when (ver >=(select max(e.ver)
+         from MRLT_ESTIMATE e where e.wonum =MrltEstimate.wonum group by e.wonum)) then 'T'
+         end">
+    <Dependencies>
+      <Item
+        Value="Ver"/>
+    </Dependencies>
+  </Attribute>
+  <Attribute
+    Name="testvar"
+    Precision="80"
+    ColumnName="TESTVAR"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    IsPersistent="false"
+    IsQueriable="false">
+    <TransientExpression><![CDATA[isCurVer]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
   </Attribute>
   <AccessorAttribute
     Name="R5events"
