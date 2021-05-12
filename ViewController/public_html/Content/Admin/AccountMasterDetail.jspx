@@ -23,7 +23,7 @@
                                    partialTriggers="it1 it2 it3 sbc1 sbc2 sbc3 it4 soc1 sbc4">
                             <af:resetActionListener/>
                         </af:button>
-                        <af:button id="ctb3" icon="#{resource['images:terminate.png']}" action="Back" text="button 1"/>
+                        <af:button id="ctb3" icon="#{resource['images:terminate.png']}" action="Back"/>
                     </af:toolbar>
                 </f:facet>
                 <f:facet name="toolbar"/>

@@ -4245,6 +4245,9 @@
               <permission-set-ref>
                 <name>Flags</name>
               </permission-set-ref>
+              <permission-set-ref>
+                <name>Estimates</name>
+              </permission-set-ref>
             </permission-set-refs>
           </grant>
           <grant>
