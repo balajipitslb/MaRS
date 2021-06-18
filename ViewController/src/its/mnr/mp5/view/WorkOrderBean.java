@@ -1571,13 +1571,7 @@ public class WorkOrderBean {
                 }
                 catch (RowNotFoundException ex) {
                     System.out.println("Inside refreshEventIter");
-                    /*
-                    RichQuery queryComp = getWoQuery();  
-                    QueryModel queryModel = queryComp.getModel();  
-                    QueryDescriptor queryDescriptor = queryComp.getValue();  
-                    queryModel.reset(queryDescriptor);  
-                    queryComp.refresh(FacesContext.getCurrentInstance());  
-                    */
+
                     iter.getViewObject().applyViewCriteria(null);
                     iter.executeQuery();
                     iter.setCurrentRowWithKey(parentKey.toStringFormat(true));
@@ -2215,7 +2209,10 @@ public class WorkOrderBean {
 
                 if (rowAct != null) {
                     try {
-                        iterAct.setCurrentRowWithKey(rowAct.toStringFormat(true));
+                        iterAct.executeQuery();
+                        if(iterAct.containsKey(rowAct.toStringFormat(true))){
+                            iterAct.setCurrentRowWithKey(rowAct.toStringFormat(true));
+                        }
                     } catch (RowNotFoundException ex) {
                         System.out.println("Act RowNotFoundException");
                     }
