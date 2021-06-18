@@ -11,7 +11,7 @@
                     <af:navigationPane id="np1">
                         <af:commandNavigationItem text="Home" id="cni1" accessKey="H"
                                                   actionListener="#{ModuleNavBean.goHomeModule}"
-                                                  visible="#{securityContext.userGrantedResource['resourceName=Invoice;resourceType=GlobalNav;action=view']}"/>
+                                                  />
                         <af:commandNavigationItem text="Work Order" id="cni2" selected="false" accessKey="W"
                                                   actionListener="#{ModuleNavBean.goWOModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=WorkOrder;resourceType=GlobalNav;action=view']}"/>
@@ -19,7 +19,8 @@
                                                   actionListener="#{ModuleNavBean.goEstimatesModule}"
                                                   visible="#{(securityContext.userGrantedResource['resourceName=Estimates;resourceType=GlobalNav;action=view'])and(ModuleNavBean.showEstimate eq 'Y')}"/>  
                        <af:commandNavigationItem text="Invoice" id="cni3" accessKey="I"
-                                                  actionListener="#{ModuleNavBean.goInvoiceModule}"/>
+                                                  actionListener="#{ModuleNavBean.goInvoiceModule}"
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Invoice;resourceType=GlobalNav;action=view']}"/>
                         <af:commandNavigationItem text="PO &amp; Receivings" id="cni4" accessKey="P"
                                                   actionListener="#{ModuleNavBean.goPORecvModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=PORecv;resourceType=GlobalNav;action=view']}"/>

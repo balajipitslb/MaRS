@@ -325,7 +325,7 @@
       <Factory className="oracle.jdevimpl.db.adapter.DatabaseProviderFactory1212"/>
       <RefAddresses>
          <StringRefAddr addrType="sid">
-            <Contents>mp5standby12</Contents>
+            <Contents>MaRSDB</Contents>
          </StringRefAddr>
          <StringRefAddr addrType="subtype">
             <Contents>oraJDBC</Contents>
@@ -333,11 +333,11 @@
          <StringRefAddr addrType="user">
             <Contents>mp5prd</Contents>
          </StringRefAddr>
-         <StringRefAddr addrType="hostname">
-            <Contents>ITSWEBDMZUAT12C</Contents>
-         </StringRefAddr>
          <StringRefAddr addrType="port">
             <Contents>1521</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>ITSMP5ORADB21.itslb.com</Contents>
          </StringRefAddr>
          <SecureRefAddr addrType="password"/>
          <StringRefAddr addrType="oraDriverType">
