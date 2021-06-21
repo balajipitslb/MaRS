@@ -11,4 +11,8 @@ public interface PORecvDataControl extends ApplicationModule {
     void clearFullyRetn();
 
     void initCompanyRcpts();
+
+    boolean isPartInactive(String sPart);
+
+    void printRecd();
 }

@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="PartMaintPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="PartsDataControlNested.PartsMaintView" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="PartsMaintViewIterator"/>
-    <searchRegion Criteria="PartSearch" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  Binds="PartsMaintViewIterator" id="PartSearchQuery"/>
-  </executables>
-  <bindings>
-    <tree IterBinding="PartsMaintViewIterator" id="PartsMaintView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.parts.PartsMaintView" Name="PartsMaintView0">
-        <AttrNames>
-          <Item Value="ParCode"/>
-          <Item Value="ParDesc"/>
-          <Item Value="ParClass"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <attributeValues IterBinding="PartsMaintViewIterator" id="ParDesc">
-      <AttrNames>
-        <Item Value="ParDesc"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="PartsMaintViewIterator" StaticList="false" Uses="LOV_ParClass" id="ParClass"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="PartsMaintViewIterator" id="ParCode">
-      <AttrNames>
-        <Item Value="ParCode"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="PartsMaintViewIterator" StaticList="false" Uses="LOV_ParUom" id="ParUom" DTSupportsMRU="true"
-          SelectItemValueMode="ListObject"/>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="PartsDataControlNested.PartsMaintView" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="PartsMaintViewIterator"/>
+        <searchRegion Criteria="PartSearch" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                      Binds="PartsMaintViewIterator" id="PartSearchQuery"/>
+    </executables>
+    <bindings>
+        <tree IterBinding="PartsMaintViewIterator" id="PartsMaintView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.parts.PartsMaintView" Name="PartsMaintView0">
+                <AttrNames>
+                    <Item Value="ParCode"/>
+                    <Item Value="ParDesc"/>
+                    <Item Value="ParClass"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="PartsMaintViewIterator" id="ParDesc">
+            <AttrNames>
+                <Item Value="ParDesc"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="PartsMaintViewIterator" StaticList="false" Uses="LOV_ParClass" id="ParClass"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="PartsMaintViewIterator" id="ParCode">
+            <AttrNames>
+                <Item Value="ParCode"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="PartsMaintViewIterator" StaticList="false" Uses="LOV_ParUom" id="ParUom" DTSupportsMRU="true"
+              SelectItemValueMode="ListObject"/>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+    </bindings>
 </pageDefinition>

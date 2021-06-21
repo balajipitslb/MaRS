@@ -135,6 +135,21 @@ public class WODataControlImpl extends ExtendedApplicationModuleImpl implements 
         vo.setCurrentRow(row);
     }
 
+    public String UpdateWOStatus(String evntCd, String pStatus, String pUser) {
+        
+        System.out.println("Inside WODataControlImpl UpdateWOStatus evntCd: "+evntCd+" pStatus: "+pStatus+" pUser: "+pUser);
+        return (String)callStoredFunction(VARCHAR2, "mnrpkg.ITS_WorkOrderUpd(?,?,?)",
+                                          new Object[] { evntCd, pStatus, pUser});
+    }    
+    
+    public String RejWOPartsReturn(String pEvtCode) {
+             //System.out.println("inside brRejWOPartsReturn function: " + pEvtCode);
+             
+             String ret = (String)callStoredFunction(VARCHAR2, "mnrpkg.RejWOPartsReturn(?)",
+                                               new Object[] {pEvtCode});
+             //System.out.println("brRejWOPartsReturn Ret = " + ret);
+             return ret;
+         }
     
     // Some constants
     public static int NUMBER = Types.NUMERIC;
@@ -287,13 +302,6 @@ public class WODataControlImpl extends ExtendedApplicationModuleImpl implements 
         return (ExtendedViewObjectImpl)findViewObject("Matlparts");
     }
 
-    /**
-     * Container's getter for CustomFields.
-     * @return CustomFields
-     */
-    public ExtendedViewObjectImpl getCustomFields() {
-        return (ExtendedViewObjectImpl)findViewObject("CustomFields");
-    }
 
     /**
      * Container's getter for MeterReadings.
@@ -456,13 +464,6 @@ public class WODataControlImpl extends ExtendedApplicationModuleImpl implements 
         return (ViewLinkImpl)findViewLink("MatlistsMatlpartsLink1");
     }
 
-    /**
-     * Container's getter for WOEventsCustomFieldsLink1.
-     * @return WOEventsCustomFieldsLink1
-     */
-    public ViewLinkImpl getWOEventsCustomFieldsLink1() {
-        return (ViewLinkImpl)findViewLink("WOEventsCustomFieldsLink1");
-    }
 
     /**
      * Container's getter for WOEventsMeterReadingsLink1.
@@ -568,5 +569,153 @@ public class WODataControlImpl extends ExtendedApplicationModuleImpl implements 
      */
     public ViewLinkImpl getAvailableQtyExistenceLink1() {
         return (ViewLinkImpl)findViewLink("AvailableQtyExistenceLink1");
+    }
+
+    /**
+     * Container's getter for WOEvents2.
+     * @return WOEvents2
+     */
+    public WOEventsImpl getWOEvents2() {
+        return (WOEventsImpl) findViewObject("WOEvents2");
+    }
+
+
+    /**
+     * Container's getter for EstimateVerLov1.
+     * @return EstimateVerLov1
+     */
+    public ExtendedViewObjectImpl getEstimateVerLov() {
+        return (ExtendedViewObjectImpl) findViewObject("EstimateVerLov");
+    }
+
+    /**
+     * Container's getter for estimate_estimateverlovLink1.
+     * @return estimate_estimateverlovLink1
+     */
+    public ViewLinkImpl getestimate_estimateverlovLink1() {
+        return (ViewLinkImpl) findViewLink("estimate_estimateverlovLink1");
+    }
+
+
+    /**
+     * Container's getter for Estimate2.
+     * @return Estimate2
+     */
+    public EstimateImpl getEstimateWO() {
+        return (EstimateImpl) findViewObject("EstimateWO");
+    }
+
+    /**
+     * Container's getter for R5EventsEstimatesWOLink1.
+     * @return R5EventsEstimatesWOLink1
+     */
+    public ViewLinkImpl getR5EventsEstimatesWOLink1() {
+        return (ViewLinkImpl) findViewLink("R5EventsEstimatesWOLink1");
+    }
+
+    /**
+     * Container's getter for EstimateTask1.
+     * @return EstimateTask1
+     */
+    public ExtendedViewObjectImpl getEstimateTaskWO() {
+        return (ExtendedViewObjectImpl) findViewObject("EstimateTaskWO");
+    }
+
+    /**
+     * Container's getter for MrltEstimatetaskdetailFk1Link1.
+     * @return MrltEstimatetaskdetailFk1Link1
+     */
+    public ViewLinkImpl getMrltEstimatetaskdetailFk1Link1() {
+        return (ViewLinkImpl) findViewLink("MrltEstimatetaskdetailFk1Link1");
+    }
+
+    /**
+     * Container's getter for EstimatePart1.
+     * @return EstimatePart1
+     */
+    public ExtendedViewObjectImpl getEstimatePartWO() {
+        return (ExtendedViewObjectImpl) findViewObject("EstimatePartWO");
+    }
+
+    /**
+     * Container's getter for MrltEstimatepartdetailFk1Link2.
+     * @return MrltEstimatepartdetailFk1Link2
+     */
+    public ViewLinkImpl getMrltEstimatepartdetailFk1Link2() {
+        return (ViewLinkImpl) findViewLink("MrltEstimatepartdetailFk1Link2");
+    }
+
+
+    /**
+     * Container's getter for CustomFields.
+     * @return CustomFields
+     */
+    public ExtendedViewObjectImpl getCustomFields() {
+        return (ExtendedViewObjectImpl) findViewObject("CustomFields");
+    }
+
+    /**
+     * Container's getter for WOEventsCustomFieldsLink1.
+     * @return WOEventsCustomFieldsLink1
+     */
+    public ViewLinkImpl getWOEventsCustomFieldsLink1() {
+        return (ViewLinkImpl) findViewLink("WOEventsCustomFieldsLink1");
+    }
+
+
+    /**
+     * Container's getter for EstimateQueryVO1.
+     * @return EstimateQueryVO1
+     */
+    public ExtendedViewObjectImpl getEstimateQuery() {
+        return (ExtendedViewObjectImpl) findViewObject("EstimateQuery");
+    }
+
+    /**
+     * Container's getter for Estimate2.
+     * @return Estimate2
+     */
+    public EstimateImpl getEstimate2() {
+        return (EstimateImpl) findViewObject("Estimate2");
+    }
+
+    /**
+     * Container's getter for estimateQuery_estimateLink1.
+     * @return estimateQuery_estimateLink1
+     */
+    public ViewLinkImpl getestimateQuery_estimateLink1() {
+        return (ViewLinkImpl) findViewLink("estimateQuery_estimateLink1");
+    }
+
+    /**
+     * Container's getter for EstimateTask1.
+     * @return EstimateTask1
+     */
+    public ExtendedViewObjectImpl getEstimateQueryTask() {
+        return (ExtendedViewObjectImpl) findViewObject("EstimateQueryTask");
+    }
+
+    /**
+     * Container's getter for MrltEstimatetaskdetailFk1Link3.
+     * @return MrltEstimatetaskdetailFk1Link3
+     */
+    public ViewLinkImpl getMrltEstimatetaskdetailFk1Link3() {
+        return (ViewLinkImpl) findViewLink("MrltEstimatetaskdetailFk1Link3");
+    }
+
+    /**
+     * Container's getter for EstimatePart1.
+     * @return EstimatePart1
+     */
+    public ExtendedViewObjectImpl getEstimateQueryPart() {
+        return (ExtendedViewObjectImpl) findViewObject("EstimateQueryPart");
+    }
+
+    /**
+     * Container's getter for MrltEstimatepartdetailFk1Link3.
+     * @return MrltEstimatepartdetailFk1Link3
+     */
+    public ViewLinkImpl getMrltEstimatepartdetailFk1Link3() {
+        return (ViewLinkImpl) findViewLink("MrltEstimatepartdetailFk1Link3");
     }
 }

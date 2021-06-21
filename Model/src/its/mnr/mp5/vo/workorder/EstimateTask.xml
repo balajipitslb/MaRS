@@ -4,7 +4,7 @@
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="EstimateTask"
-  Version="11.1.2.60.81"
+  Version="12.1.3.10.8"
   SelectList="MrltEstimatetaskdetail.ESTTASKDTLID, 
        MrltEstimatetaskdetail.ESTID, 
        MrltEstimatetaskdetail.SEQ, 
@@ -30,7 +30,6 @@
   ComponentClass="its.mnr.mp5.baseclass.ExtendedViewObjectImpl"
   DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
   PageIterMode="Full"
-  UseGlueCode="false"
   FetchMode="FETCH_AS_NEEDED"
   Passivate="All">
   <EntityUsage
@@ -69,7 +68,14 @@
     PrecisionRule="true"
     EntityAttrName="Cmt"
     EntityUsage="MrltEstimatetaskdetail"
-    AliasName="CMT"/>
+    AliasName="CMT">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.EstimateTask.Cmt_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Uom"
     IsNotNull="true"
@@ -83,7 +89,14 @@
     PrecisionRule="true"
     EntityAttrName="Loc"
     EntityUsage="MrltEstimatetaskdetail"
-    AliasName="LOC"/>
+    AliasName="LOC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.EstimateTask.Loc_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Loccd"
     IsNotNull="true"
@@ -97,7 +110,14 @@
     PrecisionRule="true"
     EntityAttrName="Dmg"
     EntityUsage="MrltEstimatetaskdetail"
-    AliasName="DMG"/>
+    AliasName="DMG">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.EstimateTask.Dmg_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Dmgcd"
     IsNotNull="true"
@@ -111,7 +131,14 @@
     PrecisionRule="true"
     EntityAttrName="Rep"
     EntityUsage="MrltEstimatetaskdetail"
-    AliasName="REP"/>
+    AliasName="REP">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.EstimateTask.Rep_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Repcd"
     IsNotNull="true"
@@ -125,7 +152,14 @@
     PrecisionRule="true"
     EntityAttrName="Mechid"
     EntityUsage="MrltEstimatetaskdetail"
-    AliasName="MECHID"/>
+    AliasName="MECHID">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.EstimateTask.Mechid_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Shift"
     IsNotNull="true"
@@ -146,13 +180,27 @@
     PrecisionRule="true"
     EntityAttrName="Lbrhr"
     EntityUsage="MrltEstimatetaskdetail"
-    AliasName="LBRHR"/>
+    AliasName="LBRHR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.EstimateTask.Lbrhr_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Lbrcst"
     PrecisionRule="true"
     EntityAttrName="Lbrcst"
     EntityUsage="MrltEstimatetaskdetail"
-    AliasName="LBRCST"/>
+    AliasName="LBRCST">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.EstimateTask.Lbrcst_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Compcd"
     PrecisionRule="true"
@@ -164,4 +212,8 @@
     ViewLink="its.mnr.mp5.vo.link.MrltEstimatepartdetailFk1Link"
     Type="oracle.jbo.RowIterator"
     IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
+  </ResourceBundle>
 </ViewObject>

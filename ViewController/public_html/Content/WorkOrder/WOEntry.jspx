@@ -16,7 +16,7 @@
                                       queryListener="#{WorkOrderBean.processQuery}"
                                       queryOperationListener="#{bindings.WorkOrderListQuery.processQueryOperation}"
                                       saveQueryMode="readOnly" modeChangeVisible="false" searchButtonAccessKey="s"
-                                      resetButtonAccessKey="r" disclosed="true"/>
+                                      resetButtonAccessKey="r" disclosed="true" binding="#{WorkOrderBean.woQuery}"/>
                             <af:spacer width="10" height="10" id="s10"/>
                             <af:table value="#{bindings.WOEvents.collectionModel}" var="row"
                                       rows="#{bindings.WOEvents.rangeSize}"
@@ -149,9 +149,19 @@
                                         </af:showDetailHeader>
                                         <af:spacer width="10" height="10" id="s8"/>
                                         <af:toolbar id="t16">
+                                        <!--
                                             <af:button text="#{viewcontrollerBundle.FLAG}" id="cb1"
                                                        actionListener="#{WorkOrderBean.ShowWOFlagAssociation_action}"
                                                        icon="#{resource['images:flag.png']}" accessKey="f"/>
+                                                       -->
+                                            <af:button text="Flag" id="cb1"
+                                                       icon="#{resource['images:flag.png']}" accessKey="f"
+                                                       actionListener="#{WorkOrderBean.ShowWOFlagAssociation_action}"
+                                                       useWindow="true" windowModalityType="modeless"
+                                                       windowHeight="350" windowWidth="450"
+                                                       windowEmbedStyle="inlineDocument" partialSubmit="false">
+                                                <af:clientListener method="enforcePreventUserInput" type="action"/>
+                                            </af:button>            
                                         </af:toolbar>
                                     </af:panelGroupLayout>
                                 </f:facet>
@@ -211,7 +221,38 @@
                                     </af:panelLabelAndMessage>
                                     <f:facet name="end">
                                         <af:panelGroupLayout id="g2" layout="horizontal"
-                                                             inlineStyle="margin: 0px 0px 0px 100px;">
+                                                             inlineStyle="margin: 0px 0px 0px 50px;">
+                                            <!--
+                                            <af:outputText value="ItsEstid: #{bindings.ItsEstid.inputValue}" id="ot40"/>
+                                            <af:outputText value="sEst: #{ModuleNavBean.showEstimate}" id="ot41"/>
+                                            -->
+                                            <af:toolbar id="t18">
+                                            <!--
+                                            actionListener="#{WorkOrderBean.createEstimateWO_action}"
+                                            action="callWOEstimates"
+                                            -->
+                                                <af:button text="Estimate" id="b1" 
+                                                           windowHeight="820" windowWidth="890" useWindow="true"
+                                                           windowEmbedStyle="window"
+                                                           rendered="#{(!empty(bindings.ItsEstid.inputValue))and (securityContext.userGrantedResource['resourceName=Estimates;resourceType=GlobalNav;action=view']) and(ModuleNavBean.showEstimate eq 'Y')}"
+                                                           icon="#{resource['images:estimate.png']}" accessKey="e"
+                                                           returnListener="#{WorkOrderBean.estimateReturnLstnr}"
+                                                           action="callWOEstimates">
+                                                    <!--
+                                                       rendered="#{(not empty(bindings.ItsEstid.inputValue)) and (ModuleNavBean.showEstimate eq 'Y')}"
+                                                       rendered="#{(not empty(bindings.ItsEstid.inputValue))and (bindings.tShowEstimate.inputValue eq 'Y')}"
+                                                         -->
+                                                    <!--
+                                                <af:setActionListener from="#{bindings.ItsEstid.inputValue}"
+                                                                      to="#{pageFlowScope.psfEstid}"/>
+                                                                      -->
+                                                    <af:setActionListener from="#{bindings.EvtCode.inputValue}"
+                                                                          to="#{pageFlowScope.psfEstid}"/>
+                                                    <af:setActionListener to="#{pageFlowScope.pfsCalledFromWO}"
+                                                                          from="#{true}"/>
+                                                </af:button>
+                                            </af:toolbar>
+                                            <af:spacer width="30" height="10" id="s25"/>
                                             <af:outputLabel value="#{bindings.ItsIsasset.label}" id="ol4"
                                                             rendered="#{bindings.ItsIsasset.attributeValue == 'N'}"/>
                                             <af:link text="Asset" id="cl1" action="callAsset" useWindow="true"
@@ -328,7 +369,7 @@
                                           partialTriggers="::ctb3 ::ctb4 ::ctb5 :::ctb20 :::ctb21 :::ctb10 :::ctb15 :::ctb16 :::ctb17"
                                           autoHeightRows="-1" binding="#{WorkOrderBean.woActivitiesTable}">
                                     <af:clientListener method="handleTaskDoubleClick" type="dblClick"/><af:serverListener type="TaskDoubleClickEvent"
-                                                                                                                          method="#{WorkOrderBean.handleTaskDoubleClick}"/>
+                                         method="#{WorkOrderBean.handleTaskDoubleClick}"/>
                                     <af:column sortProperty="#{bindings.WOActivities.hints.ActAct.name}"
                                                sortable="false" headerText="#{bindings.WOActivities.hints.ActAct.label}"
                                                id="c1" width="20">
@@ -592,6 +633,7 @@
                                                               pattern="#{bindings.Matlparts.hints.Available.format}"/>
                                         </af:inputText>
                                     </af:column>
+                                    <!--
                                     <af:column id="c28" headerText="Tax" align="center">
                                         <af:column sortProperty="#{bindings.Matlparts.hints.ItsPartaxamt.name}"
                                                    sortable="false"
@@ -626,6 +668,7 @@
                                             </af:inputText>
                                         </af:column>
                                     </af:column>
+                                    -->
                                 </af:table>
                             </af:panelCollection>
                             <af:panelFormLayout id="pfl2" maxColumns="3" rows="1" fieldWidth="200" labelWidth="75">
@@ -660,7 +703,7 @@
                             <af:panelStretchLayout id="pbl1" startWidth="200px" endWidth="199px" dimensionsFrom="auto"
                                                    inlineStyle="margin:5px 3px 5px 10px;">
                                 <f:facet name="center">
-                                    <af:panelFormLayout id="pgl2" maxColumns="2" rows="2" fieldWidth="150"
+                                    <af:panelFormLayout id="pgl2" maxColumns="2" rows="3" fieldWidth="150"
                                                         labelWidth="75"
                                                         inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin:2px; background-color:White;"
                                                         partialTriggers="pc1:ctb3 pc1:ctb4 pc1:t1">
@@ -672,7 +715,8 @@
                                                       shortDesc="#{bindings.TotalPartCst.hints.tooltip}" id="it3"
                                                       disabled="true" readOnly="true">
                                             <f:validator binding="#{bindings.TotalPartCst.validator}"/>
-                                            <af:convertNumber type="currency"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.TotalPartCst.format}"/>
                                         </af:inputText>
                                         <af:inputText value="#{bindings.TotalLaborCst.inputValue}"
                                                       label="#{bindings.TotalLaborCst.hints.label}"
@@ -682,7 +726,8 @@
                                                       shortDesc="#{bindings.TotalLaborCst.hints.tooltip}" id="it4"
                                                       disabled="true" readOnly="true">
                                             <f:validator binding="#{bindings.TotalLaborCst.validator}"/>
-                                            <af:convertNumber type="currency"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.TotalLaborCst.format}"/>
                                         </af:inputText>
                                         <af:inputText value="#{bindings.TotalHours.inputValue}"
                                                       label="#{bindings.TotalHours.hints.label}"
@@ -694,20 +739,51 @@
                                                       contentStyle="#{bindings.isTotalHourOver eq 'true' ?  'color: Red;' : null}"
                                                       readOnly="true">
                                             <f:validator binding="#{bindings.TotalHours.validator}"/>
-                                            <af:convertNumber/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.TotalHours.format}"/>
                                         </af:inputText>
-                                        <af:inputText value="#{bindings.TotalPartsLabor.inputValue}"
-                                                      label="#{bindings.TotalPartsLabor.hints.label}"
-                                                      required="#{bindings.TotalPartsLabor.hints.mandatory}"
-                                                      columns="#{bindings.TotalPartsLabor.hints.displayWidth}"
-                                                      maximumLength="#{bindings.TotalPartsLabor.hints.precision}"
-                                                      shortDesc="#{bindings.TotalPartsLabor.hints.tooltip}" id="it6"
-                                                      disabled="true"
-                                                      contentStyle="#{bindings.isTotalPartsLaborOver  eq 'true'?  'color: Red;' : null}"
-                                                      readOnly="true">
-                                            <f:validator binding="#{bindings.TotalPartsLabor.validator}"/>
-                                            <af:convertNumber type="currency"/>
+                                        <af:inputText value="#{bindings.tTotalTax.inputValue}"
+                                                      label="#{bindings.tTotalTax.hints.label}"
+                                                      required="#{bindings.tTotalTax.hints.mandatory}" readOnly="true"
+                                                      columns="#{bindings.tTotalTax.hints.displayWidth}"
+                                                      maximumLength="#{bindings.tTotalTax.hints.precision}"
+                                                      shortDesc="#{bindings.tTotalTax.hints.tooltip}" id="it30">
+                                            <f:validator binding="#{bindings.tTotalTax.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.tTotalTax.format}"/>
                                         </af:inputText>
+                                        <af:inputText value="#{bindings.tWOTotal.inputValue}"
+                                                      label="#{bindings.tWOTotal.hints.label}"
+                                                      required="#{bindings.tWOTotal.hints.mandatory}" readOnly="true"
+                                                      columns="#{bindings.tWOTotal.hints.displayWidth}"
+                                                      maximumLength="#{bindings.tWOTotal.hints.precision}"
+                                                      shortDesc="#{bindings.tWOTotal.hints.tooltip}" id="it20">
+                                            <f:validator binding="#{bindings.tWOTotal.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.tWOTotal.format}"/>
+                                        </af:inputText>
+                                        <!--
+                                        <af:inputText value="#{bindings.tTaxPerc.inputValue}"
+                                                      label="#{bindings.tTaxPerc.hints.label}"
+                                                      required="#{bindings.tTaxPerc.hints.mandatory}" readOnly="true"
+                                                      columns="#{bindings.tTaxPerc.hints.displayWidth}"
+                                                      maximumLength="#{bindings.tTaxPerc.hints.precision}"
+                                                      shortDesc="#{bindings.tTaxPerc.hints.tooltip}" id="it6">
+                                            <f:validator binding="#{bindings.tTaxPerc.validator}"/>
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.tTaxPerc.format}"/>
+                                        </af:inputText>
+                                        -->
+                                        <!--
+                                        <af:selectOneChoice value="#{bindings.tt1.inputValue}"
+                                                            label="#{bindings.tt1.label}"
+                                                            required="#{bindings.tt1.hints.mandatory}"
+                                                            shortDesc="#{bindings.tt1.hints.tooltip}" readOnly="true"
+                                                            id="soc2">
+                                            <f:selectItems value="#{bindings.tt1.items}" id="si1"/>
+                                            <f:validator binding="#{bindings.tt1.validator}"/>
+                                        </af:selectOneChoice>
+                                        -->
                                     </af:panelFormLayout>
                                 </f:facet>
                                 <f:facet name="start">

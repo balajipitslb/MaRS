@@ -1,210 +1,210 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="InvoiceInquiryPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="Root.INVDataControl.MrltInvoiceheaderView" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="MrltInvoiceheaderViewIterator"/>
-    <searchRegion Criteria="InvoiceInquiryCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  Binds="MrltInvoiceheaderViewIterator" id="InvoiceInquiryCriteriaQuery"/>
-    <iterator Binds="Root.INVDataControl.MrltInvoiceitemView" DataControl="MNRDataControlDataControl"
-              id="MrltInvoiceitemViewIterator"/>
-    <iterator Binds="Root.INVDataControl.MrltInvoiceheaderView1" DataControl="MNRDataControlDataControl" RangeSize="10"
-              id="MrltInvoiceheaderView1Iterator"/>
-    <iterator Binds="Root.INVDataControl.MrltInvoicecritemView" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="MrltInvoicecritemViewIterator"/>
-    <iterator Binds="Root.INVDataControl.MrltInvoicertroitemView" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="MrltInvoicertroitemViewIterator"/>
-  </executables>
-  <bindings>
-    <tree IterBinding="MrltInvoiceheaderViewIterator" id="MrltInvoiceheaderView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.invoice.MrltInvoiceheaderView" Name="MrltInvoiceheaderView0">
-        <AttrNames>
-          <Item Value="Invnum"/>
-          <Item Value="Labor"/>
-          <Item Value="Part"/>
-          <Item Value="Tax"/>
-          <Item Value="Total"/>
-          <Item Value="Invdt"/>
-          <Item Value="Status"/>
-          <Item Value="Acctnum"/>
-          <Item Value="Type"/>
-          <Item Value="Int1"/>
-          <Item Value="Invcr"/>
-          <Item Value="Ref"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <tree IterBinding="MrltInvoiceitemViewIterator" id="MrltInvoiceitemView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.invoice.MrltInvoiceitemView" Name="MrltInvoiceitemView0">
-        <AttrNames>
-          <Item Value="Wo"/>
-          <Item Value="Equip"/>
-          <Item Value="Startdt"/>
-          <Item Value="Completedt"/>
-          <Item Value="Labor"/>
-          <Item Value="Part"/>
-          <Item Value="Tax"/>
-          <Item Value="Total"/>
-          <Item Value="TotalHrs"/>
-        </AttrNames>
-        <Accessors>
-          <Item Value="WorkOrder"/>
-        </Accessors>
-      </nodeDefinition>
-      <nodeDefinition DefName="its.mnr.mp5.vo.workorder.WOEvents" Name="MrltInvoiceitemView1">
-        <AttrNames>
-          <Item Value="EvtAcd"/>
-          <Item Value="EvtClass"/>
-          <Item Value="EvtClassOrg"/>
-          <Item Value="EvtCode"/>
-          <Item Value="EvtCompleted"/>
-          <Item Value="EvtCostcode"/>
-          <Item Value="EvtCreated"/>
-          <Item Value="EvtCreatedby"/>
-          <Item Value="EvtDate"/>
-          <Item Value="EvtDesc"/>
-          <Item Value="EvtEnteredby"/>
-          <Item Value="EvtJobtype"/>
-          <Item Value="EvtObject"/>
-          <Item Value="EvtObjectOrg"/>
-          <Item Value="EvtOrg"/>
-          <Item Value="EvtOrigin"/>
-          <Item Value="EvtReported"/>
-          <Item Value="EvtRstatus"/>
-          <Item Value="EvtRtype"/>
-          <Item Value="EvtShift"/>
-          <Item Value="EvtStart"/>
-          <Item Value="EvtStatus"/>
-          <Item Value="EvtType"/>
-          <Item Value="EvtUpdated"/>
-          <Item Value="EvtUpdatedby"/>
-          <Item Value="EvtWOType"/>
-          <Item Value="ItsEstid"/>
-          <Item Value="ItsIsadf"/>
-          <Item Value="ItsIsasset"/>
-          <Item Value="ItsIspm"/>
-          <Item Value="ItsNote"/>
-          <Item Value="PostedEvtStatus"/>
-          <Item Value="TotalHours"/>
-          <Item Value="TotalLaborCst"/>
-          <Item Value="TotalPartCst"/>
-          <Item Value="TotalPartsLabor"/>
-          <Item Value="StatusSwitcher"/>
-          <Item Value="CostcodeSwitcher"/>
-          <Item Value="JobtypeSwitcher"/>
-          <Item Value="ClassSwitcher"/>
-          <Item Value="isTotalHourOver"/>
-          <Item Value="isTotalPartsLaborOver"/>
-          <Item Value="ItsAccountrateid"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="updateInvoiceStatus"
-                  InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="updateInvoiceStatus" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.updateInvoiceStatus_updateInvoiceStatus_updateInvoiceStatus_result">
-      <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
-      <NamedData NDName="newStatus" NDType="java.lang.String"/>
-    </methodAction>
-    <methodAction IterBinding="MrltInvoiceheaderViewIterator" id="WorkOrderRFIUpd"
-                  InstanceName="bindings.MrltInvoiceheaderViewIterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="WorkOrderRFIUpd" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.WorkOrderRFIUpd_WorkOrderRFIUpd_WorkOrderRFIUpd_result">
-      <NamedData NDName="pInvHdrId" NDType="oracle.jbo.domain.Number"/>
-      <NamedData NDName="pNewStatus" NDType="java.lang.String"/>
-    </methodAction>
-    <action id="Commit" InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"
-            RequiresUpdateModel="true" Action="commitTransaction"/>
-    <attributeValues IterBinding="MrltInvoiceheaderViewIterator" id="Invnum">
-      <AttrNames>
-        <Item Value="Invnum"/>
-      </AttrNames>
-    </attributeValues>
-    <tree IterBinding="MrltInvoicecritemViewIterator" id="MrltInvoicecritemView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.invoice.MrltInvoicecritemView" Name="MrltInvoicecritemView0">
-        <AttrNames>
-          <Item Value="Wo"/>
-          <Item Value="Labor"/>
-          <Item Value="Part"/>
-          <Item Value="Tax"/>
-          <Item Value="Taxper"/>
-          <Item Value="Laborcr"/>
-          <Item Value="Partcr"/>
-          <Item Value="Totalcr"/>
-          <Item Value="Taxcr"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"/>
-    <tree IterBinding="MrltInvoicertroitemViewIterator" id="MrltInvoicertroitemView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.invoice.MrltInvoicertroitemView" Name="MrltInvoicertroitemView0">
-        <AttrNames>
-          <Item Value="Invoice"/>
-          <Item Value="Wo"/>
-          <Item Value="Act"/>
-          <Item Value="Oldver"/>
-          <Item Value="Newver"/>
-          <Item Value="Lbrhrs"/>
-          <Item Value="Shift"/>
-          <Item Value="Equipcharge"/>
-          <Item Value="Oldratetype"/>
-          <Item Value="Newratetype"/>
-          <Item Value="Oldrate"/>
-          <Item Value="Newrate"/>
-          <Item Value="Task"/>
-          <Item Value="Locdesc"/>
-          <Item Value="Damdesc"/>
-          <Item Value="Reppdesc"/>
-          <Item Value="CreditDebit"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <attributeValues IterBinding="MrltInvoiceheaderViewIterator" id="Type">
-      <AttrNames>
-        <Item Value="Type"/>
-      </AttrNames>
-    </attributeValues>
-    <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceStdXML"
-                  InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="writeInvoiceStdXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceStdXML_writeInvoiceStdXML_writeInvoiceStdXML_result">
-      <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
-    </methodAction>
-    <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceCrXML"
-                  InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="writeInvoiceCrXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceCrXML_writeInvoiceCrXML_writeInvoiceCrXML_result">
-      <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
-    </methodAction>
-    <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceRtroXML"
-                  InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="writeInvoiceRtroXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceRtroXML_writeInvoiceRtroXML_writeInvoiceRtroXML_result">
-      <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
-    </methodAction>
-    <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceEstXML"
-                  InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="writeInvoiceEstXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceEstXML_writeInvoiceEstXML_writeInvoiceEstXML_result">
-      <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
-    </methodAction>
-    <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="deleteInvoiceXMLFile"
-                  InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
-                  DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
-                  MethodName="deleteInvoiceXMLFile" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.deleteInvoiceXMLFile_deleteInvoiceXMLFile_deleteInvoiceXMLFile_result">
-      <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
-      <NamedData NDName="pType" NDType="java.lang.String"/>
-    </methodAction>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="INVDataControl.MrltInvoiceheaderView" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="MrltInvoiceheaderViewIterator"/>
+        <searchRegion Criteria="InvoiceInquiryCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                      Binds="MrltInvoiceheaderViewIterator" id="InvoiceInquiryCriteriaQuery"/>
+        <iterator Binds="INVDataControl.MrltInvoiceitemView" DataControl="MNRDataControlDataControl"
+                  id="MrltInvoiceitemViewIterator"/>
+        <iterator Binds="INVDataControl.MrltInvoiceheaderView1" DataControl="MNRDataControlDataControl" RangeSize="10"
+                  id="MrltInvoiceheaderView1Iterator"/>
+        <iterator Binds="INVDataControl.MrltInvoicecritemView" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="MrltInvoicecritemViewIterator"/>
+        <iterator Binds="INVDataControl.MrltInvoicertroitemView" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="MrltInvoicertroitemViewIterator"/>
+    </executables>
+    <bindings>
+        <tree IterBinding="MrltInvoiceheaderViewIterator" id="MrltInvoiceheaderView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.invoice.MrltInvoiceheaderView" Name="MrltInvoiceheaderView0">
+                <AttrNames>
+                    <Item Value="Invnum"/>
+                    <Item Value="Labor"/>
+                    <Item Value="Part"/>
+                    <Item Value="Tax"/>
+                    <Item Value="Total"/>
+                    <Item Value="Invdt"/>
+                    <Item Value="Status"/>
+                    <Item Value="Acctnum"/>
+                    <Item Value="Type"/>
+                    <Item Value="Int1"/>
+                    <Item Value="Invcr"/>
+                    <Item Value="Ref"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="MrltInvoiceitemViewIterator" id="MrltInvoiceitemView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.invoice.MrltInvoiceitemView" Name="MrltInvoiceitemView0">
+                <AttrNames>
+                    <Item Value="Wo"/>
+                    <Item Value="Equip"/>
+                    <Item Value="Startdt"/>
+                    <Item Value="Completedt"/>
+                    <Item Value="Labor"/>
+                    <Item Value="Part"/>
+                    <Item Value="Tax"/>
+                    <Item Value="Total"/>
+                    <Item Value="TotalHrs"/>
+                </AttrNames>
+                <Accessors>
+                    <Item Value="WorkOrder"/>
+                </Accessors>
+            </nodeDefinition>
+            <nodeDefinition DefName="its.mnr.mp5.vo.workorder.WOEvents" Name="MrltInvoiceitemView1">
+                <AttrNames>
+                    <Item Value="EvtAcd"/>
+                    <Item Value="EvtClass"/>
+                    <Item Value="EvtClassOrg"/>
+                    <Item Value="EvtCode"/>
+                    <Item Value="EvtCompleted"/>
+                    <Item Value="EvtCostcode"/>
+                    <Item Value="EvtCreated"/>
+                    <Item Value="EvtCreatedby"/>
+                    <Item Value="EvtDate"/>
+                    <Item Value="EvtDesc"/>
+                    <Item Value="EvtEnteredby"/>
+                    <Item Value="EvtJobtype"/>
+                    <Item Value="EvtObject"/>
+                    <Item Value="EvtObjectOrg"/>
+                    <Item Value="EvtOrg"/>
+                    <Item Value="EvtOrigin"/>
+                    <Item Value="EvtReported"/>
+                    <Item Value="EvtRstatus"/>
+                    <Item Value="EvtRtype"/>
+                    <Item Value="EvtShift"/>
+                    <Item Value="EvtStart"/>
+                    <Item Value="EvtStatus"/>
+                    <Item Value="EvtType"/>
+                    <Item Value="EvtUpdated"/>
+                    <Item Value="EvtUpdatedby"/>
+                    <Item Value="EvtWOType"/>
+                    <Item Value="ItsEstid"/>
+                    <Item Value="ItsIsadf"/>
+                    <Item Value="ItsIsasset"/>
+                    <Item Value="ItsIspm"/>
+                    <Item Value="ItsNote"/>
+                    <Item Value="PostedEvtStatus"/>
+                    <Item Value="TotalHours"/>
+                    <Item Value="TotalLaborCst"/>
+                    <Item Value="TotalPartCst"/>
+                    <Item Value="TotalPartsLabor"/>
+                    <Item Value="StatusSwitcher"/>
+                    <Item Value="CostcodeSwitcher"/>
+                    <Item Value="JobtypeSwitcher"/>
+                    <Item Value="ClassSwitcher"/>
+                    <Item Value="isTotalHourOver"/>
+                    <Item Value="isTotalPartsLaborOver"/>
+                    <Item Value="ItsAccountrateid"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="updateInvoiceStatus"
+                      InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateInvoiceStatus" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.updateInvoiceStatus_updateInvoiceStatus_updateInvoiceStatus_result">
+            <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="newStatus" NDType="java.lang.String"/>
+        </methodAction>
+        <methodAction IterBinding="MrltInvoiceheaderViewIterator" id="WorkOrderRFIUpd"
+                      InstanceName="bindings.MrltInvoiceheaderViewIterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="WorkOrderRFIUpd" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.WorkOrderRFIUpd_WorkOrderRFIUpd_WorkOrderRFIUpd_result">
+            <NamedData NDName="pInvHdrId" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="pNewStatus" NDType="java.lang.String"/>
+        </methodAction>
+        <action id="Commit" InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"
+                RequiresUpdateModel="true" Action="commitTransaction"/>
+        <attributeValues IterBinding="MrltInvoiceheaderViewIterator" id="Invnum">
+            <AttrNames>
+                <Item Value="Invnum"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="MrltInvoicecritemViewIterator" id="MrltInvoicecritemView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.invoice.MrltInvoicecritemView" Name="MrltInvoicecritemView0">
+                <AttrNames>
+                    <Item Value="Wo"/>
+                    <Item Value="Labor"/>
+                    <Item Value="Part"/>
+                    <Item Value="Tax"/>
+                    <Item Value="Taxper"/>
+                    <Item Value="Laborcr"/>
+                    <Item Value="Partcr"/>
+                    <Item Value="Totalcr"/>
+                    <Item Value="Taxcr"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+        <tree IterBinding="MrltInvoicertroitemViewIterator" id="MrltInvoicertroitemView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.invoice.MrltInvoicertroitemView" Name="MrltInvoicertroitemView0">
+                <AttrNames>
+                    <Item Value="Invoice"/>
+                    <Item Value="Wo"/>
+                    <Item Value="Act"/>
+                    <Item Value="Oldver"/>
+                    <Item Value="Newver"/>
+                    <Item Value="Lbrhrs"/>
+                    <Item Value="Shift"/>
+                    <Item Value="Equipcharge"/>
+                    <Item Value="Oldratetype"/>
+                    <Item Value="Newratetype"/>
+                    <Item Value="Oldrate"/>
+                    <Item Value="Newrate"/>
+                    <Item Value="Task"/>
+                    <Item Value="Locdesc"/>
+                    <Item Value="Damdesc"/>
+                    <Item Value="Reppdesc"/>
+                    <Item Value="CreditDebit"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="MrltInvoiceheaderViewIterator" id="Type">
+            <AttrNames>
+                <Item Value="Type"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceStdXML"
+                      InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="writeInvoiceStdXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceStdXML_writeInvoiceStdXML_writeInvoiceStdXML_result">
+            <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
+        </methodAction>
+        <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceCrXML"
+                      InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="writeInvoiceCrXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceCrXML_writeInvoiceCrXML_writeInvoiceCrXML_result">
+            <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
+        </methodAction>
+        <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceRtroXML"
+                      InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="writeInvoiceRtroXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceRtroXML_writeInvoiceRtroXML_writeInvoiceRtroXML_result">
+            <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
+        </methodAction>
+        <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="writeInvoiceEstXML"
+                      InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="writeInvoiceEstXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceEstXML_writeInvoiceEstXML_writeInvoiceEstXML_result">
+            <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
+        </methodAction>
+        <methodAction IterBinding="MrltInvoiceheaderView1Iterator" id="deleteInvoiceXMLFile"
+                      InstanceName="bindings.MrltInvoiceheaderView1Iterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="deleteInvoiceXMLFile" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.deleteInvoiceXMLFile_deleteInvoiceXMLFile_deleteInvoiceXMLFile_result">
+            <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
+            <NamedData NDName="pType" NDType="java.lang.String"/>
+        </methodAction>
+    </bindings>
 </pageDefinition>
 <!--
 <?xml version="1.0" encoding="UTF-8" ?>

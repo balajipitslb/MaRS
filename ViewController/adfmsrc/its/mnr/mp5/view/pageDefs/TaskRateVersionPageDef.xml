@@ -1,73 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="TaskRateVersionPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="BillingRatesDataControlNested.AccountRateVersionDetail"
-              DataControl="MNRDataControlDataControl" RangeSize="25" id="AccountRateVersionDetailIterator"
-              ChangeEventPolicy="ppr" Refresh="ifNeeded"/>
-  </executables>
-  <bindings>
-    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="AcctBillType">
-      <AttrNames>
-        <Item Value="AcctBillType"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="Acctnum">
-      <AttrNames>
-        <Item Value="Acctnum"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="Ver">
-      <AttrNames>
-        <Item Value="Ver"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="Effectivedt">
-      <AttrNames>
-        <Item Value="Effectivedt"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="Base">
-      <AttrNames>
-        <Item Value="Base"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M1">
-      <AttrNames>
-        <Item Value="M1"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M1o">
-      <AttrNames>
-        <Item Value="M1o"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M2">
-      <AttrNames>
-        <Item Value="M2"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M2o">
-      <AttrNames>
-        <Item Value="M2o"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M3">
-      <AttrNames>
-        <Item Value="M3"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M3o">
-      <AttrNames>
-        <Item Value="M3o"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="AccountRateVersionDetailIterator" id="AcctNumDesc">
-      <AttrNames>
-        <Item Value="AcctNumDesc"/>
-      </AttrNames>
-    </attributeValues>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="BillingRatesDataControlNested.AccountRateVersionDetail" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="AccountRateVersionDetailIterator" ChangeEventPolicy="ppr" Refresh="ifNeeded"/>
+    </executables>
+    <bindings>
+        <attributeValues IterBinding="AccountRateVersionDetailIterator" id="AcctBillType">
+            <AttrNames>
+                <Item Value="AcctBillType"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AccountRateVersionDetailIterator" id="Acctnum">
+            <AttrNames>
+                <Item Value="Acctnum"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AccountRateVersionDetailIterator" id="Ver">
+            <AttrNames>
+                <Item Value="Ver"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AccountRateVersionDetailIterator" id="Effectivedt">
+            <AttrNames>
+                <Item Value="Effectivedt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AccountRateVersionDetailIterator" id="Base">
+            <AttrNames>
+                <Item Value="Base"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M1">
+            <AttrNames>
+                <Item Value="M1"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M1o">
+            <AttrNames>
+                <Item Value="M1o"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M2">
+            <AttrNames>
+                <Item Value="M2"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M2o">
+            <AttrNames>
+                <Item Value="M2o"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M3">
+            <AttrNames>
+                <Item Value="M3"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AccountRateVersionDetailIterator" id="M3o">
+            <AttrNames>
+                <Item Value="M3o"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="AccountRateVersionDetailIterator" id="AcctNumDesc">
+            <AttrNames>
+                <Item Value="AcctNumDesc"/>
+            </AttrNames>
+        </attributeValues>
+    </bindings>
 </pageDefinition>

@@ -29,4 +29,20 @@ public class EstimateImpl extends ExtendedViewObjectImpl {
     public void setEIdBind(String value) {
         ensureVariableManager().setVariableValue("EIdBind", value);
     }
+
+    /**
+     * Returns the variable value for WOBind.
+     * @return variable value for WOBind
+     */
+    public String getWOBind() {
+        return (String) ensureVariableManager().getVariableValue("WOBind");
+    }
+
+    /**
+     * Sets <code>value</code> for variable WOBind.
+     * @param value value to bind as WOBind
+     */
+    public void setWOBind(String value) {
+        ensureVariableManager().setVariableValue("WOBind", value);
+    }
 }

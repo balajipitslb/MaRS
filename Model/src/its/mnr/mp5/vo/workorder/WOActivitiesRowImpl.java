@@ -483,6 +483,26 @@ public class WOActivitiesRowImpl extends ExtendedViewRowImpl implements WOActivi
             }
         }
         ,
+        tTaxPerc {
+            public Object get(WOActivitiesRowImpl obj) {
+                return obj.gettTaxPerc();
+            }
+
+            public void put(WOActivitiesRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
+        tTotalTax {
+            public Object get(WOActivitiesRowImpl obj) {
+                return obj.gettTotalTax();
+            }
+
+            public void put(WOActivitiesRowImpl obj, Object value) {
+                obj.settTotalTax((Double) value);
+            }
+        }
+        ,
         Matlists {
             public Object get(WOActivitiesRowImpl obj) {
                 return obj.getMatlists();
@@ -611,6 +631,8 @@ public class WOActivitiesRowImpl extends ExtendedViewRowImpl implements WOActivi
     public static final int TOTALPARTCOST = AttributesEnum.TotalPartCost.index();
     public static final int ITSACCOUNTRATEID = AttributesEnum.ItsAccountRateId.index();
     public static final int ITSSGID = AttributesEnum.ItsSgid.index();
+    public static final int TTAXPERC = AttributesEnum.tTaxPerc.index();
+    public static final int TTOTALTAX = AttributesEnum.tTotalTax.index();
     public static final int MATLISTS = AttributesEnum.Matlists.index();
     public static final int MRLREFSHIFTVIEW = AttributesEnum.MrlrefShiftView.index();
     public static final int TASKDAMAGE = AttributesEnum.TaskDamage.index();
@@ -1085,6 +1107,30 @@ public class WOActivitiesRowImpl extends ExtendedViewRowImpl implements WOActivi
         setAttributeInternal(ITSSGID, value);
     }
 
+
+    /**
+     * Gets the attribute value for the calculated attribute tTaxPerc.
+     * @return the tTaxPerc
+     */
+    public Double gettTaxPerc() {
+        return (Double) getAttributeInternal(TTAXPERC);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute tTotalTax.
+     * @return the tTotalTax
+     */
+    public Double gettTotalTax() {
+        return (Double) getAttributeInternal(TTOTALTAX);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute tTotalTax.
+     * @param value value to set the  tTotalTax
+     */
+    public void settTotalTax(Double value) {
+        setAttributeInternal(TTOTALTAX, value);
+    }
 
     /**
      * Gets the associated <code>RowIterator</code> using master-detail link Matlists.

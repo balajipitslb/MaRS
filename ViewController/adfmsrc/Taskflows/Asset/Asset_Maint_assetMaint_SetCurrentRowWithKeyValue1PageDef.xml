@@ -2,10 +2,10 @@
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81"
                 id="Asset_Maint_assetMaint_SetCurrentRowWithKeyValue1PageDef" Package="Taskflows.Asset"
                 SkipValidation="true">
-  <parameters/>
-  <executables>
-    <iterator Binds="AssetDataControlNested.MrltAssetView" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="MrltAssetViewIterator"/>
-  </executables>
-  <bindings/>
+    <parameters/>
+    <executables>
+        <iterator Binds="AssetDataControlNested.MrltAssetView" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="MrltAssetViewIterator"/>
+    </executables>
+    <bindings/>
 </pageDefinition>

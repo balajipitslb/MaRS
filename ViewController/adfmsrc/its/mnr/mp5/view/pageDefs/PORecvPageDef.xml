@@ -1,582 +1,591 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="PORecvPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="PORecvDataControlNested.POrdersView" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="POrdersViewIterator" ChangeEventPolicy="ppr"/>
-    <iterator Binds="PORecvDataControlNested.POrdersComment" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="POrdersCommentIterator" ChangeEventPolicy="ppr"/>
-    <iterator Binds="PORecvDataControlNested.POrderlinesView" DataControl="MNRDataControlDataControl"
-              RangeSize="50" id="POrderlinesViewIterator" ChangeEventPolicy="ppr">
-      <sortCriteria>
-        <sort attribute="OrlOrder" ascending="true"/>
-        <sort attribute="OrlOrdline" ascending="true"/>
-      </sortCriteria>
-    </iterator>
-    <iterator Binds="PORecvDataControlNested.POExchargesView" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="POExchargesViewIterator" ChangeEventPolicy="ppr"/>
-    <iterator Binds="PORecvDataControlNested.POTransactionsRecvView" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="POTransactionsRecvViewIterator" ChangeEventPolicy="ppr"/>
-    <iterator Binds="PORecvDataControlNested.POTranslinesRecvView" DataControl="MNRDataControlDataControl"
-              RangeSize="100" id="POTranslinesRecvViewIterator" ChangeEventPolicy="ppr"/>
-    <searchRegion Criteria="POMARS" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
-                  Binds="POrdersViewIterator" id="POMARSQuery"/>
-    <iterator Binds="PORecvDataControlNested.POTransactionsRetView" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="POTransactionsRetViewIterator" ChangeEventPolicy="ppr"/>
-    <iterator Binds="PORecvDataControlNested.POTranslinesRetView" DataControl="MNRDataControlDataControl"
-              RangeSize="100" id="POTranslinesRetViewIterator" ChangeEventPolicy="ppr"/>
-    <iterator Binds="PORecvDataControlNested.POParts" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="POPartsIterator" ChangeEventPolicy="ppr"/>
-    <iterator Binds="PORecvDataControlNested.TaxRateValuesView" DataControl="MNRDataControlDataControl"
-              RangeSize="10" id="TaxRateValuesViewIterator" ChangeEventPolicy="ppr"/>
-  </executables>
-  <bindings>  
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" InstanceName="MNRDataControlDataControl"
-            DataControl="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
-            InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
-   
-    <tree IterBinding="POrdersViewIterator" id="POrdersView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.po.POrdersView" Name="POrdersView0">
-        <AttrNames>
-          <Item Value="OrdCode"/>
-          <Item Value="OrdStatus"/>
-          <Item Value="OrdDate"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <attributeValues IterBinding="POrdersViewIterator" id="OrdCode">
-      <AttrNames>
-        <Item Value="OrdCode"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrdersViewIterator" id="OrdDesc">
-      <AttrNames>
-        <Item Value="OrdDesc"/>
-      </AttrNames>
-    </attributeValues>
-    <listOfValues StaticList="false" IterBinding="POrdersViewIterator" Uses="LOV_OrdOrigin" id="OrdOrigin"/>
-    <listOfValues StaticList="false" IterBinding="POrdersViewIterator" Uses="LOV_OrdBuyer" id="OrdBuyer"/>
-    <attributeValues IterBinding="POrdersViewIterator" id="OrdDue">
-      <AttrNames>
-        <Item Value="OrdDue"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrdersCommentIterator" id="AddText">
-      <AttrNames>
-        <Item Value="AddText"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrdersCommentIterator" id="AddCreated">
-      <AttrNames>
-        <Item Value="AddCreated"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrdersCommentIterator" id="AddUser">
-      <AttrNames>
-        <Item Value="AddUser"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrdersCommentIterator" id="AddUpdated">
-      <AttrNames>
-        <Item Value="AddUpdated"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrdersCommentIterator" id="AddUpduser">
-      <AttrNames>
-        <Item Value="AddUpduser"/>
-      </AttrNames>
-    </attributeValues>
-    <action IterBinding="POrdersCommentIterator" id="Create" RequiresUpdateModel="true" Action="createRow"/>
-    <action IterBinding="POrdersCommentIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
-    <action IterBinding="POrdersCommentIterator" id="First" RequiresUpdateModel="true" Action="first"/>
-    <action IterBinding="POrdersCommentIterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
-    <action IterBinding="POrdersCommentIterator" id="Next" RequiresUpdateModel="true" Action="next"/>
-    <action IterBinding="POrdersCommentIterator" id="Last" RequiresUpdateModel="true" Action="last"/>
-    <action IterBinding="POrdersViewIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
-    <listOfValues StaticList="false" IterBinding="POrdersViewIterator" Uses="LOV_OrdSupplier" id="OrdSupplier"/>
-    <attributeValues IterBinding="POrdersViewIterator" id="tSupplierDesc">
-      <AttrNames>
-        <Item Value="tSupplierDesc"/>
-      </AttrNames>
-    </attributeValues>
-    <tree IterBinding="POrderlinesViewIterator" id="POrderlinesView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.po.POrderlinesView" Name="POrderlinesView0" DiscrName="ItsOrltype"
-                      DiscrValue="PART">
-        <AttrNames>
-          <Item Value="OrlOrdline"/>
-          <Item Value="OrlPart"/>
-          <Item Value="tPartDesc"/>
-          <Item Value="OrlPuruom"/>
-          <Item Value="OrlMultiply"/>
-          <Item Value="OrlOrdqty"/>
-          <Item Value="OrlPrice"/>
-          <Item Value="tOrlPriceExtended"/>
-          <Item Value="OrlTotextra"/>
-          <Item Value="ItsGl"/>
-          <Item Value="ItsNote"/>
-          <Item Value="OrlStatus"/>
-          <Item Value="Recvqty"/>
-          <Item Value="Retnqty"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <attributeValues IterBinding="POrdersViewIterator" id="OrdDate">
-      <AttrNames>
-        <Item Value="OrdDate"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrdersViewIterator" id="OrdAuth">
-      <AttrNames>
-        <Item Value="OrdAuth"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrdersViewIterator" id="OrdApprov">
-      <AttrNames>
-        <Item Value="OrdApprov"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrdersViewIterator" id="OrdPrice">
-      <AttrNames>
-        <Item Value="OrdPrice"/>
-      </AttrNames>
-    </attributeValues>
-    <listOfValues StaticList="false" IterBinding="POrderlinesViewIterator" Uses="LOV_OrlPart" id="OrlPart"/>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlOrder">
-      <AttrNames>
-        <Item Value="OrlOrder"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlOrdline">
-      <AttrNames>
-        <Item Value="OrlOrdline"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlPrice">
-      <AttrNames>
-        <Item Value="OrlPrice"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlOrdqty">
-      <AttrNames>
-        <Item Value="OrlOrdqty"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="POrderlinesViewIterator" StaticList="false" Uses="LOV_OrlPuruom" id="OrlPuruom"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlStatus">
-      <AttrNames>
-        <Item Value="OrlStatus"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlTotextra">
-      <AttrNames>
-        <Item Value="OrlTotextra"/>
-      </AttrNames>
-    </attributeValues>
-    <action IterBinding="POrderlinesViewIterator" id="First1" RequiresUpdateModel="true" Action="first"/>
-    <action IterBinding="POrderlinesViewIterator" id="Previous1" RequiresUpdateModel="true" Action="previous"/>
-    <action IterBinding="POrderlinesViewIterator" id="Next1" RequiresUpdateModel="true" Action="next"/>
-    <action IterBinding="POrderlinesViewIterator" id="Last1" RequiresUpdateModel="true" Action="last"/>
-    <action IterBinding="POrderlinesViewIterator" id="CreateInsert1" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
-    <action IterBinding="POrderlinesViewIterator" id="Delete1" RequiresUpdateModel="false" Action="removeCurrentRow"/>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="tPartDesc">
-      <AttrNames>
-        <Item Value="tPartDesc"/>
-      </AttrNames>
-    </attributeValues>
-    <tree IterBinding="POExchargesViewIterator" id="POExchargesView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.po.POExchargesView" Name="POExchargesView0">
-        <AttrNames>
-          <Item Value="EchInvordCode"/>
-          <Item Value="EchInvordLine"/>
-          <Item Value="EchCode"/>
-          <Item Value="EchType"/>
-          <Item Value="EchDiscount"/>
-          <Item Value="EchDiscperc"/>
-          <Item Value="EchParprice" Binds="EchParprice"/>
-          <Item Value="tTypeDesc"/>
-          <Item Value="EchId"/>
-          <Item Value="EchInvord"/>
-          <Item Value="EchInvordOrg"/>
-          <Item Value="EchRtype"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <attributeValues IterBinding="POExchargesViewIterator" id="EchInvordCode">
-      <AttrNames>
-        <Item Value="EchInvordCode"/>
-      </AttrNames>
-    </attributeValues>
-    <button IterBinding="POExchargesViewIterator" id="EchParprice" DTSupportsMRU="false" StaticList="true">
-      <AttrNames>
-        <Item Value="EchParprice"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="+"/>
-        <Item Value="-"/>
-      </ValueList>
-    </button>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlPart1">
-      <AttrNames>
-        <Item Value="OrlPart"/>
-      </AttrNames>
-    </attributeValues>
-    <action IterBinding="POExchargesViewIterator" id="CreateInsert2" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
-    <action IterBinding="POExchargesViewIterator" id="Delete2" RequiresUpdateModel="false" Action="removeCurrentRow"/>
-    <attributeValues IterBinding="POrdersViewIterator" id="tPriceExtended1">
-      <AttrNames>
-        <Item Value="tPriceExtended"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="POrderlinesViewIterator" StaticList="false" Uses="LOV_OrlStatus" id="OrlStatus1"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="ItsNote">
-      <AttrNames>
-        <Item Value="ItsNote"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="ItsGl">
-      <AttrNames>
-        <Item Value="ItsGl"/>
-      </AttrNames>
-    </attributeValues>
-    <tree IterBinding="POrderlinesViewIterator" id="POrderlinesView1">
-      <nodeDefinition DefName="its.mnr.mp5.vo.po.POrderlinesView" Name="POrderlinesView10" DiscrName="ItsOrltype"
-                      DiscrValue="SERVICE">
-        <AttrNames>
-          <Item Value="OrlOrdline"/>
-          <Item Value="OrlTask"/>
-          <Item Value="OrlTaskqty"/>
-          <Item Value="ItsTaskprice"/>
-          <Item Value="ItsTaskuom"/>
-          <Item Value="ItsGl"/>
-          <Item Value="ItsNote"/>
-          <Item Value="OrlStatus"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlTask">
-      <AttrNames>
-        <Item Value="OrlTask"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="POrderlinesViewIterator" StaticList="false" Uses="LOV_OrlTask" id="OrlTask1"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="tTaskDesc">
-      <AttrNames>
-        <Item Value="tTaskDesc"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlType">
-      <AttrNames>
-        <Item Value="OrlType"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlRtype">
-      <AttrNames>
-        <Item Value="OrlRtype"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="POrderlinesViewIterator" id="ItsOrltype" DTSupportsMRU="false" SelectItemValueMode="ListObject"
-          StaticList="true">
-      <AttrNames>
-        <Item Value="ItsOrltype"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="PART"/>
-        <Item Value="SERVICE"/>
-      </ValueList>
-    </list>
-    <attributeValues IterBinding="POrdersCommentIterator" id="AddCode">
-      <AttrNames>
-        <Item Value="AddCode"/>
-      </AttrNames>
-    </attributeValues>
-    <methodAction IterBinding="POrderlinesViewIterator" id="addPartToSupplier"
-                  InstanceName="bindings.POrderlinesViewIterator.currentRow" DataControl="MNRDataControlDataControl"
-                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="addPartToSupplier"
-                  IsViewObjectMethod="false" IsLocalObjectReference="true"/>
-    <methodAction IterBinding="POrderlinesViewIterator" id="isPartInCat"
-                  InstanceName="bindings.POrderlinesViewIterator.currentRow" DataControl="MNRDataControlDataControl"
-                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="isPartInCat" IsViewObjectMethod="false"
-                  IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.isPartInCat_isPartInCat_isPartInCat_result"/>
-    <listOfValues StaticList="false" IterBinding="POrdersViewIterator" Uses="LOV_OrdStatus" id="OrdStatus1"/>
-    <tree IterBinding="POTranslinesRecvViewIterator" id="POTranslinesRecvView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.po.POTranslinesView" Name="POTranslinesRecvView0">
-        <AttrNames>
-          <Item Value="TrlTrans"/>
-          <Item Value="TrlOrder"/>
-          <Item Value="TrlOrdline"/>
-          <Item Value="TrlPart"/>
-          <Item Value="tPartDesc"/>
-          <Item Value="tUom"/>
-          <Item Value="TrlQty"/>
-          <Item Value="tOrderQty"/>
-          <Item Value="tTotalRecvd"/>
-          <Item Value="tOutstanding"/>
-          <Item Value="TrlBin"/>
-          <Item Value="TrlLot"/>
-          <Item Value="TrlDate"/>
-          <Item Value="tEntityState"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <action IterBinding="POTranslinesRecvViewIterator" id="Delete3" RequiresUpdateModel="false"
-            Action="removeCurrentRow"/>
-    <tree IterBinding="POTransactionsRecvViewIterator" id="POTransactionsRecvView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.po.POTransactionsRecvView" Name="POTransactionsRecvView0"
-                      DiscrName="TraType" DiscrValue="RECV">
-        <AttrNames>
-          <Item Value="TraCode"/>
-          <Item Value="TraAuth"/>
-          <Item Value="TraDesc"/>
-          <Item Value="TraStatus"/>
-          <Item Value="TraCodeTransient"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <attributeValues IterBinding="POTransactionsRecvViewIterator" id="TraCode">
-      <AttrNames>
-        <Item Value="TraCode"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POTransactionsRecvViewIterator" id="TraCodeTransient">
-      <AttrNames>
-        <Item Value="TraCodeTransient"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POTransactionsRecvViewIterator" id="TraDesc">
-      <AttrNames>
-        <Item Value="TraDesc"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="POTransactionsRecvViewIterator" StaticList="false" Uses="LOV_TraStatus" id="TraStatus"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <methodAction id="clearFullyRecd" RequiresUpdateModel="true" Action="invokeMethod" MethodName="clearFullyRecd"
-                  IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
-                  InstanceName="data.MNRDataControlDataControl.dataProvider.PORecvDataControlNested"/>
-    <methodAction IterBinding="POTransactionsRecvViewIterator" id="fetchOrderlines" RequiresUpdateModel="true"
-                  Action="invokeMethod" MethodName="fetchOrderlines" IsViewObjectMethod="false"
-                  DataControl="MNRDataControlDataControl"
-                  InstanceName="bindings.POTransactionsRecvViewIterator.currentRow" IsLocalObjectReference="true"
-                  ReturnName="data.MNRDataControlDataControl.methodResults.fetchOrderlines_fetchOrderlines_fetchOrderlines_result"/>
-    <tree IterBinding="POTransactionsRetViewIterator" id="POTransactionsRetView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.po.POTransactionsRetView" Name="POTransactionsRetView0"
-                      DiscrName="TraType" DiscrValue="RETN">
-        <AttrNames>
-          <Item Value="TraCode"/>
-          <Item Value="TraAcd"/>
-          <Item Value="TraAuth"/>
-          <Item Value="TraDesc"/>
-          <Item Value="TraStatus"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <tree IterBinding="POTranslinesRetViewIterator" id="POTranslinesRetView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.po.POTranslinesView" Name="POTranslinesRetView0">
-        <AttrNames>
-          <Item Value="TrlTrans"/>
-          <Item Value="TrlOrder"/>
-          <Item Value="TrlOrdline"/>
-          <Item Value="TrlPart"/>
-          <Item Value="tPartDesc"/>
-          <Item Value="tUom"/>
-          <Item Value="TrlQty"/>
-          <Item Value="tOrderQty"/>
-          <Item Value="tTotalRetn"/>
-          <Item Value="tTotalRecvd"/>
-          <Item Value="TrlBin"/>
-          <Item Value="TrlLot"/>
-          <Item Value="TrlDate"/>
-          <Item Value="tEntityState"/>
-          <Item Value="tOrlRecvqty"/>
-          <Item Value="tTrlOnHandQty"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <methodAction id="clearFullyRetn" RequiresUpdateModel="true" Action="invokeMethod" MethodName="clearFullyRetn"
-                  IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
-                  InstanceName="data.MNRDataControlDataControl.dataProvider.PORecvDataControlNested"/>
-    <attributeValues IterBinding="POTransactionsRetViewIterator" id="TraStatus1">
-      <AttrNames>
-        <Item Value="TraStatus"/>
-      </AttrNames>
-    </attributeValues>
-    <methodAction IterBinding="POTransactionsRetViewIterator" id="fetchOrderlines1" RequiresUpdateModel="true"
-                  Action="invokeMethod" MethodName="fetchOrderlines" IsViewObjectMethod="false"
-                  DataControl="MNRDataControlDataControl"
-                  InstanceName="bindings.POTransactionsRetViewIterator.currentRow" IsLocalObjectReference="true"/>
-    <action IterBinding="POTranslinesRetViewIterator" id="Delete5" RequiresUpdateModel="false"
-            Action="removeCurrentRow"/>
-    <listOfValues StaticList="false" IterBinding="POTranslinesRecvViewIterator" Uses="LOV_TrlBin" id="TrlBin"/>
-    <attributeValues IterBinding="POTranslinesRecvViewIterator" id="TrlDate">
-      <AttrNames>
-        <Item Value="TrlDate"/>
-      </AttrNames>
-    </attributeValues>
-    <listOfValues StaticList="false" IterBinding="POTranslinesRecvViewIterator" Uses="LOV_TrlLot" id="TrlLot"/>
-    <attributeValues IterBinding="POTranslinesRecvViewIterator" id="TrlOrder">
-      <AttrNames>
-        <Item Value="TrlOrder"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POTranslinesRecvViewIterator" id="TrlOrdline">
-      <AttrNames>
-        <Item Value="TrlOrdline"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POTranslinesRecvViewIterator" id="TrlPart">
-      <AttrNames>
-        <Item Value="TrlPart"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POTranslinesRecvViewIterator" id="TrlQty">
-      <AttrNames>
-        <Item Value="TrlQty"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POTranslinesRecvViewIterator" id="TrlTrans">
-      <AttrNames>
-        <Item Value="TrlTrans"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POTranslinesRecvViewIterator" id="tPartDesc1">
-      <AttrNames>
-        <Item Value="tPartDesc"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POTranslinesRecvViewIterator" id="tUom">
-      <AttrNames>
-        <Item Value="tUom"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POTranslinesRecvViewIterator" id="tTotalRecvd">
-      <AttrNames>
-        <Item Value="tTotalRecvd"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POTranslinesRecvViewIterator" id="tOrderQty">
-      <AttrNames>
-        <Item Value="tOrderQty"/>
-      </AttrNames>
-    </attributeValues>
-    <action IterBinding="POTranslinesRecvViewIterator" id="First2" RequiresUpdateModel="true" Action="first"/>
-    <action IterBinding="POTranslinesRecvViewIterator" id="Previous2" RequiresUpdateModel="true" Action="previous"/>
-    <action IterBinding="POTranslinesRecvViewIterator" id="Next2" RequiresUpdateModel="true" Action="next"/>
-    <action IterBinding="POTranslinesRecvViewIterator" id="Last2" RequiresUpdateModel="true" Action="last"/>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="tPostedOrlStatus">
-      <AttrNames>
-        <Item Value="tPostedOrlStatus"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrdersViewIterator" id="ItsIsadf">
-      <AttrNames>
-        <Item Value="ItsIsadf"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POTranslinesRecvViewIterator" id="tOutstanding">
-      <AttrNames>
-        <Item Value="tOutstanding"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POTranslinesRetViewIterator" id="tTrlOnHandQty">
-      <AttrNames>
-        <Item Value="tTrlOnHandQty"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POTranslinesRetViewIterator" id="tOrlRecvqty">
-      <AttrNames>
-        <Item Value="tOrlRecvqty"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="tOrlPriceExtended">
-      <AttrNames>
-        <Item Value="tOrlPriceExtended"/>
-      </AttrNames>
-    </attributeValues>
-    <action IterBinding="POTransactionsRecvViewIterator" id="Delete4" RequiresUpdateModel="false"
-            Action="removeCurrentRow"/>
-    <action IterBinding="POTransactionsRecvViewIterator" id="CreateInsert3"
-            InstanceName="MNRDataControlDataControl.PORecvDataControlNested.POTransactionsRecvView"
-            DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
-    <action IterBinding="POTransactionsRetViewIterator" id="CreateInsert4"
-            InstanceName="MNRDataControlDataControl.PORecvDataControlNested.POTransactionsRetView"
-            DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
-    <action IterBinding="POTransactionsRetViewIterator" id="Delete6" RequiresUpdateModel="false"
-            Action="removeCurrentRow"/>
-    <attributeValues IterBinding="POrdersViewIterator" id="tOrderlineSum">
-      <AttrNames>
-        <Item Value="tOrderlineSum"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrdersViewIterator" id="OrdDiscount">
-      <AttrNames>
-        <Item Value="OrdDiscount"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="ItsTaskprice">
-      <AttrNames>
-        <Item Value="ItsTaskprice"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlTaskqty">
-      <AttrNames>
-        <Item Value="OrlTaskqty"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="POrderlinesViewIterator" StaticList="false" Uses="LOV_ItsTaskuom" id="ItsTaskuom"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="tItsTaskPriceExtended">
-      <AttrNames>
-        <Item Value="tItsTaskPriceExtended"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrdersViewIterator" id="ItsCustfld1">
-      <AttrNames>
-        <Item Value="ItsCustfld1"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POrderlinesViewIterator" id="OrlPartOrg">
-      <AttrNames>
-        <Item Value="OrlPartOrg"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="TaxRateValuesViewIterator" id="ParTax">
-      <AttrNames>
-        <Item Value="TxvPercent"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="POExchargesViewIterator" id="tTypeDesc">
-      <AttrNames>
-        <Item Value="tTypeDesc"/>
-      </AttrNames>
-    </attributeValues>
-      <!--
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="PORecvDataControlNested.POrdersView" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="POrdersViewIterator" ChangeEventPolicy="ppr"/>
+        <iterator Binds="PORecvDataControlNested.POrdersComment" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="POrdersCommentIterator" ChangeEventPolicy="ppr"/>
+        <iterator Binds="PORecvDataControlNested.POrderlinesView" DataControl="MNRDataControlDataControl" RangeSize="50"
+                  id="POrderlinesViewIterator" ChangeEventPolicy="ppr">
+            <sortCriteria>
+                <sort attribute="OrlOrder" ascending="true"/>
+                <sort attribute="OrlOrdline" ascending="true"/>
+            </sortCriteria>
+        </iterator>
+        <iterator Binds="PORecvDataControlNested.POExchargesView" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="POExchargesViewIterator" ChangeEventPolicy="ppr"/>
+        <iterator Binds="PORecvDataControlNested.POTransactionsRecvView" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="POTransactionsRecvViewIterator" ChangeEventPolicy="ppr"/>
+        <iterator Binds="PORecvDataControlNested.POTranslinesRecvView" DataControl="MNRDataControlDataControl"
+                  RangeSize="100" id="POTranslinesRecvViewIterator" ChangeEventPolicy="ppr"/>
+        <searchRegion Criteria="POMARS" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                      Binds="POrdersViewIterator" id="POMARSQuery"/>
+        <iterator Binds="PORecvDataControlNested.POTransactionsRetView" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="POTransactionsRetViewIterator" ChangeEventPolicy="ppr"/>
+        <iterator Binds="PORecvDataControlNested.POTranslinesRetView" DataControl="MNRDataControlDataControl"
+                  RangeSize="100" id="POTranslinesRetViewIterator" ChangeEventPolicy="ppr"/>
+        <iterator Binds="PORecvDataControlNested.POParts" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="POPartsIterator" ChangeEventPolicy="ppr"/>
+        <iterator Binds="PORecvDataControlNested.TaxRateValuesView" DataControl="MNRDataControlDataControl"
+                  RangeSize="10" id="TaxRateValuesViewIterator" ChangeEventPolicy="ppr"/>
+    </executables>
+    <bindings>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
+        <tree IterBinding="POrdersViewIterator" id="POrdersView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.po.POrdersView" Name="POrdersView0">
+                <AttrNames>
+                    <Item Value="OrdCode"/>
+                    <Item Value="OrdStatus"/>
+                    <Item Value="OrdDate"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="POrdersViewIterator" id="OrdCode">
+            <AttrNames>
+                <Item Value="OrdCode"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrdersViewIterator" id="OrdDesc">
+            <AttrNames>
+                <Item Value="OrdDesc"/>
+            </AttrNames>
+        </attributeValues>
+        <listOfValues StaticList="false" IterBinding="POrdersViewIterator" Uses="LOV_OrdOrigin" id="OrdOrigin"/>
+        <listOfValues StaticList="false" IterBinding="POrdersViewIterator" Uses="LOV_OrdBuyer" id="OrdBuyer"/>
+        <attributeValues IterBinding="POrdersViewIterator" id="OrdDue">
+            <AttrNames>
+                <Item Value="OrdDue"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrdersCommentIterator" id="AddText">
+            <AttrNames>
+                <Item Value="AddText"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrdersCommentIterator" id="AddCreated">
+            <AttrNames>
+                <Item Value="AddCreated"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrdersCommentIterator" id="AddUser">
+            <AttrNames>
+                <Item Value="AddUser"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrdersCommentIterator" id="AddUpdated">
+            <AttrNames>
+                <Item Value="AddUpdated"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrdersCommentIterator" id="AddUpduser">
+            <AttrNames>
+                <Item Value="AddUpduser"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="POrdersCommentIterator" id="Create" RequiresUpdateModel="true" Action="createRow"/>
+        <action IterBinding="POrdersCommentIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+        <action IterBinding="POrdersCommentIterator" id="First" RequiresUpdateModel="true" Action="first"/>
+        <action IterBinding="POrdersCommentIterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+        <action IterBinding="POrdersCommentIterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+        <action IterBinding="POrdersCommentIterator" id="Last" RequiresUpdateModel="true" Action="last"/>
+        <action IterBinding="POrdersViewIterator" id="CreateInsert" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <listOfValues StaticList="false" IterBinding="POrdersViewIterator" Uses="LOV_OrdSupplier" id="OrdSupplier"/>
+        <attributeValues IterBinding="POrdersViewIterator" id="tSupplierDesc">
+            <AttrNames>
+                <Item Value="tSupplierDesc"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="POrderlinesViewIterator" id="POrderlinesView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.po.POrderlinesView" Name="POrderlinesView0" DiscrName="ItsOrltype"
+                            DiscrValue="PART">
+                <AttrNames>
+                    <Item Value="OrlOrdline"/>
+                    <Item Value="OrlPart"/>
+                    <Item Value="tPartDesc"/>
+                    <Item Value="OrlPuruom"/>
+                    <Item Value="OrlMultiply"/>
+                    <Item Value="OrlOrdqty"/>
+                    <Item Value="OrlPrice"/>
+                    <Item Value="tOrlPriceExtended"/>
+                    <Item Value="OrlTotextra"/>
+                    <Item Value="ItsGl"/>
+                    <Item Value="ItsNote"/>
+                    <Item Value="OrlStatus"/>
+                    <Item Value="Recvqty"/>
+                    <Item Value="Retnqty"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="POrdersViewIterator" id="OrdDate">
+            <AttrNames>
+                <Item Value="OrdDate"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrdersViewIterator" id="OrdAuth">
+            <AttrNames>
+                <Item Value="OrdAuth"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrdersViewIterator" id="OrdApprov">
+            <AttrNames>
+                <Item Value="OrdApprov"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrdersViewIterator" id="OrdPrice">
+            <AttrNames>
+                <Item Value="OrdPrice"/>
+            </AttrNames>
+        </attributeValues>
+        <listOfValues StaticList="false" IterBinding="POrderlinesViewIterator" Uses="LOV_OrlPart" id="OrlPart"/>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="OrlOrder">
+            <AttrNames>
+                <Item Value="OrlOrder"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="OrlOrdline">
+            <AttrNames>
+                <Item Value="OrlOrdline"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="OrlPrice">
+            <AttrNames>
+                <Item Value="OrlPrice"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="OrlOrdqty">
+            <AttrNames>
+                <Item Value="OrlOrdqty"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="POrderlinesViewIterator" StaticList="false" Uses="LOV_OrlPuruom" id="OrlPuruom"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="OrlStatus">
+            <AttrNames>
+                <Item Value="OrlStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="OrlTotextra">
+            <AttrNames>
+                <Item Value="OrlTotextra"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="POrderlinesViewIterator" id="First1" RequiresUpdateModel="true" Action="first"/>
+        <action IterBinding="POrderlinesViewIterator" id="Previous1" RequiresUpdateModel="true" Action="previous"/>
+        <action IterBinding="POrderlinesViewIterator" id="Next1" RequiresUpdateModel="true" Action="next"/>
+        <action IterBinding="POrderlinesViewIterator" id="Last1" RequiresUpdateModel="true" Action="last"/>
+        <action IterBinding="POrderlinesViewIterator" id="CreateInsert1" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="POrderlinesViewIterator" id="Delete1" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="tPartDesc">
+            <AttrNames>
+                <Item Value="tPartDesc"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="POExchargesViewIterator" id="POExchargesView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.po.POExchargesView" Name="POExchargesView0">
+                <AttrNames>
+                    <Item Value="EchInvordCode"/>
+                    <Item Value="EchInvordLine"/>
+                    <Item Value="EchCode"/>
+                    <Item Value="EchType"/>
+                    <Item Value="EchDiscount"/>
+                    <Item Value="EchDiscperc"/>
+                    <Item Value="EchParprice" Binds="EchParprice"/>
+                    <Item Value="tTypeDesc"/>
+                    <Item Value="EchId"/>
+                    <Item Value="EchInvord"/>
+                    <Item Value="EchInvordOrg"/>
+                    <Item Value="EchRtype"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="POExchargesViewIterator" id="EchInvordCode">
+            <AttrNames>
+                <Item Value="EchInvordCode"/>
+            </AttrNames>
+        </attributeValues>
+        <button IterBinding="POExchargesViewIterator" id="EchParprice" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="EchParprice"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="+"/>
+                <Item Value="-"/>
+            </ValueList>
+        </button>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="OrlPart1">
+            <AttrNames>
+                <Item Value="OrlPart"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="POExchargesViewIterator" id="CreateInsert2" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="POExchargesViewIterator" id="Delete2" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <attributeValues IterBinding="POrdersViewIterator" id="tPriceExtended1">
+            <AttrNames>
+                <Item Value="tPriceExtended"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="POrderlinesViewIterator" StaticList="false" Uses="LOV_OrlStatus" id="OrlStatus1"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="ItsNote">
+            <AttrNames>
+                <Item Value="ItsNote"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="ItsGl">
+            <AttrNames>
+                <Item Value="ItsGl"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="POrderlinesViewIterator" id="POrderlinesView1">
+            <nodeDefinition DefName="its.mnr.mp5.vo.po.POrderlinesView" Name="POrderlinesView10" DiscrName="ItsOrltype"
+                            DiscrValue="SERVICE">
+                <AttrNames>
+                    <Item Value="OrlOrdline"/>
+                    <Item Value="OrlTask"/>
+                    <Item Value="OrlTaskqty"/>
+                    <Item Value="ItsTaskprice"/>
+                    <Item Value="ItsTaskuom"/>
+                    <Item Value="ItsGl"/>
+                    <Item Value="ItsNote"/>
+                    <Item Value="OrlStatus"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="OrlTask">
+            <AttrNames>
+                <Item Value="OrlTask"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="POrderlinesViewIterator" StaticList="false" Uses="LOV_OrlTask" id="OrlTask1"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="tTaskDesc">
+            <AttrNames>
+                <Item Value="tTaskDesc"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="OrlType">
+            <AttrNames>
+                <Item Value="OrlType"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="OrlRtype">
+            <AttrNames>
+                <Item Value="OrlRtype"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="POrderlinesViewIterator" id="ItsOrltype" DTSupportsMRU="false"
+              SelectItemValueMode="ListObject" StaticList="true">
+            <AttrNames>
+                <Item Value="ItsOrltype"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="PART"/>
+                <Item Value="SERVICE"/>
+            </ValueList>
+        </list>
+        <attributeValues IterBinding="POrdersCommentIterator" id="AddCode">
+            <AttrNames>
+                <Item Value="AddCode"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction IterBinding="POrderlinesViewIterator" id="addPartToSupplier"
+                      InstanceName="bindings.POrderlinesViewIterator.currentRow" DataControl="MNRDataControlDataControl"
+                      RequiresUpdateModel="true" Action="invokeMethod" MethodName="addPartToSupplier"
+                      IsViewObjectMethod="false" IsLocalObjectReference="true"/>
+        <methodAction IterBinding="POrderlinesViewIterator" id="isPartInCat"
+                      InstanceName="bindings.POrderlinesViewIterator.currentRow" DataControl="MNRDataControlDataControl"
+                      RequiresUpdateModel="true" Action="invokeMethod" MethodName="isPartInCat"
+                      IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.isPartInCat_isPartInCat_isPartInCat_result"/>
+        <listOfValues StaticList="false" IterBinding="POrdersViewIterator" Uses="LOV_OrdStatus" id="OrdStatus1"/>
+        <tree IterBinding="POTranslinesRecvViewIterator" id="POTranslinesRecvView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.po.POTranslinesView" Name="POTranslinesRecvView0">
+                <AttrNames>
+                    <Item Value="TrlTrans"/>
+                    <Item Value="TrlOrder"/>
+                    <Item Value="TrlOrdline"/>
+                    <Item Value="TrlPart"/>
+                    <Item Value="tPartDesc"/>
+                    <Item Value="tUom"/>
+                    <Item Value="TrlQty"/>
+                    <Item Value="tOrderQty"/>
+                    <Item Value="tTotalRecvd"/>
+                    <Item Value="tOutstanding"/>
+                    <Item Value="TrlBin"/>
+                    <Item Value="TrlLot"/>
+                    <Item Value="TrlDate"/>
+                    <Item Value="tEntityState"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="POTranslinesRecvViewIterator" id="Delete3" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <tree IterBinding="POTransactionsRecvViewIterator" id="POTransactionsRecvView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.po.POTransactionsRecvView" Name="POTransactionsRecvView0"
+                            DiscrName="TraType" DiscrValue="RECV">
+                <AttrNames>
+                    <Item Value="TraCode"/>
+                    <Item Value="TraAuth"/>
+                    <Item Value="TraDesc"/>
+                    <Item Value="TraStatus"/>
+                    <Item Value="TraCodeTransient"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="POTransactionsRecvViewIterator" id="TraCode">
+            <AttrNames>
+                <Item Value="TraCode"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POTransactionsRecvViewIterator" id="TraCodeTransient">
+            <AttrNames>
+                <Item Value="TraCodeTransient"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POTransactionsRecvViewIterator" id="TraDesc">
+            <AttrNames>
+                <Item Value="TraDesc"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="POTransactionsRecvViewIterator" StaticList="false" Uses="LOV_TraStatus" id="TraStatus"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <methodAction id="clearFullyRecd" RequiresUpdateModel="true" Action="invokeMethod" MethodName="clearFullyRecd"
+                      IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.PORecvDataControlNested"/>
+        <methodAction IterBinding="POTransactionsRecvViewIterator" id="fetchOrderlines" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="fetchOrderlines" IsViewObjectMethod="false"
+                      DataControl="MNRDataControlDataControl"
+                      InstanceName="bindings.POTransactionsRecvViewIterator.currentRow" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.fetchOrderlines_fetchOrderlines_fetchOrderlines_result"/>
+        <tree IterBinding="POTransactionsRetViewIterator" id="POTransactionsRetView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.po.POTransactionsRetView" Name="POTransactionsRetView0"
+                            DiscrName="TraType" DiscrValue="RETN">
+                <AttrNames>
+                    <Item Value="TraCode"/>
+                    <Item Value="TraAcd"/>
+                    <Item Value="TraAuth"/>
+                    <Item Value="TraDesc"/>
+                    <Item Value="TraStatus"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="POTranslinesRetViewIterator" id="POTranslinesRetView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.po.POTranslinesView" Name="POTranslinesRetView0">
+                <AttrNames>
+                    <Item Value="TrlTrans"/>
+                    <Item Value="TrlOrder"/>
+                    <Item Value="TrlOrdline"/>
+                    <Item Value="TrlPart"/>
+                    <Item Value="tPartDesc"/>
+                    <Item Value="tUom"/>
+                    <Item Value="TrlQty"/>
+                    <Item Value="tOrderQty"/>
+                    <Item Value="tTotalRetn"/>
+                    <Item Value="tTotalRecvd"/>
+                    <Item Value="TrlBin"/>
+                    <Item Value="TrlLot"/>
+                    <Item Value="TrlDate"/>
+                    <Item Value="tEntityState"/>
+                    <Item Value="tOrlRecvqty"/>
+                    <Item Value="tTrlOnHandQty"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <methodAction id="clearFullyRetn" RequiresUpdateModel="true" Action="invokeMethod" MethodName="clearFullyRetn"
+                      IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.PORecvDataControlNested"/>
+        <attributeValues IterBinding="POTransactionsRetViewIterator" id="TraStatus1">
+            <AttrNames>
+                <Item Value="TraStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction IterBinding="POTransactionsRetViewIterator" id="fetchOrderlines1" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="fetchOrderlines" IsViewObjectMethod="false"
+                      DataControl="MNRDataControlDataControl"
+                      InstanceName="bindings.POTransactionsRetViewIterator.currentRow" IsLocalObjectReference="true"/>
+        <action IterBinding="POTranslinesRetViewIterator" id="Delete5" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <listOfValues StaticList="false" IterBinding="POTranslinesRecvViewIterator" Uses="LOV_TrlBin" id="TrlBin"/>
+        <attributeValues IterBinding="POTranslinesRecvViewIterator" id="TrlDate">
+            <AttrNames>
+                <Item Value="TrlDate"/>
+            </AttrNames>
+        </attributeValues>
+        <listOfValues StaticList="false" IterBinding="POTranslinesRecvViewIterator" Uses="LOV_TrlLot" id="TrlLot"/>
+        <attributeValues IterBinding="POTranslinesRecvViewIterator" id="TrlOrder">
+            <AttrNames>
+                <Item Value="TrlOrder"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POTranslinesRecvViewIterator" id="TrlOrdline">
+            <AttrNames>
+                <Item Value="TrlOrdline"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POTranslinesRecvViewIterator" id="TrlPart">
+            <AttrNames>
+                <Item Value="TrlPart"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POTranslinesRecvViewIterator" id="TrlQty">
+            <AttrNames>
+                <Item Value="TrlQty"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POTranslinesRecvViewIterator" id="TrlTrans">
+            <AttrNames>
+                <Item Value="TrlTrans"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POTranslinesRecvViewIterator" id="tPartDesc1">
+            <AttrNames>
+                <Item Value="tPartDesc"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POTranslinesRecvViewIterator" id="tUom">
+            <AttrNames>
+                <Item Value="tUom"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POTranslinesRecvViewIterator" id="tTotalRecvd">
+            <AttrNames>
+                <Item Value="tTotalRecvd"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POTranslinesRecvViewIterator" id="tOrderQty">
+            <AttrNames>
+                <Item Value="tOrderQty"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="POTranslinesRecvViewIterator" id="First2" RequiresUpdateModel="true" Action="first"/>
+        <action IterBinding="POTranslinesRecvViewIterator" id="Previous2" RequiresUpdateModel="true" Action="previous"/>
+        <action IterBinding="POTranslinesRecvViewIterator" id="Next2" RequiresUpdateModel="true" Action="next"/>
+        <action IterBinding="POTranslinesRecvViewIterator" id="Last2" RequiresUpdateModel="true" Action="last"/>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="tPostedOrlStatus">
+            <AttrNames>
+                <Item Value="tPostedOrlStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrdersViewIterator" id="ItsIsadf">
+            <AttrNames>
+                <Item Value="ItsIsadf"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POTranslinesRecvViewIterator" id="tOutstanding">
+            <AttrNames>
+                <Item Value="tOutstanding"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POTranslinesRetViewIterator" id="tTrlOnHandQty">
+            <AttrNames>
+                <Item Value="tTrlOnHandQty"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POTranslinesRetViewIterator" id="tOrlRecvqty">
+            <AttrNames>
+                <Item Value="tOrlRecvqty"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="tOrlPriceExtended">
+            <AttrNames>
+                <Item Value="tOrlPriceExtended"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="POTransactionsRecvViewIterator" id="Delete4" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <action IterBinding="POTransactionsRecvViewIterator" id="CreateInsert3"
+                InstanceName="MNRDataControlDataControl.PORecvDataControlNested.POTransactionsRecvView"
+                DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+        <action IterBinding="POTransactionsRetViewIterator" id="CreateInsert4"
+                InstanceName="MNRDataControlDataControl.PORecvDataControlNested.POTransactionsRetView"
+                DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+        <action IterBinding="POTransactionsRetViewIterator" id="Delete6" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <attributeValues IterBinding="POrdersViewIterator" id="tOrderlineSum">
+            <AttrNames>
+                <Item Value="tOrderlineSum"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrdersViewIterator" id="OrdDiscount">
+            <AttrNames>
+                <Item Value="OrdDiscount"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="ItsTaskprice">
+            <AttrNames>
+                <Item Value="ItsTaskprice"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="OrlTaskqty">
+            <AttrNames>
+                <Item Value="OrlTaskqty"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="POrderlinesViewIterator" StaticList="false" Uses="LOV_ItsTaskuom" id="ItsTaskuom"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="tItsTaskPriceExtended">
+            <AttrNames>
+                <Item Value="tItsTaskPriceExtended"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrdersViewIterator" id="ItsCustfld1">
+            <AttrNames>
+                <Item Value="ItsCustfld1"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POrderlinesViewIterator" id="OrlPartOrg">
+            <AttrNames>
+                <Item Value="OrlPartOrg"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="TaxRateValuesViewIterator" id="ParTax">
+            <AttrNames>
+                <Item Value="TxvPercent"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="POExchargesViewIterator" id="tTypeDesc">
+            <AttrNames>
+                <Item Value="tTypeDesc"/>
+            </AttrNames>
+        </attributeValues>
+        <!--
     <action id="Commit1" InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"
             RequiresUpdateModel="true" Action="commitTransaction"/>
     <action id="Rollback1" InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"
             RequiresUpdateModel="false" Action="rollbackTransaction"/>
             -->
-    <action IterBinding="POTransactionsRecvViewIterator" id="Next3"
-            InstanceName="MNRDataControlDataControl.PORecvDataControlNested.POTransactionsRecvView"
-            DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="first"/>
-    <attributeValues IterBinding="POrdersViewIterator" id="tGrandTot">
-      <AttrNames>
-        <Item Value="tGrandTot"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="POrdersViewIterator" StaticList="false" Uses="LOV_ItsDeptcd" id="ItsDeptcd"
-          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="POrdersViewIterator" id="ItsCustfld2">
-      <AttrNames>
-        <Item Value="ItsCustfld2"/>
-      </AttrNames>
-    </attributeValues>
-  </bindings>
+        <action IterBinding="POTransactionsRecvViewIterator" id="Next3"
+                InstanceName="MNRDataControlDataControl.PORecvDataControlNested.POTransactionsRecvView"
+                DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="first"/>
+        <attributeValues IterBinding="POrdersViewIterator" id="tGrandTot">
+            <AttrNames>
+                <Item Value="tGrandTot"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="POrdersViewIterator" StaticList="false" Uses="LOV_ItsDeptcd" id="ItsDeptcd"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="POrdersViewIterator" id="ItsCustfld2">
+            <AttrNames>
+                <Item Value="ItsCustfld2"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="isPartInactive"
+                      InstanceName="data.MNRDataControlDataControl.dataProvider.PORecvDataControlNested"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="isPartInactive" IsViewObjectMethod="false"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.isPartInactive_MNRDataControlDataControl_dataProvider_Root_PORecvDataControlNested_isPartInactive_result">
+            <NamedData NDName="sPart" NDValue="#{pageFlowScope.sPart}" NDType="java.lang.String"/>
+        </methodAction>
+    </bindings>
 </pageDefinition>

@@ -1,52 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81"
-                id="CC_CCSetupStorePartsTempPageDef" Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="CCDataControlNested.MrltCyclecountpartstoresView" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrltCyclecountpartstoresViewIterator"/>
-    <iterator Binds="CCDataControlNested.MrltCyclecountpartsView" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrltCyclecountpartsViewIterator"/>
-    <iterator id="MrltCyclecountpartsMainStoreIterator" Binds="CCDataControlNested.MrltCyclecountpartsMainStore"
-              DataControl="MNRDataControlDataControl" RangeSize="25"/>
-  </executables>
-  <bindings>
-    <tree IterBinding="MrltCyclecountpartstoresViewIterator" id="MrltCyclecountpartstoresView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltCyclecountpartstoresView"
-                      Name="MrltCyclecountpartstoresView0">
-        <AttrNames>
-          <Item Value="Listid"/>
-          <Item Value="Srcd"/>
-          <Item Value="Used" Binds="Used"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <button IterBinding="MrltCyclecountpartstoresViewIterator" id="Used" DTSupportsMRU="false" StaticList="true">
-      <AttrNames>
-        <Item Value="Used"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="Y"/>
-        <Item Value="N"/>
-      </ValueList>
-    </button>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
-    <tree IterBinding="MrltCyclecountpartsViewIterator" id="MrltCyclecountpartsView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltCyclecountpartsView" Name="MrltCyclecountpartsView0">
-        <AttrNames>
-          <Item Value="StlTrans"/>
-          <Item Value="StlPart"/>
-          <Item Value="StlBin"/>
-          <Item Value="StlLot"/>
-          <Item Value="StlStore"/>
-          <Item Value="StlExpqty"/>
-          <Item Value="StlType"/>
-          <Item Value="StlPartOrg"/>
-          <Item Value="StlListid"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-  </bindings>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="CC_CCSetupStorePartsTempPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="CCDataControlNested.MrltCyclecountpartstoresView" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrltCyclecountpartstoresViewIterator"/>
+        <iterator Binds="CCDataControlNested.MrltCyclecountpartsView" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrltCyclecountpartsViewIterator"/>
+        <iterator id="MrltCyclecountpartsMainStoreIterator" Binds="CCDataControlNested.MrltCyclecountpartsMainStore"
+                  DataControl="MNRDataControlDataControl" RangeSize="25"/>
+    </executables>
+    <bindings>
+        <tree IterBinding="MrltCyclecountpartstoresViewIterator" id="MrltCyclecountpartstoresView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltCyclecountpartstoresView"
+                            Name="MrltCyclecountpartstoresView0">
+                <AttrNames>
+                    <Item Value="Listid"/>
+                    <Item Value="Srcd"/>
+                    <Item Value="Used" Binds="Used"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <button IterBinding="MrltCyclecountpartstoresViewIterator" id="Used" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="Used"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                DataControl="MNRDataControlDataControl" InstanceName="MNRDataControlDataControl"/>
+        <tree IterBinding="MrltCyclecountpartsViewIterator" id="MrltCyclecountpartsView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltCyclecountpartsView" Name="MrltCyclecountpartsView0">
+                <AttrNames>
+                    <Item Value="StlTrans"/>
+                    <Item Value="StlPart"/>
+                    <Item Value="StlBin"/>
+                    <Item Value="StlLot"/>
+                    <Item Value="StlStore"/>
+                    <Item Value="StlExpqty"/>
+                    <Item Value="StlType"/>
+                    <Item Value="StlPartOrg"/>
+                    <Item Value="StlListid"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+    </bindings>
 </pageDefinition>

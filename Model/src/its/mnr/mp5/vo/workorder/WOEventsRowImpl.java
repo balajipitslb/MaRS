@@ -88,13 +88,14 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
 
     /* Helper methods */  
     public Boolean sendEstimateFailure(String toaddress, String subject, String body){
+        System.out.println("Inside sendEstimateFailure toaddress: "+toaddress+" subject: "+subject+" body: "+body);
             String fromemail= getMP5Profile("AdminEmailAddress");
             String host = getMP5Profile("SMTPHost");
             String sport = getMP5Profile("SMTPPort");
             Integer iport = Integer.parseInt(sport);
             //callStoredFunction(VARCHAR2, "mnrpkg.sendEmail(?,?,?,?,?)", new Object[] {toaddress,  subject,  body,  host,  iport,  fromemail});        
-                        
-            Util.sendMessage(toaddress,  subject,  body,  host,  iport,  fromemail);
+            Util.sendMessage("lakshmi.kumar@itslb.com",  subject,  body,  host,  iport,  fromemail);    
+           // Util.sendMessage(toaddress,  subject,  body,  host,  iport,  fromemail);
         return null;
         }
     public String getEstimateCriteria(){            
@@ -163,6 +164,7 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
         }
     public Boolean SendEstimateThruEDIFlg(){
             String ret= getMP5Profile("SendEstimateThruEDIFlg");
+            System.out.println("Inside WOEventsRowImpl SendEstimateThruEDIFlg ret: "+ret);
             return (ret.equals("Y")? true :false);
         }
     public Boolean SendEstimateExceedAlert(){
@@ -217,7 +219,8 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
             return null;
         }
 
-    public Boolean writeEstimateXML(String sestid){        
+    public Boolean writeEstimateXML(String sestid){   
+        System.out.println("Inside WOEventsRowImpl writeEstimateXML sestid: "+sestid);
         //set and execute View Criteria            
         RowSet rs = this.getEstimate();
         EstimateImpl impl = (EstimateImpl)rs.getViewObject();
@@ -232,12 +235,13 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
         Row rw = impl.first();
 
         if (rw != null) {
-            //System.out.println("Estimate Found");
+            System.out.println("Estimate Found");
             String filepath = getMP5Profile("EstimateOutPath");            
             String filename = filepath + sestid + ".xml";
-            //System.out.println(filename + " : " + rw.getAttribute("Estid"));
+            System.out.println("Inside writeEstimateXML filepath: "+filepath+" filename: "+filename);
+            System.out.println(filename + " : " + rw.getAttribute("Estid"));
             Util.printXML(rw.writeXML(-1, XMLInterface.XML_OPT_ALL_ROWS), filename);
-            //System.out.println("after writeXML");
+            System.out.println("after writeXML");
             return true;
         }
         return false;
@@ -376,11 +380,11 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
              return ret;
          }
     public String ITS_EstimateUpd(String pEstId, String pStatus, String pUpdBy, String pAppNum, String pReason, String pRspType, String pIp) {
-             //System.out.println("inside ITS_EstimateUpd function() ");
+             System.out.println("inside ITS_EstimateUpd function() pEstId: "+pEstId+" pStatus: "+pStatus+" pUpdBy: "+pUpdBy+" pAppNum: "+pAppNum+" pReason: "+pReason+" pRspType: "+pRspType+" pIp: "+pIp);
              
              String ret = (String)callStoredFunction(VARCHAR2, "mnrpkg.ITS_EstimateUpd(?,?,?,?,?,?,?)",
                                                new Object[] {pEstId,pStatus,pUpdBy,pAppNum,pReason,pRspType,pIp});
-             //System.out.println("ITS_EstimateUpd Ret = " + ret);
+             System.out.println("ITS_EstimateUpd Ret = " + ret);
              return ret;
          }
     public String setEstId(String sestid){
@@ -922,6 +926,56 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
             }
         }
         ,
+        tTaxPerc {
+            public Object get(WOEventsRowImpl obj) {
+                return obj.gettTaxPerc();
+            }
+
+            public void put(WOEventsRowImpl obj, Object value) {
+                obj.settTaxPerc((Double) value);
+            }
+        }
+        ,
+        tTotalTax {
+            public Object get(WOEventsRowImpl obj) {
+                return obj.gettTotalTax();
+            }
+
+            public void put(WOEventsRowImpl obj, Object value) {
+                obj.settTotalTax((Double) value);
+            }
+        }
+        ,
+        tt {
+            public Object get(WOEventsRowImpl obj) {
+                return obj.gettt();
+            }
+
+            public void put(WOEventsRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
+        tWOTotal {
+            public Object get(WOEventsRowImpl obj) {
+                return obj.gettWOTotal();
+            }
+
+            public void put(WOEventsRowImpl obj, Object value) {
+                obj.settWOTotal((Double) value);
+            }
+        }
+        ,
+        tShowEstimate {
+            public Object get(WOEventsRowImpl obj) {
+                return obj.gettShowEstimate();
+            }
+
+            public void put(WOEventsRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
         MrltAccountmasterView1 {
             public Object get(WOEventsRowImpl obj) {
                 return obj.getMrltAccountmasterView1();
@@ -945,6 +999,16 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
         MrltFlagassociation_VO {
             public Object get(WOEventsRowImpl obj) {
                 return obj.getMrltFlagassociation_VO();
+            }
+
+            public void put(WOEventsRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
+        Estimate2 {
+            public Object get(WOEventsRowImpl obj) {
+                return obj.getEstimate2();
             }
 
             public void put(WOEventsRowImpl obj, Object value) {
@@ -1111,6 +1175,16 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
                 obj.setAttributeInternal(index(), value);
             }
         }
+        ,
+        TaxRateValues1 {
+            public Object get(WOEventsRowImpl obj) {
+                return obj.getTaxRateValues1();
+            }
+
+            public void put(WOEventsRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
         ;
         static AttributesEnum[] vals = null;
         ;
@@ -1190,9 +1264,15 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
     public static final int ITSPERFORMDT = AttributesEnum.ItsPerformdt.index();
     public static final int ITSPERFORMED = AttributesEnum.ItsPerformed.index();
     public static final int ITSPERFORMEDBY = AttributesEnum.ItsPerformedby.index();
+    public static final int TTAXPERC = AttributesEnum.tTaxPerc.index();
+    public static final int TTOTALTAX = AttributesEnum.tTotalTax.index();
+    public static final int TT = AttributesEnum.tt.index();
+    public static final int TWOTOTAL = AttributesEnum.tWOTotal.index();
+    public static final int TSHOWESTIMATE = AttributesEnum.tShowEstimate.index();
     public static final int MRLTACCOUNTMASTERVIEW1 = AttributesEnum.MrltAccountmasterView1.index();
     public static final int ESTIMATE1 = AttributesEnum.Estimate1.index();
     public static final int MRLTFLAGASSOCIATION_VO = AttributesEnum.MrltFlagassociation_VO.index();
+    public static final int ESTIMATE2 = AttributesEnum.Estimate2.index();
     public static final int FLAGASSOC_VVO = AttributesEnum.FlagAssoc_VVO.index();
     public static final int MRLREFMP5PROFILEVIEW = AttributesEnum.MrlrefMp5profileView.index();
     public static final int MRLTACCOUNTMASTERVIEW = AttributesEnum.MrltAccountmasterView.index();
@@ -1209,6 +1289,7 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
     public static final int WOACCOUNTMASTERAFQUERY = AttributesEnum.WOAccountMasterAFQuery.index();
     public static final int ISACCOUNTACTIVE = AttributesEnum.isAccountActive.index();
     public static final int YESNOBOOLEAN = AttributesEnum.YesNoBoolean.index();
+    public static final int TAXRATEVALUES1 = AttributesEnum.TaxRateValues1.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -1976,6 +2057,72 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
 
 
     /**
+     * Gets the attribute value for T_TAX_PERC using the alias name tTaxPerc.
+     * @return the T_TAX_PERC
+     */
+    public Double gettTaxPerc() {
+        return (Double) getAttributeInternal(TTAXPERC);
+    }
+
+
+    /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute tTaxPerc.
+     * @param value value to set the  tTaxPerc
+     */
+    public void settTaxPerc(Double value) {
+        setAttributeInternal(TTAXPERC, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute tTotalTax.
+     * @return the tTotalTax
+     */
+    public Double gettTotalTax() {
+        return (Double) getAttributeInternal(TTOTALTAX);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute tTotalTax.
+     * @param value value to set the  tTotalTax
+     */
+    public void settTotalTax(Double value) {
+        setAttributeInternal(TTOTALTAX, value);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute tWOTotal.
+     * @return the tWOTotal
+     */
+    public Double gettWOTotal() {
+        return (Double) getAttributeInternal(TWOTOTAL);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for the calculated attribute tWOTotal.
+     * @param value value to set the  tWOTotal
+     */
+    public void settWOTotal(Double value) {
+        setAttributeInternal(TWOTOTAL, value);
+    }
+
+
+    /**
+     * Gets the attribute value for the calculated attribute tt.
+     * @return the tt
+     */
+    public String gettt() {
+        return (String) getAttributeInternal(TT);
+    }
+
+    /**
+     * Gets the attribute value for the calculated attribute tShowEstimate.
+     * @return the tShowEstimate
+     */
+    public String gettShowEstimate() {
+        return (String) getAttributeInternal(TSHOWESTIMATE);
+    }
+
+    /**
      * Gets the associated <code>Row</code> using master-detail link MrltAccountmasterView1.
      */
     public Row getMrltAccountmasterView1() {
@@ -2010,6 +2157,13 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
      */
     public RowIterator getFlagAssoc_VVO() {
         return (RowIterator)getAttributeInternal(FLAGASSOC_VVO);
+    }
+
+    /**
+     * Gets the associated <code>RowIterator</code> using master-detail link Estimate2.
+     */
+    public RowIterator getEstimate2() {
+        return (RowIterator) getAttributeInternal(ESTIMATE2);
     }
 
     /**
@@ -2117,6 +2271,13 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
      */
     public RowSet getYesNoBoolean() {
         return (RowSet)getAttributeInternal(YESNOBOOLEAN);
+    }
+
+    /**
+     * Gets the view accessor <code>RowSet</code> TaxRateValues1.
+     */
+    public RowSet getTaxRateValues1() {
+        return (RowSet) getAttributeInternal(TAXRATEVALUES1);
     }
 
     /**

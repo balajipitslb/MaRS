@@ -92,7 +92,7 @@
       <property
          name="fromOutcome">launchWorkOrderMaster</property>
       <property
-         name="sdm:polyPoints">L54,786.76465,120.643555,T50</property>
+         name="sdm:polyPoints">B15,1031.65,301.29297,R50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall15">
@@ -121,7 +121,7 @@
       <property
          name="fromOutcome">launchServiceGroupMaster</property>
       <property
-         name="sdm:polyPoints">B10,1028.5,402.94238,R50</property>
+         name="sdm:polyPoints">B25,1037.75,402.94238,R50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall17">
@@ -150,7 +150,7 @@
       <property
          name="fromOutcome">launchComponentLocationMaster</property>
       <property
-         name="sdm:polyPoints">B21,1035.5,507.6953,R50</property>
+         name="sdm:polyPoints">B35,1043.85,507.6953,R50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall19">
@@ -179,7 +179,7 @@
       <property
          name="fromOutcome">launchDamageRepairMaster</property>
       <property
-         name="sdm:polyPoints">B33,1042.5,613.0459,R50</property>
+         name="sdm:polyPoints">B45,1049.95,613.0459,R50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall21">
@@ -208,7 +208,7 @@
       <property
          name="fromOutcome">launchPerMaster</property>
       <property
-         name="sdm:polyPoints">B90,1077.5,303.29297,L50</property>
+         name="sdm:polyPoints">B95,1080.45,303.29297,L50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall23">
@@ -237,7 +237,7 @@
       <property
          name="fromOutcome">launchAccountMaster</property>
       <property
-         name="sdm:polyPoints">B79,1070.5,404.34473,L50</property>
+         name="sdm:polyPoints">B85,1074.35,404.34473,L50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall25">
@@ -266,7 +266,7 @@
       <property
          name="fromOutcome">launchProfileMaster</property>
       <property
-         name="sdm:polyPoints">B67,1063.5,507.39648,L50</property>
+         name="sdm:polyPoints">B75,1068.25,507.39648,L50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall27">
@@ -295,7 +295,7 @@
       <property
          name="fromOutcome">launchServiceTask</property>
       <property
-         name="sdm:polyPoints">B56,1056.5,614.0459,L50</property>
+         name="sdm:polyPoints">B65,1062.15,614.0459,L50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall29">
@@ -368,7 +368,7 @@
       <property
          name="fromOutcome">launchInvoiceAssembly</property>
       <property
-         name="sdm:polyPoints">L50,448.01562,345.24707,T50</property>
+         name="sdm:polyPoints">L54,448.01562,348.74707,T50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall37">
@@ -472,65 +472,6 @@
       <property
          name="x">227.5</property>
    </View>
-   <WildcardControlFlowRule
-      id="WildcardControlFlowRule47">
-      <property
-         name="activityId">*</property>
-      <property
-         name="y">-97.850586</property>
-      <property
-         name="x">87.0</property>
-   </WildcardControlFlowRule>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase49"
-      from="WildcardControlFlowRule47"
-      to="View10">
-      <property
-         name="fromOutcome">goHome</property>
-      <property
-         name="sdm:polyPoints">B43,83.5,290.1953,L50</property>
-   </ControlFlowCase>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase50"
-      from="WildcardControlFlowRule47"
-      to="View31">
-      <property
-         name="fromOutcome">goInvoice</property>
-      <property
-         name="sdm:polyPoints">B57,90.5,120.643555,524.0,120.643555,T50</property>
-   </ControlFlowCase>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase51"
-      from="WildcardControlFlowRule47"
-      to="View12">
-      <property
-         name="fromOutcome">goAdmin</property>
-      <property
-         name="sdm:polyPoints">B71,97.5,113.643555,L46</property>
-   </ControlFlowCase>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase52"
-      from="WildcardControlFlowRule47"
-      to="View11">
-      <property
-         name="fromOutcome">goWorkOrder</property>
-      <property
-         name="sdm:polyPoints">B29,76.5,360.5459,L50</property>
-   </ControlFlowCase>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase53"
-      from="WildcardControlFlowRule47"
-      to="View49">
-      <property
-         name="fromOutcome">goReport</property>
-      <property
-         name="sdm:polyPoints">R45,227.5,-101.20117,B50</property>
-   </ControlFlowCase>
    <View
       id="View44">
       <property
@@ -546,16 +487,6 @@
       <property
          name="x">303.0</property>
    </View>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase45"
-      from="WildcardControlFlowRule47"
-      to="View44">
-      <property
-         name="fromOutcome">goStock</property>
-      <property
-         name="sdm:polyPoints">R55,192.5,-94.20117,192.5,-20.75293,L50</property>
-   </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall46">
       <property
@@ -621,16 +552,6 @@
    </View>
    <ControlFlowCase
       islink="true"
-      id="ControlFlowCase54"
-      from="WildcardControlFlowRule47"
-      to="View50">
-      <property
-         name="fromOutcome">goPORecv</property>
-      <property
-         name="sdm:polyPoints">L50,3.0,-97.70117,3.0,-97.4541,R50</property>
-   </ControlFlowCase>
-   <ControlFlowCase
-      islink="true"
       id="ControlFlowCase55"
       from="View50"
       to="TaskFlowCall48">
@@ -666,7 +587,7 @@
       <property
          name="fromOutcome">launchCompRcpts</property>
       <property
-         name="sdm:polyPoints">B50,-86.0,42.396484,R50</property>
+         name="sdm:polyPoints">B56,-82.5,42.396484,R50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall58">
@@ -695,7 +616,7 @@
       <property
          name="fromOutcome">launchCyclecnt</property>
       <property
-         name="sdm:polyPoints">T56,306.5,-74.75293,702.0156,-74.75293,T50</property>
+         name="sdm:polyPoints">T61,310.0,-74.75293,702.0156,-74.75293,T50</property>
    </ControlFlowCase>
    <View
       id="View60">
@@ -712,16 +633,6 @@
       <property
          name="x">13.0</property>
    </View>
-   <ControlFlowCase
-      islink="true"
-      id="ControlFlowCase61"
-      from="WildcardControlFlowRule47"
-      to="View60">
-      <property
-         name="fromOutcome">goAsset</property>
-      <property
-         name="sdm:polyPoints">T50,87.0,-227.05176,R50</property>
-   </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall63">
       <property
@@ -749,7 +660,7 @@
       <property
          name="fromOutcome">goAssetMaint</property>
       <property
-         name="sdm:polyPoints">L50,-91.25,-227.05176,-91.25,-227.30469,R50</property>
+         name="sdm:polyPoints">L54,-91.25,-223.55176,-91.25,-227.30469,R50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall64">
@@ -778,7 +689,7 @@
       <property
          name="fromOutcome">goDocs</property>
       <property
-         name="sdm:polyPoints">T50,12.999985,-344.60352,R50</property>
+         name="sdm:polyPoints">L46,-124.31836,-230.55176,B50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall66">
@@ -807,7 +718,7 @@
       <property
          name="fromOutcome">launchClass</property>
       <property
-         name="sdm:polyPoints">B44,1049.5,733.09766,L50</property>
+         name="sdm:polyPoints">B55,1056.05,733.09766,L50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall68">
@@ -836,7 +747,7 @@
       <property
          name="fromOutcome">launchSuppliers</property>
       <property
-         name="sdm:polyPoints">T44,299.5,-138.90234,L50</property>
+         name="sdm:polyPoints">T50,303.0,-138.90234,L50</property>
    </ControlFlowCase>
    <TaskFlowCall
       id="TaskFlowCall70">
@@ -853,9 +764,9 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">-34.551758</property>
+         name="y">-5.2529297</property>
       <property
-         name="x">-372.5</property>
+         name="x">41.5</property>
    </TaskFlowCall>
    <ControlFlowCase
       islink="true"
@@ -865,6 +776,158 @@
       <property
          name="fromOutcome">launchPOHist</property>
       <property
-         name="sdm:polyPoints">T50,-86.0,-151.4541,-372.5,-151.4541,T50</property>
+         name="sdm:polyPoints">T50,-86.0,-151.4541,41.5,-151.4541,T50</property>
+   </ControlFlowCase>
+   <WildcardControlFlowRule
+      id="WildcardControlFlowRule76">
+      <property
+         name="activityId">*</property>
+      <property
+         name="srcid">__1</property>
+      <property
+         name="y">-328.0</property>
+      <property
+         name="x">-353.0</property>
+   </WildcardControlFlowRule>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase75"
+      from="WildcardControlFlowRule76"
+      to="View60">
+      <property
+         name="fromOutcome">goAsset</property>
+      <property
+         name="tosrcid">__35</property>
+      <property
+         name="fromsrcid">__1</property>
+      <property
+         name="sdm:polyPoints">B77,-339.0,-173.05176,13.0,-173.05176,B50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase76"
+      from="WildcardControlFlowRule76"
+      to="View31">
+      <property
+         name="fromOutcome">goInvoice</property>
+      <property
+         name="tosrcid">__19</property>
+      <property
+         name="fromsrcid">__1</property>
+      <property
+         name="sdm:polyPoints">B23,-367.0,341.74707,L46</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase78"
+      from="WildcardControlFlowRule76"
+      to="View10">
+      <property
+         name="fromOutcome">goHome</property>
+      <property
+         name="tosrcid">__2</property>
+      <property
+         name="fromsrcid">__1</property>
+      <property
+         name="sdm:polyPoints">B36,-360.0,290.1953,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase79"
+      from="WildcardControlFlowRule76"
+      to="View49">
+      <property
+         name="fromOutcome">goReport</property>
+      <property
+         name="tosrcid">__26</property>
+      <property
+         name="fromsrcid">__1</property>
+      <property
+         name="sdm:polyPoints">B91,-332.0,-249.70703,227.5,-249.70703,B50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase80"
+      from="WildcardControlFlowRule76"
+      to="View44">
+      <property
+         name="fromOutcome">goStock</property>
+      <property
+         name="tosrcid">__22</property>
+      <property
+         name="fromsrcid">__1</property>
+      <property
+         name="sdm:polyPoints">T57,-349.5,-370.3506,296.0,-370.3506,T39</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase81"
+      from="WildcardControlFlowRule76"
+      to="View50">
+      <property
+         name="fromOutcome">goPORecv</property>
+      <property
+         name="tosrcid">__29</property>
+      <property
+         name="fromsrcid">__1</property>
+      <property
+         name="sdm:polyPoints">B64,-346.0,-43.4541,-89.5,-43.4541,B44</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase82"
+      from="WildcardControlFlowRule76"
+      to="View11">
+      <property
+         name="fromOutcome">goWorkOrder</property>
+      <property
+         name="tosrcid">__5</property>
+      <property
+         name="fromsrcid">__1</property>
+      <property
+         name="sdm:polyPoints">B9,-374.0,360.5459,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase84"
+      from="WildcardControlFlowRule76"
+      to="View12">
+      <property
+         name="fromOutcome">goAdmin</property>
+      <property
+         name="tosrcid">__3</property>
+      <property
+         name="fromsrcid">__1</property>
+      <property
+         name="sdm:polyPoints">B50,-353.0,171.14355,1025.55,171.14355,B5</property>
+   </ControlFlowCase>
+   <View
+      id="View75">
+      <property
+         name="activityId">WOEstimates</property>
+      <property
+         name="page">/Content/Estimates/Estimates.jspx</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>WOEstimates&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">-401.55176</property>
+      <property
+         name="x">582.6709</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase83"
+      from="WildcardControlFlowRule76"
+      to="View75">
+      <property
+         name="fromOutcome">goEstimates</property>
+      <property
+         name="tosrcid">__42</property>
+      <property
+         name="fromsrcid">__1</property>
+      <property
+         name="sdm:polyPoints">T43,-356.5,-455.55176,582.6709,-455.55176,T50</property>
    </ControlFlowCase>
 </SDM>

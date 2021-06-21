@@ -80,10 +80,18 @@ public class POCompanyReceipts {
     private RichInputText itPrice;
     private RichInputListOfValues txtBin;
     private RichInputListOfValues txtLot;
+    private RichPopup inactivePartPop;
 
     public POCompanyReceipts() {
     }
 
+    public void setInactivePartPop(RichPopup inactivePartPop) {
+        this.inactivePartPop = inactivePartPop;
+    }
+
+    public RichPopup getInactivePartPop() {
+        return inactivePartPop;
+    }
     /* Helper methods */
         public oracle.binding.BindingContainer getBindings() {
             return BindingContext.getCurrent().getCurrentBindingsEntry();
@@ -466,16 +474,26 @@ public class POCompanyReceipts {
     }
     
     public void partChangeLsnr(ValueChangeEvent valueChangeEvent) {
+        boolean res=false;
+        RichPopup.PopupHints hints = new RichPopup.PopupHints();
 //        System.out.println("partChangeLsnr");
         valueChangeEvent.getComponent().processUpdates(FacesContext.getCurrentInstance());
-//        String sPart = (String)this.itPart.getValue();
+        String sPart = (String)this.itPart.getValue();
 //        String sPartOrg = (String)this.itLineOrg.getValue();
 //        System.out.println("sPart: " + sPart);
+        BindingContainer bindings = getBindings();
+        OperationBinding operationBinding = bindings.getOperationBinding("isPartInactive");
+        operationBinding.getParamsMap().put("sPart", sPart);
+        res = (Boolean)operationBinding.execute();
+        if(!res){
+            getDefaultBinLot();
+        }
+        else{
+            inactivePartPop.show(hints);
+        }
+            AdfFacesContext.getCurrentInstance().addPartialTarget(this.txtBin);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(this.txtLot);
 
-        getDefaultBinLot();
-        AdfFacesContext.getCurrentInstance().addPartialTarget(this.txtBin);
-        AdfFacesContext.getCurrentInstance().addPartialTarget(this.txtLot);
-        
     }
 
 
@@ -487,6 +505,31 @@ public class POCompanyReceipts {
             return null;
         }
         return null;
+    }
+
+    public void inactivePartDiagLstnr(DialogEvent de) {
+        DialogEvent.Outcome result = de.getOutcome();
+        RichPopup.PopupHints hints = new RichPopup.PopupHints();
+        String cLinePartType = "PS";
+
+        System.out.println("Inside inactivePartDiagLstnr ok");
+        if (result == DialogEvent.Outcome.ok) {
+            System.out.println("Inside inactivePartDiagLstnr ok 1");
+             // on_rollback();
+            // poLinePop.hide();
+          ////  refreshIterators();
+            oracle.adf.view.rich.util.ResetUtils.reset(itPart);
+            BindingContainer bindings = getBindings();
+         
+                // perform rollback operation
+           ////     OperationBinding operationBinding = bindings.getOperationBinding("Rollback");
+            ////    operationBinding.execute();
+            ////on_rollback();
+            ADFUtil.setEL("#{bindings.TrlPart.inputValue}", "");
+            AdfFacesContext.getCurrentInstance().addPartialTarget(itPart);
+            AdfFacesContext.getCurrentInstance().addPartialTarget(addPartPop);
+            
+        }
     }
     
     public Boolean addPartToStock(String pPart, String pPartOrg, String pStore, Double pQty) {

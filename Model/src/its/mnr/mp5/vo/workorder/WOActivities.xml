@@ -30,7 +30,8 @@
        R5activities.ITS_TASKDAMID, 
        R5activities.ITS_TASKDESC, 
        R5activities.ITS_TASKID, 
-       R5activities.ITS_SGID"
+       R5activities.ITS_SGID, 
+       (select Txv_Percent from R5TAXRATEVALUES where Txv_Rate='LAX') AS tTaxPerc"
   FromList="R5ACTIVITIES R5activities"
   OrderBy="ACT_ACT"
   BindingStyle="OracleName"
@@ -607,6 +608,30 @@
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
+  <ViewAttribute
+    Name="tTaxPerc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="tTaxPerc"
+    SQLType="DOUBLE"
+    Expression="select Txv_Percent from R5TAXRATEVALUES where Txv_Rate='LAX'"/>
+  <ViewAttribute
+    Name="tTotalTax"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Double"
+    ColumnType="DOUBLE PRECISION"
+    AliasName="tTotalTax"
+    SQLType="DOUBLE">
+    <TransientExpression
+      trustMode="trusted"><![CDATA[((TotalPartCst !=null) && (tTaxPerc !=null))?(TotalPartCst*(tTaxPerc/100)):0.00]]></TransientExpression>
+    <RecalcCondition
+      trustMode="trusted"><![CDATA[true]]></RecalcCondition>
+  </ViewAttribute>
   <ViewLinkAccessor
     Name="Matlists"
     ViewLink="its.mnr.mp5.vo.link.WOActivitiesMatlists"
@@ -634,6 +659,60 @@
       <Return
         Type="boolean"
         Name="_return_type_"/>
+    </Method>
+    <Method
+      Name="getDefDamCode"
+      MethodName="getDefDamCode">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="taskid"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="getDefLocCode"
+      MethodName="getDefLocCode">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="taskid"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="getDefRepCode"
+      MethodName="getDefRepCode">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="taskdamid"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="idtype"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="isSingleDefaultDam"
+      MethodName="isSingleDefaultDam">
+      <Return
+        Name="_return_type_"
+        Type="boolean"/>
+    </Method>
+    <Method
+      Name="isSingleDefaultLoc"
+      MethodName="isSingleDefaultLoc">
+      <Return
+        Name="_return_type_"
+        Type="boolean"/>
+    </Method>
+    <Method
+      Name="isSingleDefaultRep"
+      MethodName="isSingleDefaultRep">
+      <Return
+        Name="_return_type_"
+        Type="boolean"/>
     </Method>
     <Method
       Name="getDefDamCode"

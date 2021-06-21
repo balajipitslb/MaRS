@@ -73,7 +73,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
 
         //Status flow from C(Completed) -> CRV(Clerk Review)
         if (oldevtstatus.equals("C") && evtstatus.equals("CRV")) {
-            //System.out.println("C(Completed) -> CRV(Clerk Review)");
+            System.out.println("Inside validateEvtStatus() C(Completed) -> CRV(Clerk Review)");
             //check View Object for Estimate existence.
             RowSet rs = this.getEstimateExistence();
             VariableValueManager vm = rs.ensureVariableManager();
@@ -104,7 +104,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             rs.executeQuery();
             Row rw = rs.first();
             if (rw == null) {
-                //System.out.println("No associated activities");
+                System.out.println("No associated activities");
                 ret = false;
             }
         }
@@ -356,7 +356,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
         final String READYFORINV = "RFI";
         final String INVOICED = "INV";
         final String STATUS = getPostedAttribute(EVTSTATUS).toString(); //this.getEvtStatus();
-        //System.out.println("STATUS: " + STATUS);
+       //// System.out.println("Inside isAttributeUpdateable STATUS: " + STATUS);
         Hashtable userData = getDBTransaction().getSession().getUserData();
         if (userData == null) {
             userData = new Hashtable();
@@ -436,12 +436,14 @@ public class R5eventsImpl extends ExtendedEntityImpl {
     public void lock() {
         try {
             super.lock();
-        } catch
-        (RowInconsistentException e)
-        {
+        } ////catch (RowInconsistentException e) {
+        catch (Exception e) {
+            System.out.println("Inside lock() exception: " + e.getMessage());
+            checkInconsistentAttrs();
             refresh(REFRESH_WITH_DB_ONLY_IF_UNCHANGED | REFRESH_CONTAINEES);
             //checkInconsistentAttrs();
             //throw (e);
+          ////  e.printStackTrace();
             super.lock();
         }
     }
@@ -469,9 +471,9 @@ public class R5eventsImpl extends ExtendedEntityImpl {
                   ! origValue.equals(currDbValue))))
               {
                  // If they don't match, tell us about it.
-                 //System.out.println("Inconsistent attribute " + getAttributeNames()[i]);
-                 //System.out.println("  Queried from DB = " + origValue);
-                 //System.out.println("  Now in DB = " + currDbValue);
+                 System.out.println("Inconsistent attribute " + getAttributeNames()[i]);
+                 System.out.println("  Queried from DB = " + origValue);
+                 System.out.println("  Now in DB = " + currDbValue);
              }
              // Set this EO instance back to the way it was
              if (attributeChanges[i]) {
@@ -530,7 +532,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtDesc((String)value);
+                obj.setEvtDesc((String) value);
             }
         }
         ,
@@ -540,7 +542,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtType((String)value);
+                obj.setEvtType((String) value);
             }
         }
         ,
@@ -550,7 +552,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtRtype((String)value);
+                obj.setEvtRtype((String) value);
             }
         }
         ,
@@ -560,7 +562,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtDate((Timestamp)value);
+                obj.setEvtDate((Timestamp) value);
             }
         }
         ,
@@ -570,7 +572,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtStatus((String)value);
+                obj.setEvtStatus((String) value);
             }
         }
         ,
@@ -580,7 +582,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtRstatus((String)value);
+                obj.setEvtRstatus((String) value);
             }
         }
         ,
@@ -590,7 +592,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtMrc((String)value);
+                obj.setEvtMrc((String) value);
             }
         }
         ,
@@ -600,7 +602,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtLtype((String)value);
+                obj.setEvtLtype((String) value);
             }
         }
         ,
@@ -610,7 +612,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtLocation((String)value);
+                obj.setEvtLocation((String) value);
             }
         }
         ,
@@ -620,7 +622,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtCostcode((String)value);
+                obj.setEvtCostcode((String) value);
             }
         }
         ,
@@ -630,7 +632,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtPrinted((String)value);
+                obj.setEvtPrinted((String) value);
             }
         }
         ,
@@ -640,7 +642,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtProject((String)value);
+                obj.setEvtProject((String) value);
             }
         }
         ,
@@ -650,7 +652,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtProjbud((String)value);
+                obj.setEvtProjbud((String) value);
             }
         }
         ,
@@ -660,7 +662,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtObtype((String)value);
+                obj.setEvtObtype((String) value);
             }
         }
         ,
@@ -670,7 +672,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtObrtype((String)value);
+                obj.setEvtObrtype((String) value);
             }
         }
         ,
@@ -680,7 +682,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtObject((String)value);
+                obj.setEvtObject((String) value);
             }
         }
         ,
@@ -690,7 +692,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtStandwork((String)value);
+                obj.setEvtStandwork((String) value);
             }
         }
         ,
@@ -700,7 +702,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtPpm((String)value);
+                obj.setEvtPpm((String) value);
             }
         }
         ,
@@ -710,7 +712,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtFreq((Integer)value);
+                obj.setEvtFreq((Integer) value);
             }
         }
         ,
@@ -720,7 +722,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtIsstype((String)value);
+                obj.setEvtIsstype((String) value);
             }
         }
         ,
@@ -730,7 +732,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtMeter((String)value);
+                obj.setEvtMeter((String) value);
             }
         }
         ,
@@ -740,7 +742,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtMeterdue((Integer)value);
+                obj.setEvtMeterdue((Integer) value);
             }
         }
         ,
@@ -750,7 +752,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtClass((String)value);
+                obj.setEvtClass((String) value);
             }
         }
         ,
@@ -760,7 +762,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtRoute((String)value);
+                obj.setEvtRoute((String) value);
             }
         }
         ,
@@ -770,7 +772,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtSession((String)value);
+                obj.setEvtSession((String) value);
             }
         }
         ,
@@ -780,7 +782,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtSchedno((Integer)value);
+                obj.setEvtSchedno((Integer) value);
             }
         }
         ,
@@ -790,7 +792,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtPlanprio((String)value);
+                obj.setEvtPlanprio((String) value);
             }
         }
         ,
@@ -800,7 +802,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtFixed((String)value);
+                obj.setEvtFixed((String) value);
             }
         }
         ,
@@ -810,7 +812,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtSlack((Integer)value);
+                obj.setEvtSlack((Integer) value);
             }
         }
         ,
@@ -820,7 +822,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtTarget((Timestamp)value);
+                obj.setEvtTarget((Timestamp) value);
             }
         }
         ,
@@ -830,7 +832,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtNewtarget((Timestamp)value);
+                obj.setEvtNewtarget((Timestamp) value);
             }
         }
         ,
@@ -840,7 +842,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtEarlystart((Timestamp)value);
+                obj.setEvtEarlystart((Timestamp) value);
             }
         }
         ,
@@ -850,7 +852,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtLateend((Timestamp)value);
+                obj.setEvtLateend((Timestamp) value);
             }
         }
         ,
@@ -860,7 +862,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtMustend((Timestamp)value);
+                obj.setEvtMustend((Timestamp) value);
             }
         }
         ,
@@ -870,7 +872,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtLastplan((Timestamp)value);
+                obj.setEvtLastplan((Timestamp) value);
             }
         }
         ,
@@ -880,7 +882,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtDuration((Integer)value);
+                obj.setEvtDuration((Integer) value);
             }
         }
         ,
@@ -890,7 +892,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtNewdur((Integer)value);
+                obj.setEvtNewdur((Integer) value);
             }
         }
         ,
@@ -900,7 +902,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtPlanstatus((String)value);
+                obj.setEvtPlanstatus((String) value);
             }
         }
         ,
@@ -910,7 +912,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtParent((String)value);
+                obj.setEvtParent((String) value);
             }
         }
         ,
@@ -920,7 +922,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtDepend((String)value);
+                obj.setEvtDepend((String) value);
             }
         }
         ,
@@ -930,7 +932,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtOrigin((String)value);
+                obj.setEvtOrigin((String) value);
             }
         }
         ,
@@ -940,7 +942,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtReqm((String)value);
+                obj.setEvtReqm((String) value);
             }
         }
         ,
@@ -950,7 +952,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtCause((String)value);
+                obj.setEvtCause((String) value);
             }
         }
         ,
@@ -960,7 +962,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtAction((String)value);
+                obj.setEvtAction((String) value);
             }
         }
         ,
@@ -970,7 +972,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtJobtype((String)value);
+                obj.setEvtJobtype((String) value);
             }
         }
         ,
@@ -980,7 +982,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtPriority((String)value);
+                obj.setEvtPriority((String) value);
             }
         }
         ,
@@ -990,7 +992,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtReported((Timestamp)value);
+                obj.setEvtReported((Timestamp) value);
             }
         }
         ,
@@ -1000,7 +1002,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtStart((Timestamp)value);
+                obj.setEvtStart((Timestamp) value);
             }
         }
         ,
@@ -1010,7 +1012,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtMatavail((Timestamp)value);
+                obj.setEvtMatavail((Timestamp) value);
             }
         }
         ,
@@ -1020,7 +1022,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtDue((Timestamp)value);
+                obj.setEvtDue((Timestamp) value);
             }
         }
         ,
@@ -1030,7 +1032,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtCompleted((Timestamp)value);
+                obj.setEvtCompleted((Timestamp) value);
             }
         }
         ,
@@ -1040,7 +1042,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtDowntime((Integer)value);
+                obj.setEvtDowntime((Integer) value);
             }
         }
         ,
@@ -1050,7 +1052,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtLabtotal((Integer)value);
+                obj.setEvtLabtotal((Integer) value);
             }
         }
         ,
@@ -1060,7 +1062,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtMattotal((Integer)value);
+                obj.setEvtMattotal((Integer) value);
             }
         }
         ,
@@ -1070,7 +1072,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtShift((String)value);
+                obj.setEvtShift((String) value);
             }
         }
         ,
@@ -1080,7 +1082,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtFailureusage((BigDecimal)value);
+                obj.setEvtFailureusage((BigDecimal) value);
             }
         }
         ,
@@ -1090,7 +1092,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtMeterreading((BigDecimal)value);
+                obj.setEvtMeterreading((BigDecimal) value);
             }
         }
         ,
@@ -1100,7 +1102,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtMetuom((String)value);
+                obj.setEvtMetuom((String) value);
             }
         }
         ,
@@ -1110,7 +1112,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtMaxcost((BigDecimal)value);
+                obj.setEvtMaxcost((BigDecimal) value);
             }
         }
         ,
@@ -1120,7 +1122,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtScreener((String)value);
+                obj.setEvtScreener((String) value);
             }
         }
         ,
@@ -1130,7 +1132,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtRoutedfrom((String)value);
+                obj.setEvtRoutedfrom((String) value);
             }
         }
         ,
@@ -1140,7 +1142,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtRoutereason((String)value);
+                obj.setEvtRoutereason((String) value);
             }
         }
         ,
@@ -1150,7 +1152,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtWarranty((String)value);
+                obj.setEvtWarranty((String) value);
             }
         }
         ,
@@ -1160,7 +1162,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtOkwinend((Timestamp)value);
+                obj.setEvtOkwinend((Timestamp) value);
             }
         }
         ,
@@ -1170,7 +1172,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtNearwinstart((Timestamp)value);
+                obj.setEvtNearwinstart((Timestamp) value);
             }
         }
         ,
@@ -1180,7 +1182,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtGenwinstart((Timestamp)value);
+                obj.setEvtGenwinstart((Timestamp) value);
             }
         }
         ,
@@ -1190,7 +1192,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtOkwinendval((BigDecimal)value);
+                obj.setEvtOkwinendval((BigDecimal) value);
             }
         }
         ,
@@ -1200,7 +1202,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtNearwinbegval((BigDecimal)value);
+                obj.setEvtNearwinbegval((BigDecimal) value);
             }
         }
         ,
@@ -1210,7 +1212,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtGenwinbegval((BigDecimal)value);
+                obj.setEvtGenwinbegval((BigDecimal) value);
             }
         }
         ,
@@ -1220,7 +1222,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtRoutestatus((String)value);
+                obj.setEvtRoutestatus((String) value);
             }
         }
         ,
@@ -1230,7 +1232,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtRouterstatus((String)value);
+                obj.setEvtRouterstatus((String) value);
             }
         }
         ,
@@ -1240,7 +1242,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtAcd((Integer)value);
+                obj.setEvtAcd((Integer) value);
             }
         }
         ,
@@ -1250,7 +1252,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtRejectreason((String)value);
+                obj.setEvtRejectreason((String) value);
             }
         }
         ,
@@ -1260,7 +1262,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtEnteredby((String)value);
+                obj.setEvtEnteredby((String) value);
             }
         }
         ,
@@ -1270,7 +1272,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtFailure((String)value);
+                obj.setEvtFailure((String) value);
             }
         }
         ,
@@ -1280,7 +1282,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtDowntimehrs((Integer)value);
+                obj.setEvtDowntimehrs((Integer) value);
             }
         }
         ,
@@ -1290,7 +1292,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtSafety((String)value);
+                obj.setEvtSafety((String) value);
             }
         }
         ,
@@ -1300,7 +1302,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtObjcriticality((String)value);
+                obj.setEvtObjcriticality((String) value);
             }
         }
         ,
@@ -1310,7 +1312,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtMpproj((String)value);
+                obj.setEvtMpproj((String) value);
             }
         }
         ,
@@ -1320,7 +1322,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtTransorgid((Integer)value);
+                obj.setEvtTransorgid((Integer) value);
             }
         }
         ,
@@ -1330,7 +1332,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtTranscode((String)value);
+                obj.setEvtTranscode((String) value);
             }
         }
         ,
@@ -1340,7 +1342,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtTransgroup((Integer)value);
+                obj.setEvtTransgroup((Integer) value);
             }
         }
         ,
@@ -1350,7 +1352,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtCn((String)value);
+                obj.setEvtCn((String) value);
             }
         }
         ,
@@ -1360,7 +1362,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtReopened((String)value);
+                obj.setEvtReopened((String) value);
             }
         }
         ,
@@ -1370,7 +1372,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtPpopk((Integer)value);
+                obj.setEvtPpopk((Integer) value);
             }
         }
         ,
@@ -1380,7 +1382,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtPpmrev((Integer)value);
+                obj.setEvtPpmrev((Integer) value);
             }
         }
         ,
@@ -1390,7 +1392,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtRouterev((Integer)value);
+                obj.setEvtRouterev((Integer) value);
             }
         }
         ,
@@ -1400,7 +1402,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtOrg((String)value);
+                obj.setEvtOrg((String) value);
             }
         }
         ,
@@ -1410,7 +1412,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtClassOrg((String)value);
+                obj.setEvtClassOrg((String) value);
             }
         }
         ,
@@ -1420,7 +1422,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtObjectOrg((String)value);
+                obj.setEvtObjectOrg((String) value);
             }
         }
         ,
@@ -1430,7 +1432,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtLocationOrg((String)value);
+                obj.setEvtLocationOrg((String) value);
             }
         }
         ,
@@ -1440,7 +1442,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtSchedgrp((String)value);
+                obj.setEvtSchedgrp((String) value);
             }
         }
         ,
@@ -1450,7 +1452,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtRequeststart((Timestamp)value);
+                obj.setEvtRequeststart((Timestamp) value);
             }
         }
         ,
@@ -1460,7 +1462,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtSchedend((Timestamp)value);
+                obj.setEvtSchedend((Timestamp) value);
             }
         }
         ,
@@ -1470,7 +1472,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtRequestend((Timestamp)value);
+                obj.setEvtRequestend((Timestamp) value);
             }
         }
         ,
@@ -1480,7 +1482,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtMastercal((String)value);
+                obj.setEvtMastercal((String) value);
             }
         }
         ,
@@ -1490,7 +1492,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtStep((Integer)value);
+                obj.setEvtStep((Integer) value);
             }
         }
         ,
@@ -1500,7 +1502,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtSeq((Integer)value);
+                obj.setEvtSeq((Integer) value);
             }
         }
         ,
@@ -1510,7 +1512,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtTrigevent((String)value);
+                obj.setEvtTrigevent((String) value);
             }
         }
         ,
@@ -1520,7 +1522,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtOldrstatus((String)value);
+                obj.setEvtOldrstatus((String) value);
             }
         }
         ,
@@ -1530,7 +1532,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtOldstatus((String)value);
+                obj.setEvtOldstatus((String) value);
             }
         }
         ,
@@ -1540,7 +1542,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtNewrstatus((String)value);
+                obj.setEvtNewrstatus((String) value);
             }
         }
         ,
@@ -1550,7 +1552,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtNewstatus((String)value);
+                obj.setEvtNewstatus((String) value);
             }
         }
         ,
@@ -1560,7 +1562,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtConflict((String)value);
+                obj.setEvtConflict((String) value);
             }
         }
         ,
@@ -1570,7 +1572,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtConflictresolved((String)value);
+                obj.setEvtConflictresolved((String) value);
             }
         }
         ,
@@ -1580,7 +1582,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtConflictdesc((String)value);
+                obj.setEvtConflictdesc((String) value);
             }
         }
         ,
@@ -1590,7 +1592,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtPackage((String)value);
+                obj.setEvtPackage((String) value);
             }
         }
         ,
@@ -1600,7 +1602,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtCodeAlias((String)value);
+                obj.setEvtCodeAlias((String) value);
             }
         }
         ,
@@ -1610,7 +1612,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtCreated((Timestamp)value);
+                obj.setEvtCreated((Timestamp) value);
             }
         }
         ,
@@ -1620,7 +1622,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtCreatedby((String)value);
+                obj.setEvtCreatedby((String) value);
             }
         }
         ,
@@ -1630,7 +1632,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtUpdated((Timestamp)value);
+                obj.setEvtUpdated((Timestamp) value);
             }
         }
         ,
@@ -1640,7 +1642,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtUpdatedby((String)value);
+                obj.setEvtUpdatedby((String) value);
             }
         }
         ,
@@ -1660,7 +1662,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setItsIsasset((String)value);
+                obj.setItsIsasset((String) value);
             }
         }
         ,
@@ -1670,7 +1672,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setItsIspm((String)value);
+                obj.setItsIspm((String) value);
             }
         }
         ,
@@ -1680,7 +1682,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setItsNote((String)value);
+                obj.setItsNote((String) value);
             }
         }
         ,
@@ -1690,7 +1692,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setItsEstid((String)value);
+                obj.setItsEstid((String) value);
             }
         }
         ,
@@ -1700,7 +1702,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setTotalPartCst((Double)value);
+                obj.setTotalPartCst((Double) value);
             }
         }
         ,
@@ -1710,7 +1712,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setTotalHours((Double)value);
+                obj.setTotalHours((Double) value);
             }
         }
         ,
@@ -1720,7 +1722,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setTotalLaborCst((Double)value);
+                obj.setTotalLaborCst((Double) value);
             }
         }
         ,
@@ -1730,7 +1732,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setTotalPartsLabor((Double)value);
+                obj.setTotalPartsLabor((Double) value);
             }
         }
         ,
@@ -1740,7 +1742,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtWOType((String)value);
+                obj.setEvtWOType((String) value);
             }
         }
         ,
@@ -1780,7 +1782,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setItsAccountrateid((String)value);
+                obj.setItsAccountrateid((String) value);
             }
         }
         ,
@@ -1790,7 +1792,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setItsReviewdt((Timestamp)value);
+                obj.setItsReviewdt((Timestamp) value);
             }
         }
         ,
@@ -1800,7 +1802,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setItsReviewed((String)value);
+                obj.setItsReviewed((String) value);
             }
         }
         ,
@@ -1810,7 +1812,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setItsReviewedby((String)value);
+                obj.setItsReviewedby((String) value);
             }
         }
         ,
@@ -1820,7 +1822,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setItsPerformdt((Timestamp)value);
+                obj.setItsPerformdt((Timestamp) value);
             }
         }
         ,
@@ -1830,7 +1832,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setItsPerformed((String)value);
+                obj.setItsPerformed((String) value);
             }
         }
         ,
@@ -1840,7 +1842,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setItsPerformedby((String)value);
+                obj.setItsPerformedby((String) value);
             }
         }
         ,
@@ -1870,7 +1872,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtTrigeventR5events((R5eventsImpl)value);
+                obj.setEvtTrigeventR5events((R5eventsImpl) value);
             }
         }
         ,
@@ -1890,7 +1892,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setEvtParentR5events((R5eventsImpl)value);
+                obj.setEvtParentR5events((R5eventsImpl) value);
             }
         }
         ,
@@ -1910,7 +1912,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setR5objects((ExtendedEntityImpl)value);
+                obj.setR5objects((ExtendedEntityImpl) value);
             }
         }
         ,
@@ -1920,7 +1922,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setR5objects1((ExtendedEntityImpl)value);
+                obj.setR5objects1((ExtendedEntityImpl) value);
             }
         }
         ,
@@ -1930,7 +1932,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setMrlrefWorkordermaster((ExtendedEntityImpl)value);
+                obj.setMrlrefWorkordermaster((ExtendedEntityImpl) value);
             }
         }
         ,
@@ -1940,7 +1942,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setR5transactions((R5transactionsImpl)value);
+                obj.setR5transactions((R5transactionsImpl) value);
             }
         }
         ,
@@ -1950,7 +1952,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setMrltAccountmaster((MrltAccountmasterImpl)value);
+                obj.setMrltAccountmaster((MrltAccountmasterImpl) value);
             }
         }
         ,
@@ -1960,7 +1962,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setR5uoms((ExtendedEntityImpl)value);
+                obj.setR5uoms((ExtendedEntityImpl) value);
             }
         }
         ,
@@ -1970,7 +1972,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5eventsImpl obj, Object value) {
-                obj.setMrltAsset((MrltAssetImpl)value);
+                obj.setMrltAsset((MrltAssetImpl) value);
             }
         }
         ,
@@ -2232,13 +2234,13 @@ public class R5eventsImpl extends ExtendedEntityImpl {
     public R5eventsImpl() {
     }
 
-
     /**
      * @return the definition object for this instance class.
      */
     public static synchronized EntityDefImpl getDefinitionObject() {
         return EntityDefImpl.findDefObject("its.mnr.mp5.eo.local.R5events");
     }
+
 
     /**
      * Gets the attribute value for EvtCode, using the alias name EvtCode.
@@ -4577,7 +4579,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
      * @return a Key object based on given key constituents.
      */
     public static Key createPrimaryKey(String evtCode) {
-        return new Key(new Object[]{evtCode});
+        return new Key(new Object[] { evtCode });
     }
 
 

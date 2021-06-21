@@ -4,16 +4,21 @@
         xmlns:c="http://java.sun.com/jsp/jstl/core">
     <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.Content.Report.reportBundle']}"/>
     <af:document title="#{viewcontrollerBundle.MARS}" id="d1">
+        <af:messages id="m1"/>
         <af:form id="f1">
             <af:pageTemplate viewId="/templates/MP5BaseTemplate.jspx" id="pt1">
                 <f:facet name="GlobalTop">
                     <af:navigationPane id="np1">
                         <af:commandNavigationItem text="Home" id="cni1" accessKey="H"
-                                                  selected="false" actionListener="#{ModuleNavBean.goHomeModule}"/>
-                        <af:commandNavigationItem text="Work Order" id="cni2" accessKey="W"
+                                                  actionListener="#{ModuleNavBean.goHomeModule}"
+                                                  />
+                        <af:commandNavigationItem text="Work Order" id="cni2" selected="false" accessKey="W"
                                                   actionListener="#{ModuleNavBean.goWOModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=WorkOrder;resourceType=GlobalNav;action=view']}"/>
-                        <af:commandNavigationItem text="Invoice" id="cni3" accessKey="I"
+                        <af:commandNavigationItem text="Estimates" id="cni9" accessKey="E"
+                                                  actionListener="#{ModuleNavBean.goEstimatesModule}"
+                                                  visible="#{(securityContext.userGrantedResource['resourceName=Estimates;resourceType=GlobalNav;action=view'])and(ModuleNavBean.showEstimate eq 'Y')}"/>  
+                       <af:commandNavigationItem text="Invoice" id="cni3" accessKey="I"
                                                   actionListener="#{ModuleNavBean.goInvoiceModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=Invoice;resourceType=GlobalNav;action=view']}"/>
                         <af:commandNavigationItem text="PO &amp; Receivings" id="cni4" accessKey="P"
@@ -22,12 +27,12 @@
                         <af:commandNavigationItem text="Stock" id="cni5" accessKey="S"
                                                   actionListener="#{ModuleNavBean.goStockModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=Stock;resourceType=GlobalNav;action=view']}"/>
-                        <af:commandNavigationItem text="Asset" id="cni8" accessKey="S"
+                        <af:commandNavigationItem text="Asset" id="cni8" accessKey="A"
                                                   actionListener="#{ModuleNavBean.goAssetModule}"
-                                                  visible="#{securityContext.userGrantedResource['resourceName=Asset;resourceType=GlobalNav;action=view']}"/>
+                                                  visible="#{securityContext.userGrantedResource['resourceName=Asset;resourceType=GlobalNav;action=view']}"
+                                                  />
                         <af:commandNavigationItem text="Report (This)" id="cni6" accessKey="R" selected="true"
-                                                  action="goReport"
-                                                  visible="#{securityContext.userGrantedResource['resourceName=Report;resourceType=GlobalNav;action=view']}"/>
+                                                  actionListener="#{ModuleNavBean.goReportModule}"/>
                         <af:commandNavigationItem text="Admin" id="cni7" accessKey="M"
                                                   actionListener="#{ModuleNavBean.goAdminModule}"
                                                   visible="#{securityContext.userGrantedResource['resourceName=Admin;resourceType=GlobalNav;action=view']}"/>
@@ -37,6 +42,7 @@
                             <af:panelBox id="pb1" showDisclosure="false"
                                          inlineStyle="height:350px; padding:10px; margin:20px 0px 0px;">
                                 <f:facet name="toolbar"/>
+                        
                         <af:spacer width="10" height="10" id="s5" inlineStyle="height:20px;"/>
                         <af:link text="Work Orders" id="gl1"
                                  destination="http://itsgp31/MaRSReport/Pages/Folder.aspx?ItemPath=%2fWork+Orders&amp;ViewMode=List"

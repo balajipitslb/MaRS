@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="CCSetup_SetupPageDef"
                 Package="its.mnr.mp5.view.pageDefs">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="CCDataControlNested.MrltCyclecountheaderView" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrltCyclecountheaderViewIterator"/>
-  </executables>
-  <bindings>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Ccdesc">
-      <AttrNames>
-        <Item Value="Ccdesc"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Created">
-      <AttrNames>
-        <Item Value="Created"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Store">
-      <AttrNames>
-        <Item Value="Store"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Org">
-      <AttrNames>
-        <Item Value="Org"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="MrltCyclecountheaderViewIterator" id="RangeType" DTSupportsMRU="false"
-          SelectItemValueMode="ListObject" StaticList="true">
-      <AttrNames>
-        <Item Value="RangeType"/>
-      </AttrNames>
-      <ValueList>
-        <Item Value="Bin Range"/>
-        <Item Value="Bin #"/>
-        <Item Value="Part Class"/>
-        <Item Value="Part Range"/>
-        <Item Value="Part #"/>
-      </ValueList>
-    </list>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Listid">
-      <AttrNames>
-        <Item Value="Listid"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Ccstatus">
-      <AttrNames>
-        <Item Value="Ccstatus"/>
-      </AttrNames>
-    </attributeValues>
-    <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Sttknum">
-      <AttrNames>
-        <Item Value="Sttknum"/>
-      </AttrNames>
-    </attributeValues>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" InstanceName="MNRDataControlDataControl"
-            DataControl="MNRDataControlDataControl"/>
-  </bindings>
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="CCDataControlNested.MrltCyclecountheaderView" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrltCyclecountheaderViewIterator"/>
+    </executables>
+    <bindings>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Ccdesc">
+            <AttrNames>
+                <Item Value="Ccdesc"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Created">
+            <AttrNames>
+                <Item Value="Created"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Store">
+            <AttrNames>
+                <Item Value="Store"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Org">
+            <AttrNames>
+                <Item Value="Org"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="MrltCyclecountheaderViewIterator" id="RangeType" DTSupportsMRU="false"
+              SelectItemValueMode="ListObject" StaticList="true">
+            <AttrNames>
+                <Item Value="RangeType"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Bin Range"/>
+                <Item Value="Bin #"/>
+                <Item Value="Part Class"/>
+                <Item Value="Part Range"/>
+                <Item Value="Part #"/>
+            </ValueList>
+        </list>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Listid">
+            <AttrNames>
+                <Item Value="Listid"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Ccstatus">
+            <AttrNames>
+                <Item Value="Ccstatus"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="MrltCyclecountheaderViewIterator" id="Sttknum">
+            <AttrNames>
+                <Item Value="Sttknum"/>
+            </AttrNames>
+        </attributeValues>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
+    </bindings>
 </pageDefinition>

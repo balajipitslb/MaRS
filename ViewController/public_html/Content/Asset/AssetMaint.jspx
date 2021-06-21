@@ -445,7 +445,7 @@
                                                                                    disabled="#{!bindings.Previous.enabled}"
                                                                                    partialSubmit="true" id="cb2"
                                                                                    icon="#{resource['images:shuttle_left.png']}"
-                                                                                   text="button 1"/>
+                                                                                   />
                                                                         <af:button actionListener="#{bindings.Next.execute}"
                                                                                    disabled="#{!bindings.Next.enabled}"
                                                                                    partialSubmit="true" id="cb1"

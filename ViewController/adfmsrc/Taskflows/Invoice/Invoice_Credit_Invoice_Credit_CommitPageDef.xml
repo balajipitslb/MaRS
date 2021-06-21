@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8"
                 id="Invoice_Credit_Invoice_Credit_CommitPageDef" Package="Taskflows.Invoice" SkipValidation="true">
-  <parameters/>
-  <executables/>
-  <bindings>
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="MNRDataControlDataControl"/>
-  </bindings>
+    <parameters/>
+    <executables/>
+    <bindings>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                DataControl="MNRDataControlDataControl"/>
+    </bindings>
 </pageDefinition>

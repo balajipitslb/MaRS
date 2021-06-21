@@ -1523,7 +1523,77 @@
             <display-name>AdminToolsPanel-InvoiceXMLTool</display-name>
             <description>Access to AdminToolsPanel-InvoiceXML file generator tool.</description>
             <type-name-ref>UIControl</type-name-ref>
-          </resource>          
+          </resource>
+          <resource>
+            <name>Content.Estimates.EstimatesPageDef</name>
+            <type-name-ref>RegionResourceType</type-name-ref>
+            <display-name>WOEstimates (Content.Estimates)</display-name>
+            <description>Content.Estimates.EstimatesPageDef</description>
+          </resource>
+          <resource>
+            <name>/WEB-INF/Taskflows/WorkOrder/WorkOrder-Estimates.xml#WorkOrder-Estimates</name>
+            <type-name-ref>TaskFlowResourceType</type-name-ref>
+            <display-name>WorkOrder-Estimates(/WEB-INF/Taskflows/WorkOrder)</display-name>
+            <description>/WEB-INF/Taskflows/WorkOrder/WorkOrder-Estimates.xml#WorkOrder-Estimates</description>
+          </resource>
+          <resource>
+            <type-name-ref>GlobalNav</type-name-ref>
+            <name>Estimates</name>
+            <display-name>Estimates</display-name>
+          </resource>
+          <resource>
+            <name>/WEB-INF/Taskflows/Estimates/Estimates-EstimatesEntry.xml#Estimates-EstimatesEntry</name>
+            <type-name-ref>TaskFlowResourceType</type-name-ref>
+            <display-name>Estimates-EstimatesEntry(/WEB-INF/Taskflows/Estimates)</display-name>
+            <description>/WEB-INF/Taskflows/Estimates/Estimates-EstimatesEntry.xml#Estimates-EstimatesEntry</description>
+          </resource>
+          <resource>
+            <name>Taskflows.Estimates.Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecuteWithParams1PageDef</name>
+            <type-name-ref>RegionResourceType</type-name-ref>
+            <display-name>Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecuteWithParams1 (Taskflows.Estimates)</display-name>
+            <description>Taskflows.Estimates.Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecuteWithParams1PageDef</description>
+          </resource>
+          <resource>
+            <name>Content.Estimates.EstimatesEntryPageDef</name>
+            <type-name-ref>RegionResourceType</type-name-ref>
+            <display-name>EstimatesEntry (Content.Estimates)</display-name>
+            <description>Content.Estimates.EstimatesEntryPageDef</description>
+          </resource>
+          <resource>
+            <name>Content.Report.reportPageDef</name>
+            <type-name-ref>RegionResourceType</type-name-ref>
+            <display-name>report (Content.Report)</display-name>
+            <description>Content.Report.reportPageDef</description>
+          </resource>
+          <resource>
+            <name>Content.Estimates.view1PageDef</name>
+            <type-name-ref>RegionResourceType</type-name-ref>
+            <display-name>EstimateWO (Content.Estimates)</display-name>
+            <description>Content.Estimates.view1PageDef</description>
+          </resource>
+          <resource>
+            <name>Content.Asset.assetPageDef</name>
+            <type-name-ref>RegionResourceType</type-name-ref>
+            <display-name>asset (Content.Asset)</display-name>
+            <description>Content.Asset.assetPageDef</description>
+          </resource>
+          <resource>
+            <name>/WEB-INF/Taskflows/WorkOrder/Flag-flow.xml#Flag-flow</name>
+            <type-name-ref>TaskFlowResourceType</type-name-ref>
+            <display-name>Flag-flow(/WEB-INF/Taskflows/WorkOrder)</display-name>
+            <description>/WEB-INF/Taskflows/WorkOrder/Flag-flow.xml#Flag-flow</description>
+          </resource>
+          <resource>
+            <name>its.mnr.mp5.view.pageDefs.FlagsPageDef</name>
+            <type-name-ref>RegionResourceType</type-name-ref>
+            <display-name>Flags (its.mnr.mp5.view.pageDefs)</display-name>
+            <description>its.mnr.mp5.view.pageDefs.FlagsPageDef</description>
+          </resource>
+          <resource>
+            <type-name-ref>UIControl</type-name-ref>
+            <name>FlagUI</name>
+            <display-name>FlagUI</display-name>
+          </resource>
         </resources>
         <permission-sets>
           <permission-set>
@@ -2200,6 +2270,12 @@
                 <type-name-ref>GlobalNav</type-name-ref>
                 <actions>view</actions>
               </member-resource>
+              <member-resource>
+                <type-name-ref>RegionResourceType</type-name-ref>
+                <resource-name>Content.Report.reportPageDef</resource-name>
+                <display-name>report (Content.Report)</display-name>
+                <actions>view</actions>
+              </member-resource>
             </member-resources>
           </permission-set>
           <permission-set>
@@ -2664,6 +2740,18 @@
                 <type-name-ref>GlobalNav</type-name-ref>
                 <actions>view</actions>
               </member-resource>
+              <member-resource>
+                <type-name-ref>UIControl</type-name-ref>
+                <resource-name>Asset</resource-name>
+                <display-name>Asset</display-name>
+                <actions>enabled</actions>
+              </member-resource>
+              <member-resource>
+                <type-name-ref>RegionResourceType</type-name-ref>
+                <resource-name>Content.Asset.assetPageDef</resource-name>
+                <display-name>asset (Content.Asset)</display-name>
+                <actions>view</actions>
+              </member-resource>
             </member-resources>
           </permission-set>
           <permission-set>
@@ -2861,6 +2949,78 @@
               <member-resource>
                 <resource-name>AdminToolsPanel</resource-name>
                 <type-name-ref>UIControl</type-name-ref>
+                <actions>enabled</actions>
+              </member-resource>
+            </member-resources>
+          </permission-set>
+          <permission-set>
+            <name>Estimates</name>
+            <display-name>Estimates - View Estimate Screen</display-name>
+            <member-resources>
+              <member-resource>
+                <type-name-ref>GlobalNav</type-name-ref>
+                <resource-name>Estimates</resource-name>
+                <display-name>Estimates</display-name>
+                <actions>view</actions>
+              </member-resource>
+              <member-resource>
+                <type-name-ref>TaskFlowResourceType</type-name-ref>
+                <resource-name>/WEB-INF/Taskflows/Estimates/Estimates-EstimatesEntry.xml#Estimates-EstimatesEntry</resource-name>
+                <display-name>Estimates-EstimatesEntry(/WEB-INF/Taskflows/Estimates)</display-name>
+                <actions>view</actions>
+              </member-resource>
+              <member-resource>
+                <type-name-ref>RegionResourceType</type-name-ref>
+                <resource-name>Taskflows.Estimates.Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecuteWithParams1PageDef</resource-name>
+                <display-name>Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecuteWithParams1 (Taskflows.Estimates)</display-name>
+                <actions>view</actions>
+              </member-resource>
+              <member-resource>
+                <type-name-ref>RegionResourceType</type-name-ref>
+                <resource-name>Content.Estimates.EstimatesEntryPageDef</resource-name>
+                <display-name>EstimatesEntry (Content.Estimates)</display-name>
+                <actions>view</actions>
+              </member-resource>
+              <member-resource>
+                <type-name-ref>RegionResourceType</type-name-ref>
+                <resource-name>Content.Estimates.EstimatesPageDef</resource-name>
+                <display-name>Estimates (Content.Estimates)</display-name>
+                <actions>view</actions>
+              </member-resource>
+              <member-resource>
+                <type-name-ref>RegionResourceType</type-name-ref>
+                <resource-name>Content.Estimates.view1PageDef</resource-name>
+                <display-name>EstimateWO (Content.Estimates)</display-name>
+                <actions>view</actions>
+              </member-resource>
+            </member-resources>
+          </permission-set>
+          <permission-set>
+            <name>Flags</name>
+            <display-name>Flags</display-name>
+            <member-resources>
+              <member-resource>
+                <type-name-ref>TaskFlowResourceType</type-name-ref>
+                <resource-name>/WEB-INF/Taskflows/WorkOrder/Flag-flow.xml#Flag-flow</resource-name>
+                <display-name>Flag-flow(/WEB-INF/Taskflows/WorkOrder)</display-name>
+                <actions>view</actions>
+              </member-resource>
+              <member-resource>
+                <type-name-ref>RegionResourceType</type-name-ref>
+                <resource-name>its.mnr.mp5.view.pageDefs.FlagsPageDef</resource-name>
+                <display-name>Flags (its.mnr.mp5.view.pageDefs)</display-name>
+                <actions>view</actions>
+              </member-resource>
+            </member-resources>
+          </permission-set>
+          <permission-set>
+            <name>Flags|Create and Edit Flag Associations</name>
+            <display-name>Flags - Create and Edit Flag Associations</display-name>
+            <member-resources>
+              <member-resource>
+                <type-name-ref>UIControl</type-name-ref>
+                <resource-name>FlagUI</resource-name>
+                <display-name>FlagUI</display-name>
                 <actions>enabled</actions>
               </member-resource>
             </member-resources>
@@ -3133,6 +3293,12 @@
               </permission-set-ref>
               <permission-set-ref>
                 <name>Admin|Admin-FlagsPanel</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags|Create and Edit Flag Associations</name>
               </permission-set-ref>
             </permission-set-refs>
           </grant>
@@ -3690,7 +3856,15 @@
               <permission-set-ref>
                 <name>Admin|Admin-ToolsPanel-InvoiceXMLTool</name>
               </permission-set-ref>
-              
+              <permission-set-ref>
+                <name>Estimates</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags|Create and Edit Flag Associations</name>
+              </permission-set-ref>
             </permission-set-refs>
           </grant>
           <grant>
@@ -3781,6 +3955,12 @@
               <permission-set-ref>
                 <name>WorkOrder|CreateEditFlagAssoc</name>
               </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags|Create and Edit Flag Associations</name>
+              </permission-set-ref>
             </permission-set-refs>
           </grant>
           <grant>
@@ -3845,6 +4025,12 @@
               <permission-set-ref>
                 <name>Stock - Cycle Count View</name>
               </permission-set-ref>
+              <permission-set-ref>
+                <name>Estimates</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
+              </permission-set-ref>
             </permission-set-refs>
           </grant>
           <grant>
@@ -3893,6 +4079,12 @@
               <permission-set-ref>
                 <name>WorkOrder|CreateEditFlagAssoc</name>
               </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags|Create and Edit Flag Associations</name>
+              </permission-set-ref>
             </permission-set-refs>
           </grant>
           <grant>
@@ -3935,6 +4127,12 @@
               <permission-set-ref>
                 <name>WorkOrder|CreateEditFlagAssoc</name>
               </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags|Create and Edit Flag Associations</name>
+              </permission-set-ref>
             </permission-set-refs>
           </grant>
           <grant>
@@ -3949,6 +4147,12 @@
             <permission-set-refs>
               <permission-set-ref>
                 <name>WorkOrder|WorkOrderEntry</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Estimates</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
               </permission-set-ref>
             </permission-set-refs>
           </grant>
@@ -4038,6 +4242,12 @@
               <permission-set-ref>
                 <name>Admin|Admin-ToolsPanel</name>
               </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Estimates</name>
+              </permission-set-ref>
             </permission-set-refs>
           </grant>
           <grant>
@@ -4088,6 +4298,9 @@
               </permission-set-ref>
               <permission-set-ref>
                 <name>Admin|Admin</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Flags</name>
               </permission-set-ref>
             </permission-set-refs>
           </grant>

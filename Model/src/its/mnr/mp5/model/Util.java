@@ -53,6 +53,7 @@ public class Util {
     }
 
     public static void printXML(Node n, String fileName) {
+        System.out.println("Inside Util printXML n: "+n+" fileName: "+fileName);
         File file = new java.io.File(fileName);
         //java.io.File file = new java.io.File("C:/Windows/Temp/emp.xml");
         PrintWriter output = null;
@@ -61,15 +62,15 @@ public class Util {
             ((XMLNode)n).print(output);
         } catch (IOException e) {
             //throw new RuntimeException("IOExceptions will crash the application", e);
-            System.out.println(e.getMessage());
+            System.out.println("Inside Util printXML e.getMessage(): "+e.getMessage());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Inside Util printXML e.getMessage() 2: "+e.getMessage());
         } finally {
             if (output != null) {
                 try {
                     output.close();
                 } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                    System.out.println("Inside Util printXML e.getMessage() finally: "+e.getMessage());
                 }
             }
         }
@@ -77,18 +78,18 @@ public class Util {
     }
 
     public static Boolean writeTextFile(String fileName, String s) {
-        //System.out.println("writeTextFile");
+        System.out.println("Inside Util writeTextFile");
         Boolean Chk = false;
 
         FileWriter output = null;
         try {
             output = new FileWriter(fileName);
             output.write(s);
-            //System.out.println(s);
+            System.out.println("Inside Util writeTextFile s: "+s);
             //output.flush();
             //output.close();
         } catch (Exception e) {
-            //System.out.println("Exception");
+            System.out.println("Inside Util writeTextFile Exception: "+e.getMessage());
             e.printStackTrace();
             throw new RuntimeException(e);
         } finally {

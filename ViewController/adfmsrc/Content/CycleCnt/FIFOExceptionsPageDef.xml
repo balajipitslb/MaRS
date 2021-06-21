@@ -1,59 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="11.1.2.60.81" id="FIFOExceptionsPageDef"
                 Package="Content.CycleCnt">
-  <parameters/>
-  <executables>
-    <variableIterator id="variables"/>
-    <iterator Binds="CCDataControlNested.MrltFifopartxView" DataControl="MNRDataControlDataControl" RangeSize="25"
-              id="MrltFifopartxViewIterator" Refresh="default"/>
-    <iterator Binds="CCDataControlNested.MrltFifoheaderView1" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrltFifoheaderView1Iterator"/>
-    <iterator Binds="CCDataControlNested.MrltFifopartxheaderView" DataControl="MNRDataControlDataControl"
-              RangeSize="25" id="MrltFifopartxheaderViewIterator" Refresh="default">
-      <sortCriteria>
-        <sort attribute="Fpxhid" ascending="false"/>
-      </sortCriteria>
-    </iterator>
-    <iterator Binds="CCDataControlNested.MrltFifoPartx_partView1" RangeSize="25" DataControl="MNRDataControlDataControl"
-              id="MrltFifoPartx_partView1Iterator"/>
-  </executables>
-  <bindings>
-    <tree IterBinding="MrltFifopartxViewIterator" id="MrltFifopartxView1">
-      <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltFifopartxView" Name="MrltFifopartxView10">
-        <AttrNames>
-          <Item Value="Fpxhid"/>
-          <Item Value="Partnum"/>
-          <Item Value="tPartDesc"/>
-          <Item Value="Xtype"/>
-          <Item Value="Pvalue"/>
-          <Item Value="Reptype"/>
-          <Item Value="Created"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <tree IterBinding="MrltFifoheaderView1Iterator" id="MrltFifoheaderView1">
-      <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltFifoheaderView" Name="MrltFifoheaderView10">
-        <AttrNames>
-          <Item Value="Listid"/>
-          <Item Value="tCCDesc"/>
-          <Item Value="tCCStatus"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <tree IterBinding="MrltFifopartxheaderViewIterator" id="MrltFifopartxheaderView">
-      <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltFifopartxheaderView" Name="MrltFifopartxheaderView0">
-        <AttrNames>
-          <Item Value="Fpxhid"/>
-          <Item Value="Created"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <action IterBinding="MrltFifopartxheaderViewIterator" id="CreateInsert" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
-    <action IterBinding="MrltFifopartxViewIterator" id="CreateInsert1" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
-    <action IterBinding="MrltFifopartxViewIterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
-    <!--
+    <parameters/>
+    <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="CCDataControlNested.MrltFifopartxView" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="MrltFifopartxViewIterator" Refresh="default"/>
+        <iterator Binds="CCDataControlNested.MrltFifoheaderView1" DataControl="MNRDataControlDataControl" RangeSize="25"
+                  id="MrltFifoheaderView1Iterator"/>
+        <iterator Binds="CCDataControlNested.MrltFifopartxheaderView" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrltFifopartxheaderViewIterator" Refresh="default">
+            <sortCriteria>
+                <sort attribute="Fpxhid" ascending="false"/>
+            </sortCriteria>
+        </iterator>
+        <iterator Binds="CCDataControlNested.MrltFifoPartx_partView1" RangeSize="25"
+                  DataControl="MNRDataControlDataControl" id="MrltFifoPartx_partView1Iterator"/>
+    </executables>
+    <bindings>
+        <tree IterBinding="MrltFifopartxViewIterator" id="MrltFifopartxView1">
+            <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltFifopartxView" Name="MrltFifopartxView10">
+                <AttrNames>
+                    <Item Value="Fpxhid"/>
+                    <Item Value="Partnum"/>
+                    <Item Value="tPartDesc"/>
+                    <Item Value="Xtype"/>
+                    <Item Value="Pvalue"/>
+                    <Item Value="Reptype"/>
+                    <Item Value="Created"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="MrltFifoheaderView1Iterator" id="MrltFifoheaderView1">
+            <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltFifoheaderView" Name="MrltFifoheaderView10">
+                <AttrNames>
+                    <Item Value="Listid"/>
+                    <Item Value="tCCDesc"/>
+                    <Item Value="tCCStatus"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <tree IterBinding="MrltFifopartxheaderViewIterator" id="MrltFifopartxheaderView">
+            <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltFifopartxheaderView" Name="MrltFifopartxheaderView0">
+                <AttrNames>
+                    <Item Value="Fpxhid"/>
+                    <Item Value="Created"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="MrltFifopartxheaderViewIterator" id="CreateInsert" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="MrltFifopartxViewIterator" id="CreateInsert1" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="MrltFifopartxViewIterator" id="Delete" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <!--
     <list IterBinding="MrltFifopartxViewIterator" id="Xtype" DTSupportsMRU="true" SelectItemValueMode="ListObject"
           StaticList="true">
       <AttrNames>
@@ -76,47 +77,48 @@
         <Item Value="BOTH"/>
       </ValueList>
     </list>-->
-    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" InstanceName="MNRDataControlDataControl"
-            DataControl="MNRDataControlDataControl"/>
-    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
-            InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
-    <action IterBinding="MrltFifopartxheaderViewIterator" id="Create" RequiresUpdateModel="true" Action="createRow"/>
-    <tree IterBinding="MrltFifoPartx_partView1Iterator" id="MrltFifoPartx_partView1">
-      <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltFifoPartx_partView" Name="MrltFifoPartx_partView10">
-        <AttrNames>
-          <Item Value="Fpxhid"/>
-          <Item Value="Partnum"/>
-          <Item Value="ParDesc"/>
-          <Item Value="Xtype"/>
-          <Item Value="Pvalue"/>
-          <Item Value="Reptype"/>
-          <Item Value="Created"/>
-        </AttrNames>
-      </nodeDefinition>
-    </tree>
-    <action IterBinding="MrltFifoPartx_partView1Iterator" id="CreateInsert2" RequiresUpdateModel="true"
-            Action="createInsertRow"/>
-    <action IterBinding="MrltFifoPartx_partView1Iterator" id="Delete1" RequiresUpdateModel="false"
-            Action="removeCurrentRow"/>
-    <listOfValues IterBinding="MrltFifopartxViewIterator" StaticList="false" Uses="LOV_Partnum" id="Partnum1"/>
-    <attributeValues IterBinding="MrltFifopartxViewIterator" id="tParDesc">
-      <AttrNames>
-        <Item Value="tPartDesc"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="MrltFifopartxViewIterator" StaticList="false" Uses="LOV_Xtype" id="Xtype"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="MrltFifopartxViewIterator" id="Pvalue">
-      <AttrNames>
-        <Item Value="Pvalue"/>
-      </AttrNames>
-    </attributeValues>
-    <list IterBinding="MrltFifopartxViewIterator" StaticList="false" Uses="LOV_Reptype" id="Reptype"
-          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
-    <attributeValues IterBinding="MrltFifopartxViewIterator" id="Created">
-      <AttrNames>
-        <Item Value="Created"/>
-      </AttrNames>
-    </attributeValues>
-  </bindings>
+        <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+                InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
+        <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+                InstanceName="MNRDataControlDataControl" DataControl="MNRDataControlDataControl"/>
+        <action IterBinding="MrltFifopartxheaderViewIterator" id="Create" RequiresUpdateModel="true"
+                Action="createRow"/>
+        <tree IterBinding="MrltFifoPartx_partView1Iterator" id="MrltFifoPartx_partView1">
+            <nodeDefinition DefName="its.mnr.mp5.vo.cyclecount.MrltFifoPartx_partView" Name="MrltFifoPartx_partView10">
+                <AttrNames>
+                    <Item Value="Fpxhid"/>
+                    <Item Value="Partnum"/>
+                    <Item Value="ParDesc"/>
+                    <Item Value="Xtype"/>
+                    <Item Value="Pvalue"/>
+                    <Item Value="Reptype"/>
+                    <Item Value="Created"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <action IterBinding="MrltFifoPartx_partView1Iterator" id="CreateInsert2" RequiresUpdateModel="true"
+                Action="createInsertRow"/>
+        <action IterBinding="MrltFifoPartx_partView1Iterator" id="Delete1" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <listOfValues IterBinding="MrltFifopartxViewIterator" StaticList="false" Uses="LOV_Partnum" id="Partnum1"/>
+        <attributeValues IterBinding="MrltFifopartxViewIterator" id="tParDesc">
+            <AttrNames>
+                <Item Value="tPartDesc"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="MrltFifopartxViewIterator" StaticList="false" Uses="LOV_Xtype" id="Xtype"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="MrltFifopartxViewIterator" id="Pvalue">
+            <AttrNames>
+                <Item Value="Pvalue"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="MrltFifopartxViewIterator" StaticList="false" Uses="LOV_Reptype" id="Reptype"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="MrltFifopartxViewIterator" id="Created">
+            <AttrNames>
+                <Item Value="Created"/>
+            </AttrNames>
+        </attributeValues>
+    </bindings>
 </pageDefinition>

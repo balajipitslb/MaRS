@@ -1007,6 +1007,15 @@
                                                                id="ot16"/>
                                             </af:dialog>
                                         </af:popup>
+                                        <af:popup childCreation="deferred" autoCancel="disabled" id="p5"
+                                                  binding="#{POMaintenance.inactivePartPop}">
+                                            <af:dialog id="d8" type="ok" title="#{viewcontrollerBundle.WARNING}"
+                                            titleIconSource="#{resource['images:warning.png']}"
+                                                       closeIconVisible="false"
+                                                       dialogListener="#{POMaintenance.inactivePartDiagLstnr}">
+                                                        <af:outputText value="This is an Inactive part. Please choose another part." id="ot67"/>
+                                            </af:dialog>
+                                        </af:popup>                                           
                                         <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
                                                   binding="#{POMaintenance.xchargesPop}">
                                             <af:dialog id="d3" title="ExtraCharges/Discounts" closeIconVisible="false"

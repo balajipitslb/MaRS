@@ -228,6 +228,7 @@ public class POTransactionsRecvViewRowImpl extends ExtendedViewRowImpl implement
         String sPartOrg;
         Double dOrderedQty = 0.0;
         Double dRecvdQty;
+        Double dOutQty;
         String sStatus;
         String sOrdLineType;
         ////System.out.println("1");
@@ -248,10 +249,21 @@ public class POTransactionsRecvViewRowImpl extends ExtendedViewRowImpl implement
             
             dRecvdQty = (Double)rw.getAttribute("Recvqty") == null ? 0 : (Double)rw.getAttribute("Recvqty");
 
-//            //System.out.println("ACnt: " + cnt++ + ":: Part:" + sPart + ":: dOrderedQty: " + dOrderedQty + "  dRecvdQty: " + dRecvdQty);
+    //            //System.out.println("ACnt: " + cnt++ + ":: Part:" + sPart + ":: dOrderedQty: " + dOrderedQty + "  dRecvdQty: " + dRecvdQty);
             allReadyFetched = aList.contains(sOrdLine);
-//            //System.out.println("allReadyFetched: " + allReadyFetched);
-            if (!allReadyFetched && (dRecvdQty.compareTo(dOrderedQty) < 0) && "A".equals(sStatus) && "PART".equals(sOrdLineType)) {
+    //            //System.out.println("allReadyFetched: " + allReadyFetched);
+            ////////////////////***********LK*************////////////////////////////////////////
+            if(rw.getAttributeIndexOf("tOrlOutstanding")!=-1){
+                if(rw.getAttribute("tOrlOutstanding")!=null){
+                    dOutQty = (Double.valueOf((String)rw.getAttribute("tOrlOutstanding"))).doubleValue();
+                }
+                else
+                    dOutQty = dOrderedQty-dRecvdQty;
+            }
+                else
+                    dOutQty = dOrderedQty-dRecvdQty;
+           // if (!allReadyFetched && (dRecvdQty.compareTo(dOrderedQty) < 0) && "A".equals(sStatus) && "PART".equals(sOrdLineType)) {
+           if (!allReadyFetched && (dOutQty > 0) && "A".equals(sStatus) && "PART".equals(sOrdLineType)) {
                 POTranslinesViewRowImpl rowImpl = (POTranslinesViewRowImpl)rit.createRow();
                 rit.insertRow(rowImpl);
 
@@ -296,10 +308,23 @@ public class POTransactionsRecvViewRowImpl extends ExtendedViewRowImpl implement
             
             dRecvdQty = (Double)rw.getAttribute("Recvqty") == null ? 0 : (Double)rw.getAttribute("Recvqty");
             
-//            //System.out.println("BCnt: " + cnt++ + ":: Part:" + sPart + ":: dOrderedQty: " + dOrderedQty + "  dRecvdQty: " + dRecvdQty);
+    //            //System.out.println("BCnt: " + cnt++ + ":: Part:" + sPart + ":: dOrderedQty: " + dOrderedQty + "  dRecvdQty: " + dRecvdQty);
             allReadyFetched = aList.contains(sOrdLine);
-//            //System.out.println("allReadyFetched: " + allReadyFetched);
-            if (rw != null && (!allReadyFetched  && (dRecvdQty.compareTo(dOrderedQty) < 0) && "A".equals(sStatus) && "PART".equals(sOrdLineType))) {
+    //            //System.out.println("allReadyFetched: " + allReadyFetched);
+            
+                        ////////////////////***********LK*************////////////////////////////////////////
+            if(rw.getAttributeIndexOf("tOrlOutstanding")!=-1){
+                if(rw.getAttribute("tOrlOutstanding")!=null){
+                    dOutQty = (Double.valueOf((String)rw.getAttribute("tOrlOutstanding"))).doubleValue();
+                }
+                else
+                    dOutQty = dOrderedQty-dRecvdQty;
+            }
+                else
+                    dOutQty = dOrderedQty-dRecvdQty;
+           //  if (rw != null && (!allReadyFetched  && (dRecvdQty.compareTo(dOrderedQty) < 0) && "A".equals(sStatus) && "PART".equals(sOrdLineType))) {
+                      
+            if (rw != null && (!allReadyFetched  && (dOutQty> 0) && "A".equals(sStatus) && "PART".equals(sOrdLineType))) {
 
                 POTranslinesViewRowImpl rowImpl = (POTranslinesViewRowImpl)rit.createRow();
                 rit.insertRow(rowImpl);
@@ -326,7 +351,7 @@ public class POTransactionsRecvViewRowImpl extends ExtendedViewRowImpl implement
                 ////System.out.println("rowImpl.gettOutstanding(): " + rowImpl.gettOutstanding());
             }
         }
-//        ritOrl.closeRowSet();
+    //        ritOrl.closeRowSet();
 
     }
     public String getDefaultBinLot(String pPart, String pPartOrg){

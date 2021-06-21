@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Flags Association" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelHeader text="#WO: #{pageFlowScope.psfEvtcode}" id="ph1" binding="#{FlagBean.flagHdr}">
+                        <f:facet name="context"/>
+                        <f:facet name="menuBar">
+                            <af:toolbar id="t1"
+                                        inlineStyle="border-color:Silver; border-style:solid; border-width:thin; background-color:White;"
+                                        partialTriggers="b1">
+                                <af:button icon="#{resource['images:add.png']}" id="b1"
+                                           actionListener="#{FlagBean.CreateNewWOFlagAssociation_action}"
+                                           binding="#{FlagBean.addFlagAssocWOBttn}"
+                                           visible="#{!((bindings.EvtStatus1.attributeValue eq 'EST' or bindings.EvtStatus1.attributeValue eq 'APP' or bindings.EvtStatus1.attributeValue eq 'REJ' or bindings.EvtStatus1.attributeValue eq 'UNA' or bindings.EvtStatus1.attributeValue eq 'C' or bindings.EvtStatus1.attributeValue eq 'CANC' or bindings.EvtStatus1.attributeValue eq 'RFI' or bindings.EvtStatus1.attributeValue eq 'INV' or bindings.EvtStatus1.attributeValue eq 'EXC'  or bindings.EvtStatus1.inputValue eq 'CBM'))}"
+                                                       rendered="#{(bindings.FlagAssoc_VVO1Iterator.estimatedRowCount le 0) and (securityContext.userGrantedResource['resourceName=WOEntryFlassAssociationsCreateEdit;resourceType=UIControl;action=enabled'])}"/>
+                                <af:button text="Apply" icon="#{resource['images:commit.png']}" id="b2"
+                                           actionListener="#{bindings.Commit.execute}"
+                                           disabled="#{(!bindings.Commit.enabled)}" binding="#{FlagBean.apply}"/>
+                                           <!--actionListener="#{bindings.Rollback.execute}"-->
+                                <af:button text="Cancel" icon="#{resource['images:undo.png']}" id="b3"
+                                           actionListener="#{FlagBean.flagAssocTblRollback_action}"
+                                           disabled="#{(!bindings.Rollback.enabled)}" immediate="true">
+                                    <af:resetActionListener/>
+                                </af:button>
+                                <af:button id="b4" immediate="false" actionListener="#{FlagBean.flagPPClose_action}"
+                                           icon="#{resource['images:terminate.png']}"/>
+                            </af:toolbar>
+                        </f:facet>
+                        <f:facet name="toolbar"/>
+                        <f:facet name="legend"/>
+                        <f:facet name="info"/>
+                        <af:panelCollection id="pc1" inlineStyle="margin:5px" featuresOff="viewMenu detach"
+                                            partialTriggers="::b1 ::b2 ::b3">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="statusbar"/>
+                            <af:table value="#{bindings.FlagAssoc_VVO1.collectionModel}" var="row"
+                                      rows="#{bindings.FlagAssoc_VVO1.rangeSize}"
+                                      emptyText="#{bindings.FlagAssoc_VVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      rowBandingInterval="0" fetchSize="#{bindings.FlagAssoc_VVO1.rangeSize}" id="t2"
+                                      binding="#{FlagBean.flagAssocTable}" editingMode="clickToEdit"
+                                      columnStretching="column:c2">
+                                <af:column headerText="Name" id="c2">
+                                    <af:inputText value="#{row.bindings.Fname.inputValue}"
+                                                  label="#{bindings.FlagAssoc_VVO1.hints.Fname.label}"
+                                                  required="#{bindings.FlagAssoc_VVO1.hints.Fname.mandatory}"
+                                                  columns="#{bindings.FlagAssoc_VVO1.hints.Fname.displayWidth}"
+                                                  maximumLength="#{bindings.FlagAssoc_VVO1.hints.Fname.precision}"
+                                                  shortDesc="#{bindings.FlagAssoc_VVO1.hints.Fname.tooltip}" id="it2"
+                                                  readOnly="true">
+                                        <f:validator binding="#{row.bindings.Fname.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column headerText="Updated By" id="c3">
+                                    <af:inputText value="#{row.bindings.Faupdby.inputValue}"
+                                                  label="#{bindings.FlagAssoc_VVO1.hints.Faupdby.label}"
+                                                  required="#{bindings.FlagAssoc_VVO1.hints.Faupdby.mandatory}"
+                                                  columns="#{bindings.FlagAssoc_VVO1.hints.Faupdby.displayWidth}"
+                                                  maximumLength="#{bindings.FlagAssoc_VVO1.hints.Faupdby.precision}"
+                                                  shortDesc="#{bindings.FlagAssoc_VVO1.hints.Faupdby.tooltip}" id="it3"
+                                                  readOnly="true">
+                                        <f:validator binding="#{row.bindings.Faupdby.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column headerText="Update date" id="c4">
+                                    <af:inputDate value="#{row.bindings.Faupddt.inputValue}"
+                                                  label="#{bindings.FlagAssoc_VVO1.hints.Faupddt.label}"
+                                                  required="#{bindings.FlagAssoc_VVO1.hints.Faupddt.mandatory}"
+                                                  columns="#{bindings.FlagAssoc_VVO1.hints.Faupddt.displayWidth}"
+                                                  shortDesc="#{bindings.FlagAssoc_VVO1.hints.Faupddt.tooltip}" id="id1"
+                                                  readOnly="true">
+                                        <f:validator binding="#{row.bindings.Faupddt.validator}"/>
+                                        <af:convertDateTime pattern="#{bindings.FlagAssoc_VVO1.hints.Faupddt.format}"/>
+                                    </af:inputDate>
+                                </af:column>
+                                <af:column headerText="#{bindings.FlagAssoc_VVO1.hints.Faitem.label}" id="c1"
+                                           visible="false">
+                                    <af:inputText value="#{row.bindings.Faitem.inputValue}"
+                                                  label="#{bindings.FlagAssoc_VVO1.hints.Faitem.label}"
+                                                  required="#{bindings.FlagAssoc_VVO1.hints.Faitem.mandatory}"
+                                                  columns="#{bindings.FlagAssoc_VVO1.hints.Faitem.displayWidth}"
+                                                  maximumLength="#{bindings.FlagAssoc_VVO1.hints.Faitem.precision}"
+                                                  shortDesc="#{bindings.FlagAssoc_VVO1.hints.Faitem.tooltip}" id="it1"
+                                                  readOnly="true">
+                                        <f:validator binding="#{row.bindings.Faitem.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column headerText="Active" id="c5">
+                                    <af:selectOneChoice value="#{row.bindings.Faactive.inputValue}"
+                                                        label="#{row.bindings.Faactive.label}"
+                                                        required="#{bindings.FlagAssoc_VVO1.hints.Faactive.mandatory}"
+                                                        shortDesc="#{bindings.FlagAssoc_VVO1.hints.Faactive.tooltip}"
+                                                        id="soc1"
+                                                        readOnly="#{(bindings.EvtStatus1.attributeValue eq 'EST' or bindings.EvtStatus1.attributeValue eq 'APP' or bindings.EvtStatus1.attributeValue eq 'REJ' or bindings.EvtStatus1.attributeValue eq 'UNA' or bindings.EvtStatus1.attributeValue eq 'C' or bindings.EvtStatus1.attributeValue eq 'CANC' or bindings.EvtStatus1.attributeValue eq 'RFI' or bindings.EvtStatus1.attributeValue eq 'INV' or bindings.EvtStatus1.attributeValue eq 'EXC'  or bindings.EvtStatus1.inputValue eq 'CBM')or(!securityContext.userGrantedResource['resourceName=WOEntryFlassAssociationsCreateEdit;resourceType=UIControl;action=enabled'])}"
+                                                        autoSubmit="true">
+                                        <f:selectItems value="#{row.bindings.Faactive.items}" id="si2"/>
+                                    </af:selectOneChoice>
+                                </af:column>
+                            </af:table>
+                        </af:panelCollection>
+                    </af:panelHeader>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

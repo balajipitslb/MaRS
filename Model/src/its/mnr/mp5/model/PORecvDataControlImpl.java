@@ -20,6 +20,7 @@ import oracle.jbo.Key;
 import oracle.jbo.Row;
 import oracle.jbo.RowIterator;
 import oracle.jbo.RowSetIterator;
+import oracle.jbo.ViewCriteria;
 import oracle.jbo.ViewObject;
 import oracle.jbo.server.ViewLinkImpl;
 import oracle.jbo.server.ViewObjectImpl;
@@ -73,6 +74,35 @@ public class PORecvDataControlImpl extends ExtendedApplicationModuleImpl impleme
             System.out.println("Clear Fully Received parts:End  VO RowCount=" + vo.getRowCount());
             //printRecd();
         }
+ 
+    public boolean isPartInactive(String sPart) {
+        boolean ret = false;
+        String notUsed = "";
+        System.out.println("Inside isPartInactive sPart: " + sPart);
+        ViewObjectImpl vo = this.getPOParts1();
+
+        try {
+            ViewCriteria vc = vo.getViewCriteria("findPartByParCode");
+            vo.applyViewCriteria(vc);
+            vo.setNamedWhereClauseParam("Bind_parcode", sPart);
+            vo.executeQuery();
+    
+            Row curr1 = vo.first();
+            notUsed = (String)curr1.getAttribute("ParNotused");
+              System.out.println("Inside isPartInactive notUsed : " + notUsed+" part code: "+(String)curr1.getAttribute("ParCode"));
+            if (notUsed.equals("+")) {
+                ret = true;
+                  System.out.println("Inside isPartInactive part notUsed ret: "+ret);
+            }
+            //}
+            // }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
+
     
     public void printRecd() {
             ////System.out.println("printRecd()");
@@ -339,5 +369,13 @@ public class PORecvDataControlImpl extends ExtendedApplicationModuleImpl impleme
      */
     public ViewLinkImpl getPOOrderlinesExchargesLink1() {
         return (ViewLinkImpl)findViewLink("POOrderlinesExchargesLink1");
+    }
+
+    /**
+     * Container's getter for POParts1.
+     * @return POParts1
+     */
+    public ExtendedViewObjectImpl getPOParts1() {
+        return (ExtendedViewObjectImpl) findViewObject("POParts1");
     }
 }

@@ -278,5 +278,37 @@
         Name="_return_type_"
         Type="void"/>
     </Method>
+    <Method
+      Name="getShowEstimate"
+      MethodName="getShowEstimate">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="sendMessage"
+      MethodName="sendMessage">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="toaddress"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="subject"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="body"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="host"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="port"
+        Type="java.lang.Integer"/>
+      <Parameter
+        Name="fromemail"
+        Type="java.lang.String"/>
+    </Method>
   </ClientInterface>
 </AppModule>

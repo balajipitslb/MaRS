@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8"
+                id="WorkOrder_Estimates_WorkOrder_Estimates_ExecuteWithParamsPageDef" Package="Taskflows.WorkOrder"
+                SkipValidation="true">
+    <parameters/>
+    <executables>
+        <iterator Binds="Estimate" RangeSize="25" DataControl="WODataControlDataControl" id="EstimateIterator"
+                  Refresh="never"/>
+    </executables>
+    <bindings>
+        <action IterBinding="EstimateIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+                Action="executeWithParams">
+            <NamedData NDName="EIdBind" NDType="java.lang.String"/>
+        </action>
+    </bindings>
+</pageDefinition>

@@ -483,9 +483,9 @@
       <Attr Name="_description" Value="T Grand Tot"/>
     </DesignTime>
     <TransientExpression
-      trustMode="untrusted"><![CDATA[(adf.object.R5orderlines.sum("OrlTotextra") != null? adf.object.R5orderlines.sum("OrlTotextra") : 0)+(OrdPrice!=null?OrdPrice:0)]]></TransientExpression>
+      trustMode="trusted"><![CDATA[(adf.object.R5orderlines.sum("OrlTotextra") != null? adf.object.R5orderlines.sum("OrlTotextra") : 0)+(OrdPrice!=null?OrdPrice:0)]]></TransientExpression>
     <RecalcCondition
-      trustMode="untrusted"><![CDATA[true]]></RecalcCondition>
+      trustMode="trusted"><![CDATA[true]]></RecalcCondition>
   </Attribute>
   <AccessorAttribute
     Name="R5activities"

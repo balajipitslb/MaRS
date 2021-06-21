@@ -14,7 +14,7 @@ import oracle.jbo.domain.Timestamp;
 public class MrltInvoiceheaderViewImpl extends ExtendedViewObjectImpl {
     public boolean createInvoiceHeader(Number pHeaderId, String pType, Double dLabor, Double dPart, Double pTax, Double pTotal,
                                        String pAcctNum, String pInt, Double pInvCr, Number pRef){
-        //System.out.println("inside MrltInvoiceheaderViewRowImpl:createInvoiceHeader()");
+        System.out.println("inside MrltInvoiceheaderViewRowImpl:createInvoiceHeader() pTax:"+pTax);
         Boolean ret = true;
         //DBTransaction trans = getDBTransaction();
         //Number ntrlacd = getValueFromSequence("S5ACCOUNTDETAIL", trans); 

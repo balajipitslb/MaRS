@@ -4,7 +4,7 @@
 <AppModule
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="WODataControl"
-  Version="11.1.2.64.36"
+  Version="12.1.3.10.8"
   ComponentClass="its.mnr.mp5.model.WODataControlImpl"
   DefClass="its.mnr.mp5.model.WODataControlDefImpl"
   ClearCacheOnRollback="true"
@@ -50,7 +50,7 @@
   <ViewUsage
     Name="CustomFields"
     ViewObjectName="its.mnr.mp5.vo.workorder.CustomFields"/>
-  <ViewUsage
+<ViewUsage
     Name="MeterReadings"
     ViewObjectName="its.mnr.mp5.vo.workorder.MeterReadings"/>
   <ViewUsage
@@ -108,6 +108,37 @@
   <ViewUsage
     Name="AvailableQtyExistence1"
     ViewObjectName="its.mnr.mp5.lov.AvailableQtyExistence"/>
+  <ViewUsage
+    Name="WOEvents2"
+    ViewObjectName="its.mnr.mp5.vo.workorder.WOEvents">
+    <ViewCriteriaUsage
+      Name="WObyEvtCode"
+      FullName="its.mnr.mp5.vo.workorder.WOEvents.WObyEvtCode"/>
+  </ViewUsage>
+  <ViewUsage
+    Name="EstimateVerLov"
+    ViewObjectName="its.mnr.mp5.lov.EstimateVerLov"/>
+  <ViewUsage
+    Name="EstimateWO"
+    ViewObjectName="its.mnr.mp5.vo.workorder.Estimate"/>
+  <ViewUsage
+    Name="EstimateTaskWO"
+    ViewObjectName="its.mnr.mp5.vo.workorder.EstimateTask"/>
+  <ViewUsage
+    Name="EstimatePartWO"
+    ViewObjectName="its.mnr.mp5.vo.workorder.EstimatePart"/>
+  <ViewUsage
+    Name="EstimateQuery"
+    ViewObjectName="its.mnr.mp5.vo.workorder.EstimateQueryVO"/>
+  <ViewUsage
+    Name="Estimate2"
+    ViewObjectName="its.mnr.mp5.vo.workorder.Estimate"/>
+  <ViewUsage
+    Name="EstimateQueryTask"
+    ViewObjectName="its.mnr.mp5.vo.workorder.EstimateTask"/>
+  <ViewUsage
+    Name="EstimateQueryPart"
+    ViewObjectName="its.mnr.mp5.vo.workorder.EstimatePart"/>
   <ViewLinkUsage
     Name="CurrentARVersionLaborCostLink1"
     ViewLinkObjectName="its.mnr.mp5.vo.link.CurrentARVersionLaborCostLink"
@@ -144,7 +175,7 @@
     SrcViewUsageName="its.mnr.mp5.model.WODataControl.WOEvents"
     DstViewUsageName="its.mnr.mp5.model.WODataControl.CustomFields"
     Reversed="false"/>
-  <ViewLinkUsage
+<ViewLinkUsage
     Name="WOEventsMeterReadingsLink1"
     ViewLinkObjectName="its.mnr.mp5.vo.link.WOEventsMeterReadingsLink"
     SrcViewUsageName="its.mnr.mp5.model.WODataControl.WOEvents"
@@ -204,12 +235,56 @@
     SrcViewUsageName="its.mnr.mp5.model.WODataControl.Matlparts"
     DstViewUsageName="its.mnr.mp5.model.WODataControl.AvailableQtyExistence1"
     Reversed="false"/>
-  <ClientInterface>
+  <ViewLinkUsage
+    Name="estimate_estimateverlovLink1"
+    ViewLinkObjectName="its.mnr.mp5.vo.link.estimate_estimateverlovLink"
+    SrcViewUsageName="its.mnr.mp5.model.WODataControl.Estimate"
+    DstViewUsageName="its.mnr.mp5.model.WODataControl.EstimateVerLov"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="R5EventsEstimatesWOLink1"
+    ViewLinkObjectName="its.mnr.mp5.vo.link.R5EventsEstimatesWOLink"
+    SrcViewUsageName="its.mnr.mp5.model.WODataControl.WOEvents"
+    DstViewUsageName="its.mnr.mp5.model.WODataControl.EstimateWO"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="MrltEstimatetaskdetailFk1Link1"
+    ViewLinkObjectName="its.mnr.mp5.vo.link.MrltEstimatetaskdetailFk1Link"
+    SrcViewUsageName="its.mnr.mp5.model.WODataControl.EstimateWO"
+    DstViewUsageName="its.mnr.mp5.model.WODataControl.EstimateTaskWO"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="MrltEstimatepartdetailFk1Link2"
+    ViewLinkObjectName="its.mnr.mp5.vo.link.MrltEstimatepartdetailFk1Link"
+    SrcViewUsageName="its.mnr.mp5.model.WODataControl.EstimateTaskWO"
+    DstViewUsageName="its.mnr.mp5.model.WODataControl.EstimatePartWO"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="estimateQuery_estimateLink1"
+    ViewLinkObjectName="its.mnr.mp5.vo.link.estimateQuery_estimateLink"
+    SrcViewUsageName="its.mnr.mp5.model.WODataControl.EstimateQuery"
+    DstViewUsageName="its.mnr.mp5.model.WODataControl.Estimate2"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="MrltEstimatetaskdetailFk1Link3"
+    ViewLinkObjectName="its.mnr.mp5.vo.link.MrltEstimatetaskdetailFk1Link"
+    SrcViewUsageName="its.mnr.mp5.model.WODataControl.Estimate2"
+    DstViewUsageName="its.mnr.mp5.model.WODataControl.EstimateQueryTask"
+    Reversed="false"/>
+  <ViewLinkUsage
+    Name="MrltEstimatepartdetailFk1Link3"
+    ViewLinkObjectName="its.mnr.mp5.vo.link.MrltEstimatepartdetailFk1Link"
+    SrcViewUsageName="its.mnr.mp5.model.WODataControl.EstimateQueryTask"
+    DstViewUsageName="its.mnr.mp5.model.WODataControl.EstimateQueryPart"
+    Reversed="false"/>
+  <ClientInterface
+    Name="__clientInterface">
     <Method
       Name="createFlagAssociation"
       MethodName="createFlagAssociation">
       <Return
-        Type="void"/>
+        Type="void"
+        Name="_return_type_"/>
       <Parameter
         Name="fid"
         Type="java.lang.Integer"/>
@@ -224,13 +299,15 @@
       Name="doQueryResultReset"
       MethodName="doQueryResultReset">
       <Return
-        Type="void"/>
+        Type="void"
+        Name="_return_type_"/>
     </Method>
     <Method
       Name="isFlagUsedInWO"
       MethodName="isFlagUsedInWO">
       <Return
-        Type="java.lang.String"/>
+        Type="java.lang.String"
+        Name="_return_type_"/>
       <Parameter
         Name="Fidval"
         Type="java.lang.Integer"/>
@@ -239,7 +316,8 @@
       Name="CopyWOTask"
       MethodName="CopyWOTask">
       <Return
-        Type="java.lang.String"/>
+        Type="java.lang.String"
+        Name="_return_type_"/>
       <Parameter
         Name="ACTEVENT"
         Type="java.lang.String"/>
@@ -254,6 +332,32 @@
         Type="java.lang.String"/>
       <Parameter
         Name="pOrg"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="UpdateWOStatus"
+      MethodName="UpdateWOStatus">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="evntCd"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pstatus"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pUser"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="RejWOPartsReturn"
+      MethodName="RejWOPartsReturn">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="pEvtCode"
         Type="java.lang.String"/>
     </Method>
   </ClientInterface>

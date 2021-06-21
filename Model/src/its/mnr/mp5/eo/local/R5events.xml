@@ -4,12 +4,11 @@
 <Entity
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="R5events"
-  Version="11.1.2.64.36"
+  Version="12.1.3.10.8"
   DBObjectType="table"
   DBObjectName="R5EVENTS"
   AliasName="R5events"
   BindingStyle="OracleName"
-  UseGlueCode="false"
   RowClass="its.mnr.mp5.eo.local.R5eventsImpl"
   DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
   CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
@@ -22,7 +21,8 @@
     Name="CurrentAccountRateVersion"
     ViewObjectName="its.mnr.mp5.vo.workorder.CurrentAccountRateVersion"
     MaxFetchSize="1"
-    AccessMode="FORWARD_ONLY">
+    AccessMode="FORWARD_ONLY"
+    RowLevelBinds="true">
     <ViewCriteriaUsage
       Name="CurrentAccountRateVersionByAccount"
       FullName="its.mnr.mp5.vo.workorder.CurrentAccountRateVersion.CurrentAccountRateVersionByAccount"/>
@@ -43,7 +43,8 @@
     AccessMode="FORWARD_ONLY"/>
   <ViewAccessor
     Name="EstimateExistence"
-    ViewObjectName="its.mnr.mp5.lov.EstimateExistence">
+    ViewObjectName="its.mnr.mp5.lov.EstimateExistence"
+    RowLevelBinds="true">
     <ParameterMap>
       <PIMap Variable="WOAcctNum">
         <TransientExpression><![CDATA[EvtCostcode]]></TransientExpression>
@@ -66,7 +67,8 @@
   <ViewAccessor
     Name="AccountRateVersionDetail"
     ViewObjectName="its.mnr.mp5.vo.workorder.AccountRateVersionDetail"
-    MaxFetchSize="1">
+    MaxFetchSize="1"
+    RowLevelBinds="true">
     <ViewCriteriaUsage
       Name="AccountRateVersionDetailCriteria"
       FullName="its.mnr.mp5.vo.workorder.AccountRateVersionDetail.AccountRateVersionDetailCriteria"/>
@@ -161,8 +163,10 @@
       Name="EvtStatus_Rule_0"
       ResId="STATUS_CHANGE_NOT_ALLOWED__A_0"
       MethodName="validateEvtStatus">
-      <validation:OnCondition><![CDATA[newValue == 'CRV']]></validation:OnCondition>
-      <validation:ResExpressions>
+      <validation:OnCondition
+        Name="OnConditionExpr"><![CDATA[newValue == 'CRV']]></validation:OnCondition>
+      <validation:ResExpressions
+        Name="EvtStatus_Rule_0_ResExprList">
         <validation:Expression
           Name="wo"><![CDATA[EvtCode]]></validation:Expression>
       </validation:ResExpressions>
@@ -171,8 +175,10 @@
       Name="EvtStatus_Rule_1"
       MethodName="validateEvtStatusNoActs"
       ResId="WORK_ORDER_WO_DOES_NOT_HAVE_AN">
-      <validation:OnCondition><![CDATA[newValue == 'CBM']]></validation:OnCondition>
-      <validation:ResExpressions>
+      <validation:OnCondition
+        Name="OnConditionExpr"><![CDATA[newValue == 'CBM']]></validation:OnCondition>
+      <validation:ResExpressions
+        Name="EvtStatus_Rule_1_ResExprList">
         <validation:Expression
           Name="wo"><![CDATA[EvtCode]]></validation:Expression>
       </validation:ResExpressions>
@@ -187,8 +193,10 @@
       Name="EvtStatus_Rule_2"
       MethodName="validateEvtStatusNoParts"
       ResId="WORK_ORDER_WO_HAS_PARTS_ASSOCI">
-      <validation:OnCondition><![CDATA[newValue == 'CANC']]></validation:OnCondition>
-      <validation:ResExpressions>
+      <validation:OnCondition
+        Name="OnConditionExpr"><![CDATA[newValue == 'CANC']]></validation:OnCondition>
+      <validation:ResExpressions
+        Name="EvtStatus_Rule_2_ResExprList">
         <validation:Expression
           Name="wo"><![CDATA[EvtCode]]></validation:Expression>
       </validation:ResExpressions>
@@ -197,7 +205,8 @@
       Name="EvtStatus_Rule_3"
       MethodName="validateEvtStatusIsDirty"
       ResId="STATUS_CHANGE_NOT_ALLOWED__PLE">
-      <validation:OnCondition><![CDATA[newValue == 'CBM']]></validation:OnCondition>
+      <validation:OnCondition
+        Name="OnConditionExpr"><![CDATA[newValue == 'CBM']]></validation:OnCondition>
     </validation:MethodValidationBean>
   </Attribute>
   <Attribute
@@ -1424,8 +1433,8 @@
     ColumnType="DOUBLE PRECISION"
     IsPersistent="false"
     IsQueriable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[adf.object.R5activities.sum("TotalPartCost") != null? adf.object.R5activities.sum("TotalPartCost") : 0]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -1473,8 +1482,8 @@
     ColumnType="DOUBLE PRECISION"
     IsPersistent="false"
     IsQueriable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[(TotalPartCst != null && TotalLaborCst !=null? Math.round((TotalPartCst + TotalLaborCst)* 100) / 100:null)]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -1491,8 +1500,8 @@
     ColumnType="VARCHAR2"
     IsPersistent="false"
     IsQueriable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[(EvtCode != null && EvtJobtype != null? adf.object.MrlrefWorkordermaster.Wotype: null)]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <Dependencies>
       <Item
         Value="EvtJobtype"/>
@@ -1508,8 +1517,8 @@
     IsPersistent="false"
     IsQueriable="false"
     IsUpdateable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[adf.object.getPostedAttribute(adf.object.getAttributeIndexOf("EvtStatus"))]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
   </Attribute>
   <Attribute
     Name="isTotalHourOver"
@@ -1520,7 +1529,6 @@
     IsPersistent="false"
     IsQueriable="false"
     IsUpdateable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[if(EvtCode != null && EvtCostcode != null){
 	if(adf.object.MrltAccountmaster.Estimate == 'Y'){
 		if(adf.object.MrltAccountmaster.Overuom == 'H' && TotalHours >= adf.object.MrltAccountmaster.Over){
@@ -1529,6 +1537,7 @@
 	}else return false;
 }
 else return false;]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <Dependencies>
       <Item
         Value="EvtCode"/>
@@ -1547,7 +1556,6 @@ else return false;]]></TransientExpression>
     IsPersistent="false"
     IsQueriable="false"
     IsUpdateable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[if(EvtCode != null && EvtCostcode != null){
 	if(adf.object.MrltAccountmaster.Estimate == 'Y'){
 		if(adf.object.MrltAccountmaster.Overuom == 'D' && TotalPartsLabor >= adf.object.MrltAccountmaster.Over){
@@ -1556,6 +1564,7 @@ else return false;]]></TransientExpression>
 	}else return false;
 }
 else return false;]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <Dependencies>
       <Item
         Value="EvtCode"/>
@@ -2188,9 +2197,8 @@ else return false;]]></TransientExpression>
       <validation:Item
         Value="EvtCreated"/>
     </validation:OnAttributes>
-    <validation:ResExpressions>
-      <validation:Expression
-        Name="start"><![CDATA[EvtStart]]></validation:Expression>
+    <validation:ResExpressions
+      Name="R5events_Rule_0_ResExprList">
       <validation:Expression
         Name="create"><![CDATA[EvtCreated]]></validation:Expression>
     </validation:ResExpressions>
@@ -2202,7 +2210,8 @@ else return false;]]></TransientExpression>
       <validation:Item
         Value="EvtStart"/>
     </validation:OnAttributes>
-    <validation:OnCondition><![CDATA[EvtCostcode != null]]></validation:OnCondition>
+    <validation:OnCondition
+      Name="OnConditionExpr"><![CDATA[EvtCostcode != null]]></validation:OnCondition>
   </validation:MethodValidationBean>
   <ResourceBundle>
     <PropertiesBundle
