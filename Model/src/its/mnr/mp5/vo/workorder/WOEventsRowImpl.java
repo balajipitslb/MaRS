@@ -94,8 +94,8 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
             String sport = getMP5Profile("SMTPPort");
             Integer iport = Integer.parseInt(sport);
             //callStoredFunction(VARCHAR2, "mnrpkg.sendEmail(?,?,?,?,?)", new Object[] {toaddress,  subject,  body,  host,  iport,  fromemail});        
-            Util.sendMessage("lakshmi.kumar@itslb.com",  subject,  body,  host,  iport,  fromemail);    
-           // Util.sendMessage(toaddress,  subject,  body,  host,  iport,  fromemail);
+            //Util.sendMessage("lakshmi.kumar@itslb.com",  subject,  body,  host,  iport,  fromemail);    
+            Util.sendMessage(toaddress,  subject,  body,  host,  iport,  fromemail);
         return null;
         }
     public String getEstimateCriteria(){            
