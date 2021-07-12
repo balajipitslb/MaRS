@@ -82,7 +82,14 @@
     PrecisionRule="true"
     EntityAttrName="Uom"
     EntityUsage="MrltEstimatetaskdetail"
-    AliasName="UOM"/>
+    AliasName="UOM">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.EstimateTask.Uom_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="Loc"
     IsNotNull="true"
@@ -206,7 +213,14 @@
     PrecisionRule="true"
     EntityAttrName="Compcd"
     EntityUsage="MrltEstimatetaskdetail"
-    AliasName="COMPCD"/>
+    AliasName="COMPCD">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.EstimateTask.Compcd_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewLinkAccessor
     Name="MrltEstimatepartdetailView"
     ViewLink="its.mnr.mp5.vo.link.MrltEstimatepartdetailFk1Link"

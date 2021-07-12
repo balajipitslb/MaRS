@@ -307,11 +307,12 @@
             <NamedData NDName="WOEventCode" NDType="java.lang.String"/>
             <NamedData NDName="WOAcctNum" NDType="java.lang.String"/>
         </methodAction>
-        <methodAction id="getMP5Profile" InstanceName="data.MNRDataControlDataControl.dataProvider"
+        <methodAction id="getMP5Profile" InstanceName="bindings.WOEventsIterator.currentRow"
                       DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
                       MethodName="getMP5Profile" IsViewObjectMethod="false" IsLocalObjectReference="true"
-                      ReturnName="data.MNRDataControlDataControl.methodResults.getMP5Profile_MNRDataControlDataControl_dataProvider_getMP5Profile_result">
-            <NamedData NDName="sProfile" NDType="java.lang.String"/>
+                      ReturnName="data.MNRDataControlDataControl.methodResults.getMP5Profile_getMP5Profile_getMP5Profile_result"
+                      IterBinding="WOEventsIterator">
+            <NamedData NDName="sprofile" NDType="java.lang.String"/>
         </methodAction>
         <methodAction IterBinding="WOEventsIterator" id="updateWOStatus"
                       InstanceName="bindings.WOEventsIterator.currentRow" DataControl="MNRDataControlDataControl"

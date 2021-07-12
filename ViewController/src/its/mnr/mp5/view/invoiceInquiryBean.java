@@ -104,7 +104,7 @@ public class invoiceInquiryBean {
                         writeInvoiceChk = writeInvoiceCrXML(nInv);
                     } else if ("RTRO".equals(sType)) {
                         writeInvoiceChk = writeInvoiceRtroXML(nInv);
-                    } else if ("EST".equals(sType)) {
+                    } else if ("PEND".equals(sType)) {
                         writeInvoiceChk = writeInvoiceEstXML(nInv);
                     }
 
@@ -323,7 +323,7 @@ public class invoiceInquiryBean {
         RichPopup.PopupHints hints = new RichPopup.PopupHints();
         if ("CR".equals(sType)) {
             pdtlCr.show(hints);
-        } else if ("STD".equals(sType) || "EST".equals(sType)) {
+        } else if ("STD".equals(sType) || "PEND".equals(sType)) {
             pdtlStd.show(hints);
         } else if ("RTRO".equals(sType)) {
             pdtlRtro.show(hints);

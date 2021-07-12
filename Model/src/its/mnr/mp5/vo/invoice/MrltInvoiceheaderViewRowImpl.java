@@ -283,7 +283,7 @@ public class MrltInvoiceheaderViewRowImpl extends ExtendedViewRowImpl implements
                 attrMap.put(MPARTSDETAILVODEF, MPARTSDETAILATTRS);
 
                 String filepath = getMP5Profile("InvoiceOutPath");
-                String filename = filepath + pInvNum + "#EST.xml";
+                String filename = filepath + pInvNum + "#PEND.xml";
                 Util.printXML(rw.writeXML(XMLInterface.XML_OPT_ALL_ROWS, attrMap), filename);
 
                 /*Uncomment to print to screen
@@ -311,8 +311,8 @@ public class MrltInvoiceheaderViewRowImpl extends ExtendedViewRowImpl implements
                 invType = "#CR.xml";
             } else if ("RTRO".equals(pType)) {
                 invType = "#RTRO.xml";
-            } else if ("EST".equals(pType)) {
-                invType = "#EST.xml";
+            } else if ("PEND".equals(pType)) {
+                invType = "#PEND.xml";
             } else return deleteChk;
             String filename = filepath + pInvNum + invType;
             deleteChk = Util.deleteFile(filename);

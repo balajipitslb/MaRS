@@ -4,7 +4,7 @@
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="WOAccountMaster"
-  Version="11.1.2.60.81"
+  Version="12.1.3.10.8"
   OrderBy="TO_NUMBER(ACCTNUM)"
   BindingStyle="OracleName"
   CustomQuery="true"
@@ -12,7 +12,6 @@
   ComponentClass="its.mnr.mp5.vo.workorder.WOAccountMasterImpl"
   DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
   PageIterMode="Full"
-  UseGlueCode="false"
   FetchSize="40"
   FetchMode="FETCH_ALL"
   RangeSize="40"
@@ -42,7 +41,8 @@
     Name="WOStartDt"
     Kind="where"
     Type="java.sql.Timestamp">
-    <TransientExpression><![CDATA[adf.currentDateTime]]></TransientExpression>
+    <TransientExpression
+      Name="expression"><![CDATA[adf.currentDateTime]]></TransientExpression>
   </Variable>
   <SQLQuery><![CDATA[SELECT AM.ACCOUNTNM, 
        AM.ACCOUNTNMLONG, 
@@ -189,6 +189,12 @@ AND AR.ACCOUNTRATEID =   (SELECT MAX (TO_NUMBER(ACCOUNTRATEID))
     <DesignTime>
       <Attr Name="_DisplaySize" Value="1"/>
     </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.vo.workorder.WOAccountMaster.Estimate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </ViewAttribute>
   <ViewAttribute
     Name="Invrej"

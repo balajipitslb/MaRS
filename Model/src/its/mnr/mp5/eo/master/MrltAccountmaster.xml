@@ -4,12 +4,11 @@
 <Entity
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="MrltAccountmaster"
-  Version="11.1.2.60.81"
+  Version="12.1.3.10.8"
   DBObjectType="table"
   DBObjectName="MRLT_ACCOUNTMASTER"
   AliasName="MrltAccountmaster"
   BindingStyle="OracleName"
-  UseGlueCode="false"
   RowClass="its.mnr.mp5.eo.master.MrltAccountmasterImpl"
   DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
   CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
@@ -22,7 +21,8 @@
     Name="UnfinishedWOExistence"
     ViewObjectName="its.mnr.mp5.lov.UnfinishedWOExistence"
     FetchMode="FETCH_ALL"
-    AccessMode="FORWARD_ONLY">
+    AccessMode="FORWARD_ONLY"
+    RowLevelBinds="true">
     <ParameterMap>
       <PIMap Variable="WOAcctNum">
         <TransientExpression><![CDATA[Acctnum]]></TransientExpression>
@@ -153,7 +153,8 @@
       Name="Billtype_Rule_0"
       MethodName="validateBilltype"
       ResId="its.mnr.mp5.eo.master.MrltAccountmaster.Billtype_Rule_0">
-      <validation:ResExpressions>
+      <validation:ResExpressions
+        Name="Billtype_Rule_0_ResExprList">
         <validation:Expression
           Name="acct"><![CDATA[Acctnum]]></validation:Expression>
       </validation:ResExpressions>
@@ -162,7 +163,8 @@
       Name="Billtype_Rule_1"
       OperandType="EXPR"
       Inverse="false">
-      <validation:OnCondition><![CDATA[newValue == 'N']]></validation:OnCondition>
+      <validation:OnCondition
+        Name="OnConditionExpr"><![CDATA[newValue == 'N']]></validation:OnCondition>
       <validation:MsgIds>
         <validation:Item
           Value="REQUIRE_ESTIMATE_MUST_BE_UNCHE"/>
@@ -203,7 +205,8 @@ else return true]]></validation:TransientExpression>
       Name="Amstractive_Rule_0"
       MethodName="validateActive"
       ResId="UNFINISHED_WORK_ORDERS_EXIST_0">
-      <validation:ResExpressions>
+      <validation:ResExpressions
+        Name="Amstractive_Rule_0_ResExprList">
         <validation:Expression
           Name="acct"><![CDATA[Acctnum]]></validation:Expression>
       </validation:ResExpressions>
@@ -234,7 +237,8 @@ else return true]]></validation:TransientExpression>
       Name="Estimate_Rule_0"
       OperandType="EXPR"
       Inverse="false">
-      <validation:OnCondition><![CDATA[newValue == 'N']]></validation:OnCondition>
+      <validation:OnCondition
+        Name="OnConditionExpr"><![CDATA[newValue == 'N']]></validation:OnCondition>
       <validation:MsgIds>
         <validation:Item
           Value="ESTIMATE_COMPLETION_AND_INVOIC"/>
@@ -244,6 +248,12 @@ else return true]]></validation:TransientExpression>
 }
 else return true]]></validation:TransientExpression>
     </validation:ExpressionValidationBean>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.master.MrltAccountmaster.Estimate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <Attribute
     Name="Over"
@@ -348,7 +358,8 @@ else return true]]></validation:TransientExpression>
       Name="Parttax_Rule_0"
       MethodName="validateParttax"
       ResId="UNFINISHED_WORK_ORDERS_EXIST_1">
-      <validation:ResExpressions>
+      <validation:ResExpressions
+        Name="Parttax_Rule_0_ResExprList">
         <validation:Expression
           Name="acct"><![CDATA[Acctnum]]></validation:Expression>
       </validation:ResExpressions>
