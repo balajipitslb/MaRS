@@ -293,6 +293,9 @@
         <Property
           Name="mode"
           Value="Basic"/>
+        <Property
+          Name="displayName"
+          ResId="its.mnr.mp5.vo.workorder.EstimateQueryVO.EstimateSearch_displayName"/>
       </CustomProperties>
     </Properties>
     <ViewCriteriaRow
@@ -339,6 +342,11 @@
     <PropertiesBundle
       PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
   </ResourceBundle>
+  <SortCriteria>
+    <Sort
+      Attribute="Estid"
+      Ascending="false"/>
+  </SortCriteria>
   <SortCriteria>
     <Sort
       Attribute="Estid"

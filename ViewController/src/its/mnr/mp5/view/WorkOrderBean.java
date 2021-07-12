@@ -624,7 +624,7 @@ public class WorkOrderBean {
 
                     userModificationMsg("ERROR", "ERROR",
                                         "Error encountered while setting status to Completed. The Administrator has been notified");
-                    sendEstimateFailure(adminemail, "Estimate XML Error #1",
+                    sendEstimateFailure(adminemail, "Pending WO XML Error #1",
                                         "Failed to status to COMPLETED for " + sEvtCodeIn);
                 }
                 return ret;
@@ -661,7 +661,7 @@ public class WorkOrderBean {
             if (!ret) {
                 userModificationMsg("ERROR", "ERROR",
                                     "Error encountered while setting status to Completed. The Administrator has been notified");
-                sendEstimateFailure(adminemail, "Estimate XML Error #2",
+                sendEstimateFailure(adminemail, "Pending WO XML Error #2",
                                     "Failed to status to COMPLETED for " + sEvtCodeIn);
             }
             return ret;
@@ -680,15 +680,15 @@ public class WorkOrderBean {
             } else if (retEst.contains("CHK")) {
                 //Fail. Send email notification
                 String sEstChk = parseString(retEst, "CHK:", ",");
-                sendEstimateFailure(adminemail, "Estimate Record Error #3-Chk" + sEstChk,
-                                    "Failed to create Estimate record for " + sEvtCodeIn + "Est#" + sEstId);
+                sendEstimateFailure(adminemail, "Pending WO Record Error #3-Chk" + sEstChk,
+                                    "Failed to create Pending WO record for " + sEvtCodeIn + "PWO#" + sEstId);
                 //Set WO Status = EXCEPTION
                 Boolean ret = updateWOStatus("EXC");
                 //Notify user
                 if (ret) {
                     userModificationMsg("ERROR", "ERROR", "Error encountered. The Administrator has been notified");
                 } else {
-                    sendEstimateFailure(adminemail, "Estimate Record Error #3",
+                    sendEstimateFailure(adminemail, "Pending WO Record Error #3",
                                         "Failed to update to EXCEPTION for " + sEvtCodeIn);
                 }
                 return ret;
@@ -701,26 +701,26 @@ public class WorkOrderBean {
             if (retWrXML) {
                 //Success
                 //Set WO Status = ESTIMATE
-                Boolean ret = updateWOStatus("EST");
+                Boolean ret = updateWOStatus("PEND");
                 //Notify user if error occurs in update
                 if (!ret) {
                     userModificationMsg("ERROR", "ERROR",
-                                        "Error encountered while setting status to Estimate. The Administrator has been notified");
-                    sendEstimateFailure(adminemail, "Estimate XML Error #4",
-                                        "Failed to status to ESTIMATE for " + sEvtCodeIn);
+                                        "Error encountered while setting status to Pending. The Administrator has been notified");
+                    sendEstimateFailure(adminemail, "Pending WO XML Error #4",
+                                        "Failed to status to PENDING for " + sEvtCodeIn);
                 }
                 return ret;
             } else {
                 //Fail. Send email notification
-                sendEstimateFailure(adminemail, "Estimate XML Error",
-                                    "Failed to create Estimate XML for Estimate #" + sEstId);
+                sendEstimateFailure(adminemail, "Pending WO XML Error",
+                                    "Failed to create Pending WO XML for Pending WO #" + sEstId);
                 //Set WO Status = EXCEPTION
                 Boolean ret = updateWOStatus("EXC");
                 //Notify user if error occurs in update
                 if (!ret) {
                     userModificationMsg("ERROR", "ERROR",
                                         "Error encountered while setting status to EXCEPTION. The Administrator has been notified");
-                    sendEstimateFailure(adminemail, "Estimate XML Error #5",
+                    sendEstimateFailure(adminemail, "Pending WO XML Error #5",
                                         "Failed to status to EXCEPTION for " + sEvtCodeIn);
                 }
                 return ret;
@@ -746,7 +746,7 @@ public class WorkOrderBean {
         //Check Estimate Criteria
         String retCrit = getEstimateCriteria();
         //parse results "EST: "OVER:" "UOM:"
-        String sEST = parseString(retCrit, "EST:", ",");
+        String sEST = parseString(retCrit, "PEND:", ",");
         String sOVER = parseString(retCrit, "OVER:", ",");
         String sUOM = parseString(retCrit, "UOM:", ",");
         Boolean result = false;
@@ -1005,6 +1005,7 @@ public class WorkOrderBean {
             }
             if (!processChk) {
                 //Update failed. Email admin
+                adminemail = getMP5Profile("AdminEmailAddress");
                 String sEvtCode = (String)ADFUtil.evaluateEL("#{bindings.EvtCode.inputValue}");
                 System.out.println("Inside processBITPI adminemail: "+adminemail+" sEvtCode: "+sEvtCode);
                 sendEstimateFailure(adminemail, "Chassis BIT/FHWA I/F Error",
@@ -1751,7 +1752,7 @@ public class WorkOrderBean {
         if (!updateEstimateChk) {
             //reset Estimate Status to OPEN. Notify user of error.
             userModificationMsg("ERROR", "ERROR",
-                                "Error encountered setting Estimate status. Please notify the Administrator.");
+                                "Error encountered setting Pending WO status. Please notify the Administrator.");
         }
 
         // Run Estimate Completion logic
@@ -1759,7 +1760,7 @@ public class WorkOrderBean {
             writeEstCompXMLChk = writeEstimateCompletionXML(sAcctNum, sEvtCode);
             if (!writeEstCompXMLChk) {
                 userModificationMsg("ERROR", "ERROR",
-                                    "Error encountered setting Estimate Completion status. Please notify the Administrator.");
+                                    "Error encountered setting Pending WO Completion status. Please notify the Administrator.");
             }
         }
 

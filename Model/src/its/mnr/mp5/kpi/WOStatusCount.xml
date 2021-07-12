@@ -26,7 +26,7 @@
   where uco_code=evt_status 
   and uco_entity = 'EVST'
   and its_isadf='Y' 
-  and evt_status in ('OPEN','CRV','EST','UNA','RFI','RBF','APP')
+  and evt_status in ('OPEN','CRV','PEND','UNA','RFI','RBF','APP')
 group by uco_desc,uco_code
 ORDER BY uco_desc]]></SQLQuery>
   <ViewAttribute

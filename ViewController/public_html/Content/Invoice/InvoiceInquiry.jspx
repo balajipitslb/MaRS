@@ -189,7 +189,7 @@
             <af:popup childCreation="deferred" id="pDetailSTD" contentDelivery="immediate"
                       binding="#{invoiceInquiryBean.pdtlStd}">
                 <af:dialog id="d2"
-                           title="#{bindings.Type == 'STD'? 'Standard' : 'Estimate'} Invoice Details for ##{bindings.Invnum}"
+                           title="#{bindings.Type == 'STD'? 'Standard' : 'Pending'} Invoice Details for ##{bindings.Invnum}"
                            contentHeight="250" contentWidth="700" type="ok" closeIconVisible="false">
                     <f:facet name="buttonBar"/>
                     <af:table value="#{bindings.MrltInvoiceitemView.collectionModel}" var="row"
