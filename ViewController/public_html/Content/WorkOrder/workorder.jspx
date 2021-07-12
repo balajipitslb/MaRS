@@ -17,7 +17,7 @@
                         <!--and(bindings.getMP5Profile.result eq 'Y')
                         #{bindings.getMP5Profile.result}
                         #{WorkOrderBean.showEst}-->
-                        <af:commandNavigationItem text="Estimates" id="cni9" accessKey="E"
+                        <af:commandNavigationItem text="Pending WOs" id="cni9" accessKey="E"
                                                   actionListener="#{ModuleNavBean.goEstimatesModule}"
                                                   visible="#{(securityContext.userGrantedResource['resourceName=Estimates;resourceType=GlobalNav;action=view'])and(ModuleNavBean.showEstimate eq 'Y')}"/>                          
                         <af:commandNavigationItem text="Invoice" id="cni3" accessKey="I"

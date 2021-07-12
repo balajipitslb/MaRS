@@ -822,7 +822,7 @@
         ViewAttribute="Type"
         Operator="="
         Conjunction="AND"
-        Value="EST"
+        Value="PEND"
         Required="Optional">
         <Properties>
           <CustomProperties>

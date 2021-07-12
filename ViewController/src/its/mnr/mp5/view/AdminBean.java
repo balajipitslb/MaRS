@@ -399,7 +399,7 @@ public class AdminBean {
                             writeInvoiceChk = writeInvoiceCrXML(Invnum);
                         } else if ("RTRO".equals(sType)) {
                             writeInvoiceChk = writeInvoiceRtroXML(Invnum);
-                        } else if ("EST".equals(sType)) {
+                        } else if ("PEND".equals(sType)) {
                             writeInvoiceChk = writeInvoiceEstXML(Invnum);
                         }
                         /*
