@@ -343,7 +343,7 @@ public class R5eventsImpl extends ExtendedEntityImpl {
     public boolean isAttributeUpdateable(int index) {
         final String MANAGEMENT_GROUP = "3";
         final String OFFICECLERKSNONMNR_GROUP = "19";
-        final String ESTIMATE = "EST";
+        final String ESTIMATE = "PEND";
         final String EXCEPTION = "EXC";
         final String CLERKREVIEW = "CRV";
         final String APPROVED = "APP";

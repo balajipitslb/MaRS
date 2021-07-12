@@ -93,6 +93,7 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
             String host = getMP5Profile("SMTPHost");
             String sport = getMP5Profile("SMTPPort");
             Integer iport = Integer.parseInt(sport);
+            System.out.println("Inside sendEstimateFailure fromemail: "+fromemail+" host: "+host+" iport: "+iport);
             //callStoredFunction(VARCHAR2, "mnrpkg.sendEmail(?,?,?,?,?)", new Object[] {toaddress,  subject,  body,  host,  iport,  fromemail});        
             //Util.sendMessage("lakshmi.kumar@itslb.com",  subject,  body,  host,  iport,  fromemail);    
             Util.sendMessage(toaddress,  subject,  body,  host,  iport,  fromemail);
@@ -132,7 +133,7 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
                         //System.out.println("sOverUom: " + sOverUom);
                     }
                 rs.closeRowSet();
-                ret = "EST:" + sEst + "," + "OVER:" + sOver + "," + "UOM:" + sOverUom + ",";
+                ret = "PEND:" + sEst + "," + "OVER:" + sOver + "," + "UOM:" + sOverUom + ",";
                 return ret;
             }
             //System.out.println("rw == null");
@@ -157,7 +158,7 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
                 sEst = (String)rw.getAttribute("Estimate");
                 sOver = (String)rw.getAttribute("Over");
                 sOverUom = (String)rw.getAttribute("Overuom");
-                ret = "EST:" + sEst + "," + "OVER:" + sOver + "," + "UOM:" + sOverUom + ",";    
+                ret = "PEND:" + sEst + "," + "OVER:" + sOver + "," + "UOM:" + sOverUom + ",";    
             return ret;
             }
             return null;

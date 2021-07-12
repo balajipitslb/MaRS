@@ -1,6 +1,8 @@
 package its.mnr.mp5.vo.workorder.common;
 
 import oracle.jbo.Row;
+import oracle.jbo.RowIterator;
+import oracle.jbo.RowSet;
 import oracle.jbo.domain.Date;
 import oracle.jbo.domain.Timestamp;
 // ---------------------------------------------------------------------
@@ -233,5 +235,54 @@ public interface WOEventsRow extends Row {
     String gettShowEstimate();
 
     String setEstId(String sestid);
+
+    String getAccountDetail(String sacctnum, String sattribute);
+
+    RowSet getEstimate();
+
+    RowIterator getEstimate1();
+
+    RowIterator getEstimate2();
+
+    RowIterator getFlagAssoc_VVO();
+
+    RowSet getHeaderCodes();
+
+    RowSet getHeaderCodesAFQuery();
+
+    String getMP5Profile(String sprofile);
+
+    RowSet getMrlrefMp5profileView();
+
+    RowSet getMrltAccountmasterView();
+
+    Row getMrltAccountmasterView1();
+
+    RowIterator getMrltFlagassociation_VO();
+
+    RowSet getTaxRateValues1();
+
+    RowSet getUcodes();
+
+    RowSet getUcodesWOStatus();
+
+    RowSet getWOAccountMaster();
+
+    RowSet getWOAccountMasterAFQuery();
+
+    RowSet getWOStatus();
+
+    RowSet getWorkOrderMaster();
+
+    RowSet getWorkorderStatus();
+
+    RowSet getWorkorderStatusAll();
+
+    RowSet getYesNoBoolean();
+
+    RowSet getisAccountActive();
+
+    void setMrltAccountmasterView1(Row value);
+
 }
 

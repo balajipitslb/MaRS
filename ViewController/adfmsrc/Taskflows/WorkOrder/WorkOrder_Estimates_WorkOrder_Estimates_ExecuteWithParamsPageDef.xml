@@ -5,7 +5,7 @@
     <parameters/>
     <executables>
         <iterator Binds="Estimate" RangeSize="25" DataControl="WODataControlDataControl" id="EstimateIterator"
-                  Refresh="never"/>
+                  Refresh="default"/>
     </executables>
     <bindings>
         <action IterBinding="EstimateIterator" id="ExecuteWithParams" RequiresUpdateModel="true"
