@@ -83,7 +83,7 @@ public class INVDataControlImpl extends ExtendedApplicationModuleImpl implements
                                    "','rrrr/mm/dd')  + 1");
             }
             resultVO.addWhereClause(whereClause.toString());
-            System.out.println(resultVO.getQuery());
+           // System.out.println(resultVO.getQuery());
             resultVO.executeQuery();
         }
     }
@@ -176,8 +176,9 @@ public class INVDataControlImpl extends ExtendedApplicationModuleImpl implements
                 .append("\n AND A.ACCOUNTRATEID =  (SELECT MAX(TO_NUMBER(B.ACCOUNTRATEID)) FROM MRLT_ACCOUNTRATE B WHERE I.COMPLETEDT >=  B.EFFECTIVEDT AND B.ACCTNUM=A.ACCTNUM)")
                 .append("\n AND H.STATUS ='ISSUED'")
                 .append("\n AND H.TYPE = 'STD'")
-                .append("\n  AND A.VER > NVL((SELECT RTROVER FROM MRLT_INVOICERTROITEMVW R WHERE R.WO =I.WO  AND R.ACT=ACT.ACT_ACT), I.INVVER)");
-
+                //.append("\n  AND A.VER > NVL((SELECT RTROVER FROM MRLT_INVOICERTROITEMVW R WHERE R.WO =I.WO  AND R.ACT=ACT.ACT_ACT), I.INVVER)");
+                .append("\n  AND TO_NUMBER(A.VER) > NVL((SELECT TO_NUMBER(RTROVER) FROM MRLT_INVOICERTROITEMVW R WHERE R.WO =I.WO  AND R.ACT=ACT.ACT_ACT), TO_NUMBER(I.INVVER) )");
+            
             if (criteriaRow.getAccountNum() != null) {
                 whereClause.append("\n AND H.ACCTNUM =  '" + criteriaRow.getAccountNum() + "'");
             }
