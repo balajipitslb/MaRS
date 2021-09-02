@@ -111,7 +111,7 @@
   </Attribute>
   <Attribute
     Name="Appnum"
-    Precision="10"
+    Precision="20"
     ColumnName="APPNUM"
     SQLType="VARCHAR"
     Type="java.lang.String"

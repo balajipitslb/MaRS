@@ -223,7 +223,8 @@
     PrecisionRule="true"
     EntityAttrName="Appnum"
     EntityUsage="MrltEstimate"
-    AliasName="APPNUM"><Properties><SchemaBasedProperties><DISPLAYWIDTH Value="10"/></SchemaBasedProperties></Properties></ViewAttribute>
+    AliasName="APPNUM"><Properties><SchemaBasedProperties><DISPLAYWIDTH
+                                                            Value="20"/></SchemaBasedProperties></Properties></ViewAttribute>
   <ViewAttribute
     Name="Upddt"
     PrecisionRule="true"
