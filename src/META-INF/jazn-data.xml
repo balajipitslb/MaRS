@@ -1594,6 +1594,18 @@
             <name>FlagUI</name>
             <display-name>FlagUI</display-name>
           </resource>
+          <resource>
+            <name>/WEB-INF/Taskflows/Admin/Master/Admin-InvoiceXMLFeed.xml#Admin-InvoiceXMLFeed</name>
+            <type-name-ref>TaskFlowResourceType</type-name-ref>
+            <display-name>Admin-InvoiceXMLFeed(/WEB-INF/Taskflows/Admin/Master)</display-name>
+            <description>/WEB-INF/Taskflows/Admin/Master/Admin-InvoiceXMLFeed.xml#Admin-InvoiceXMLFeed</description>
+          </resource>
+          <resource>
+            <name>its.mnr.mp5.view.pageDefs.InvoiceXMLFeederPageDef</name>
+            <type-name-ref>RegionResourceType</type-name-ref>
+            <display-name>InvoiceXMLFeeder (its.mnr.mp5.view.pageDefs)</display-name>
+            <description>its.mnr.mp5.view.pageDefs.InvoiceXMLFeederPageDef</description>
+          </resource>
         </resources>
         <permission-sets>
           <permission-set>
@@ -3025,6 +3037,31 @@
               </member-resource>
             </member-resources>
           </permission-set>
+          <permission-set>
+            <name>Admin|Invoice XML Feed</name>
+            <display-name>Admin - Invoice XML Feed</display-name>
+            <description>Permission to Invoice XML creation tool</description>
+            <member-resources>
+              <member-resource>
+                <type-name-ref>TaskFlowResourceType</type-name-ref>
+                <resource-name>/WEB-INF/Taskflows/Admin/Master/Admin-InvoiceXMLFeed.xml#Admin-InvoiceXMLFeed</resource-name>
+                <display-name>Admin-InvoiceXMLFeed(/WEB-INF/Taskflows/Admin/Master)</display-name>
+                <actions>view</actions>
+              </member-resource>
+              <member-resource>
+                <type-name-ref>UIControl</type-name-ref>
+                <resource-name>AdminToolsPanel-InvoiceXMLTool</resource-name>
+                <display-name>AdminToolsPanel-InvoiceXMLTool</display-name>
+                <actions>enabled</actions>
+              </member-resource>
+              <member-resource>
+                <type-name-ref>RegionResourceType</type-name-ref>
+                <resource-name>its.mnr.mp5.view.pageDefs.InvoiceXMLFeederPageDef</resource-name>
+                <display-name>InvoiceXMLFeeder (its.mnr.mp5.view.pageDefs)</display-name>
+                <actions>view</actions>
+              </member-resource>
+            </member-resources>
+          </permission-set>
         </permission-sets>
         <jazn-policy>
           <grant>
@@ -3864,6 +3901,9 @@
               </permission-set-ref>
               <permission-set-ref>
                 <name>Flags|Create and Edit Flag Associations</name>
+              </permission-set-ref>
+              <permission-set-ref>
+                <name>Admin|Invoice XML Feed</name>
               </permission-set-ref>
             </permission-set-refs>
           </grant>

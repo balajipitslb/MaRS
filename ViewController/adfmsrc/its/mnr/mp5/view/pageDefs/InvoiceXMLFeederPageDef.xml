@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="InvoiceXMLFeederPageDef"
+                Package="its.mnr.mp5.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+        <iterator Binds="INVDataControl.MrltInvoiceheaderView" DataControl="MNRDataControlDataControl"
+                  RangeSize="25" id="MrltInvoiceheaderViewIterator"/>
+    <iterator Binds="INVDataControl.MrltInvoicexmlfeedView" DataControl="MNRDataControlDataControl" RangeSize="25"
+              id="MrltInvoicexmlfeedViewIterator"/>
+    <searchRegion Criteria="MrltInvoicexmlfeedViewCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" Binds="MrltInvoicexmlfeedViewIterator"
+                  id="MrltInvoicexmlfeedViewCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="selectAllInvs" RequiresUpdateModel="true" Action="invokeMethod" MethodName="selectAllInvs"
+                  IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.selectAllDept_MNRDataControlDataControl_dataProvider_INVDataControl_selectAllDept_result"/>
+    <methodAction id="deselectAllInvs" RequiresUpdateModel="true" Action="invokeMethod" MethodName="deselectAllInvs"
+                  IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.deselectAllDept_MNRDataControlDataControl_dataProvider_INVDataControl_deselectAllDept_result"/>
+        <methodAction IterBinding="MrltInvoiceheaderViewIterator" id="writeInvoiceStdXML"
+                      InstanceName="bindings.MrltInvoiceheaderViewIterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="writeInvoiceStdXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceStdXML_writeInvoiceStdXML_writeInvoiceStdXML_result">
+            <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
+        </methodAction>
+        <methodAction IterBinding="MrltInvoiceheaderViewIterator" id="writeInvoiceCrXML"
+                      InstanceName="bindings.MrltInvoiceheaderViewIterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="writeInvoiceCrXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceCrXML_writeInvoiceCrXML_writeInvoiceCrXML_result">
+            <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
+        </methodAction>
+        <methodAction IterBinding="MrltInvoiceheaderViewIterator" id="writeInvoiceEstXML"
+                      InstanceName="bindings.MrltInvoiceheaderViewIterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="writeInvoiceEstXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceEstXML_writeInvoiceEstXML_writeInvoiceEstXML_result">
+            <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
+        </methodAction>
+        <methodAction IterBinding="MrltInvoiceheaderViewIterator" id="writeInvoiceRtroXML"
+                      InstanceName="bindings.MrltInvoiceheaderViewIterator.currentRow"
+                      DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="writeInvoiceRtroXML" IsViewObjectMethod="false" IsLocalObjectReference="true"
+                      ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceRtroXML_writeInvoiceRtroXML_writeInvoiceRtroXML_result">
+            <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
+        </methodAction>
+    <methodAction id="selectAllUnprocessedInvs" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="selectAllUnprocessedInvs" IsViewObjectMethod="false"
+                  DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.selectAllUnprocessedInvs_MNRDataControlDataControl_dataProvider_INVDataControl_selectAllUnprocessedInvs_result"/>
+    <tree IterBinding="MrltInvoicexmlfeedViewIterator" id="MrltInvoicexmlfeedView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.invoice.MrltInvoicexmlfeedView" Name="MrltInvoicexmlfeedView0">
+        <AttrNames>
+          <Item Value="Invnum"/>
+          <Item Value="Isprocessed"/>
+          <Item Value="Processeddate"/>
+          <Item Value="tSel"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="MNRDataControlDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <button IterBinding="MrltInvoicexmlfeedViewIterator" Uses="LOV_Isprocessed" StaticList="false" id="Isprocessed">
+      <AttrNames>
+        <Item Value="Isprocessed"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="MrltInvoicexmlfeedViewIterator" Uses="LOV_tSel" StaticList="false" id="tSel">
+      <AttrNames>
+        <Item Value="tSel"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <action IterBinding="MrltInvoicexmlfeedViewIterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="MrltInvoicexmlfeedViewIterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <methodAction id="removeProcessed" RequiresUpdateModel="true" Action="invokeMethod" MethodName="removeProcessed"
+                  IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.INVDataControl"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.removeProcessed_MNRDataControlDataControl_dataProvider_INVDataControl_removeProcessed_result"/>
+  </bindings>
+</pageDefinition>

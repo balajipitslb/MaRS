@@ -18,4 +18,12 @@ public interface INVDataControl extends ApplicationModule {
 
     void initInvoiceRetro();
 
+
+    void deselectAllInvs();
+
+    void selectAllInvs();
+
+    void selectAllUnprocessedInvs();
+
+    String removeProcessed();
 }

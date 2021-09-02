@@ -100,6 +100,8 @@
          <list n="constituent-sets">
             <hash>
                <list n="pattern-filters">
+                  <string v="+check.png"/>
+                  <string v="+check.png"/>
                   <string v="+estimate.png"/>
                   <string v="+flag.jpg"/>
                   <string v="+lock.png"/>
