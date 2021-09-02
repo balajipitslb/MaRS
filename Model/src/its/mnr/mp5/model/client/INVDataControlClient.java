@@ -17,33 +17,65 @@ public class INVDataControlClient extends ApplicationModuleImpl implements INVDa
     }
 
 
+    public void deselectAllDept() {
+        Object _ret = this.riInvokeExportedMethod(this, "deselectAllDept", null, null);
+        return;
+    }
+
+
+    public void selectAllDept() {
+        Object _ret = this.riInvokeExportedMethod(this, "selectAllDept", null, null);
+        return;
+    }
+
+
+    public void deselectAllInvs() {
+        Object _ret = this.riInvokeExportedMethod(this, "deselectAllInvs", null, null);
+        return;
+    }
+
     public void executeInvoiceAssemblySearch() {
-        Object _ret = this.riInvokeExportedMethod(this,"executeInvoiceAssemblySearch",null,null);
+        Object _ret = this.riInvokeExportedMethod(this, "executeInvoiceAssemblySearch", null, null);
         return;
     }
 
     public void executeInvoiceCreditSearch() {
-        Object _ret = this.riInvokeExportedMethod(this,"executeInvoiceCreditSearch",null,null);
+        Object _ret = this.riInvokeExportedMethod(this, "executeInvoiceCreditSearch", null, null);
         return;
     }
 
     public void executeInvoiceRetroSearch() {
-        Object _ret = this.riInvokeExportedMethod(this,"executeInvoiceRetroSearch",null,null);
+        Object _ret = this.riInvokeExportedMethod(this, "executeInvoiceRetroSearch", null, null);
         return;
     }
 
     public void initInvoiceAssembly() {
-        Object _ret = this.riInvokeExportedMethod(this,"initInvoiceAssembly",null,null);
+        Object _ret = this.riInvokeExportedMethod(this, "initInvoiceAssembly", null, null);
         return;
     }
 
     public void initInvoiceCredit() {
-        Object _ret = this.riInvokeExportedMethod(this,"initInvoiceCredit",null,null);
+        Object _ret = this.riInvokeExportedMethod(this, "initInvoiceCredit", null, null);
         return;
     }
 
     public void initInvoiceRetro() {
-        Object _ret = this.riInvokeExportedMethod(this,"initInvoiceRetro",null,null);
+        Object _ret = this.riInvokeExportedMethod(this, "initInvoiceRetro", null, null);
+        return;
+    }
+
+    public String removeProcessed() {
+        Object _ret = this.riInvokeExportedMethod(this, "removeProcessed", null, null);
+        return (String) _ret;
+    }
+
+    public void selectAllInvs() {
+        Object _ret = this.riInvokeExportedMethod(this, "selectAllInvs", null, null);
+        return;
+    }
+
+    public void selectAllUnprocessedInvs() {
+        Object _ret = this.riInvokeExportedMethod(this, "selectAllUnprocessedInvs", null, null);
         return;
     }
 }

@@ -272,6 +272,17 @@
   <view id="WOEstimates">
     <page>/Content/Estimates/Estimates.jspx</page>
  </view>
+  <task-flow-call id="Admin-InvoiceXMLFeed">
+    <task-flow-reference>
+      <document>/WEB-INF/Taskflows/Admin/Master/Admin-InvoiceXMLFeed.xml</document>
+      <id>Admin-InvoiceXMLFeed</id>
+    </task-flow-reference>
+    <run-as-dialog>
+      <display-type>
+        <inline-popup/>
+      </display-type>
+    </run-as-dialog>
+  </task-flow-call>
   <control-flow-rule id="__1">
     <from-activity-id>*</from-activity-id>
     <control-flow-case id="__2">
@@ -352,6 +363,10 @@
     <control-flow-case id="__39">
       <from-outcome>launchClass</from-outcome>
       <to-activity-id>Admin-Class</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__46">
+      <from-outcome>launchInvXMLFeeder</from-outcome>
+      <to-activity-id>Admin-InvoiceXMLFeed</to-activity-id>
     </control-flow-case>
   </control-flow-rule>
   <control-flow-rule id="__20">
