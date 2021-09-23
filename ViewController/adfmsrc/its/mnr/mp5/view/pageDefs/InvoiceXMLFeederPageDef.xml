@@ -6,7 +6,7 @@
     <variableIterator id="variables"/>
         <iterator Binds="INVDataControl.MrltInvoiceheaderView" DataControl="MNRDataControlDataControl"
                   RangeSize="25" id="MrltInvoiceheaderViewIterator"/>
-    <iterator Binds="INVDataControl.MrltInvoicexmlfeedView" DataControl="MNRDataControlDataControl" RangeSize="25"
+    <iterator Binds="INVDataControl.MrltInvoicexmlfeedView" DataControl="MNRDataControlDataControl" RangeSize="40"
               id="MrltInvoicexmlfeedViewIterator"/>
     <searchRegion Criteria="MrltInvoicexmlfeedViewCriteria"
                   Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" Binds="MrltInvoicexmlfeedViewIterator"

@@ -7,7 +7,7 @@
   Version="12.1.3.10.8"
   BindingStyle="OracleName"
   CustomQuery="false"
-  RowClass="its.mnr.mp5.vo.workorder.EstimateRowImpl"
+  RowClass="its.mnr.mp5.baseclass.ExtendedViewRowImpl"
   ComponentClass="its.mnr.mp5.vo.workorder.EstimateImpl"
   DefClass="its.mnr.mp5.baseclass.ExtendedViewDefImpl"
   PageIterMode="Full"
@@ -18,14 +18,17 @@
   WhereFlags="1"
   SelectAllAttributes="false">
   <DesignTime>
-    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
-    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
   </DesignTime>
   <Variable
     Name="EIdBind"
     Kind="viewcriteria"
     Type="java.lang.String"/>
-  <ViewAccessor
+  <Variable
+    Name="VerBind"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+<ViewAccessor
     Name="EstimateStatusApprLOV1"
     ViewObjectName="its.mnr.mp5.lov.EstimateStatusApprLOV"
     RowLevelBinds="true"/>
@@ -394,7 +397,51 @@
         Required="Optional"/>
     </ViewCriteriaRow>
   </ViewCriteria>
-  <ViewLinkAccessor
+  <ViewCriteria
+    Name="EstimateVerCriteria"
+    ViewObjectName="its.mnr.mp5.vo.workorder.Estimate"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="EstimateCriteria1_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Estid"
+        ViewAttribute="Estid"
+        Operator="="
+        Conjunction="AND"
+        Value=":EIdBind"
+        Required="Optional"
+        IsBindVarValue="true"/>
+      <ViewCriteriaItem
+        Name="Ver"
+        ViewAttribute="Ver"
+        Operator="="
+        Conjunction="AND"
+        Value=":VerBind"
+        Required="Optional"
+        IsBindVarValue="true"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+<ViewLinkAccessor
     Name="EstimateTask"
     ViewLink="its.mnr.mp5.vo.link.MrltEstimatetaskdetailFk1Link"
     Type="oracle.jbo.RowIterator"
@@ -463,6 +510,22 @@
     <PropertiesBundle
       PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
   </ResourceBundle>
+  <SortCriteria>
+    <Sort
+      Attribute="Estid"
+      Ascending="false"/>
+    <Sort
+      Attribute="Ver"
+      Ascending="false"/>
+  </SortCriteria>
+<SortCriteria>
+    <Sort
+      Attribute="Estid"
+      Ascending="false"/>
+    <Sort
+      Attribute="Ver"
+      Ascending="false"/>
+  </SortCriteria>
   <SortCriteria>
     <Sort
       Attribute="Estid"

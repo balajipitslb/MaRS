@@ -945,9 +945,9 @@
       <property
          name="exceptionHandler">false</property>
       <property
-         name="y">721.44824</property>
+         name="y">718.7471</property>
       <property
-         name="x">796.03613</property>
+         name="x">788.03613</property>
    </TaskFlowCall>
    <ControlFlowCase
       islink="true"
@@ -957,6 +957,35 @@
       <property
          name="fromOutcome">launchInvXMLFeeder</property>
       <property
-         name="sdm:polyPoints">B39,1046.2222,721.09766,R50</property>
+         name="sdm:polyPoints">B35,1043.85,718.3965,R50</property>
+   </ControlFlowCase>
+   <TaskFlowCall
+      id="TaskFlowCall75">
+      <property
+         name="taskFlowId">Admin-EstimateXMLFeed</property>
+      <property
+         name="activityId">Admin-EstimateXMLFeed</property>
+      <property
+         name="documentReference">/WEB-INF/Taskflows/Admin/Master/Admin-EstimateXMLFeed.xml</property>
+      <property
+         name="runAsDialog">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>Admin-EstimateXMLFeed&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">828.7471</property>
+      <property
+         name="x">790.3662</property>
+   </TaskFlowCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase77"
+      from="View12"
+      to="TaskFlowCall75">
+      <property
+         name="fromOutcome">launchEstXMLFeeder</property>
+      <property
+         name="sdm:polyPoints">B45,1049.95,828.3965,R50</property>
    </ControlFlowCase>
 </SDM>

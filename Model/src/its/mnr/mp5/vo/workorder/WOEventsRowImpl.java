@@ -14,6 +14,7 @@ import its.mnr.mp5.model.Util;
 import its.mnr.mp5.vo.admin.MrlrefMp5profileViewImpl;
 import its.mnr.mp5.vo.admin.MrltAccountmasterViewImpl;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -220,6 +221,47 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
             return null;
         }
 
+    public Boolean writeEstimateXMLTool(String sestid, String sVer){   
+        ////System.out.println("Inside writeEstimateXMLTool writeEstimateXML sestid: "+sestid+" sVer: "+sVer);
+        //set and execute View Criteria            
+        RowSet rs = this.getEstimate();
+        EstimateImpl impl = (EstimateImpl)rs.getViewObject();
+        ViewCriteria vc = impl.getViewCriteria("EstimateVerCriteria");
+        vc.resetCriteria();
+        impl.setEIdBind(sestid);
+        impl.setVerBind(sVer);
+        impl.applyViewCriteria(vc);
+        ////System.out.println("Inside writeEstimateXMLTool impl count: "+impl.getEstimatedRowCount());
+        // set range size to 1 since we expect a single record
+        impl.setRangeSize(1);
+        // execute query to make sure we get latest data!
+        impl.executeQuery();
+        Row rw = impl.first();
+
+        if (rw != null) {
+            
+           //// System.out.println("Estimate Found");
+            String filepath = getMP5Profile("EstimateOutPath");            
+            String filename = filepath + sestid + ".xml";
+           //// System.out.println("Inside writeEstimateXMLTool filepath: "+filepath+" filename: "+filename);
+           //// System.out.println("Inside writeEstimateXMLTool filename: "+filename + " : " + rw.getAttribute("Estid"));
+           //// System.out.println("Inside writeEstimateXMLTool count: "+rw.getAttributeCount()+" attribute names: "+rw.getAttributeNames()+" attribute values: "+rw.getAttributeValues());
+            
+            for(int i=0; i<rw.getAttributeNames().length;i++){
+                System.out.println("Inside writeEstimateXMLTool Name: "+rw.getAttributeNames()[i]+" Value: "+rw.getAttributeValues()[i]);
+            }
+            
+           //// System.out.println("Inside writeEstimateXMLTool rw.writeXML: "+rw.writeXML(-1, XMLInterface.XML_OPT_ALL_ROWS));
+            
+            Util.printXML(rw.writeXML(-1, XMLInterface.XML_OPT_ALL_ROWS), filename);
+            
+           //// System.out.println("after writeEstimateXMLTool");
+            return true;
+        }
+        return false;
+    }
+
+
     public Boolean writeEstimateXML(String sestid){   
         System.out.println("Inside WOEventsRowImpl writeEstimateXML sestid: "+sestid);
         //set and execute View Criteria            
@@ -239,10 +281,10 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
             System.out.println("Estimate Found");
             String filepath = getMP5Profile("EstimateOutPath");            
             String filename = filepath + sestid + ".xml";
-            System.out.println("Inside writeEstimateXML filepath: "+filepath+" filename: "+filename);
-            System.out.println(filename + " : " + rw.getAttribute("Estid"));
+          ////  System.out.println("Inside writeEstimateXML filepath: "+filepath+" filename: "+filename);
+          ////  System.out.println(filename + " : " + rw.getAttribute("Estid"));
             Util.printXML(rw.writeXML(-1, XMLInterface.XML_OPT_ALL_ROWS), filename);
-            System.out.println("after writeXML");
+         ////   System.out.println("after writeXML");
             return true;
         }
         return false;
@@ -1027,6 +1069,16 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
             }
         }
         ,
+        MrltEstimatexmlfeedView {
+            public Object get(WOEventsRowImpl obj) {
+                return obj.getMrltEstimatexmlfeedView();
+            }
+
+            public void put(WOEventsRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
         MrlrefMp5profileView {
             public Object get(WOEventsRowImpl obj) {
                 return obj.getMrlrefMp5profileView();
@@ -1275,6 +1327,7 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
     public static final int MRLTFLAGASSOCIATION_VO = AttributesEnum.MrltFlagassociation_VO.index();
     public static final int ESTIMATE2 = AttributesEnum.Estimate2.index();
     public static final int FLAGASSOC_VVO = AttributesEnum.FlagAssoc_VVO.index();
+    public static final int MRLTESTIMATEXMLFEEDVIEW = AttributesEnum.MrltEstimatexmlfeedView.index();
     public static final int MRLREFMP5PROFILEVIEW = AttributesEnum.MrlrefMp5profileView.index();
     public static final int MRLTACCOUNTMASTERVIEW = AttributesEnum.MrltAccountmasterView.index();
     public static final int WORKORDERMASTER = AttributesEnum.WorkOrderMaster.index();
@@ -2158,6 +2211,20 @@ public class WOEventsRowImpl extends ExtendedViewRowImpl implements WOEventsRow 
      */
     public RowIterator getFlagAssoc_VVO() {
         return (RowIterator)getAttributeInternal(FLAGASSOC_VVO);
+    }
+
+    /**
+     * Gets the associated <code>Row</code> using master-detail link MrltEstimatexmlfeedView.
+     */
+    public Row getMrltEstimatexmlfeedView() {
+        return (Row) getAttributeInternal(MRLTESTIMATEXMLFEEDVIEW);
+    }
+
+    /**
+     * Sets the master-detail link MrltEstimatexmlfeedView between this object and <code>value</code>.
+     */
+    public void setMrltEstimatexmlfeedView(Row value) {
+        setAttributeInternal(MRLTESTIMATEXMLFEEDVIEW, value);
     }
 
     /**
