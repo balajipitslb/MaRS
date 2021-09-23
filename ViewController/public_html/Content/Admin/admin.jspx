@@ -110,9 +110,16 @@
                                     <af:showPopupBehavior popupId="::pUpdPOBCd" triggerType="click"/>
                                 </af:link>
                                 <af:link text="Create Invoice XML Files" id="cl17"
-                                         rendered="#{(securityContext.userGrantedResource['resourceName=AdminToolsPanel-InvoiceXMLTool;resourceType=UIControl;action=enabled'])}">
+                                         rendered="#{(securityContext.userGrantedResource['resourceName=AdminToolsPanel-InvoiceXMLTool;resourceType=UIControl;action=enabled'])}"
+                                         inlineStyle="font-size:small;">
                                     <af:showPopupBehavior triggerType="click" popupId="::invFilesPP"/>
                                 </af:link>
+                                <af:link text="Invoice XML Feeder Tool" id="l1" inlineStyle="font-size:small;"
+                                         action="launchInvXMLFeeder" windowHeight="700" windowWidth="600"
+                                         rendered="#{(securityContext.userGrantedResource['resourceName=AdminToolsPanel-InvoiceXMLTool;resourceType=UIControl;action=enabled'])}"/>
+                                <af:link text="Estimate XML Feeder Tool" id="l2" inlineStyle="font-size:small;"
+                                         windowHeight="700" windowWidth="600" action="launchEstXMLFeeder"
+                                         rendered="#{(securityContext.userGrantedResource['resourceName=AdminToolsPanel-EstimateXMLTool;resourceType=UIControl;action=enabled'])}"/>
                             </af:panelList>
                         </af:panelBox>
                             <af:panelBox text="Flags" id="pb4" visible="true" showDisclosure="false"

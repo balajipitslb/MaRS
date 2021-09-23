@@ -131,6 +131,8 @@
               usageId="its_mnr_mp5_view_Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecuteWithParams1PageDef1"/>
         <page path="/WEB-INF/Taskflows/Estimates/Estimates-EstimatesEntry.xml#Estimates-EstimatesEntry@Commit"
               usageId="its_mnr_mp5_view_Estimates_EstimatesEntry_Estimates_EstimatesEntry_CommitPageDef"/>
+        <page path="/Content/Admin/InvoiceXMLFeeder.jspx" usageId="its_mnr_mp5_view_InvoiceXMLFeederPageDef"/>
+        <page path="/Content/Admin/EstimateXMLFeeder.jspx" usageId="its_mnr_mp5_view_EstimateXMLFeederPageDef"/>
     </pageMap>
     <pageDefinitionUsages>
         <page id="its_mnr_mp5_view_AdminPageDef" path="its.mnr.mp5.view.pageDefs.AdminPageDef"/>
@@ -273,6 +275,8 @@
               path="Taskflows.Estimates.Estimates_EstimatesEntry_Estimates_EstimatesEntry_ExecuteWithParams1PageDef1"/>
         <page id="its_mnr_mp5_view_Estimates_EstimatesEntry_Estimates_EstimatesEntry_CommitPageDef"
               path="Taskflows.Estimates.Estimates_EstimatesEntry_Estimates_EstimatesEntry_CommitPageDef"/>
+        <page id="its_mnr_mp5_view_InvoiceXMLFeederPageDef" path="its.mnr.mp5.view.pageDefs.InvoiceXMLFeederPageDef"/>
+        <page id="its_mnr_mp5_view_EstimateXMLFeederPageDef" path="Content.Admin.EstimateXMLFeederPageDef"/>
     </pageDefinitionUsages>
     <dataControlUsages>
         <dc id="MP5TMSWS" path="its.mnr.mp5.MP5TMSWS"/>

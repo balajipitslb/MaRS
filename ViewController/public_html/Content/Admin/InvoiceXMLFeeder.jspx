@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:set var="viewcontrollerBundle" value="#{adfBundle['viewcontroller.InvoiceXMLFeederBundle']}"/>
+    <af:document title="InvoiceXMLFeeder.jspx" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1" usesUpload="true">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelGroupLayout layout="vertical" id="pgl1">
+                        <af:panelHeader text="Invoice XML Tool" id="ph2">
+                            <af:spacer width="10" height="10" id="s3"/>
+                            <af:query id="qryId1" headerText="Search"
+                                      value="#{bindings.MrltInvoicexmlfeedViewCriteriaQuery.queryDescriptor}"
+                                      model="#{bindings.MrltInvoicexmlfeedViewCriteriaQuery.queryModel}"
+                                      queryListener="#{bindings.MrltInvoicexmlfeedViewCriteriaQuery.processQuery}"
+                                      queryOperationListener="#{bindings.MrltInvoicexmlfeedViewCriteriaQuery.processQueryOperation}"
+                                      resultComponentId="::pc1:resId1" displayMode="compact"
+                                      modeChangeVisible="false" saveQueryMode="readOnly" disclosed="true"/>
+                            <f:facet name="menuBar">
+                                <af:toolbar id="t2"
+                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin; background-color:White;">
+                                    <af:menuBar id="mb1">
+                                        <af:menu text="Actions" id="m2">
+                                        <!--
+                                        text="#{viewcontrollerBundle.PROCESS}"
+                                        -->
+                                            <af:commandMenuItem text="Process" id="cmi1"
+                                                                actionListener="#{invXMLFeedBean.processInvoice}"/>
+                                                                <!--text="#{viewcontrollerBundle.REMOVEPROCESSED}"-->
+                                            <af:commandMenuItem text="Remove Processed" id="cmi2"
+                                                                actionListener="#{invXMLFeedBean.removeProcessedAction}"/>
+                                            <af:commandMenuItem text="Upload CSV" id="cmi3">
+                                                <af:showPopupBehavior popupId="p1"/>
+                                            </af:commandMenuItem>
+                                        </af:menu>
+                                    </af:menuBar>
+                                    <af:spacer width="10" height="10" id="s2"/>
+                                    <af:button id="b3" icon="#{resource['images:commit.png']}"
+                                               actionListener="#{bindings.Commit.execute}"
+                                               disabled="#{(!bindings.Commit.enabled)}" text="Apply"/>
+                                    <af:button actionListener="#{bindings.Rollback.execute}" text="Cancel"
+                                               disabled="#{!bindings.Rollback.enabled}" immediate="true" id="b4"
+                                               icon="#{resource['images:undo.png']}">
+                                        <af:resetActionListener/>
+                                    </af:button>
+                                    <af:button id="b1" icon="#{resource['images:terminate.png']}"
+                                               actionListener="#{ModuleNavBean.goExit}"/>
+                                </af:toolbar>
+                            </f:facet>
+                        </af:panelHeader>
+                        <af:panelCollection id="pc1" featuresOff="viewMenu detachToolbarItem"
+                                            inlineStyle=" margin:10px 5px 5px 5px;height:500px;"
+                                            defaultToolbarItemDisplay="icon" styleClass="AFStretchWidth"
+                                            binding="#{invXMLFeedBean.pcol}" partialTriggers="resId1:sbc2">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t3">
+                                    <af:selectBooleanCheckbox id="sbc3" autoSubmit="true"
+                                                              valueChangeListener="#{invXMLFeedBean.selectAllAction}"
+                                                              label="Select All" labelStyle="width:60px"
+                                                              binding="#{invXMLFeedBean.selAll}"/>
+                                    <af:button actionListener="#{bindings.CreateInsert.execute}"
+                                               disabled="#{!bindings.CreateInsert.enabled}" id="b5"
+                                               icon="#{resource['images:add.png']}"/>
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <!--
+                                    actionListener="#{bindings.Delete.execute}"
+                                    -->
+                                    <af:button actionListener="#{invXMLFeedBean.deleteSelectedInvs}"
+                                               disabled="#{!bindings.Delete.enabled}" id="b6"
+                                               icon="#{resource['images:delete.png']}"/>
+                                    <af:button text="Process" id="b2"
+                                               actionListener="#{invXMLFeedBean.processInvoice}" icon="#{resource['images:check.png']}"
+                                               rendered="false"/>
+                                    <!--partialTriggers="sbc4"-->
+                                    <!--
+                                    <af:selectBooleanCheckbox label="Select All Unprocessed" id="sbc4"
+                                                              valueChangeListener="#{invXMLFeedBean.selectAllUnprocessedAction}"
+                                                              autoSubmit="true" labelStyle="width:110px"
+                                                              binding="#{invXMLFeedBean.selUnproAll}"
+                                                              partialTriggers="sbc3"/>
+                                    -->
+                                </af:toolbar>
+                            </f:facet>
+                            <af:table value="#{bindings.MrltInvoicexmlfeedView.collectionModel}" var="row"
+                                      rows="#{bindings.MrltInvoicexmlfeedView.rangeSize}"
+                                      emptyText="#{bindings.MrltInvoicexmlfeedView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      rowBandingInterval="0" fetchSize="#{bindings.MrltInvoicexmlfeedView.rangeSize}"
+                                      id="resId1" partialTriggers="sbc2 ::b5 ::b6" binding="#{invXMLFeedBean.resTable}"
+                                      styleClass="AFStretchWidth" varStatus="vs">
+                                <af:column id="c5" headerText="No.">
+                                    <af:outputText value="#{vs.index+1}" id="ot2"/>
+                                </af:column>
+<af:column headerText="#{bindings.MrltInvoicexmlfeedView.hints.Invnum.label}" id="c1"
+                                           inlineStyle='#{(row.tSel)?"background-color: #ffaaaa":""};' width="100">
+                                    <af:inputText value="#{row.bindings.Invnum.inputValue}"
+                                                  label="#{bindings.MrltInvoicexmlfeedView.hints.Invnum.label}"
+                                                  required="#{bindings.MrltInvoicexmlfeedView.hints.Invnum.mandatory}"
+                                                  columns="#{bindings.MrltInvoicexmlfeedView.hints.Invnum.displayWidth}"
+                                                  maximumLength="#{bindings.MrltInvoicexmlfeedView.hints.Invnum.precision}"
+                                                  shortDesc="#{bindings.MrltInvoicexmlfeedView.hints.Invnum.tooltip}"
+                                                  id="it1">
+                                        <f:validator binding="#{row.bindings.Invnum.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.MrltInvoicexmlfeedView.hints.Invnum.format}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column headerText="#{bindings.MrltInvoicexmlfeedView.hints.Isprocessed.label}"
+                                           id="c2" inlineStyle='#{(row.tSel)?"background-color: #ffaaaa":""};'
+                                           width="65">
+                                    <af:selectBooleanCheckbox value="#{row.bindings.Isprocessed.inputValue}"
+                                                              label="#{row.bindings.Isprocessed.label}"
+                                                              shortDesc="#{bindings.MrltInvoicexmlfeedView.hints.Isprocessed.tooltip}"
+                                                              id="sbc1" readOnly="true"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.MrltInvoicexmlfeedView.hints.Processeddate.label}"
+                                           id="c4" width="135">
+                                    <af:outputText value="#{row.Processeddate}"
+                                                   shortDesc="#{bindings.MrltInvoicexmlfeedView.hints.Processeddate.tooltip}"
+                                                   id="ot1">
+                                        <af:convertDateTime pattern="#{bindings.MrltInvoicexmlfeedView.hints.Processeddate.format}"
+                                                            timeStyle="medium"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="Select" id="c3"
+                                           inlineStyle='#{(row.tSel)?"background-color: #ffaaaa":""};' width="36">
+                                    <!-- partialTriggers="l1 l2"     ::sbc4-->
+                                    <af:selectBooleanCheckbox value="#{row.bindings.tSel.inputValue}"
+                                                              label="#{row.bindings.tSel.label}"
+                                                              shortDesc="#{bindings.MrltInvoicexmlfeedView.hints.tSel.tooltip}"
+                                                              id="sbc2" autoSubmit="true"
+                                                              partialTriggers="::sbc3"/>
+                                </af:column>
+                            </af:table>
+                        </af:panelCollection>
+                                        <af:popup childCreation="deferred" autoCancel="disabled" id="p2"
+                                                  binding="#{invXMLFeedBean.pendingChangePop}">
+                                                  <!--title="#{viewcontrollerBundle.WARNING}"-->
+                                            <af:dialog id="d4" type="yesNo" title="Warning"
+                                                       dialogListener="#{invXMLFeedBean.pendingChangeDiagListener}"
+                                                       titleIconSource="#{resource['images:warning.png']}"
+                                                       closeIconVisible="false">
+                                                <f:facet name="buttonBar"/>
+                                                <!--
+                                                value="#{viewcontrollerBundle.PENDINGCHANGESEXISTSSAVEANDCON}"
+                                                -->
+                                                <af:outputText value="Pending changes exists. Save and continue?"
+                                                               id="ot16"/>
+                                            </af:dialog>
+                                        </af:popup>
+                        <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+                            <af:dialog id="d2" title="Upload csv File" closeIconVisible="false"
+                                       inlineStyle="width:400px;">
+                                <f:facet name="buttonBar"/>
+                                <af:inputFile label="Upload file" id="if1" autoSubmit="true"
+                                              valueChangeListener="#{invXMLFeedBean.cvsFileUpload}"/>
+                            </af:dialog>
+                        </af:popup>
+                    </af:panelGroupLayout>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

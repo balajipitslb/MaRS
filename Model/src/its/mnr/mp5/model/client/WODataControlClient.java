@@ -30,6 +30,22 @@ public class WODataControlClient extends ApplicationModuleImpl implements WOData
     }
 
 
+    public void deselectAllInvs() {
+        Object _ret = this.riInvokeExportedMethod(this, "deselectAllInvs", null, null);
+        return;
+    }
+
+
+    public void selectAllInvs() {
+        Object _ret = this.riInvokeExportedMethod(this, "selectAllInvs", null, null);
+        return;
+    }
+
+    public void selectAllUnprocessedInvs() {
+        Object _ret = this.riInvokeExportedMethod(this, "selectAllUnprocessedInvs", null, null);
+        return;
+    }
+
     public String CopyWOTask(String ACTEVENT, Integer ACTACT, String ACTMATLIST, String pUser, String pOrg) {
         Object _ret = this.riInvokeExportedMethod(this, "CopyWOTask", new String[] {
                                                   "java.lang.String", "java.lang.Integer", "java.lang.String",
@@ -58,6 +74,11 @@ public class WODataControlClient extends ApplicationModuleImpl implements WOData
         return;
     }
 
+    public void deselectAllEsts() {
+        Object _ret = this.riInvokeExportedMethod(this, "deselectAllEsts", null, null);
+        return;
+    }
+
     public void doQueryResultReset() {
         Object _ret = this.riInvokeExportedMethod(this, "doQueryResultReset", null, null);
         return;
@@ -67,5 +88,20 @@ public class WODataControlClient extends ApplicationModuleImpl implements WOData
         Object _ret = this.riInvokeExportedMethod(this, "isFlagUsedInWO", new String[] { "java.lang.Integer" }, new Object[] {
                                                   Fidval });
         return (String) _ret;
+    }
+
+    public String removeProcessed() {
+        Object _ret = this.riInvokeExportedMethod(this, "removeProcessed", null, null);
+        return (String) _ret;
+    }
+
+    public void selectAllEsts() {
+        Object _ret = this.riInvokeExportedMethod(this, "selectAllEsts", null, null);
+        return;
+    }
+
+    public void selectAllUnprocessedEsts() {
+        Object _ret = this.riInvokeExportedMethod(this, "selectAllUnprocessedEsts", null, null);
+        return;
     }
 }

@@ -538,6 +538,16 @@ public class MrltInvoiceheaderViewRowImpl extends ExtendedViewRowImpl implements
             }
         }
         ,
+        MrltInvoicexmlfeedView {
+            public Object get(MrltInvoiceheaderViewRowImpl obj) {
+                return obj.getMrltInvoicexmlfeedView();
+            }
+
+            public void put(MrltInvoiceheaderViewRowImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
+        ,
         InvoiceStatusLOV {
             public Object get(MrltInvoiceheaderViewRowImpl obj) {
                 return obj.getInvoiceStatusLOV();
@@ -643,6 +653,7 @@ public class MrltInvoiceheaderViewRowImpl extends ExtendedViewRowImpl implements
     public static final int INVWORKORDERS = AttributesEnum.InvWorkOrders.index();
     public static final int INVCRWORKORDERS = AttributesEnum.InvCrWorkOrders.index();
     public static final int RETROITEMDETAIL = AttributesEnum.RetroItemDetail.index();
+    public static final int MRLTINVOICEXMLFEEDVIEW = AttributesEnum.MrltInvoicexmlfeedView.index();
     public static final int INVOICESTATUSLOV = AttributesEnum.InvoiceStatusLOV.index();
     public static final int INVOICETYPELOV = AttributesEnum.InvoiceTypeLOV.index();
     public static final int YESNOBOOLEAN = AttributesEnum.YesNoBoolean.index();
@@ -885,6 +896,20 @@ public class MrltInvoiceheaderViewRowImpl extends ExtendedViewRowImpl implements
      */
     public RowIterator getRetroItemDetail() {
         return (RowIterator)getAttributeInternal(RETROITEMDETAIL);
+    }
+
+    /**
+     * Gets the associated <code>Row</code> using master-detail link MrltInvoicexmlfeedView.
+     */
+    public Row getMrltInvoicexmlfeedView() {
+        return (Row) getAttributeInternal(MRLTINVOICEXMLFEEDVIEW);
+    }
+
+    /**
+     * Sets the master-detail link MrltInvoicexmlfeedView between this object and <code>value</code>.
+     */
+    public void setMrltInvoicexmlfeedView(Row value) {
+        setAttributeInternal(MRLTINVOICEXMLFEEDVIEW, value);
     }
 
     /**

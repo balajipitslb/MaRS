@@ -79,4 +79,19 @@
       <property
          name="sdm:polyPoints">R50,204.0,290.59766,457.6869,277.94238,L46</property>
    </ControlFlowCase>
+   <MethodCall
+      id="MethodCall8">
+      <property
+         name="activityId">ErrorHandler</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>ErrorHandler&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="inherited">true</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">61.149414</property>
+      <property
+         name="x">44.424805</property>
+   </MethodCall>
 </SDM>
