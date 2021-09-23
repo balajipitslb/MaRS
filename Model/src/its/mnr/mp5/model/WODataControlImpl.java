@@ -348,7 +348,7 @@ public class WODataControlImpl extends ExtendedApplicationModuleImpl implements 
      * @return Estimate
      */
     public EstimateImpl getEstimate() {
-        return (EstimateImpl)findViewObject("Estimate");
+        return (EstimateImpl) findViewObject("Estimate");
     }
 
     /**
@@ -372,7 +372,7 @@ public class WODataControlImpl extends ExtendedApplicationModuleImpl implements 
      * @return WOEstimate
      */
     public EstimateImpl getWOEstimate() {
-        return (EstimateImpl)findViewObject("WOEstimate");
+        return (EstimateImpl) findViewObject("WOEstimate");
     }
 
     /**
@@ -388,7 +388,7 @@ public class WODataControlImpl extends ExtendedApplicationModuleImpl implements 
      * @return Estimate1
      */
     public EstimateImpl getEstimate1() {
-        return (EstimateImpl)findViewObject("Estimate1");
+        return (EstimateImpl) findViewObject("Estimate1");
     }
 
     /**
@@ -717,5 +717,92 @@ public class WODataControlImpl extends ExtendedApplicationModuleImpl implements 
      */
     public ViewLinkImpl getMrltEstimatepartdetailFk1Link3() {
         return (ViewLinkImpl) findViewLink("MrltEstimatepartdetailFk1Link3");
+    }
+
+    /**
+     * Container's getter for MrltEstimatexmlfeedView1.
+     * @return MrltEstimatexmlfeedView1
+     */
+    public ExtendedViewObjectImpl getMrltEstimatexmlfeedView() {
+        return (ExtendedViewObjectImpl) findViewObject("MrltEstimatexmlfeedView");
+    }
+    
+    public void selectAllUnprocessedEsts() {
+        deselectAllEsts();
+        ViewObjectImpl vo = getMrltEstimatexmlfeedView();
+        RowSetIterator rsi = vo.createRowSetIterator("new");
+        if (rsi != null) {
+            rsi.reset();
+            while (rsi.hasNext()) {
+                Row r = rsi.next();
+                if (r.getAttribute("Isprocessed").equals("N"))
+                    r.setAttribute("tSel", "Y");
+
+            }
+            rsi.closeRowSetIterator();
+        }
+    }
+
+    public void selectAllEsts() {
+        // deselectAllInvs();
+        ViewObjectImpl vo = getMrltEstimatexmlfeedView();
+        RowSetIterator rsi = vo.createRowSetIterator("new");
+        if (rsi != null) {
+            rsi.reset();
+            while (rsi.hasNext()) {
+                Row r = rsi.next();
+                r.setAttribute("tSel", "Y");
+            }
+            rsi.closeRowSetIterator();
+        }
+    }
+
+    public void deselectAllEsts() {
+        ViewObjectImpl vo = getMrltEstimatexmlfeedView();
+        RowSetIterator rsi = vo.createRowSetIterator("new");
+        if (rsi != null) {
+            rsi.reset();
+            while (rsi.hasNext()) {
+                Row r = rsi.next();
+                r.setAttribute("tSel", "N");
+            }
+            rsi.closeRowSetIterator();
+        }
+    }
+
+    public String removeProcessed() {
+        String ret = "";
+        ViewObjectImpl vo = getMrltEstimatexmlfeedView();
+        RowSetIterator rsi = vo.createRowSetIterator("new");
+        if (rsi != null) {
+            rsi.reset();
+            while (rsi.hasNext()) {
+                Row r = rsi.next();
+                if (r.getAttribute("Isprocessed").equals("Y")) {
+                    System.out.println("Inside removeProcessed processed Estid: " + r.getAttribute("Estid"));
+                    r.remove();
+                }
+
+            }
+            rsi.closeRowSetIterator();
+
+        }
+        return "removed";
+    }
+
+    /**
+     * Container's getter for WOEvents3.
+     * @return WOEvents3
+     */
+    public WOEventsImpl getWOEvents3() {
+        return (WOEventsImpl) findViewObject("WOEvents3");
+    }
+
+    /**
+     * Container's getter for MrltEstimatexmlfeedView_WOEventsLink1.
+     * @return MrltEstimatexmlfeedView_WOEventsLink1
+     */
+    public ViewLinkImpl getMrltEstimatexmlfeedView_WOEventsLink1() {
+        return (ViewLinkImpl) findViewLink("MrltEstimatexmlfeedView_WOEventsLink1");
     }
 }

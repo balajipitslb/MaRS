@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="EstimateXMLFeederPageDef"
+                Package="Content.Admin">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="WODataControlNested.MrltEstimatexmlfeedView" DataControl="MNRDataControlDataControl" RangeSize="40"
+              id="MrltEstimatexmlfeedViewIterator"/>
+    <searchRegion Criteria="MrltEstimatexmlfeedViewCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="MrltEstimatexmlfeedViewIterator" id="MrltEstimatexmlfeedViewCriteriaQuery"/>
+    <iterator Binds="WODataControlNested.WOEvents" DataControl="MNRDataControlDataControl" RangeSize="10"
+              id="WOEventsIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MrltEstimatexmlfeedViewIterator" id="MrltEstimatexmlfeedView">
+      <nodeDefinition DefName="its.mnr.mp5.vo.workorder.MrltEstimatexmlfeedView" Name="MrltEstimatexmlfeedView0">
+        <AttrNames>
+          <Item Value="Estid"/>
+          <Item Value="Wonum"/>
+          <Item Value="Ver"/>
+          <Item Value="Isprocessed"/>
+          <Item Value="Processeddate"/>
+          <Item Value="tSel"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="MrltEstimatexmlfeedViewIterator" StaticList="false" id="Isprocessed" Uses="LOV_Isprocessed">
+      <AttrNames>
+        <Item Value="Isprocessed"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="MrltEstimatexmlfeedViewIterator" Uses="LOV_tSel" StaticList="false" id="tSel">
+      <AttrNames>
+        <Item Value="tSel"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <action id="Commit" DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="MNRDataControlDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <methodAction IterBinding="WOEventsIterator" id="writeEstimateXML" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="writeEstimateXML" IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                  InstanceName="bindings.WOEventsIterator.currentRow" IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.writeEstimateXML_writeEstimateXML_writeEstimateXML_result">
+      <NamedData NDName="sestid" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="selectAllEsts" RequiresUpdateModel="true" Action="invokeMethod" MethodName="selectAllEsts"
+                  IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.WODataControlNested"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.selectAllInvs_MNRDataControlDataControl_dataProvider_WODataControlNested_selectAllEsts_result"/>
+    <methodAction id="selectAllUnprocessedEsts" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="selectAllUnprocessedEsts" IsViewObjectMethod="false"
+                  DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.WODataControlNested"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.selectAllUnprocessedInvs_MNRDataControlDataControl_dataProvider_WODataControlNested_selectAllUnprocessedEsts_result"/>
+    <methodAction id="deselectAllEsts" RequiresUpdateModel="true" Action="invokeMethod" MethodName="deselectAllEsts"
+                  IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.WODataControlNested"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.deselectAllInvs_MNRDataControlDataControl_dataProvider_WODataControlNested_deselectAllEsts_result"/>
+    <methodAction id="removeProcessed" RequiresUpdateModel="true" Action="invokeMethod" MethodName="removeProcessed"
+                  IsViewObjectMethod="false" DataControl="MNRDataControlDataControl"
+                  InstanceName="data.MNRDataControlDataControl.dataProvider.WODataControlNested"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.removeProcessed_MNRDataControlDataControl_dataProvider_WODataControlNested_removeProcessed_result"/>
+    <action IterBinding="MrltEstimatexmlfeedViewIterator" id="CreateInsert"
+            InstanceName="MNRDataControlDataControl.WODataControlNested.MrltEstimatexmlfeedView"
+            DataControl="MNRDataControlDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="MrltEstimatexmlfeedViewIterator" id="Delete"
+            InstanceName="MNRDataControlDataControl.WODataControlNested.MrltEstimatexmlfeedView"
+            DataControl="MNRDataControlDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <methodAction IterBinding="WOEventsIterator" id="writeEstimateXMLTool" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="writeEstimateXMLTool" IsViewObjectMethod="false"
+                  DataControl="MNRDataControlDataControl" InstanceName="bindings.WOEventsIterator.currentRow"
+                  IsLocalObjectReference="true"
+                  ReturnName="data.MNRDataControlDataControl.methodResults.writeEstimateXMLTool_writeEstimateXMLTool_writeEstimateXMLTool_result">
+      <NamedData NDName="sestid" NDType="java.lang.String"/>
+      <NamedData NDName="sVer" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

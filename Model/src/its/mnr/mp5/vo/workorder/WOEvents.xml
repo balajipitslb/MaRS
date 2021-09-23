@@ -72,6 +72,10 @@
     Name="WOEvtCodeBind"
     Kind="viewcriteria"
     Type="java.lang.String"/>
+  <Variable
+    Name="WOEstidBind"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
   <ViewAccessor
     Name="MrlrefMp5profileView"
     ViewObjectName="its.mnr.mp5.vo.admin.MrlrefMp5profileView"
@@ -2353,6 +2357,42 @@
     </ViewCriteriaRow>
   </ViewCriteria>
   <ViewCriteria
+    Name="WObyEvtCode"
+    ViewObjectName="its.mnr.mp5.vo.workorder.WOEvents"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="WOEventsCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="EvtCode"
+        ViewAttribute="EvtCode"
+        Operator="="
+        Conjunction="AND"
+        Value=":WOEvtCodeBind"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
     Name="REJStatus"
     ViewObjectName="its.mnr.mp5.vo.workorder.WOEvents"
     Conjunction="AND">
@@ -2447,7 +2487,7 @@
     </ViewCriteriaRow>
   </ViewCriteria>
   <ViewCriteria
-    Name="WObyEvtCode"
+    Name="WObyEstId"
     ViewObjectName="its.mnr.mp5.vo.workorder.WOEvents"
     Conjunction="AND">
     <Properties>
@@ -2463,7 +2503,7 @@
           Value="true"/>
         <Property
           Name="showInList"
-          Value="false"/>
+          Value="true"/>
         <Property
           Name="mode"
           Value="Basic"/>
@@ -2473,13 +2513,13 @@
       Name="WOEventsCriteria_row_0"
       UpperColumns="1">
       <ViewCriteriaItem
-        Name="EvtCode"
-        ViewAttribute="EvtCode"
+        Name="ItsEstid"
+        ViewAttribute="ItsEstid"
         Operator="="
         Conjunction="AND"
-        Value=":WOEvtCodeBind"
-        IsBindVarValue="true"
-        Required="Optional"/>
+        Value=":WOEstidBind"
+        Required="Optional"
+        IsBindVarValue="true"/>
     </ViewCriteriaRow>
   </ViewCriteria>
   <ViewLinkAccessor
@@ -2501,6 +2541,12 @@
     Name="Estimate2"
     ViewLink="its.mnr.mp5.vo.link.R5EventsEstimatesWOLink"
     Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="MrltEstimatexmlfeedView"
+    ViewLink="its.mnr.mp5.vo.link.MrltEstimatexmlfeedView_WOEventsLink"
+    Type="oracle.jbo.Row"
+    Reversed="true"
     IsUpdateable="false"/>
   <ViewLinkAccessor
     Name="FlagAssoc_VVO"
@@ -2859,6 +2905,19 @@
       <Parameter
         Name="value"
         Type="oracle.jbo.Row"/>
+    </Method>
+    <Method
+      Name="writeEstimateXMLTool"
+      MethodName="writeEstimateXMLTool">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.Boolean"/>
+      <Parameter
+        Name="sestid"
+        Type="java.lang.String"/>
+      <Parameter
+        Name="sVer"
+        Type="java.lang.String"/>
     </Method>
   </ClientRowInterface>
   <ResourceBundle>

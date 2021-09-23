@@ -839,7 +839,7 @@ public class WorkOrderBean {
             //check errors
             List errors = operationBinding.getErrors();
         }
-        System.out.println("Inside MNRDatacontrol method getMP5Profile sprofile: "+sprofile+" result: "+result);
+        ////System.out.println("Inside MNRDatacontrol method getMP5Profile sprofile: "+sprofile+" result: "+result);
         return result;
     }
 

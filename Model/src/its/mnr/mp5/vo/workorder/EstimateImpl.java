@@ -45,4 +45,20 @@ public class EstimateImpl extends ExtendedViewObjectImpl {
     public void setWOBind(String value) {
         ensureVariableManager().setVariableValue("WOBind", value);
     }
+
+    /**
+     * Returns the variable value for VerBind.
+     * @return variable value for VerBind
+     */
+    public String getVerBind() {
+        return (String) ensureVariableManager().getVariableValue("VerBind");
+    }
+
+    /**
+     * Sets <code>value</code> for variable VerBind.
+     * @param value value to bind as VerBind
+     */
+    public void setVerBind(String value) {
+        ensureVariableManager().setVariableValue("VerBind", value);
+    }
 }
