@@ -139,6 +139,12 @@
   <ViewUsage
     Name="EstimateQueryPart"
     ViewObjectName="its.mnr.mp5.vo.workorder.EstimatePart"/>
+  <ViewUsage
+    Name="MrltEstimatexmlfeedView"
+    ViewObjectName="its.mnr.mp5.vo.workorder.MrltEstimatexmlfeedView"/>
+  <ViewUsage
+    Name="WOEvents3"
+    ViewObjectName="its.mnr.mp5.vo.workorder.WOEvents"/>
   <ViewLinkUsage
     Name="CurrentARVersionLaborCostLink1"
     ViewLinkObjectName="its.mnr.mp5.vo.link.CurrentARVersionLaborCostLink"
@@ -277,6 +283,12 @@
     SrcViewUsageName="its.mnr.mp5.model.WODataControl.EstimateQueryTask"
     DstViewUsageName="its.mnr.mp5.model.WODataControl.EstimateQueryPart"
     Reversed="false"/>
+  <ViewLinkUsage
+    Name="MrltEstimatexmlfeedView_WOEventsLink1"
+    ViewLinkObjectName="its.mnr.mp5.vo.link.MrltEstimatexmlfeedView_WOEventsLink"
+    SrcViewUsageName="its.mnr.mp5.model.WODataControl.MrltEstimatexmlfeedView"
+    DstViewUsageName="its.mnr.mp5.model.WODataControl.WOEvents3"
+    Reversed="false"/>
   <ClientInterface
     Name="__clientInterface">
     <Method
@@ -359,6 +371,34 @@
       <Parameter
         Name="pEvtCode"
         Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="removeProcessed"
+      MethodName="removeProcessed">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="deselectAllEsts"
+      MethodName="deselectAllEsts">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+    </Method>
+    <Method
+      Name="selectAllEsts"
+      MethodName="selectAllEsts">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+    </Method>
+    <Method
+      Name="selectAllUnprocessedEsts"
+      MethodName="selectAllUnprocessedEsts">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
     </Method>
   </ClientInterface>
 </AppModule>

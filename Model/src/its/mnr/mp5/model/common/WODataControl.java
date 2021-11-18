@@ -19,4 +19,14 @@ public interface WODataControl extends ApplicationModule {
     String UpdateWOStatus(String evntCd, String pstatus, String pUser);
 
     String RejWOPartsReturn(String pEvtCode);
+
+
+    String removeProcessed();
+
+
+    void deselectAllEsts();
+
+    void selectAllEsts();
+
+    void selectAllUnprocessedEsts();
 }

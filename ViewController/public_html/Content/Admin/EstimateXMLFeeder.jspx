@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="EstimateXMLFeeder.jspx" id="d1">
+        <af:messages id="m1"/>
+        <af:form id="f1" usesUpload="true">
+            <af:pageTemplate viewId="/templates/AdminDashboardTemplate.jspx" id="pt1">
+                <f:facet name="main">
+                    <af:panelGroupLayout layout="vertical" id="pgl1">
+                        <af:panelHeader text="Estimate XML Tool" id="ph1">
+                            <af:spacer width="10" height="10" id="s2"/>
+                            <af:query id="qryId1" headerText="Search" disclosed="true"
+                                      value="#{bindings.MrltEstimatexmlfeedViewCriteriaQuery.queryDescriptor}"
+                                      model="#{bindings.MrltEstimatexmlfeedViewCriteriaQuery.queryModel}"
+                                      queryListener="#{bindings.MrltEstimatexmlfeedViewCriteriaQuery.processQuery}"
+                                      queryOperationListener="#{bindings.MrltEstimatexmlfeedViewCriteriaQuery.processQueryOperation}"
+                                      resultComponentId="::pc1:resId1" displayMode="compact" saveQueryMode="readOnly"
+                                      modeChangeVisible="false"/>
+                            <f:facet name="menuBar">
+                                <af:toolbar id="t2"
+                                            inlineStyle="border-color:Silver; border-style:solid; border-width:thin; background-color:White;">
+                                    <af:menuBar id="mb1">
+                                        <af:menu text="Actions" id="m2">
+                                            <af:commandMenuItem text="Process" id="cmi1"
+                                                                actionListener="#{estXMLFeedBean.processEstimates}"/>
+                                            <af:commandMenuItem text="Remove Processed" id="cmi2"
+                                                                actionListener="#{estXMLFeedBean.removeProcessedAction}"/>
+                                            <af:commandMenuItem text="Upload CSV" id="cmi3">
+                                                <af:showPopupBehavior popupId="p2"/>
+                                            </af:commandMenuItem>
+                                        </af:menu>
+                                    </af:menuBar>
+                                    <af:spacer width="10" height="10" id="s3"/>
+                                    <af:button text="Apply" id="b3" icon="#{resource['images:commit.png']}"
+                                               disabled="#{(!bindings.Commit.enabled)}"
+                                               actionListener="#{bindings.Commit.execute}"/>
+                                    <af:button id="b4" icon="#{resource['images:undo.png']}" text="Cancel"
+                                               actionListener="#{bindings.Rollback.execute}"
+                                               disabled="#{!bindings.Rollback.enabled}" immediate="true">
+                                        <af:resetActionListener/>
+                                    </af:button>
+                                    <af:button id="b5" icon="#{resource['images:terminate.png']}"
+                                    actionListener="#{ModuleNavBean.goExit}"/>
+                                </af:toolbar>
+                            </f:facet>
+                        </af:panelHeader>
+                        <af:panelCollection id="pc1" featuresOff="viewMenu detachToolbarItem"
+                                            styleClass="AFStretchWidth"
+                                            inlineStyle=" margin:10px 5px 5px 5px;height:500px;"
+                                            partialTriggers="resId1:sbc2" binding="#{estXMLFeedBean.pcol}">
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t1">
+                                    <af:selectBooleanCheckbox label="Select All" id="sbc3" autoSubmit="true"
+                                                              labelStyle="width:60px"
+                                                              valueChangeListener="#{estXMLFeedBean.selectAllAction}"/>
+                                    <af:button id="b1" icon="#{resource['images:add.png']}"
+                                               disabled="#{!bindings.CreateInsert.enabled}"
+                                               actionListener="#{bindings.CreateInsert.execute}"/>
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <af:button id="b2" icon="#{resource['images:delete.png']}"
+                                               disabled="#{!bindings.Delete.enabled}"
+                                               actionListener="#{estXMLFeedBean.deleteSelectedEsts}"/>
+                                </af:toolbar>
+                            </f:facet>
+                            <f:facet name="statusbar"/>
+                            <af:table value="#{bindings.MrltEstimatexmlfeedView.collectionModel}" var="row"
+                                      rows="#{bindings.MrltEstimatexmlfeedView.rangeSize}"
+                                      emptyText="#{bindings.MrltEstimatexmlfeedView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      rowBandingInterval="0" fetchSize="#{bindings.MrltEstimatexmlfeedView.rangeSize}"
+                                      id="resId1" partialTriggers="::b1 ::b2 sbc2" binding="#{estXMLFeedBean.resTable}"
+                                      varStatus="vs" styleClass="AFStretchWidth">
+                                <af:column id="c1" headerText="No.">
+                                    <af:outputText value="#{vs.index+1}" id="ot1"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.MrltEstimatexmlfeedView.hints.Estid.label}"
+                                           id="resId1c1">
+                                    <af:inputText value="#{row.bindings.Estid.inputValue}"
+                                                  label="#{bindings.MrltEstimatexmlfeedView.hints.Estid.label}"
+                                                  required="#{bindings.MrltEstimatexmlfeedView.hints.Estid.mandatory}"
+                                                  columns="#{bindings.MrltEstimatexmlfeedView.hints.Estid.displayWidth}"
+                                                  maximumLength="#{bindings.MrltEstimatexmlfeedView.hints.Estid.precision}"
+                                                  shortDesc="#{bindings.MrltEstimatexmlfeedView.hints.Estid.tooltip}"
+                                                  id="it1">
+                                        <f:validator binding="#{row.bindings.Estid.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.MrltEstimatexmlfeedView.hints.Estid.format}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column headerText="#{bindings.MrltEstimatexmlfeedView.hints.Wonum.label}"
+                                           id="resId1c2" >
+                                    <af:inputText value="#{row.Wonum}"
+                                                  shortDesc="#{bindings.MrltEstimatexmlfeedView.hints.Wonum.tooltip}"
+                                                  label="#{bindings.MrltEstimatexmlfeedView.hints.Wonum.label}" id="it2"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.MrltEstimatexmlfeedView.hints.Ver.label}"
+                                           id="resId1c3">
+                                    <af:inputText value="#{row.bindings.Ver.inputValue}"
+                                                  label="#{bindings.MrltEstimatexmlfeedView.hints.Ver.label}"
+                                                  required="#{bindings.MrltEstimatexmlfeedView.hints.Ver.mandatory}"
+                                                  columns="#{bindings.MrltEstimatexmlfeedView.hints.Ver.displayWidth}"
+                                                  maximumLength="#{bindings.MrltEstimatexmlfeedView.hints.Ver.precision}"
+                                                  shortDesc="#{bindings.MrltEstimatexmlfeedView.hints.Ver.tooltip}"
+                                                  id="it3">
+                                        <f:validator binding="#{row.bindings.Ver.validator}"/>
+                                    </af:inputText>
+                                </af:column>
+                                <af:column headerText="#{bindings.MrltEstimatexmlfeedView.hints.Isprocessed.label}"
+                                           id="resId1c4">
+                                    <af:selectBooleanCheckbox value="#{row.bindings.Isprocessed.inputValue}"
+                                                              label="#{row.bindings.Isprocessed.label}"
+                                                              shortDesc="#{bindings.MrltEstimatexmlfeedView.hints.Isprocessed.tooltip}"
+                                                              readOnly="true" id="sbc1"/>
+                                </af:column>
+                                <af:column headerText="#{bindings.MrltEstimatexmlfeedView.hints.Processeddate.label}"
+                                           id="resId1c5">
+                                    <af:outputText value="#{row.Processeddate}"
+                                                   shortDesc="#{bindings.MrltEstimatexmlfeedView.hints.Processeddate.tooltip}"
+                                                   id="ot5">
+                                        <af:convertDateTime pattern="#{bindings.MrltEstimatexmlfeedView.hints.Processeddate.format}"/>
+                                    </af:outputText>
+                                </af:column>
+                                <af:column headerText="#{bindings.MrltEstimatexmlfeedView.hints.tSel.label}"
+                                           id="resId1c6">
+                                    <af:selectBooleanCheckbox value="#{row.bindings.tSel.inputValue}"
+                                                              label="#{row.bindings.tSel.label}"
+                                                              shortDesc="#{bindings.MrltEstimatexmlfeedView.hints.tSel.tooltip}"
+                                                              id="sbc2" partialTriggers="::sbc3" autoSubmit="true"/>
+                                </af:column>
+                            </af:table>
+                        </af:panelCollection>
+                        <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                  binding="#{estXMLFeedBean.pendingChangePop}">
+                            <af:dialog id="d2" type="yesNo" title="Warning"
+                                       dialogListener="#{estXMLFeedBean.pendingChangeDiagListener}"
+                                       titleIconSource="#{resource['images:warning.png']}"
+                                       closeIconVisible="false">
+                                <af:outputText value="Pending changes exists. Save and continue?" id="ot4"/>
+                            </af:dialog>
+                        </af:popup>
+                        <af:popup childCreation="deferred" autoCancel="disabled" id="p2">
+                            <af:dialog id="d3" title="Upload csv File" closeIconVisible="false"
+                                       inlineStyle="width:400px;">
+                                <f:facet name="buttonBar"/>
+                                <af:inputFile label="Upload file" id="if1" autoSubmit="true"
+                                              valueChangeListener="#{estXMLFeedBean.cvsFileUpload}"/>
+                            </af:dialog>
+                        </af:popup>
+                    </af:panelGroupLayout>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

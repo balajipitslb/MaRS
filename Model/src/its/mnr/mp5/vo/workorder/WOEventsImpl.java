@@ -84,4 +84,20 @@ public class WOEventsImpl extends ExtendedViewObjectImpl {
         long value = super.getCappedQueryHitCount(viewRowSet, masterRows, oldCap, cap);
         return value;
     }
+
+    /**
+     * Returns the variable value for WOEstidBind.
+     * @return variable value for WOEstidBind
+     */
+    public String getWOEstidBind() {
+        return (String) ensureVariableManager().getVariableValue("WOEstidBind");
+    }
+
+    /**
+     * Sets <code>value</code> for variable WOEstidBind.
+     * @param value value to bind as WOEstidBind
+     */
+    public void setWOEstidBind(String value) {
+        ensureVariableManager().setVariableValue("WOEstidBind", value);
+    }
 }

@@ -284,5 +284,8 @@ public interface WOEventsRow extends Row {
 
     void setMrltAccountmasterView1(Row value);
 
+    Boolean writeEstimateXMLTool(String sestid, String sVer);
+
+    void setPostedEvtStatus(String value);
 }
 

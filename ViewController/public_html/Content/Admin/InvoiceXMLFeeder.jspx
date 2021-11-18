@@ -51,7 +51,7 @@ xmlns:c="http://java.sun.com/jsp/jstl/core">
                             </f:facet>
                         </af:panelHeader>
                         <af:panelCollection id="pc1" featuresOff="viewMenu detachToolbarItem"
-                                            inlineStyle=" margin:10px 5px 5px 5px ;"
+                                            inlineStyle=" margin:10px 5px 5px 5px;height:500px;"
                                             defaultToolbarItemDisplay="icon" styleClass="AFStretchWidth"
                                             binding="#{invXMLFeedBean.pcol}" partialTriggers="resId1:sbc2">
                             <f:facet name="toolbar">
@@ -87,8 +87,12 @@ xmlns:c="http://java.sun.com/jsp/jstl/core">
                                       rows="#{bindings.MrltInvoicexmlfeedView.rangeSize}"
                                       emptyText="#{bindings.MrltInvoicexmlfeedView.viewable ? 'No data to display.' : 'Access Denied.'}"
                                       rowBandingInterval="0" fetchSize="#{bindings.MrltInvoicexmlfeedView.rangeSize}"
-                                      id="resId1" partialTriggers="sbc2 ::b5 ::b6" binding="#{invXMLFeedBean.resTable}">
-                                <af:column headerText="#{bindings.MrltInvoicexmlfeedView.hints.Invnum.label}" id="c1"
+                                      id="resId1" partialTriggers="sbc2 ::b5 ::b6" binding="#{invXMLFeedBean.resTable}"
+                                      styleClass="AFStretchWidth" varStatus="vs">
+                                <af:column id="c5" headerText="No.">
+                                    <af:outputText value="#{vs.index+1}" id="ot2"/>
+                                </af:column>
+<af:column headerText="#{bindings.MrltInvoicexmlfeedView.hints.Invnum.label}" id="c1"
                                            inlineStyle='#{(row.tSel)?"background-color: #ffaaaa":""};' width="100">
                                     <af:inputText value="#{row.bindings.Invnum.inputValue}"
                                                   label="#{bindings.MrltInvoicexmlfeedView.hints.Invnum.label}"
