@@ -343,6 +343,16 @@ public class POrdersViewRowImpl extends ExtendedViewRowImpl {
             }
         }
         ,
+        ItsProjcd {
+            public Object get(POrdersViewRowImpl obj) {
+                return obj.getItsProjcd();
+            }
+
+            public void put(POrdersViewRowImpl obj, Object value) {
+                obj.setItsProjcd((String) value);
+            }
+        }
+        ,
         POrdersComment {
             public Object get(POrdersViewRowImpl obj) {
                 return obj.getPOrdersComment();
@@ -524,6 +534,7 @@ public class POrdersViewRowImpl extends ExtendedViewRowImpl {
     public static final int ITSCUSTFLD2 = AttributesEnum.ItsCustfld2.index();
     public static final int ITSDEPTCD = AttributesEnum.ItsDeptcd.index();
     public static final int TGRANDTOT = AttributesEnum.tGrandTot.index();
+    public static final int ITSPROJCD = AttributesEnum.ItsProjcd.index();
     public static final int PORDERSCOMMENT = AttributesEnum.POrdersComment.index();
     public static final int POCOMPANIES = AttributesEnum.POCompanies.index();
     public static final int POTRANSACTIONSRECVVIEW = AttributesEnum.POTransactionsRecvView.index();
@@ -1043,6 +1054,22 @@ public class POrdersViewRowImpl extends ExtendedViewRowImpl {
      */
     public void settGrandTot(Double value) {
         setAttributeInternal(TGRANDTOT, value);
+    }
+
+    /**
+     * Gets the attribute value for ITS_PROJCD using the alias name ItsProjcd.
+     * @return the ITS_PROJCD
+     */
+    public String getItsProjcd() {
+        return (String) getAttributeInternal(ITSPROJCD);
+    }
+
+    /**
+     * Sets <code>value</code> as attribute value for ITS_PROJCD using the alias name ItsProjcd.
+     * @param value value to set the ITS_PROJCD
+     */
+    public void setItsProjcd(String value) {
+        setAttributeInternal(ITSPROJCD, value);
     }
 
     /**

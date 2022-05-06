@@ -574,7 +574,7 @@
             </AttrNames>
         </attributeValues>
         <list IterBinding="POrdersViewIterator" StaticList="false" Uses="LOV_ItsDeptcd" id="ItsDeptcd"
-              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
         <attributeValues IterBinding="POrdersViewIterator" id="ItsCustfld2">
             <AttrNames>
                 <Item Value="ItsCustfld2"/>
@@ -587,5 +587,10 @@
                       ReturnName="data.MNRDataControlDataControl.methodResults.isPartInactive_MNRDataControlDataControl_dataProvider_Root_PORecvDataControlNested_isPartInactive_result">
             <NamedData NDName="sPart" NDValue="#{pageFlowScope.sPart}" NDType="java.lang.String"/>
         </methodAction>
+        <attributeValues IterBinding="POrdersViewIterator" id="ItsProjcd">
+            <AttrNames>
+                <Item Value="ItsProjcd"/>
+            </AttrNames>
+        </attributeValues>
     </bindings>
 </pageDefinition>
