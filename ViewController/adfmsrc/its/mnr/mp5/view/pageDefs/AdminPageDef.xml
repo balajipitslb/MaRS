@@ -164,5 +164,10 @@
                       ReturnName="data.MNRDataControlDataControl.methodResults.writeInvoiceRtroXML_writeInvoiceRtroXML_writeInvoiceRtroXML_result">
             <NamedData NDName="pInvNum" NDType="oracle.jbo.domain.Number"/>
         </methodAction>
+        <attributeValues IterBinding="POrdersViewIterator" id="ItsProjcd">
+            <AttrNames>
+                <Item Value="ItsProjcd"/>
+            </AttrNames>
+        </attributeValues>
     </bindings>
 </pageDefinition>

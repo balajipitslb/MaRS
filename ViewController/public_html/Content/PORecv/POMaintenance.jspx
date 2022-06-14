@@ -727,7 +727,6 @@
                                                                       maximumLength="#{bindings.ItsProjcd.hints.precision}"
                                                                       shortDesc="#{bindings.ItsProjcd.hints.tooltip}"
                                                                       autoSubmit="true"
-                                                                      contentStyle="text-transform:uppercase;"
                                                                       id="it11">
                                                             <f:validator binding="#{bindings.ItsProjcd.validator}"/>
                                                         </af:inputText>                                                        

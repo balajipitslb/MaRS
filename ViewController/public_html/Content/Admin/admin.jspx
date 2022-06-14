@@ -295,7 +295,7 @@
                         <f:facet name="toolbar"/>
                         <f:facet name="info"/>
                         <af:panelGroupLayout layout="vertical" id="pgl1">
-                            <af:panelHeader text=" " id="ph3" inlineStyle="width:250px;">
+                            <af:panelHeader text=" " id="ph3" inlineStyle="width:270px;">
                                 <af:query id="qryId1" headerText="Search" disclosed="true"
                                           value="#{bindings.POrdersOrdCdQuery.queryDescriptor}"
                                           model="#{bindings.POrdersOrdCdQuery.queryModel}"
@@ -327,8 +327,18 @@
                                                   columns="#{bindings.ItsCustfld1.hints.displayWidth}"
                                                   maximumLength="#{bindings.ItsCustfld1.hints.precision}"
                                                   shortDesc="#{bindings.ItsCustfld1.hints.tooltip}" id="it8"
-                                                  autoSubmit="true" contentStyle="text-transform:uppercase; ">
+                                                  inlineStyle="margin:0px 10px;"
+                                                  autoSubmit="true" contentStyle="text-transform:uppercase;">
                                         <f:validator binding="#{bindings.ItsCustfld1.validator}"/>
+                                    </af:inputText>
+                                    <af:inputText value="#{bindings.ItsProjcd.inputValue}"
+                                                  label="#{bindings.ItsProjcd.hints.label}"
+                                                  required="#{bindings.ItsProjcd.hints.mandatory}"
+                                                  columns="#{bindings.ItsProjcd.hints.displayWidth}"
+                                                  maximumLength="#{bindings.ItsProjcd.hints.precision}"
+                                                  autoSubmit="true" inlineStyle="margin:0px 10px;"
+                                                  shortDesc="#{bindings.ItsProjcd.hints.tooltip}" id="it10">
+                                        <f:validator binding="#{bindings.ItsProjcd.validator}"/>
                                     </af:inputText>
                                 </af:panelFormLayout>
                             </af:panelHeader>
