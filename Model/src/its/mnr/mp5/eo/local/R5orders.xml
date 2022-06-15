@@ -468,6 +468,10 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="its.mnr.mp5.eo.local.R5orders.ItsCustfld2_LABEL"/>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <DISPLAYHEIGHT
+          Value="10"/>
       </SchemaBasedProperties>
     </Properties>    
   </Attribute>
@@ -482,10 +486,26 @@
     <DesignTime>
       <Attr Name="_description" Value="T Grand Tot"/>
     </DesignTime>
-    <TransientExpression
-      trustMode="trusted"><![CDATA[(adf.object.R5orderlines.sum("OrlTotextra") != null? adf.object.R5orderlines.sum("OrlTotextra") : 0)+(OrdPrice!=null?OrdPrice:0)]]></TransientExpression>
-    <RecalcCondition
-      trustMode="trusted"><![CDATA[true]]></RecalcCondition>
+    <TransientExpression><![CDATA[(adf.object.R5orderlines.sum("OrlTotextra") != null? adf.object.R5orderlines.sum("OrlTotextra") : 0)+(OrdPrice!=null?OrdPrice:0)]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
+  </Attribute>
+  <Attribute
+    Name="ItsProjcd"
+    Precision="20"
+    ColumnName="ITS_PROJCD"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MP5PRD.R5ORDERS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="its.mnr.mp5.eo.local.R5orders.ItsProjcd_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
   </Attribute>
   <AccessorAttribute
     Name="R5activities"

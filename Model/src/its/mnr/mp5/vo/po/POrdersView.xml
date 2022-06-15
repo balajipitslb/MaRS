@@ -30,7 +30,8 @@
        R5orders.ITS_ISADF, 
        R5orders.ITS_CUSTFLD1, 
        R5orders.ITS_CUSTFLD2, 
-       R5orders.ITS_DEPTCD"
+       R5orders.ITS_DEPTCD, 
+       R5orders.ITS_PROJCD"
   FromList="MP5PRD.R5ORDERS R5orders"
   BindingStyle="OracleName"
   CustomQuery="false"
@@ -698,6 +699,12 @@ null;
     EntityAttrName="tGrandTot"
     EntityUsage="R5orders"
     AliasName="T_GRAND_TOT"/>
+  <ViewAttribute
+    Name="ItsProjcd"
+    PrecisionRule="true"
+    EntityAttrName="ItsProjcd"
+    EntityUsage="R5orders"
+    AliasName="ITS_PROJCD"/>
   <ViewCriteria
     Name="DefaultAll"
     ViewObjectName="its.mnr.mp5.vo.po.POrdersView"

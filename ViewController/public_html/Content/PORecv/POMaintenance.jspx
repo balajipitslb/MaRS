@@ -686,7 +686,7 @@
                                                        binding="#{POMaintenance.deptPpDiag}" type="none"
                                                        closeIconVisible="false">
                                                 <af:panelHeader text="PO#  #{bindings.OrdCode.inputValue}" id="ph6"
-                                                                inlineStyle="width:450px; height:210px;margin-bottom:10px; background-color:transparent;">
+                                                                inlineStyle="width:450px; height:235px;margin-bottom:10px; background-color:transparent;">
                                                     <f:facet name="menuBar">
                                                         <af:toolbar id="t20"
                                                                     inlineStyle="border-color:Silver; border-style:solid; border-width:thin; margin: 5px; background-color:White;">
@@ -720,22 +720,36 @@
                                                                       contentStyle="text-transform:uppercase; ">
                                                             <f:validator binding="#{bindings.ItsCustfld1.validator}"/>
                                                         </af:inputText>
+                                                        <af:inputText value="#{bindings.ItsProjcd.inputValue}"
+                                                                      label="#{bindings.ItsProjcd.hints.label}"
+                                                                      required="#{bindings.ItsProjcd.hints.mandatory}"
+                                                                      columns="#{bindings.ItsProjcd.hints.displayWidth}"
+                                                                      maximumLength="#{bindings.ItsProjcd.hints.precision}"
+                                                                      shortDesc="#{bindings.ItsProjcd.hints.tooltip}"
+                                                                      autoSubmit="true"
+                                                                      id="it11">
+                                                            <f:validator binding="#{bindings.ItsProjcd.validator}"/>
+                                                        </af:inputText>                                                        
                                                         <af:selectOneChoice value="#{bindings.ItsDeptcd.inputValue}"
-                                                                            label="Dept"
+                                                                            label="#{bindings.ItsDeptcd.label}"
                                                                             required="#{bindings.ItsDeptcd.hints.mandatory}"
                                                                             shortDesc="#{bindings.ItsDeptcd.hints.tooltip}"
                                                                             id="soc8" autoSubmit="true">
                                                             <f:selectItems value="#{bindings.ItsDeptcd.items}"
                                                                            id="si7"/>
+                                                            <f:validator binding="#{bindings.ItsDeptcd.validator}"/>
                                                         </af:selectOneChoice>
                                                         <af:inputText value="#{bindings.ItsCustfld2.inputValue}"
                                                                       label="#{bindings.ItsCustfld2.hints.label}"
                                                                       required="#{bindings.ItsCustfld2.hints.mandatory}"
                                                                       maximumLength="#{bindings.ItsCustfld2.hints.precision}"
                                                                       shortDesc="#{bindings.ItsCustfld2.hints.tooltip}"
-                                                                      id="it5" autoSubmit="true" columns="50" rows="10">
+                                                                      id="it5" autoSubmit="true"
+                                                                      columns="#{bindings.ItsCustfld2.hints.displayWidth}"
+                                                                      rows="10">
                                                             <f:validator binding="#{bindings.ItsCustfld2.validator}"/>
                                                         </af:inputText>
+
                                                     </af:panelFormLayout>
                                                 </af:panelHeader>
                                             </af:dialog>

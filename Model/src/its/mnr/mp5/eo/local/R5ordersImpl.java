@@ -458,7 +458,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdCode((String)value);
+                obj.setOrdCode((String) value);
             }
         }
         ,
@@ -468,7 +468,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdDesc((String)value);
+                obj.setOrdDesc((String) value);
             }
         }
         ,
@@ -478,7 +478,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdType((String)value);
+                obj.setOrdType((String) value);
             }
         }
         ,
@@ -488,7 +488,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdRtype((String)value);
+                obj.setOrdRtype((String) value);
             }
         }
         ,
@@ -498,7 +498,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdSupplier((String)value);
+                obj.setOrdSupplier((String) value);
             }
         }
         ,
@@ -508,7 +508,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdDate((Date)value);
+                obj.setOrdDate((Date) value);
             }
         }
         ,
@@ -518,7 +518,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdDue((Date)value);
+                obj.setOrdDue((Date) value);
             }
         }
         ,
@@ -528,7 +528,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdApprov((Date)value);
+                obj.setOrdApprov((Date) value);
             }
         }
         ,
@@ -538,7 +538,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdStatus((String)value);
+                obj.setOrdStatus((String) value);
             }
         }
         ,
@@ -548,7 +548,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdRstatus((String)value);
+                obj.setOrdRstatus((String) value);
             }
         }
         ,
@@ -558,7 +558,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdAuth((String)value);
+                obj.setOrdAuth((String) value);
             }
         }
         ,
@@ -568,7 +568,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdDiscount((Double)value);
+                obj.setOrdDiscount((Double) value);
             }
         }
         ,
@@ -578,7 +578,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdPrice((Double)value);
+                obj.setOrdPrice((Double) value);
             }
         }
         ,
@@ -588,7 +588,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdCurr((String)value);
+                obj.setOrdCurr((String) value);
             }
         }
         ,
@@ -598,7 +598,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdExch((Double)value);
+                obj.setOrdExch((Double) value);
             }
         }
         ,
@@ -608,7 +608,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdOrigin((String)value);
+                obj.setOrdOrigin((String) value);
             }
         }
         ,
@@ -618,7 +618,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdStore((String)value);
+                obj.setOrdStore((String) value);
             }
         }
         ,
@@ -628,7 +628,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdPrinted((String)value);
+                obj.setOrdPrinted((String) value);
             }
         }
         ,
@@ -638,7 +638,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdBuyer((String)value);
+                obj.setOrdBuyer((String) value);
             }
         }
         ,
@@ -648,7 +648,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdRevision((Integer)value);
+                obj.setOrdRevision((Integer) value);
             }
         }
         ,
@@ -658,7 +658,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdOrg((String)value);
+                obj.setOrdOrg((String) value);
             }
         }
         ,
@@ -668,7 +668,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setOrdSupplierOrg((String)value);
+                obj.setOrdSupplierOrg((String) value);
             }
         }
         ,
@@ -678,7 +678,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.settOrdCode((String)value);
+                obj.settOrdCode((String) value);
             }
         }
         ,
@@ -698,7 +698,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.settOrderlineSum((Double)value);
+                obj.settOrderlineSum((Double) value);
             }
         }
         ,
@@ -708,7 +708,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.settPriceExtended((Double)value);
+                obj.settPriceExtended((Double) value);
             }
         }
         ,
@@ -718,7 +718,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setItsCustfld1((String)value);
+                obj.setItsCustfld1((String) value);
             }
         }
         ,
@@ -728,7 +728,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setItsDeptcd((String)value);
+                obj.setItsDeptcd((String) value);
             }
         }
         ,
@@ -738,7 +738,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setItsCustfld2((String)value);
+                obj.setItsCustfld2((String) value);
             }
         }
         ,
@@ -748,7 +748,17 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.settGrandTot((Double)value);
+                obj.settGrandTot((Double) value);
+            }
+        }
+        ,
+        ItsProjcd {
+            public Object get(R5ordersImpl obj) {
+                return obj.getItsProjcd();
+            }
+
+            public void put(R5ordersImpl obj, Object value) {
+                obj.setItsProjcd((String) value);
             }
         }
         ,
@@ -768,7 +778,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setR5companies((ExtendedEntityImpl)value);
+                obj.setR5companies((ExtendedEntityImpl) value);
             }
         }
         ,
@@ -778,7 +788,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setR5users((ExtendedEntityImpl)value);
+                obj.setR5users((ExtendedEntityImpl) value);
             }
         }
         ,
@@ -788,7 +798,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
             }
 
             public void put(R5ordersImpl obj, Object value) {
-                obj.setR5users1((ExtendedEntityImpl)value);
+                obj.setR5users1((ExtendedEntityImpl) value);
             }
         }
         ,
@@ -930,6 +940,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
     public static final int ITSDEPTCD = AttributesEnum.ItsDeptcd.index();
     public static final int ITSCUSTFLD2 = AttributesEnum.ItsCustfld2.index();
     public static final int TGRANDTOT = AttributesEnum.tGrandTot.index();
+    public static final int ITSPROJCD = AttributesEnum.ItsProjcd.index();
     public static final int R5ACTIVITIES = AttributesEnum.R5activities.index();
     public static final int R5COMPANIES = AttributesEnum.R5companies.index();
     public static final int R5USERS = AttributesEnum.R5users.index();
@@ -955,6 +966,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
     public static synchronized EntityDefImpl getDefinitionObject() {
         return EntityDefImpl.findDefObject("its.mnr.mp5.eo.local.R5orders");
     }
+
 
     /**
      * Gets the attribute value for OrdCode, using the alias name OrdCode.
@@ -1436,6 +1448,22 @@ public class R5ordersImpl extends ExtendedEntityImpl {
     }
 
     /**
+     * Gets the attribute value for ItsProjcd, using the alias name ItsProjcd.
+     * @return the value of ItsProjcd
+     */
+    public String getItsProjcd() {
+        return (String) getAttributeInternal(ITSPROJCD);
+    }
+
+    /**
+     * Sets <code>value</code> as the attribute value for ItsProjcd.
+     * @param value value to set the ItsProjcd
+     */
+    public void setItsProjcd(String value) {
+        setAttributeInternal(ITSPROJCD, value);
+    }
+
+    /**
      * getAttrInvokeAccessor: generated method. Do not modify.
      * @param index the index identifying the attribute
      * @param attrDef the attribute
@@ -1580,7 +1608,7 @@ public class R5ordersImpl extends ExtendedEntityImpl {
      * @return a Key object based on given key constituents.
      */
     public static Key createPrimaryKey(String ordCode, String ordOrg) {
-        return new Key(new Object[]{ordCode, ordOrg});
+        return new Key(new Object[] { ordCode, ordOrg });
     }
 
 
