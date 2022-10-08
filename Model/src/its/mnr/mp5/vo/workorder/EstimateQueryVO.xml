@@ -308,6 +308,12 @@
         Conjunction="AND"
         Required="Optional"/>
       <ViewCriteriaItem
+        Name="EstimateSearch_EstimateCriteria1_row_0_Appnum"
+        ViewAttribute="Appnum"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
         Name="Equipnum"
         ViewAttribute="Equipnum"
         Operator="CONTAINS"
@@ -342,6 +348,11 @@
     <PropertiesBundle
       PropertiesFile="its.mnr.mp5.model.ModelBundle"/>
   </ResourceBundle>
+  <SortCriteria>
+    <Sort
+      Attribute="Estid"
+      Ascending="false"/>
+  </SortCriteria>
   <SortCriteria>
     <Sort
       Attribute="Estid"

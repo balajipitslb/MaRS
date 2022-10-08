@@ -11,7 +11,8 @@
   BindingStyle="OracleName"
   RowClass="its.mnr.mp5.eo.local.MrltEstimateImpl"
   DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
-  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache">
+  CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
+  xmlns:validation="http://xmlns.oracle.com/adfm/validation">
   <DesignTime>
     <Attr Name="_isCodegen" Value="true"/>
     <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
@@ -19,6 +20,10 @@
   <ViewAccessor
     Name="WOEvents"
     ViewObjectName="its.mnr.mp5.vo.workorder.WOEvents"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ApprovalCodeExistence"
+    ViewObjectName="its.mnr.mp5.lov.ApprovalCodeExistence"
     RowLevelBinds="true"/>
   <Attribute
     Name="Estid"
@@ -124,8 +129,21 @@
       <SchemaBasedProperties>
         <LABEL
           ResId="its.mnr.mp5.eo.local.MrltEstimate.Appnum_LABEL"/>
+        <AUTOSUBMIT
+          Value="true"/>
       </SchemaBasedProperties>
-    </Properties>
+    </Properties>    
+    <validation:MethodValidationBean
+      Name="AppnumRule0"
+      ResId="THIS_APPROVAL_CODE_ALREADY_EXISTS_"
+      MethodName="validateAppnum">
+      <validation:ResExpressions
+        Name="AppnumRule0_ResExprList">
+        <validation:Expression
+          trustMode="trusted"
+          Name="Appnum"><![CDATA[Appnum]]></validation:Expression>
+      </validation:ResExpressions>
+    </validation:MethodValidationBean>    
   </Attribute>
   <Attribute
     Name="Upddt"

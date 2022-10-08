@@ -5,9 +5,13 @@ import its.mnr.mp5.baseclass.ExtendedEntityImpl;
 import java.math.BigDecimal;
 
 import oracle.jbo.AttributeList;
+import oracle.jbo.JboException;
 import oracle.jbo.Key;
+import oracle.jbo.Row;
 import oracle.jbo.RowIterator;
 import oracle.jbo.RowSet;
+import oracle.jbo.VariableValueManager;
+import oracle.jbo.domain.Date;
 import oracle.jbo.domain.Number;
 import oracle.jbo.domain.Timestamp;
 import oracle.jbo.server.AttributeDefImpl;
@@ -20,6 +24,68 @@ import oracle.jbo.server.TransactionEvent;
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
 public class MrltEstimateImpl extends ExtendedEntityImpl {
+    
+    /**
+     * Validation method for EvtStatus.
+     */
+    public boolean validateAppNum_orig() {
+        System.out.println("Inside validateAppNum_orig()getPostedAttribute(APPNUM): "+getPostedAttribute(APPNUM));
+        //false returns validition error
+        boolean ret = true;
+        ////if(getPostedAttribute(APPNUM)!=null){
+        String oldAppNum = getPostedAttribute(APPNUM).toString();
+        String newAppNum = getAppnum().toString();
+
+        //Status flow from C(Completed) -> CRV(Clerk Review)
+      //  if (oldAppNum !=null) {
+            System.out.println("Inside validateAppNum_orig() oldAppNum: "+oldAppNum+" getAppnum(): "+getAppnum());
+            //check View Object for Estimate Approval num existence.
+            RowSet rs = this.getApprovalCodeExistence();
+           
+            VariableValueManager vm = rs.ensureVariableManager();
+            vm.setVariableValue("bAppNum", getAppnum());
+           
+            rs.setForwardOnly(true);
+            rs.executeQuery();
+            System.out.println("Inside validateAppNum_orig() rs row count: "+rs.getEstimatedRowCount());
+            /*
+            Row rw = rs.first();
+            if (rw != null) {
+                ret = false;
+
+                String sAppnum = (String)rw.getAttribute("Appnum");
+                System.out.println("New Appnum: " + sAppnum + ":" + sAppnum );
+                String msg = "Approval Code (" + getAppnum() + ") has already been used. Please use another value";
+                
+                if (getAppnum().equals(sAppnum)){
+                        throw new JboException(msg);               
+                    } 
+                
+            }
+            */
+            Row rw = null;
+            while (rs.hasNext()) {
+                rw = rs.next();
+                if (rw.getAttribute("Appnum").equals(getAppnum())) {
+                    System.out.println("rw.getAttribute(Appnum).equals(getAppnum()): " + rw.getAttribute("Appnum").equals(getAppnum()) );
+                    ret = false;
+
+                    String sAppnum = (String)rw.getAttribute("Appnum");
+                    System.out.println("New Appnum: " + sAppnum + ":" + sAppnum );
+                    String msg = "Approval Code (" + getAppnum() + ") has already been used. Please use another value";
+                    
+                    if (getAppnum().equals(sAppnum)){
+                            throw new JboException(msg);               
+                        } 
+                }
+            }
+
+       // }
+      ////  }
+        System.out.println("Inside validateAppNum() ret: " + ret);
+        this.getApprovalCodeExistence().closeRowSet();
+        return ret;
+    }
     /**
      * Add attribute defaulting logic in this method.
      * @param attributeList list of attribute names/values to initialize the row
@@ -42,7 +108,16 @@ public class MrltEstimateImpl extends ExtendedEntityImpl {
      * @param e the transaction event
      */
     protected void doDML(int operation, TransactionEvent e) {
-
+      /*  
+        if (operation == DML_INSERT) {
+            System.out.println("Inside MrltEstimateImpl DML_INSERT calling validateAppNum");
+            validateAppNum_orig();
+        } else if (operation == DML_UPDATE && (isAttributeChanged(APPNUM))
+        ) {
+            System.out.println("Inside MrltEstimateImpl DML_UPDATE calling validateAppNum");
+            validateAppNum_orig();
+        }
+    */
         super.doDML(operation, e);
     }
 
@@ -51,6 +126,72 @@ public class MrltEstimateImpl extends ExtendedEntityImpl {
      */
     public void remove() {
         super.remove();
+    }
+
+    /**
+     * Validation method for Appnum.
+     */
+    public boolean validateAppnum(String appnum) {
+        System.out.println("Inside validateAppNum()getPostedAttribute(APPNUM): "+getPostedAttribute(APPNUM)+" appnum: "+appnum);
+        //false returns validition error
+        boolean ret = true;
+        String oldAppNum ="";
+        String newAppNum = "";
+        if(getPostedAttribute(APPNUM)!=null)
+            oldAppNum = getPostedAttribute(APPNUM).toString();
+        if(getAppnum()!=null)
+            newAppNum = getAppnum().toString();
+
+        //Status flow from C(Completed) -> CRV(Clerk Review)
+        //  if (oldAppNum !=null) {
+            System.out.println("Inside validateAppNum() oldAppNum: "+oldAppNum+" getAppnum(): "+getAppnum()+" appnum: "+appnum);
+            //check View Object for Estimate Approval num existence.
+            RowSet rs = this.getApprovalCodeExistence();
+        VariableValueManager vm = rs.ensureVariableManager();
+        //vm.setVariableValue("bAppNum", getAppnum());
+        vm.setVariableValue("bAppNum", appnum);
+        
+        rs.setForwardOnly(true);
+        rs.executeQuery();
+        System.out.println("Inside validateAppNum() rs row count: "+rs.getEstimatedRowCount());
+        /*
+        Row rw = rs.first();
+        if (rw != null) {
+            ret = false;
+
+            String sAppnum = (String)rw.getAttribute("Appnum");
+            System.out.println("New Appnum: " + sAppnum + ":" + sAppnum );
+            String msg = "Approval Code (" + getAppnum() + ") has already been used. Please use another value";
+            
+            if (getAppnum().equals(sAppnum)){
+                    throw new JboException(msg);               
+                } 
+            
+        }
+        */
+        Row rw = null;
+        while (rs.hasNext()) {
+            rw = rs.next();
+
+            if (rw.getAttribute("Appnum").equals(appnum)) {
+                System.out.println("Inside validateAppNum rw.getAttribute(Appnum).equals(getAppnum()): " + rw.getAttribute("Appnum").equals(getAppnum()) );
+                ret = false;
+
+                String sAppnum = (String)rw.getAttribute("Appnum");
+                System.out.println("Inside validateAppNum New Appnum: " + sAppnum + ":" + sAppnum );
+                String msg = "Approval Code " + appnum + " has already been used. Please use another value";
+                
+              //  if (getAppnum().equals(sAppnum)){
+                        throw new JboException(msg);               
+               //     } 
+            }
+        }
+
+        // }
+        ////  }
+        System.out.println("Inside validateAppNum() ret: " + ret);
+        this.getApprovalCodeExistence().closeRowSet();
+        return ret;
     }
 
     /**
@@ -296,6 +437,16 @@ public class MrltEstimateImpl extends ExtendedEntityImpl {
                 obj.setAttributeInternal(index(), value);
             }
         }
+        ,
+        ApprovalCodeExistence {
+            public Object get(MrltEstimateImpl obj) {
+                return obj.getApprovalCodeExistence();
+            }
+
+            public void put(MrltEstimateImpl obj, Object value) {
+                obj.setAttributeInternal(index(), value);
+            }
+        }
         ;
         private static AttributesEnum[] vals = null;
         private static final int firstIndex = 0;
@@ -349,6 +500,7 @@ public class MrltEstimateImpl extends ExtendedEntityImpl {
     public static final int R5EVENTS = AttributesEnum.R5events.index();
     public static final int MRLTESTIMATETASKDETAIL = AttributesEnum.MrltEstimatetaskdetail.index();
     public static final int WOEVENTS = AttributesEnum.WOEvents.index();
+    public static final int APPROVALCODEEXISTENCE = AttributesEnum.ApprovalCodeExistence.index();
 
     /**
      * This is the default constructor (do not remove).
@@ -780,6 +932,14 @@ public class MrltEstimateImpl extends ExtendedEntityImpl {
         return super.isAttributeUpdateable(index);
     }
  */
+
+
+    /**
+     * Gets the view accessor <code>RowSet</code> ApprovalCodeExistence.
+     */
+    public RowSet getApprovalCodeExistence() {
+        return (RowSet) getAttributeInternal(APPROVALCODEEXISTENCE);
+    }
 
 
     /**
