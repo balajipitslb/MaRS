@@ -55,11 +55,14 @@
                                         <f:validator binding="#{row.bindings.Ver.validator}"/>
                                     </af:selectOneChoice>
                                 </af:column>
+                                <af:column id="c27" headerText="#{bindings.Estimate.hints.Appnum.label}" width="70">
+                                    <af:outputText value="#{row.Appnum}" id="ot3"/>
+                                </af:column>
                                 <af:column headerText="#{bindings.Estimate.hints.Equipnum.label}" id="c4" width="120">
                                     <af:outputText value="#{row.Equipnum}"
                                                    shortDesc="#{bindings.Estimate.hints.Equipnum.tooltip}" id="ot1"/>
                                 </af:column>
-                                <af:column headerText="#{bindings.Estimate.hints.Acctnum.label}" id="c3" width="80">
+                                <af:column headerText="#{bindings.Estimate.hints.Acctnum.label}" id="c3" width="60">
                                     <af:selectOneChoice value="#{row.bindings.Acctnum.inputValue}"
                                                         label="#{row.bindings.Acctnum.label}"
                                                         required="#{bindings.Estimate.hints.Acctnum.mandatory}"

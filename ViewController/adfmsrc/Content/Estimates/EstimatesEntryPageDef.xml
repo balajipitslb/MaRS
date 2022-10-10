@@ -24,6 +24,7 @@
                     <Item Value="Estid"/>
                     <Item Value="Wonum"/>
                     <Item Value="Ver"/>
+                    <Item Value="Appnum"/>
                     <Item Value="Equipnum"/>
                     <Item Value="Acctnum"/>
                     <Item Value="Status"/>
