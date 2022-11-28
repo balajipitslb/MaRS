@@ -2296,6 +2296,10 @@ public class CycleCountBean {
 
       //  if ((ID.equals("CCSetup")) || (ID.equals("createAsCounted")) || (ID.equals("createAdjusted"))) {
             BindingContainer bindings = getBindings();
+/**** LK
+Commenting out to allow to create FIFOs even if there are other CC lists. This block used to only point to the 
+            latest CC Lis and not to the selected CC list.
+  
 
             OperationBinding operationBinding = bindings.getOperationBinding("ExecuteCCHeader");
             Object result = operationBinding.execute();
@@ -2303,6 +2307,7 @@ public class CycleCountBean {
             if (!operationBinding.getErrors().isEmpty()) {
                 return null;
             }
+****/ 
             String Jobid = "";
 
             OperationBinding oper = bindings.getOperationBinding("ExecuteJobRunning");
