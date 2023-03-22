@@ -4,12 +4,11 @@
 <Entity
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="R5parts"
-  Version="11.1.2.64.36"
+  Version="12.1.3.10.47"
   DBObjectType="table"
   DBObjectName="R5PARTS"
   AliasName="R5parts"
   BindingStyle="OracleName"
-  UseGlueCode="false"
   RowClass="its.mnr.mp5.eo.local.R5partsImpl"
   DefClass="its.mnr.mp5.baseclass.ExtendedEntityDefImpl"
   CollClass="its.mnr.mp5.baseclass.ExtendedEntityCache"
@@ -21,7 +20,8 @@
   <ViewAccessor
     Name="SupplierExistenceChk"
     ViewObjectName="its.mnr.mp5.lov.SupplierExistence"
-    MaxFetchSize="1">
+    MaxFetchSize="1"
+    RowLevelBinds="true">
     <ParameterMap>
       <PIMap Variable="BPART">
         <TransientExpression><![CDATA[ParCode]]></TransientExpression>
@@ -54,14 +54,15 @@
   </Attribute>
   <Attribute
     Name="ParDesc"
-    Precision="45"
+    Precision="75"
     ColumnName="PAR_DESC"
     SQLType="VARCHAR"
     Type="java.lang.String"
     ColumnType="VARCHAR2"
     TableName="R5PARTS"
     RetrievedOnInsert="true"
-    RetrievedOnUpdate="true">
+    RetrievedOnUpdate="true"
+    IsNotNull="true">
     <DesignTime>
       <Attr Name="_DisplaySize" Value="45"/>
       <Attr Name="_diagramName" Value="Description"/>
@@ -534,8 +535,8 @@
     ColumnType="DOUBLE PRECISION"
     IsPersistent="false"
     IsQueriable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[R5stock.sum("StoQty")]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <Properties>
       <SchemaBasedProperties>
         <LABEL
@@ -552,8 +553,8 @@
     ColumnType="VARCHAR2"
     IsPersistent="false"
     IsQueriable="false">
-    <RecalcCondition><![CDATA[true]]></RecalcCondition>
     <TransientExpression><![CDATA[adf.object.getPostedAttribute(adf.object.getAttributeIndexOf("ParNotused"))]]></TransientExpression>
+    <RecalcCondition><![CDATA[true]]></RecalcCondition>
   </Attribute>
   <AccessorAttribute
     Name="R5matlparts"
@@ -773,6 +774,18 @@
       <Attr Name="_isCheck" Value="true"/>
     </DesignTime>
     <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="R5partsParDescCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_DBObjectName" Value="R5PARTS_PAR_DESC_CHECK"/>
+      <Attr Name="_checkCondition" Value='"PAR_DESC" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="its.mnr.mp5.eo.local.R5parts.ParDesc"/>
+    </AttrArray>
   </Key>
   <Key
     Name="R5prikPar"

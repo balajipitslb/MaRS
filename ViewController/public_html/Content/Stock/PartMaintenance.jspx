@@ -116,13 +116,14 @@
                                                 <f:validator binding="#{bindings.ParCode.validator}"/>
                                             </af:inputText>
                                             <af:inputText value="#{bindings.ParDesc.inputValue}"
-                                                          columns="#{bindings.ParDesc.hints.displayWidth}"
+                                                          columns="40"
                                                           maximumLength="#{bindings.ParDesc.hints.precision}"
                                                           shortDesc="#{bindings.ParDesc.hints.tooltip}" id="it2"
                                                           autoSubmit="true"
                                                           readOnly="#{bindings.tPostedParNotused.attributeValue ne null and bindings.tPostedParNotused.attributeValue eq '+'  or !securityContext.userGrantedResource['resourceName=StockModifyParts;resourceType=UIControl;action=enabled']}"
                                                           label="#{bindings.ParDesc.hints.label}"
-                                                          contentStyle="text-transform:uppercase; " autoTab="true">
+                                                          contentStyle="text-transform:uppercase; " autoTab="true"
+                                                          rows="2">
                                                 <f:validator binding="#{bindings.ParDesc.validator}"/>
                                             </af:inputText>
                                             <af:spacer width="10" height="20" id="s4"/>

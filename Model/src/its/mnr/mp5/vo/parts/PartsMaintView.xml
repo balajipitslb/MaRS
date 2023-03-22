@@ -309,7 +309,7 @@
         <LABEL
           ResId="its.mnr.mp5.vo.parts.PartsMaintView.ParDesc_LABEL"/>
         <DISPLAYWIDTH
-          Value="50"/>
+          Value="75"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>

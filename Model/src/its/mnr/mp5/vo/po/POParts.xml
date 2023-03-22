@@ -144,7 +144,7 @@
         <LABEL
           ResId="its.mnr.mp5.vo.po.POParts.ParDesc_LABEL"/>
         <DISPLAYWIDTH
-          Value="20"/>
+          Value="75"/>
       </SchemaBasedProperties>
     </Properties>
   </ViewAttribute>
